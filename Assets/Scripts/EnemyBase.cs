@@ -10,7 +10,7 @@ public class EnemyBase : MonoBehaviour, IDropHandler
     [SerializeField] private int m_maxHp = 1;
     private int m_hp;
     [SerializeField] private Slider m_slider;
-    private AttackCard m_atkCard;
+    private IAttackCard m_atkCard;
 
     void Start()
     {
@@ -21,14 +21,14 @@ public class EnemyBase : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        m_atkCard = eventData.pointerDrag.GetComponent<AttackCard>();
+        m_atkCard = eventData.pointerDrag.GetComponent<IAttackCard>();
+        if (m_atkCard == null) { return; }
         m_hp -= m_atkCard.GetDamage();
         m_slider.value = m_hp;
         Debug.Log($"{m_name}は{m_atkCard.GetDamage()}ダメージ受けた");
         if (m_hp < 0)
         {
             Destroy(this.gameObject);
-            Debug.Log("オリジム死！W");
         }
     }
 }
