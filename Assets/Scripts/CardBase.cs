@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragObj : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler
+public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
 
     public void OnBeginDrag(PointerEventData eventData)
