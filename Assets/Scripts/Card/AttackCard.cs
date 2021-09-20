@@ -16,7 +16,7 @@ public class AttackCard : CardBase, IAttackCard
 
     public int GetDamage()
     {
-        OnUse();
+        OnCast();
         return m_damage;
     }
 }

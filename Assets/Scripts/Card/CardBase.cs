@@ -19,7 +19,7 @@ public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     }
 
     /// <summary>カード使用後</summary>
-    public void OnUse()
+    public void OnCast()
     {
         transform.parent = m_discard.transform;
     }

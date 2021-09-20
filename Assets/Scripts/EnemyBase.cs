@@ -14,7 +14,7 @@ public class EnemyBase : MonoBehaviour, IDropHandler
 
     void Start()
     {
-        m_slider = this.transform.GetChild(0).GetComponent<Slider>();
+        m_slider = transform.GetChild(0).GetComponent<Slider>();
         m_hp = m_maxHp;
         m_slider.maxValue = m_maxHp;
         m_slider.value = m_hp;

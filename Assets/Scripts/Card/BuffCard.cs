@@ -15,7 +15,7 @@ public class BuffCard : CardBase, IBuffCard
 
     public int GetBlock()
     {
-        OnUse();
+        OnCast();
         return m_block;
     }
 }

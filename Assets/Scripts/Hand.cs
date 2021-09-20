@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform m_deck;
 
-    void Update()
+    /// <summary>
+    /// 手札にある全てのカードを捨て札に移動させる
+    /// </summary>
+    public void AllCast()
     {
-        
+        if (transform.childCount == 0) { return; }
+        for (int i = transform.childCount - 1; 0 <= i; i--)
+        {
+            transform.GetChild(i).parent = m_deck.transform;
+        }
     }
 }
