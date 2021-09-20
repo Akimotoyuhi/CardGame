@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// 全てのカードのベースとなるクラス
+/// </summary>
 public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     /// <summary>移動前の場所保存用</summary>
@@ -15,6 +18,7 @@ public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         m_discard = GameObject.Find("Discard");
     }
 
+    /// <summary>カード使用後</summary>
     public void OnUse()
     {
         transform.parent = m_discard.transform;

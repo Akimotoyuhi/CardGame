@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    /// <summary>ターン終了</summary>
     public void TurnEnd()
     {
         m_deck.Draw();

@@ -9,11 +9,12 @@ public class EnemyBase : MonoBehaviour, IDropHandler
     [SerializeField] private string m_name = "name";
     [SerializeField] private int m_maxHp = 1;
     private int m_hp;
-    [SerializeField] private Slider m_slider;
+    private Slider m_slider;
     private IAttackCard m_atkCard;
 
     void Start()
     {
+        m_slider = this.transform.GetChild(0).GetComponent<Slider>();
         m_hp = m_maxHp;
         m_slider.maxValue = m_maxHp;
         m_slider.value = m_hp;
