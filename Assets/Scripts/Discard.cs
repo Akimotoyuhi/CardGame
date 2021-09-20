@@ -9,9 +9,9 @@ public class Discard : MonoBehaviour
     /// <summary>捨て札から山札にカードを移す</summary>
     public void ConvartToDeck()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = transform.childCount - 1; 0 <= i; i--)
         {
-            transform.GetChild(i).parent = m_deck;
+            transform.GetChild(i).parent = m_deck.transform;
         }
     }
 }
