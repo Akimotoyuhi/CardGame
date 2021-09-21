@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EnemyBase : MonoBehaviour, IDropHandler
+public abstract class EnemyBase : MonoBehaviour, IDropHandler
 {
     [SerializeField] private string m_name = "name";
     [SerializeField] private int m_maxHp = 1;
     private int m_hp;
     private Slider m_slider;
     private IAttackCard m_atkCard;
+    protected Player m_player;
 
     void Start()
     {
+        m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         m_slider = transform.GetChild(0).GetComponent<Slider>();
         m_hp = m_maxHp;
         m_slider.maxValue = m_maxHp;
@@ -32,4 +34,6 @@ public class EnemyBase : MonoBehaviour, IDropHandler
             Destroy(this.gameObject);
         }
     }
+
+    public abstract void Action();
 }

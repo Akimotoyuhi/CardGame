@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Deck m_deck;
     [SerializeField] private Discard m_discard;
     [SerializeField] private Hand m_hand;
+    [SerializeField] private Transform m_enemies;
 
     void Start()
     {
@@ -21,6 +22,10 @@ public class GameManager : MonoBehaviour
     public void TurnEnd()
     {
         m_hand.AllCast();
+        for (int i = 0; i < m_enemies.childCount; i++)
+        {
+            m_enemies.GetChild(i).GetComponent<EnemyBase>().Action();
+        }
         m_deck.Draw();
     }
 }
