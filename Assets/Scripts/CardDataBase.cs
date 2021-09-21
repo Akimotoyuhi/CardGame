@@ -9,7 +9,8 @@ public enum BuffDebuff
 {
     Damage = 0,
     Weakness = 1,
-    end = 2,
+    Vulnerable = 2,
+    end = 3,
 }
 
 [CreateAssetMenu]

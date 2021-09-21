@@ -25,24 +25,40 @@ public class Player : MonoBehaviour, IDropHandler
         SetText();
     }
 
-    public void Damage(int damage)
+    public void Damage(int[] damage)
     {
-        damage = m_block -= damage;
+        for (int i = 0; i < m_stateArray.Length; i++)
+        {
+            m_stateArray[i] += damage[i];
+        }
+        int dmg = SetDamage(m_stateArray[(int)BuffDebuff.Damage]);
+        dmg = m_block -= dmg;
         if (m_block < 0) { m_block = 0; }
         m_blkSlider.value = m_block;
-        if (damage > 0)
+        m_stateArray[(int)BuffDebuff.Damage] = 0;
+        if (dmg > 0)
         {
             SetText();
             return;
         }
-        m_hp += damage;
+        m_hp += dmg;
         m_hpSlider.value = m_hp;
         SetText();
     }
 
-    private void EndTurn()
+    private int SetDamage(int num)
     {
+        if (m_stateArray[(int)BuffDebuff.Vulnerable] > 0)
+        {
+            num = Parsent(num, 0.5f);
+        }
+        return num;
+    }
 
+    private int Parsent(int num, float parsent)
+    {
+        float t = num * (1 - parsent);
+        return (int)t;
     }
 
     private void SetText()

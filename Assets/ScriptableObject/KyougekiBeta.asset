@@ -17,3 +17,5 @@ MonoBehaviour:
     m_cost: 1
     m_damage: 6
     m_defence: 0
+    m_buffDebuff: 
+    m_effectTurn: 

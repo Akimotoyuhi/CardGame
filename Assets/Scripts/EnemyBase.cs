@@ -27,19 +27,15 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
     {
         m_atkCard = eventData.pointerDrag.GetComponent<IAttackCard>();
         if (m_atkCard == null) { return; }
-        int[] nums = m_atkCard.GetDamage();
-        int damage = nums[(int)BuffDebuff.Damage];
+        m_stateArray = m_atkCard.GetDamage();
+        int damage = m_stateArray[(int)BuffDebuff.Damage];
         m_hp -= damage;
         m_slider.value = m_hp;
         if (m_hp < 0)
         {
             Destroy(this.gameObject);
         }
-        for (int i = 1; i < m_stateArray.Length; i++)
-        {
-            m_stateArray[i] += nums[i];
-        }
-        Debug.Log($"ダメージ:{m_stateArray[(int)BuffDebuff.Damage]} 脱力状態:{m_stateArray[(int)BuffDebuff.Weakness]}");
+        m_stateArray[(int)BuffDebuff.Damage] = 0;
     }
 
     /// <summary>

@@ -10,7 +10,7 @@ public class BuffCard : CardBase, IBuffCard
     void Start()
     {
         SetUp();
-        m_tooltip.text = $"{m_cardData.m_cardData.Defense}を得る";
+        m_tooltip.text = $"{m_cardData.m_cardData.Defense}ブロックを得る";
     }
 
     public int GetBlock()
