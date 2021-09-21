@@ -2,19 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+/// <summary>
+/// バフデバフ
+/// </summary>
+public enum BuffDebuff
+{
+    a,
+    b,
+    c
+}
 
 /// <summary>
 /// 全てのカードのベースとなるクラス
 /// </summary>
 public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    [SerializeField] protected CardDataBase m_cardData;
+    [SerializeField] private Text m_cost;
+    [SerializeField] private Text m_name;
+    [SerializeField] protected Text m_tooltip;
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
-    [System.NonSerialized] public GameObject m_discard;
+    [System.NonSerialized] protected GameObject m_discard;
 
     public void SetUp()
     {
+        m_cost.text = $"{m_cardData.m_cardData.Cost}";
+        m_name.text = m_cardData.m_cardData.Name;
         m_discard = GameObject.Find("Discard");
     }
 

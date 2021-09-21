@@ -7,15 +7,15 @@ using UnityEngine;
 /// </summary>
 public class BuffCard : CardBase, IBuffCard
 {
-    [SerializeField] private int m_block = 0;
     void Start()
     {
         SetUp();
+        m_tooltip.text = $"{m_cardData.m_cardData.Defense}を得る";
     }
 
     public int GetBlock()
     {
         OnCast();
-        return m_block;
+        return m_cardData.m_cardData.Defense;
     }
 }

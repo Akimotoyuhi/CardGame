@@ -8,15 +8,17 @@ using UnityEngine;
 public class AttackCard : CardBase, IAttackCard
 {
     /// <summary>与えるダメージ</summary>
-    [SerializeField] private int m_damage = 1;
+    private int m_damage;
+
     private void Start()
     {
         SetUp();
+        m_tooltip.text = $"{m_cardData.m_cardData.Damage}ダメージを与える";
     }
 
     public int GetDamage()
     {
         OnCast();
-        return m_damage;
+        return m_cardData.m_cardData.Damage;
     }
 }

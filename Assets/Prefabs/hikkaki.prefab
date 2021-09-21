@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 589981444798936321}
   - component: {fileID: 589981444798936327}
   m_Layer: 5
-  m_Name: AttackCard
+  m_Name: hikkaki
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28104a240351ba649851d429e937311b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 6
+  m_cardData: {fileID: 11400000, guid: 2c12bb3ae029f5d40916ddf83df0554b, type: 2}
+  m_cost: {fileID: 589981445944952001}
+  m_name: {fileID: 589981445997085945}
+  m_tooltip: {fileID: 589981446493470428}
 --- !u!1 &589981445944952003
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +172,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 0
 --- !u!1 &589981445997085947
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4efca5b2263d6ec46909515646a31806, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 042301a19cacc864ebddcd9b674ff900, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -56,7 +56,6 @@ public class Player : MonoBehaviour, IDropHandler
         if (m_buffCard == null) { return; }
         m_block += m_buffCard.GetBlock();
         m_blkSlider.value = m_block;
-        Debug.Log($"Playerの現在ブロック数{m_block}");
         SetText();
     }
 }
