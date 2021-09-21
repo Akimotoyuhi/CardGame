@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CardID
+/// <summary>
+/// バフデバフ
+/// </summary>
+public enum BuffDebuff
 {
-    kyougekiBeta = 0,
-    defenceUpArufa = 1,
+    Damage = 0,
+    Weakness = 1,
+    end = 2,
 }
 
 [CreateAssetMenu]
@@ -22,7 +26,8 @@ public class CardData
     [SerializeField] int m_cost;
     [SerializeField] int m_damage;
     [SerializeField] int m_defence;
-    
+    [SerializeField] BuffDebuff[] m_buffDebuff;
+    [SerializeField] int[] m_effectTurn;
 
     public string Name { get { return m_cardName; } }
 
@@ -31,4 +36,10 @@ public class CardData
     public int Damage { get { return m_damage; } }
 
     public int Defense { get { return m_defence; } }
+    
+    public int GiveStateNum { get { return m_buffDebuff.Length; } }
+
+    public BuffDebuff GiveState(int i) { return m_buffDebuff[i]; }
+
+    public int GiveStateTrun(int i) { return m_effectTurn[i]; }
 }

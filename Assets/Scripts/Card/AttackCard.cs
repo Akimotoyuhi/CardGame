@@ -16,9 +16,15 @@ public class AttackCard : CardBase, IAttackCard
         m_tooltip.text = $"{m_cardData.m_cardData.Damage}ダメージを与える";
     }
 
-    public int GetDamage()
+    public int[] GetDamage()
     {
         OnCast();
-        return m_cardData.m_cardData.Damage;
+        int[] nums = new int[(int)BuffDebuff.end];
+        nums[(int)BuffDebuff.Damage] = m_cardData.m_cardData.Damage;
+        for (int i = 0; i < m_cardData.m_cardData.GiveStateNum; i++)
+        {
+            nums[(int)m_cardData.m_cardData.GiveState(i)] = (int)m_cardData.m_cardData.GiveStateTrun(i);
+        }
+        return nums;
     }
 }

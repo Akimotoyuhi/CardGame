@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>敵に対して何かするカードに付けるインターフェース</summary>
 public interface IAttackCard
 {
-    int GetDamage();
+    int[] GetDamage();
 }
 
 /// <summary>プレイヤー対して何かするカードに付けるインターフェース</summary>

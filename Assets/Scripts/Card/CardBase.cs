@@ -5,16 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// バフデバフ
-/// </summary>
-public enum BuffDebuff
-{
-    a,
-    b,
-    c
-}
-
-/// <summary>
 /// 全てのカードのベースとなるクラス
 /// </summary>
 public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler

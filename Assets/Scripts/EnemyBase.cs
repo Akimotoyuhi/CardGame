@@ -12,6 +12,7 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
     private Slider m_slider;
     private IAttackCard m_atkCard;
     protected Player m_player;
+    private int[] m_stateArray = new int[(int)BuffDebuff.end];
 
     void Start()
     {
@@ -26,13 +27,39 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
     {
         m_atkCard = eventData.pointerDrag.GetComponent<IAttackCard>();
         if (m_atkCard == null) { return; }
-        m_hp -= m_atkCard.GetDamage();
+        int[] nums = m_atkCard.GetDamage();
+        int damage = nums[(int)BuffDebuff.Damage];
+        m_hp -= damage;
         m_slider.value = m_hp;
-        Debug.Log($"{m_name}は{m_atkCard.GetDamage()}ダメージ受けた");
         if (m_hp < 0)
         {
             Destroy(this.gameObject);
         }
+        for (int i = 1; i < m_stateArray.Length; i++)
+        {
+            m_stateArray[i] += nums[i];
+        }
+        Debug.Log($"ダメージ:{m_stateArray[(int)BuffDebuff.Damage]} 脱力状態:{m_stateArray[(int)BuffDebuff.Weakness]}");
+    }
+
+    /// <summary>
+    /// デバフの効果込みの攻撃力を返す
+    /// </summary>
+    /// <param name="atk">元の攻撃力</param>
+    /// <returns>最終的な攻撃力</returns>
+    protected int SetAttack(int atk)
+    {
+        if (m_stateArray[(int)BuffDebuff.Weakness] > 0)
+        {
+            atk = Parsent(atk, 0.25f);
+        }
+        return atk;
+    }
+
+    protected int Parsent(int num, float parsent)
+    {
+        float total = num * (1 - parsent);
+        return (int)total;
     }
 
     public abstract void Action();
