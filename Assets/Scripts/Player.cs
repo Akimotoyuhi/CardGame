@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IDropHandler
     [SerializeField] private Slider m_blkSlider;
     [SerializeField] private Text m_text;
     private IBuffCard m_buffCard;
-    public int[] m_stateArray = new int[(int)BuffDebuff.end];
+    public int[] m_stateArray;
 
     void Start()
     {
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour, IDropHandler
         m_hpSlider.value = m_hp;
         m_blkSlider.value = m_block;
         SetText();
+        m_stateArray = new int[(int)BuffDebuff.end];
     }
 
     /// <summary>
