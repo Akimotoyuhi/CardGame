@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164e0b36cd6510544aceba3605b7243e, type: 3}
-  m_Name: hikkaki
+  m_Name: koutetunoisi
   m_EditorClassIdentifier: 
   m_cardData:
-    m_cardName: "\u3072\u3063\u304B\u304D\uFF01"
-    m_cost: 1
-    m_damage: 4
-    m_defence: 0
-    m_buffDebuff: 01000000
-    m_effectTurn: 01000000
+    m_cardName: "\u92FC\u9244\u306E\u610F\u601D"
+    m_cost: 3
+    m_damage: 0
+    m_defence: 10
+    m_buffDebuff: 0500000006000000
+    m_effectTurn: 0500000005000000

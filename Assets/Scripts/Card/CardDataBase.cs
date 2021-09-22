@@ -8,9 +8,16 @@ using UnityEngine;
 public enum BuffDebuff
 {
     Damage = 0,
-    Weakness = 1,
-    Vulnerable = 2,
-    end = 3,
+    Block = 1,
+    /// <summary>脱力</summary>
+    Weakness = 2,
+    /// <summary>脆弱化</summary>
+    Vulnerable = 3,
+    /// <summary>筋力</summary>
+    Strength = 5,
+    /// <summary>敏捷性</summary>
+    Agile = 6,
+    end = 7,
 }
 
 [CreateAssetMenu]

@@ -11,5 +11,5 @@ public interface IAttackCard
 /// <summary>プレイヤー対して何かするカードに付けるインターフェース</summary>
 public interface IBuffCard
 {
-    int GetBlock();
+    int[] SetBlock();
 }

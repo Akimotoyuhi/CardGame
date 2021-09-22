@@ -20,6 +20,6 @@ public class Origimusi : EnemyBase
         {
             nums[(int)BuffDebuff.Damage] = SetAttack(3);
         }
-        m_player.Damage(nums);
+        m_player.GetAcceptDamage(nums);
     }
 }

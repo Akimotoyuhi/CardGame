@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IDropHandler
     [SerializeField] private Slider m_blkSlider;
     [SerializeField] private Text m_text;
     private IBuffCard m_buffCard;
-    private int[] m_stateArray = new int[(int)BuffDebuff.end];
+    public int[] m_stateArray = new int[(int)BuffDebuff.end];
 
     void Start()
     {
@@ -25,13 +25,17 @@ public class Player : MonoBehaviour, IDropHandler
         SetText();
     }
 
-    public void Damage(int[] damage)
+    /// <summary>
+    /// 被ダメージ処理
+    /// </summary>
+    /// <param name="damage">ブロック値を加味した被ダメージ</param>
+    public void GetAcceptDamage(int[] damage)
     {
         for (int i = 0; i < m_stateArray.Length; i++)
         {
             m_stateArray[i] += damage[i];
         }
-        int dmg = SetDamage(m_stateArray[(int)BuffDebuff.Damage]);
+        int dmg = SetAcceptDamage(m_stateArray[(int)BuffDebuff.Damage]);
         dmg = m_block -= dmg;
         if (m_block < 0) { m_block = 0; }
         m_blkSlider.value = m_block;
@@ -46,12 +50,13 @@ public class Player : MonoBehaviour, IDropHandler
         SetText();
     }
 
-    private int SetDamage(int num)
+    /// <summary>
+    /// バフデバフを含めた被ダメージ計算
+    /// </summary>
+    /// <param name="num">被ダメージ</param>
+    /// <returns>計算後の被ダメージ</returns>
+    private int SetAcceptDamage(int num)
     {
-        if (m_stateArray[(int)BuffDebuff.Vulnerable] > 0)
-        {
-            num = Parsent(num, 0.5f);
-        }
         return num;
     }
 
@@ -71,8 +76,13 @@ public class Player : MonoBehaviour, IDropHandler
     {
         m_buffCard = pointerEvent.pointerDrag.GetComponent<IBuffCard>();
         if (m_buffCard == null) { return; }
-        m_block += m_buffCard.GetBlock();
-        m_blkSlider.value = m_block;
+        int[] nums = new int[(int)BuffDebuff.end];
+        nums = m_buffCard.SetBlock();
+        for (int i = 0; i < (int)BuffDebuff.end; i++)
+        {
+            m_stateArray[i] += nums[i];
+        }
+        m_blkSlider.value = m_stateArray[(int)BuffDebuff.Block];
         SetText();
     }
 }

@@ -16,13 +16,21 @@ public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
-    [System.NonSerialized] protected GameObject m_discard;
+    protected GameObject m_discard;
+    protected Player m_player;
 
     public void SetUp()
     {
         m_cost.text = $"{m_cardData.m_cardData.Cost}";
         m_name.text = m_cardData.m_cardData.Name;
         m_discard = GameObject.Find("Discard");
+        m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
+
+    protected int Parsent(int num, float parsent)
+    {
+        float t = num * (1 - parsent);
+        return (int)t;
     }
 
     /// <summary>カード使用後</summary>
