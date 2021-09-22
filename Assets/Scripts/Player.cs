@@ -68,7 +68,11 @@ public class Player : MonoBehaviour, IDropHandler
 
     private void SetText()
     {
-        if (m_block > 0) { m_text.text = $"{m_block}"; }
+        if (m_block > 0)
+        {
+            m_blkSlider.value = m_block;
+            m_text.text = $"{m_block}";
+        }
         else { m_text.text = $"{m_hp} : {m_maxHp}"; }
     }
 
@@ -76,13 +80,8 @@ public class Player : MonoBehaviour, IDropHandler
     {
         m_buffCard = pointerEvent.pointerDrag.GetComponent<IBuffCard>();
         if (m_buffCard == null) { return; }
-        int[] nums = new int[(int)BuffDebuff.end];
-        nums = m_buffCard.SetBlock();
-        for (int i = 0; i < (int)BuffDebuff.end; i++)
-        {
-            m_stateArray[i] += nums[i];
-        }
-        m_blkSlider.value = m_stateArray[(int)BuffDebuff.Block];
+        m_stateArray = m_buffCard.SetBlock();
+        m_block += m_stateArray[(int)BuffDebuff.Block];
         SetText();
     }
 }

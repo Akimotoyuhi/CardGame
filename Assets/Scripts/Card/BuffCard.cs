@@ -21,8 +21,8 @@ public class BuffCard : CardBase, IBuffCard
     {
         //バフデバフの付与
         int[] nums = m_player.m_stateArray;
-        //ブロック値は永続させないので破棄
-        nums[(int)BuffDebuff.Block] = 0;
+        //ブロック値はターンを跨がないので破棄
+        //nums[(int)BuffDebuff.Block] = 0;
         for (int i = 0; i < m_cardData.m_cardData.GiveStateNum; i++)
         {
             nums[(int)m_cardData.m_cardData.GiveState(i)] += m_cardData.m_cardData.GiveStateTrun(i);
@@ -33,7 +33,7 @@ public class BuffCard : CardBase, IBuffCard
         {
             Parsent(block, 0.25f);
         }
-        block += nums[(int)BuffDebuff.Agile];
+        //block += nums[(int)BuffDebuff.Agile];
         nums[(int)BuffDebuff.Block] = block;
         return nums;
     }
