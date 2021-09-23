@@ -19,7 +19,7 @@ public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     protected GameObject m_discard;
     protected Player m_player;
 
-    public void SetUp()
+    public virtual void SetUp()
     {
         m_cost.text = $"{m_cardData.m_cardData.Cost}";
         m_name.text = m_cardData.m_cardData.Name;

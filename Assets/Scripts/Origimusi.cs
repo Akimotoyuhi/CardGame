@@ -11,7 +11,7 @@ public class Origimusi : EnemyBase
         int[] nums = new int[(int)BuffDebuff.end];
         int r = Random.Range(0, 2);
 
-        //攻撃パターン１(仮)
+        //攻撃パターン(仮)
         if (r == 0)
         {
             nums[(int)BuffDebuff.Vulnerable] = 1;

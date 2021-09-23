@@ -7,10 +7,17 @@ using UnityEngine;
 /// </summary>
 public class BuffCard : CardBase, IBuffCard
 {
+    protected int m_block;
     void Start()
     {
         SetUp();
-        m_tooltip.text = $"{m_cardData.m_cardData.Defense}ブロックを得る";
+        m_tooltip.text = $"{m_block}ブロックを得る";
+    }
+
+    public override void SetUp()
+    {
+        base.SetUp();
+        m_block = m_cardData.m_cardData.Defense;
     }
 
     /// <summary>

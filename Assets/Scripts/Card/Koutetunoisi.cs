@@ -7,6 +7,6 @@ public class Koutetunoisi : BuffCard, IBuffCard
     void Start()
     {
         SetUp();
-        m_tooltip.text = $"敏捷と筋力を5得る\n10ブロックを得る\nターン終了時に\n敏捷と筋力を5失い\n次のターンスタンする";
+        m_tooltip.text = $"敏捷と筋力を5得る\n{m_block}ブロックを得る\nターン終了時に\n敏捷と筋力を5失い\n次のターンスタンする";
     }
 }
