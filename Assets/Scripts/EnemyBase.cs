@@ -9,17 +9,19 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
     [SerializeField] private string m_name = "name";
     [SerializeField] private int m_maxHp = 1;
     private int m_hp;
-    protected int m_block;
+    private int m_block;
     [SerializeField] private Slider m_hpSlider;
     [SerializeField] private Slider m_blkSlider;
     [SerializeField] private Text m_text;
     private IAttackCard m_atkCard;
-    protected Player m_player;
-    private int[] m_stateArray = new int[(int)BuffDebuff.end];
+    private Player m_player;
+    private int[] m_stateArray;
+    [SerializeField] private EnemyActionData m_enemyActionData;
 
     void Start()
     {
         m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        m_stateArray = new int[(int)BuffDebuff.end];
         m_hp = m_maxHp;
         m_hpSlider.maxValue = m_maxHp;
         m_hpSlider.value = m_hp;
@@ -43,21 +45,17 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
         SetText();
     }
 
-    /// <summary>
-    /// デバフの効果込みの攻撃力を返す
-    /// </summary>
-    /// <param name="atk">元の攻撃力</param>
-    /// <returns>最終的な攻撃力</returns>
-    protected int SetAttack(int atk)
+    private int[] SetAttack(int[] state)
     {
+        int[] nums = state;
         if (m_stateArray[(int)BuffDebuff.Weakness] > 0)
         {
-            atk = Parsent(atk, 0.25f);
+            nums[(int)BuffDebuff.Damage] = Parsent(nums[(int)BuffDebuff.Damage], 0.25f);
         }
-        return atk;
+        return nums;
     }
 
-    protected int Parsent(int num, float parsent)
+    private int Parsent(int num, float parsent)
     {
         float total = num * (1 - parsent);
         return (int)total;
@@ -73,5 +71,23 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
         else { m_text.text = $"{m_hp} : {m_maxHp}"; }
     }
 
-    public abstract void Action(int turn);
+    public void Action(int turn)
+    {
+        int num = turn - 1;
+        while (true)
+        {
+            if (num < m_enemyActionData.m_enemyDatas.Length)
+            {
+
+                m_player.GetAcceptDamage(SetAttack(m_enemyActionData.m_enemyDatas[num].Action()));
+                m_stateArray[(int)BuffDebuff.Damage] = 0;
+                m_stateArray[(int)BuffDebuff.Block] = 0;
+                return;
+            }
+            else
+            {
+                num -= m_enemyActionData.m_enemyDatas.Length;
+            }
+        }
+    }
 }
