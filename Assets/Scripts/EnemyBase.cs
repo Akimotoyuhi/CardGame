@@ -73,5 +73,5 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
         else { m_text.text = $"{m_hp} : {m_maxHp}"; }
     }
 
-    public abstract void Action();
+    public abstract void Action(int turn);
 }

@@ -41,7 +41,6 @@ public class BuffCard : CardBase, IBuffCard
         {
             Parsent(block, 0.25f);
         }
-        Debug.Log(nums.Length);
         block += nums[(int)BuffDebuff.Agile];
         nums[(int)BuffDebuff.Block] = block;
         return nums;

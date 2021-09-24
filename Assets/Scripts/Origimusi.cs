@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Origimusi : EnemyBase
 {
-    //[SerializeField] private int m_atk;
-
-    public override void Action()
+    public override void Action(int Turn)
     {
         int[] nums = new int[(int)BuffDebuff.end];
-        int r = Random.Range(0, 2);
 
         //攻撃パターン(仮)
-        if (r == 0)
+        if (Turn % 2 != 0)
         {
             nums[(int)BuffDebuff.Vulnerable] = 1;
         }
-        else if (r == 1)
+        else if (Turn % 2 == 0)
         {
             nums[(int)BuffDebuff.Damage] = SetAttack(3);
         }

@@ -36,7 +36,7 @@ public class Player : MonoBehaviour, IDropHandler
         {
             m_stateArray[i] += damage[i];
         }
-        int dmg = SetAcceptDamage(m_stateArray[(int)BuffDebuff.Damage]);
+        int dmg = CalculationAcceptDamage(m_stateArray[(int)BuffDebuff.Damage]);
         dmg = m_block -= dmg;
         if (m_block < 0) { m_block = 0; }
         m_blkSlider.value = m_block;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour, IDropHandler
     /// </summary>
     /// <param name="num">被ダメージ</param>
     /// <returns>計算後の被ダメージ</returns>
-    private int SetAcceptDamage(int num)
+    private int CalculationAcceptDamage(int num)
     {
         return num;
     }
