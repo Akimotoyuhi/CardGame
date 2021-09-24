@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyActionData : ScriptableObject
 {
+    [Header("Element0は先制効果です")]
     public EnemyData[] m_enemyDatas;
 }
 
@@ -23,16 +24,6 @@ public class EnemyData
         {
             nums[(int)m_buffDebuff[i]] += m_turn[i];
         }
-        /*
-        if (turn % 2 != 0)
-        {
-            nums[(int)BuffDebuff.Vulnerable] = 1;
-        }
-        else if (turn % 2 == 0)
-        {
-            nums[(int)BuffDebuff.Damage] = SetAttack(m_buffDebuff == );
-        }
-        */
         return nums;
     }
 }

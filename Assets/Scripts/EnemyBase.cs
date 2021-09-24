@@ -73,7 +73,7 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
 
     public void Action(int turn)
     {
-        int num = turn - 1;
+        int num = turn;
         while (true)
         {
             if (num < m_enemyActionData.m_enemyDatas.Length)
@@ -86,7 +86,7 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
             }
             else
             {
-                num -= m_enemyActionData.m_enemyDatas.Length;
+                num -= m_enemyActionData.m_enemyDatas.Length - 1;
             }
         }
     }
