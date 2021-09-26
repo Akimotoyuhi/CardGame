@@ -35,7 +35,7 @@ public class BuffCard : CardBase, IBuffCard
         {
             nums[(int)m_cardData.m_cardData.GiveState(i)] += m_cardData.m_cardData.GiveStateTrun(i);
         }
-        //防御の計算
+        //ブロック値の計算
         int block = m_cardData.m_cardData.Defense;
         if (nums[(int)BuffDebuff.Vulnerable] > 0)
         {

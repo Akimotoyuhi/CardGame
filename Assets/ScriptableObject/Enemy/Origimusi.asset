@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Origimusi
   m_EditorClassIdentifier: 
   m_enemyDatas:
+  - m_buffDebuff: 
+    m_turn: 
   - m_buffDebuff: 00000000
     m_turn: 03000000
-  - m_buffDebuff: 02000000
-    m_turn: 01000000

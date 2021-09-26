@@ -32,6 +32,7 @@ public class CardData
 {
     [SerializeField] string m_cardName = "";
     [SerializeField] int m_cost;
+    [SerializeField] string m_tooltip;
     [SerializeField] int m_damage;
     [SerializeField] int m_defence;
     [SerializeField] BuffDebuff[] m_buffDebuff;

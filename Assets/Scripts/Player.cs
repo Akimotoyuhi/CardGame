@@ -82,7 +82,14 @@ public class Player : MonoBehaviour, IDropHandler
         m_buffCard = pointerEvent.pointerDrag.GetComponent<IBuffCard>();
         if (m_buffCard == null) { return; }
         m_stateArray = m_buffCard.SetBlock();
-        m_block += m_stateArray[(int)BuffDebuff.Block];
+        if (m_stateArray[(int)BuffDebuff.Vulnerable] > 0)
+        {
+            m_block += Parsent(m_stateArray[(int)BuffDebuff.Block], 0.25f);
+        }
+        else
+        {
+            m_block += m_stateArray[(int)BuffDebuff.Block];
+        }
         SetText();
     }
 }
