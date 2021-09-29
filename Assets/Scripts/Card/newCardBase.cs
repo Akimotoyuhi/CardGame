@@ -3,19 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class newCardBase : MonoBehaviour
+public class NewCardBase : MonoBehaviour
 {
     [Serializable]
-    class EnemyCommandSet
+    class CardCommandSet
     {
         [SerializeReference, SubclassSelector]
-        public ICommand Command;                // コマンド
+        public ICommand m_command;
         public string m_name = "name";
-        public int Probability = 1;             // 実行確率
-        public float CastTime = 0;              // 行動までの時間
-        public float CoolTime = 0;              // 行動後のインターバル
-        public int NextIndex = -1;              // 次に必ずそのIndexの行動をする。-1で抽選に戻る
+        public int m_cost = 0;
     }
 
-    [SerializeField] List<EnemyCommandSet> m_enemyCommandSets = new List<EnemyCommandSet>();
+    [SerializeField] List<CardCommandSet> m_commands = new List<CardCommandSet>();
+
+    private void Start()
+    {
+        int[] i = new int[(int)BuffDebuff.end];
+        i = m_commands[0].m_command.SetParam();
+        Debug.Log($"CardName{m_commands[0].m_name}, Cost{m_commands[0].m_cost}");
+        foreach (var a in i)
+        {
+            Debug.Log("Parametor" + a);
+        }
+    }
+
+    private void CreateCard()
+    {
+
+    }
 }

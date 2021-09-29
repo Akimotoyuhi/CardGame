@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ICommand
 {
-    int Cast();
+    int[] SetParam();
 }
