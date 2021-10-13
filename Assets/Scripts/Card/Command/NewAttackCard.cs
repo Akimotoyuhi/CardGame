@@ -2,37 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewAttackCard : ICommand
+public class NewAttackCard : IEffect
 {
     [SerializeField] int m_power;
 
-    public int[] SetParam()
+    public int[] GetParam()
     {
+        Debug.Log("a");
         int[] state = new int[(int)BuffDebuff.end];
         state[(int)BuffDebuff.Damage] = m_power;
         return state;
     }
+
+    public string GetTooltip()
+    {
+        return $"{m_power}ダメージを与える";
+    }
 }
 
-public class BlockCard : ICommand
+public class BlockCard : IEffect
 {
     [SerializeField] int m_block;
 
-    public int[] SetParam()
+    public int[] GetParam()
     {
         Debug.Log("b");
         int[] state = new int[(int)BuffDebuff.end];
         state[(int)BuffDebuff.Block] = m_block;
         return state;
     }
+
+    public string GetTooltip()
+    {
+        return $"{m_block}ブロックを得る";
+    }
 }
 
-public class SetBuffDebuff : ICommand
+public class SetBuffDebuff : IEffect
 {
     [SerializeField] BuffDebuff[] m_buffDebuffs;
     [SerializeField] int m_turn;
 
-    public int[] SetParam()
+    public int[] GetParam()
     {
         Debug.Log("c");
         int[] state = new int[(int)BuffDebuff.end];
@@ -41,5 +52,10 @@ public class SetBuffDebuff : ICommand
             state[(int)m_buffDebuffs[i]] += m_turn;
         }
         return state;
+    }
+
+    public string GetTooltip()
+    {
+        return $"{m_buffDebuffs}を{m_turn}ターン与える";
     }
 }

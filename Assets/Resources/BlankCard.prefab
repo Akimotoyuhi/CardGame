@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 4756192355611260295}
   - component: {fileID: 4756192355611260293}
   - component: {fileID: 4756192355611260292}
-  - component: {fileID: 4756192355611260290}
+  - component: {fileID: -9154361223724921267}
   m_Layer: 5
   m_Name: BlankCard
   m_TagString: Untagged
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4756192355611260290
+--- !u!114 &-9154361223724921267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,10 +396,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4756192355611260294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28104a240351ba649851d429e937311b, type: 3}
+  m_Script: {fileID: 11500000, guid: 159eee14e98b7554ea750ef20f409d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cardData: {fileID: 11400000, guid: 82f20a1981629fc4b861e8f070c45745, type: 2}
-  m_cost: {fileID: 4756192354467185732}
-  m_name: {fileID: 4756192354113062012}
-  m_tooltip: {fileID: 4756192353884880473}

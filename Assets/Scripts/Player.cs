@@ -13,7 +13,6 @@ public class Player : MonoBehaviour, IDropHandler
     [SerializeField] private Slider m_hpSlider;
     [SerializeField] private Slider m_blkSlider;
     [SerializeField] private Text m_text;
-    private IBuffCard m_buffCard;
     public int[] m_stateArray;
 
     void Start()
@@ -79,9 +78,9 @@ public class Player : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData pointerEvent)
     {
-        m_buffCard = pointerEvent.pointerDrag.GetComponent<IBuffCard>();
-        if (m_buffCard == null) { return; }
-        m_stateArray = m_buffCard.SetBlock();
+        BlankCard buffCard = pointerEvent.pointerDrag.GetComponent<BlankCard>();
+        if (buffCard == null || buffCard.GetCardType() != CardType.ToPlayer) { return; }
+        m_stateArray = buffCard.GetEffect();
         if (m_stateArray[(int)BuffDebuff.Vulnerable] > 0)
         {
             m_block += Parsent(m_stateArray[(int)BuffDebuff.Block], 0.25f);

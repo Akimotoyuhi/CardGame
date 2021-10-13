@@ -13,7 +13,6 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
     [SerializeField] private Slider m_hpSlider;
     [SerializeField] private Slider m_blkSlider;
     [SerializeField] private Text m_text;
-    private IAttackCard m_atkCard;
     private Player m_player;
     private int[] m_stateArray;
     [SerializeField] private EnemyActionData m_enemyActionData;
@@ -31,9 +30,9 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        m_atkCard = eventData.pointerDrag.GetComponent<IAttackCard>();
-        if (m_atkCard == null) { return; }
-        m_stateArray = m_atkCard.GetDamage();
+        BlankCard atkCard = eventData.pointerDrag.GetComponent<BlankCard>();
+        if (atkCard == null || atkCard.GetCardType() != CardType.ToPlayer) return;
+        m_stateArray = atkCard.GetEffect();
         int damage = m_stateArray[(int)BuffDebuff.Damage];
         m_hp -= damage;
         m_hpSlider.value = m_hp;

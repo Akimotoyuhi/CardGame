@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICommand
+public interface IEffect
 {
-    int[] SetParam();
+    int[] GetParam();
+
+    string GetTooltip();
 }

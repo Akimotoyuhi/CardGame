@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Koutetunoisi : BuffCard, IBuffCard
+public class Koutetunoisi : BuffCard
 {
     void Start()
     {

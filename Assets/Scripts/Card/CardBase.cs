@@ -21,8 +21,8 @@ public class CardBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public virtual void SetUp()
     {
-        m_cost.text = $"{m_cardData.m_cardData.Cost}";
-        m_name.text = m_cardData.m_cardData.Name;
+        //m_cost.text = $"{m_cardData.m_cardData.Cost}";
+        //m_name.text = m_cardData.m_cardData.Name;
         m_discard = GameObject.Find("Discard");
         m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }

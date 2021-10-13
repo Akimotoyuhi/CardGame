@@ -15,7 +15,7 @@ public class EnemyData
     [Header("バフデバフの設定")]
     [SerializeField] private BuffDebuff[] m_buffDebuff;
     [SerializeField] private int[] m_turn;
-    //[SerializeField] private bool m_toPlayer;
+    [SerializeField] private bool m_toPlayer;
 
     public int[] Action()
     {
