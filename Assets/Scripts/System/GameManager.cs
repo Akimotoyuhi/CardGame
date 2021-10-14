@@ -12,19 +12,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] Hand m_hand;
     [SerializeField] EnemyController m_enemies;
     [SerializeField] NewCardData m_cardData;
+    private Player m_player;
 
     void Start()
     {
         //初期デッキ構築　とりあえず
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    CreateCard((int)CardID.kyougeki);
-        //}
+        for (int i = 0; i < 5; i++)
+        {
+            CreateCard((int)CardID.kyougeki);
+        }
         for (int i = 0; i < 5; i++)
         {
             CreateCard((int)CardID.bougyoryokuUp);
         }
+        CreateCard((int)CardID.hikkaki);
         m_deck.Draw();
+        m_player = GameObject.Find("Player").GetComponent<Player>();
         Debug.Log(m_progressTurn + "ターン目");
     }
 
@@ -35,7 +38,17 @@ public class GameManager : MonoBehaviour
         m_enemies.EnemyTrun(m_progressTurn);
         m_progressTurn++;
         m_deck.Draw();
+        m_player.TurnEnd();
+        TurnStart();
+    }
+
+    /// <summary>
+    /// ターン開始
+    /// </summary>
+    private void TurnStart()
+    {
         Debug.Log(m_progressTurn + "ターン目");
+        m_player.TurnStart();
     }
 
     /// <summary>

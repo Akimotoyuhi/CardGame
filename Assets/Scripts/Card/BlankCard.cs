@@ -43,7 +43,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public int[] GetEffect()
     {
         OnCast();
-        Debug.Log(m_effect[(int)BuffDebuff.Block]);
         return m_effect;
     }
 

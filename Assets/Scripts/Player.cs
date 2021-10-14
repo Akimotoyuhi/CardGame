@@ -4,25 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Player : MonoBehaviour, IDropHandler
+public class Player : CharactorBase, IDropHandler
 {
-    [SerializeField] private string m_name = "name";
-    [SerializeField] private int m_maxHp = 1;
-    private int m_hp;
-    private int m_block = 0;
-    [SerializeField] private Slider m_hpSlider;
-    [SerializeField] private Slider m_blkSlider;
-    [SerializeField] private Text m_text;
-    public int[] m_stateArray;
-
     void Start()
     {
-        m_hp = m_maxHp;
-        m_hpSlider.maxValue = m_maxHp;
-        m_hpSlider.value = m_hp;
-        m_blkSlider.value = m_block;
-        SetText();
-        m_stateArray = new int[(int)BuffDebuff.end];
+        SetUp();
     }
 
     /// <summary>
@@ -60,40 +46,19 @@ public class Player : MonoBehaviour, IDropHandler
         return num;
     }
 
-    private int Parsent(int num, float parsent)
-    {
-        float t = num * (1 - parsent);
-        return (int)t;
-    }
-
-    private void SetText()
-    {
-        if (m_block > 0)
-        {
-            m_blkSlider.value = m_block;
-            m_text.text = $"{m_block}";
-        }
-        else { m_text.text = $"{m_hp} : {m_maxHp}"; }
-    }
-
     public void OnDrop(PointerEventData pointerEvent)
     {
         BlankCard card = pointerEvent.pointerDrag.GetComponent<BlankCard>();
         if (card == null || card.GetCardType() != CardType.ToPlayer) return;
         m_stateArray = card.GetEffect();
-        for (int i = 0; i < m_stateArray.Length; i++)
-        {
-            Debug.Log($"index:{i}, value:{m_stateArray[i]}");
-        }
         if (m_stateArray[(int)BuffDebuff.Vulnerable] > 0)
         {
-            m_block += Parsent(m_stateArray[(int)BuffDebuff.Block], 0.25f);
+            m_block += Parsent(m_stateArray[(int)BuffDebuff.Block], 25);
         }
         else
         {
             m_block += m_stateArray[(int)BuffDebuff.Block];
         }
-        Debug.Log($"block値:{m_block}");
         SetText();
     }
 }

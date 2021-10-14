@@ -11,8 +11,9 @@ public class NewCardData : ScriptableObject
 
 public enum CardID
 {
-    kyougeki = 0,
-    bougyoryokuUp = 1
+    kyougeki, //デフォルトカード
+    bougyoryokuUp, //デフォルトカード
+    hikkaki
 }
 
 public enum CardType
@@ -31,6 +32,7 @@ public class NewCardDataBase
     [System.Serializable]
     public class CardEffectSet
     {
+        [Header("効果設定")]
         [SerializeReference, SubclassSelector]
         public IEffect m_effect;
     }
@@ -58,10 +60,6 @@ public class NewCardDataBase
             {
                 nums[n] += m_cardEffectSets[i].m_effect.GetParam()[n]; //index1は５になってる
             }
-        }
-        for (int i = 0; i < nums.Length; i++)
-        {
-            Debug.Log($"index{i}, value{nums[i]}"); //index1は０
         }
         return nums;
     }

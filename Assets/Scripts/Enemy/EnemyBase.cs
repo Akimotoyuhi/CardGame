@@ -4,28 +4,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class EnemyBase : MonoBehaviour, IDropHandler
+public class EnemyBase : CharactorBase, IDropHandler
 {
-    [SerializeField] private string m_name = "name";
-    [SerializeField] private int m_maxHp = 1;
-    private int m_hp;
-    private int m_block;
-    [SerializeField] private Slider m_hpSlider;
-    [SerializeField] private Slider m_blkSlider;
-    [SerializeField] private Text m_text;
     private Player m_player;
-    private int[] m_stateArray;
-    [SerializeField] private EnemyActionData m_enemyActionData;
+    [SerializeField] EnemyActionData m_enemyActionData;
 
     void Start()
     {
         m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        m_stateArray = new int[(int)BuffDebuff.end];
-        m_hp = m_maxHp;
-        m_hpSlider.maxValue = m_maxHp;
-        m_hpSlider.value = m_hp;
-        m_blkSlider.value = m_block;
-        SetText();
+        SetUp();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -49,25 +36,10 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
         int[] nums = state;
         if (m_stateArray[(int)BuffDebuff.Weakness] > 0)
         {
-            nums[(int)BuffDebuff.Damage] = Parsent(nums[(int)BuffDebuff.Damage], 0.25f);
+            Debug.Log("脱力中");
+            nums[(int)BuffDebuff.Damage] = Parsent(nums[(int)BuffDebuff.Damage], 25);
         }
         return nums;
-    }
-
-    private int Parsent(int num, float parsent)
-    {
-        float total = num * (1 - parsent);
-        return (int)total;
-    }
-
-    private void SetText()
-    {
-        if (m_block > 0)
-        {
-            m_blkSlider.value = m_block;
-            m_text.text = $"{m_block}";
-        }
-        else { m_text.text = $"{m_hp} : {m_maxHp}"; }
     }
 
     public void Action(int turn)

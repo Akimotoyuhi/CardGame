@@ -20,10 +20,19 @@ public enum BuffDebuff
     end = 7,
 }
 
+/// <summary>
+/// バフデバフ関係
+/// </summary>
 public class NewBuffDebuff
 {
-    public void BuffDebuffManager()
+    /// <summary>
+    /// ターン終了でなにかするデバフの処理
+    /// 基本持続ターン数を減らす用
+    /// </summary>
+    /// <param name="nums">state</param>
+    public void Decrement(int[] nums)
     {
-
+        if (nums[(int)BuffDebuff.Weakness] > 0) nums[(int)BuffDebuff.Weakness]--;
+        if (nums[(int)BuffDebuff.Vulnerable] > 0) nums[(int)BuffDebuff.Vulnerable]--;
     }
 }

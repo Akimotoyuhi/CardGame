@@ -38,16 +38,13 @@ public class BlockCard : IEffect
 
 public class SetBuffDebuff : IEffect
 {
-    [SerializeField] BuffDebuff[] m_buffDebuffs;
+    [SerializeField] BuffDebuff m_buffDebuffs;
     [SerializeField] int m_turn;
 
     public int[] GetParam()
     {
         int[] state = new int[(int)BuffDebuff.end];
-        for (int i = 0; i < m_buffDebuffs.Length; i++)
-        {
-            state[(int)m_buffDebuffs[i]] += m_turn;
-        }
+        state[(int)m_buffDebuffs] += m_turn;
         return state;
     }
 
