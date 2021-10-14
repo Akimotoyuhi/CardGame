@@ -78,9 +78,13 @@ public class Player : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData pointerEvent)
     {
-        BlankCard buffCard = pointerEvent.pointerDrag.GetComponent<BlankCard>();
-        if (buffCard == null || buffCard.GetCardType() != CardType.ToPlayer) { return; }
-        m_stateArray = buffCard.GetEffect();
+        BlankCard card = pointerEvent.pointerDrag.GetComponent<BlankCard>();
+        if (card == null || card.GetCardType() != CardType.ToPlayer) return;
+        m_stateArray = card.GetEffect();
+        for (int i = 0; i < m_stateArray.Length; i++)
+        {
+            Debug.Log($"index:{i}, value:{m_stateArray[i]}");
+        }
         if (m_stateArray[(int)BuffDebuff.Vulnerable] > 0)
         {
             m_block += Parsent(m_stateArray[(int)BuffDebuff.Block], 0.25f);
@@ -89,6 +93,7 @@ public class Player : MonoBehaviour, IDropHandler
         {
             m_block += m_stateArray[(int)BuffDebuff.Block];
         }
+        Debug.Log($"block値:{m_block}");
         SetText();
     }
 }

@@ -36,4 +36,33 @@ public class NewCardDataBase
     }
     public List<CardEffectSet> m_cardEffectSets = new List<CardEffectSet>();
     public CardType m_cardType = CardType.NotPlay;
+
+    public string GetTooltip()
+    {
+        string ret = "";
+        for (int i = 0; i < m_cardEffectSets.Count; i++)
+        {
+            ret += m_cardEffectSets[i].m_effect.GetTooltip();
+            if (i < m_cardEffectSets.Count - 1) continue;
+            ret += "\n";
+        }
+        return ret;
+    }
+
+    public int[] GetParam()
+    {
+        int[] nums = new int[(int)BuffDebuff.end];
+        for (int i = 0; i < m_cardEffectSets.Count; i++) //設定されたエフェクトの回数分
+        {
+            for (int n = 0; n < m_cardEffectSets[i].m_effect.GetParam().Length; n++) //エフェクト全てを入れる
+            {
+                nums[n] += m_cardEffectSets[i].m_effect.GetParam()[n]; //index1は５になってる
+            }
+        }
+        for (int i = 0; i < nums.Length; i++)
+        {
+            Debug.Log($"index{i}, value{nums[i]}"); //index1は０
+        }
+        return nums;
+    }
 }

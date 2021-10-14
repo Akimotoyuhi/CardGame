@@ -8,7 +8,6 @@ public class NewAttackCard : IEffect
 
     public int[] GetParam()
     {
-        Debug.Log("a");
         int[] state = new int[(int)BuffDebuff.end];
         state[(int)BuffDebuff.Damage] = m_power;
         return state;
@@ -26,7 +25,6 @@ public class BlockCard : IEffect
 
     public int[] GetParam()
     {
-        Debug.Log("b");
         int[] state = new int[(int)BuffDebuff.end];
         state[(int)BuffDebuff.Block] = m_block;
         return state;
@@ -45,7 +43,6 @@ public class SetBuffDebuff : IEffect
 
     public int[] GetParam()
     {
-        Debug.Log("c");
         int[] state = new int[(int)BuffDebuff.end];
         for (int i = 0; i < m_buffDebuffs.Length; i++)
         {

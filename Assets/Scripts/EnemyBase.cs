@@ -30,9 +30,9 @@ public abstract class EnemyBase : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        BlankCard atkCard = eventData.pointerDrag.GetComponent<BlankCard>();
-        if (atkCard == null || atkCard.GetCardType() != CardType.ToPlayer) return;
-        m_stateArray = atkCard.GetEffect();
+        BlankCard card = eventData.pointerDrag.GetComponent<BlankCard>();
+        if (card == null || card.GetCardType() != CardType.ToEnemy) return;
+        m_stateArray = card.GetEffect();
         int damage = m_stateArray[(int)BuffDebuff.Damage];
         m_hp -= damage;
         m_hpSlider.value = m_hp;

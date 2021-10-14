@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //初期デッキ構築　とりあえず
-        for (int i = 0; i < 5; i++)
-        {
-            CreateCard((int)CardID.kyougeki);
-        }
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    CreateCard((int)CardID.kyougeki);
+        //}
         for (int i = 0; i < 5; i++)
         {
             CreateCard((int)CardID.bougyoryokuUp);
@@ -46,9 +46,7 @@ public class GameManager : MonoBehaviour
         GameObject obj = Instantiate((GameObject)Resources.Load("BlankCard"));
         BlankCard card = obj.GetComponent<BlankCard>();
         NewCardDataBase cardData = m_cardData.m_cardData[num];
-        Debug.Log(cardData);
-        Debug.Log($"{cardData.m_image}, {cardData.m_name}, {cardData.m_cost}, {cardData.m_cardEffectSets[num].m_effect.GetTooltip()}, {cardData.m_cardEffectSets[num].m_effect.GetParam()}, {cardData.m_cardType}");
-        card.SetInfo(cardData.m_image, cardData.m_name, cardData.m_cost, cardData.m_cardEffectSets[num].m_effect.GetTooltip(), cardData.m_cardEffectSets[num].m_effect.GetParam(), cardData.m_cardType);
+        card.SetInfo(cardData.m_image, cardData.m_name, cardData.m_cost, cardData.GetTooltip(), cardData.GetParam(), cardData.m_cardType);
         obj.transform.parent = m_deck.transform;
     }
 }

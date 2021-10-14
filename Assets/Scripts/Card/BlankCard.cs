@@ -19,7 +19,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     void Start()
     {
         m_discard = GameObject.Find("Discard");
-        m_effect = new int[(int)BuffDebuff.end];
     }
 
     public void SetInfo(Sprite image, string name, int cost, string tooltip, int[] effect, CardType type)
@@ -28,7 +27,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         transform.Find("Name").GetComponent<Text>().text = name;
         transform.Find("Cost").GetComponent<Text>().text = $"{cost}";
         transform.Find("Tooltip").GetComponent<Text>().text = tooltip;
-        m_effect = effect;
+        m_effect = new int[(int)BuffDebuff.end];
+        for (int i = 0; i < effect.Length; i++)
+        {
+            m_effect[i] = effect[i];
+        }
         m_cardType = type;
     }
 
@@ -39,7 +42,14 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public int[] GetEffect()
     {
+        OnCast();
+        Debug.Log(m_effect[(int)BuffDebuff.Block]);
         return m_effect;
+    }
+
+    public void OnCast()
+    {
+        transform.parent = m_discard.transform;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
