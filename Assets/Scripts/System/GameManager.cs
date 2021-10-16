@@ -17,14 +17,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //初期デッキ構築　とりあえず
-        for (int i = 0; i < 5; i++)
-        {
-            CreateCard((int)CardID.kyougeki);
-        }
-        for (int i = 0; i < 5; i++)
-        {
-            CreateCard((int)CardID.bougyoryokuUp);
-        }
+        CreateCard((int)CardID.kyougeki);
+        CreateCard((int)CardID.bougyoryokuUp);
         CreateCard((int)CardID.hikkaki);
         m_deck.Draw();
         m_player = GameObject.Find("Player").GetComponent<Player>();
@@ -60,6 +54,7 @@ public class GameManager : MonoBehaviour
         BlankCard card = obj.GetComponent<BlankCard>();
         NewCardDataBase cardData = m_cardData.m_cardData[num];
         card.SetInfo(cardData.m_image, cardData.m_name, cardData.m_cost, cardData.GetTooltip(), cardData.GetParam(), cardData.m_cardType);
-        obj.transform.parent = m_deck.transform;
+        //obj.transform.parent = m_deck.transform;
+        obj.transform.SetParent(m_deck.transform, false);
     }
 }

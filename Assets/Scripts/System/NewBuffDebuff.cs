@@ -7,17 +7,17 @@ using UnityEngine;
 /// </summary>
 public enum BuffDebuff
 {
-    Damage = 0,
-    Block = 1,
+    Damage,
+    Block,
     /// <summary>脱力:与えるダメージが25%低下</summary>
-    Weakness = 2,
+    Weakness,
     /// <summary>脆弱化:得るブロックが25%低下</summary>
-    Vulnerable = 3,
+    Vulnerable,
     /// <summary>筋力:与えるダメージがn増加</summary>
-    Strength = 5,
+    Strength,
     /// <summary>敏捷性:得るブロックがn増加</summary>
-    Agile = 6,
-    end = 7,
+    Agile,
+    end,
 }
 
 /// <summary>

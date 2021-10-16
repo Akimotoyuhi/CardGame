@@ -14,7 +14,8 @@ public class Hand : MonoBehaviour
         if (transform.childCount == 0) { return; }
         for (int i = transform.childCount - 1; 0 <= i; i--)
         {
-            transform.GetChild(i).parent = m_deck.transform;
+            //transform.GetChild(i).parent = m_deck;
+            transform.GetChild(i).SetParent(m_deck, false);
         }
     }
 }

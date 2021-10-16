@@ -9,16 +9,16 @@ using UnityEngine.UI;
 /// </summary>
 public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    private int[] m_effect;
+    [SerializeField] private int[] m_effect;
     private CardType m_cardType;
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
-    private GameObject m_discard;
+    private Transform m_discard;
 
     void Start()
     {
-        m_discard = GameObject.Find("Discard");
+        m_discard = GameObject.Find("Discard").transform;
     }
 
     public void SetInfo(Sprite image, string name, int cost, string tooltip, int[] effect, CardType type)
@@ -42,13 +42,19 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public int[] GetEffect()
     {
+        //バグについて
+        //使用せずにターンを終了(捨て札に移動)した場合m_effectに入っている値は消えないが
+        //使用した状態でターンを終了させるとm_effectが消える
         OnCast();
+        Debug.Log($"GetEffect.攻撃:{m_effect[(int)BuffDebuff.Damage]}");
+        Debug.Log($"GetEffect.脱力:{m_effect[(int)BuffDebuff.Weakness]}");
         return m_effect;
     }
 
     public void OnCast()
     {
-        transform.parent = m_discard.transform;
+        //transform.parent = m_discard.transform;
+        transform.SetParent(m_discard, false);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

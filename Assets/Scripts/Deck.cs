@@ -17,15 +17,16 @@ public class Deck : MonoBehaviour
             if (this.transform.childCount == 0)
             {
                 Debug.Log("山札切れ");
-                m_discard.ConvartToDeck();
+                m_discard.ConvartToDeck(); //山札が無かったら捨て札からカードを戻す
                 if (this.transform.childCount == 0)
                 {
-                    Debug.Log("デッキ枚数不足");
+                    Debug.Log("デッキ枚数不足"); //捨て札からカードを戻しても山札がないなら引くのをやめる
                     return;
                 }
             }
             int r = Random.Range(0, this.transform.childCount);
-            transform.GetChild(r).parent = m_hand;
+            transform.GetChild(r).SetParent(m_hand, false);
+            //transform.GetChild(r).parent = m_hand;
         }
     }
 }

@@ -45,8 +45,7 @@ public class NewCardDataBase
         for (int i = 0; i < m_cardEffectSets.Count; i++)
         {
             ret += m_cardEffectSets[i].m_effect.GetTooltip();
-            if (i < m_cardEffectSets.Count - 1) continue;
-            ret += "\n";
+            if (i < m_cardEffectSets.Count - 1) ret += "\n";
         }
         return ret;
     }
@@ -58,7 +57,7 @@ public class NewCardDataBase
         {
             for (int n = 0; n < m_cardEffectSets[i].m_effect.GetParam().Length; n++) //エフェクト全てを入れる
             {
-                nums[n] += m_cardEffectSets[i].m_effect.GetParam()[n]; //index1は５になってる
+                nums[n] += m_cardEffectSets[i].m_effect.GetParam()[n];
             }
         }
         return nums;

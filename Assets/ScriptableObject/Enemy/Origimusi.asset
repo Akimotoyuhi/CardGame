@@ -15,5 +15,7 @@ MonoBehaviour:
   m_enemyDatas:
   - m_buffDebuff: 
     m_turn: 
+    m_toPlayer: 0
   - m_buffDebuff: 00000000
     m_turn: 03000000
+    m_toPlayer: 0
