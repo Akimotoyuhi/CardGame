@@ -30,8 +30,11 @@ public class Map : MonoBehaviour
     [SerializeField] GameObject m_eventCellPrefab;
     /// <summary>休憩マス(最大２つ)</summary>
     [SerializeField] GameObject m_restCellPrefab;
+
     /// <summary>所属セクター保存用</summary>
     private GameObject[] m_cellLocation;
+    /// <summary>線描画用</summary>
+    private LineRenderer m_lineRenderer;
 
     void Start()
     {
@@ -64,12 +67,18 @@ public class Map : MonoBehaviour
     private void CreateMap(GameObject cell, int num = 0)
     {
         //捜索セルを保存する→次のセクターの中からランダムで一つ決める→numをインクリメント
-        GameObject nowCell;
-        nowCell = cell;
-        if (!nowCell) nowCell = m_cellLocation[num];
-        
-
-        if (num > m_sector) return;
-        CreateMap(null, num);
+        GameObject nowCell = cell;
+        if (num >= m_sector) return; //最後まで行ったら終了
+        if (!nowCell)
+        {
+            nowCell = m_cellLocation[num].transform.GetChild(0).gameObject; //最初の一回はStartがほしいので特別
+            m_lineRenderer = nowCell.GetComponent<LineRenderer>(); //線描画前の初期設定
+            //m_lineRenderer.startWidth = 0.1f;
+            //m_lineRenderer.endWidth = 0.1f;
+            m_lineRenderer.positionCount = m_sector;
+        }
+        m_lineRenderer.SetPosition(num, nowCell.transform.position);
+        int r = Random.Range(0, m_cellLocation[num].transform.childCount); //次セクターからランダムで一つセルを選択
+        CreateMap(m_cellLocation[num].transform.GetChild(r).gameObject, num + 1);
     }
 }
