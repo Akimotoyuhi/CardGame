@@ -33,15 +33,17 @@ public class Map : MonoBehaviour
 
     /// <summary>所属セクター保存用</summary>
     private GameObject[] m_cellLocation;
-    /// <summary>線描画用</summary>
+    /// <summary>線の描画用</summary>
+    private Vector3[] m_pos;
     private LineRenderer m_lineRenderer;
+    private Canvas m_canvas;
 
-    void Start()
+    private void Start()
     {
+        m_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         m_cellLocation = new GameObject[m_sector];
         CreateCell();
     }
-
     /// <summary>
     /// セルの生成と配置
     /// </summary>
@@ -62,6 +64,7 @@ public class Map : MonoBehaviour
             obj.transform.SetParent(m_parentSector, false);
         }
         CreateMap(null);
+        m_lineRenderer.SetPositions(m_pos);
     }
 
     private void CreateMap(GameObject cell, int num = 0)
@@ -72,13 +75,24 @@ public class Map : MonoBehaviour
         if (!nowCell)
         {
             nowCell = m_cellLocation[num].transform.GetChild(0).gameObject; //最初の一回はStartがほしいので特別
-            m_lineRenderer = nowCell.GetComponent<LineRenderer>(); //線描画前の初期設定
-            //m_lineRenderer.startWidth = 0.1f;
-            //m_lineRenderer.endWidth = 0.1f;
+            m_lineRenderer = nowCell.GetComponent<LineRenderer>();
             m_lineRenderer.positionCount = m_sector;
+            m_lineRenderer.startWidth = 10;
+            m_lineRenderer.endWidth = 10;
+            m_pos = new Vector3[m_sector];
         }
-        m_lineRenderer.SetPosition(num, nowCell.transform.position);
+        
+        m_pos[num] = ConvertCanvasPos(nowCell.transform.position, m_canvas);
         int r = Random.Range(0, m_cellLocation[num].transform.childCount); //次セクターからランダムで一つセルを選択
+        Debug.Log($"{nowCell.name} Pos :{m_pos[num]}");
         CreateMap(m_cellLocation[num].transform.GetChild(r).gameObject, num + 1);
+    }
+
+    private Vector3 ConvertCanvasPos(Vector3 pos, Canvas canvas)
+    {
+        RectTransform rect = canvas.GetComponent<RectTransform>();
+        pos.x += rect.transform.position.x;
+        pos.y += rect.transform.position.y;
+        return new Vector3(pos.x, pos.y, rect.transform.position.z - 10);
     }
 }

@@ -17,9 +17,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //初期デッキ構築　とりあえず
-        CreateCard((int)CardID.kyougeki);
-        CreateCard((int)CardID.bougyoryokuUp);
-        CreateCard((int)CardID.hikkaki);
+        //CreateCard((int)CardID.kyougeki);
+        //CreateCard((int)CardID.bougyoryokuUp);
+        //CreateCard((int)CardID.hikkaki);
+        Debug.Log($"CardID:{(int)CardID.kouzoukyouka}, {CardID.kouzoukyouka}");
+        CreateCard((int)CardID.kouzoukyouka);
+        Debug.Log($"CardID:{(int)CardID.sennjuturennkei}, {CardID.sennjuturennkei}");
+        CreateCard((int)CardID.sennjuturennkei);
+        Debug.Log($"CardID:{(int)CardID.meltdown}, {CardID.meltdown}");
+        CreateCard((int)CardID.meltdown);
         m_deck.Draw();
         m_player = GameObject.Find("Player").GetComponent<Player>();
         Debug.Log(m_progressTurn + "ターン目");

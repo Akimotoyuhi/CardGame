@@ -15,7 +15,7 @@ public class NewAttackCard : IEffect
 
     public string GetTooltip()
     {
-        return $"{m_power}ダメージを与える";
+        return $"{m_power}ダメージを";
     }
 }
 
@@ -32,7 +32,7 @@ public class BlockCard : IEffect
 
     public string GetTooltip()
     {
-        return $"{m_block}ブロックを得る";
+        return $"{m_block}ブロックを";
     }
 }
 
@@ -50,6 +50,6 @@ public class SetBuffDebuff : IEffect
 
     public string GetTooltip()
     {
-        return $"{m_buffDebuffs}を{m_turn}ターン与える";
+        return $"{m_buffDebuffs}を{m_turn}ターン";
     }
 }

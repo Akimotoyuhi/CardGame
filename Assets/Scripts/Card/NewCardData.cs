@@ -13,14 +13,16 @@ public enum CardID
 {
     kyougeki, //デフォルトカード
     bougyoryokuUp, //デフォルトカード
-    hikkaki
+    hikkaki,
+    kouzoukyouka, //特殊カード
+    sennjuturennkei, //特殊カード
+    meltdown //特殊カード
 }
 
 public enum CardType
 {
     ToPlayer,
     ToEnemy,
-    NotPlay
 }
 
 [System.Serializable]
@@ -37,7 +39,7 @@ public class NewCardDataBase
         public IEffect m_effect;
     }
     public List<CardEffectSet> m_cardEffectSets = new List<CardEffectSet>();
-    public CardType m_cardType = CardType.NotPlay;
+    public CardType m_cardType;
 
     public string GetTooltip()
     {
@@ -45,6 +47,8 @@ public class NewCardDataBase
         for (int i = 0; i < m_cardEffectSets.Count; i++)
         {
             ret += m_cardEffectSets[i].m_effect.GetTooltip();
+            if (m_cardType == CardType.ToPlayer) ret += "得る";
+            else if (m_cardType == CardType.ToEnemy) ret += "与える";
             if (i < m_cardEffectSets.Count - 1) ret += "\n";
         }
         return ret;

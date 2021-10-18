@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3497339588191491058}
   - component: {fileID: 2179109183720130987}
   - component: {fileID: 3123831850306039295}
-  - component: {fileID: 291078121077197595}
+  - component: {fileID: 4699779594058634448}
   m_Layer: 5
   m_Name: cell
   m_TagString: Untagged
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!120 &291078121077197595
+--- !u!120 &4699779594058634448
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

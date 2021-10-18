@@ -971,7 +971,6 @@ MonoBehaviour:
   m_hpSlider: {fileID: 982773013}
   m_blkSlider: {fileID: 1620826722}
   m_text: {fileID: 907077745}
-  m_stateArray: 0000000000000000000000000000000000000000
 --- !u!1 &946966257
 GameObject:
   m_ObjectHideFlags: 0
