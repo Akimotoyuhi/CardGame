@@ -36,7 +36,11 @@ public class CharactorBase : MonoBehaviour
             m_blkSlider.value = m_block;
             m_text.text = $"{m_block}";
         }
-        else { m_text.text = $"{m_hp} : {m_maxHp}"; }
+        else
+        {
+            m_blkSlider.value = m_block;
+            m_text.text = $"{m_hp} : {m_maxHp}";
+        }
     }
 
     /// <summary>
@@ -66,5 +70,6 @@ public class CharactorBase : MonoBehaviour
     public virtual void TurnStart()
     {
         m_block = 0;
+        SetText();
     }
 }

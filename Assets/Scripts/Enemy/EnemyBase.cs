@@ -19,7 +19,7 @@ public class EnemyBase : CharactorBase, IDropHandler
     {
         BlankCard card = eventData.pointerDrag.GetComponent<BlankCard>();
         if (card == null || card.GetCardType() != CardType.ToEnemy) return;
-        m_stateArray = card.GetEffect(); //この時点で脱力が消えてる
+        m_stateArray = card.GetEffect();
         int damage = m_stateArray[(int)BuffDebuff.Damage];
         m_hp -= damage;
         m_hpSlider.value = m_hp;
@@ -52,8 +52,8 @@ public class EnemyBase : CharactorBase, IDropHandler
             if (num < m_enemyActionData.m_enemyDatas.Length)
             {
                 m_player.GetAcceptDamage(SetAttack(m_enemyActionData.m_enemyDatas[num].Action()));
-                m_stateArray[(int)BuffDebuff.Damage] = 0;
-                m_stateArray[(int)BuffDebuff.Block] = 0;
+                //m_stateArray[(int)BuffDebuff.Damage] = 0;
+                //m_stateArray[(int)BuffDebuff.Block] = 0;
                 return;
             }
             else

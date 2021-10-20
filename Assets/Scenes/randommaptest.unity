@@ -442,17 +442,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d249bd329ed9e6d4b90188a891f237bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxCell: 3
   m_parentSector: {fileID: 1777699760}
   m_sectorPrefab: {fileID: 4689219055565768202, guid: 6c611e1ee71f5e24282777e86147d07f,
     type: 3}
-  m_cellPrefab: {fileID: 4689219055565768202, guid: a3de2e77b33ad3a4ca7668e3e3212df5,
+  m_cellPrefab: {fileID: 971258997563312600, guid: e6524bca606119c4994e372a1e84ffb3,
     type: 3}
-  m_startCellPrefab: {fileID: 0}
-  m_bossCellPrefab: {fileID: 0}
-  m_battleCellPrefab: {fileID: 0}
-  m_eliteCellPrefab: {fileID: 0}
-  m_eventCellPrefab: {fileID: 0}
-  m_restCellPrefab: {fileID: 0}
 --- !u!1 &1875483552
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
@@ -11,26 +12,13 @@ public class Map : MonoBehaviour
 
     /// <summary>セクター数</summary>
     private int m_sector = 7;
+    [SerializeField] int m_maxCell = 3;
     /// <summary>親セクター</summary>
     [SerializeField] Transform m_parentSector;
     /// <summary>セクターｐレハブ</summary>
     [SerializeField] GameObject m_sectorPrefab;
     /// <summary>とりあえずセル</summary>
     [SerializeField] GameObject m_cellPrefab;
-    [Header("下は今は使わない")]
-    /// <summary>開始セル(最大１つ)</summary>
-    [SerializeField] GameObject m_startCellPrefab;
-    /// <summary>最終セル(最大１つ)</summary>
-    [SerializeField] GameObject m_bossCellPrefab;
-    /// <summary>戦闘セル(たくさん)</summary>
-    [SerializeField] GameObject m_battleCellPrefab;
-    /// <summary>強敵セル(最大３つ)</summary>
-    [SerializeField] GameObject m_eliteCellPrefab;
-    /// <summary>イベントセル(たくさん)</summary>
-    [SerializeField] GameObject m_eventCellPrefab;
-    /// <summary>休憩マス(最大２つ)</summary>
-    [SerializeField] GameObject m_restCellPrefab;
-
     /// <summary>所属セクター保存用</summary>
     private GameObject[] m_cellLocation;
     /// <summary>線の描画用</summary>
@@ -49,50 +37,55 @@ public class Map : MonoBehaviour
     /// </summary>
     private void CreateCell()
     {
-        GameObject obj = gameObject;
+        GameObject sector = gameObject;
+        GameObject cell;
         for (int i = 0; i < m_sector; i++)
         {
+            sector = Instantiate(m_sectorPrefab);
+            sector.transform.SetParent(this.transform, false);
+            sector.name = $"Sector{i}";
+
             if (i == 0 || i == m_sector - 1)
             {
-                obj = Instantiate(m_cellPrefab);
+                //最初と最後はセル一つ
+                cell = Instantiate(m_cellPrefab);
+                cell.transform.SetParent(sector.transform, false);
             }
             else
             {
-                obj = Instantiate(m_sectorPrefab);
+                for (int n = 0; n < m_maxCell; n++)
+                {
+                    cell = Instantiate(m_cellPrefab);
+                    cell.transform.SetParent(sector.transform, false);
+                }
             }
-            m_cellLocation[i] = obj;
-            obj.transform.SetParent(m_parentSector, false);
+            m_cellLocation[i] = sector;
+            sector.transform.SetParent(m_parentSector, false);
         }
-        CreateMap(null);
-        m_lineRenderer.SetPositions(m_pos);
+        CreateMap();
+        //m_cellLocation[0].transform.GetChild(0).gameObject.GetComponent<Cell>().ListChecker();
+        m_cellLocation[0].transform.GetChild(0).gameObject.GetComponent<Cell>().LineCaster();
     }
 
-    private void CreateMap(GameObject cell, int num = 0)
+    /// <summary>
+    /// マップ生成
+    /// </summary>
+    private void CreateMap()
     {
-        //捜索セルを保存する→次のセクターの中からランダムで一つ決める→numをインクリメント
-        GameObject nowCell = cell;
-        if (num >= m_sector) return; //最後まで行ったら終了
-        if (!nowCell)
+        GameObject cell;
+        GameObject beforeCell = null;
+        for (int i = 0; i < m_sector; i++)
         {
-            nowCell = m_cellLocation[num].transform.GetChild(0).gameObject; //最初の一回はStartがほしいので特別
-            m_lineRenderer = nowCell.GetComponent<LineRenderer>();
-            m_lineRenderer.positionCount = m_sector;
-            m_lineRenderer.startWidth = 10;
-            m_lineRenderer.endWidth = 10;
-            m_pos = new Vector3[m_sector];
+            //セルのランダム抽選
+            cell = m_cellLocation[i].transform.GetChild(Random.Range(0, m_cellLocation[i].transform.childCount)).gameObject;
+            cell.GetComponent<Image>().color = Color.red;
+            if (i == 0) //一回目は前セルが存在しないので前セルに自分を入れてターンエンド
+            {
+                beforeCell = cell;
+                continue;
+            }
+            beforeCell.GetComponent<Cell>().m_objList.Add(cell); //前のセルと現在のセルをつなげる
+            beforeCell = cell;
         }
-        
-        m_pos[num] = ConvertCanvasPos(nowCell.transform.position, m_canvas);
-        int r = Random.Range(0, m_cellLocation[num].transform.childCount); //次セクターからランダムで一つセルを選択
-        Debug.Log($"{nowCell.name} Pos :{m_pos[num]}");
-        CreateMap(m_cellLocation[num].transform.GetChild(r).gameObject, num + 1);
-    }
-
-    private Vector3 ConvertCanvasPos(Vector3 pos, Canvas canvas)
-    {
-        RectTransform rect = canvas.GetComponent<RectTransform>();
-        pos.x += rect.transform.position.x;
-        pos.y += rect.transform.position.y;
-        return new Vector3(pos.x, pos.y, rect.transform.position.z - 10);
     }
 }
