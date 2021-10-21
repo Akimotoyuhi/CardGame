@@ -42,12 +42,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public int[] GetEffect()
     {
-        //バグについて
-        //使用せずにターンを終了(捨て札に移動)した場合m_effectに入っている値は消えないが
-        //使用した状態でターンを終了させるとm_effectが消える
         OnCast();
-        Debug.Log($"GetEffect.攻撃:{m_effect[(int)BuffDebuff.Damage]}");
-        Debug.Log($"GetEffect.脱力:{m_effect[(int)BuffDebuff.Weakness]}");
         return m_effect;
     }
 

@@ -76,8 +76,8 @@ MonoBehaviour:
     00000003:
       type: {class: SetBuffDebuff, ns: , asm: Assembly-CSharp}
       data:
-        m_buffDebuffs: 5
-        m_turn: 2
+        m_buffDebuffs: 2
+        m_turn: 1
     00000004:
       type: {class: BlockCard, ns: , asm: Assembly-CSharp}
       data:
@@ -85,7 +85,7 @@ MonoBehaviour:
     00000005:
       type: {class: NewAttackCard, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 20
+        m_power: 0
     00000006:
       type: {class: SetBuffDebuff, ns: , asm: Assembly-CSharp}
       data:

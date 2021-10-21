@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 敵グループの制御
+/// </summary>
 public class EnemyController : MonoBehaviour
 {
     private List<EnemyBase> m_enemies = new List<EnemyBase>();

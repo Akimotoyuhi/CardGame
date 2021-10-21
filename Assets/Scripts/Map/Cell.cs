@@ -12,24 +12,22 @@ public class Cell : MonoBehaviour
 
     void Start()
     {
-
+        Debug.Log($"Sector:{transform.parent.gameObject.name}, Cell{gameObject.name}, RectPos:{ConvertCanvasPos(transform.position, transform.root.gameObject.GetComponent<Canvas>())}");
     }
 
     public void LineCaster()
     {
-        /*
         Vector3[] vec = new Vector3[m_objList.Count];
-        vec[0] = ConvertCanvasPos(transform.position, transform.root.GetComponent<Canvas>());
+        //vec[0] = ConvertCanvasPos(transform.position, transform.root.GetComponent<Canvas>());
         for (int i = 0; i < vec.Length; i++)
         {
             Vector3 v = m_objList[i].transform.position;
             vec[i] = ConvertCanvasPos(v, this.transform.root.GetComponent<Canvas>());
-            m_objList[i].GetComponent<Cell>().ListChecker();
+            //m_objList[i].GetComponent<Cell>().ListChecker();
             m_objList[i].GetComponent<Cell>().LineCaster();
         }
         m_lineRenderer = GetComponent<LineRenderer>();
         m_lineRenderer.SetPositions(vec);
-        */
     }
 
     public void ListChecker()

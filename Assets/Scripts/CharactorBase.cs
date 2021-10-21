@@ -14,10 +14,11 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] protected Slider m_blkSlider;
     [SerializeField] protected Text m_text;
     [NonSerialized] public int[] m_stateArray;
-    protected NewBuffDebuff m_buffDebuff = new NewBuffDebuff();
+    protected Condition m_condition;
 
     protected void SetUp()
     {
+        m_condition = new Condition();
         m_hp = m_maxHp;
         m_hpSlider.maxValue = m_maxHp;
         m_hpSlider.value = m_hp;
@@ -56,12 +57,32 @@ public class CharactorBase : MonoBehaviour
         return (int)t;
     }
 
+    protected void SetCondisionTurn(int[] states)
+    {
+        int[] nums = new int[(int)BuffDebuff.end];
+        nums = states;
+        for (int i = 0; i < states.Length; i++)
+        {
+            if (i == (int)BuffDebuff.Vulnerable)
+            {
+                m_condition.vulnerable.turn += nums[(int)BuffDebuff.Vulnerable];
+                return;
+            }
+            else if (i == (int)BuffDebuff.Weakness)
+            {
+                m_condition.weakness.turn += nums[(int)BuffDebuff.Weakness];
+                //Debug.Log(m_condition.weakness.turn);
+                return;
+            }
+        }
+    }
+
     /// <summary>
     /// ターン終了時に起こる効果
     /// </summary>
     public virtual void TurnEnd()
     {
-        m_buffDebuff.Decrement(m_stateArray);
+        m_condition.Decrement();
     }
 
     /// <summary>

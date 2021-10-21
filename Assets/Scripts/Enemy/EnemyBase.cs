@@ -20,6 +20,11 @@ public class EnemyBase : CharactorBase, IDropHandler
         BlankCard card = eventData.pointerDrag.GetComponent<BlankCard>();
         if (card == null || card.GetCardType() != CardType.ToEnemy) return;
         m_stateArray = card.GetEffect();
+        foreach (int e in m_stateArray)
+        {
+            Debug.Log(e);
+        }
+        SetCondisionTurn(m_stateArray);
         int damage = m_stateArray[(int)BuffDebuff.Damage];
         m_hp -= damage;
         m_hpSlider.value = m_hp;
@@ -27,38 +32,28 @@ public class EnemyBase : CharactorBase, IDropHandler
         {
             Destroy(this.gameObject);
         }
-        //m_stateArray[(int)BuffDebuff.Damage] = 0;
         SetText();
     }
 
     private int[] SetAttack(int[] state)
     {
-        Debug.Log($"脱力ターン数{state[(int)BuffDebuff.Weakness]}");
         int[] nums = state;
-        if (m_stateArray[(int)BuffDebuff.Weakness] > 0)
-        {
-            Debug.Log("脱力中");
-            nums[(int)BuffDebuff.Damage] = Parsent(nums[(int)BuffDebuff.Damage], 25);
-        }
-        else Debug.Log("脱力してない");
+        nums[(int)BuffDebuff.Damage] = m_condition.AtAttack(nums[(int)BuffDebuff.Damage]);
         return nums;
     }
 
     public void Action(int turn)
     {
-        int num = turn;
         while (true)
         {
-            if (num < m_enemyActionData.m_enemyDatas.Length)
+            if (turn < m_enemyActionData.m_enemyDatas.Length)
             {
-                m_player.GetAcceptDamage(SetAttack(m_enemyActionData.m_enemyDatas[num].Action()));
-                //m_stateArray[(int)BuffDebuff.Damage] = 0;
-                //m_stateArray[(int)BuffDebuff.Block] = 0;
+                m_player.GetAcceptDamage(SetAttack(m_enemyActionData.m_enemyDatas[turn].Action()));
                 return;
             }
             else
             {
-                num -= m_enemyActionData.m_enemyDatas.Length - 1;
+                turn -= m_enemyActionData.m_enemyDatas.Length - 1;
             }
         }
     }
