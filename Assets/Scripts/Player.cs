@@ -52,14 +52,7 @@ public class Player : CharactorBase, IDropHandler
         if (card == null || card.GetCardType() != CardType.ToPlayer) return;
         m_stateArray = card.GetEffect();
         SetCondisionTurn(m_stateArray);
-        //if (m_stateArray[(int)BuffDebuff.Vulnerable] > 0)
-        //{
-        //    m_block += Parsent(m_stateArray[(int)BuffDebuff.Block], 25);
-        //}
-        //else
-        //{
-        //    m_block += m_stateArray[(int)BuffDebuff.Block];
-        //}
+        m_block += m_stateArray[(int)BuffDebuff.Block];
         SetText();
     }
 }

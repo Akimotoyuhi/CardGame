@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         m_hand.AllCast();
         m_enemies.EnemyTrun(m_progressTurn);
         m_progressTurn++;
-        m_deck.Draw();
         m_player.TurnEnd();
         Invoke("TurnStart", 1f);
     }
@@ -55,6 +54,7 @@ public class GameManager : MonoBehaviour
     private void TurnStart()
     {
         m_isPress = false;
+        m_deck.Draw();
         Debug.Log(m_progressTurn + "ターン目");
         m_player.TurnStart();
     }
