@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Effect
+public class CardBase
 {
     public int attack;
     public int block;
-
+    public int[] conditions;
 }

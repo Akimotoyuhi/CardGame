@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         CreateCard((int)CardID.kyougeki);
         CreateCard((int)CardID.bougyoryokuUp);
         CreateCard((int)CardID.hikkaki);
-        CreateCard((int)CardID.kouzoukyouka);
+        //CreateCard((int)CardID.kouzoukyouka);
         //CreateCard((int)CardID.sennjuturennkei);
         //CreateCard((int)CardID.meltdown);
         m_deck.Draw();

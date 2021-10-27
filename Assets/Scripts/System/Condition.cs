@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public enum BuffDebuff
 {
-    Damage,
-    Block,
+    //Damage,
+    //Block,
     /// <summary>脱力:与えるダメージが25%低下</summary>
     Weakness,
     /// <summary>脆弱化:得るブロックが25%低下</summary>
@@ -25,6 +25,7 @@ public enum BuffDebuff
 /// </summary>
 public class Condition
 {
+    //private List<Condition> conList = new List<Condition>();
     public Weakness weakness = new Weakness();
     public Vulnerable vulnerable = new Vulnerable();
     public Strength strength = new Strength();

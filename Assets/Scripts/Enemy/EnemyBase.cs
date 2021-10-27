@@ -19,13 +19,9 @@ public class EnemyBase : CharactorBase, IDropHandler
     {
         BlankCard card = eventData.pointerDrag.GetComponent<BlankCard>();
         if (card == null || card.GetCardType() != CardType.ToEnemy) return;
-        m_stateArray = card.GetEffect();
-        foreach (int e in m_stateArray)
-        {
-            Debug.Log(e);
-        }
+        m_stateArray = card.GetEffect().conditions;
         SetCondisionTurn(m_stateArray);
-        int damage = m_stateArray[(int)BuffDebuff.Damage];
+        int damage = card.GetEffect().attack;
         m_hp -= damage;
         m_hpSlider.value = m_hp;
         if (m_hp < 0)
@@ -35,25 +31,29 @@ public class EnemyBase : CharactorBase, IDropHandler
         SetText();
     }
 
-    private int[] SetAttack(int[] state)
+    private EnemyCommand SetAttack(EnemyCommand command)
     {
-        int[] nums = state;
-        nums[(int)BuffDebuff.Damage] = m_condition.AtAttack(nums[(int)BuffDebuff.Damage]);
-        return nums;
+        EnemyCommand ret = new EnemyCommand();
+        ret.m_attack = m_condition.AtAttack(command.m_attack);
+        return ret;
     }
 
+    /// <summary>
+    /// ActionDataに基づいた敵の行動
+    /// </summary>
+    /// <param name="turn">現在ターン数</param>
     public void Action(int turn)
     {
         while (true)
         {
-            if (turn < m_enemyActionData.m_enemyDatas.Length)
+            if (turn < m_enemyActionData.m_enemyDatas.Count)
             {
                 m_player.GetAcceptDamage(SetAttack(m_enemyActionData.m_enemyDatas[turn].Action()));
                 return;
             }
             else
             {
-                turn -= m_enemyActionData.m_enemyDatas.Length - 1;
+                turn -= m_enemyActionData.m_enemyDatas.Count - 1;
             }
         }
     }

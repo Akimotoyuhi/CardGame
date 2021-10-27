@@ -9,7 +9,8 @@ using UnityEngine.UI;
 /// </summary>
 public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private int[] m_effect;
+    //[SerializeField] private int[] m_effect;
+    CardBase m_cardbase = new CardBase();
     private CardType m_cardType;
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
@@ -21,17 +22,18 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_discard = GameObject.Find("Discard").transform;
     }
 
-    public void SetInfo(Sprite image, string name, int cost, string tooltip, int[] effect, CardType type)
+    public void SetInfo(Sprite image, string name, int cost, string tooltip, CardBase param, CardType type)
     {
         transform.Find("Icon").GetComponent<Image>().sprite = image;
         transform.Find("Name").GetComponent<Text>().text = name;
         transform.Find("Cost").GetComponent<Text>().text = $"{cost}";
         transform.Find("Tooltip").GetComponent<Text>().text = tooltip;
-        m_effect = new int[(int)BuffDebuff.end];
-        for (int i = 0; i < effect.Length; i++)
-        {
-            m_effect[i] = effect[i];
-        }
+        m_cardbase = param;
+        //m_effect = new int[(int)BuffDebuff.end];
+        //for (int i = 0; i < effect.Length; i++)
+        //{
+        //    m_effect[i] = effect[i];
+        //}
         m_cardType = type;
     }
 
@@ -40,10 +42,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         return m_cardType;
     }
 
-    public int[] GetEffect()
+    public CardBase GetEffect()
     {
         OnCast();
-        return m_effect;
+        return m_cardbase;
     }
 
     public void OnCast()

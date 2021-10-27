@@ -46,6 +46,7 @@ public class NewCardDataBase
         string ret = "";
         for (int i = 0; i < m_cardEffectSets.Count; i++)
         {
+            Debug.Log(m_cardEffectSets[i].m_effect.GetTooltip());
             ret += m_cardEffectSets[i].m_effect.GetTooltip();
             if (m_cardType == CardType.ToPlayer) ret += "得る";
             else if (m_cardType == CardType.ToEnemy) ret += "与える";
@@ -54,16 +55,15 @@ public class NewCardDataBase
         return ret;
     }
 
-    public int[] GetParam()
+    public CardBase GetParam()
     {
-        int[] nums = new int[(int)BuffDebuff.end];
-        for (int i = 0; i < m_cardEffectSets.Count; i++) //設定されたエフェクトの回数分
+        CardBase cardBase = new CardBase();
+        for (int i = 0; i < m_cardEffectSets.Count; i++)
         {
-            for (int n = 0; n < m_cardEffectSets[i].m_effect.GetParam().Length; n++) //エフェクト全てを入れる
-            {
-                nums[n] += m_cardEffectSets[i].m_effect.GetParam()[n];
-            }
+            cardBase.attack = m_cardEffectSets[i].m_effect.GetParam().attack;
+            cardBase.block = m_cardEffectSets[i].m_effect.GetParam().block;
+            cardBase.conditions = m_cardEffectSets[i].m_effect.GetParam().conditions;
         }
-        return nums;
+        return cardBase;
     }
 }

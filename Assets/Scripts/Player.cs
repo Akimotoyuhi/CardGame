@@ -15,17 +15,13 @@ public class Player : CharactorBase, IDropHandler
     /// 被ダメージ処理
     /// </summary>
     /// <param name="damage">ブロック値を加味した被ダメージ</param>
-    public void GetAcceptDamage(int[] damage)
+    public void GetAcceptDamage(EnemyCommand enemy)
     {
-        for (int i = 0; i < m_stateArray.Length; i++)
-        {
-            m_stateArray[i] += damage[i];
-        }
-        int dmg = CalculationAcceptDamage(m_stateArray[(int)BuffDebuff.Damage]);
+        SetCondisionTurn(enemy.m_conditions);
+        int dmg = CalculationAcceptDamage(enemy.m_attack);
         dmg = m_block -= dmg;
         if (m_block < 0) { m_block = 0; }
         m_blkSlider.value = m_block;
-        m_stateArray[(int)BuffDebuff.Damage] = 0;
         if (dmg > 0)
         {
             SetText();
@@ -50,9 +46,9 @@ public class Player : CharactorBase, IDropHandler
     {
         BlankCard card = pointerEvent.pointerDrag.GetComponent<BlankCard>();
         if (card == null || card.GetCardType() != CardType.ToPlayer) return;
-        m_stateArray = card.GetEffect();
+        m_stateArray = card.GetEffect().conditions;
         SetCondisionTurn(m_stateArray);
-        m_block += m_stateArray[(int)BuffDebuff.Block];
+        m_block += card.GetEffect().block;
         SetText();
     }
 }

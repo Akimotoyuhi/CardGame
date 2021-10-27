@@ -32,33 +32,10 @@ MonoBehaviour:
     m_image: {fileID: 21300000, guid: 042301a19cacc864ebddcd9b674ff900, type: 3}
     m_cardEffectSets:
     - m_effect:
+        id: 0
+    - m_effect:
         id: 2
-    - m_effect:
-        id: 3
     m_cardType: 1
-  - m_name: "\u6307\u4EE4:\u69CB\u9020\u5F37\u5316"
-    m_cost: 1
-    m_image: {fileID: 21300000, guid: ad5765035bd0c744db85d1357d977c9e, type: 3}
-    m_cardEffectSets:
-    - m_effect:
-        id: 4
-    m_cardType: 0
-  - m_name: "\u6307\u4EE4:\u6226\u8853\u9023\u643A"
-    m_cost: 2
-    m_image: {fileID: 21300000, guid: 8e7662195db030746805634c581d00c9, type: 3}
-    m_cardEffectSets:
-    - m_effect:
-        id: 5
-    m_cardType: 1
-  - m_name: "\u6307\u4EE4:\u30E1\u30EB\u30C8\u30C0\u30A6\u30F3"
-    m_cost: 2
-    m_image: {fileID: 21300000, guid: f339bcaf21dc9984db9b19581904f665, type: 3}
-    m_cardEffectSets:
-    - m_effect:
-        id: 6
-    - m_effect:
-        id: 3
-    m_cardType: 0
   references:
     version: 1
     00000000:
@@ -70,24 +47,7 @@ MonoBehaviour:
       data:
         m_block: 5
     00000002:
-      type: {class: NewAttackCard, ns: , asm: Assembly-CSharp}
+      type: {class: ConditionCard, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 4
-    00000003:
-      type: {class: SetBuffDebuff, ns: , asm: Assembly-CSharp}
-      data:
-        m_buffDebuffs: 2
+        m_buffDebuffs: 0
         m_turn: 1
-    00000004:
-      type: {class: BlockCard, ns: , asm: Assembly-CSharp}
-      data:
-        m_block: 13
-    00000005:
-      type: {class: NewAttackCard, ns: , asm: Assembly-CSharp}
-      data:
-        m_power: 0
-    00000006:
-      type: {class: SetBuffDebuff, ns: , asm: Assembly-CSharp}
-      data:
-        m_buffDebuffs: 4
-        m_turn: 2

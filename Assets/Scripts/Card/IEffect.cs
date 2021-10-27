@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IEffect
 {
-    int[] GetParam();
+    CardBase GetParam();
 
     string GetTooltip();
 }

@@ -5,25 +5,39 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyActionData : ScriptableObject
 {
-    [Header("Element0は先制効果です")]
-    public EnemyData[] m_enemyDatas;
+    public List<EnemyData> m_enemyDatas = new List<EnemyData>();
 }
 
 [System.Serializable]
 public class EnemyData
 {
-    [Header("バフデバフの設定")]
-    [SerializeField] private BuffDebuff[] m_buffDebuff;
-    [SerializeField] private int[] m_turn;
-    [SerializeField] private bool m_toPlayer;
-
-    public int[] Action()
+    public string m_name;
+    public int m_maxhp;
+    [System.Serializable]
+    public class SetCommand
     {
-        int[] nums = new int[(int)BuffDebuff.end];
-        for (int i = 0; i < m_buffDebuff.Length; i++)
+        [SerializeReference, SubclassSelector]
+        public ICommand m_command;
+        //[SerializeField] bool m_toPlayer;
+    }
+    [Header("Element0は先制効果です")]
+    [SerializeField] List<SetCommand> m_commands = new List<SetCommand>();
+
+    public EnemyCommand Action()
+    {
+        EnemyCommand ret = new EnemyCommand();
+        for (int i = 0; i < m_commands.Count; i++)
         {
-            nums[(int)m_buffDebuff[i]] += m_turn[i];
+            ret.m_attack = m_commands[i].m_command.GetParam().m_attack;
+            ret.m_block = m_commands[i].m_command.GetParam().m_block;
+            ret.m_conditions = m_commands[i].m_command.GetParam().m_conditions;
         }
-        return nums;
+        return ret;
+        //int[] nums = new int[(int)BuffDebuff.end];
+        //for (int i = 0; i < m_buffDebuff.Length; i++)
+        //{
+        //    nums[(int)m_buffDebuff[i]] += m_turn[i];
+        //}
+        //return nums;
     }
 }
