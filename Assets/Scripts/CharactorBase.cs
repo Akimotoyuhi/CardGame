@@ -57,8 +57,13 @@ public class CharactorBase : MonoBehaviour
         return (int)t;
     }
 
+    /// <summary>
+    /// 状態異常のターン加算処理
+    /// </summary>
+    /// <param name="states"></param>
     protected void SetCondisionTurn(int[] states)
     {
+        Debug.Log(states.Length);
         int[] nums = new int[(int)BuffDebuff.end];
         nums = states;
         for (int i = 0; i < states.Length; i++)

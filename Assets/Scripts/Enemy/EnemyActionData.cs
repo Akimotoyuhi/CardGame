@@ -5,14 +5,13 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyActionData : ScriptableObject
 {
+    [Header("Element0は先制効果です")]
     public List<EnemyData> m_enemyDatas = new List<EnemyData>();
 }
 
 [System.Serializable]
 public class EnemyData
 {
-    public string m_name;
-    public int m_maxhp;
     [System.Serializable]
     public class SetCommand
     {
@@ -20,8 +19,7 @@ public class EnemyData
         public ICommand m_command;
         //[SerializeField] bool m_toPlayer;
     }
-    [Header("Element0は先制効果です")]
-    [SerializeField] List<SetCommand> m_commands = new List<SetCommand>();
+    public List<SetCommand> m_commands = new List<SetCommand>();
 
     public EnemyCommand Action()
     {
@@ -33,11 +31,5 @@ public class EnemyData
             ret.m_conditions = m_commands[i].m_command.GetParam().m_conditions;
         }
         return ret;
-        //int[] nums = new int[(int)BuffDebuff.end];
-        //for (int i = 0; i < m_buffDebuff.Length; i++)
-        //{
-        //    nums[(int)m_buffDebuff[i]] += m_turn[i];
-        //}
-        //return nums;
     }
 }

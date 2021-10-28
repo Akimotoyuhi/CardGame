@@ -2519,7 +2519,7 @@ MonoBehaviour:
   m_hpSlider: {fileID: 701776486}
   m_blkSlider: {fileID: 1284174609}
   m_text: {fileID: 1727291531}
-  m_enemyActionData: {fileID: 11400000, guid: bb6cd0b6656ba6841bcff356279f8bc7, type: 2}
+  m_enemyActionData: {fileID: 11400000, guid: 2f395795a4bace2419a69125975473db, type: 2}
 --- !u!1 &2002597983
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,7 +46,6 @@ public class NewCardDataBase
         string ret = "";
         for (int i = 0; i < m_cardEffectSets.Count; i++)
         {
-            Debug.Log(m_cardEffectSets[i].m_effect.GetTooltip());
             ret += m_cardEffectSets[i].m_effect.GetTooltip();
             if (m_cardType == CardType.ToPlayer) ret += "得る";
             else if (m_cardType == CardType.ToEnemy) ret += "与える";

@@ -14,7 +14,7 @@ public class Player : CharactorBase, IDropHandler
     /// <summary>
     /// 被ダメージ処理
     /// </summary>
-    /// <param name="damage">ブロック値を加味した被ダメージ</param>
+    /// <param name="damage">被ダメージ</param>
     public void GetAcceptDamage(EnemyCommand enemy)
     {
         SetCondisionTurn(enemy.m_conditions);

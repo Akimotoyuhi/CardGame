@@ -53,7 +53,7 @@ public class EnemyBase : CharactorBase, IDropHandler
             }
             else
             {
-                turn -= m_enemyActionData.m_enemyDatas.Count - 1;
+                turn -= m_enemyActionData.m_enemyDatas.Count;
             }
         }
     }
