@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Linq;
 public class GameManager : MonoBehaviour
 {
     /// <summary>経過ターン数</summary>
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private Player m_player;
     /// <summary>ボタンの受付拒否</summary>
     private bool m_isPress = false;
+    delegate void Dele(int i);
+    Dele d = default;
 
     void Start()
     {
@@ -34,6 +36,9 @@ public class GameManager : MonoBehaviour
         m_deck.Draw();
         m_player = GameObject.Find("Player").GetComponent<Player>();
         Debug.Log(m_progressTurn + "ターン目");
+        d += m_hand.AllCast;
+        d += m_enemies.EnemyTrun;
+        d += m_player.TurnEnd;
     }
 
     /// <summary>ターン終了</summary>
@@ -45,6 +50,7 @@ public class GameManager : MonoBehaviour
         m_enemies.EnemyTrun(m_progressTurn);
         m_progressTurn++;
         m_player.TurnEnd();
+        //d(m_progressTurn);
         Invoke("TurnStart", 1f);
     }
 

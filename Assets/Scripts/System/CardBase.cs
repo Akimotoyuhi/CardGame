@@ -6,5 +6,5 @@ public class CardBase
 {
     public int attack;
     public int block;
-    public int[] conditions;
+    public int[] conditions = new int[(int)BuffDebuff.end];
 }

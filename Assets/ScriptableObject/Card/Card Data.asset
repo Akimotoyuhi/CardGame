@@ -41,7 +41,7 @@ MonoBehaviour:
     00000000:
       type: {class: NewAttackCard, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 3
     00000001:
       type: {class: BlockCard, ns: , asm: Assembly-CSharp}
       data:

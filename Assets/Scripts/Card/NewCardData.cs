@@ -59,9 +59,13 @@ public class NewCardDataBase
         CardBase cardBase = new CardBase();
         for (int i = 0; i < m_cardEffectSets.Count; i++)
         {
-            cardBase.attack = m_cardEffectSets[i].m_effect.GetParam().attack;
-            cardBase.block = m_cardEffectSets[i].m_effect.GetParam().block;
-            cardBase.conditions = m_cardEffectSets[i].m_effect.GetParam().conditions;
+            cardBase.attack += m_cardEffectSets[i].m_effect.GetParam().attack;
+            cardBase.block += m_cardEffectSets[i].m_effect.GetParam().block;
+            for (int n = 0; n < (int)BuffDebuff.end; n++)
+            {
+                cardBase.conditions[n] += m_cardEffectSets[i].m_effect.GetParam().conditions[n];
+            }
+            //cardBase.conditions += m_cardEffectSets[i].m_effect.GetParam().conditions;
         }
         return cardBase;
     }

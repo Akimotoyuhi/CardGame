@@ -63,7 +63,7 @@ public class CharactorBase : MonoBehaviour
     /// <param name="states"></param>
     protected void SetCondisionTurn(int[] states)
     {
-        Debug.Log(states.Length);
+        if (states == null) return;
         int[] nums = new int[(int)BuffDebuff.end];
         nums = states;
         for (int i = 0; i < states.Length; i++)
@@ -85,7 +85,7 @@ public class CharactorBase : MonoBehaviour
     /// <summary>
     /// ターン終了時に起こる効果
     /// </summary>
-    public virtual void TurnEnd()
+    public virtual void TurnEnd(int i = 0)
     {
         m_condition.Decrement();
     }
