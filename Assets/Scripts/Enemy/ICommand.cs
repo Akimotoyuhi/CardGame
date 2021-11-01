@@ -7,6 +7,16 @@ public interface ICommand
     EnemyCommand GetParam();
 }
 
+public class EnemyNanmosinai : ICommand
+{
+    public EnemyCommand GetParam()
+    {
+        EnemyCommand command = new EnemyCommand();
+        command.m_ = 0;
+        return command;
+    }
+}
+
 public class EnemyAttack : ICommand
 {
     [SerializeField] int m_power;
@@ -47,4 +57,5 @@ public class EnemyCommand
     public int m_attack;
     public int m_block;
     public int[] m_conditions;
+    public byte m_;
 }

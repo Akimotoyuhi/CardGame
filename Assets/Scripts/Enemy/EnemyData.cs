@@ -26,19 +26,20 @@ public class EnemyDataBase
             public ICommand m_command;
         }
         [Header("1ターンで行う敵の行動")]
-        public List<TurnCommand> m_commands = new List<TurnCommand>();
+        public List<TurnCommand> m_turnCommands = new List<TurnCommand>();
     }
     [Header("Element0は先制効果")]
-    public List<SetCommand> m_commands = new List<SetCommand>();
+    public List<SetCommand> m_setCommands = new List<SetCommand>();
 
-    public EnemyCommand Action()
+    public EnemyCommand[] SetAction()
     {
-        EnemyCommand ret = new EnemyCommand();
-        for (int i = 0; i < m_commands.Count; i++)
+        EnemyCommand[] ret = new EnemyCommand[m_setCommands.Count];
+        for (int i = 0; i < m_setCommands.Count; i++) //敵の行動(全体)
         {
-            //ret.m_attack = m_commands[i].m_command.GetParam().m_attack;
-            //ret.m_block = m_commands[i].m_command.GetParam().m_block;
-            //ret.m_conditions = m_commands[i].m_command.GetParam().m_conditions;
+            for (int n = 0; n < m_setCommands[i].m_turnCommands.Count; n++) //敵の行動(１ターンあたり)
+            {
+                ret[i] = m_setCommands[i].m_turnCommands[n].m_command.GetParam();
+            }
         }
         return ret;
     }

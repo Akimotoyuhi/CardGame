@@ -11,6 +11,7 @@ public class EnemyBase : CharactorBase, IDropHandler
     public int m_id;
     [SerializeField] EnemyData m_enemyData;
     private EnemyDataBase m_data;
+    private EnemyCommand[] m_command;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyBase : CharactorBase, IDropHandler
         m_data = m_enemyData.m_enemyDatas[m_id];
         m_name = m_data.Name;
         m_maxHp = m_data.HP;
+        m_command = m_data.SetAction();
         m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         base.SetUp();
     }
@@ -56,18 +58,10 @@ public class EnemyBase : CharactorBase, IDropHandler
     /// <param name="turn">現在ターン数</param>
     public void Action(int turn)
     {
-        while (true)
+        if (turn >= m_command.Length)
         {
-            if (turn < m_enemyData.m_enemyDatas.Count)
-            {
-                //if (m_enemyData.m_enemyDatas[turn].Action() == null) return;
-                m_player.GetAcceptDamage(SetAttack(m_enemyData.m_enemyDatas[turn].Action()));
-                return;
-            }
-            else
-            {
-                turn -= m_enemyData.m_enemyDatas.Count;
-            }
+            turn = 1;
         }
+        m_player.GetAcceptDamage(SetAttack(m_command[turn]));
     }
 }

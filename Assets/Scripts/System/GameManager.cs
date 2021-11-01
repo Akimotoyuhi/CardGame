@@ -6,7 +6,7 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     /// <summary>経過ターン数</summary>
-    private int m_progressTurn = 1;
+    private int m_progressTurn = 0;
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
     /// <summary>捨て札</summary>
@@ -27,8 +27,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //初期デッキ構築　とりあえず
-        CreateCard((int)CardID.kyougeki);
-        CreateCard((int)CardID.bougyoryokuUp);
+        for (int i = 0; i < 3; i++)
+        {
+            CreateCard((int)CardID.kyougeki);
+            CreateCard((int)CardID.bougyoryokuUp);
+        }
         CreateCard((int)CardID.hikkaki);
         //CreateCard((int)CardID.kouzoukyouka);
         //CreateCard((int)CardID.sennjuturennkei);
