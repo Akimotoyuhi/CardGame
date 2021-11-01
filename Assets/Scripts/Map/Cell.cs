@@ -12,7 +12,8 @@ public class Cell : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"Sector:{transform.parent.gameObject.name}, Cell{gameObject.name}, RectPos:{ConvertCanvasPos(transform.position, transform.root.gameObject.GetComponent<Canvas>())}");
+        //Debug.Log($"Sector:{transform.parent.gameObject.name}, Cell{gameObject.name}, RectPos:{(RectTransform)transform}");
+        //Debug.Log($"Sector:{transform.parent.gameObject.name}, Cell{gameObject.name}, RectPos:{ConvertCanvasPos(transform.position, transform.root.gameObject.GetComponent<Canvas>())}");
     }
 
     public void LineCaster()

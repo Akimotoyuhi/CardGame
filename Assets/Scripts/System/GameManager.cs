@@ -46,11 +46,11 @@ public class GameManager : MonoBehaviour
     {
         if (m_isPress) return;
         m_isPress = true;
-        m_hand.AllCast();
-        m_enemies.EnemyTrun(m_progressTurn);
+        //m_hand.AllCast();
+        //m_enemies.EnemyTrun(m_progressTurn);
         m_progressTurn++;
-        m_player.TurnEnd();
-        //d(m_progressTurn);
+        //m_player.TurnEnd();
+        d(m_progressTurn);
         Invoke("TurnStart", 1f);
     }
 

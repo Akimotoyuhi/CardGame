@@ -12,7 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ef0ae2c8073bc418ee64dc8c2b92fc, type: 3}
   m_Name: Event Data
   m_EditorClassIdentifier: 
-  eventDataBases:
-  - text:
-    - 
-    eventid: 0
+  m_eventDataBases:
+  - m_text:
+    - "\u91A4\u6CB9\n\u7AF9\n\u30DF\u30F3\u30C8\ntrue"
+    - 'false
+
+      w
+
+      w
+
+      w
+
+      w'
+    m_eventid: 0
+  - m_text:
+    - "\u304D\u3093\u305F\u307E\n\u305F\u307E\u304D\u3093"
+    m_eventid: 0

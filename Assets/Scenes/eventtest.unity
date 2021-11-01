@@ -456,7 +456,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3c37b2c1668a542991b2b9d3350eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_eventData: {fileID: 0}
+  m_eventData: {fileID: 11400000, guid: 9081b8f3a22df3143b227c9dad9bc1f1, type: 2}
+  m_viewText: {fileID: 493616407}
+  m_textTime: 0.05
 --- !u!114 &2025059182
 MonoBehaviour:
   m_ObjectHideFlags: 0

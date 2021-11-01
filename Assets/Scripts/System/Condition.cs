@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Reflection;
 
 /// <summary>
 /// バフデバフ
@@ -30,11 +32,12 @@ public class Condition
     public Vulnerable vulnerable = new Vulnerable();
     public Strength strength = new Strength();
     public Agile agile = new Agile();
-    //public interface IAttacked { int GetEffect(int value); }
-    //public interface IDamaged { int GetEffect(int value); }
-    //public interface ITurnBegin { }
-    //public interface ITurnEnd { }
-    public class Weakness
+    /// <summary>ターン終了時に効果ターンが減るやつに付ける</summary>
+    public interface ITurnLess
+    {
+        void Dec();
+    }
+    public class Weakness : ITurnLess
     {
         public int turn = 0;
         private float parsent = 0.25f;
@@ -48,8 +51,12 @@ public class Condition
             turn = 0;
             return damage;
         }
+        public void Dec()
+        {
+            turn--;
+        }
     }
-    public class Vulnerable
+    public class Vulnerable : ITurnLess
     {
         public int turn = 0;
         private float parsent = 0.25f;
@@ -62,6 +69,10 @@ public class Condition
             }
             turn = 0;
             return damage;
+        }
+        public void Dec()
+        {
+            turn--;
         }
     }
     public class Strength

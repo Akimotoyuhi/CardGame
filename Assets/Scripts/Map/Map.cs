@@ -64,7 +64,7 @@ public class Map : MonoBehaviour
         }
         CreateMap();
         //m_cellLocation[0].transform.GetChild(0).gameObject.GetComponent<Cell>().ListChecker();
-        m_cellLocation[0].transform.GetChild(0).gameObject.GetComponent<Cell>().LineCaster();
+        //m_cellLocation[0].transform.GetChild(0).gameObject.GetComponent<Cell>().LineCaster();
     }
 
     /// <summary>
