@@ -3,16 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class EnemyBase : CharactorBase, IDropHandler
 {
     private Player m_player;
-    [SerializeField] EnemyActionData m_enemyActionData;
+    public int m_id;
+    [SerializeField] EnemyData m_enemyData;
+    private EnemyDataBase m_data;
 
     void Start()
     {
-        m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         SetUp();
+    }
+
+    protected override void SetUp()
+    {
+        m_data = m_enemyData.m_enemyDatas[m_id];
+        m_name = m_data.Name;
+        m_maxHp = m_data.HP;
+        m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        base.SetUp();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -35,6 +46,7 @@ public class EnemyBase : CharactorBase, IDropHandler
     {
         EnemyCommand ret = new EnemyCommand();
         ret.m_attack = m_condition.AtAttack(command.m_attack);
+        Debug.Log(ret.m_attack);
         return ret;
     }
 
@@ -46,14 +58,15 @@ public class EnemyBase : CharactorBase, IDropHandler
     {
         while (true)
         {
-            if (turn < m_enemyActionData.m_enemyDatas.Count)
+            if (turn < m_enemyData.m_enemyDatas.Count)
             {
-                m_player.GetAcceptDamage(SetAttack(m_enemyActionData.m_enemyDatas[turn].Action()));
+                //if (m_enemyData.m_enemyDatas[turn].Action() == null) return;
+                m_player.GetAcceptDamage(SetAttack(m_enemyData.m_enemyDatas[turn].Action()));
                 return;
             }
             else
             {
-                turn -= m_enemyActionData.m_enemyDatas.Count;
+                turn -= m_enemyData.m_enemyDatas.Count;
             }
         }
     }

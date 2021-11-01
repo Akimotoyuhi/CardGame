@@ -14,17 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_eventDataBases:
   - m_text:
-    - "\u91A4\u6CB9\n\u7AF9\n\u30DF\u30F3\u30C8\ntrue"
-    - 'false
-
-      w
-
-      w
-
-      w
-
-      w'
-    m_eventid: 0
-  - m_text:
-    - "\u304D\u3093\u305F\u307E\n\u305F\u307E\u304D\u3093"
+    - "\u308A\u3093\u3054\n\u3054\u308A\u3089\n\u3089\u30FC\u3081\u3093"
+    - "\u6B7B"
     m_eventid: 0

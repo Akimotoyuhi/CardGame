@@ -10,22 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 010aca3cbebe2564796e0e2a6ed4274e, type: 3}
-  m_Name: Enemy Action Data
+  m_Name: Enemy Data
   m_EditorClassIdentifier: 
   m_enemyDatas:
-  - m_commands:
-    - m_command:
-        id: 0
-  - m_commands:
-    - m_command:
-        id: 1
+  - m_name: "\u30AA\u30EA\u30B8\u30E0\u30B7"
+    m_hp: 15
+    m_commands:
+    - m_commands: []
+    - m_commands:
+      - m_command:
+          id: 0
   references:
     version: 1
     00000000:
       type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
       data:
         m_power: 5
-    00000001:
-      type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
-      data:
-        m_power: 10

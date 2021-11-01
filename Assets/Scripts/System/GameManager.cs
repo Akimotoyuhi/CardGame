@@ -33,9 +33,11 @@ public class GameManager : MonoBehaviour
         //CreateCard((int)CardID.kouzoukyouka);
         //CreateCard((int)CardID.sennjuturennkei);
         //CreateCard((int)CardID.meltdown);
-        m_deck.Draw();
         m_player = GameObject.Find("Player").GetComponent<Player>();
         Debug.Log(m_progressTurn + "ターン目");
+        m_deck.Draw();
+        m_enemies.EnemyTrun(m_progressTurn);
+        m_progressTurn++;
         d += m_hand.AllCast;
         d += m_enemies.EnemyTrun;
         d += m_player.TurnEnd;
@@ -46,11 +48,8 @@ public class GameManager : MonoBehaviour
     {
         if (m_isPress) return;
         m_isPress = true;
-        //m_hand.AllCast();
-        //m_enemies.EnemyTrun(m_progressTurn);
-        m_progressTurn++;
-        //m_player.TurnEnd();
         d(m_progressTurn);
+        m_progressTurn++;
         Invoke("TurnStart", 1f);
     }
 

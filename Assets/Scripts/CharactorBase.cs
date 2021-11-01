@@ -16,7 +16,7 @@ public class CharactorBase : MonoBehaviour
     [NonSerialized] public int[] m_stateArray;
     protected Condition m_condition;
 
-    protected void SetUp()
+    protected virtual void SetUp()
     {
         m_condition = new Condition();
         m_hp = m_maxHp;
@@ -76,7 +76,6 @@ public class CharactorBase : MonoBehaviour
             else if (i == (int)BuffDebuff.Weakness)
             {
                 m_condition.weakness.turn += nums[(int)BuffDebuff.Weakness];
-                //Debug.Log(m_condition.weakness.turn);
                 return;
             }
         }
