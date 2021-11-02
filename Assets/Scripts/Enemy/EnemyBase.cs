@@ -58,6 +58,7 @@ public class EnemyBase : CharactorBase, IDropHandler
     /// <param name="turn">現在ターン数</param>
     public void Action(int turn)
     {
+        Debug.Log(turn);
         if (turn >= m_command.Length)
         {
             turn = 1;

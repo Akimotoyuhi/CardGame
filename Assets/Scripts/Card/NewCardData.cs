@@ -14,6 +14,7 @@ public enum CardID
     kyougeki, //デフォルトカード
     bougyoryokuUp, //デフォルトカード
     hikkaki,
+    danzai,
     kouzoukyouka, //特殊カード
     sennjuturennkei, //特殊カード
     meltdown //特殊カード

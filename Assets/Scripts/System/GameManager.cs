@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     /// <summary>プレイヤー</summary>
     private Player m_player;
     /// <summary>ボタンの受付拒否</summary>
-    private bool m_isPress = false;
+    private bool m_isPress = true;
     delegate void Dele(int i);
     Dele d = default;
 
@@ -33,17 +33,24 @@ public class GameManager : MonoBehaviour
             CreateCard((int)CardID.bougyoryokuUp);
         }
         CreateCard((int)CardID.hikkaki);
-        //CreateCard((int)CardID.kouzoukyouka);
-        //CreateCard((int)CardID.sennjuturennkei);
-        //CreateCard((int)CardID.meltdown);
+        CreateCard((int)CardID.kouzoukyouka);
+        CreateCard((int)CardID.sennjuturennkei);
+        CreateCard((int)CardID.meltdown);
+        CreateCard((int)CardID.danzai);
         m_player = GameObject.Find("Player").GetComponent<Player>();
+        d += m_hand.AllCast;
+        d += m_enemies.EnemyTrun;
+        d += m_player.TurnEnd;
+        Invoke("FirstTurn", 0.1f);
+    }
+
+    private void FirstTurn()
+    {
         Debug.Log(m_progressTurn + "ターン目");
         m_deck.Draw();
         m_enemies.EnemyTrun(m_progressTurn);
         m_progressTurn++;
-        d += m_hand.AllCast;
-        d += m_enemies.EnemyTrun;
-        d += m_player.TurnEnd;
+        m_isPress = false;
     }
 
     /// <summary>ターン終了</summary>

@@ -25,7 +25,9 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: EnemyNanmosinai, ns: , asm: Assembly-CSharp}
+      type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 10
     00000001:
       type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
       data:
