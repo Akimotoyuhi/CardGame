@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     /// <summary>マップ生成時に使うフラグ</summary>
-    //private bool m_isCheckd = false;
+    //private bool m_isChecked = false;
     /// <summary>次セルの保存用</summary>
     public List<GameObject> m_objList = new List<GameObject>();
     private LineRenderer m_lineRenderer;

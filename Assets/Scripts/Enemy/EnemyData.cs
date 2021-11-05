@@ -9,6 +9,14 @@ public class EnemyData : ScriptableObject
     public List<EnemyDataBase> m_enemyDatas = new List<EnemyDataBase>();
 }
 
+/// <summary>
+/// 敵ID
+/// </summary>
+public enum EnemyID
+{
+    origimusi
+}
+
 [Serializable]
 public class EnemyDataBase
 {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// GameManagerより上のManager。GameManager神
+/// </summary>
 public class GodGameManager
 {
     

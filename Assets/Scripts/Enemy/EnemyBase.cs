@@ -9,6 +9,7 @@ public class EnemyBase : CharactorBase, IDropHandler
 {
     private Player m_player;
     public int m_id;
+    private EnemyManager m_enemyManager;
     [SerializeField] EnemyData m_enemyData;
     private EnemyDataBase m_data;
     private EnemyCommand[] m_command;
@@ -25,6 +26,7 @@ public class EnemyBase : CharactorBase, IDropHandler
         m_maxHp = m_data.HP;
         m_command = m_data.SetAction();
         m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        m_enemyManager = transform.parent.gameObject.GetComponent<EnemyManager>();
         base.SetUp();
     }
 
@@ -37,18 +39,24 @@ public class EnemyBase : CharactorBase, IDropHandler
         int damage = card.GetEffect().attack;
         m_hp -= damage;
         m_hpSlider.value = m_hp;
-        if (m_hp < 0)
+        if (m_hp <= 0)
         {
+            m_isDead = true;
+            m_enemyManager.Removed();
             Destroy(this.gameObject);
         }
         SetText();
     }
 
+    /// <summary>
+    /// 敵攻撃力計算
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
     private EnemyCommand SetAttack(EnemyCommand command)
     {
         EnemyCommand ret = new EnemyCommand();
         ret.m_attack = m_condition.AtAttack(command.m_attack);
-        Debug.Log(ret.m_attack);
         return ret;
     }
 
@@ -58,10 +66,9 @@ public class EnemyBase : CharactorBase, IDropHandler
     /// <param name="turn">現在ターン数</param>
     public void Action(int turn)
     {
-        Debug.Log(turn);
-        if (turn >= m_command.Length)
+        while (turn >= m_command.Length)
         {
-            turn = 1;
+            turn -= m_command.Length - 1;
         }
         m_player.GetAcceptDamage(SetAttack(m_command[turn]));
     }

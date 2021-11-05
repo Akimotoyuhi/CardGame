@@ -31,6 +31,12 @@ public class NewCardDataBase
 {
     public string m_name;
     public int m_cost;
+    //public int Cost //コストｘのカード作る時に使う
+    //{
+    //    get
+    //    {
+    //    }
+    //}
     public Sprite m_image;
     [System.Serializable]
     public class CardEffectSet
@@ -42,6 +48,10 @@ public class NewCardDataBase
     public List<CardEffectSet> m_cardEffectSets = new List<CardEffectSet>();
     public CardType m_cardType;
 
+    /// <summary>
+    /// カードの説明分組み立て
+    /// </summary>
+    /// <returns></returns>
     public string GetTooltip()
     {
         string ret = "";
@@ -55,6 +65,10 @@ public class NewCardDataBase
         return ret;
     }
 
+    /// <summary>
+    /// カードのパラメーター組み立て
+    /// </summary>
+    /// <returns></returns>
     public CardBase GetParam()
     {
         CardBase cardBase = new CardBase();
@@ -66,7 +80,6 @@ public class NewCardDataBase
             {
                 cardBase.conditions[n] += m_cardEffectSets[i].m_effect.GetParam().conditions[n];
             }
-            //cardBase.conditions += m_cardEffectSets[i].m_effect.GetParam().conditions;
         }
         return cardBase;
     }

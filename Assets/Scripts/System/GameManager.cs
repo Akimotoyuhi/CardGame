@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+
 public class GameManager : MonoBehaviour
 {
     /// <summary>経過ターン数</summary>
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     /// <summary>手札</summary>
     [SerializeField] Hand m_hand;
     /// <summary>敵グループ</summary>
-    [SerializeField] EnemyController m_enemies;
+    [SerializeField] EnemyManager m_enemies;
     /// <summary>カードのデータベース</summary>
     [SerializeField] NewCardData m_cardData;
     /// <summary>プレイヤー</summary>
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
         CreateCard((int)CardID.kouzoukyouka);
         CreateCard((int)CardID.sennjuturennkei);
         CreateCard((int)CardID.meltdown);
-        CreateCard((int)CardID.danzai);
+        //CreateCard((int)CardID.danzai);
         m_player = GameObject.Find("Player").GetComponent<Player>();
         d += m_hand.AllCast;
         d += m_enemies.EnemyTrun;
@@ -44,6 +45,10 @@ public class GameManager : MonoBehaviour
         Invoke("FirstTurn", 0.1f);
     }
 
+    /// <summary>
+    /// 最初のターンの特別処理
+    /// いらんかも
+    /// </summary>
     private void FirstTurn()
     {
         Debug.Log(m_progressTurn + "ターン目");

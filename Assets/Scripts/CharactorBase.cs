@@ -6,15 +6,23 @@ using UnityEngine.UI;
 
 public class CharactorBase : MonoBehaviour
 {
+    /// <summary>名前</summary>
     [SerializeField] protected string m_name = "name";
+    /// <summary>最大HP</summary>
     [SerializeField] protected int m_maxHp = 1;
+    /// <summary>現在HP</summary>
     protected int m_hp;
+    /// <summary>ブロック値</summary>
     protected int m_block;
     [SerializeField] protected Slider m_hpSlider;
     [SerializeField] protected Slider m_blkSlider;
     [SerializeField] protected Text m_text;
     [NonSerialized] public int[] m_stateArray;
+    /// <summary>死んでる判定</summary>
+    protected bool m_isDead = false;
     protected Condition m_condition;
+
+    public bool IsDead { get { return m_isDead; } }
 
     protected virtual void SetUp()
     {
