@@ -6,8 +6,8 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    /// <summary>経過ターン数</summary>
-    private int m_progressTurn = 0;
+    /// <summary>プレイヤー初期データ</summary>
+    [SerializeField] PlayerStatsData m_playerStatsData;
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
     /// <summary>捨て札</summary>
@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] NewCardData m_cardData;
     /// <summary>プレイヤー</summary>
     private Player m_player;
+    /// <summary>経過ターン数</summary>
+    private int m_progressTurn = 0;
     /// <summary>ボタンの受付拒否</summary>
     private bool m_isPress = true;
     delegate void Dele(int i);
@@ -27,16 +29,31 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //初期デッキ構築　とりあえず
-        for (int i = 0; i < 3; i++)
+        //初期デッキ構築
+        if (GodGameManager.Instance().StartCheck())
         {
-            CreateCard((int)CardID.kyougeki);
-            CreateCard((int)CardID.bougyoryokuUp);
+            for (int i = 0; i < GodGameManager.Instance().Cards.Length; i++)
+            {
+                CreateCard(GodGameManager.Instance().GetHaveCardID(i));
+            }
         }
-        CreateCard((int)CardID.hikkaki);
-        CreateCard((int)CardID.kouzoukyouka);
-        CreateCard((int)CardID.sennjuturennkei);
-        CreateCard((int)CardID.meltdown);
+        else
+        {
+            for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
+            {
+                CreateCard(m_playerStatsData.GetCard(i));
+            }
+        }
+        //初期デッキ構築　とりあえず
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    CreateCard((int)CardID.kyougeki);
+        //    CreateCard((int)CardID.bougyoryokuUp);
+        //}
+        //CreateCard((int)CardID.hikkaki);
+        //CreateCard((int)CardID.kouzoukyouka);
+        //CreateCard((int)CardID.sennjuturennkei);
+        //CreateCard((int)CardID.meltdown);
         //CreateCard((int)CardID.danzai);
         m_player = GameObject.Find("Player").GetComponent<Player>();
         d += m_hand.AllCast;

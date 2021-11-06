@@ -22,15 +22,18 @@ MonoBehaviour:
     - m_turnCommands:
       - m_command:
           id: 1
-  - m_name: "\u30AA\u30EA\u30B8\u30E0\u30B7\u03B1"
-    m_hp: 30
+    - m_turnCommands:
+      - m_command:
+          id: 2
+  - m_name: Soldier
+    m_hp: 45
     m_setCommands:
     - m_turnCommands:
       - m_command:
           id: 0
     - m_turnCommands:
       - m_command:
-          id: 2
+          id: 3
     - m_turnCommands:
       - m_command:
           id: 1
@@ -46,4 +49,8 @@ MonoBehaviour:
       type: {class: EnemyCondition, ns: , asm: Assembly-CSharp}
       data:
         m_buffDebuffs: 0
-        m_turn: 1
+        m_turn: 2
+    00000003:
+      type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 7
