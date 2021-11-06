@@ -25,7 +25,7 @@ public class EnemyBase : CharactorBase, IDropHandler
         m_name = m_data.Name;
         m_maxHp = m_data.HP;
         m_command = m_data.SetAction();
-        m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        //m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         m_enemyManager = transform.parent.gameObject.GetComponent<EnemyManager>();
         base.SetUp();
     }
@@ -69,6 +69,11 @@ public class EnemyBase : CharactorBase, IDropHandler
         while (turn >= m_command.Length)
         {
             turn -= m_command.Length - 1;
+        }
+
+        if (!m_player)
+        {
+            m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         }
         m_player.GetAcceptDamage(SetAttack(m_command[turn]));
     }

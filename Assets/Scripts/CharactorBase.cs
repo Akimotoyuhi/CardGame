@@ -15,7 +15,7 @@ public class CharactorBase : MonoBehaviour
     /// <summary>ブロック値</summary>
     protected int m_block;
     /// <summary>画像</summary>
-    protected int m_image;
+    protected Sprite m_image;
     [SerializeField] protected Slider m_hpSlider;
     [SerializeField] protected Slider m_blkSlider;
     [SerializeField] protected Text m_text;
@@ -23,12 +23,14 @@ public class CharactorBase : MonoBehaviour
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
     protected Condition m_condition;
+    protected GameManager m_gamemanager;
 
     public bool IsDead { get { return m_isDead; } }
 
     protected virtual void SetUp()
     {
         m_condition = new Condition();
+        GetComponent<Image>().sprite = m_image;
         m_hp = m_maxHp;
         m_hpSlider.maxValue = m_maxHp;
         m_hpSlider.value = m_hp;
@@ -67,9 +69,12 @@ public class CharactorBase : MonoBehaviour
         return (int)t;
     }
 
-    public void SetOaram()
+    public void SetParam(string name, Sprite image, int hp, GameManager gm)
     {
-
+        m_name = name;
+        m_image = image;
+        m_maxHp = hp;
+        m_gamemanager = gm;
     }
 
     /// <summary>

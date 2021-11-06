@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] EnemyData m_data;
+    private EnemyDataBase m_database;
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
     /// <summary>敵の総数。終了判定用</summary>
     private int m_enemyCount = 0;
@@ -19,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     /// <summary>
     /// フィールドにいる敵を数える
     /// </summary>
-    private void EnemyCount()
+    public void EnemyCount()
     {
         for (int i = 0; i < transform.childCount; i++)
         {

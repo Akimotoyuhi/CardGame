@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Encount Data
   m_EditorClassIdentifier: 
   m_data:
-  - m_enemyID: 
+  - m_enemyID: 00000000
