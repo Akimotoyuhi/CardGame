@@ -14,7 +14,9 @@ public class EnemyData : ScriptableObject
 /// </summary>
 public enum EnemyID
 {
-    origimusi
+    origimusi,
+    Soldier,
+    endLength
 }
 
 [Serializable]
@@ -23,7 +25,8 @@ public class EnemyDataBase
     [Header("敵の基本情報")]
     [SerializeField] string m_name;
     [SerializeField] int m_hp;
-
+    [SerializeField] Sprite m_image;
+ 
     [Serializable]
     public class SetCommand
     {

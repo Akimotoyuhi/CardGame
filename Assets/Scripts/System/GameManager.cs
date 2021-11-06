@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     /// <summary>プレイヤー初期データ</summary>
     [SerializeField] PlayerStatsData m_playerStatsData;
+    /// <summary>プレイヤーのプレハブ</summary>
+    [SerializeField] GameObject m_playerPrefab;
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
     /// <summary>捨て札</summary>
@@ -29,7 +31,20 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //初期デッキ構築
+        CreateFirld();
+        m_player = GameObject.Find("Player").GetComponent<Player>();
+        d += m_hand.AllCast;
+        d += m_enemies.EnemyTrun;
+        d += m_player.TurnEnd;
+        Invoke("FirstTurn", 0.1f);
+    }
+
+    /// <summary>
+    /// プレイヤー、敵、カードを生成してゲーム画面を作る
+    /// </summary>
+    private void CreateFirld()
+    {
+        //初期デッキとプレイヤー構築
         if (GodGameManager.Instance().StartCheck())
         {
             for (int i = 0; i < GodGameManager.Instance().Cards.Length; i++)
@@ -41,25 +56,12 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
             {
+
                 CreateCard(m_playerStatsData.GetCard(i));
             }
         }
-        //初期デッキ構築　とりあえず
-        //for (int i = 0; i < 3; i++)
-        //{
-        //    CreateCard((int)CardID.kyougeki);
-        //    CreateCard((int)CardID.bougyoryokuUp);
-        //}
-        //CreateCard((int)CardID.hikkaki);
-        //CreateCard((int)CardID.kouzoukyouka);
-        //CreateCard((int)CardID.sennjuturennkei);
-        //CreateCard((int)CardID.meltdown);
-        //CreateCard((int)CardID.danzai);
-        m_player = GameObject.Find("Player").GetComponent<Player>();
-        d += m_hand.AllCast;
-        d += m_enemies.EnemyTrun;
-        d += m_player.TurnEnd;
-        Invoke("FirstTurn", 0.1f);
+
+        //敵グループ生成
     }
 
     /// <summary>
@@ -99,11 +101,11 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// カードの作成
     /// </summary>
-    public void CreateCard(int num)
+    public void CreateCard(int id)
     {
         GameObject obj = Instantiate((GameObject)Resources.Load("BlankCard"));
         BlankCard card = obj.GetComponent<BlankCard>();
-        NewCardDataBase cardData = m_cardData.m_cardData[num];
+        NewCardDataBase cardData = m_cardData.m_cardData[id];
         card.SetInfo(cardData.m_image, cardData.m_name, cardData.m_cost, cardData.GetTooltip(), cardData.GetParam(), cardData.m_cardType);
         //obj.transform.parent = m_deck.transform;
         obj.transform.SetParent(m_deck.transform, false);

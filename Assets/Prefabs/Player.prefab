@@ -538,7 +538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 494e93f398d869546b979d744682dc11, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -560,8 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d992d6c8e5d46894e84ef9d12601f5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: "\u3042\u307F\u3083"
-  m_maxHp: 70
+  m_name: name
+  m_maxHp: 0
   m_hpSlider: {fileID: 4774533046637096720}
   m_blkSlider: {fileID: 4774533045999032423}
   m_text: {fileID: 4774533046712527476}

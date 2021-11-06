@@ -14,14 +14,15 @@ public class GodGameManager
 
     /// <summary>現在の進行状況</summary>
     private int m_step = 0;
-    private int m_hp = 70;
+    private int m_hp = 0;
     private CardID[] m_cards = new CardID[0];
-    public int Step { get { return m_instance.m_step; } set { m_step = value; } }
-    public int Hp { get { return m_instance.m_hp; } }
+    public int Step { get => m_instance.m_step; set => m_step = value; }
+    public int Hp { get => m_instance.m_hp; }
     public int GetHaveCardID(int index) { return (int)m_cards[index]; }
-    public CardID[] Cards { get { return m_cards; } }
+    public CardID[] Cards { get => m_cards; }
     /// <summary>
-    /// 初回の特別処理判定用
+    /// 初回の特別処理判定用<br/>
+    /// いらんかも
     /// </summary>
     /// <returns>初回呼び出しならfalse</returns>
     public bool StartCheck()

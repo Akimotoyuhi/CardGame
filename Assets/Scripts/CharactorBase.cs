@@ -14,6 +14,8 @@ public class CharactorBase : MonoBehaviour
     protected int m_hp;
     /// <summary>ブロック値</summary>
     protected int m_block;
+    /// <summary>画像</summary>
+    protected int m_image;
     [SerializeField] protected Slider m_hpSlider;
     [SerializeField] protected Slider m_blkSlider;
     [SerializeField] protected Text m_text;
@@ -63,6 +65,11 @@ public class CharactorBase : MonoBehaviour
         parsent /= 100;
         float t = num * (1 - parsent);
         return (int)t;
+    }
+
+    public void SetOaram()
+    {
+
     }
 
     /// <summary>
