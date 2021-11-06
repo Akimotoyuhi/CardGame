@@ -6,6 +6,7 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("プレイヤー関連")]
     /// <summary>プレイヤー初期データ</summary>
     [SerializeField] PlayerStatsData m_playerStatsData;
     /// <summary>プレイヤーのプレハブ</summary>
@@ -14,12 +15,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] RectTransform m_playerPos;
     /// <summary>プレイヤークラス</summary>
     private Player m_player;
+    [Header("ゲーム関連")]
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
     /// <summary>捨て札</summary>
     [SerializeField] Discard m_discard;
     /// <summary>手札</summary>
     [SerializeField] Hand m_hand;
+    /// <summary>カードのデータベース</summary>
+    [SerializeField] NewCardData m_cardData;
+    [Header("敵関連")]
     /// <summary>敵グループ</summary>
     [SerializeField] GameObject m_enemies;
     /// <summary>敵プレハブ</summary>
@@ -27,10 +32,11 @@ public class GameManager : MonoBehaviour
     /// <summary>敵グループのデータ</summary>
     [SerializeField] EncountData m_encountData;
     private EncountDataBase m_encountDatabase;
+    /// <summary>敵のデータ</summary>
+    [SerializeField] EnemyData m_enemydata;
+    private EnemyDataBase m_enemyDatabase;
     /// <summary>敵グループの管理クラス</summary>
     private EnemyManager m_enemyManager;
-    /// <summary>カードのデータベース</summary>
-    [SerializeField] NewCardData m_cardData;
     /// <summary>経過ターン数</summary>
     private int m_progressTurn = 0;
     /// <summary>ボタンの受付拒否</summary>
@@ -78,9 +84,13 @@ public class GameManager : MonoBehaviour
 
         //敵グループ生成
         m_encountDatabase = m_encountData.m_data[0]; //テスト用にとりあえずグループ０番
-        for (int i = 0; i < m_encountDatabase; i++)
+        for (int i = 0; i < m_encountDatabase.GetLength; i++)
         {
-
+            m_enemyDatabase = m_enemydata.m_enemyDatas[m_encountDatabase.GetID(i)];
+            Transform tra = Instantiate(m_enemyPrefab, m_enemies.transform).transform;
+            tra.SetParent(m_enemies.transform, false);
+            EnemyBase e = tra.GetComponent<EnemyBase>();
+            e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, this);
         }
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
     }
@@ -106,7 +116,7 @@ public class GameManager : MonoBehaviour
         m_hand.AllCast();
         m_enemyManager.EnemyTrun(m_progressTurn);
         m_player.TurnEnd();
-        d(m_progressTurn);
+        //d(m_progressTurn);
         m_progressTurn++;
         Invoke("TurnStart", 1f);
     }

@@ -54,6 +54,7 @@ public class EnemyDataBase
         }
         return ret;
     }
-    public string Name { get { return m_name; } }
-    public int HP { get { return m_hp; } }
+    public string Name { get => m_name; }
+    public int HP { get => m_hp; }
+    public Sprite Image { get => m_image; }
 }

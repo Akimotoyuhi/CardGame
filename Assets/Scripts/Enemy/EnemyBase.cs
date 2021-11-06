@@ -75,6 +75,7 @@ public class EnemyBase : CharactorBase, IDropHandler
         {
             m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         }
+        Debug.Log($"damage:{SetAttack(m_command[turn]).m_attack}");
         m_player.GetAcceptDamage(SetAttack(m_command[turn]));
     }
 }
