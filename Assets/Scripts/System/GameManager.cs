@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             Transform tra = Instantiate(m_enemyPrefab, m_enemies.transform).transform;
             tra.SetParent(m_enemies.transform, false);
             EnemyBase e = tra.GetComponent<EnemyBase>();
-            e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, this);
+            e.SetParam(m_encountDatabase.GetID(i), m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, this);
         }
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
     }

@@ -15,7 +15,7 @@ public class EncountDataBase
     [SerializeField] EnemyID[] m_enemyID = new EnemyID[(int)EnemyID.endLength];
 
     /// <summary>
-    /// どのグループとエンカウントしたか
+    /// 敵IDの取得
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>

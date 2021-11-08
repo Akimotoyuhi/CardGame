@@ -22,12 +22,18 @@ public class EnemyBase : CharactorBase, IDropHandler
     protected override void SetUp()
     {
         m_data = m_enemyData.m_enemyDatas[m_id];
-        m_name = m_data.Name;
-        m_maxHp = m_data.HP;
         m_command = m_data.SetAction();
-        //m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         m_enemyManager = transform.parent.gameObject.GetComponent<EnemyManager>();
         base.SetUp();
+    }
+
+    public void SetParam(int id, string name, Sprite image, int hp, GameManager gm)
+    {
+        m_id = id;
+        m_name = name;
+        m_image = image;
+        m_maxHp = hp;
+        m_gamemanager = gm;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -75,7 +81,7 @@ public class EnemyBase : CharactorBase, IDropHandler
         {
             m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         }
-        Debug.Log($"damage:{SetAttack(m_command[turn]).m_attack}");
+        Debug.Log($"damage:{SetAttack(m_command[turn]).m_attack}, turn:{turn}");
         m_player.GetAcceptDamage(SetAttack(m_command[turn]));
     }
 }

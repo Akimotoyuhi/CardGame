@@ -46,7 +46,7 @@ MonoBehaviour:
     00000001:
       type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 3
     00000002:
       type: {class: EnemyCondition, ns: , asm: Assembly-CSharp}
       data:
