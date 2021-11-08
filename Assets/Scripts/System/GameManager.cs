@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+using Mastar;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     /// <summary>プレイヤークラス</summary>
     private Player m_player;
     [Header("ゲーム関連")]
+    /// <summary>ゲーム画面</summary>
+    [SerializeField] GameObject m_game;
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
     /// <summary>捨て札</summary>
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
     private EnemyDataBase m_enemyDatabase;
     /// <summary>敵グループの管理クラス</summary>
     private EnemyManager m_enemyManager;
+    [Header("その他")]
+    [SerializeField] GameObject m_map;
     /// <summary>経過ターン数</summary>
     private int m_progressTurn = 0;
     /// <summary>ボタンの受付拒否</summary>
@@ -46,14 +50,29 @@ public class GameManager : MonoBehaviour
     delegate void Dele(int i);
     Dele d = default;
 
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         CreateFirld();
+        m_game.GetComponent<Canvas>().enabled = false;
         //m_player = GameObject.Find("Player").GetComponent<Player>();
         //d += m_hand.AllCast;
         //d += m_enemies.EnemyTrun;
         //d += m_player.TurnEnd;
-        Invoke("FirstTurn", 0.1f);
+        //Invoke("FirstTurn", 0.1f);
+    }
+
+    public void Battle(int id)
+    {
+        m_map.GetComponent<Canvas>().enabled = false;
+        m_game.GetComponent<Canvas>().enabled = true;
+        FirstTurn();
     }
 
     /// <summary>

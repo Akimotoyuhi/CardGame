@@ -24,11 +24,11 @@ public class Map : MonoBehaviour
     /// <summary>線の描画用</summary>
     private Vector3[] m_pos;
     private LineRenderer m_lineRenderer;
-    private Canvas m_canvas;
+    //private Canvas m_canvas;
 
     private void Start()
     {
-        m_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        //m_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         m_cellLocation = new GameObject[m_sector];
         CreateCell();
     }
@@ -37,8 +37,8 @@ public class Map : MonoBehaviour
     /// </summary>
     private void CreateCell()
     {
-        GameObject sector = gameObject;
-        GameObject cell;
+        GameObject sector = default;
+        GameObject cell = default;
         for (int i = 0; i < m_sector; i++)
         {
             sector = Instantiate(m_sectorPrefab);
@@ -59,6 +59,7 @@ public class Map : MonoBehaviour
                     cell.transform.SetParent(sector.transform, false);
                 }
             }
+            cell.GetComponent<Cell>().m_encountId = Random.Range(0, (int)EnemyID.endLength);
             m_cellLocation[i] = sector;
             sector.transform.SetParent(m_parentSector, false);
         }

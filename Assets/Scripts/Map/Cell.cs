@@ -9,11 +9,19 @@ public class Cell : MonoBehaviour
     /// <summary>次セルの保存用</summary>
     public List<GameObject> m_objList = new List<GameObject>();
     private LineRenderer m_lineRenderer;
+    /// <summary>このセルで出現する敵ID</summary>
+    public int m_encountId = default;
 
     void Start()
     {
         //Debug.Log($"Sector:{transform.parent.gameObject.name}, Cell{gameObject.name}, RectPos:{(RectTransform)transform}");
         //Debug.Log($"Sector:{transform.parent.gameObject.name}, Cell{gameObject.name}, RectPos:{ConvertCanvasPos(transform.position, transform.root.gameObject.GetComponent<Canvas>())}");
+    }
+
+    public void OnClick()
+    {
+        //とりあえず
+        GameManager.Instance.Battle(m_encountId);
     }
 
     public void LineCaster()
