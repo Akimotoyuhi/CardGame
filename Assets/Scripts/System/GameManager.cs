@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 最初のターンの特別処理
+    /// 最初のターンの特別処理<br/>
     /// いらんかも
     /// </summary>
     private void FirstTurn()
@@ -127,7 +127,6 @@ public class GameManager : MonoBehaviour
         m_enemyManager.EnemyTrun(m_progressTurn);
         m_progressTurn++;
         m_isPress = false;
-        //Invoke("TurnStart", 1f);
         TurnStart();
     }
 

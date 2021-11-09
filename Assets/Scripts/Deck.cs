@@ -9,10 +9,10 @@ public class Deck : MonoBehaviour
     [SerializeField] private Discard m_discard;
 
     /// <summary>山札から手札にカードを移す</summary>
-    /// <param name="drawNum"></param>
+    /// <param name="drawNum">ドロー数が変化した場合この引数が必要になる</param>
     public void Draw(int drawNum = 0)
     {
-        for (int i = 0; i < m_defDrawNum + drawNum; i++)
+        for (int i = 0; i <= m_defDrawNum + drawNum; i++)
         {
             if (this.transform.childCount == 0)
             {
