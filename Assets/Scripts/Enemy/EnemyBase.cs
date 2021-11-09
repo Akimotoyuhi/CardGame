@@ -8,31 +8,27 @@ using System;
 public class EnemyBase : CharactorBase, IDropHandler
 {
     private Player m_player;
-    public int m_id;
     private EnemyManager m_enemyManager;
-    [SerializeField] EnemyData m_enemyData;
-    private EnemyDataBase m_data;
     private EnemyCommand[] m_command;
 
     void Start()
     {
+        gameObject.name = m_name;
+        m_enemyManager = transform.parent.gameObject.GetComponent<EnemyManager>();
         SetUp();
     }
 
     protected override void SetUp()
     {
-        m_data = m_enemyData.m_enemyDatas[m_id];
-        m_command = m_data.SetAction();
-        m_enemyManager = transform.parent.gameObject.GetComponent<EnemyManager>();
         base.SetUp();
     }
 
-    public void SetParam(int id, string name, Sprite image, int hp, GameManager gm)
+    public void SetParam(string name, Sprite image, int hp, EnemyCommand[] command, GameManager gm)
     {
-        m_id = id;
         m_name = name;
         m_image = image;
         m_maxHp = hp;
+        m_command = command;
         m_gamemanager = gm;
     }
 
@@ -62,6 +58,7 @@ public class EnemyBase : CharactorBase, IDropHandler
     private EnemyCommand SetAttack(EnemyCommand command)
     {
         EnemyCommand ret = new EnemyCommand();
+        if (m_condition == null) Debug.Log("condition is null");
         ret.m_attack = m_condition.AtAttack(command.m_attack);
         return ret;
     }
@@ -76,7 +73,6 @@ public class EnemyBase : CharactorBase, IDropHandler
         {
             turn -= m_command.Length - 1;
         }
-
         if (!m_player)
         {
             m_player = GameObject.FindWithTag("Player").GetComponent<Player>();

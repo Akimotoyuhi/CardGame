@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Mastar;
 
 public class GameManager : MonoBehaviour
@@ -47,8 +48,8 @@ public class GameManager : MonoBehaviour
     private bool m_isPress = true;
     
     //いらんかも
-    delegate void Dele(int i);
-    Dele d = default;
+    //delegate void Dele(int i);
+    //Dele d = default;
 
     public static GameManager Instance { get; private set; }
 
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CreateFirld();
+        //CreateFirld();
         m_game.GetComponent<Canvas>().enabled = false;
         //m_player = GameObject.Find("Player").GetComponent<Player>();
         //d += m_hand.AllCast;
@@ -72,13 +73,14 @@ public class GameManager : MonoBehaviour
     {
         m_map.GetComponent<Canvas>().enabled = false;
         m_game.GetComponent<Canvas>().enabled = true;
+        CreateFirld(id);
         FirstTurn();
     }
 
     /// <summary>
     /// プレイヤー、敵、カードを生成してゲーム画面を作る
     /// </summary>
-    private void CreateFirld()
+    private void CreateFirld(int id)
     {
         //初期デッキとプレイヤー構築
         if (GodGameManager.Instance().StartCheck())
@@ -100,18 +102,18 @@ public class GameManager : MonoBehaviour
                 CreateCard(m_playerStatsData.GetCard(i));
             }
         }
-
         //敵グループ生成
-        m_encountDatabase = m_encountData.m_data[0]; //テスト用にとりあえずグループ０番
+        m_encountDatabase = m_encountData.m_data[id];
         for (int i = 0; i < m_encountDatabase.GetLength; i++)
         {
             m_enemyDatabase = m_enemydata.m_enemyDatas[m_encountDatabase.GetID(i)];
             Transform tra = Instantiate(m_enemyPrefab, m_enemies.transform).transform;
             tra.SetParent(m_enemies.transform, false);
             EnemyBase e = tra.GetComponent<EnemyBase>();
-            e.SetParam(m_encountDatabase.GetID(i), m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, this);
+            e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, m_enemyDatabase.SetAction(), this);
         }
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
+        m_enemyManager.EnemyCount();
     }
 
     /// <summary>
@@ -121,10 +123,12 @@ public class GameManager : MonoBehaviour
     private void FirstTurn()
     {
         Debug.Log(m_progressTurn + "ターン目");
-        m_deck.Draw();
+        //m_deck.Draw();
         m_enemyManager.EnemyTrun(m_progressTurn);
         m_progressTurn++;
         m_isPress = false;
+        //Invoke("TurnStart", 1f);
+        TurnStart();
     }
 
     /// <summary>ターン終了</summary>
@@ -162,5 +166,10 @@ public class GameManager : MonoBehaviour
         card.SetInfo(cardData.m_image, cardData.m_name, cardData.m_cost, cardData.GetTooltip(), cardData.GetParam(), cardData.m_cardType);
         //obj.transform.parent = m_deck.transform;
         obj.transform.SetParent(m_deck.transform, false);
+    }
+
+    public void SceneReload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

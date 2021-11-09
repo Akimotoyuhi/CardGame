@@ -7,13 +7,14 @@ using UnityEngine;
 /// </summary>
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] GameManager m_gamemanager;
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
     /// <summary>敵の総数。終了判定用</summary>
     private int m_enemyCount = 0;
 
     void Start()
     {
-        EnemyCount();
+        //EnemyCount();
     }
 
     /// <summary>
@@ -52,7 +53,7 @@ public class EnemyManager : MonoBehaviour
         m_enemyCount--;
         if (m_enemyCount <= 0)
         {
-            Debug.Log("勝利");
+            m_gamemanager.SceneReload();
         }
     }
 }

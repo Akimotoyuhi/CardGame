@@ -22,14 +22,13 @@ public class CharactorBase : MonoBehaviour
     [NonSerialized] public int[] m_stateArray;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
-    protected Condition m_condition;
+    protected Condition m_condition = new Condition();
     protected GameManager m_gamemanager;
 
-    public bool IsDead { get { return m_isDead; } }
+    public bool IsDead { get => m_isDead; }
 
     protected virtual void SetUp()
     {
-        m_condition = new Condition();
         GetComponent<Image>().sprite = m_image;
         m_hp = m_maxHp;
         m_hpSlider.maxValue = m_maxHp;
