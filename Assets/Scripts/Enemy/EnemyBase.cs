@@ -32,24 +32,6 @@ public class EnemyBase : CharactorBase, IDrop
         m_gamemanager = gm;
     }
 
-    //public void OnDrop(PointerEventData eventData)
-    //{
-    //    BlankCard card = eventData.pointerDrag.GetComponent<BlankCard>();
-    //    if (card == null || card.GetCardType() != CardType.ToEnemy) return;
-    //    m_stateArray = card.GetEffect().conditions;
-    //    SetCondisionTurn(m_stateArray);
-    //    int damage = card.GetEffect().attack;
-    //    m_hp -= damage;
-    //    m_hpSlider.value = m_hp;
-    //    if (m_hp <= 0)
-    //    {
-    //        m_isDead = true;
-    //        m_enemyManager.Removed();
-    //        Destroy(this.gameObject);
-    //    }
-    //    SetText();
-    //}
-
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != CardType.ToEnemy) return;
@@ -94,7 +76,7 @@ public class EnemyBase : CharactorBase, IDrop
         {
             m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         }
-        Debug.Log($"damage:{SetAttack(m_command[turn]).m_attack}, turn:{turn}");
+        //Debug.Log($"damage:{SetAttack(m_command[turn]).m_attack}, turn:{turn}");
         m_player.GetAcceptDamage(SetAttack(m_command[turn]));
     }
 }

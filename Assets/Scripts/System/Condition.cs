@@ -9,8 +9,6 @@ using System.Reflection;
 /// </summary>
 public enum BuffDebuff
 {
-    //Damage,
-    //Block,
     /// <summary>脱力:与えるダメージが25%低下</summary>
     Weakness,
     /// <summary>脆弱化:得るブロックが25%低下</summary>
@@ -23,9 +21,9 @@ public enum BuffDebuff
 }
 
 /// <summary>
-/// バフデバフ関係
+/// バフデバフ関係の基底クラス
 /// </summary>
-public class Condition
+public abstract class Condition
 {
     //private List<Condition> conList = new List<Condition>();
     public Weakness weakness = new Weakness();
@@ -48,7 +46,6 @@ public class Condition
                 float ret = damage * (1 - parsent);
                 return (int)ret;
             }
-            turn = 0;
             return damage;
         }
         public void Dec()
@@ -67,7 +64,6 @@ public class Condition
                 float ret = damage * (1 - parsent);
                 return (int)ret;
             }
-            turn = 0;
             return damage;
         }
         public void Dec()
@@ -78,13 +74,13 @@ public class Condition
     public class Strength
     {
         private int power = 0;
-        public int SetTurn { set { power = value; } }
+        public int SetTurn { set => power = value; }
         public int GetEffect(int damage) { return damage + power; }
     }
     public class Agile
     {
         private int power = 0;
-        public int SetTurn { set { power = value; } }
+        public int SetTurn { set => power = value; }
         public int GetEffect(int block) { return block + power; }
     }
 
