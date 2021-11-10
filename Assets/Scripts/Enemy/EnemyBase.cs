@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 
-public class EnemyBase : CharactorBase, IDropHandler
+public class EnemyBase : CharactorBase, IDrop
 {
     private Player m_player;
     private EnemyManager m_enemyManager;
@@ -32,10 +32,27 @@ public class EnemyBase : CharactorBase, IDropHandler
         m_gamemanager = gm;
     }
 
-    public void OnDrop(PointerEventData eventData)
+    //public void OnDrop(PointerEventData eventData)
+    //{
+    //    BlankCard card = eventData.pointerDrag.GetComponent<BlankCard>();
+    //    if (card == null || card.GetCardType() != CardType.ToEnemy) return;
+    //    m_stateArray = card.GetEffect().conditions;
+    //    SetCondisionTurn(m_stateArray);
+    //    int damage = card.GetEffect().attack;
+    //    m_hp -= damage;
+    //    m_hpSlider.value = m_hp;
+    //    if (m_hp <= 0)
+    //    {
+    //        m_isDead = true;
+    //        m_enemyManager.Removed();
+    //        Destroy(this.gameObject);
+    //    }
+    //    SetText();
+    //}
+
+    public void GetDrop(BlankCard card)
     {
-        BlankCard card = eventData.pointerDrag.GetComponent<BlankCard>();
-        if (card == null || card.GetCardType() != CardType.ToEnemy) return;
+        if (card == null || card.GetCardType != CardType.ToEnemy) return;
         m_stateArray = card.GetEffect().conditions;
         SetCondisionTurn(m_stateArray);
         int damage = card.GetEffect().attack;

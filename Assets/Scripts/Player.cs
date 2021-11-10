@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Player : CharactorBase, IDropHandler
+public class Player : CharactorBase, IDropHandler, IDrop
 {
     void Start()
     {
@@ -42,10 +42,19 @@ public class Player : CharactorBase, IDropHandler
         return num;
     }
 
+    public void GetDrop(BlankCard card)
+    {
+        if (card == null || card.GetCardType != CardType.ToPlayer) return;
+        m_stateArray = card.GetEffect().conditions;
+        SetCondisionTurn(m_stateArray);
+        m_block += card.GetEffect().block;
+        SetText();
+    }
+
     public void OnDrop(PointerEventData pointerEvent)
     {
         BlankCard card = pointerEvent.pointerDrag.GetComponent<BlankCard>();
-        if (card == null || card.GetCardType() != CardType.ToPlayer) return;
+        if (card == null || card.GetCardType != CardType.ToPlayer) return;
         m_stateArray = card.GetEffect().conditions;
         SetCondisionTurn(m_stateArray);
         m_block += card.GetEffect().block;

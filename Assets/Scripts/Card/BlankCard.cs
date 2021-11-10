@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// GameManagerで動的に作られたカードのUIをセットしたりする受け皿
 /// </summary>
-public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
     //[SerializeField] private int[] m_effect;
     CardBase m_cardbase = new CardBase();
@@ -22,6 +22,15 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_discard = GameObject.Find("Discard").transform;
     }
 
+    /// <summary>
+    /// カードのパラメーター設定
+    /// </summary>
+    /// <param name="image"></param>
+    /// <param name="name"></param>
+    /// <param name="cost"></param>
+    /// <param name="tooltip"></param>
+    /// <param name="param"></param>
+    /// <param name="type"></param>
     public void SetInfo(Sprite image, string name, int cost, string tooltip, CardBase param, CardType type)
     {
         transform.Find("Icon").GetComponent<Image>().sprite = image;
@@ -29,18 +38,15 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         transform.Find("Cost").GetComponent<Text>().text = $"{cost}";
         transform.Find("Tooltip").GetComponent<Text>().text = tooltip;
         m_cardbase = param;
-        //m_effect = new int[(int)BuffDebuff.end];
-        //for (int i = 0; i < effect.Length; i++)
-        //{
-        //    m_effect[i] = effect[i];
-        //}
         m_cardType = type;
     }
 
-    public CardType GetCardType()
-    {
-        return m_cardType;
-    }
+    //public CardType GetCardType()
+    //{
+    //    return m_cardType;
+    //}
+
+    public CardType GetCardType { get => m_cardType; }
 
     public CardBase GetEffect()
     {
@@ -52,6 +58,20 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         //transform.parent = m_discard.transform;
         transform.SetParent(m_discard, false);
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        //ドロップ時に自分の座標にRayを飛ばす
+        var result = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, result);
+        foreach (var hit in result)
+        {
+            //ドロップされたオブジェクトがドロップを受け付けるインターフェースが実装されていれば自分の情報を渡す
+            IDrop item = hit.gameObject.GetComponent<IDrop>();
+            if (item == null) continue;
+            item.GetDrop(this);
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)

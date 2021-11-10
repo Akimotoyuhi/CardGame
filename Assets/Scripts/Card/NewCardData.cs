@@ -11,13 +11,13 @@ public class NewCardData : ScriptableObject
 
 public enum CardID
 {
-    kyougeki, //デフォルトカード
-    bougyoryokuUp, //デフォルトカード
-    hikkaki,
-    danzai,
-    kouzoukyouka, //特殊カード
-    sennjuturennkei, //特殊カード
-    meltdown //特殊カード
+    PowerfulStrike, //デフォルトカード
+    DEFStrengthening, //デフォルトカード
+    CatScratch,
+    Conviction,
+    StructuralFortification, //特殊カード
+    TacticalCoordination, //特殊カード
+    Meltdown //特殊カード
 }
 
 public enum CardType
