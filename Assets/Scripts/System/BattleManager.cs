@@ -58,6 +58,7 @@ public class BattleManager : MonoBehaviour
         m_isGame = true;
         Setup();
         CreateField(enemyid);
+        FirstTurn();
     }
 
     private void CreateField(int enemyid)
@@ -89,6 +90,7 @@ public class BattleManager : MonoBehaviour
         {
             m_enemyManager.CreateEnemies(m_encountDatabase.GetID(i));
         }
+        m_enemyManager.EnemyCount();
     }
 
     /// <summary>

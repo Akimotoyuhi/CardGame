@@ -24,7 +24,6 @@ public class EnemyManager : MonoBehaviour
         tra.SetParent(transform, false);
         EnemyBase e = tra.GetComponent<EnemyBase>();
         e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, m_enemyDatabase.SetAction());
-        //EnemyCount();
     }
 
     /// <summary>
