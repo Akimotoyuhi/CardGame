@@ -23,7 +23,7 @@ public class CharactorBase : MonoBehaviour
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
     protected Condition m_condition = new Condition();
-    protected GameManager m_gamemanager;
+    //protected GameManager m_gamemanager;
 
     public bool IsDead { get => m_isDead; }
 
@@ -68,12 +68,12 @@ public class CharactorBase : MonoBehaviour
         return (int)t;
     }
 
-    public void SetParam(string name, Sprite image, int hp, GameManager gm)
+    public void SetParam(string name, Sprite image, int hp)
     {
         m_name = name;
         m_image = image;
         m_maxHp = hp;
-        m_gamemanager = gm;
+        //m_gamemanager = gm;
     }
 
     /// <summary>

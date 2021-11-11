@@ -23,13 +23,12 @@ public class EnemyBase : CharactorBase, IDrop
         base.SetUp();
     }
 
-    public void SetParam(string name, Sprite image, int hp, EnemyCommand[] command, GameManager gm)
+    public void SetParam(string name, Sprite image, int hp, EnemyCommand[] command)
     {
         m_name = name;
         m_image = image;
         m_maxHp = hp;
         m_command = command;
-        m_gamemanager = gm;
     }
 
     public void GetDrop(BlankCard card)

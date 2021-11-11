@@ -8,12 +8,22 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] GameManager m_gamemanager;
+    /// <summary>敵データ</summary>
+    [SerializeField] EnemyData m_enemydata;
+    private EnemyDataBase m_enemyDatabase;
+    /// <summary>敵プレハブ</summary>
+    [SerializeField] GameObject m_enemyPrefab;
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
     /// <summary>敵の総数。終了判定用</summary>
     private int m_enemyCount = 0;
 
-    void Start()
+    public void CreateEnemies(int id)
     {
+        m_enemyDatabase = m_enemydata.m_enemyDatas[id];
+        Transform tra = Instantiate(m_enemyPrefab, transform).transform;
+        tra.SetParent(transform, false);
+        EnemyBase e = tra.GetComponent<EnemyBase>();
+        e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, m_enemyDatabase.SetAction());
         //EnemyCount();
     }
 

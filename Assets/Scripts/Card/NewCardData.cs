@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [CreateAssetMenu]
 public class NewCardData : ScriptableObject
@@ -14,10 +15,10 @@ public enum CardID
     PowerfulStrike, //デフォルトカード
     DEFStrengthening, //デフォルトカード
     CatScratch,
-    Conviction,
     StructuralFortification, //特殊カード
     TacticalCoordination, //特殊カード
-    Meltdown //特殊カード
+    Meltdown, //特殊カード
+    Conviction
 }
 
 public enum CardType
@@ -26,7 +27,7 @@ public enum CardType
     ToEnemy,
 }
 
-[System.Serializable]
+[Serializable]
 public class NewCardDataBase
 {
     public string m_name;
@@ -38,7 +39,7 @@ public class NewCardDataBase
     //    }
     //}
     public Sprite m_image;
-    [System.Serializable]
+    [Serializable]
     public class CardEffectSet
     {
         [Header("効果設定")]

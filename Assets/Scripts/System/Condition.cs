@@ -23,8 +23,19 @@ public enum BuffDebuff
 /// <summary>
 /// バフデバフ関係の基底クラス
 /// </summary>
-public abstract class Condition
+public class Condition
 {
+    /// <summary>バフかどうか</summary>
+    //protected bool m_isBuff;
+
+    /// <summary>ターン終了時の振る舞い</summary>
+    //public abstract void TurnEnd();
+    /// <summary>発動時の効果</summary>
+    //public abstract void Active();
+    ///// <summary>効果の発動条件</summary>
+    //public abstract void Trigger();
+
+    
     //private List<Condition> conList = new List<Condition>();
     public Weakness weakness = new Weakness();
     public Vulnerable vulnerable = new Vulnerable();
@@ -35,7 +46,7 @@ public abstract class Condition
     {
         void Dec();
     }
-    public class Weakness : ITurnLess
+    public class Weakness
     {
         public int turn = 0;
         private float parsent = 0.25f;
@@ -53,7 +64,7 @@ public abstract class Condition
             turn--;
         }
     }
-    public class Vulnerable : ITurnLess
+    public class Vulnerable
     {
         public int turn = 0;
         private float parsent = 0.25f;
