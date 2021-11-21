@@ -139,7 +139,7 @@ public class BattleManager : MonoBehaviour
         GameObject obj = Instantiate((GameObject)Resources.Load("BlankCard"));
         BlankCard card = obj.GetComponent<BlankCard>();
         NewCardDataBase cardData = m_cardData.m_cardData[id];
-        card.SetInfo(cardData.m_image, cardData.m_name, cardData.m_cost, cardData.GetTooltip(), cardData.GetParam(), cardData.m_cardType);
+        card.SetInfo(cardData.CardName, cardData.Image, cardData.Tooltip, cardData.Attack, cardData.AttackNum, cardData.Block, cardData.BlockNum, cardData.Cost, cardData.Conditions, cardData.UseType, m_player);
         //obj.transform.parent = m_deck.transform;
         obj.transform.SetParent(m_deck.transform, false);
     }

@@ -272,8 +272,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 911093667}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1819076728}
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
         m_MethodName: TurnEnd
         m_Mode: 1
         m_Arguments:

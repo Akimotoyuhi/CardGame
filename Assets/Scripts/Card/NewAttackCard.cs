@@ -15,7 +15,7 @@ public class NewAttackCard : IEffect
     public CardBase GetParam()
     {
         CardBase cardBase = new CardBase();
-        cardBase.attack = m_power;
+        cardBase.m_attack = m_power;
         return cardBase;
     }
 
@@ -38,7 +38,7 @@ public class BlockCard : IEffect
     public CardBase GetParam()
     {
         CardBase cardBase = new CardBase();
-        cardBase.block = m_block;
+        cardBase.m_block = m_block;
         return cardBase;
     }
 
@@ -50,19 +50,29 @@ public class BlockCard : IEffect
 
 public class ConditionCard : IEffect
 {
-    [SerializeField] BuffDebuff m_buffDebuffs;
-    [SerializeField] int m_turn;
+    //[SerializeField] BuffDebuff m_buffDebuffs;
+    //[SerializeField] int m_turn;
+    //[SerializeField] Condition m_condition;
+    //[SerializeReference] SetCondition m_condition;
+    //[System.Serializable]
+    //public class SetCondition
+    //{
+    //    [SerializeReference, SubclassSelector]
+    //    public ICondition m_condition;
+    //}
+    //public List<SetCondition> m_setConditions = new List<SetCondition>();
 
     public CardBase GetParam()
     {
         CardBase cardBase = new CardBase();
         cardBase.conditions = new int[(int)BuffDebuff.end];
-        cardBase.conditions[(int)m_buffDebuffs] += m_turn;
+        //cardBase.conditions[(int)m_buffDebuffs] += m_turn;
         return cardBase;
     }
 
     public string GetTooltip()
     {
-        return $"{m_buffDebuffs}を{m_turn}ターン";
+        //return $"{m_buffDebuffs}を{m_turn}ターン";
+        return "a";
     }
 }

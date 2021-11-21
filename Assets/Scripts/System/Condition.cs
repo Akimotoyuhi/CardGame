@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Reflection;
 
 /// <summary>
 /// バフデバフ
@@ -20,32 +19,33 @@ public enum BuffDebuff
     end,
 }
 
+public enum EventTiming
+{
+    TurnBegin,
+    TurnEnd,
+    Hit,
+    Attacked
+}
+
 /// <summary>
 /// バフデバフ関係の基底クラス
 /// </summary>
-public class Condition
+public abstract class Condition : ICondition
 {
-    /// <summary>バフかどうか</summary>
-    //protected bool m_isBuff;
+    public int m_turn = default;
+    /// <summary> 効果 </summary>
+    /// <param name="eventTiming">評価されるタイミング</param>
+    /// <param name="num">影響を受ける数値</param>
+    /// <returns>計算後の数値</returns>
+    public abstract int Effect(EventTiming eventTiming, int num = 0);
+    /// <summary>バフかデバフかの判定</summary>
+    /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
+    public abstract int IsBuff();
 
-    /// <summary>ターン終了時の振る舞い</summary>
-    //public abstract void TurnEnd();
-    /// <summary>発動時の効果</summary>
-    //public abstract void Active();
-    ///// <summary>効果の発動条件</summary>
-    //public abstract void Trigger();
 
-    
-    //private List<Condition> conList = new List<Condition>();
-    public Weakness weakness = new Weakness();
-    public Vulnerable vulnerable = new Vulnerable();
-    public Strength strength = new Strength();
-    public Agile agile = new Agile();
-    /// <summary>ターン終了時に効果ターンが減るやつに付ける</summary>
-    public interface ITurnLess
-    {
-        void Dec();
-    }
+
+
+    /*
     public class Weakness
     {
         public int turn = 0;
@@ -137,4 +137,5 @@ public class Condition
     {
         Debug.Log("AtTurnEnd");
     }
+    */
 }

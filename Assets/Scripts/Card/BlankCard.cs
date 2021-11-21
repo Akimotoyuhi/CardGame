@@ -5,13 +5,35 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// GameManagerで動的に作られたカードのUIをセットしたりする受け皿
+/// カードの実体
 /// </summary>
 public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
-    //[SerializeField] private int[] m_effect;
-    CardBase m_cardbase = new CardBase();
-    private CardType m_cardType;
+    private string m_tooltip;
+    public int Power { get; private set; }
+    public int AttackNum { get; private set; }
+    public int Block { get; private set; }
+    public int BlockNum { get; private set; }
+    private string m_cost;
+    public int Cost 
+    {
+        get
+        {
+            int ret = default;
+            if (int.TryParse(m_cost, out ret))
+            {
+                ret = int.Parse(m_cost);
+            }
+            else
+            {
+                ret = m_player.Cost;
+            }
+            return ret;
+        }
+    }
+    public List<Condition> Conditions { get; private set; }
+    private UseType m_useType;
+    private Player m_player;
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
@@ -22,46 +44,45 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_discard = GameObject.Find("Discard").transform;
     }
 
-    /// <summary>
-    /// カードのパラメーター設定
-    /// </summary>
-    /// <param name="image"></param>
-    /// <param name="name"></param>
-    /// <param name="cost"></param>
-    /// <param name="tooltip"></param>
-    /// <param name="param"></param>
-    /// <param name="type"></param>
-    public void SetInfo(Sprite image, string name, int cost, string tooltip, CardBase param, CardType type)
+    public Player Player { set => m_player = value; }
+
+    public void SetInfo(string name, Sprite image, string tooltip, int power, int attackNum, int block, int blockNum, string cost, List<Condition> conditions, UseType useType, Player player)
     {
-        transform.Find("Icon").GetComponent<Image>().sprite = image;
         transform.Find("Name").GetComponent<Text>().text = name;
-        transform.Find("Cost").GetComponent<Text>().text = $"{cost}";
-        transform.Find("Tooltip").GetComponent<Text>().text = tooltip;
-        m_cardbase = param;
-        m_cardType = type;
+        transform.Find("Icon").GetComponent<Image>().sprite = image;
+        m_tooltip = tooltip;
+        Power = power;
+        AttackNum = attackNum;
+        Block = block;
+        BlockNum = blockNum;
+        m_cost = cost;
+        Conditions = conditions;
+        m_useType = useType;
+        m_player = player;
     }
 
-    //public CardType GetCardType()
-    //{
-    //    return m_cardType;
-    //}
+    public UseType GetCardType { get => m_useType; }
 
-    public CardType GetCardType { get => m_cardType; }
-
-    public CardBase GetEffect()
+    public BlankCard OnCast()
     {
-        OnCast();
-        return m_cardbase;
-    }
 
-    public void OnCast()
-    {
-        //transform.parent = m_discard.transform;
+        CostCal();
         transform.SetParent(m_discard, false);
+        return this;
+    }
+
+    /// <summary>
+    /// プレイヤーのコストを減らす
+    /// </summary>
+    /// <returns></returns>
+    private void CostCal()
+    {
+        m_player.Cost -= Cost;
     }
 
     public void OnDrop(PointerEventData eventData)
     {
+        if (m_player.Cost < Cost) return; //コスト足りなかったら使えない
         //ドロップ時に自分の座標にRayを飛ばす
         var result = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, result);

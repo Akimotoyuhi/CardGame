@@ -22,8 +22,11 @@ public class CharactorBase : MonoBehaviour
     [NonSerialized] public int[] m_stateArray;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
-    protected Condition m_condition = new Condition();
+    protected Condition m_condition;
+    protected List<Condition> m_conditions = new List<Condition>();
     //protected GameManager m_gamemanager;
+
+    protected enum GetCardType { Damage, Block }
 
     public bool IsDead { get => m_isDead; }
 
@@ -34,24 +37,48 @@ public class CharactorBase : MonoBehaviour
         m_hpSlider.maxValue = m_maxHp;
         m_hpSlider.value = m_hp;
         m_blkSlider.value = m_block;
-        SetText();
+        SetUI();
         m_stateArray = new int[(int)BuffDebuff.end];
     }
 
     /// <summary>
-    /// キャラクター下のゲージとテキストの処理
+    /// キャラクター下のスライダーとテキストの処理
     /// </summary>
-    protected void SetText()
+    protected void SetUI()
     {
-        if (m_block > 0)
+        if (m_block > 0) //ブロック値がある時
         {
             m_blkSlider.value = m_block;
             m_text.text = $"{m_block}";
         }
         else
         {
+            m_block = 0;
             m_blkSlider.value = m_block;
+            m_hpSlider.value = m_hp;
             m_text.text = $"{m_hp} : {m_maxHp}";
+        }
+    }
+
+    /// <summary>
+    /// 連続で攻撃食らったorブロック張った時の処理
+    /// </summary>
+    /// <param name="getCardType">攻撃かブロックか</param>
+    /// <param name="value">値</param>
+    /// <param name="num">回数</param>
+    /// <returns></returns>
+    protected IEnumerator ContinuousReaction(GetCardType getCardType, int value, int num)
+    {
+        switch (getCardType)
+        {
+            case GetCardType.Damage:
+                for (int i = 0; i < num; i++)
+                {
+                    m_hp -= value;
+                    SetUI();
+                    yield return new WaitForSeconds(0.1f);
+                }
+                break;
         }
     }
 
@@ -89,12 +116,12 @@ public class CharactorBase : MonoBehaviour
         {
             if (i == (int)BuffDebuff.Vulnerable)
             {
-                m_condition.vulnerable.turn += nums[(int)BuffDebuff.Vulnerable];
+                //m_condition.vulnerable.turn += nums[(int)BuffDebuff.Vulnerable];
                 return;
             }
             else if (i == (int)BuffDebuff.Weakness)
             {
-                m_condition.weakness.turn += nums[(int)BuffDebuff.Weakness];
+                //m_condition.weakness.turn += nums[(int)BuffDebuff.Weakness];
                 return;
             }
         }
@@ -105,7 +132,7 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     public virtual void TurnEnd(int i = 0)
     {
-        m_condition.Decrement();
+        //m_condition.Decrement();
     }
 
     /// <summary>
@@ -114,6 +141,6 @@ public class CharactorBase : MonoBehaviour
     public virtual void TurnStart()
     {
         m_block = 0;
-        SetText();
+        SetUI();
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Player : CharactorBase, IDropHandler, IDrop
 {
+    public int Cost { get; set; }
+
     void Start()
     {
         SetUp();
@@ -18,18 +20,17 @@ public class Player : CharactorBase, IDropHandler, IDrop
     public void GetAcceptDamage(EnemyCommand enemy)
     {
         SetCondisionTurn(enemy.m_conditions);
-        int dmg = CalculationAcceptDamage(enemy.m_attack);
-        dmg = m_block -= dmg;
+        int damage = CalculationAcceptDamage(enemy.m_attack);
+        damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
         m_blkSlider.value = m_block;
-        if (dmg > 0)
+        if (damage > 0) { }
+        else
         {
-            SetText();
-            return;
+            m_hp -= damage;
+            m_hpSlider.value = m_hp;
         }
-        m_hp += dmg;
-        m_hpSlider.value = m_hp;
-        SetText();
+        SetUI();
     }
 
     /// <summary>
@@ -44,20 +45,20 @@ public class Player : CharactorBase, IDropHandler, IDrop
 
     public void GetDrop(BlankCard card)
     {
-        if (card == null || card.GetCardType != CardType.ToPlayer) return;
-        m_stateArray = card.GetEffect().conditions;
+        if (card == null || card.GetCardType != UseType.ToPlayer) return;
+        m_conditions = card.Conditions;
         SetCondisionTurn(m_stateArray);
-        m_block += card.GetEffect().block;
-        SetText();
+        m_block += card.OnCast().Block;
+        SetUI();
     }
 
     public void OnDrop(PointerEventData pointerEvent)
     {
         BlankCard card = pointerEvent.pointerDrag.GetComponent<BlankCard>();
-        if (card == null || card.GetCardType != CardType.ToPlayer) return;
-        m_stateArray = card.GetEffect().conditions;
+        if (card == null || card.GetCardType != UseType.ToPlayer) return;
+        m_conditions = card.Conditions;
         SetCondisionTurn(m_stateArray);
-        m_block += card.GetEffect().block;
-        SetText();
+        m_block += card.OnCast().Block;
+        SetUI();
     }
 }

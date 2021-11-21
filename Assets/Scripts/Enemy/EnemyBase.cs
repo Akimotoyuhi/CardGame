@@ -33,21 +33,28 @@ public class EnemyBase : CharactorBase, IDrop
 
     public void GetDrop(BlankCard card)
     {
-        if (card == null || card.GetCardType != CardType.ToEnemy) return;
-        m_stateArray = card.GetEffect().conditions;
+        if (card == null || card.GetCardType != UseType.ToEnemy) return;
+        m_conditions = card.Conditions;
         SetCondisionTurn(m_stateArray);
-        int damage = card.GetEffect().attack;
-        m_hp -= damage;
-        m_hpSlider.value = m_hp;
-        if (m_hp <= 0)
+        //int damage = card.GetEffect().m_attack;
+        int damage = card.Power;
+        damage = m_block -= damage;
+        if (m_block < 0) { m_block = 0; }
+        m_blkSlider.value = m_block;
+        if (damage > 0) { }
+        else
         {
-            m_isDead = true;
-            m_enemyManager.Removed();
-            Destroy(this.gameObject);
+            StartCoroutine(ContinuousReaction(GetCardType.Damage, damage, card.AttackNum));
+            if (m_hp <= 0)
+            {
+                m_isDead = true;
+                m_enemyManager.Removed();
+                Destroy(this.gameObject);
+            }
         }
-        SetText();
+        SetUI();
     }
-
+    
     /// <summary>
     /// 敵攻撃力計算
     /// </summary>
@@ -57,7 +64,7 @@ public class EnemyBase : CharactorBase, IDrop
     {
         EnemyCommand ret = new EnemyCommand();
         if (m_condition == null) Debug.Log("condition is null");
-        ret.m_attack = m_condition.AtAttack(command.m_attack);
+        //ret.m_attack = m_condition.AtAttack(command.m_attack);
         return ret;
     }
 
