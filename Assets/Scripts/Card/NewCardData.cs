@@ -48,10 +48,6 @@ public class NewCardDataBase
     [SerializeField] int m_block;
     /// <summary>ブロック回数</summary>
     [SerializeField] int m_blockNum;
-    //[Header("効果設定")]
-    //[SerializeField, SerializeReference, SubclassSelector]
-    //List<IEffect> m_effects = new List<IEffect>();
-    //public IEffect m_effect;
     [Header("カードを使用した際に付与するコンディションの設定")]
     [SerializeField, SerializeReference, SubclassSelector]
     List<ICondition> m_cardConditionSets = new List<ICondition>();
@@ -82,72 +78,4 @@ public class NewCardDataBase
         }
     }
     public UseType UseType => m_cardType;
-
-    //エラー回避用 後で消す
-    [Serializable]
-    public class Iranai
-    {
-        public Kari m_effect = new Kari();
-
-        public class Kari
-        {
-            public string GetTooltip()
-            {
-                return "";
-            }
-            public CardBase GetParam()
-            {
-                CardBase ret = new CardBase();
-                return ret;
-            }
-        }
-    }
-    public List<Iranai> m_cardEffectSets = new List<Iranai>();
-
-    /// <summary>
-    /// カードの説明分組み立て
-    /// </summary>
-    /// <returns></returns>
-    public string GetTooltip()
-    {
-        string ret = "";
-        for (int i = 0; i < m_cardEffectSets.Count; i++)
-        {
-            ret += m_cardEffectSets[i].m_effect.GetTooltip();
-            if (m_cardType == UseType.ToPlayer) ret += "得る";
-            else if (m_cardType == UseType.ToEnemy) ret += "与える";
-            if (i < m_cardEffectSets.Count - 1) ret += "\n";
-        }
-        return ret;
-    }
-
-    /// <summary>
-    /// カードのパラメーター組み立て
-    /// </summary>
-    /// <returns></returns>
-    public CardBase GetParam()
-    {
-        CardBase cardBase = new CardBase();
-        for (int i = 0; i < m_cardEffectSets.Count; i++)
-        {
-            cardBase.m_attack += m_cardEffectSets[i].m_effect.GetParam().m_attack;
-            cardBase.m_block += m_cardEffectSets[i].m_effect.GetParam().m_block;
-            for (int n = 0; n < (int)BuffDebuff.end; n++)
-            {
-                cardBase.conditions[n] += m_cardEffectSets[i].m_effect.GetParam().conditions[n];
-            }
-        }
-        return cardBase;
-    }
-}
-
-[Serializable]
-public class AttackOrBlock
-{
-    public enum Type { Attack, Block }
-    [SerializeField] Type m_type;
-    /// <summary>ぱわあ</summary>
-    [SerializeField] int m_power;
-    /// <summary>回数</summary>
-    [SerializeField] int m_number;
 }
