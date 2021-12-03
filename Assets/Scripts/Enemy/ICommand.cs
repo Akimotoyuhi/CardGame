@@ -41,12 +41,12 @@ public class EnemyBlock : ICommand
 
 public class EnemyCondition : ICommand
 {
-    [SerializeField] BuffDebuff m_buffDebuffs;
+    [SerializeField] ConditionID m_buffDebuffs;
     [SerializeField] int m_turn;
     public EnemyCommand GetParam()
     {
         EnemyCommand command = new EnemyCommand();
-        command.m_conditions = new int[(int)BuffDebuff.end];
+        command.m_conditions = new int[(int)ConditionID.end];
         command.m_conditions[(int)m_buffDebuffs] += m_turn;
         return command;
     }
@@ -56,6 +56,11 @@ public class EnemyCommand
 {
     public int m_attack;
     public int m_block;
+    //public List<ICondition> conditions = new List<ICondition>();
     public int[] m_conditions;
     public byte m_;
+
+    //public int Attack => m_attack;
+    //public int Block => m_block;
+    //public List<Condition> conditions
 }

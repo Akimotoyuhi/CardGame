@@ -9,8 +9,8 @@ namespace Mastar
     /// </summary>
     public class GodGameManager
     {
-        static GodGameManager m_instance = new GodGameManager(); // privateなクラス変数
-        static public GodGameManager Instance() { return m_instance; }// インスタンスを返す関数
+        private static GodGameManager m_instance = new GodGameManager();
+        public static GodGameManager Instance => m_instance;
         private GodGameManager() { } //privateなコンストラクタ
 
         /// <summary>現在の進行状況</summary>

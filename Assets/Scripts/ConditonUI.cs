@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ConditonUI : MonoBehaviour
 {
     private Sprite m_image;
-    //private Condition m_condition = new Condition();
 
     void Start()
     {

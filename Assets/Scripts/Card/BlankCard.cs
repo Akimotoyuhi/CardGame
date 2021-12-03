@@ -39,50 +39,46 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// <summary>捨て札</summary>
     private Transform m_discard;
 
-    void Start()
+    private void Setup()
     {
         m_discard = GameObject.Find("Discard").transform;
     }
 
     public Player Player { set => m_player = value; }
 
-    public void SetInfo(string name, Sprite image, string tooltip, int power, int attackNum, int block, int blockNum, string cost, List<Condition> conditions, UseType useType, Player player)
+    public void SetInfo(NewCardDataBase carddata, Player player)
     {
-        transform.Find("Name").GetComponent<Text>().text = name;
-        transform.Find("Icon").GetComponent<Image>().sprite = image;
-        m_tooltip = tooltip;
-        Power = power;
-        AttackNum = attackNum;
-        Block = block;
-        BlockNum = blockNum;
-        m_cost = cost;
-        Conditions = conditions;
-        m_useType = useType;
+        transform.Find("Name").GetComponent<Text>().text = carddata.CardName;
+        transform.Find("Icon").GetComponent<Image>().sprite = carddata.Image;
+        m_tooltip = carddata.Tooltip;
+        transform.Find("Tooltip").GetComponent<Text>().text = m_tooltip;
+        Power = carddata.Attack;
+        AttackNum = carddata.AttackNum;
+        Block = carddata.Block;
+        BlockNum = carddata.BlockNum;
+        m_cost = carddata.Cost;
+        Conditions = carddata.Conditions;
+        m_useType = carddata.UseType;
         m_player = player;
+        Setup();
     }
 
     public UseType GetCardType { get => m_useType; }
 
     public BlankCard OnCast()
     {
-
-        CostCal();
-        transform.SetParent(m_discard, false);
+        m_player.Cost -= Cost; //プレイヤーのコストを減らす
+        transform.SetParent(m_discard, false); //捨て札に移動
         return this;
-    }
-
-    /// <summary>
-    /// プレイヤーのコストを減らす
-    /// </summary>
-    /// <returns></returns>
-    private void CostCal()
-    {
-        m_player.Cost -= Cost;
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (m_player.Cost < Cost) return; //コスト足りなかったら使えない
+        if (m_player.Cost < Cost) //コスト足りなかったら使えない
+        {
+            Debug.Log($"コストが足りない!\nカードのコスト:{Cost} プレイヤーのコスト:{m_player.Cost}");
+            return;
+        }
         //ドロップ時に自分の座標にRayを飛ばす
         var result = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, result);

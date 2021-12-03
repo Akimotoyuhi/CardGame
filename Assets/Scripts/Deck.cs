@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class Deck : MonoBehaviour
 {
-    private int m_defDrawNum = 5;
     [SerializeField] private Transform m_hand;
     [SerializeField] private Discard m_discard;
 
+    private void Start()
+    {
+        BattleManager.Instance.TurnBegin.Subscribe(turn => Draw(BattleManager.Instance.GetDrowNum));
+    }
+
     /// <summary>山札から手札にカードを移す</summary>
     /// <param name="drawNum">ドロー数が変化した場合この引数が必要になる</param>
-    public void Draw(int drawNum = 0)
+    public void Draw(int drawNum)
     {
-        for (int i = 0; i < m_defDrawNum + drawNum; i++)
+        for (int i = 0; i < drawNum; i++)
         {
             if (this.transform.childCount == 0)
             {
@@ -26,7 +31,6 @@ public class Deck : MonoBehaviour
             }
             int r = Random.Range(0, this.transform.childCount);
             transform.GetChild(r).SetParent(m_hand, false);
-            //transform.GetChild(r).parent = m_hand;
         }
     }
 }

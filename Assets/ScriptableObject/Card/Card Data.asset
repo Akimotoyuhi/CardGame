@@ -17,59 +17,73 @@ MonoBehaviour:
     m_cost: 1
     m_image: {fileID: 21300000, guid: 4efca5b2263d6ec46909515646a31806, type: 3}
     m_tooltip: 
-    m_effects: []
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
     m_cardConditionSets: []
     m_cardType: 1
-    m_cardEffectSets: []
   - m_name: "\u9632\u5FA1\u529B\u5F37\u5316"
     m_cost: 1
     m_image: {fileID: 21300000, guid: bbfd132f187f03a46878521b80755c87, type: 3}
     m_tooltip: 
-    m_effects: []
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
     m_cardConditionSets: []
     m_cardType: 0
-    m_cardEffectSets: []
   - m_name: "\u3072\u3063\u304B\u304D\uFF01"
     m_cost: 1
     m_image: {fileID: 21300000, guid: 042301a19cacc864ebddcd9b674ff900, type: 3}
     m_tooltip: 
-    m_effects: []
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
     m_cardConditionSets:
     - id: 0
     m_cardType: 1
-    m_cardEffectSets: []
   - m_name: "\u6307\u4EE4\uFF1A\u69CB\u9020\u5F37\u5316"
     m_cost: 1
     m_image: {fileID: 21300000, guid: ad5765035bd0c744db85d1357d977c9e, type: 3}
     m_tooltip: 
-    m_effects: []
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
     m_cardConditionSets: []
     m_cardType: 0
-    m_cardEffectSets: []
   - m_name: "\u6307\u4EE4\uFF1A\u6226\u8853\u9023\u643A"
     m_cost: 2
     m_image: {fileID: 21300000, guid: 8e7662195db030746805634c581d00c9, type: 3}
     m_tooltip: 
-    m_effects: []
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
     m_cardConditionSets: []
     m_cardType: 1
-    m_cardEffectSets: []
   - m_name: "\u6307\u4EE4\uFF1A\u30E1\u30EB\u30C8\u30C0\u30A6\u30F3"
     m_cost: 2
     m_image: {fileID: 21300000, guid: f339bcaf21dc9984db9b19581904f665, type: 3}
     m_tooltip: 
-    m_effects: []
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
     m_cardConditionSets: []
     m_cardType: 0
-    m_cardEffectSets: []
   - m_name: "\u65AD\u7F6A"
     m_cost: 99
     m_image: {fileID: 21300000, guid: 93d23b67fec4f044c84f31c48354dcee, type: 3}
     m_tooltip: 
-    m_effects: []
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
     m_cardConditionSets: []
     m_cardType: 1
-    m_cardEffectSets: []
   references:
     version: 1
     00000000:

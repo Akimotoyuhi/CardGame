@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mastar;
+using System;
+using UniRx;
+
+enum Timing { Start, End }
 
 public class BattleManager : MonoBehaviour
 {
@@ -22,6 +26,9 @@ public class BattleManager : MonoBehaviour
     private EncountDataBase m_encountDatabase;
     /// <summary>敵グループの管理クラス</summary>
     private EnemyManager m_enemyManager;
+    [Header("バトル中のパラメーター管理")]
+    /// <summary>経過ターン数</summary>
+    private int m_progressTurn = 0;
     [Space]
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
@@ -29,14 +36,25 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Discard m_discard;
     /// <summary>手札</summary>
     [SerializeField] Hand m_hand;
-    /// <summary>バトル中かどうかのフラグ</summary>
-    private bool m_isGame = false;
     /// <summary>カードデータ</summary>
     [SerializeField] NewCardData m_cardData;
-    /// <summary>経過ターン数</summary>
-    private int m_progressTurn = 0;
     /// <summary>ボタンの受付拒否</summary>
     private bool m_isPress = true;
+    /// <summary>バトル中かどうかのフラグ</summary>
+    private bool m_isGame = false;
+    private GameManager m_gameManager;
+    public static BattleManager Instance { get; private set; }
+    private Subject<int> m_turnBegin = new Subject<int>();
+    private Subject<int> m_turnEnd = new Subject<int>();
+    public IObservable<int> TurnBegin => m_turnBegin;
+    public IObservable<int> TurnEnd2 => m_turnEnd;
+    public int GetDrowNum => m_player.DrowNum;
+    public GameManager SetGameManager { set => m_gameManager = value; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -44,7 +62,8 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// バトル中かどうかを見てキャンバス表示したりしなかったりするメソッド
+    /// セットアップ<br/>
+    /// 最初に呼ぶ
     /// </summary>
     public void Setup()
     {
@@ -52,6 +71,10 @@ public class BattleManager : MonoBehaviour
         else GetComponent<Canvas>().enabled = false;
     }
 
+    /// <summary>
+    /// 戦闘開始
+    /// </summary>
+    /// <param name="enemyid">エンカウントした敵のID</param>
     public void Battle(int enemyid)
     {
         m_progressTurn = 0;
@@ -64,14 +87,14 @@ public class BattleManager : MonoBehaviour
     private void CreateField(int enemyid)
     {
         //デッキとプレイヤー構築
-        if (GodGameManager.Instance().StartCheck())
+        if (GodGameManager.Instance.StartCheck())
         {
             m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            GodGameManager inst = GodGameManager.Instance();
+            GodGameManager inst = GodGameManager.Instance;
             m_player.SetParam(inst.Name, inst.Image, inst.Hp);
-            for (int i = 0; i < GodGameManager.Instance().Cards.Length; i++)
+            for (int i = 0; i < GodGameManager.Instance.Cards.Length; i++)
             {
-                CreateCard(GodGameManager.Instance().GetHaveCardID(i));
+                CreateCard(GodGameManager.Instance.GetHaveCardID(i));
             }
         }
         else
@@ -100,10 +123,8 @@ public class BattleManager : MonoBehaviour
     private void FirstTurn()
     {
         Debug.Log(m_progressTurn + "ターン目");
-        //m_deck.Draw();
-        m_enemyManager.EnemyTrun(m_progressTurn);
+        m_turnBegin.OnNext(m_progressTurn);
         m_progressTurn++;
-        m_isPress = false;
         TurnStart();
     }
 
@@ -113,9 +134,9 @@ public class BattleManager : MonoBehaviour
         if (m_isPress) return;
         m_isPress = true;
         m_hand.AllCast();
-        m_enemyManager.EnemyTrun(m_progressTurn);
+        m_turnBegin.OnNext(m_progressTurn);
+        //m_enemyManager.EnemyTrun(m_progressTurn);
         m_player.TurnEnd();
-        //d(m_progressTurn);
         m_progressTurn++;
         Invoke("TurnStart", 1f);
     }
@@ -126,7 +147,8 @@ public class BattleManager : MonoBehaviour
     private void TurnStart()
     {
         m_isPress = false;
-        m_deck.Draw();
+        m_turnEnd.OnNext(m_progressTurn);
+        //m_deck.Draw(m_drowNum);
         Debug.Log(m_progressTurn + "ターン目");
         m_player.TurnStart();
     }
@@ -139,8 +161,7 @@ public class BattleManager : MonoBehaviour
         GameObject obj = Instantiate((GameObject)Resources.Load("BlankCard"));
         BlankCard card = obj.GetComponent<BlankCard>();
         NewCardDataBase cardData = m_cardData.m_cardData[id];
-        card.SetInfo(cardData.CardName, cardData.Image, cardData.Tooltip, cardData.Attack, cardData.AttackNum, cardData.Block, cardData.BlockNum, cardData.Cost, cardData.Conditions, cardData.UseType, m_player);
-        //obj.transform.parent = m_deck.transform;
+        card.SetInfo(cardData, m_player);
         obj.transform.SetParent(m_deck.transform, false);
     }
 }

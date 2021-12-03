@@ -11,5 +11,5 @@ public class CardBase
     public string m_tooltip;
     public Sprite m_image;
     public List<Condition> m_condition;
-    public int[] conditions = new int[(int)BuffDebuff.end];
+    public int[] conditions = new int[(int)ConditionID.end];
 }

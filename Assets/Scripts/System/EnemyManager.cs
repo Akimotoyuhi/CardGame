@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 /// <summary>
 /// 敵グループの制御
@@ -38,20 +39,34 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        BattleManager.Instance.TurnBegin.Subscribe(turn =>
+        {
+            for (int i = 0; i < m_enemies.Count; i++)
+            {
+                if (m_enemies[i].IsDead) continue;
+                m_enemies[i].TurnStart();
+                m_enemies[i].Action(turn);
+                m_enemies[i].TurnEnd();
+            }
+        });
+    }
+
     /// <summary>
     /// 敵のターン
     /// </summary>
     /// <param name="turn">現在ターン数</param>
-    public void EnemyTrun(int turn)
-    {
-        for (int i = 0; i < m_enemies.Count; i++)
-        {
-            if (m_enemies[i].IsDead) continue;
-            m_enemies[i].TurnStart();
-            m_enemies[i].Action(turn);
-            m_enemies[i].TurnEnd();
-        }
-    }
+    //public void EnemyTrun(int turn)
+    //{
+    //    for (int i = 0; i < m_enemies.Count; i++)
+    //    {
+    //        if (m_enemies[i].IsDead) continue;
+    //        m_enemies[i].TurnStart();
+    //        m_enemies[i].Action(turn);
+    //        m_enemies[i].TurnEnd();
+    //    }
+    //}
 
     /// <summary>
     /// 終了判定用<br/>

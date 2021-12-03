@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public class EnemyBase : CharactorBase, IDrop
 {
@@ -34,9 +35,10 @@ public class EnemyBase : CharactorBase, IDrop
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != UseType.ToEnemy) return;
-        m_conditions = card.Conditions;
-        SetCondisionTurn(m_stateArray);
-        //int damage = card.GetEffect().m_attack;
+        foreach (var item in card.Conditions)
+        {
+            m_conditions.Add(item);
+        }
         int damage = card.Power;
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
@@ -44,7 +46,7 @@ public class EnemyBase : CharactorBase, IDrop
         if (damage > 0) { }
         else
         {
-            StartCoroutine(ContinuousReaction(GetCardType.Damage, damage, card.AttackNum));
+            //StartCoroutine(ContinuousReaction(GetCardType.Damage, damage, card.AttackNum));
             if (m_hp <= 0)
             {
                 m_isDead = true;
@@ -63,8 +65,7 @@ public class EnemyBase : CharactorBase, IDrop
     private EnemyCommand SetAttack(EnemyCommand command)
     {
         EnemyCommand ret = new EnemyCommand();
-        if (m_condition == null) Debug.Log("condition is null");
-        //ret.m_attack = m_condition.AtAttack(command.m_attack);
+        ret.m_attack = ConditionEffect(EventTiming.Attacked, command.m_attack);
         return ret;
     }
 

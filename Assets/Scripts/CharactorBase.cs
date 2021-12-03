@@ -19,10 +19,10 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] protected Slider m_hpSlider;
     [SerializeField] protected Slider m_blkSlider;
     [SerializeField] protected Text m_text;
-    [NonSerialized] public int[] m_stateArray;
+    //[NonSerialized] public int[] m_stateArray;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
-    protected Condition m_condition;
+    //protected Condition m_condition;
     protected List<Condition> m_conditions = new List<Condition>();
     //protected GameManager m_gamemanager;
 
@@ -38,7 +38,7 @@ public class CharactorBase : MonoBehaviour
         m_hpSlider.value = m_hp;
         m_blkSlider.value = m_block;
         SetUI();
-        m_stateArray = new int[(int)BuffDebuff.end];
+        //m_stateArray = new int[(int)BuffDebuff.end];
     }
 
     /// <summary>
@@ -58,6 +58,16 @@ public class CharactorBase : MonoBehaviour
             m_hpSlider.value = m_hp;
             m_text.text = $"{m_hp} : {m_maxHp}";
         }
+    }
+
+    protected int ConditionEffect(EventTiming eventTiming, int value)
+    {
+        int ret = value; 
+        foreach (var item in m_conditions)
+        {
+            ret = item.Effect(eventTiming, value);
+        }
+        return ret;
     }
 
     /// <summary>
@@ -110,16 +120,16 @@ public class CharactorBase : MonoBehaviour
     protected void SetCondisionTurn(int[] states)
     {
         if (states == null) return;
-        int[] nums = new int[(int)BuffDebuff.end];
+        int[] nums = new int[(int)ConditionID.end];
         nums = states;
         for (int i = 0; i < states.Length; i++)
         {
-            if (i == (int)BuffDebuff.Vulnerable)
+            if (i == (int)ConditionID.Vulnerable)
             {
                 //m_condition.vulnerable.turn += nums[(int)BuffDebuff.Vulnerable];
                 return;
             }
-            else if (i == (int)BuffDebuff.Weakness)
+            else if (i == (int)ConditionID.Weakness)
             {
                 //m_condition.weakness.turn += nums[(int)BuffDebuff.Weakness];
                 return;

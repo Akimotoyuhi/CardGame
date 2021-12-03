@@ -32,13 +32,13 @@ MonoBehaviour:
     m_setCommands:
     - m_turnCommands:
       - m_command:
-          id: 0
-    - m_turnCommands:
-      - m_command:
           id: 3
     - m_turnCommands:
       - m_command:
           id: 4
+    - m_turnCommands:
+      - m_command:
+          id: 5
   references:
     version: 1
     00000000:
@@ -53,10 +53,12 @@ MonoBehaviour:
         m_buffDebuffs: 0
         m_turn: 2
     00000003:
+      type: {class: EnemyNanmosinai, ns: , asm: Assembly-CSharp}
+    00000004:
       type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
       data:
         m_power: 7
-    00000004:
+    00000005:
       type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
       data:
         m_power: 5

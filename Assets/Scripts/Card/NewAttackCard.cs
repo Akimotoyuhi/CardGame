@@ -65,7 +65,7 @@ public class ConditionCard : IEffect
     public CardBase GetParam()
     {
         CardBase cardBase = new CardBase();
-        cardBase.conditions = new int[(int)BuffDebuff.end];
+        cardBase.conditions = new int[(int)ConditionID.end];
         //cardBase.conditions[(int)m_buffDebuffs] += m_turn;
         return cardBase;
     }

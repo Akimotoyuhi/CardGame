@@ -1,16 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using UniRx;
 
-public class Player : CharactorBase, IDropHandler, IDrop
+public class Player : CharactorBase, IDrop
 {
-    public int Cost { get; set; }
+    private int m_defaultCost = 5;
+    private int m_cost = default;
+    private int m_defaultDrowNum = 5;
+    private int m_drowNum = default;
+    public int Cost { get { return m_cost; } set { m_cost = value; } }
+    public int DrowNum { get { return m_drowNum; } set { m_drowNum = value; } }
 
     void Start()
     {
         SetUp();
+    }
+
+    public override void TurnStart()
+    {
+        m_cost = m_defaultCost;
+        base.TurnStart();
     }
 
     /// <summary>
@@ -23,12 +33,12 @@ public class Player : CharactorBase, IDropHandler, IDrop
         int damage = CalculationAcceptDamage(enemy.m_attack);
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
-        m_blkSlider.value = m_block;
-        if (damage > 0) { }
+        damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
+        if (damage < 0) { }
         else
         {
+            Debug.Log("GetDamage" + damage);
             m_hp -= damage;
-            m_hpSlider.value = m_hp;
         }
         SetUI();
     }
@@ -46,18 +56,10 @@ public class Player : CharactorBase, IDropHandler, IDrop
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != UseType.ToPlayer) return;
-        m_conditions = card.Conditions;
-        SetCondisionTurn(m_stateArray);
-        m_block += card.OnCast().Block;
-        SetUI();
-    }
-
-    public void OnDrop(PointerEventData pointerEvent)
-    {
-        BlankCard card = pointerEvent.pointerDrag.GetComponent<BlankCard>();
-        if (card == null || card.GetCardType != UseType.ToPlayer) return;
-        m_conditions = card.Conditions;
-        SetCondisionTurn(m_stateArray);
+        foreach (var item in card.Conditions)
+        {
+            m_conditions.Add(item);
+        }
         m_block += card.OnCast().Block;
         SetUI();
     }
