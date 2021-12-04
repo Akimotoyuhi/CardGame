@@ -27,6 +27,13 @@ public enum EventTiming
     Attacked
 }
 
+public enum ParametorType
+{
+    Attack,
+    Block,
+    Life
+}
+
 /// <summary>
 /// バフデバフ関係の基底クラス
 /// </summary>
@@ -37,19 +44,19 @@ public abstract class Condition
     /// <param name="eventTiming">評価されるタイミング</param>
     /// <param name="num">影響を受ける数値</param>
     /// <returns>計算後の数値</returns>
-    public abstract int Effect(EventTiming eventTiming, int num = 0);
+    public abstract int Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0);
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
     public abstract int IsBuff();
 }
 
 [Serializable]
-public class ConditionCelection
+public class ConditionSelection
 {
     [SerializeField] ConditionID m_conditionID;
     [SerializeField] int m_turn;
 
-    public Condition Condition
+    public Condition GetCondition
     {
         get
         {
@@ -64,7 +71,7 @@ public class ConditionCelection
                     vul.m_turn = m_turn;
                     return vul;
                 default:
-                    Debug.Log("無効なパラメーター");
+                    Debug.Log("未設定のIDが渡されました");
                     return null;
             }
         }

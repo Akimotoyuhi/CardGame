@@ -42,14 +42,15 @@ public class EnemyDataBase
     [Header("Element0は先制効果")]
     public List<SetCommand> m_setCommands = new List<SetCommand>();
 
-    public EnemyCommand[] SetAction()
+    public List<EnemyCommand> SetAction()
     {
-        EnemyCommand[] ret = new EnemyCommand[m_setCommands.Count];
+        List<EnemyCommand> ret = new List<EnemyCommand>();
         for (int i = 0; i < m_setCommands.Count; i++) //敵の行動(全体)
         {
             for (int n = 0; n < m_setCommands[i].m_turnCommands.Count; n++) //敵の行動(１ターンあたり)
             {
-                ret[i] = m_setCommands[i].m_turnCommands[n].m_command.GetParam();
+                //ret[i] = m_setCommands[i].m_turnCommands[n].m_command.GetParam();
+                ret.Add(m_setCommands[i].m_turnCommands[n].m_command.GetParam());
             }
         }
         return ret;

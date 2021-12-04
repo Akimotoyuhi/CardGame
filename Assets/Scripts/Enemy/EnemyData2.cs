@@ -16,15 +16,11 @@ public class EnemyDataBase2
     [SerializeField] string m_name;
     [SerializeField] int m_hp;
     [SerializeField] Sprite m_image;
-    [Serializable]
-    public class SetCommand
-    {
-        public enum ForkingNode { Selector, Sequence }
-        public ForkingNode m_forkingNode;
-        [SerializeReference, SubclassSelector]
-        public List<ICommand2> m_command2s = new List<ICommand2>();
-    }
-    public SetCommand m_command;
+    [SerializeField] List<EnemyCommand2> m_enemyCommand2s;
+    public string Name => m_name;
+    public int HP => m_hp;
+    public Sprite Image => m_image;
+    public List<EnemyCommand2> EnemyCommand2s => m_enemyCommand2s;
 }
 
 public interface ICommand2
@@ -36,8 +32,7 @@ public class Action : ICommand2
 {
     [SerializeField] int m_power;
     [SerializeField] int m_block;
-    [SerializeField, SerializeReference, SubclassSelector]
-    Condition m_condition;
+    [SerializeField] ConditionSelection m_condition;
     //Ç±Ç±Ç…IConditionê›íËÇ≥ÇπÇÈÇ∆ÉoÉOÇÈ
 
     public bool Execute()

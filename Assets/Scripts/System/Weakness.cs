@@ -8,25 +8,25 @@ using UnityEngine;
 /// </summary>
 public class Weakness : Condition
 {
-    public override int Effect(EventTiming eventTiming, int num)
+    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power)
     {
-        if (m_turn <= 0) return num;
+        if (m_turn <= 0 && parametorType != ParametorType.Attack) return power;
         float ret = default;
         switch (eventTiming)
         {
             case EventTiming.TurnBegin:
-                ret = num * (1 - 0.25f);
+                ret = power * (1 - 0.25f);
                 return (int)ret;
             case EventTiming.Attacked:
-                ret = num * (1 - 0.25f);
+                ret = power * (1 - 0.25f);
                 return (int)ret;
             case EventTiming.TurnEnd:
                 m_turn--;
                 break;
             default:
-                return num;
+                return power;
         }
-        return num;
+        return power;
     }
     public override int IsBuff() { return 1; }
 }
@@ -36,23 +36,23 @@ public class Weakness : Condition
 /// </summary>
 public class Vulnerable : Condition
 {
-    public override int Effect(EventTiming eventTiming, int num)
+    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block)
     {
-        if (m_turn <= 0) return num;
+        if (m_turn <= 0 && parametorType != ParametorType.Block) return block;
         float ret = default;
         switch (eventTiming)
         {
             case EventTiming.TurnBegin:
-                ret = num * (1 - 0.25f);
+                ret = block * (1 - 0.25f);
                 return (int)ret;
             case EventTiming.Attacked:
-                ret = num * (1 - 0.25f);
+                ret = block * (1 - 0.25f);
                 return (int)ret;
             case EventTiming.TurnEnd:
                 m_turn--;
                 break;
         }
-        return num;
+        return block;
     }
     public override int IsBuff() { return 1; }
 }

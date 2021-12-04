@@ -11,6 +11,7 @@ public class EnemyBase : CharactorBase, IDrop
     private Player m_player;
     private EnemyManager m_enemyManager;
     private EnemyCommand[] m_command;
+    private List<EnemyCommand> m_enemyCommands = new List<EnemyCommand>();
 
     void Start()
     {
@@ -24,12 +25,13 @@ public class EnemyBase : CharactorBase, IDrop
         base.SetUp();
     }
 
-    public void SetParam(string name, Sprite image, int hp, EnemyCommand[] command)
+    public void SetParam(string name, Sprite image, int hp, List<EnemyCommand> enemyCommands)
     {
         m_name = name;
         m_image = image;
         m_maxHp = hp;
-        m_command = command;
+        //m_command = enemyCommands;
+        m_enemyCommands = enemyCommands;
     }
 
     public void GetDrop(BlankCard card)
@@ -42,11 +44,13 @@ public class EnemyBase : CharactorBase, IDrop
         int damage = card.Power;
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
-        m_blkSlider.value = m_block;
-        if (damage > 0) { }
+        damage *= -1;
+        if (damage < 0) { }
         else
         {
             //StartCoroutine(ContinuousReaction(GetCardType.Damage, damage, card.AttackNum));
+            m_hp -= damage;
+
             if (m_hp <= 0)
             {
                 m_isDead = true;
@@ -55,6 +59,7 @@ public class EnemyBase : CharactorBase, IDrop
             }
         }
         SetUI();
+        card.OnCast();
     }
     
     /// <summary>
@@ -65,7 +70,7 @@ public class EnemyBase : CharactorBase, IDrop
     private EnemyCommand SetAttack(EnemyCommand command)
     {
         EnemyCommand ret = new EnemyCommand();
-        ret.m_attack = ConditionEffect(EventTiming.Attacked, command.m_attack);
+        ret.m_attack = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.m_attack);
         return ret;
     }
 

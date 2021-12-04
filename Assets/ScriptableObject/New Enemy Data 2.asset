@@ -23,4 +23,10 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: , ns: , asm: }
+      type: {class: Action, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 0
+        m_block: 0
+        m_condition:
+          m_conditionID: 0
+          m_turn: 2

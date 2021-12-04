@@ -48,9 +48,10 @@ public class NewCardDataBase
     [SerializeField] int m_block;
     /// <summary>ブロック回数</summary>
     [SerializeField] int m_blockNum;
-    [Header("カードを使用した際に付与するコンディションの設定")]
-    [SerializeField, SerializeReference, SubclassSelector]
-    List<ICondition> m_cardConditionSets = new List<ICondition>();
+    //[Header("カードを使用した際に付与するコンディションの設定")]
+    //[SerializeField, SerializeReference, SubclassSelector]
+    //List<ICondition> m_cardConditionSets = new List<ICondition>();
+    [SerializeField] List<ConditionSelection> m_concitions;
     /// <summary>使用する標的</summary>
     [SerializeField] UseType m_cardType = new UseType();
 
@@ -68,11 +69,9 @@ public class NewCardDataBase
         get
         {
             List<Condition> ret = new List<Condition>();
-            foreach (var item in m_cardConditionSets)
+            foreach (var item in m_concitions)
             {
-                var con = item as Condition;
-                if (con == null) continue;
-                ret.Add(con);
+                ret.Add(item.GetCondition);
             }
             return ret;
         }

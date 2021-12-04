@@ -50,8 +50,9 @@ MonoBehaviour:
     00000002:
       type: {class: EnemyCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_buffDebuffs: 0
-        m_turn: 2
+        m_conditions:
+          m_conditionID: 0
+          m_turn: 2
     00000003:
       type: {class: EnemyNanmosinai, ns: , asm: Assembly-CSharp}
     00000004:

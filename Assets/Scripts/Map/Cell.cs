@@ -21,8 +21,8 @@ public class Cell : MonoBehaviour
     public void OnClick()
     {
         //とりあえず
-        //GameManager.Instance.Battle(m_encountId);
-        GameManager.Instance.Battle(0);
+        GameManager.Instance.Battle(m_encountId);
+        //GameManager.Instance.Battle(0);
     }
 
     public void LineCaster()

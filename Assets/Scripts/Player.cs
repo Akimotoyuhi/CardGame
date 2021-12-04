@@ -5,10 +5,11 @@ using UniRx;
 
 public class Player : CharactorBase, IDrop
 {
-    private int m_defaultCost = 5;
+    private int m_defaultCost = 3;
+    [SerializeField]
     private int m_cost = default;
     private int m_defaultDrowNum = 5;
-    private int m_drowNum = default;
+    private int m_drowNum = 5;
     public int Cost { get { return m_cost; } set { m_cost = value; } }
     public int DrowNum { get { return m_drowNum; } set { m_drowNum = value; } }
 
@@ -37,7 +38,6 @@ public class Player : CharactorBase, IDrop
         if (damage < 0) { }
         else
         {
-            Debug.Log("GetDamage" + damage);
             m_hp -= damage;
         }
         SetUI();
@@ -56,11 +56,13 @@ public class Player : CharactorBase, IDrop
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != UseType.ToPlayer) return;
+        BlankCard cards = card;
         foreach (var item in card.Conditions)
         {
             m_conditions.Add(item);
         }
-        m_block += card.OnCast().Block;
+        m_block += card.Block;
         SetUI();
+        card.OnCast();
     }
 }

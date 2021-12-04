@@ -60,12 +60,12 @@ public class CharactorBase : MonoBehaviour
         }
     }
 
-    protected int ConditionEffect(EventTiming eventTiming, int value)
+    protected int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
     {
         int ret = value; 
         foreach (var item in m_conditions)
         {
-            ret = item.Effect(eventTiming, value);
+            ret = item.Effect(eventTiming, parametorType, value);
         }
         return ret;
     }
