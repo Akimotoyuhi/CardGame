@@ -89,6 +89,7 @@ public class SubclassSelectorDrawer : PropertyDrawer
                 {
                     // GetGenericArguments で要素の型を取得する
                     var genericArguments = fieldType.GetGenericArguments();
+                    if (genericArguments.Count() == 0) continue;
                     fieldType = genericArguments[0];
                 }
 
@@ -97,8 +98,11 @@ public class SubclassSelectorDrawer : PropertyDrawer
                 continue;
             }
 
-            //else
-            fieldType = field.FieldType;
+            if (field != null)
+            {
+                //else
+                fieldType = field.FieldType;
+            }
         }
 
         return fieldType;

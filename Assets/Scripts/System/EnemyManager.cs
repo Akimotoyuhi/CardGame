@@ -10,21 +10,30 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] GameManager m_gamemanager;
     /// <summary>敵データ</summary>
-    [SerializeField] EnemyData m_enemydata;
-    private EnemyDataBase m_enemyDatabase;
+    //[SerializeField] EnemyData m_enemydata;
+    [SerializeField] EnemyData3 m_enemyData;
+    private EnemyDataBase3 m_enemyDatabase;
     /// <summary>敵プレハブ</summary>
     [SerializeField] GameObject m_enemyPrefab;
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
     /// <summary>敵の総数。終了判定用</summary>
     private int m_enemyCount = 0;
 
+    //public void CreateEnemies(int id)
+    //{
+    //    m_enemyDatabase = m_enemydata.m_enemyDatas[id];
+    //    Transform tra = Instantiate(m_enemyPrefab, transform).transform;
+    //    tra.SetParent(transform, false);
+    //    EnemyBase e = tra.GetComponent<EnemyBase>();
+    //    e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, m_enemyDatabase.SetAction());
+    //}
     public void CreateEnemies(int id)
     {
-        m_enemyDatabase = m_enemydata.m_enemyDatas[id];
+        m_enemyDatabase = m_enemyData.m_enemyDataBase3s[id];
         Transform tra = Instantiate(m_enemyPrefab, transform).transform;
         tra.SetParent(transform, false);
         EnemyBase e = tra.GetComponent<EnemyBase>();
-        e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, m_enemyDatabase.SetAction());
+        e.SetParam(m_enemyDatabase);
     }
 
     /// <summary>

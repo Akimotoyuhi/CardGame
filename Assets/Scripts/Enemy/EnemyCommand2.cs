@@ -17,7 +17,7 @@ public class EnemyCommand2
             case ForkingNode.Selector:
                 if (m_command2s[0].Execute())
                 {
-                    //•Ð•ûTrue‚¾‚Á‚½‚çTrue
+                    //•Ð•ûtrue‚¾‚Á‚½‚çtrue
                     return true;
                 }
                 return false;

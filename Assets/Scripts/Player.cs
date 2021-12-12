@@ -28,17 +28,17 @@ public class Player : CharactorBase, IDrop
     /// 被ダメージ処理
     /// </summary>
     /// <param name="damage">被ダメージ</param>
-    public void GetAcceptDamage(EnemyCommand enemy)
+    public void GetAcceptDamage(EnemyActionCommnad3 enemy)
     {
-        SetCondisionTurn(enemy.m_conditions);
-        int damage = CalculationAcceptDamage(enemy.m_attack);
+        //SetCondisionTurn(enemy.Condition);
+        int damage = CalculationAcceptDamage(enemy.Power);
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
         damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
         if (damage < 0) { }
         else
         {
-            m_hp -= damage;
+            m_life -= damage;
         }
         SetUI();
     }

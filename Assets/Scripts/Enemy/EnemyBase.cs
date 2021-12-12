@@ -12,6 +12,7 @@ public class EnemyBase : CharactorBase, IDrop
     private EnemyManager m_enemyManager;
     private EnemyCommand[] m_command;
     private List<EnemyCommand> m_enemyCommands = new List<EnemyCommand>();
+    private EnemyDataBase3 m_enemyDataBase = new EnemyDataBase3();
 
     void Start()
     {
@@ -25,13 +26,12 @@ public class EnemyBase : CharactorBase, IDrop
         base.SetUp();
     }
 
-    public void SetParam(string name, Sprite image, int hp, List<EnemyCommand> enemyCommands)
+    public void SetParam(EnemyDataBase3 data)
     {
-        m_name = name;
-        m_image = image;
-        m_maxHp = hp;
-        //m_command = enemyCommands;
-        m_enemyCommands = enemyCommands;
+        m_name = data.Name;
+        m_maxLife = data.Life;
+        m_image = data.Image;
+        m_enemyDataBase = data;
     }
 
     public void GetDrop(BlankCard card)
@@ -49,9 +49,9 @@ public class EnemyBase : CharactorBase, IDrop
         else
         {
             //StartCoroutine(ContinuousReaction(GetCardType.Damage, damage, card.AttackNum));
-            m_hp -= damage;
+            m_life -= damage;
 
-            if (m_hp <= 0)
+            if (m_life <= 0)
             {
                 m_isDead = true;
                 m_enemyManager.Removed();
@@ -80,15 +80,9 @@ public class EnemyBase : CharactorBase, IDrop
     /// <param name="turn">現在ターン数</param>
     public void Action(int turn)
     {
-        while (turn >= m_command.Length)
-        {
-            turn -= m_command.Length - 1;
-        }
-        if (!m_player)
-        {
-            m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        }
-        //Debug.Log($"damage:{SetAttack(m_command[turn]).m_attack}, turn:{turn}");
-        m_player.GetAcceptDamage(SetAttack(m_command[turn]));
+        if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
+        Debug.Log($"{m_enemyDataBase.CommandSelect(this, turn).Power}ダメージ");
+        m_player.GetAcceptDamage(m_enemyDataBase.CommandSelect(this, turn));
     }
 }

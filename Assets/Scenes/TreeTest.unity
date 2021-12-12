@@ -232,8 +232,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1071337049}
-  - component: {fileID: 1071337050}
-  - component: {fileID: 1071337051}
   - component: {fileID: 1071337048}
   m_Layer: 0
   m_Name: GameObject
@@ -251,9 +249,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1071337047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e25750c9d715244b4cf639fad5ed00, type: 3}
+  m_Script: {fileID: 11500000, guid: c8c05ef4890adfe489362eea8ec0cf38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_enemyData: {fileID: 11400000, guid: 8febba63acd6ad84e9fbddf3976ebf2b, type: 2}
+  m_id: 0
+  m_name: 
+  m_life: 0
+  m_turn: 0
 --- !u!4 &1071337049
 Transform:
   m_ObjectHideFlags: 0
@@ -268,32 +271,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1071337050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071337047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4bcb4133a02ff44a55e37c67555dbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_test: {fileID: 1071337048}
---- !u!114 &1071337051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071337047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d427c72f0463d44e9fbb79971f2cdfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_test: {fileID: 1071337048}
 --- !u!1 &1615421309
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,8 +583,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1071337048}
-        m_TargetAssemblyTypeName: RxObserverTest, Assembly-CSharp
-        m_MethodName: OnClick
+        m_TargetAssemblyTypeName: EnemyCommandTest, Assembly-CSharp
+        m_MethodName: OnCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

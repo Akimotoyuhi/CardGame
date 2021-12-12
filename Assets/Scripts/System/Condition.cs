@@ -60,6 +60,7 @@ public class ConditionSelection
     {
         get
         {
+            if (m_turn <= 0) return null;
             switch (m_conditionID)
             {
                 case ConditionID.Weakness:

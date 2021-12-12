@@ -11,7 +11,7 @@ public class BattleManager : MonoBehaviour
 {
     [Header("プレイヤー関連")]
     /// <summary>プレイヤー初期データ</summary>
-    [SerializeField]PlayerStatsData m_playerStatsData;
+    [SerializeField] PlayerStatsData m_playerStatsData;
     /// <summary>プレイヤーのプレハブ</summary>
     [SerializeField] GameObject m_playerPrefab;
     /// <summary>プレイヤーの配置場所</summary>
@@ -111,6 +111,7 @@ public class BattleManager : MonoBehaviour
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
         for (int i = 0; i < m_encountDatabase.GetLength; i++)
         {
+            Debug.Log(m_encountDatabase.GetID(i));
             m_enemyManager.CreateEnemies(m_encountDatabase.GetID(i));
         }
         m_enemyManager.EnemyCount();

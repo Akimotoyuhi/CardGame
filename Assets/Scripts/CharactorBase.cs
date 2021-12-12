@@ -9,9 +9,9 @@ public class CharactorBase : MonoBehaviour
     /// <summary>名前</summary>
     [SerializeField] protected string m_name = "name";
     /// <summary>最大HP</summary>
-    [SerializeField] protected int m_maxHp = 1;
+    [SerializeField] protected int m_maxLife = 1;
     /// <summary>現在HP</summary>
-    protected int m_hp;
+    protected int m_life;
     /// <summary>ブロック値</summary>
     protected int m_block;
     /// <summary>画像</summary>
@@ -19,12 +19,10 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] protected Slider m_hpSlider;
     [SerializeField] protected Slider m_blkSlider;
     [SerializeField] protected Text m_text;
-    //[NonSerialized] public int[] m_stateArray;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
-    //protected Condition m_condition;
     protected List<Condition> m_conditions = new List<Condition>();
-    //protected GameManager m_gamemanager;
+    public int Life => m_life;
 
     protected enum GetCardType { Damage, Block }
 
@@ -33,9 +31,9 @@ public class CharactorBase : MonoBehaviour
     protected virtual void SetUp()
     {
         GetComponent<Image>().sprite = m_image;
-        m_hp = m_maxHp;
-        m_hpSlider.maxValue = m_maxHp;
-        m_hpSlider.value = m_hp;
+        m_life = m_maxLife;
+        m_hpSlider.maxValue = m_maxLife;
+        m_hpSlider.value = m_life;
         m_blkSlider.value = m_block;
         SetUI();
         //m_stateArray = new int[(int)BuffDebuff.end];
@@ -55,8 +53,8 @@ public class CharactorBase : MonoBehaviour
         {
             m_block = 0;
             m_blkSlider.value = m_block;
-            m_hpSlider.value = m_hp;
-            m_text.text = $"{m_hp} : {m_maxHp}";
+            m_hpSlider.value = m_life;
+            m_text.text = $"{m_life} : {m_maxLife}";
         }
     }
 
@@ -84,7 +82,7 @@ public class CharactorBase : MonoBehaviour
             case GetCardType.Damage:
                 for (int i = 0; i < num; i++)
                 {
-                    m_hp -= value;
+                    m_life -= value;
                     SetUI();
                     yield return new WaitForSeconds(0.1f);
                 }
@@ -109,8 +107,7 @@ public class CharactorBase : MonoBehaviour
     {
         m_name = name;
         m_image = image;
-        m_maxHp = hp;
-        //m_gamemanager = gm;
+        m_maxLife = hp;
     }
 
     /// <summary>
