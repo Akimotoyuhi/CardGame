@@ -39,7 +39,7 @@ public enum ParametorType
 /// </summary>
 public abstract class Condition
 {
-    public int m_turn = default;
+    public int Turn { get; set; }
     /// <summary> 効果 </summary>
     /// <param name="eventTiming">評価されるタイミング</param>
     /// <param name="num">影響を受ける数値</param>
@@ -48,6 +48,7 @@ public abstract class Condition
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
     public abstract int IsBuff();
+    public abstract ConditionID GetConditionID();
 }
 
 [Serializable]
@@ -65,11 +66,11 @@ public class ConditionSelection
             {
                 case ConditionID.Weakness:
                     Condition weak = new Weakness();
-                    weak.m_turn = m_turn;
+                    weak.Turn = m_turn;
                     return weak;
                 case ConditionID.Vulnerable:
                     Condition vul = new Vulnerable();
-                    vul.m_turn = m_turn;
+                    vul.Turn = m_turn;
                     return vul;
                 default:
                     Debug.Log("未設定のIDが渡されました");

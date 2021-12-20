@@ -10,7 +10,7 @@ public class Weakness : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power)
     {
-        if (m_turn <= 0 && parametorType != ParametorType.Attack) return power;
+        if (Turn <= 0 && parametorType != ParametorType.Attack) return power;
         float ret = default;
         switch (eventTiming)
         {
@@ -21,7 +21,7 @@ public class Weakness : Condition
                 ret = power * (1 - 0.25f);
                 return (int)ret;
             case EventTiming.TurnEnd:
-                m_turn--;
+                if (Turn > 0) Turn--;
                 break;
             default:
                 return power;
@@ -29,6 +29,7 @@ public class Weakness : Condition
         return power;
     }
     public override int IsBuff() { return 1; }
+    public override ConditionID GetConditionID() { return ConditionID.Weakness; }
 }
 /// <summary>
 /// �Ǝ㉻<br/>
@@ -38,7 +39,7 @@ public class Vulnerable : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block)
     {
-        if (m_turn <= 0 && parametorType != ParametorType.Block) return block;
+        if (Turn <= 0 && parametorType != ParametorType.Block) return block;
         float ret = default;
         switch (eventTiming)
         {
@@ -49,10 +50,11 @@ public class Vulnerable : Condition
                 ret = block * (1 - 0.25f);
                 return (int)ret;
             case EventTiming.TurnEnd:
-                m_turn--;
+                if (Turn > 0) Turn--;
                 break;
         }
         return block;
     }
     public override int IsBuff() { return 1; }
+    public override ConditionID GetConditionID() { return ConditionID.Vulnerable; }
 }

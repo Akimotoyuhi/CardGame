@@ -47,20 +47,10 @@ public class EnemyDataBase3
                 }
                 Debug.LogError("条件未一致");
                 return null;
-            case NodeType.Selector: //どれか一つでも成功したらtrue
-                for (int i = 0; i < m_enemyBaseState.Count; i++)
-                {
-                    for (int n = 0; n < m_enemyBaseState[i].m_conditionalCommand.Count; n++)
-                    {
-                        if (m_enemyBaseState[i].m_conditionalCommand[n].Conditional(enemy, turn))
-                        {
-
-                        }
-                    }
-                }
+            default:
+                Debug.LogError("無効なケース");
                 return null;
         }
-        return null;
     }
 }
 
@@ -74,9 +64,9 @@ public class EnemyBaseState
 [System.Serializable]
 public class EnemyActionCommnad3
 {
-    //行動データ
-    [SerializeField] string m_power;
-    [SerializeField] string m_block;
+    [Header("行動データ")]
+    [SerializeField] string m_power = "0";
+    [SerializeField] string m_block = "0";
     [SerializeField] ConditionSelection m_condition;
     [SerializeField] TargetType m_target;
     public int Power => int.Parse(m_power);
@@ -88,9 +78,10 @@ public class EnemyActionCommnad3
 [System.Serializable]
 public class EnemyConditionalCommand3
 {
-    //条件データ
-    [SerializeField] WhereType m_type;
-    [SerializeField] int m_value;
+    [Header("条件データ")]
+    [SerializeField, Tooltip("条件")] WhereType m_type;
+    [SerializeField, Tooltip("評価する値")] int m_value;
+    [SerializeField, Tooltip("確率にするか否か")] bool m_isProbability;
     /// <summary>
     /// 条件式
     /// </summary>
@@ -105,13 +96,38 @@ public class EnemyConditionalCommand3
                     return true;
                 }
                 return false;
-            case WhereType.BerrowLife:
+            case WhereType.NotTurn:
+                if (turn == m_value)
+                {
+                    return false;
+                }
+                return true;
+            case WhereType.RowTurn:
+                if (turn <= m_value)
+                {
+                    return true;
+                }
+                return false;
+            case WhereType.HighLife:
+                if (turn >= m_value)
+                {
+                    return true;
+                }
+                return false;
+            case WhereType.MultipleTurn:
+                if (turn % m_value == 0)
+                {
+                    return true;
+                }
+                return false;
+            case WhereType.RowLife:
                 if (enemy.Life <= m_value)
                 {
                     return true;
                 }
                 return false;
             default:
+                Debug.Log("無効な条件ケース");
                 return false;
         }
     }
@@ -126,5 +142,10 @@ public enum TargetType
 public enum WhereType
 {
     Turn,
-    BerrowLife
+    NotTurn,
+    RowTurn,
+    HighTurn,
+    MultipleTurn,
+    RowLife,
+    HighLife,
 }

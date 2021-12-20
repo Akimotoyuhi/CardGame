@@ -1,16 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+public enum CellState
+{
+    Enemy,
+    Rest
+}
 
 public class Cell : MonoBehaviour
 {
-    /// <summary>マップ生成時に使うフラグ</summary>
-    //private bool m_isChecked = false;
-    /// <summary>次セルの保存用</summary>
-    public List<GameObject> m_objList = new List<GameObject>();
-    private LineRenderer m_lineRenderer;
-    /// <summary>このセルで出現する敵ID</summary>
+    /// <summary>開始位置</summary>
+    [SerializeField] Image m_startPos;
+    /// <summary>終了位置</summary>
+    [SerializeField] Image m_endPos;
+    /// <summary>セルの状態</summary>
+    [SerializeField] CellState m_cellState = default;
+    [Header("セルの状態に応じて変わる色の設定")]
+    [SerializeField] Color m_enemyColor = Color.red;
+    [SerializeField] Color m_restColor = Color.blue;
+    /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
+    public CellState CellState { set => m_cellState = value; }
+    /// <summary>このセルが所属するセクター番号</summary>
+    public int SectorIndex { get; set; }
+    public List<int> NextCell { get; set; }
 
     void Start()
     {
@@ -25,40 +40,30 @@ public class Cell : MonoBehaviour
         //GameManager.Instance.Battle(0);
     }
 
-    public void LineCaster()
+    public void LineCast()
     {
-        Vector3[] vec = new Vector3[m_objList.Count];
-        //vec[0] = ConvertCanvasPos(transform.position, transform.root.GetComponent<Canvas>());
-        for (int i = 0; i < vec.Length; i++)
-        {
-            Vector3 v = m_objList[i].transform.position;
-            vec[i] = ConvertCanvasPos(v, this.transform.root.GetComponent<Canvas>());
-            //m_objList[i].GetComponent<Cell>().ListChecker();
-            m_objList[i].GetComponent<Cell>().LineCaster();
-        }
-        m_lineRenderer = GetComponent<LineRenderer>();
-        m_lineRenderer.SetPositions(vec);
+
     }
 
     public void ListChecker()
     {
-        foreach (var list in m_objList)
-        {
-            Debug.Log(list.transform.position);
-        }
+        //foreach (var list in m_objList)
+        //{
+        //    Debug.Log(list.transform.position);
+        //}
     }
 
-    /// <summary>
-    /// canvasの2d座標に変換
-    /// </summary>
-    /// <param name="pos">変換する座標</param>
-    /// <param name="canvas">canvas</param>
-    /// <returns>変換後の座標</returns>
-    private Vector3 ConvertCanvasPos(Vector3 pos, Canvas canvas)
+    public void ColorChange()
     {
-        RectTransform rect = canvas.GetComponent<RectTransform>();
-        pos.x += rect.transform.position.x;
-        pos.y += rect.transform.position.y;
-        return new Vector3(pos.x, pos.y, rect.transform.position.z - 10);
+        Image image = GetComponent<Image>();
+        switch (m_cellState)
+        {
+            case CellState.Enemy:
+                image.color = m_enemyColor;
+                break;
+            case CellState.Rest:
+                image.color = m_restColor;
+                break;
+        }
     }
 }
