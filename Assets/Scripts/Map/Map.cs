@@ -20,12 +20,10 @@ public class Map : MonoBehaviour
     [SerializeField] GameObject m_sectorPrefab;
     /// <summary>セルプレハブ</summary>
     [SerializeField] GameObject m_cellPrefab;
-    /// <summary>線描画用プレハブ</summary>
+    /// <summary>線描画用</summary>
     [SerializeField] GameObject m_linePrefab;
     /// <summary>セクター保存用</summary>
-    private GameObject[] m_cellLocation;
-    /// <summary>線の描画用</summary>
-    private Vector3[] m_pos;
+    private GameObject[] m_sectorLocation;
 
     private void Start()
     {
@@ -36,7 +34,7 @@ public class Map : MonoBehaviour
     /// </summary>
     private void CreateMap()
     {
-        m_cellLocation = new GameObject[m_sector];
+        m_sectorLocation = new GameObject[m_sector];
         for (int i = 0; i < m_sector; i++)
         {
             GameObject sector = Instantiate(m_sectorPrefab);
@@ -62,7 +60,7 @@ public class Map : MonoBehaviour
                     cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
                 }
             }
-            m_cellLocation[i] = sector;
+            m_sectorLocation[i] = sector;
             sector.transform.SetParent(m_parentSector, false);
         }
         AddPath(0, 0);
@@ -73,13 +71,44 @@ public class Map : MonoBehaviour
     /// <param name="sectorIndex"></param>
     private void AddPath(int sectorIndex, int cellIndex)
     {
-        if (sectorIndex > m_sector) return;
+        int r = 0;
         //次のセクターから進むセルを一つ抽選する
-        int r = Random.Range(0, m_cellLocation[sectorIndex + 1].transform.childCount);
+        //if (sectorIndex > m_sector) return;
+        if (sectorIndex + 1 >= m_sector)
+        {
+            return;
+        }
+        r = Random.Range(0, m_sectorLocation[sectorIndex + 1].transform.childCount);
         //今のセルに次のインデックスを教えてあげる
-        m_cellLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>().NextCell.Add(r);
+        Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
+        Debug.Log(c);
+        c.AddNextCell(r);
+        c.CellState = CellState.Enemy;
+        c.ColorChange();
         AddPath(sectorIndex + 1, r);
+
+        //セル同士を線で結ぶ
+        GameObject obj = Instantiate(m_cellPrefab);
+        float diffX = c.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
+        float diffY = c.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
+
+        // 終点となるImageの方向に向かせる
+        float angle = Mathf.Atan2(diffY, diffX) * Mathf.Rad2Deg;
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // 中点の計算
+        float mX = (c.GetChildPosition(CellChildType.Begin).x + c.GetChildPosition(CellChildType.End).x) / 2;
+        float mY = (c.GetChildPosition(CellChildType.Begin).y + c.GetChildPosition(CellChildType.End).y) / 2;
+        obj.transform.position = new Vector2(mX, mY);
+        float distance = Vector2.Distance(c.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
+        RectTransform rect = obj.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(distance, rect.rect.height);
     }
+
+
+
+
+
     /*
     // 対象となる Canvas
     [SerializeField]
