@@ -41,14 +41,14 @@ public class Map : MonoBehaviour
             sector.transform.SetParent(this.transform, false);
             sector.name = $"Sector{i}";
             Cell cell = default;
-
+            //ここ同じ処理が二度出てるので修正するように
             if (i == 0 || i == m_sector - 1)
             {
                 //最初と最後はセル一つ
                 cell = Instantiate(m_cellPrefab).GetComponent<Cell>();
                 cell.transform.SetParent(sector.transform, false);
                 cell.SectorIndex = i;
-                cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
+                //cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
             }
             else
             {
@@ -57,7 +57,7 @@ public class Map : MonoBehaviour
                     cell = Instantiate(m_cellPrefab).GetComponent<Cell>();
                     cell.transform.SetParent(sector.transform, false);
                     cell.SectorIndex = i;
-                    cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
+                    //cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
                 }
             }
             m_sectorLocation[i] = sector;
@@ -76,6 +76,9 @@ public class Map : MonoBehaviour
         //if (sectorIndex > m_sector) return;
         if (sectorIndex + 1 >= m_sector)
         {
+            //ボス作ったらコメント消す
+            //m_sectorLocation[sectorIndex].transform.GetChild(0).gameObject.GetComponent<Cell>().CellState = CellState.Boss;
+            m_sectorLocation[sectorIndex].transform.GetChild(0).gameObject.GetComponent<Cell>().CellState = CellState.Enemy;
             return;
         }
         r = Random.Range(0, m_sectorLocation[sectorIndex + 1].transform.childCount);
@@ -84,7 +87,7 @@ public class Map : MonoBehaviour
         Debug.Log(c);
         c.AddNextCell(r);
         c.CellState = CellState.Enemy;
-        c.ColorChange();
+        c.m_encountId = Random.Range(0, (int)EnemyID.endLength);
         AddPath(sectorIndex + 1, r);
 
         //セル同士を線で結ぶ
@@ -104,8 +107,6 @@ public class Map : MonoBehaviour
         RectTransform rect = obj.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(distance, rect.rect.height);
     }
-
-
 
 
 

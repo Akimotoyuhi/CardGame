@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum CellState { Enemy, Rest }
+public enum CellState { Enemy, Rest, Boss }
 public enum CellChildType { Begin, End }
 
 public class Cell : MonoBehaviour
@@ -20,7 +20,14 @@ public class Cell : MonoBehaviour
     private List<int> m_nextCellList = new List<int>();
     /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
-    public CellState CellState { set => m_cellState = value; }
+    public CellState CellState
+    {
+        set
+        {
+            m_cellState = value;
+            ColorChange();
+        }
+    }
     /// <summary>このセルが所属するセクター番号</summary>
     public int SectorIndex { get; set; }
     public int GetNextCellIndex(int index) { return m_nextCellList[index]; }
@@ -49,7 +56,7 @@ public class Cell : MonoBehaviour
         }
     }
 
-    public void ColorChange()
+    private void ColorChange()
     {
         Image image = GetComponent<Image>();
         switch (m_cellState)
