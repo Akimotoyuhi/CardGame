@@ -63,49 +63,56 @@ public class Map : MonoBehaviour
             m_sectorLocation[i] = sector;
             sector.transform.SetParent(m_parentSector, false);
         }
-        AddPath(0, 0);
+        AddPath(0, 0, null);
     }
     /// <summary>
     /// 道を作る
     /// </summary>
     /// <param name="sectorIndex"></param>
-    private void AddPath(int sectorIndex, int cellIndex)
+    private void AddPath(int sectorIndex, int cellIndex, Cell beforeCell)
     {
-        int r = 0;
         //次のセクターから進むセルを一つ抽選する
-        //if (sectorIndex > m_sector) return;
-        if (sectorIndex + 1 >= m_sector)
-        {
-            //ボス作ったらコメント消す
-            //m_sectorLocation[sectorIndex].transform.GetChild(0).gameObject.GetComponent<Cell>().CellState = CellState.Boss;
-            m_sectorLocation[sectorIndex].transform.GetChild(0).gameObject.GetComponent<Cell>().CellState = CellState.Enemy;
-            return;
-        }
-        r = Random.Range(0, m_sectorLocation[sectorIndex + 1].transform.childCount);
-        //今のセルに次のインデックスを教えてあげる
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
-        Debug.Log(c);
-        c.AddNextCell(r);
         c.CellState = CellState.Enemy;
         c.m_encountId = Random.Range(0, (int)EnemyID.endLength);
-        AddPath(sectorIndex + 1, r);
+        if (sectorIndex + 1 >= m_sector) return;
+        //線引く
+        if (beforeCell)
+        {
+            GameObject line = Instantiate(m_linePrefab);
+            line.transform.SetParent(c.transform);
+            float x = beforeCell.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
+            float y = beforeCell.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
+            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+            line.transform.rotation = Quaternion.Euler(0, 0, angle);
+            float mX = (beforeCell.GetChildPosition(CellChildType.Begin).x + c.GetChildPosition(CellChildType.End).x) / 2;
+            float mY = (beforeCell.GetChildPosition(CellChildType.Begin).y + c.GetChildPosition(CellChildType.End).y) / 2;
+            line.transform.position = new Vector2(mX, mY);
+            float distance = Vector2.Distance(beforeCell.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
+            RectTransform rect = line.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(distance, rect.rect.height);
+        }
+        //今のセルに次のインデックスを教えてあげる
+        int r = Random.Range(0, m_sectorLocation[sectorIndex + 1].transform.childCount);
+        c.AddNextCell(r);
+        AddPath(sectorIndex + 1, r, c);
 
         //セル同士を線で結ぶ
-        GameObject obj = Instantiate(m_cellPrefab);
-        float diffX = c.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
-        float diffY = c.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
+        //GameObject obj = Instantiate(m_cellPrefab);
+        //float diffX = c.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
+        //float diffY = c.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
 
-        // 終点となるImageの方向に向かせる
-        float angle = Mathf.Atan2(diffY, diffX) * Mathf.Rad2Deg;
-        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+        //// 終点となるImageの方向に向かせる
+        //float angle = Mathf.Atan2(diffY, diffX) * Mathf.Rad2Deg;
+        //obj.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        // 中点の計算
-        float mX = (c.GetChildPosition(CellChildType.Begin).x + c.GetChildPosition(CellChildType.End).x) / 2;
-        float mY = (c.GetChildPosition(CellChildType.Begin).y + c.GetChildPosition(CellChildType.End).y) / 2;
-        obj.transform.position = new Vector2(mX, mY);
-        float distance = Vector2.Distance(c.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
-        RectTransform rect = obj.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(distance, rect.rect.height);
+        //// 中点の計算
+        //float mX = (c.GetChildPosition(CellChildType.Begin).x + c.GetChildPosition(CellChildType.End).x) / 2;
+        //float mY = (c.GetChildPosition(CellChildType.Begin).y + c.GetChildPosition(CellChildType.End).y) / 2;
+        //obj.transform.position = new Vector2(mX, mY);
+        //float distance = Vector2.Distance(c.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
+        //RectTransform rect = obj.GetComponent<RectTransform>();
+        //rect.sizeDelta = new Vector2(distance, rect.rect.height);
     }
 
 

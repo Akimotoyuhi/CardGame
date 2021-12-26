@@ -1379,6 +1379,8 @@ MonoBehaviour:
     type: 3}
   m_cellPrefab: {fileID: 971258997563312600, guid: e6524bca606119c4994e372a1e84ffb3,
     type: 3}
+  m_linePrefab: {fileID: 538390810350223235, guid: ffc7a88d40db5ff49b83891c08204752,
+    type: 3}
 --- !u!114 &8837727758879024942
 MonoBehaviour:
   m_ObjectHideFlags: 0
