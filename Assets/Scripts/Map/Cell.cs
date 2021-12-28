@@ -30,13 +30,15 @@ public class Cell : MonoBehaviour
     }
     /// <summary>このセルが所属するセクター番号</summary>
     public int SectorIndex { get; set; }
+    /// <summary>このセルが所属するステップ数</summary>
+    public int Step { get; set; }
     public int GetNextCellIndex(int index) { return m_nextCellList[index]; }
     public void AddNextCell(int value) { m_nextCellList.Add(value); }
 
     public void OnClick()
     {
         //とりあえず
-        GameManager.Instance.Battle(m_encountId);
+        GameManager.Instance.Battle(m_encountId, Step);
     }
 
     /// <summary>

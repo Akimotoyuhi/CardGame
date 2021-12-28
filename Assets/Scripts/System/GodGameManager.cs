@@ -20,12 +20,12 @@ namespace Mastar
         private int m_hp = default;
         private Sprite m_image = default;
         private CardID[] m_cards = new CardID[0];
-        public int Step { get => m_instance.m_step; set => m_step = value; }
-        public string Name { get => m_name; }
-        public int Hp { get => m_instance.m_hp; }
+        public int Step { get => m_instance.m_step; set => m_instance.m_step = value; }
+        public string Name => m_instance.m_name;
+        public int Hp => m_instance.m_hp;
         public Sprite Image { get => m_image; }
-        public int GetHaveCardID(int index) { return (int)m_cards[index]; }
-        public CardID[] Cards { get => m_cards; }
+        public int GetHaveCardID(int index) { return (int)m_instance.m_cards[index]; }
+        public CardID[] Cards => m_instance.m_cards;
         /// <summary>
         /// 初回の特別処理判定用<br/>
         /// いらんかも
