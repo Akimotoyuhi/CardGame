@@ -26,10 +26,6 @@ public class Map : MonoBehaviour
     private GameObject[] m_sectorLocation;
     private List<Cell> m_cells = new List<Cell>();
 
-    private void Start()
-    {
-        //CreateMap();
-    }
     /// <summary>
     /// セルの生成と配置
     /// </summary>
@@ -66,19 +62,22 @@ public class Map : MonoBehaviour
             m_sectorLocation[i] = sector;
             sector.transform.SetParent(m_parentSector, false);
         }
-        AddPath(0, 0, null);
+        AddPath();
+        AddPath();
+        DeleteCell();
     }
     /// <summary>
     /// 道を作る
     /// </summary>
     /// <param name="sectorIndex"></param>
-    private void AddPath(int sectorIndex, int cellIndex, Cell beforeCell)
+    private void AddPath(int sectorIndex = 0, int cellIndex = 0, Cell beforeCell = null)
     {
         //次のセクターから進むセルを一つ抽選する
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
         c.CellState = CellState.Enemy;
         c.m_encountId = Random.Range(0, (int)EnemyID.endLength);
         c.Step = sectorIndex;
+        c.CreatedFlag = true;
         if (sectorIndex + 1 >= m_sector) return;
         #region 未完成の線引く処理
         //線引く
@@ -107,9 +106,18 @@ public class Map : MonoBehaviour
     /// <summary>
     /// マップ生成時に使ってないセルを消す
     /// </summary>
-    private void DaleteCell()
+    private void DeleteCell()
     {
-
+        for (int i = 0; i < m_sectorLocation.Length; i++)
+        {
+            for (int n = 0; n < m_sectorLocation[i].transform.childCount; n++)
+            {
+                if (!m_sectorLocation[i].transform.GetChild(n).gameObject.GetComponent<Cell>().CreatedFlag)
+                {
+                    Destroy(m_sectorLocation[i].transform.GetChild(n).gameObject);
+                }
+            }
+        }
     }
 
     /*

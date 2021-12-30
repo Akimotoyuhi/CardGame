@@ -34,10 +34,9 @@ public class GameManager : MonoBehaviour
         BattleManager.Instance.Battle(id);
         BattleManager.Instance.SetGameManager = this;
     }
-
-    public void SceneReload()
+    public void BattleEnd()
     {
         GodGameManager.Instance.Step++;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

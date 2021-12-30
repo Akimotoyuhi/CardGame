@@ -86,7 +86,7 @@ public class EnemyManager : MonoBehaviour
         m_enemyCount--;
         if (m_enemyCount <= 0)
         {
-            m_gamemanager.SceneReload();
+            m_gamemanager.BattleEnd();
         }
     }
 }

@@ -20,6 +20,8 @@ public class Cell : MonoBehaviour
     private List<int> m_nextCellList = new List<int>();
     /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
+    /// <summary>生成済みフラグ とりあえず</summary>
+    public bool CreatedFlag { get; set; }
     public CellState CellState
     {
         set
@@ -70,5 +72,10 @@ public class Cell : MonoBehaviour
                 image.color = m_restColor;
                 break;
         }
+        if (GameManager.Instance.Step != Step)
+        {
+            image.color -= new Color(0, 0, 0, 0.5f);
+        }
+        Debug.Log(GameManager.Instance.Step);
     }
 }
