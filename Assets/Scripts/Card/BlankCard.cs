@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
+
+public enum ReplaceType
+{
+    Attack,
+    Block
+}
 
 /// <summary>
 /// カードの実体
@@ -15,7 +22,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public int Block { get; private set; }
     public int BlockNum { get; private set; }
     private string m_cost;
-    public int Cost 
+    public int Cost
     {
         get
         {
@@ -61,6 +68,29 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_useType = carddata.UseType;
         m_player = player;
         Setup();
+    }
+
+    /// <summary>
+    /// プレイヤーの状態を参照してカードのパラメーターを変える
+    /// 基本ドローした時に呼ばれる
+    /// </summary>
+    /// <returns></returns>
+    public void GetPlayerEffect()
+    {
+        string ret = m_tooltip;
+        MatchCollection matches = Regex.Matches(m_tooltip, "{%power([0-9]*)}");
+        foreach (Match m in matches)
+        {
+            int index = int.Parse(m.Groups[1].Value);
+            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Drow, ParametorType.Attack, int.Parse(m.Groups[index].Value)).ToString());
+        }
+        matches = Regex.Matches(m_tooltip, "{%block([0-9]*)}");
+        foreach (Match m in matches)
+        {
+            int index = int.Parse(m.Groups[1].Value);
+            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Drow, ParametorType.Block, int.Parse(m.Groups[index].Value)).ToString());
+        }
+        transform.GetChild(3).GetComponent<Text>().text = ret;
     }
 
     public UseType GetCardType { get => m_useType; }

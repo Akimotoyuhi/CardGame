@@ -23,9 +23,7 @@ public class CharactorBase : MonoBehaviour
     protected bool m_isDead = false;
     protected List<Condition> m_conditions = new List<Condition>();
     public int Life => m_life;
-
     protected enum GetCardType { Damage, Block }
-
     public bool IsDead { get => m_isDead; }
 
     protected virtual void SetUp()
@@ -58,7 +56,7 @@ public class CharactorBase : MonoBehaviour
         }
     }
 
-    protected int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
+    public int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
     {
         int ret = value; 
         foreach (var item in m_conditions)

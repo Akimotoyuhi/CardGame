@@ -22,6 +22,11 @@ public enum CardID
     Conviction
 }
 
+public enum CommonCardID
+{
+
+}
+
 public enum UseType
 {
     ToPlayer,

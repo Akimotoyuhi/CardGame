@@ -27,6 +27,20 @@ public class EnemyManager : MonoBehaviour
     //    EnemyBase e = tra.GetComponent<EnemyBase>();
     //    e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, m_enemyDatabase.SetAction());
     //}
+
+    private void Start()
+    {
+        BattleManager.Instance.TurnBegin.Subscribe(turn =>
+        {
+            for (int i = 0; i < m_enemies.Count; i++)
+            {
+                if (m_enemies[i].IsDead) continue;
+                m_enemies[i].TurnStart();
+                m_enemies[i].Action(turn);
+                m_enemies[i].TurnEnd();
+            }
+        });
+    }
     public void CreateEnemies(int id)
     {
         m_enemyDatabase = m_enemyData.m_enemyDataBase3s[id];
@@ -46,20 +60,6 @@ public class EnemyManager : MonoBehaviour
             m_enemies.Add(transform.GetChild(i).GetComponent<EnemyBase>());
             m_enemyCount++;
         }
-    }
-
-    private void Start()
-    {
-        BattleManager.Instance.TurnBegin.Subscribe(turn =>
-        {
-            for (int i = 0; i < m_enemies.Count; i++)
-            {
-                if (m_enemies[i].IsDead) continue;
-                m_enemies[i].TurnStart();
-                m_enemies[i].Action(turn);
-                m_enemies[i].TurnEnd();
-            }
-        });
     }
 
     /// <summary>

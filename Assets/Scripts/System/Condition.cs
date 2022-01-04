@@ -24,7 +24,8 @@ public enum EventTiming
     TurnBegin,
     TurnEnd,
     Hit,
-    Attacked
+    Attacked,
+    Drow
 }
 
 public enum ParametorType

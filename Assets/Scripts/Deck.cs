@@ -19,11 +19,11 @@ public class Deck : MonoBehaviour
     {
         for (int i = 0; i < drawNum; i++)
         {
-            if (this.transform.childCount == 0)
+            if (transform.childCount == 0)
             {
                 Debug.Log("山札切れ");
                 m_discard.ConvartToDeck(); //山札が無かったら捨て札からカードを戻す
-                if (this.transform.childCount == 0)
+                if (transform.childCount == 0)
                 {
                     Debug.Log("デッキ枚数不足"); //捨て札からカードを戻しても山札がないなら引くのをやめる
                     return;
