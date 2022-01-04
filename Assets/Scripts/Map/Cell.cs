@@ -76,6 +76,5 @@ public class Cell : MonoBehaviour
         {
             image.color -= new Color(0, 0, 0, 0.5f);
         }
-        Debug.Log(GameManager.Instance.Step);
     }
 }

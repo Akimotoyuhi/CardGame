@@ -82,13 +82,14 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Drow, ParametorType.Attack, int.Parse(m.Groups[index].Value)).ToString());
+            Debug.Log(m.Value);
+            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)).ToString());
         }
         matches = Regex.Matches(m_tooltip, "{%block([0-9]*)}");
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Drow, ParametorType.Block, int.Parse(m.Groups[index].Value)).ToString());
+            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)).ToString());
         }
         transform.GetChild(3).GetComponent<Text>().text = ret;
     }

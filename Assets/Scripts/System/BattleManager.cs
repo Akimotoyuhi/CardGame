@@ -164,5 +164,6 @@ public class BattleManager : MonoBehaviour
         NewCardDataBase cardData = m_cardData.m_cardData[id];
         card.SetInfo(cardData, m_player);
         obj.transform.SetParent(m_deck.transform, false);
+        card.GetPlayerEffect();
     }
 }

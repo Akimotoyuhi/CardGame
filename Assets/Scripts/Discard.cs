@@ -12,8 +12,8 @@ public class Discard : MonoBehaviour
         for (int i = transform.childCount - 1; 0 <= i; i--)
         {
             //transform.GetChild(i).parent = m_deck.transform;
-            transform.GetChild(i).SetParent(m_deck, false);
             transform.GetChild(i).GetComponent<BlankCard>().GetPlayerEffect();
+            transform.GetChild(i).SetParent(m_deck, false);
         }
     }
 }
