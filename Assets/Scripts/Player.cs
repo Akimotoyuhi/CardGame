@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 public class Player : CharactorBase, IDrop
 {
@@ -22,6 +23,23 @@ public class Player : CharactorBase, IDrop
     {
         m_cost = m_defaultCost;
         base.TurnStart();
+    }
+
+    protected override void SetUp()
+    {
+        GetComponent<Image>().sprite = m_image;
+        m_hpSlider.maxValue = m_maxLife;
+        m_hpSlider.value = m_life;
+        m_blkSlider.value = m_block;
+        SetUI();
+    }
+
+    public void SetParam(string name, Sprite image, int maxLife, int currentLife)
+    {
+        m_name = name;
+        m_image = image;
+        m_maxLife = maxLife;
+        m_life = currentLife;
     }
 
     /// <summary>

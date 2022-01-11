@@ -22,10 +22,12 @@ public class CharactorBase : MonoBehaviour
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
     protected List<Condition> m_conditions = new List<Condition>();
-    public int Life => m_life;
-    protected enum GetCardType { Damage, Block }
+    public string Name => m_name;
+    public int MaxLife => m_maxLife;
+    public int CurrentLife { get => m_life; }
+    public Sprite Image => m_image;
     public bool IsDead { get => m_isDead; }
-
+    protected enum GetCardType { Damage, Block }
     protected virtual void SetUp()
     {
         GetComponent<Image>().sprite = m_image;
@@ -33,8 +35,21 @@ public class CharactorBase : MonoBehaviour
         m_hpSlider.maxValue = m_maxLife;
         m_hpSlider.value = m_life;
         m_blkSlider.value = m_block;
+        //m_conditions = new List<Condition>();
         SetUI();
         //m_stateArray = new int[(int)BuffDebuff.end];
+    }
+
+    public int Heal
+    {
+        set
+        {
+            m_life += value;
+            if (m_life > m_maxLife)
+            {
+                m_life = m_maxLife;
+            }
+        }
     }
 
     /// <summary>
@@ -58,7 +73,7 @@ public class CharactorBase : MonoBehaviour
 
     public int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
     {
-        int ret = value; 
+        int ret = value;
         foreach (var item in m_conditions)
         {
             ret = item.Effect(eventTiming, parametorType, value);

@@ -17,6 +17,8 @@ public enum ReplaceType
 public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
     private string m_tooltip;
+    private string m_viewText;
+    //private int m_power;
     public int Power { get; private set; }
     public int AttackNum { get; private set; }
     public int Block { get; private set; }
@@ -82,16 +84,23 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            Debug.Log(m.Value);
-            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)).ToString());
+            Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value));
+            ret = ret.Replace(m.Value, Power.ToString());
         }
         matches = Regex.Matches(m_tooltip, "{%block([0-9]*)}");
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            ret = ret.Replace(m.Value, m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)).ToString());
+            Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value));
+            ret = ret.Replace(m.Value, Block.ToString());
         }
-        transform.GetChild(3).GetComponent<Text>().text = ret;
+        m_viewText = ret;
+        SetText();
+    }
+
+    public void SetText()
+    {
+        transform.Find("Tooltip").GetComponent<Text>().text = m_viewText;
     }
 
     public UseType GetCardType { get => m_useType; }

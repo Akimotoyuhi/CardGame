@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class Deck : MonoBehaviour
+public class Deck : CardManagement
 {
     [SerializeField] private Transform m_hand;
     [SerializeField] private Discard m_discard;

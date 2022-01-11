@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "Card Data")]
 public class NewCardData : ScriptableObject
 {
     public List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
@@ -43,7 +43,7 @@ public class NewCardDataBase
     /// <summary>画像</summary>
     [SerializeField] Sprite m_image;
     /// <summary>効果の説明文</summary>
-    [TextArea(0,5), Tooltip("変数に差し替えたい部分は{%value}のように記述する事")]
+    [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{%value}のように記述する事")]
     [SerializeField] string m_tooltip;
     /// <summary>攻撃</summary>
     [SerializeField] int m_power;

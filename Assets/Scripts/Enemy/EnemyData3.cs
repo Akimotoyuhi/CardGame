@@ -88,6 +88,14 @@ public class EnemyConditionalCommand3
     /// <returns>¬Œ÷‰Â”Û</returns>
     public bool Conditional(EnemyBase enemy, int turn)
     {
+        if (turn == 0)
+        {
+            if (m_type != WhereType.Turn && m_value != 0)
+            {
+                //0ƒ^[ƒ“–Ú‚Í“Á•Ê‚Èˆ—‚ª–³‚¢ŒÀ‚è“®‚©‚È‚¢‚æ‚¤‚É‚·‚é
+                return false;
+            }
+        }
         switch (m_type)
         {
             case WhereType.Turn:
@@ -121,7 +129,7 @@ public class EnemyConditionalCommand3
                 }
                 return false;
             case WhereType.RowLife:
-                if (enemy.Life <= m_value)
+                if (enemy.CurrentLife <= m_value)
                 {
                     return true;
                 }

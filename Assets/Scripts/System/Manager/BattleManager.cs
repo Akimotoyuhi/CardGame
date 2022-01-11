@@ -38,6 +38,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Hand m_hand;
     /// <summary>カードデータ</summary>
     [SerializeField] NewCardData m_cardData;
+    [SerializeField] GameObject m_cardPrefab;
     /// <summary>ボタンの受付拒否</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
@@ -89,9 +90,10 @@ public class BattleManager : MonoBehaviour
         //デッキとプレイヤー構築
         if (GodGameManager.Instance.StartCheck())
         {
+            //データが存在する場合は保存されているManagerから取ってくる
+            Debug.Log("保存されたデータが見つかった");
             m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            GodGameManager inst = GodGameManager.Instance;
-            m_player.SetParam(inst.Name, inst.Image, inst.Hp);
+            m_player.SetParam(GodGameManager.Instance.Name, GodGameManager.Instance.Image, GodGameManager.Instance.Life);
             for (int i = 0; i < GodGameManager.Instance.Cards.Length; i++)
             {
                 CreateCard(GodGameManager.Instance.GetHaveCardID(i));
@@ -99,8 +101,10 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
+            //データが無い場合は初期値のデータから取ってくる
+            Debug.Log("初回起動");
             m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            m_player.SetParam(m_playerStatsData.Name, m_playerStatsData.Image, m_playerStatsData.HP);
+            m_player.SetParam(m_playerStatsData.Name, m_playerStatsData.Image, m_playerStatsData.HP, m_playerStatsData.HP);
             for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
             {
                 CreateCard(m_playerStatsData.GetCard(i));
@@ -124,7 +128,7 @@ public class BattleManager : MonoBehaviour
     private void FirstTurn()
     {
         Debug.Log(m_progressTurn + "ターン目");
-        m_turnBegin.OnNext(m_progressTurn);
+        //m_turnBegin.OnNext(m_progressTurn);
         m_progressTurn++;
         TurnStart();
     }
@@ -135,11 +139,11 @@ public class BattleManager : MonoBehaviour
         if (m_isPress) return;
         m_isPress = true;
         m_hand.AllCast();
-        m_turnBegin.OnNext(m_progressTurn);
+        m_turnEnd.OnNext(m_progressTurn);
         //m_enemyManager.EnemyTrun(m_progressTurn);
         m_player.TurnEnd();
         m_progressTurn++;
-        Invoke("TurnStart", 1f);
+        Invoke("TurnStart", 0.5f);
     }
 
     /// <summary>
@@ -148,7 +152,7 @@ public class BattleManager : MonoBehaviour
     private void TurnStart()
     {
         m_isPress = false;
-        m_turnEnd.OnNext(m_progressTurn);
+        m_turnBegin.OnNext(m_progressTurn);
         //m_deck.Draw(m_drowNum);
         Debug.Log(m_progressTurn + "ターン目");
         m_player.TurnStart();
@@ -159,11 +163,19 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void CreateCard(int id)
     {
-        GameObject obj = Instantiate((GameObject)Resources.Load("BlankCard"));
+        GameObject obj = Instantiate(m_cardPrefab);
         BlankCard card = obj.GetComponent<BlankCard>();
         NewCardDataBase cardData = m_cardData.m_cardData[id];
         card.SetInfo(cardData, m_player);
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
+    }
+
+    public void BatlteEnd()
+    {
+        m_discard.CardDelete();
+        m_deck.CardDelete();
+        m_hand.CardDelete();
+        GameManager.Instance.FloorFinished(m_player);
     }
 }

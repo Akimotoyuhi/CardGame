@@ -21,8 +21,8 @@ public class Cell : MonoBehaviour
     /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
     /// <summary>生成済みフラグ とりあえず</summary>
-    public bool CreatedFlag { get; set; }
-    public CellState CellState
+    public bool CreatedFlag { get; set; } = false;
+    public CellState SetCellState
     {
         set
         {
@@ -33,14 +33,19 @@ public class Cell : MonoBehaviour
     /// <summary>このセルが所属するセクター番号</summary>
     public int SectorIndex { get; set; }
     /// <summary>このセルが所属するステップ数</summary>
-    public int Step { get; set; }
+    //public int Step { get; set; }
+    public int Step;
     public int GetNextCellIndex(int index) { return m_nextCellList[index]; }
     public void AddNextCell(int value) { m_nextCellList.Add(value); }
 
     public void OnClick()
     {
+        if (GameManager.Instance.Step != Step)
+        {
+            Debug.Log("選択不可");
+        }
         //とりあえず
-        GameManager.Instance.Battle(m_encountId, Step);
+        GameManager.Instance.OnClick(m_cellState, m_encountId);
     }
 
     /// <summary>

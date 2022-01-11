@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Discard : MonoBehaviour
+public class Discard : CardManagement
 {
     [SerializeField] private Transform m_deck;
 
@@ -11,7 +11,6 @@ public class Discard : MonoBehaviour
     {
         for (int i = transform.childCount - 1; 0 <= i; i--)
         {
-            //transform.GetChild(i).parent = m_deck.transform;
             transform.GetChild(i).GetComponent<BlankCard>().GetPlayerEffect();
             transform.GetChild(i).SetParent(m_deck, false);
         }

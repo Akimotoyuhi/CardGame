@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d5cf8d1a0f19554ca4931d32442a4a8, type: 3}
-  m_Name: New Enemy Data 3
+  m_Name: Enemy Data
   m_EditorClassIdentifier: 
   m_enemyDataBase3s:
   - m_name: OriginiumSlag

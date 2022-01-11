@@ -22,6 +22,8 @@ public class Map : MonoBehaviour
     [SerializeField] GameObject m_cellPrefab;
     /// <summary>線描画用</summary>
     [SerializeField] GameObject m_linePrefab;
+    /// <summary>休憩マスを生成する位置</summary>
+    [SerializeField] int m_restIndex = 5;
     /// <summary>セクター保存用</summary>
     private GameObject[] m_sectorLocation;
     private List<Cell> m_cells = new List<Cell>();
@@ -63,7 +65,7 @@ public class Map : MonoBehaviour
             sector.transform.SetParent(m_parentSector, false);
         }
         AddPath();
-        AddPath();
+        //AddPath();
         DeleteCell();
     }
     /// <summary>
@@ -74,9 +76,16 @@ public class Map : MonoBehaviour
     {
         //次のセクターから進むセルを一つ抽選する
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
-        c.CellState = CellState.Enemy;
-        c.m_encountId = Random.Range(0, (int)EnemyID.endLength);
         c.Step = sectorIndex;
+        if (sectorIndex == m_restIndex)
+        {
+            c.SetCellState = CellState.Rest;
+        }
+        else
+        {
+            c.SetCellState = CellState.Enemy;
+            c.m_encountId = Random.Range(0, (int)EnemyID.endLength);
+        }
         c.CreatedFlag = true;
         if (sectorIndex + 1 >= m_sector) return;
         #region 未完成の線引く処理
@@ -115,6 +124,16 @@ public class Map : MonoBehaviour
                 if (!m_sectorLocation[i].transform.GetChild(n).gameObject.GetComponent<Cell>().CreatedFlag)
                 {
                     Destroy(m_sectorLocation[i].transform.GetChild(n).gameObject);
+                    //int r = Random.Range(0, 2);
+                    //if (r == 0)
+                    //{
+                    //    Destroy(m_sectorLocation[i].transform.GetChild(n).gameObject);
+                    //}
+                    //else
+                    //{
+                    //    m_sectorLocation[i].transform.GetChild(n).GetComponent<Button>().interactable = false;
+                    //    m_sectorLocation[i].transform.GetChild(n).GetComponent<Image>().color = new Color(0, 0, 0, 1);
+                    //}
                 }
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class EventManager : MonoBehaviour
 {
@@ -19,17 +20,23 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButton(0))
         {
             m_viewText.text = "";
             if (!m_isSpeak)
             {
-                if (m_nowText < m_eventData.m_eventDataBases[m_eventid].m_text.Length)
-                {
-                    StartCoroutine(TextAsync(m_eventData.m_eventDataBases[m_eventid].m_text[m_nowText]));
-                    m_nowText++;
-                }
-                else m_nowText = 0;
+                //switch (m_eventData.m_eventDataBases[m_eventid].m_eventData[0].EventType)
+                //{
+                //    case EventType.Text:
+                //        break;
+                //}
+                //if (m_nowText < m_eventData.m_eventDataBases[m_eventid].m_eventData[0].Execute().Length)
+                //{
+                //    m_viewText.DOText(m_eventData.m_eventDataBases[m_eventid].m_eventData[0].Execute(), 1);
+                //    //StartCoroutine(TextAsync(m_eventData.m_eventDataBases[m_eventid].m_text[m_nowText]));
+                //    m_nowText++;
+                //}
+                //else m_nowText = 0;
             }
             else
             {
@@ -54,5 +61,10 @@ public class EventManager : MonoBehaviour
             }
         }
         m_isSpeak = false;
+    }
+
+    public void OnClick(int buttonNumbar)
+    {
+
     }
 }

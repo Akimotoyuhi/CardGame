@@ -20,10 +20,24 @@ namespace Mastar
         private int m_hp = default;
         private Sprite m_image = default;
         private CardID[] m_cards = new CardID[0];
+        private Player m_player = null;
+        //public Player Player { set => m_player = value; }
         public int Step { get => m_instance.m_step; set => m_instance.m_step = value; }
-        public string Name => m_instance.m_name;
-        public int Hp => m_instance.m_hp;
+        public string Name => m_instance.m_player.Name;
+        public int Life => m_instance.m_player.CurrentLife;
+        public int Heal
+        {
+            set
+            {
+                m_player.Heal = value;
+            }
+        }
         public Sprite Image { get => m_image; }
+        public void SavePlayerState(string name, Sprite image, int maxLife, int CurrentLife)
+        {
+            m_player = new Player();
+            m_player.SetParam(name, image, maxLife, CurrentLife);
+        }
         public int GetHaveCardID(int index) { return (int)m_instance.m_cards[index]; }
         public CardID[] Cards => m_instance.m_cards;
         /// <summary>
