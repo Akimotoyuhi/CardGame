@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas m_battleCanvas;
     [SerializeField] Canvas m_eventCanvas;
     public static GameManager Instance { get; private set; }
-    public int Step => GodGameManager.Instance.Step;
-    public int Heal { set => GodGameManager.Instance.Heal = value; }
+    public int Step => DataManager.Instance.Step;
+    public int Heal { set => DataManager.Instance.CurrentLife = value; }
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //BattleManager.Instance.Setup();
-        if (GodGameManager.Instance.StartCheck())
+        if (DataManager.Instance.StartCheck())
         {
 
         }
@@ -56,10 +56,10 @@ public class GameManager : MonoBehaviour
     {
         if (player)
         {
-            GodGameManager.Instance.SavePlayerState(player.Name, player.Image, player.MaxLife, player.CurrentLife);
+            DataManager.Instance.SavePlayerState(player.Name, player.Image, player.MaxLife, player.CurrentLife);
         }
         Destroy(player.gameObject);
-        GodGameManager.Instance.Step++;
+        DataManager.Instance.Step++;
         m_mapCanvas.enabled = true;
         m_battleCanvas.enabled = false;
         m_eventCanvas.enabled = false;

@@ -4,14 +4,11 @@ using UnityEngine;
 
 namespace Mastar
 {
-    /// <summary>
-    /// GameManagerより上のManager。GameManager神
-    /// </summary>
-    public class GodGameManager
+    public class DataManager
     {
-        private static GodGameManager m_instance = new GodGameManager();
-        public static GodGameManager Instance => m_instance;
-        private GodGameManager() { } //privateなコンストラクタ
+        private static DataManager m_instance = new DataManager();
+        public static DataManager Instance => m_instance;
+        //private DataManager() { }
 
         /// <summary>現在の進行状況</summary>
         private int m_step = 0;
@@ -21,15 +18,8 @@ namespace Mastar
         //public Player Player { set => m_player = value; }
         public int Step { get => m_instance.m_step; set => m_instance.m_step = value; }
         public string Name => m_instance.m_player.Name;
-        public int CurrentLife => m_instance.m_player.CurrentLife;
+        public int CurrentLife { get => m_instance.m_player.CurrentLife; set => m_instance.m_player.Heal = value; }
         public int MaxLife => m_instance.m_player.MaxLife;
-        public int Heal
-        {
-            set
-            {
-                m_instance.m_player.Heal = value;
-            }
-        }
         public Sprite Image { get => m_instance.m_player.Image; }
         public void SavePlayerState(string name, Sprite image, int maxLife, int CurrentLife)
         {
@@ -46,7 +36,7 @@ namespace Mastar
         /// <returns>初回呼び出しならfalse</returns>
         public bool StartCheck()
         {
-            if (m_cards.Length == 0) { return false; }
+            if (!m_player) { return false; }
             else return true;
         }
     }

@@ -88,15 +88,15 @@ public class BattleManager : MonoBehaviour
     private void CreateField(int enemyid)
     {
         //デッキとプレイヤー構築
-        if (GodGameManager.Instance.StartCheck())
+        if (DataManager.Instance.StartCheck())
         {
             //データが存在する場合は保存されているManagerから取ってくる
             Debug.Log("保存されたデータが見つかった");
             m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            m_player.SetParam(GodGameManager.Instance.Name, GodGameManager.Instance.Image, GodGameManager.Instance.MaxLife, GodGameManager.Instance.CurrentLife);
-            for (int i = 0; i < GodGameManager.Instance.Cards.Length; i++)
+            m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.Image, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
+            for (int i = 0; i < DataManager.Instance.Cards.Length; i++)
             {
-                CreateCard(GodGameManager.Instance.GetHaveCardID(i));
+                CreateCard(DataManager.Instance.GetHaveCardID(i));
             }
         }
         else

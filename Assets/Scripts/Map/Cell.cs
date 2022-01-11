@@ -43,6 +43,7 @@ public class Cell : MonoBehaviour
         if (GameManager.Instance.Step != Step)
         {
             Debug.Log("選択不可");
+            return;
         }
         //とりあえず
         GameManager.Instance.OnClick(m_cellState, m_encountId);
