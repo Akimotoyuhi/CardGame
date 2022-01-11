@@ -6,13 +6,17 @@ using UnityEngine.UI;
 
 public class Player : CharactorBase, IDrop
 {
+    /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
     private int m_defaultCost = 3;
     [SerializeField]
     private int m_cost = default;
+    /// <summary>デフォルトドロー枚数。何らかの効果で下げられた後元の値に戻す時に使う　いらんかも</summary>
     private int m_defaultDrowNum = 5;
     private int m_drowNum = 5;
-    public int Cost { get { return m_cost; } set { m_cost = value; } }
-    public int DrowNum { get { return m_drowNum; } set { m_drowNum = value; } }
+    /// <summary>現在コスト</summary>
+    public int Cost { get => m_cost; set => m_cost = value; }
+    /// <summary>現在のドロー枚数</summary>
+    public int DrowNum { get => m_drowNum; set => m_drowNum = value; }
 
     void Start()
     {

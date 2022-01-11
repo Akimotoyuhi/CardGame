@@ -93,7 +93,7 @@ public class BattleManager : MonoBehaviour
             //データが存在する場合は保存されているManagerから取ってくる
             Debug.Log("保存されたデータが見つかった");
             m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            m_player.SetParam(GodGameManager.Instance.Name, GodGameManager.Instance.Image, GodGameManager.Instance.Life);
+            m_player.SetParam(GodGameManager.Instance.Name, GodGameManager.Instance.Image, GodGameManager.Instance.MaxLife, GodGameManager.Instance.CurrentLife);
             for (int i = 0; i < GodGameManager.Instance.Cards.Length; i++)
             {
                 CreateCard(GodGameManager.Instance.GetHaveCardID(i));
