@@ -35,7 +35,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             }
             else
             {
-                ret = m_player.Cost;
+                ret = m_player.CurrrentCost;
             }
             return ret;
         }
@@ -107,16 +107,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public BlankCard OnCast()
     {
-        m_player.Cost -= Cost; //プレイヤーのコストを減らす
+        m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
+        BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         transform.SetParent(m_discard, false); //捨て札に移動
         return this;
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (m_player.Cost < Cost) //コスト足りなかったら使えない
+        if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
         {
-            Debug.Log($"コストが足りない!\nカードのコスト:{Cost} プレイヤーのコスト:{m_player.Cost}");
+            Debug.Log($"コストが足りない!\nカードのコスト:{Cost} プレイヤーのコスト:{m_player.CurrrentCost}");
             return;
         }
         //ドロップ時に自分の座標にRayを飛ばす

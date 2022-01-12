@@ -4,11 +4,14 @@ using UnityEngine;
 using Mastar;
 using System;
 using UniRx;
+using UnityEngine.UI;
 
 enum Timing { Start, End }
 
 public class BattleManager : MonoBehaviour
 {
+    #region メンバ変数
+    #region Player関連のメンバ
     [Header("プレイヤー関連")]
     /// <summary>プレイヤー初期データ</summary>
     [SerializeField] PlayerStatsData m_playerStatsData;
@@ -18,6 +21,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] RectTransform m_playerPos;
     /// <summary>プレイヤークラス</summary>
     private Player m_player;
+    /// <summary>プレイヤーのコスト表示用テキスト</summary>
+    [SerializeField] Text m_costViewText;
+    #endregion
+    #region Enemy関連のメンバ
     [Header("敵関連")]
     /// <summary>敵グループ</summary>
     [SerializeField] GameObject m_enemies;
@@ -29,6 +36,8 @@ public class BattleManager : MonoBehaviour
     [Header("バトル中のパラメーター管理")]
     /// <summary>経過ターン数</summary>
     private int m_progressTurn = 0;
+    #endregion
+    #region その他のメンバ
     [Space]
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
@@ -44,6 +53,9 @@ public class BattleManager : MonoBehaviour
     /// <summary>バトル中かどうかのフラグ</summary>
     private bool m_isGame = false;
     private GameManager m_gameManager;
+    #endregion
+    #endregion
+    #region プロパティ
     public static BattleManager Instance { get; private set; }
     private Subject<int> m_turnBegin = new Subject<int>();
     private Subject<int> m_turnEnd = new Subject<int>();
@@ -51,6 +63,7 @@ public class BattleManager : MonoBehaviour
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
     public GameManager SetGameManager { set => m_gameManager = value; }
+    #endregion
 
     private void Awake()
     {
@@ -71,12 +84,15 @@ public class BattleManager : MonoBehaviour
         if (m_isGame) GetComponent<Canvas>().enabled = true;
         else GetComponent<Canvas>().enabled = false;
     }
-
+    public void SetCostText(string maxCost, string currentCost)
+    {
+        m_costViewText.text = currentCost + "/" + maxCost;
+    }
     /// <summary>
     /// 戦闘開始
     /// </summary>
     /// <param name="enemyid">エンカウントした敵のID</param>
-    public void Battle(int enemyid)
+    public void BattleStart(int enemyid)
     {
         m_progressTurn = 0;
         m_isGame = true;
@@ -84,7 +100,13 @@ public class BattleManager : MonoBehaviour
         CreateField(enemyid);
         FirstTurn();
     }
-
+    public void BatlteEnd()
+    {
+        m_discard.CardDelete();
+        m_deck.CardDelete();
+        m_hand.CardDelete();
+        GameManager.Instance.FloorFinished(m_player);
+    }
     private void CreateField(int enemyid)
     {
         //デッキとプレイヤー構築
@@ -156,6 +178,7 @@ public class BattleManager : MonoBehaviour
         //m_deck.Draw(m_drowNum);
         Debug.Log(m_progressTurn + "ターン目");
         m_player.TurnStart();
+        SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
     }
 
     /// <summary>
@@ -169,13 +192,5 @@ public class BattleManager : MonoBehaviour
         card.SetInfo(cardData, m_player);
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
-    }
-
-    public void BatlteEnd()
-    {
-        m_discard.CardDelete();
-        m_deck.CardDelete();
-        m_hand.CardDelete();
-        GameManager.Instance.FloorFinished(m_player);
     }
 }

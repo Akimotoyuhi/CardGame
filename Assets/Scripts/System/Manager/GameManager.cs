@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         switch (cellState)
         {
             case CellState.Enemy:
-                BattleManager.Instance.Battle(id);
+                BattleManager.Instance.BattleStart(id);
                 BattleManager.Instance.SetGameManager = this;
                 m_battleCanvas.enabled = true;
                 break;
@@ -50,11 +50,11 @@ public class GameManager : MonoBehaviour
                 m_eventCanvas.enabled = true;
                 break;
         }
-        
+
     }
 
     /// <summary>
-    /// このフロアが終了した時の処理
+    /// 現在のフロアが終了した時の処理
     /// </summary>
     public void FloorFinished(Player player = null)
     {

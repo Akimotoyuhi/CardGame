@@ -7,15 +7,14 @@ using UnityEngine.UI;
 public class Player : CharactorBase, IDrop
 {
     /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
-    private int m_defaultCost = 3;
+    private int m_maxCost = 3;
     [SerializeField]
     private int m_cost = default;
     /// <summary>デフォルトドロー枚数。何らかの効果で下げられた後元の値に戻す時に使う　いらんかも</summary>
-    private int m_defaultDrowNum = 5;
+    private int m_maxDrowNum = 5;
     private int m_drowNum = 5;
-    /// <summary>現在コスト</summary>
-    public int Cost { get => m_cost; set => m_cost = value; }
-    /// <summary>現在のドロー枚数</summary>
+    public int MaxCost => m_maxCost;
+    public int CurrrentCost { get => m_cost; set => m_cost = value; }
     public int DrowNum { get => m_drowNum; set => m_drowNum = value; }
 
     void Start()
@@ -25,7 +24,7 @@ public class Player : CharactorBase, IDrop
 
     public override void TurnStart()
     {
-        m_cost = m_defaultCost;
+        m_cost = m_maxCost;
         base.TurnStart();
     }
 
