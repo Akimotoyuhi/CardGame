@@ -52,14 +52,19 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    /// <summary>
+    /// このフロアが終了した時の処理
+    /// </summary>
     public void FloorFinished(Player player = null)
     {
         if (player)
         {
             DataManager.Instance.SavePlayerState(player.Name, player.Image, player.MaxLife, player.CurrentLife);
+            Destroy(player.gameObject);
         }
-        Destroy(player.gameObject);
         DataManager.Instance.Step++;
+        m_map.AllColorChange();
         m_mapCanvas.enabled = true;
         m_battleCanvas.enabled = false;
         m_eventCanvas.enabled = false;

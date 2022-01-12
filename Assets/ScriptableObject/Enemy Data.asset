@@ -19,9 +19,6 @@ MonoBehaviour:
     m_NodeType: 1
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 1
-        m_value: 0
-        m_isProbability: 0
       - m_type: 4
         m_value: 2
         m_isProbability: 0

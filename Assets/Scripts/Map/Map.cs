@@ -113,6 +113,20 @@ public class Map : MonoBehaviour
     }
 
     /// <summary>
+    /// マップ上全てのセルの色を再設定する
+    /// </summary>
+    public void AllColorChange()
+    {
+        for (int i = 0; i < m_sectorLocation.Length; i++)
+        {
+            for (int n = 0; n < m_sectorLocation[i].transform.childCount; n++)
+            {
+                m_sectorLocation[i].transform.GetChild(n).GetComponent<Cell>().ColorChange();
+            }
+        }
+    }
+
+    /// <summary>
     /// マップ生成時に使ってないセルを消す
     /// </summary>
     private void DeleteCell()

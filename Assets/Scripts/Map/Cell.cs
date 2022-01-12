@@ -66,8 +66,13 @@ public class Cell : MonoBehaviour
         }
     }
 
-    private void ColorChange()
+    /// <summary>
+    /// 現在の自分のStateに合わせて自身の色を変更する
+    /// </summary>
+    public void ColorChange()
     {
+        //bool flag = GetComponent<Button>().interactable;
+        //if (!flag) return; //使用されていないセルの場合は設定しない
         Image image = GetComponent<Image>();
         switch (m_cellState)
         {
