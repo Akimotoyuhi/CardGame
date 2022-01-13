@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Mastar;
 
@@ -24,7 +23,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //BattleManager.Instance.Setup();
-        if (DataManager.Instance.StartCheck())
+        if (DataManager.Instance.IsSaveData())
         {
 
         }

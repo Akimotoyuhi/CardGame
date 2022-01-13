@@ -24,7 +24,18 @@ public class CharactorBase : MonoBehaviour
     protected List<Condition> m_conditions = new List<Condition>();
     public string Name => m_name;
     public int MaxLife => m_maxLife;
-    public int CurrentLife { get => m_life; }
+    public int CurrentLife
+    {
+        get => m_life;
+        set
+        {
+            m_life += value;
+            if (m_life > m_maxLife)
+            {
+                m_life = m_maxLife;
+            }
+        }
+    }
     public Sprite Image => m_image;
     public bool IsDead { get => m_isDead; }
     protected enum GetCardType { Damage, Block }
@@ -38,18 +49,6 @@ public class CharactorBase : MonoBehaviour
         //m_conditions = new List<Condition>();
         SetUI();
         //m_stateArray = new int[(int)BuffDebuff.end];
-    }
-
-    public int Heal
-    {
-        set
-        {
-            m_life += value;
-            if (m_life > m_maxLife)
-            {
-                m_life = m_maxLife;
-            }
-        }
     }
 
     /// <summary>

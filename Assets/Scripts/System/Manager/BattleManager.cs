@@ -100,6 +100,9 @@ public class BattleManager : MonoBehaviour
         CreateField(enemyid);
         FirstTurn();
     }
+    /// <summary>
+    /// 戦闘終了
+    /// </summary>
     public void BatlteEnd()
     {
         m_discard.CardDelete();
@@ -107,18 +110,22 @@ public class BattleManager : MonoBehaviour
         m_hand.CardDelete();
         GameManager.Instance.FloorFinished(m_player);
     }
+    /// <summary>
+    /// プレイヤーや敵の生成を行う
+    /// </summary>
+    /// <param name="enemyid"></param>
     private void CreateField(int enemyid)
     {
         //デッキとプレイヤー構築
-        if (DataManager.Instance.StartCheck())
+        if (DataManager.Instance.IsSaveData())
         {
             //データが存在する場合は保存されているManagerから取ってくる
             Debug.Log("保存されたデータが見つかった");
             m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.Image, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
-            for (int i = 0; i < DataManager.Instance.Cards.Length; i++)
+            m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.Sprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
+            for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
             {
-                CreateCard(DataManager.Instance.GetHaveCardID(i));
+                CreateCard((int)DataManager.Instance.Cards[i]);
             }
         }
         else
@@ -130,6 +137,7 @@ public class BattleManager : MonoBehaviour
             for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
             {
                 CreateCard(m_playerStatsData.GetCard(i));
+                DataManager.Instance.Cards.Add((CardID)m_playerStatsData.GetCard(i));
             }
         }
         //敵グループ生成

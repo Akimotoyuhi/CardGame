@@ -37,7 +37,7 @@ public class Map : MonoBehaviour
         for (int i = 0; i < m_sector; i++)
         {
             GameObject sector = Instantiate(m_sectorPrefab);
-            sector.transform.SetParent(this.transform, false);
+            sector.transform.SetParent(transform, false);
             sector.name = $"Sector{i}";
             Cell cell = default;
             //ここ同じ処理が二度出てるので修正するように

@@ -16,9 +16,15 @@ public class Player : CharactorBase, IDrop
     public int MaxCost => m_maxCost;
     public int CurrrentCost { get => m_cost; set => m_cost = value; }
     public int DrowNum { get => m_drowNum; set => m_drowNum = value; }
+    public Player Instance { get; private set; }
 
-    void Start()
+    private void Awake()
     {
+        Instance = this;
+    }
+    private void Start()
+    {
+        //Instance = this;
         SetUp();
     }
 

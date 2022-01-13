@@ -11,33 +11,32 @@ namespace Mastar
         //private DataManager() { }
 
         /// <summary>現在の進行状況</summary>
-        private int m_step = 0;
+        public int Step { get; set; } = 0;
         //プレイヤー情報関連
-        private CardID[] m_cards = new CardID[0];
-        private Player m_player = null;
-        //public Player Player { set => m_player = value; }
-        public int Step { get => m_instance.m_step; set => m_instance.m_step = value; }
-        public string Name => m_instance.m_player.Name;
-        public int CurrentLife { get => m_instance.m_player.CurrentLife; set => m_instance.m_player.Heal = value; }
-        public int MaxLife => m_instance.m_player.MaxLife;
-        public Sprite Image { get => m_instance.m_player.Image; }
-        public void SavePlayerState(string name, Sprite image, int maxLife, int CurrentLife)
+        List<CardID> m_cards = new List<CardID>();
+        public string Name { get; private set; }
+        public Sprite Sprite { get; private set; }
+        public int CurrentLife { get; set; }
+        public int MaxLife { get; set; }
+        public void SavePlayerState(string name, Sprite sprite, int maxLife, int currentLife)
         {
-            m_player = new Player();
-            m_player.SetParam(name, image, maxLife, CurrentLife);
+            Name = name;
+            Sprite = sprite;
+            MaxLife = maxLife;
+            CurrentLife = currentLife;
+            StartFlag = true;
         }
-        public Player Player => m_player;
-        public int GetHaveCardID(int index) { return (int)m_instance.m_cards[index]; }
-        public CardID[] Cards => m_instance.m_cards;
+        public List<CardID> Cards { get => m_cards; set => m_cards = value; }
+        public bool StartFlag { get; private set; } = false;
         /// <summary>
         /// 初回の特別処理判定用<br/>
         /// いらんかも
         /// </summary>
         /// <returns>初回呼び出しならfalse</returns>
-        public bool StartCheck()
+        public bool IsSaveData()
         {
-            if (!m_player) { return false; }
-            else return true;
+            if (StartFlag) { return true; }
+            else return false;
         }
     }
 }
