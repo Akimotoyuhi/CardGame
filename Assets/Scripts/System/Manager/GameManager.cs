@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         {
             case CellState.Enemy:
                 BattleManager.Instance.BattleStart(id);
-                BattleManager.Instance.SetGameManager = this;
                 m_battleCanvas.enabled = true;
                 break;
             case CellState.Rest:

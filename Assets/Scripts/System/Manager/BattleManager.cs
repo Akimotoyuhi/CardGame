@@ -55,7 +55,6 @@ public class BattleManager : MonoBehaviour
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
     private bool m_isGame = false;
-    private GameManager m_gameManager;
     #endregion
     #endregion
     #region プロパティ
@@ -65,7 +64,6 @@ public class BattleManager : MonoBehaviour
     public IObservable<int> TurnBegin => m_turnBegin;
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
-    public GameManager SetGameManager { set => m_gameManager = value; }
     #endregion
 
     private void Awake()

@@ -16,8 +16,11 @@ public enum ReplaceType
 /// </summary>
 public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
+    [SerializeField] Text m_viewCost;
+    [SerializeField] Text m_viewName;
+    [SerializeField] Image m_viewImage;
+    [SerializeField] Text m_viewTooltip;
     private string m_tooltip;
-    private string m_viewText;
     //private int m_power;
     public int Power { get; private set; }
     public int AttackNum { get; private set; }
@@ -51,16 +54,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private void Setup()
     {
         m_discard = GameObject.Find("Discard").transform;
+        m_viewTooltip.text = m_tooltip;
+        m_viewCost.text = m_cost;
     }
 
     public Player Player { set => m_player = value; }
 
     public void SetInfo(NewCardDataBase carddata, Player player)
     {
-        transform.Find("Name").GetComponent<Text>().text = carddata.CardName;
-        transform.Find("Icon").GetComponent<Image>().sprite = carddata.Image;
+        m_viewName.text = carddata.CardName;
+        m_viewImage.sprite = carddata.Image;
         m_tooltip = carddata.Tooltip;
-        transform.Find("Tooltip").GetComponent<Text>().text = m_tooltip;
         Power = carddata.Attack;
         AttackNum = carddata.AttackNum;
         Block = carddata.Block;
@@ -79,28 +83,27 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// <returns></returns>
     public void GetPlayerEffect()
     {
-        string ret = m_tooltip;
+        string text = m_tooltip;
         MatchCollection matches = Regex.Matches(m_tooltip, "{%atk([0-9]*)}");
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
             Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value));
-            ret = ret.Replace(m.Value, Power.ToString());
+            text = text.Replace(m.Value, Power.ToString());
         }
         matches = Regex.Matches(m_tooltip, "{%def([0-9]*)}");
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
             Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value));
-            ret = ret.Replace(m.Value, Block.ToString());
+            text = text.Replace(m.Value, Block.ToString());
         }
-        m_viewText = ret;
-        SetText();
+        SetText(text);
     }
 
-    public void SetText()
+    public void SetText(string text)
     {
-        transform.Find("Tooltip").GetComponent<Text>().text = m_viewText;
+        m_viewTooltip.text = text;
     }
 
     public UseType GetCardType { get => m_useType; }

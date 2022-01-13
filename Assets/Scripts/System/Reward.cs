@@ -14,4 +14,9 @@ public class Reward : MonoBehaviour
     {
 
     }
+
+    public void OnClick()
+    {
+
+    }
 }
