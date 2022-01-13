@@ -7,10 +7,13 @@ using Mastar;
 public enum CellClickEventType { Battle, Event, Rest }
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] int m_step;
+    [Space]
     [SerializeField] Canvas m_mapCanvas;
     [SerializeField] Map m_map;
     [SerializeField] Canvas m_battleCanvas;
     [SerializeField] Canvas m_eventCanvas;
+    
     public static GameManager Instance { get; private set; }
     public int Step => DataManager.Instance.Step;
     public int Heal { set => DataManager.Instance.CurrentLife = value; }
@@ -22,7 +25,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //BattleManager.Instance.Setup();
         if (DataManager.Instance.IsSaveData())
         {
 
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
             m_map.CreateMap();
         }
         m_eventCanvas.enabled = false;
+        m_step = DataManager.Instance.Step;
     }
 
     public void OnClick(CellState cellState, int id)
@@ -63,10 +66,20 @@ public class GameManager : MonoBehaviour
             Destroy(player.gameObject);
         }
         DataManager.Instance.Step++;
+        m_step = DataManager.Instance.Step;
         m_map.AllColorChange();
         m_mapCanvas.enabled = true;
         m_battleCanvas.enabled = false;
         m_eventCanvas.enabled = false;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// インスペクタのStepを反映させる<br/>エディタ拡張用
+    /// </summary>
+    public void GUIUpdate()
+    {
+        DataManager.Instance.Step = m_step;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
