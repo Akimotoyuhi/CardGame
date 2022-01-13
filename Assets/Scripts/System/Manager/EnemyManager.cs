@@ -11,8 +11,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameManager m_gamemanager;
     /// <summary>敵データ</summary>
     //[SerializeField] EnemyData m_enemydata;
-    [SerializeField] EnemyData3 m_enemyData;
-    private EnemyDataBase3 m_enemyDatabase;
+    [SerializeField] EnemyData m_enemyData;
+    private EnemyDataBase m_enemyDatabase;
     /// <summary>敵プレハブ</summary>
     [SerializeField] GameObject m_enemyPrefab;
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
@@ -43,7 +43,7 @@ public class EnemyManager : MonoBehaviour
     }
     public void CreateEnemies(int id)
     {
-        m_enemyDatabase = m_enemyData.m_enemyDataBase3s[id];
+        m_enemyDatabase = m_enemyData.m_enemyDataBases[id];
         Transform tra = Instantiate(m_enemyPrefab, transform).transform;
         tra.SetParent(transform, false);
         EnemyBase e = tra.GetComponent<EnemyBase>();

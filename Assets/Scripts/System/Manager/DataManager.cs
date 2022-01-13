@@ -13,7 +13,7 @@ namespace Mastar
         /// <summary>現在の進行状況</summary>
         public int Step { get; set; } = 0;
         //プレイヤー情報関連
-        List<CardID> m_cards = new List<CardID>();
+        List<SpecialCardID> m_cards = new List<SpecialCardID>();
         public string Name { get; private set; }
         public Sprite Sprite { get; private set; }
         public int CurrentLife { get; set; }
@@ -26,7 +26,7 @@ namespace Mastar
             CurrentLife = currentLife;
             StartFlag = true;
         }
-        public List<CardID> Cards { get => m_cards; set => m_cards = value; }
+        public List<SpecialCardID> Cards { get => m_cards; set => m_cards = value; }
         public bool StartFlag { get; private set; } = false;
         /// <summary>
         /// 初回の特別処理判定用<br/>

@@ -80,14 +80,14 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void GetPlayerEffect()
     {
         string ret = m_tooltip;
-        MatchCollection matches = Regex.Matches(m_tooltip, "{%power([0-9]*)}");
+        MatchCollection matches = Regex.Matches(m_tooltip, "{%atk([0-9]*)}");
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
             Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value));
             ret = ret.Replace(m.Value, Power.ToString());
         }
-        matches = Regex.Matches(m_tooltip, "{%block([0-9]*)}");
+        matches = Regex.Matches(m_tooltip, "{%def([0-9]*)}");
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);

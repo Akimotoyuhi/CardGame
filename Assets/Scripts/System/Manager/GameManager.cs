@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         m_eventCanvas.enabled = false;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
+    #region エディタ拡張
     /// <summary>
     /// インスペクタのStepを反映させる<br/>エディタ拡張用
     /// </summary>
@@ -82,4 +82,5 @@ public class GameManager : MonoBehaviour
         DataManager.Instance.Step = m_step;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    #endregion
 }

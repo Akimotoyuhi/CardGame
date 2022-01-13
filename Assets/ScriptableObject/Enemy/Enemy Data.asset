@@ -9,57 +9,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010aca3cbebe2564796e0e2a6ed4274e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d5cf8d1a0f19554ca4931d32442a4a8, type: 3}
   m_Name: Enemy Data
   m_EditorClassIdentifier: 
-  m_enemyDatas:
-  - m_name: OriginiumSlug
-    m_hp: 15
+  m_enemyDataBase3s:
+  - m_name: OriginiumSlag
+    m_life: 30
     m_image: {fileID: 21300000, guid: 24a793a574247fe4ea1d2f84eeaf7db8, type: 3}
-    m_setCommands:
-    - m_turnCommands:
-      - m_command:
-          id: 0
-    - m_turnCommands:
-      - m_command:
-          id: 1
-    - m_turnCommands:
-      - m_command:
-          id: 2
-  - m_name: Soldier
-    m_hp: 45
-    m_image: {fileID: 21300000, guid: f88bc2cc103c0e34f9f3aa5b2fcce452, type: 3}
-    m_setCommands:
-    - m_turnCommands:
-      - m_command:
-          id: 3
-    - m_turnCommands:
-      - m_command:
-          id: 4
-    - m_turnCommands:
-      - m_command:
-          id: 5
-  references:
-    version: 1
-    00000000:
-      type: {class: EnemyNanmosinai, ns: , asm: Assembly-CSharp}
-    00000001:
-      type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
-      data:
-        m_power: 3
-    00000002:
-      type: {class: EnemyCondition, ns: , asm: Assembly-CSharp}
-      data:
-        m_conditions:
+    m_NodeType: 1
+    m_enemyBaseState:
+    - m_conditionalCommand:
+      - m_type: 4
+        m_value: 2
+        m_isProbability: 0
+      m_actionCommnad:
+        m_power: 0
+        m_block: 0
+        m_condition:
           m_conditionID: 0
           m_turn: 2
-    00000003:
-      type: {class: EnemyNanmosinai, ns: , asm: Assembly-CSharp}
-    00000004:
-      type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
-      data:
-        m_power: 7
-    00000005:
-      type: {class: EnemyAttack, ns: , asm: Assembly-CSharp}
-      data:
+        m_target: 0
+    - m_conditionalCommand: []
+      m_actionCommnad:
+        m_power: 3
+        m_block: 0
+        m_condition:
+          m_conditionID: 0
+          m_turn: 0
+        m_target: 0
+  - m_name: Solder
+    m_life: 50
+    m_image: {fileID: 21300000, guid: f88bc2cc103c0e34f9f3aa5b2fcce452, type: 3}
+    m_NodeType: 1
+    m_enemyBaseState:
+    - m_conditionalCommand:
+      - m_type: 0
+        m_value: 1
+        m_isProbability: 0
+      m_actionCommnad:
+        m_power: 10
+        m_block: 
+        m_condition:
+          m_conditionID: 0
+          m_turn: 0
+        m_target: 0
+    - m_conditionalCommand: []
+      m_actionCommnad:
         m_power: 5
+        m_block: 
+        m_condition:
+          m_conditionID: 0
+          m_turn: 0
+        m_target: 0

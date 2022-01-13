@@ -10,23 +10,30 @@ public class NewCardData : ScriptableObject
 {
     public List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
 }
-
-public enum CardID
+#region カードID
+public enum SpecialCardID
 {
-    PowerfulStrike, //デフォルトカード
-    DEFStrengthening, //デフォルトカード
-    CatScratch,
-    StructuralFortification, //特殊カード
-    TacticalCoordination, //特殊カード
-    Meltdown, //特殊カード
+    PowerfulStrike,
+    DEFStrengthening,
+    StructuralFortification,
+    TacticalCoordination,
+    Meltdown,
     Conviction
 }
-
 public enum CommonCardID
 {
-
+    HammerOn,
+    CatScratch,
 }
-
+public enum RareCardID
+{
+    ShellShapedDEF
+}
+public enum EliteCardID
+{
+    TidalElegy
+}
+#endregion
 public enum UseType
 {
     ToPlayer,

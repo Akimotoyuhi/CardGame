@@ -1,16 +1,15 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
-    public List<EnemyDataBase> m_enemyDatas = new List<EnemyDataBase>();
+    public List<EnemyDataBase> m_enemyDataBases;
 }
 
 /// <summary>
-/// æ•µID
+/// “GID
 /// </summary>
 public enum EnemyID
 {
@@ -19,43 +18,152 @@ public enum EnemyID
     endLength
 }
 
-[Serializable]
+[System.Serializable]
 public class EnemyDataBase
 {
-    [Header("æ•µã®åŸºæœ¬æƒ…å ±")]
     [SerializeField] string m_name;
-    [SerializeField] int m_hp;
+    [SerializeField] int m_life;
     [SerializeField] Sprite m_image;
- 
-    [Serializable]
-    public class SetCommand
+    public string Name => m_name;
+    public int Life => m_life;
+    public Sprite Image => m_image;
+    public enum NodeType { Selector, Sequence }
+    public NodeType m_NodeType;
+    public List<EnemyBaseState> m_enemyBaseState;
+    public EnemyActionCommnad3 CommandSelect(EnemyBase enemy, int turn)
     {
-        [Serializable]
-        public class TurnCommand
+        switch (m_NodeType)
         {
-            [SerializeReference, SubclassSelector]
-            public ICommand m_command;
+            case NodeType.Sequence: //ˆê‚Â‚Å‚à¸”s‚µ‚½‚ç‚»‚±‚ÅI—¹
+                for (int i = 0; i < m_enemyBaseState.Count; i++)
+                {
+                    bool flag = false;
+                    if (m_enemyBaseState[i].m_conditionalCommand.Count <= 0)
+                    {
+                        return m_enemyBaseState[i].m_actionCommnad;
+                    }
+                    for (int n = 0; n < m_enemyBaseState[i].m_conditionalCommand.Count; n++)
+                    {
+                        if (!m_enemyBaseState[i].m_conditionalCommand[n].Conditional(enemy, turn))
+                        {
+                            Debug.Log($"ğŒ{n}Œ‹‰Ê false");
+                            flag = false;
+                            break;
+                        }
+                        Debug.Log($"ğŒ{n}Œ‹‰Ê true");
+                        flag = true;
+                    }
+                    if (flag) return m_enemyBaseState[i].m_actionCommnad;
+                }
+                Debug.LogError("ğŒ–¢ˆê’v");
+                return null;
+            default:
+                Debug.LogError("–³Œø‚ÈƒP[ƒX");
+                return null;
         }
-        [Header("1ã‚¿ãƒ¼ãƒ³ã§è¡Œã†æ•µã®è¡Œå‹•")]
-        public List<TurnCommand> m_turnCommands = new List<TurnCommand>();
     }
-    [Header("Element0ã¯å…ˆåˆ¶åŠ¹æœ")]
-    public List<SetCommand> m_setCommands = new List<SetCommand>();
+}
 
-    public List<EnemyCommand> SetAction()
+[System.Serializable]
+public class EnemyBaseState
+{
+    public List<EnemyConditionalCommand3> m_conditionalCommand;
+    public EnemyActionCommnad3 m_actionCommnad;
+}
+
+[System.Serializable]
+public class EnemyActionCommnad3
+{
+    [Header("s“®ƒf[ƒ^")]
+    [SerializeField] string m_power = "0";
+    [SerializeField] string m_block = "0";
+    [SerializeField] ConditionSelection m_condition;
+    [SerializeField] TargetType m_target;
+    public int Power => int.Parse(m_power);
+    public int Block => int.Parse(m_block);
+    public Condition Condition => m_condition.GetCondition;
+    public TargetType Target => m_target;
+}
+
+[System.Serializable]
+public class EnemyConditionalCommand3
+{
+    [Header("ğŒƒf[ƒ^")]
+    [SerializeField, Tooltip("ğŒ")] WhereType m_type;
+    [SerializeField, Tooltip("•]‰¿‚·‚é’l")] int m_value;
+    [SerializeField, Tooltip("Šm—¦‚É‚·‚é‚©”Û‚©")] bool m_isProbability;
+    /// <summary>
+    /// ğŒ®
+    /// </summary>
+    /// <returns>¬Œ÷‰Â”Û</returns>
+    public bool Conditional(EnemyBase enemy, int turn)
     {
-        List<EnemyCommand> ret = new List<EnemyCommand>();
-        for (int i = 0; i < m_setCommands.Count; i++) //æ•µã®è¡Œå‹•(å…¨ä½“)
+        if (turn == 0)
         {
-            for (int n = 0; n < m_setCommands[i].m_turnCommands.Count; n++) //æ•µã®è¡Œå‹•(ï¼‘ã‚¿ãƒ¼ãƒ³ã‚ãŸã‚Š)
+            if (m_type != WhereType.Turn && m_value != 0)
             {
-                //ret[i] = m_setCommands[i].m_turnCommands[n].m_command.GetParam();
-                ret.Add(m_setCommands[i].m_turnCommands[n].m_command.GetParam());
+                //0ƒ^[ƒ“–Ú‚Í“Á•Ê‚Èˆ—‚ª–³‚¢ŒÀ‚è“®‚©‚È‚¢‚æ‚¤‚É‚·‚é
+                return false;
             }
         }
-        return ret;
+        switch (m_type)
+        {
+            case WhereType.Turn:
+                if (turn == m_value)
+                {
+                    return true;
+                }
+                return false;
+            case WhereType.NotTurn:
+                if (turn == m_value)
+                {
+                    return false;
+                }
+                return true;
+            case WhereType.RowTurn:
+                if (turn <= m_value)
+                {
+                    return true;
+                }
+                return false;
+            case WhereType.HighLife:
+                if (turn >= m_value)
+                {
+                    return true;
+                }
+                return false;
+            case WhereType.MultipleTurn:
+                if (turn % m_value == 0)
+                {
+                    return true;
+                }
+                return false;
+            case WhereType.RowLife:
+                if (enemy.CurrentLife <= m_value)
+                {
+                    return true;
+                }
+                return false;
+            default:
+                Debug.Log("–³Œø‚ÈğŒƒP[ƒX");
+                return false;
+        }
     }
-    public string Name { get => m_name; }
-    public int HP { get => m_hp; }
-    public Sprite Image { get => m_image; }
+}
+
+public enum TargetType
+{
+    ToPlayer,
+    ToEnemy,
+}
+
+public enum WhereType
+{
+    Turn,
+    NotTurn,
+    RowTurn,
+    HighTurn,
+    MultipleTurn,
+    RowLife,
+    HighLife,
 }

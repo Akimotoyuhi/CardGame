@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,9 +10,9 @@ public class EnemyBase : CharactorBase, IDrop
 {
     private Player m_player;
     private EnemyManager m_enemyManager;
-    private EnemyCommand[] m_command;
-    private List<EnemyCommand> m_enemyCommands = new List<EnemyCommand>();
-    private EnemyDataBase3 m_enemyDataBase = new EnemyDataBase3();
+    //private EnemyCommand[] m_command;
+    //private List<EnemyCommand> m_enemyCommands = new List<EnemyCommand>();
+    private EnemyDataBase m_enemyDataBase = new EnemyDataBase();
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class EnemyBase : CharactorBase, IDrop
         base.SetUp();
     }
 
-    public void SetParam(EnemyDataBase3 data)
+    public void SetParam(EnemyDataBase data)
     {
         m_name = data.Name;
         m_maxLife = data.Life;
@@ -61,28 +61,23 @@ public class EnemyBase : CharactorBase, IDrop
         SetUI();
         card.OnCast();
     }
-    
-    /// <summary>
-    /// æ•µæ”»æ’ƒåŠ›è¨ˆç®—
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    private EnemyCommand SetAttack(EnemyCommand command)
-    {
-        EnemyCommand ret = new EnemyCommand();
-        ret.m_attack = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.m_attack);
-        return ret;
-    }
+
+    //private int SetAttack(int power)
+    //{
+    //    //EnemyCommand ret = new EnemyCommand();
+    //    int ret = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, power);
+    //    return ret;
+    //}
 
     /// <summary>
-    /// ActionDataã«åŸºã¥ã„ãŸæ•µã®è¡Œå‹•
+    /// ActionData‚ÉŠî‚Ã‚¢‚½“G‚Ìs“®
     /// </summary>
-    /// <param name="turn">ç¾åœ¨ã‚¿ãƒ¼ãƒ³æ•°</param>
+    /// <param name="turn">Œ»İƒ^[ƒ“”</param>
     public void Action(int turn)
     {
         if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
-        Debug.Log($"{m_enemyDataBase.CommandSelect(this, turn).Power}ãƒ€ãƒ¡ãƒ¼ã‚¸");
+        Debug.Log($"{m_enemyDataBase.CommandSelect(this, turn).Power}ƒ_ƒ[ƒW");
         m_player.GetAcceptDamage(m_enemyDataBase.CommandSelect(this, turn));
     }
 }

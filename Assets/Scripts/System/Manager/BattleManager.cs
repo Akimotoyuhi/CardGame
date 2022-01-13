@@ -46,7 +46,10 @@ public class BattleManager : MonoBehaviour
     /// <summary>手札</summary>
     [SerializeField] Hand m_hand;
     /// <summary>カードデータ</summary>
-    [SerializeField] NewCardData m_cardData;
+    [SerializeField] NewCardData m_specialCardData;
+    [SerializeField] NewCardData m_commonCardData;
+    [SerializeField] NewCardData m_rareCardData;
+    [SerializeField] NewCardData m_eliteCardData;
     [SerializeField] GameObject m_cardPrefab;
     /// <summary>ボタンの受付拒否</summary>
     private bool m_isPress = true;
@@ -110,6 +113,7 @@ public class BattleManager : MonoBehaviour
         m_hand.CardDelete();
         GameManager.Instance.FloorFinished(m_player);
     }
+
     /// <summary>
     /// プレイヤーや敵の生成を行う
     /// </summary>
@@ -137,7 +141,7 @@ public class BattleManager : MonoBehaviour
             for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
             {
                 CreateCard(m_playerStatsData.GetCard(i));
-                DataManager.Instance.Cards.Add((CardID)m_playerStatsData.GetCard(i));
+                DataManager.Instance.Cards.Add((SpecialCardID)m_playerStatsData.GetCard(i));
             }
         }
         //敵グループ生成
@@ -196,9 +200,14 @@ public class BattleManager : MonoBehaviour
     {
         GameObject obj = Instantiate(m_cardPrefab);
         BlankCard card = obj.GetComponent<BlankCard>();
-        NewCardDataBase cardData = m_cardData.m_cardData[id];
+        NewCardDataBase cardData = m_specialCardData.m_cardData[id];
         card.SetInfo(cardData, m_player);
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
+    }
+
+    public void Reward()
+    {
+
     }
 }
