@@ -1802,9 +1802,9 @@ MonoBehaviour:
   m_discard: {fileID: 1728880376}
   m_hand: {fileID: 1741415086}
   m_specialCardData: {fileID: 11400000, guid: 979a94e45594ef04da72e95a87ccd681, type: 2}
-  m_commonCardData: {fileID: 0}
-  m_rareCardData: {fileID: 0}
-  m_eliteCardData: {fileID: 0}
+  m_commonCardData: {fileID: 11400000, guid: 975b0c8b871f0dc4ab4eaccb65d16d1e, type: 2}
+  m_rareCardData: {fileID: 11400000, guid: f158980ab7eb2fa4fb1c854167c1e136, type: 2}
+  m_eliteCardData: {fileID: 11400000, guid: f386151be89beca4488407bfd6c950db, type: 2}
   m_cardPrefab: {fileID: 4756192355611260294, guid: ad5ff9493237f6f44a07a22bff2b1928,
     type: 3}
 --- !u!1 &1830025914

@@ -149,7 +149,7 @@ public class BattleManager : MonoBehaviour
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
         for (int i = 0; i < m_encountDatabase.GetLength; i++)
         {
-            Debug.Log(m_encountDatabase.GetID(i));
+            //Debug.Log(m_encountDatabase.GetID(i));
             m_enemyManager.CreateEnemies(m_encountDatabase.GetID(i));
         }
         m_enemyManager.EnemyCount();

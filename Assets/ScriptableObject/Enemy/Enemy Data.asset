@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5cf8d1a0f19554ca4931d32442a4a8, type: 3}
   m_Name: Enemy Data
   m_EditorClassIdentifier: 
-  m_enemyDataBase3s:
-  - m_name: OriginiumSlag
+  m_enemyDataBases:
+  - m_name: "\u30AA\u30EA\u30B8\u30E0\u30B7"
     m_life: 30
     m_image: {fileID: 21300000, guid: 24a793a574247fe4ea1d2f84eeaf7db8, type: 3}
-    m_NodeType: 1
+    m_NodeType: 0
     m_enemyBaseState:
     - m_conditionalCommand:
       - m_type: 4
         m_value: 2
         m_isProbability: 0
       m_actionCommnad:
-        m_power: 0
-        m_block: 0
+        m_power: 
+        m_block: 
         m_condition:
           m_conditionID: 0
           m_turn: 2
@@ -32,22 +32,22 @@ MonoBehaviour:
     - m_conditionalCommand: []
       m_actionCommnad:
         m_power: 3
-        m_block: 0
+        m_block: 
         m_condition:
           m_conditionID: 0
           m_turn: 0
         m_target: 0
-  - m_name: Solder
+  - m_name: "\u30EC\u30E6\u30CB\u30AA\u30F3\u5175"
     m_life: 50
     m_image: {fileID: 21300000, guid: f88bc2cc103c0e34f9f3aa5b2fcce452, type: 3}
-    m_NodeType: 1
+    m_NodeType: 0
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 0
-        m_value: 1
+      - m_type: 4
+        m_value: 2
         m_isProbability: 0
       m_actionCommnad:
-        m_power: 10
+        m_power: 5
         m_block: 
         m_condition:
           m_conditionID: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
         m_target: 0
     - m_conditionalCommand: []
       m_actionCommnad:
-        m_power: 5
+        m_power: 7
         m_block: 
         m_condition:
           m_conditionID: 0
