@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Map m_map;
     [SerializeField] Canvas m_battleCanvas;
     [SerializeField] Canvas m_eventCanvas;
-    
+
     public static GameManager Instance { get; private set; }
     public int Step => DataManager.Instance.Step;
     public int Heal { set => DataManager.Instance.CurrentLife = value; }
+    //public SpecialCardID CardID { get; set; }
 
     private void Awake()
     {

@@ -5,12 +5,18 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
-[CreateAssetMenu(fileName = "Card Data")]
+[CreateAssetMenu(fileName = "All Card Data")]
+public class AllCardData : ScriptableObject
+{
+    [SerializeField] List<NewCardData> m_cardData = new List<NewCardData>();
+
+}
+[CreateAssetMenu(fileName = "Card Data"), Serializable]
 public class NewCardData : ScriptableObject
 {
     public List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
 }
-#region カードID
+#region CardID
 public enum SpecialCardID
 {
     PowerfulStrike,
@@ -32,6 +38,10 @@ public enum RareCardID
 public enum EliteCardID
 {
     TidalElegy
+}
+public enum CurseCardID
+{
+
 }
 #endregion
 public enum UseType
@@ -67,8 +77,8 @@ public class NewCardDataBase
     /// <summary>使用する標的</summary>
     [SerializeField] UseType m_cardType = new UseType();
 
-    public string CardName => m_name;
-    public Sprite Image => m_image;
+    public string Name => m_name;
+    public Sprite Sprite => m_image;
     public string Tooltip => m_tooltip;
     public int Attack => m_power;
     public int AttackNum => m_attackNum;

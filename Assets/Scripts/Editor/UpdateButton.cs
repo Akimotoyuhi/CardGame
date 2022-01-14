@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(GameManager))]
 public class UpdateButton : Editor
 {
+
     public override void OnInspectorGUI()
     {
         GameManager gameManager = target as GameManager;
@@ -15,4 +17,6 @@ public class UpdateButton : Editor
         }
         base.OnInspectorGUI();
     }
+
 }
+#endif

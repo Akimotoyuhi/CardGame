@@ -62,8 +62,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void SetInfo(NewCardDataBase carddata, Player player)
     {
-        m_viewName.text = carddata.CardName;
-        m_viewImage.sprite = carddata.Image;
+        m_viewName.text = carddata.Name;
+        m_viewImage.sprite = carddata.Sprite;
         m_tooltip = carddata.Tooltip;
         Power = carddata.Attack;
         AttackNum = carddata.AttackNum;

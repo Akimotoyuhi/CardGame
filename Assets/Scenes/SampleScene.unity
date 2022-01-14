@@ -515,6 +515,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334202340}
   m_CullTransparentMesh: 0
+--- !u!1 &503846949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 503846951}
+  - component: {fileID: 503846950}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &503846950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503846949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f08215b07d6e064c9a8e40ab8b85530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &503846951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503846949}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,12 +1846,14 @@ MonoBehaviour:
   m_deck: {fileID: 1883843276}
   m_discard: {fileID: 1728880376}
   m_hand: {fileID: 1741415086}
+  m_reward: {fileID: 0}
   m_specialCardData: {fileID: 11400000, guid: 979a94e45594ef04da72e95a87ccd681, type: 2}
   m_commonCardData: {fileID: 11400000, guid: 975b0c8b871f0dc4ab4eaccb65d16d1e, type: 2}
   m_rareCardData: {fileID: 11400000, guid: f158980ab7eb2fa4fb1c854167c1e136, type: 2}
   m_eliteCardData: {fileID: 11400000, guid: f386151be89beca4488407bfd6c950db, type: 2}
   m_cardPrefab: {fileID: 4756192355611260294, guid: ad5ff9493237f6f44a07a22bff2b1928,
     type: 3}
+  m_rewardNum: 3
 --- !u!1 &1830025914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,7 +1904,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panel: {fileID: 0}
-  m_cardPrefab: {fileID: 0}
+  m_uiCard: {fileID: 0}
+  m_cardsParent: {fileID: 0}
 --- !u!1 &1844585986
 GameObject:
   m_ObjectHideFlags: 0

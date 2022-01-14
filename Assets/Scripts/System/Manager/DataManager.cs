@@ -13,7 +13,11 @@ namespace Mastar
         /// <summary>現在の進行状況</summary>
         public int Step { get; set; } = 0;
         //プレイヤー情報関連
-        List<SpecialCardID> m_cards = new List<SpecialCardID>();
+        private List<SpecialCardID> m_specialCards = new List<SpecialCardID>();
+        private List<CommonCardID> m_commonCards = new List<CommonCardID>();
+        private List<RareCardID> m_rareCards = new List<RareCardID>();
+        private List<EliteCardID> m_eliteCards = new List<EliteCardID>();
+        private List<CurseCardID> m_curseCards = new List<CurseCardID>();
         public string Name { get; private set; }
         public Sprite Sprite { get; private set; }
         public int CurrentLife { get; set; }
@@ -26,7 +30,11 @@ namespace Mastar
             CurrentLife = currentLife;
             StartFlag = true;
         }
-        public List<SpecialCardID> Cards { get => m_cards; set => m_cards = value; }
+        public List<SpecialCardID> SpecialCards { get => m_specialCards; set => m_specialCards = value; }
+        public List<CommonCardID> CommonCards { get => m_commonCards; set => m_commonCards = value; }
+        public List<RareCardID> RareCards { get => m_rareCards; set => m_rareCards = value;}
+        public List<EliteCardID> EliteCards { get => m_eliteCards; set => m_eliteCards = value; }
+        public List<CurseCardID> CurseCards { get => m_curseCards; set => m_curseCards = value; }
         public bool StartFlag { get; private set; } = false;
         /// <summary>
         /// 初回の特別処理判定用<br/>
