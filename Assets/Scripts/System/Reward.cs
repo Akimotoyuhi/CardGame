@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Reward : MonoBehaviour
 {
+    /// <summary>報酬画面パネル</summary>
+    [SerializeField] GameObject m_panel;
     /// <summary>表示するカードのプレハブ</summary>
     [SerializeField] GameObject m_cardPrefab;
 
@@ -15,7 +17,7 @@ public class Reward : MonoBehaviour
 
     }
 
-    public void OnClick()
+    public void OnClick(int id)
     {
 
     }
