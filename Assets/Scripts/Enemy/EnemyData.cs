@@ -28,7 +28,7 @@ public class EnemyDataBase
     public int Life => m_life;
     public Sprite Image => m_image;
     public enum NodeType { Selector, Sequence }
-    public NodeType m_NodeType;
+    public NodeType m_NodeType = NodeType.Sequence;
     public List<EnemyBaseState> m_enemyBaseState;
     public EnemyActionCommnad3 CommandSelect(EnemyBase enemy, int turn)
     {

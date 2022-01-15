@@ -15,12 +15,12 @@ public class Reward : MonoBehaviour
     /// <summary>
     /// •ñV‰æ–Ê•\¦
     /// </summary>
-    public void RewardView(NewCardDataBase cardDataBase, CardID id)
+    public void RewardView(NewCardDataBase cardDataBase)
     {
         m_panel.SetActive(true);
         Transform obj = Instantiate(m_uiCard).transform;
         obj.SetParent(m_cardsParent);
-        obj.GetComponent<UICard>().Setup(cardDataBase, id);
+        obj.GetComponent<UICard>().Setup(cardDataBase);
     }
 
     public void OnClick(CardID id)

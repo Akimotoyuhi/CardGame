@@ -70,6 +70,7 @@ public class BattleManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        m_cardData.Setup();
     }
 
     void Start()
@@ -112,9 +113,13 @@ public class BattleManager : MonoBehaviour
         m_discard.CardDelete();
         m_deck.CardDelete();
         m_hand.CardDelete();
-        m_reward.RewardView(m_cardData.CardDatas[(int)CardID.CatScratch], CardID.CatScratch);
+        m_reward.RewardView(m_cardData.GetCardRarityRandom());
     }
 
+    /// <summary>
+    /// •ñV‰æ–ÊI—¹
+    /// </summary>
+    /// <param name="getCardId"></param>
     public void RewardEnd(CardID getCardId)
     {
         DataManager.Instance.Cards.Add(getCardId);

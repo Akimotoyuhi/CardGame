@@ -15,13 +15,13 @@ public class UICard : MonoBehaviour
     [SerializeField] Text m_viewTooltip;
     private CardID m_id;
 
-    public void Setup(NewCardDataBase cardData, CardID id)
+    public void Setup(NewCardDataBase cardData)
     {
         m_viewName.text = cardData.Name;
         m_viewImage.sprite = cardData.Sprite;
         m_viewCost.text = cardData.Cost;
         m_viewTooltip.text = SetTooltip(cardData.Tooltip);
-        m_id = id;
+        m_id = cardData.CardId;
     }
 
     private string SetTooltip(string text)

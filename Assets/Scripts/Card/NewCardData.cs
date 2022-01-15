@@ -9,20 +9,48 @@ using System.Linq;
 public class NewCardData : ScriptableObject
 {
     [SerializeField] List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
+    [SerializeField] int m_eliteProbability = 5;
+    [SerializeField] int m_rareProbability = 30;
     public List<NewCardDataBase> CardDatas => m_cardData;
-    public NewCardDataBase GetDardRarityRandom(Rarity rarity)
+    public void Setup()
     {
-        List<NewCardDataBase> ret = new List<NewCardDataBase>();
-        var i = m_cardData.Where(card => 
+        for (int i = 0; i < m_cardData.Count; i++)
         {
-            Debug.Log("a");
-            if (card.Rarity == rarity) return true;
-            else return false;
-            });
-        ret = (List<NewCardDataBase>)i;
-        Debug.Log(ret);
-        int r = UnityEngine.Random.Range(0, ret.Count);
-        return ret[r];
+            m_cardData[i].CardId = (CardID)i;
+        }
+    }
+    /// <summary>
+    /// ランダムで抽選したレア度の中からランダムで１つカードを抽選する
+    /// </summary>
+    /// <returns>カードデータ</returns>
+    public NewCardDataBase GetCardRarityRandom()
+    {
+        Rarity rarity = new Rarity();
+        int r = UnityEngine.Random.Range(0, 100);
+        if (r <= m_eliteProbability)
+        {
+            rarity = Rarity.Elite;
+        }
+        else if (r <= m_rareProbability)
+        {
+            rarity = Rarity.Rare;
+        }
+        else
+        {
+            rarity = Rarity.Common;
+        }
+        return GetCardRarityRandom(rarity);
+    }
+    /// <summary>
+    /// 指定したレア度のカードを１つ抽選する
+    /// </summary>
+    /// <param name="rarity">抽選するレア度</param>
+    /// <returns>カードデータ</returns>
+    public NewCardDataBase GetCardRarityRandom(Rarity rarity)
+    {
+        var list = m_cardData.Where(card => card.Rarity == rarity).ToList();
+        int r = UnityEngine.Random.Range(0, list.Count);
+        return list[r];
     }
 }
 public enum CardID
@@ -85,6 +113,8 @@ public class NewCardDataBase
     public Sprite Sprite => m_image;
     /// <summary>効果の説明文</summary>
     public string Tooltip => m_tooltip;
+    /// <summary>カードID</summary>
+    public CardID CardId { get; set; }
     /// <summary>レアリティ</summary>
     public Rarity Rarity => m_rarity;
     /// <summary>攻撃</summary>
