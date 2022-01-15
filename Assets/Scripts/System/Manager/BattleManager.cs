@@ -113,7 +113,10 @@ public class BattleManager : MonoBehaviour
         m_discard.CardDelete();
         m_deck.CardDelete();
         m_hand.CardDelete();
-        m_reward.RewardView(m_cardData.GetCardRarityRandom());
+        for (int i = 0; i < m_rewardNum; i++)
+        {
+            m_reward.RewardView(m_cardData.GetCardRarityRandom());
+        }
     }
 
     /// <summary>
