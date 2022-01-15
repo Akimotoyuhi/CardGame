@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using DG.Tweening;
 
 public enum ReplaceType
 {
@@ -22,6 +23,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewTooltip;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
     List<Color> m_cardColor = new List<Color>();
+    private bool m_isDrag = false;
+    private bool m_isAnim = false;
     private string m_tooltip;
     //private int m_power;
     public int Power { get; private set; }
@@ -118,7 +121,24 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         transform.SetParent(m_discard, false); //捨て札に移動
         return this;
     }
-
+    
+    public void PointerEntor()
+    {
+        if (!m_isDrag && !m_isAnim)
+        {
+            m_isAnim = true;
+            m_defPos = transform.position;
+            transform.DOMoveY(transform.position.y + 30, 0.1f).OnComplete(() => m_isAnim = false);
+        }
+    }
+    public void PointerExit()
+    {
+        if (!m_isDrag)
+        {
+            m_isAnim = true;
+            transform.DOMoveY(m_defPos.y, 0.1f).OnComplete(() => m_isAnim = false);
+        }
+    }
     public void OnDrop(PointerEventData eventData)
     {
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
@@ -140,7 +160,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        m_defPos = transform.position;
+        //m_defPos = transform.position;
+        m_isDrag = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -151,5 +172,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.position = m_defPos;
+        m_isDrag = false;
     }
 }
