@@ -20,6 +20,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewName;
     [SerializeField] Image m_viewImage;
     [SerializeField] Text m_viewTooltip;
+    [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
+    List<Color> m_cardColor = new List<Color>();
     private string m_tooltip;
     //private int m_power;
     public int Power { get; private set; }
@@ -73,6 +75,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         Conditions = carddata.Conditions;
         m_useType = carddata.UseType;
         m_player = player;
+        GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         Setup();
     }
 

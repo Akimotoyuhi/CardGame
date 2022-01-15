@@ -13,6 +13,8 @@ public class UICard : MonoBehaviour
     [SerializeField] Image m_viewImage;
     [SerializeField] Text m_viewCost;
     [SerializeField] Text m_viewTooltip;
+    [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
+    List<Color> m_cardColor = new List<Color>();
     private CardID m_id;
 
     public void Setup(NewCardDataBase cardData)
@@ -22,6 +24,7 @@ public class UICard : MonoBehaviour
         m_viewCost.text = cardData.Cost;
         m_viewTooltip.text = SetTooltip(cardData.Tooltip);
         m_id = cardData.CardId;
+        GetComponent<Image>().color = m_cardColor[(int)cardData.Rarity];
     }
 
     private string SetTooltip(string text)
