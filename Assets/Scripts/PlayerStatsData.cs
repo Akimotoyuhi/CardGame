@@ -8,7 +8,7 @@ public class PlayerStatsData : ScriptableObject
     [SerializeField] string m_name;
     [SerializeField] Sprite m_image;
     [SerializeField] int m_maxHp;
-    [SerializeField, Tooltip("初期カード")] SpecialCardID[] m_cardID;
+    [SerializeField, Tooltip("初期カード")] CardID[] m_cardID;
 
     public string Name { get => m_name; }
     public Sprite Image { get => m_image; }

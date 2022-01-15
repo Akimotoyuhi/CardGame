@@ -5,87 +5,97 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
-[CreateAssetMenu(fileName = "All Card Data")]
-public class AllCardData : ScriptableObject
-{
-    [SerializeField] List<NewCardData> m_cardData = new List<NewCardData>();
-
-}
-[CreateAssetMenu(fileName = "Card Data"), Serializable]
+[CreateAssetMenu(fileName = "Card Data")]
 public class NewCardData : ScriptableObject
 {
-    public List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
+    [SerializeField] List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
+    public List<NewCardDataBase> CardDatas => m_cardData;
+    public NewCardDataBase GetDardRarityRandom(Rarity rarity)
+    {
+        List<NewCardDataBase> ret = new List<NewCardDataBase>();
+        var i = m_cardData.Where(card => 
+        {
+            Debug.Log("a");
+            if (card.Rarity == rarity) return true;
+            else return false;
+            });
+        ret = (List<NewCardDataBase>)i;
+        Debug.Log(ret);
+        int r = UnityEngine.Random.Range(0, ret.Count);
+        return ret[r];
+    }
 }
-#region CardID
-public enum SpecialCardID
+public enum CardID
 {
-    PowerfulStrike,
-    DEFStrengthening,
+    /// <summary>強撃</summary>
+    PowerfulStrike, //スターター
+    /// <summary>防御力強化</summary>
+    DEFStrengthening, //スターター
+    /// <summary>指令：構造強化</summary>
     StructuralFortification,
+    /// <summary>指令：戦術指令</summary>
     TacticalCoordination,
+    /// <summary>指令：メルトダウン</summary>
     Meltdown,
-    Conviction
-}
-public enum CommonCardID
-{
+    /// <summary>断罪</summary>
+    Conviction, //デバッグ用
+    /// <summary>ハンマリング・オン</summary>
     HammerOn,
+    /// <summary>ひっかき！</summary>
     CatScratch,
+    /// <summary>シェルガード</summary>
+    ShellShapedDEF,
+    /// <summary>海嘯の悲歌</summary>
+    TidalElegy,
 }
-public enum RareCardID
+public enum Rarity
 {
-    ShellShapedDEF
+    Common,
+    Rare,
+    Elite,
+    Special,
+    Curse,
+    BadEffect
 }
-public enum EliteCardID
-{
-    TidalElegy
-}
-public enum CurseCardID
-{
-
-}
-#endregion
 public enum UseType
 {
     ToPlayer,
     ToEnemy,
 }
-
 [Serializable]
 public class NewCardDataBase
 {
-    /// <summary>カードの名前</summary>
     [SerializeField] string m_name;
-    /// <summary>コスト</summary>
     [SerializeField] string m_cost;
-    /// <summary>画像</summary>
     [SerializeField] Sprite m_image;
-    /// <summary>効果の説明文</summary>
     [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{%value}のように記述する事")]
     [SerializeField] string m_tooltip;
-    /// <summary>攻撃</summary>
+    [SerializeField] Rarity m_rarity;
     [SerializeField] int m_power;
-    /// <summary>攻撃回数</summary>
     [SerializeField] int m_attackNum;
-    /// <summary>ブロック</summary>
     [SerializeField] int m_block;
-    /// <summary>ブロック回数</summary>
     [SerializeField] int m_blockNum;
-    //[Header("カードを使用した際に付与するコンディションの設定")]
-    //[SerializeField, SerializeReference, SubclassSelector]
-    //List<ICondition> m_cardConditionSets = new List<ICondition>();
     [SerializeField] List<ConditionSelection> m_concitions;
-    /// <summary>使用する標的</summary>
     [SerializeField] UseType m_cardType = new UseType();
-
+    /// <summary>カードの名前</summary>
     public string Name => m_name;
+    /// <summary>コスト</summary>
+    public string Cost => m_cost; //コストは数字じゃない可能性があるのでとりあえずstringにしとく
+    /// <summary>画像</summary>
     public Sprite Sprite => m_image;
+    /// <summary>効果の説明文</summary>
     public string Tooltip => m_tooltip;
+    /// <summary>レアリティ</summary>
+    public Rarity Rarity => m_rarity;
+    /// <summary>攻撃</summary>
     public int Attack => m_power;
+    /// <summary>攻撃回数</summary>
     public int AttackNum => m_attackNum;
+    /// <summary>ブロック</summary>
     public int Block => m_block;
+    /// <summary>ブロック回数</summary>
     public int BlockNum => m_blockNum;
-    //コストは数字じゃない可能性があるのでとりあえずstringにしとく
-    public string Cost => m_cost;
+    /// <summary>付与するバフデバフ</summary>
     public List<Condition> Conditions
     {
         get
@@ -98,5 +108,6 @@ public class NewCardDataBase
             return ret;
         }
     }
+    /// <summary>使用する標的</summary>
     public UseType UseType => m_cardType;
 }

@@ -150,10 +150,10 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30C9\u30AF\u30BF\u30FC\u306E\u8CA1\u5E03\u306B\n2\u81C6\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+  m_Text: "\u30C9\u30AF\u30BF\u30FC\u306E\u8CA1\u5E03\u306B2\u81C6\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
 --- !u!1 &4678181636966244167
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 4678181638202814140}
   - component: {fileID: 4678181638202814141}
   - component: {fileID: 3086179650545399232}
+  - component: {fileID: 5152335277563771919}
   m_Layer: 5
   m_Name: RewardCard
   m_TagString: Untagged
@@ -436,15 +437,31 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 5152335277563771919}
+        m_TargetAssemblyTypeName: UICard, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5152335277563771919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4678181638202814143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec38f3aa9bcbcf4baf83f74ec4ae7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_viewName: {fileID: 4678181636966244165}
+  m_viewImage: {fileID: 4678181636430094617}
+  m_viewCost: {fileID: 4678181637182480253}
+  m_viewTooltip: {fileID: 4678181636608288096}

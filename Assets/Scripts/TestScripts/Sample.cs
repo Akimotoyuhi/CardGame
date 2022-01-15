@@ -2,30 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AAAA
-{
-    public List<BBBB> listB = new List<BBBB>();
-    public enum BBBB
-    {
-        B
-    }
-    public enum CCCC
-    {
-        C
-    }
-}
-
+/// <summary>
+/// オブジェクトに付けるクラス
+/// </summary>
 public class Sample : MonoBehaviour
 {
-    AAAA a = new AAAA();
-    //List<AAAA> list = new List<AAAA>() { AAAA.BBBB.B };
-    void Start()
-    {
-        //list.Add(new AAAA.BBBB());
-    }
+    [SerializeReference, SubclassSelector]
+    ISample sample = default;
+}
 
-    void Update()
+/// <summary>
+/// シリアライズ対象のインターフェース
+/// </summary>
+public interface ISample
+{
+    int Execute();
+}
+public class A : ISample
+{
+    [Header("Aクラス")]
+    [SerializeField] int a;
+
+    public int Execute()
     {
-        
+        return a;
+    }
+}
+public class B : ISample
+{
+    [Header("Bクラス")]
+    [SerializeField] int b;
+
+    public int Execute()
+    {
+        return b;
     }
 }

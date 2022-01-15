@@ -48,10 +48,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>報酬画面</summary>
     [SerializeField] Reward m_reward;
     /// <summary>カードデータ</summary>
-    [SerializeField] NewCardData m_specialCardData;
-    [SerializeField] NewCardData m_commonCardData;
-    [SerializeField] NewCardData m_rareCardData;
-    [SerializeField] NewCardData m_eliteCardData;
+    [SerializeField] NewCardData m_cardData;
     [SerializeField] GameObject m_cardPrefab;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
@@ -78,6 +75,7 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         Setup();
+        m_reward.RewardDisabled();
     }
 
     /// <summary>
@@ -114,10 +112,13 @@ public class BattleManager : MonoBehaviour
         m_discard.CardDelete();
         m_deck.CardDelete();
         m_hand.CardDelete();
+        m_reward.RewardView(m_cardData.CardDatas[(int)CardID.CatScratch], CardID.CatScratch);
     }
 
-    public void RewardEnd(int getCardId)
+    public void RewardEnd(CardID getCardId)
     {
+        DataManager.Instance.Cards.Add(getCardId);
+        m_reward.RewardDisabled();
         GameManager.Instance.FloorFinished(m_player);
     }
 
@@ -134,9 +135,9 @@ public class BattleManager : MonoBehaviour
             Debug.Log("保存されたデータが見つかった");
             m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
             m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.Sprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
-            for (int i = 0; i < DataManager.Instance.SpecialCards.Count; i++)
+            for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
             {
-                CreateCard((int)DataManager.Instance.SpecialCards[i]);
+                CreateCard((int)DataManager.Instance.Cards[i]);
             }
         }
         else
@@ -148,7 +149,7 @@ public class BattleManager : MonoBehaviour
             for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
             {
                 CreateCard(m_playerStatsData.GetCard(i));
-                DataManager.Instance.SpecialCards.Add((SpecialCardID)m_playerStatsData.GetCard(i));
+                DataManager.Instance.Cards.Add((CardID)m_playerStatsData.GetCard(i));
             }
         }
         //敵グループ生成
@@ -207,7 +208,7 @@ public class BattleManager : MonoBehaviour
     {
         GameObject obj = Instantiate(m_cardPrefab);
         BlankCard card = obj.GetComponent<BlankCard>();
-        NewCardDataBase cardData = m_specialCardData.m_cardData[id];
+        NewCardDataBase cardData = m_cardData.CardDatas[id];
         card.SetInfo(cardData, m_player);
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();

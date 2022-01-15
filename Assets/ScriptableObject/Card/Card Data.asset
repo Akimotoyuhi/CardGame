@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a779fc0370f44e44ba74e39af86795c, type: 3}
-  m_Name: Special Card Data
+  m_Name: Card Data
   m_EditorClassIdentifier: 
   m_cardData:
   - m_name: "\u5F37\u6483"
     m_cost: 1
     m_image: {fileID: 21300000, guid: 4efca5b2263d6ec46909515646a31806, type: 3}
     m_tooltip: "\u6575\u4E00\u4F53\u306B{%atk5}\u30C0\u30E1\u30FC\u30B8"
+    m_rarity: 3
     m_power: 5
     m_attackNum: 0
     m_block: 0
@@ -27,6 +28,7 @@ MonoBehaviour:
     m_cost: 1
     m_image: {fileID: 21300000, guid: bbfd132f187f03a46878521b80755c87, type: 3}
     m_tooltip: "{%def5}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+    m_rarity: 3
     m_power: 0
     m_attackNum: 0
     m_block: 5
@@ -37,6 +39,7 @@ MonoBehaviour:
     m_cost: 1
     m_image: {fileID: 21300000, guid: ad5765035bd0c744db85d1357d977c9e, type: 3}
     m_tooltip: 
+    m_rarity: 3
     m_power: 0
     m_attackNum: 0
     m_block: 0
@@ -47,6 +50,7 @@ MonoBehaviour:
     m_cost: 2
     m_image: {fileID: 21300000, guid: 8e7662195db030746805634c581d00c9, type: 3}
     m_tooltip: 
+    m_rarity: 3
     m_power: 0
     m_attackNum: 0
     m_block: 0
@@ -57,6 +61,7 @@ MonoBehaviour:
     m_cost: 2
     m_image: {fileID: 21300000, guid: f339bcaf21dc9984db9b19581904f665, type: 3}
     m_tooltip: 
+    m_rarity: 3
     m_power: 0
     m_attackNum: 0
     m_block: 0
@@ -67,9 +72,56 @@ MonoBehaviour:
     m_cost: 1
     m_image: {fileID: 21300000, guid: 93d23b67fec4f044c84f31c48354dcee, type: 3}
     m_tooltip: "\u6575\u4E00\u4F53\u306B{%atk800}\u30C0\u30E1\u30FC\u30B8"
+    m_rarity: 3
     m_power: 800
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
     m_concitions: []
     m_cardType: 1
+  - m_name: "\u30CF\u30F3\u30DE\u30EA\u30F3\u30B0\u30FB\u30AA\u30F3"
+    m_cost: 2
+    m_image: {fileID: 21300000, guid: 04fbc0e363ed39642bcea6ed5224d282, type: 3}
+    m_tooltip: "{atk10}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+    m_rarity: 0
+    m_power: 10
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
+    m_concitions: []
+    m_cardType: 1
+  - m_name: "\u3072\u3063\u304B\u304D\uFF01"
+    m_cost: 1
+    m_image: {fileID: 21300000, guid: 042301a19cacc864ebddcd9b674ff900, type: 3}
+    m_tooltip: "{%atk3}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u8131\u529B2\u3092\u4E0E\u3048\u308B"
+    m_rarity: 0
+    m_power: 3
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
+    m_concitions:
+    - m_conditionID: 0
+      m_turn: 2
+    m_cardType: 1
+  - m_name: "\u30B7\u30A7\u30EB\u30AC\u30FC\u30C9"
+    m_cost: 1
+    m_image: {fileID: 21300000, guid: 098851754291dd04bb085db9c1f1dbb8, type: 3}
+    m_tooltip: "{%def8}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+    m_rarity: 1
+    m_power: 0
+    m_attackNum: 0
+    m_block: 8
+    m_blockNum: 0
+    m_concitions: []
+    m_cardType: 0
+  - m_name: "\u6D77\u562F\u306E\u60B2\u6B4C"
+    m_cost: 3
+    m_image: {fileID: 21300000, guid: 544d88c262a675f498e64a183bbf317a, type: 3}
+    m_tooltip: "\u7B4B\u529B\uFF11\u3001\u654F\u6377\uFF11\u3001\u30D7\u30EC\u30FC\u30C8\u30A2\u30FC\u30DE\u30FC5\u3092\u5F97\u308B\u3002\n\u5EC3\u68C4"
+    m_rarity: 2
+    m_power: 0
+    m_attackNum: 0
+    m_block: 0
+    m_blockNum: 0
+    m_concitions: []
+    m_cardType: 0

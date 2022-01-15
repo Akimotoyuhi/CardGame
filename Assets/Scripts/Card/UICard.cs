@@ -13,39 +13,37 @@ public class UICard : MonoBehaviour
     [SerializeField] Image m_viewImage;
     [SerializeField] Text m_viewCost;
     [SerializeField] Text m_viewTooltip;
-    private int m_id;
-    private Reward m_reward;
+    private CardID m_id;
 
-    public void Setup(NewCardDataBase cardData, int id, Reward reward)
+    public void Setup(NewCardDataBase cardData, CardID id)
     {
         m_viewName.text = cardData.Name;
         m_viewImage.sprite = cardData.Sprite;
         m_viewCost.text = cardData.Cost;
         m_viewTooltip.text = SetTooltip(cardData.Tooltip);
         m_id = id;
-        m_reward = reward;
     }
 
     private string SetTooltip(string text)
     {
         string ret = text;
-        MatchCollection matches = Regex.Matches(text, "{%atk([0-9]*)}");
+        MatchCollection matches = Regex.Matches(ret, "{%atk([0-9]*)}");
         foreach (Match m in matches)
         {
             int num = int.Parse(m.Groups[1].Value);
-            text = text.Replace(m.Value, num.ToString());
+            ret = ret.Replace(m.Value, num.ToString());
         }
-        matches = Regex.Matches(text, "{%def([0-9]*)}");
+        matches = Regex.Matches(ret, "{%def([0-9]*)}");
         foreach (Match m in matches)
         {
             int num = int.Parse(m.Groups[1].Value);
-            text = text.Replace(m.Value, num.ToString());
+            ret = ret.Replace(m.Value, num.ToString());
         }
         return ret;
     }
 
     public void OnClick()
     {
-        m_reward.OnClick(m_id);
+        BattleManager.Instance.RewardEnd(m_id);
     }
 }

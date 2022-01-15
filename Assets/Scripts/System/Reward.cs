@@ -15,16 +15,26 @@ public class Reward : MonoBehaviour
     /// <summary>
     /// ïÒèVâÊñ ï\é¶
     /// </summary>
-    public void RewardView(NewCardDataBase cardDataBase, int id)
+    public void RewardView(NewCardDataBase cardDataBase, CardID id)
     {
         m_panel.SetActive(true);
         Transform obj = Instantiate(m_uiCard).transform;
         obj.SetParent(m_cardsParent);
-        obj.GetComponent<UICard>().Setup(cardDataBase, id, this);
+        obj.GetComponent<UICard>().Setup(cardDataBase, id);
     }
 
-    public void OnClick(int id)
+    public void OnClick(CardID id)
     {
+        BattleManager.Instance.RewardEnd(id);
+        m_panel.SetActive(false);
+    }
+
+    public void RewardDisabled()
+    {
+        for (int i = 0; i < m_cardsParent.childCount; i++)
+        {
+            Destroy(m_cardsParent.GetChild(i).gameObject);
+        }
         m_panel.SetActive(false);
     }
 }

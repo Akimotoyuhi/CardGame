@@ -19,11 +19,11 @@ MonoBehaviour:
     m_NodeType: 1
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 4
+      - m_type: 0
         m_value: 2
         m_isProbability: 0
       m_actionCommnad:
-        m_power: 
+        m_power: 1
         m_block: 
         m_condition:
           m_conditionID: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_NodeType: 1
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 4
+      - m_type: 0
         m_value: 2
         m_isProbability: 0
       m_actionCommnad:

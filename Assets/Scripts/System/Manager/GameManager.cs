@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
         if (DataManager.Instance.IsSaveData())
         {
 
