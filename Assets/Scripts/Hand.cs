@@ -14,8 +14,16 @@ public class Hand : CardManagement
         if (transform.childCount == 0) { return; }
         for (int i = transform.childCount - 1; 0 <= i; i--)
         {
-            //transform.GetChild(i).parent = m_deck;
+            //m_deck.GetComponent<Deck>().SetParent(transform.GetChild(i));
             transform.GetChild(i).SetParent(m_deck, false);
         }
     }
+
+    //public void SetChildDefpos()
+    //{
+    //    for (int i = 0; i < transform.childCount; i++)
+    //    {
+    //        transform.GetChild(i).GetComponent<BlankCard>().SetDefpos();
+    //    }
+    //}
 }

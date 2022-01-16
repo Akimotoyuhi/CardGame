@@ -14,4 +14,8 @@ public class CardManagement : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
     }
+    public void SetParent(Transform child)
+    {
+        child.SetParent(transform, false);
+    }
 }

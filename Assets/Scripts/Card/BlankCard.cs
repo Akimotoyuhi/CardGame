@@ -119,6 +119,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         transform.SetParent(m_discard, false); //捨て札に移動
+        //BattleManager.Instance.SetHandUI();
         return this;
     }
     
@@ -128,7 +129,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             m_isAnim = true;
             m_defPos = transform.position;
-            transform.DOMoveY(transform.position.y + 30, 0.1f).OnComplete(() => m_isAnim = false);
+            transform.DOMoveY(m_defPos.y + 30, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
     public void PointerExit()
@@ -136,9 +137,13 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (!m_isDrag)
         {
             m_isAnim = true;
-            transform.DOMoveY(m_defPos.y, 0.1f).OnComplete(() => m_isAnim = false);
+            transform.DOMoveY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
+    //public void SetDefpos()
+    //{
+    //    m_defPos = transform.position;
+    //}
     public void OnDrop(PointerEventData eventData)
     {
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない

@@ -26,7 +26,6 @@ public class UICard : MonoBehaviour
         m_id = cardData.CardId;
         GetComponent<Image>().color = m_cardColor[(int)cardData.Rarity];
     }
-
     private string SetTooltip(string text)
     {
         string ret = text;

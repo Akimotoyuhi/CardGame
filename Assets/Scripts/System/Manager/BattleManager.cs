@@ -221,4 +221,8 @@ public class BattleManager : MonoBehaviour
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
     }
+    //public void SetHandUI()
+    //{
+    //    m_hand.SetChildDefpos();
+    //}
 }
