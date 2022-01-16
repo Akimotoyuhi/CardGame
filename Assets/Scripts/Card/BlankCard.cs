@@ -176,7 +176,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.position = m_defPos;
+        transform.DOMove(m_defPos, 0.1f);
+        //transform.position = m_defPos;
         m_isDrag = false;
     }
 }
