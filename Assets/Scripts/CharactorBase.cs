@@ -215,7 +215,11 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     public virtual void TurnEnd(int i = 0)
     {
-        //m_condition.Decrement();
+        foreach (var c in m_conditions)
+        {
+            c.Effect(EventTiming.TurnEnd, ParametorType.Attack);
+        }
+        RemoveEffect();
     }
 
     /// <summary>

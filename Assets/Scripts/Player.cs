@@ -59,6 +59,7 @@ public class Player : CharactorBase, IDrop
     {
         AddEffect(enemy.Conditions);
         int damage = CalculationAcceptDamage(enemy.Power);
+        Debug.Log($"受けたダメージ{damage}");
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
         damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す

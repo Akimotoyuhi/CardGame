@@ -37,11 +37,8 @@ public class EnemyBase : CharactorBase, IDrop
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != UseType.ToEnemy) return;
-        foreach (var item in card.Conditions)
-        {
-            m_conditions.Add(item);
-        }
-        int damage = card.Power;
+        AddEffect(card.Conditions);
+        int damage = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, card.Power);
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
         damage *= -1;
@@ -78,7 +75,6 @@ public class EnemyBase : CharactorBase, IDrop
         if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
         Debug.Log($"{m_enemyDataBase.CommandSelect(this, turn).Power}ダメージ");
-        Debug.Log("配列数" + m_enemyDataBase.CommandSelect(this, turn).Conditions.Count);
         m_player.GetAcceptDamage(m_enemyDataBase.CommandSelect(this, turn));
         AttackAnim(false);
     }

@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_playerPos: {fileID: 673890279}
   m_costViewText: {fileID: 183109582}
   m_enemies: {fileID: 1844585986}
-  m_encountData: {fileID: 11400000, guid: 3c98b632cb9be1049a05a5b5f2a5a9ee, type: 2}
+  m_encountData: {fileID: 11400000, guid: 7265d44935f4b41448a01cacee5265c4, type: 2}
   m_deck: {fileID: 1883843276}
   m_discard: {fileID: 1728880376}
   m_hand: {fileID: 1741415086}

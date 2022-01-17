@@ -19,28 +19,11 @@ public class EnemyManager : MonoBehaviour
     /// <summary>敵の総数。終了判定用</summary>
     private int m_enemyCount = 0;
 
-    //public void CreateEnemies(int id)
-    //{
-    //    m_enemyDatabase = m_enemydata.m_enemyDatas[id];
-    //    Transform tra = Instantiate(m_enemyPrefab, transform).transform;
-    //    tra.SetParent(transform, false);
-    //    EnemyBase e = tra.GetComponent<EnemyBase>();
-    //    e.SetParam(m_enemyDatabase.Name, m_enemyDatabase.Image, m_enemyDatabase.HP, m_enemyDatabase.SetAction());
-    //}
-
     private void Start()
     {
-        BattleManager.Instance.TurnBegin.Subscribe(turn =>
-        {
-            for (int i = 0; i < m_enemies.Count; i++)
-            {
-                if (m_enemies[i].IsDead) continue;
-                m_enemies[i].TurnStart();
-                m_enemies[i].Action(turn);
-                m_enemies[i].TurnEnd();
-            }
-        });
+        BattleManager.Instance.TurnBegin.Subscribe(turn => EnemyTrun(turn));
     }
+
     public void CreateEnemies(int id)
     {
         m_enemyDatabase = m_enemyData.m_enemyDataBases[id];
@@ -66,16 +49,16 @@ public class EnemyManager : MonoBehaviour
     /// 敵のターン
     /// </summary>
     /// <param name="turn">現在ターン数</param>
-    //public void EnemyTrun(int turn)
-    //{
-    //    for (int i = 0; i < m_enemies.Count; i++)
-    //    {
-    //        if (m_enemies[i].IsDead) continue;
-    //        m_enemies[i].TurnStart();
-    //        m_enemies[i].Action(turn);
-    //        m_enemies[i].TurnEnd();
-    //    }
-    //}
+    public void EnemyTrun(int turn)
+    {
+        for (int i = 0; i < m_enemies.Count; i++)
+        {
+            if (m_enemies[i].IsDead) continue;
+            m_enemies[i].TurnStart();
+            m_enemies[i].Action(turn);
+            m_enemies[i].TurnEnd();
+        }
+    }
 
     /// <summary>
     /// 終了判定用<br/>

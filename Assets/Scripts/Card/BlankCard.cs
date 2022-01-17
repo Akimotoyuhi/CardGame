@@ -70,7 +70,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
         m_tooltip = carddata.Tooltip;
-        Power = carddata.Attack;
+        //Power = carddata.Attack;
         AttackNum = carddata.AttackNum;
         Block = carddata.Block;
         BlockNum = carddata.BlockNum;

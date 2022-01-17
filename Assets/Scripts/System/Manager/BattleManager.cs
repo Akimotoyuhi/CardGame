@@ -182,7 +182,8 @@ public class BattleManager : MonoBehaviour
     private void FirstTurn()
     {
         Debug.Log(m_progressTurn + "É^Å[Éìñ⁄");
-        m_turnBegin.OnNext(m_progressTurn);
+        //m_turnBegin.OnNext(m_progressTurn);
+        m_enemyManager.EnemyTrun(m_progressTurn);
         m_progressTurn++;
         m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
         //TurnStart();
@@ -201,7 +202,6 @@ public class BattleManager : MonoBehaviour
         m_isPress = true;
         m_hand.AllCast();
         m_turnEnd.OnNext(m_progressTurn);
-        //m_enemyManager.EnemyTrun(m_progressTurn);
         m_player.TurnEnd();
         m_progressTurn++;
         m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
