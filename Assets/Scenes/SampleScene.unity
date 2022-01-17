@@ -1040,6 +1040,8 @@ MonoBehaviour:
   m_battleStartText: {fileID: 2123442603}
   m_playerTurn: {fileID: 2112369166}
   m_enemyTurn: {fileID: 1908087741}
+  m_moveX: 1000
+  m_moveDura: 0.2
 --- !u!1 &911093665
 GameObject:
   m_ObjectHideFlags: 0
