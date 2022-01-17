@@ -55,7 +55,7 @@ public class EnemyDataBase
                     }
                     if (flag) return m_enemyBaseState[i].m_actionCommnad;
                 }
-                Debug.LogError("条件未一致");
+                Debug.Log("条件未一致");
                 return null;
             default:
                 Debug.LogError("無効なケース");
@@ -77,11 +77,25 @@ public class EnemyActionCommnad3
     [Header("行動データ")]
     [SerializeField] string m_power = "0";
     [SerializeField] string m_block = "0";
-    [SerializeField] ConditionSelection m_condition;
+    [SerializeField] List<ConditionSelection> m_condition;
     [SerializeField] TargetType m_target;
     public int Power => int.Parse(m_power);
     public int Block => int.Parse(m_block);
-    public Condition Condition => m_condition.GetCondition;
+    public List<Condition> Conditions
+    {
+        get
+        {
+            List<Condition> ret = new List<Condition>();
+            for (int i = 0; i < m_condition.Count; i++)
+            {
+                if (m_condition[i].GetCondition != null)
+                {
+                    ret.Add(m_condition[i].GetCondition);
+                }
+            }
+            return ret;
+        }
+    }
     public TargetType Target => m_target;
 }
 
@@ -98,14 +112,14 @@ public class EnemyConditionalCommand3
     /// <returns>成功可否</returns>
     public bool Conditional(EnemyBase enemy, int turn)
     {
-        if (turn == 0)
-        {
-            if (m_type != WhereType.Turn && m_value != 0)
-            {
-                //0ターン目は特別な処理が無い限り動かないようにする
-                return false;
-            }
-        }
+        //if (turn == 0)
+        //{
+        //    if (m_type != WhereType.Turn && m_value != 0)
+        //    {
+        //        //0ターン目は特別な処理が無い限り動かないようにする
+        //        return false;
+        //    }
+        //}
         switch (m_type)
         {
             case WhereType.Turn:

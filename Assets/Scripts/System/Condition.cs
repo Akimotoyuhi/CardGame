@@ -49,7 +49,7 @@ public abstract class Condition
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
     public abstract int IsBuff();
-    public abstract ConditionID GetConditionID();
+    public abstract ConditionID ConditionID();
 }
 
 [Serializable]

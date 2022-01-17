@@ -26,7 +26,7 @@ MonoBehaviour:
         m_power: 1
         m_block: 
         m_condition:
-          m_conditionID: 0
+        - m_conditionID: 0
           m_turn: 2
         m_target: 0
     - m_conditionalCommand: []
@@ -34,8 +34,8 @@ MonoBehaviour:
         m_power: 3
         m_block: 
         m_condition:
-          m_conditionID: 0
-          m_turn: 0
+        - m_conditionID: 0
+          m_turn: 3
         m_target: 0
   - m_name: "\u30EC\u30E6\u30CB\u30AA\u30F3\u5175"
     m_life: 50
@@ -49,15 +49,11 @@ MonoBehaviour:
       m_actionCommnad:
         m_power: 5
         m_block: 
-        m_condition:
-          m_conditionID: 0
-          m_turn: 0
+        m_condition: []
         m_target: 0
     - m_conditionalCommand: []
       m_actionCommnad:
         m_power: 7
         m_block: 
-        m_condition:
-          m_conditionID: 0
-          m_turn: 0
+        m_condition: []
         m_target: 0

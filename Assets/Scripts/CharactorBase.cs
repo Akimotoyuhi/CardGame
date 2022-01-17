@@ -92,6 +92,41 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
+    /// バフデバフを付与された時の配列の加算
+    /// </summary>
+    /// <param name="conditions"></param>
+    protected void AddEffect(List<Condition> conditions)
+    {
+        for (int i = 0; i < conditions.Count; i++)
+        {
+            bool flag = false;
+            for (int n = 0; n < m_conditions.Count; n++)
+            {
+                if (conditions[i].ConditionID() == m_conditions[n].ConditionID())
+                {
+                    m_conditions[i].Turn += conditions[n].Turn;
+                    flag = true;
+                }
+            }
+            if (!flag)
+            {
+                m_conditions.Add(conditions[i]);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 効果が切れたバフデバフを消す
+    /// </summary>
+    protected void RemoveEffect()
+    {
+        for (int i = 0; i < m_conditions.Count; i++)
+        {
+            if (m_conditions[i].Turn <= 0) m_conditions.RemoveAt(i);
+        }
+    }
+
+    /// <summary>
     /// 連続で攻撃食らったorブロック張った時の処理
     /// </summary>
     /// <param name="getCardType">攻撃かブロックか</param>

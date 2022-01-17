@@ -182,7 +182,7 @@ public class BattleManager : MonoBehaviour
     private void FirstTurn()
     {
         Debug.Log(m_progressTurn + "É^Å[Éìñ⁄");
-        //m_turnBegin.OnNext(m_progressTurn);
+        m_turnBegin.OnNext(m_progressTurn);
         m_progressTurn++;
         m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
         //TurnStart();

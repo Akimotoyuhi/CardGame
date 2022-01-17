@@ -29,7 +29,7 @@ public class Weakness : Condition
         return power;
     }
     public override int IsBuff() { return 1; }
-    public override ConditionID GetConditionID() { return ConditionID.Weakness; }
+    public override ConditionID ConditionID() { return global::ConditionID.Weakness; }
 }
 /// <summary>
 /// �Ǝ㉻<br/>
@@ -56,5 +56,5 @@ public class Vulnerable : Condition
         return block;
     }
     public override int IsBuff() { return 1; }
-    public override ConditionID GetConditionID() { return ConditionID.Vulnerable; }
+    public override ConditionID ConditionID() { return global::ConditionID.Vulnerable; }
 }

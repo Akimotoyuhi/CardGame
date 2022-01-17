@@ -49,7 +49,6 @@ public class BattleUIController : MonoBehaviour
                 s.Append(m_playerRecttra.DOAnchorPosX(0, m_moveDura))
                 .AppendInterval(0.5f)
                 .Append(m_playerRecttra.DOAnchorPosX(m_moveX, m_moveDura));
-                //.OnComplete(() => m_playerTurn.color = Color.clear);
                 break;
             case BattleUIType.EnemyTurn:
                 m_enemyTurn.color = Color.red;
@@ -58,7 +57,6 @@ public class BattleUIController : MonoBehaviour
                 s.Append(m_enemyRecttra.DOAnchorPosX(0, m_moveDura))
                 .AppendInterval(0.5f)
                 .Append(m_enemyRecttra.DOAnchorPosX(-m_moveX, m_moveDura));
-                //.OnComplete(() => m_enemyTurn.color = Color.clear);
                 break;
         }
         s.OnComplete(() =>

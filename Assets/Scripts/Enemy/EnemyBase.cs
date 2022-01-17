@@ -78,6 +78,7 @@ public class EnemyBase : CharactorBase, IDrop
         if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
         Debug.Log($"{m_enemyDataBase.CommandSelect(this, turn).Power}ダメージ");
+        Debug.Log("配列数" + m_enemyDataBase.CommandSelect(this, turn).Conditions.Count);
         m_player.GetAcceptDamage(m_enemyDataBase.CommandSelect(this, turn));
         AttackAnim(false);
     }

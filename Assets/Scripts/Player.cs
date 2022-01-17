@@ -57,7 +57,7 @@ public class Player : CharactorBase, IDrop
     /// <param name="damage">被ダメージ</param>
     public void GetAcceptDamage(EnemyActionCommnad3 enemy)
     {
-        //SetCondisionTurn(enemy.Condition);
+        AddEffect(enemy.Conditions);
         int damage = CalculationAcceptDamage(enemy.Power);
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
