@@ -11,7 +11,7 @@ public class Discard : CardManagement
     {
         for (int i = transform.childCount - 1; 0 <= i; i--)
         {
-            transform.GetChild(i).GetComponent<BlankCard>().GetPlayerEffect();
+            //transform.GetChild(i).GetComponent<BlankCard>().GetPlayerEffect();
             transform.GetChild(i).SetParent(m_deck, false);
         }
     }
