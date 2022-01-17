@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        BattleManager.Instance.TurnBegin.Subscribe(turn => EnemyTrun(turn));
+        BattleManager.Instance.TurnEnd2.Subscribe(turn => EnemyTrun(turn));
     }
 
     public void CreateEnemies(int id)

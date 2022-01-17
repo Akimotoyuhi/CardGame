@@ -84,7 +84,6 @@ public class Player : CharactorBase, IDrop
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != UseType.ToPlayer) return;
-        BlankCard cards = card;
         foreach (var item in card.Conditions)
         {
             m_conditions.Add(item);

@@ -75,12 +75,12 @@ public class EnemyBaseState
 public class EnemyActionCommnad3
 {
     [Header("行動データ")]
-    [SerializeField] string m_power = "0";
-    [SerializeField] string m_block = "0";
+    [SerializeField] int m_power = 0;
+    [SerializeField] int m_block = 0;
     [SerializeField] List<ConditionSelection> m_condition;
     [SerializeField] TargetType m_target;
-    public int Power => int.Parse(m_power);
-    public int Block => int.Parse(m_block);
+    public int Power { get => m_power; set => m_power = value; }
+    public int Block { get => m_block; set => m_block = value; }
     public List<Condition> Conditions
     {
         get

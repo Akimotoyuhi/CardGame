@@ -19,12 +19,12 @@ MonoBehaviour:
     m_NodeType: 1
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 4
+      - m_type: 0
         m_value: 2
         m_isProbability: 0
       m_actionCommnad:
-        m_power: 
-        m_block: 
+        m_power: 0
+        m_block: 0
         m_condition:
         - m_conditionID: 0
           m_turn: 2
@@ -32,7 +32,7 @@ MonoBehaviour:
     - m_conditionalCommand: []
       m_actionCommnad:
         m_power: 3
-        m_block: 
+        m_block: 0
         m_condition: []
         m_target: 0
   - m_name: "\u30EC\u30E6\u30CB\u30AA\u30F3\u5175"
@@ -45,13 +45,13 @@ MonoBehaviour:
         m_value: 2
         m_isProbability: 0
       m_actionCommnad:
-        m_power: 5
-        m_block: 
+        m_power: 7
+        m_block: 0
         m_condition: []
         m_target: 0
     - m_conditionalCommand: []
       m_actionCommnad:
-        m_power: 7
-        m_block: 
+        m_power: 5
+        m_block: 0
         m_condition: []
         m_target: 0

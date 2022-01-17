@@ -59,12 +59,12 @@ public class EnemyBase : CharactorBase, IDrop
         card.OnCast();
     }
 
-    //private int SetAttack(int power)
-    //{
-    //    //EnemyCommand ret = new EnemyCommand();
-    //    int ret = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, power);
-    //    return ret;
-    //}
+    private int SetAttack(int power)
+    {
+        //EnemyCommand ret = new EnemyCommand();
+        int ret = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, power);
+        return ret;
+    }
 
     /// <summary>
     /// ActionDataに基づいた敵の行動
@@ -74,8 +74,10 @@ public class EnemyBase : CharactorBase, IDrop
     {
         if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
-        Debug.Log($"{m_enemyDataBase.CommandSelect(this, turn).Power}ダメージ");
-        m_player.GetAcceptDamage(m_enemyDataBase.CommandSelect(this, turn));
+        EnemyActionCommnad3 command = m_enemyDataBase.CommandSelect(this, turn);
+        Debug.Log($"与えるダメージ{command.Power}");
+        command.Power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.Power);
+        m_player.GetAcceptDamage(command);
         AttackAnim(false);
     }
 }
