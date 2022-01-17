@@ -16,7 +16,18 @@ namespace Mastar
         private List<CardID> m_cards = new List<CardID>();
         public string Name { get; private set; }
         public Sprite Sprite { get; private set; }
-        public int CurrentLife { get; set; }
+        public int CurrentLife
+        {
+            get => CurrentLife;
+            set
+            {
+                CurrentLife = value;
+                if (CurrentLife > MaxLife)
+                {
+                    CurrentLife = MaxLife;
+                }
+            }
+        }
         public int MaxLife { get; set; }
         public void SavePlayerState(string name, Sprite sprite, int maxLife, int currentLife)
         {

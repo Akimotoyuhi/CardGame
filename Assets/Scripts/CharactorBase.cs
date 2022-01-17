@@ -3,7 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
+/// <summary>
+/// 敵とプレイヤーの基底クラス<br/>
+/// 共通処理をまとめておく
+/// </summary>
 public class CharactorBase : MonoBehaviour
 {
     /// <summary>名前</summary>
@@ -16,11 +21,16 @@ public class CharactorBase : MonoBehaviour
     protected int m_block;
     /// <summary>画像</summary>
     protected Sprite m_image;
+    /// <summary>HPのスライダー</summary>
     [SerializeField] protected Slider m_hpSlider;
+    /// <summary>ブロック値のスライダー</summary>
     [SerializeField] protected Slider m_blkSlider;
+    /// <summary>HPバー前にあるテキスト</summary>
     [SerializeField] protected Text m_text;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
+    /// <summary>アニメーション中判定</summary>
+    private bool m_isAnim = false;
     protected List<Condition> m_conditions = new List<Condition>();
     public string Name => m_name;
     public int MaxLife => m_maxLife;
@@ -30,7 +40,7 @@ public class CharactorBase : MonoBehaviour
         set
         {
             m_life += value;
-            if (m_life > m_maxLife)
+            if (m_life >= m_maxLife)
             {
                 m_life = m_maxLife;
             }
@@ -46,6 +56,7 @@ public class CharactorBase : MonoBehaviour
         m_hpSlider.maxValue = m_maxLife;
         m_hpSlider.value = m_life;
         m_blkSlider.value = m_block;
+        //defpos = transform.position;
         //m_conditions = new List<Condition>();
         SetUI();
         //m_stateArray = new int[(int)BuffDebuff.end];
@@ -113,6 +124,24 @@ public class CharactorBase : MonoBehaviour
         parsent /= 100;
         float t = num * (1 - parsent);
         return (int)t;
+    }
+    Vector2 defpos = default;
+    protected void AttackAnim(bool isRightMove)
+    {
+        //float moveDura = 50;
+        //if (!isRightMove)
+        //{
+        //    moveDura *= -1;
+        //}
+        //if (!m_isAnim)
+        //{
+        //    m_isAnim = true;
+        //    defpos = transform.position;
+        //    Sequence s = DOTween.Sequence();
+        //    s.Append(transform.DOMoveX(defpos.y + moveDura, 0.1f))
+        //        .Append(transform.DOMoveX(defpos.y, 0.1f))
+        //        .OnComplete(() => m_isAnim = false);
+        //}
     }
 
     public void SetParam(string name, Sprite image, int hp)

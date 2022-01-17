@@ -47,12 +47,15 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Hand m_hand;
     /// <summary>報酬画面</summary>
     [SerializeField] Reward m_reward;
+    /// <summary>戦闘時のUI管理クラス</summary>
+    [SerializeField] BattleUIController m_battleUIController;
     /// <summary>カードデータ</summary>
     [SerializeField] NewCardData m_cardData;
+    /// <summary>カードのプレハブ</summary>
     [SerializeField] GameObject m_cardPrefab;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
-    /// <summary>ボタンの受付拒否</summary>
+    /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
     private bool m_isGame = false;
@@ -103,7 +106,8 @@ public class BattleManager : MonoBehaviour
         m_isGame = true;
         Setup();
         CreateField(enemyid);
-        FirstTurn();
+        m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
+        //FirstTurn();
     }
     /// <summary>
     /// 戦闘終了
@@ -180,20 +184,27 @@ public class BattleManager : MonoBehaviour
         Debug.Log(m_progressTurn + "ターン目");
         //m_turnBegin.OnNext(m_progressTurn);
         m_progressTurn++;
-        TurnStart();
+        m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
+        //TurnStart();
+    }
+
+    public void OnClick()
+    {
+        if (m_isPress) return;
+        m_battleUIController.Play(BattleUIType.EnemyTurn, TurnEnd);
+        //TurnEnd();
     }
 
     /// <summary>ターン終了</summary>
-    public void TurnEnd()
+    private void TurnEnd()
     {
-        if (m_isPress) return;
         m_isPress = true;
         m_hand.AllCast();
         m_turnEnd.OnNext(m_progressTurn);
         //m_enemyManager.EnemyTrun(m_progressTurn);
         m_player.TurnEnd();
         m_progressTurn++;
-        Invoke("TurnStart", 0.5f);
+        m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
     }
 
     /// <summary>

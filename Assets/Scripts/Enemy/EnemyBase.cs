@@ -79,5 +79,6 @@ public class EnemyBase : CharactorBase, IDrop
         if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
         Debug.Log($"{m_enemyDataBase.CommandSelect(this, turn).Power}É_ÉÅÅ[ÉW");
         m_player.GetAcceptDamage(m_enemyDataBase.CommandSelect(this, turn));
+        AttackAnim(false);
     }
 }

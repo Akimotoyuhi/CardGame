@@ -117,6 +117,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public BlankCard OnCast()
     {
         m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
+        m_player.PlayerAnim();
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         transform.SetParent(m_discard, false); //捨て札に移動
         //BattleManager.Instance.SetHandUI();
