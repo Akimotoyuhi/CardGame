@@ -27,11 +27,11 @@ public class NewCardData : ScriptableObject
     {
         Rarity rarity = new Rarity();
         int r = UnityEngine.Random.Range(0, 100);
-        if (r <= m_eliteProbability)
+        if (r < m_eliteProbability)
         {
             rarity = Rarity.Elite;
         }
-        else if (r <= m_rareProbability)
+        else if (r < m_rareProbability)
         {
             rarity = Rarity.Rare;
         }

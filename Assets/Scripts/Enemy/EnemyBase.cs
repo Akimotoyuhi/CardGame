@@ -73,7 +73,11 @@ public class EnemyBase : CharactorBase, IDrop
     public void Action(int turn)
     {
         if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
+        if (m_enemyDataBase.CommandSelect(this, turn) == null)
+        {
+            Debug.Log("âΩÇ‡ÇµÇ»Ç¢");
+            return;
+        }
         EnemyActionCommnad3 command = m_enemyDataBase.CommandSelect(this, turn);
         Debug.Log($"ó^Ç¶ÇÈÉ_ÉÅÅ[ÉW{command.Power}");
         int atk = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.Power);

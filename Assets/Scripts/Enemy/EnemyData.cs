@@ -38,10 +38,10 @@ public class EnemyDataBase
                 for (int i = 0; i < m_enemyBaseState.Count; i++)
                 {
                     bool flag = false;
-                    if (m_enemyBaseState[i].m_conditionalCommand.Count <= 0)
-                    {
-                        return m_enemyBaseState[i].m_actionCommnad;
-                    }
+                    //if (m_enemyBaseState[i].m_conditionalCommand.Count <= 0)
+                    //{
+                    //    return m_enemyBaseState[i].m_actionCommnad; //こいつが悪い
+                    //}
                     for (int n = 0; n < m_enemyBaseState[i].m_conditionalCommand.Count; n++)
                     {
                         if (!m_enemyBaseState[i].m_conditionalCommand[n].Conditional(enemy, turn))
@@ -114,14 +114,19 @@ public class EnemyConditionalCommand3
     /// <returns>成功可否</returns>
     public bool Conditional(EnemyBase enemy, int turn)
     {
-        //if (turn == 0)
-        //{
-        //    if (m_type != WhereType.Turn && m_value != 0)
-        //    {
-        //        //0ターン目は特別な処理が無い限り動かないようにする
-        //        return false;
-        //    }
-        //}
+        Debug.Log($"条件式入った  ターン数{turn}:type{m_type}");
+        if (turn == 0)
+        {
+            if (m_type == WhereType.BattleBegin)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         switch (m_type)
         {
             case WhereType.Turn:
@@ -130,19 +135,13 @@ public class EnemyConditionalCommand3
                     return true;
                 }
                 return false;
-            case WhereType.NotTurn:
-                if (turn == m_value)
-                {
-                    return false;
-                }
-                return true;
             case WhereType.RowTurn:
                 if (turn <= m_value)
                 {
                     return true;
                 }
                 return false;
-            case WhereType.HighLife:
+            case WhereType.HighTurn:
                 if (turn >= m_value)
                 {
                     return true;
@@ -160,8 +159,14 @@ public class EnemyConditionalCommand3
                     return true;
                 }
                 return false;
+            case WhereType.HighLife:
+                if (enemy.CurrentLife >= m_value)
+                {
+                    return true;
+                }
+                return false;
             default:
-                Debug.Log("無効な条件ケース");
+                Debug.LogError("無効な条件ケース");
                 return false;
         }
     }
@@ -176,10 +181,10 @@ public enum TargetType
 public enum WhereType
 {
     Turn,
-    NotTurn,
     RowTurn,
     HighTurn,
     MultipleTurn,
     RowLife,
     HighLife,
+    BattleBegin,
 }
