@@ -9,6 +9,7 @@ namespace Mastar
         private static DataManager m_instance = new DataManager();
         public static DataManager Instance => m_instance;
         //private DataManager() { }
+        private int m_currentLife = 0;
 
         /// <summary>現在の進行状況</summary>
         public int Step { get; set; } = 0;
@@ -18,13 +19,13 @@ namespace Mastar
         public Sprite Sprite { get; private set; }
         public int CurrentLife
         {
-            get => CurrentLife;
+            get => m_currentLife;
             set
             {
-                CurrentLife = value;
-                if (CurrentLife > MaxLife)
+                m_currentLife = value;
+                if (m_currentLife > MaxLife)
                 {
-                    CurrentLife = MaxLife;
+                    m_currentLife = MaxLife;
                 }
             }
         }
