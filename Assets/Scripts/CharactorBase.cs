@@ -32,6 +32,7 @@ public class CharactorBase : MonoBehaviour
     /// <summary>アニメーション中判定</summary>
     private bool m_isAnim = false;
     protected List<Condition> m_conditions = new List<Condition>();
+    protected RectTransform m_rectTransform;
     public string Name => m_name;
     public int MaxLife => m_maxLife;
     public int CurrentLife
@@ -56,10 +57,8 @@ public class CharactorBase : MonoBehaviour
         m_hpSlider.maxValue = m_maxLife;
         m_hpSlider.value = m_life;
         m_blkSlider.value = m_block;
-        //defpos = transform.position;
-        //m_conditions = new List<Condition>();
+        m_rectTransform = GetComponent<RectTransform>();
         SetUI();
-        //m_stateArray = new int[(int)BuffDebuff.end];
     }
 
     /// <summary>

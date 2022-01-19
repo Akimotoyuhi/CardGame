@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &183471455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1907,6 +1907,8 @@ MonoBehaviour:
   m_battleUIController: {fileID: 898539508}
   m_cardData: {fileID: 11400000, guid: 979a94e45594ef04da72e95a87ccd681, type: 2}
   m_cardPrefab: {fileID: 4756192355611260294, guid: ad5ff9493237f6f44a07a22bff2b1928,
+    type: 3}
+  m_damageTextPrefab: {fileID: 3589477616511004303, guid: 3fc45f6c1cb5c0e4785baaf4d3032234,
     type: 3}
   m_rewardNum: 3
 --- !u!1 &1830025914

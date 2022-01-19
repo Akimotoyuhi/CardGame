@@ -53,6 +53,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] NewCardData m_cardData;
     /// <summary>カードのプレハブ</summary>
     [SerializeField] GameObject m_cardPrefab;
+    /// <summary>ダメージ表示用のテキスト</summary>
+    [SerializeField] GameObject m_damageTextPrefab;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
     /// <summary>ボタンの受付</summary>
@@ -232,8 +234,13 @@ public class BattleManager : MonoBehaviour
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
     }
-    //public void SetHandUI()
-    //{
-    //    m_hand.SetChildDefpos();
-    //}
+    public void ViewText(string str, RectTransform rectTransform, ColorType colorType)
+    {
+        DamageText text = Instantiate(m_damageTextPrefab).GetComponent<DamageText>();
+        text.transform.SetParent(rectTransform);
+        text.transform.position = rectTransform.anchoredPosition;
+        text.Color(colorType);
+        text.ChangeText(str);
+        text.RandomMove();
+    }
 }
