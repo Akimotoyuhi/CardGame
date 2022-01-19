@@ -76,8 +76,10 @@ public class EnemyBase : CharactorBase, IDrop
         if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
         EnemyActionCommnad3 command = m_enemyDataBase.CommandSelect(this, turn);
         Debug.Log($"ó^Ç¶ÇÈÉ_ÉÅÅ[ÉW{command.Power}");
-        command.Power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.Power);
-        m_player.GetAcceptDamage(command);
+        int atk = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.Power);
+        int blk = command.Block;
+        List<Condition> conditions = command.Conditions;
+        m_player.GetAcceptDamage(atk, blk, conditions);
         AttackAnim(false);
     }
 }

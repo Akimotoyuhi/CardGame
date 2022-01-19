@@ -92,7 +92,7 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
-    /// バフデバフを付与された時の配列の加算
+    /// バフデバフを付与された時の加算
     /// </summary>
     /// <param name="conditions"></param>
     protected void AddEffect(List<Condition> conditions)
@@ -110,6 +110,7 @@ public class CharactorBase : MonoBehaviour
             }
             if (!flag)
             {
+                //同じエフェクトが一つも見つからなかったら新たに追加
                 m_conditions.Add(conditions[i]);
             }
         }
@@ -122,7 +123,11 @@ public class CharactorBase : MonoBehaviour
     {
         for (int i = 0; i < m_conditions.Count; i++)
         {
-            if (m_conditions[i].Turn <= 0) m_conditions.RemoveAt(i);
+            if (m_conditions[i].Turn <= 0)
+            {
+                m_conditions.RemoveAt(i);
+                Debug.Log("デバフを除去");
+            }
         }
     }
 

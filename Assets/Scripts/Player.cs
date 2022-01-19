@@ -55,10 +55,25 @@ public class Player : CharactorBase, IDrop
     /// 被ダメージ処理
     /// </summary>
     /// <param name="damage">被ダメージ</param>
-    public void GetAcceptDamage(EnemyActionCommnad3 enemy)
+    //public void GetAcceptDamage(EnemyActionCommnad3 enemy)
+    //{
+    //    AddEffect(enemy.Conditions);
+    //    int damage = CalculationAcceptDamage(enemy.Power);
+    //    Debug.Log($"受けたダメージ{damage}");
+    //    damage = m_block -= damage;
+    //    if (m_block < 0) { m_block = 0; }
+    //    damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
+    //    if (damage < 0) { }
+    //    else
+    //    {
+    //        m_life -= damage;
+    //    }
+    //    SetUI();
+    //}
+    public void GetAcceptDamage(int power, int blk ,List<Condition> conditions)
     {
-        AddEffect(enemy.Conditions);
-        int damage = CalculationAcceptDamage(enemy.Power);
+        AddEffect(conditions);
+        int damage = CalculationAcceptDamage(power);
         Debug.Log($"受けたダメージ{damage}");
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }

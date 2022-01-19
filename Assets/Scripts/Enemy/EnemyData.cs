@@ -76,7 +76,9 @@ public class EnemyActionCommnad3
 {
     [Header("行動データ")]
     [SerializeField] int m_power = 0;
+    //private int m_initPower = 0;
     [SerializeField] int m_block = 0;
+    //private int m_initBlock = 0;
     [SerializeField] List<ConditionSelection> m_condition;
     [SerializeField] TargetType m_target;
     public int Power { get => m_power; set => m_power = value; }
