@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour
 
     public void CreateEnemies(int id)
     {
-        m_enemyDatabase = m_enemyData.m_enemyDataBases[id];
+        m_enemyDatabase = m_enemyData.EnemyDataBase(id);
         Transform tra = Instantiate(m_enemyPrefab, transform).transform;
         tra.SetParent(transform, false);
         EnemyBase e = tra.GetComponent<EnemyBase>();

@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
-    public List<EnemyDataBase> m_enemyDataBases;
+    [SerializeField] List<EnemyDataBase> m_enemyDataBases;
+    public EnemyDataBase EnemyDataBase(int index) => m_enemyDataBases[index];
 }
 
 /// <summary>
@@ -15,15 +16,32 @@ public enum EnemyID
 {
     origimusi,
     Soldier,
-    endLength
+    ForsakenOne,
+    endLength,
+}
+/// <summary>
+/// “GoŒ»êŠ
+/// </summary>
+public enum EnemyAppearanceEria
+{
+    Act1Enemy,
+    Act1Elite,
+    Act1Boss,
+    Act2Enemy,
+    Act2Elite,
+    Act2Boss,
+    Act3Enemy,
+    Act3Elite,
+    Act3Boss,
 }
 
 [System.Serializable]
 public class EnemyDataBase
 {
-    [SerializeField] string m_name;
-    [SerializeField] int m_life;
-    [SerializeField] Sprite m_image;
+    [SerializeField, Tooltip("–¼‘O")] string m_name;
+    [SerializeField, Tooltip("Å‘å‘Ì—Í")] int m_life;
+    [SerializeField, Tooltip("‰æ‘œ")] Sprite m_image;
+    [SerializeField, Tooltip("oŒ»êŠ")] EnemyAppearanceEria m_enemyAppearanceEria;
     public string Name => m_name;
     public int Life => m_life;
     public Sprite Image => m_image;
