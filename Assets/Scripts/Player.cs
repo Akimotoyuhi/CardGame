@@ -82,7 +82,7 @@ public class Player : CharactorBase, IDrop
         else
         {
             m_life -= damage;
-            //BattleManager.Instance.ViewText(damage.ToString(), m_rectTransform, ColorType.Red);
+            BattleManager.Instance.ViewText(damage.ToString(), m_rectTransform, ColorType.Red);
         }
         SetUI();
     }

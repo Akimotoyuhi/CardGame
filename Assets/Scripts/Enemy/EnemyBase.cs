@@ -47,7 +47,7 @@ public class EnemyBase : CharactorBase, IDrop
         {
             //StartCoroutine(ContinuousReaction(GetCardType.Damage, damage, card.AttackNum));
             m_life -= damage;
-            //BattleManager.Instance.ViewText(damage.ToString(), m_rectTransform, ColorType.Red);
+            BattleManager.Instance.ViewText(damage.ToString(), m_rectTransform, ColorType.Red);
             if (m_life <= 0)
             {
                 m_isDead = true;

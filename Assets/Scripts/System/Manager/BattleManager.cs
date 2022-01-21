@@ -83,10 +83,6 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         m_enemyData.Assignment();
-        //foreach (var item in m_enemyData.Act1Enemy)
-        //{
-        //    Debug.Log(item.Name);
-        //}
         Setup();
         m_reward.RewardDisabled();
     }
@@ -247,11 +243,11 @@ public class BattleManager : MonoBehaviour
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
     }
-    public void ViewText(string str, RectTransform rectTransform, ColorType colorType)
+    public void ViewText(string str, RectTransform tra, ColorType colorType)
     {
         DamageText text = Instantiate(m_damageTextPrefab).GetComponent<DamageText>();
-        text.transform.SetParent(rectTransform);
-        text.transform.position = rectTransform.anchoredPosition;
+        text.transform.SetParent(tra);
+        text.transform.position = tra.anchoredPosition;
         text.Color(colorType);
         text.ChangeText(str);
         text.RandomMove();

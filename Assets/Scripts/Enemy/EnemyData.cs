@@ -20,16 +20,13 @@ public class EnemyData : ScriptableObject
         m_act1Enemies.Clear();
         m_act1Elites.Clear();
         m_act1Boss.Clear();
-        Debug.Log("Š„‚è“–‚ÄŠÖ”‚É“ü‚Á‚½");
         for (int i = 0; i < m_useData; i++)
         {
             EnemyDataBase data = m_enemyDataBases[i];
             switch (data.EnemyAppearanceEria)
             {
                 case EnemyAppearanceEria.Act1Enemy:
-                    Debug.Log(data.Name);
                     m_act1Enemies.Add(data);
-                    Debug.Log(m_act1Enemies.Count);
                     break;
                 case EnemyAppearanceEria.Act1Elite:
                     m_act1Elites.Add(data);
