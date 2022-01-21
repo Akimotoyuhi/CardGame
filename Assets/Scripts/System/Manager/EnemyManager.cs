@@ -8,13 +8,13 @@ using UniRx;
 /// </summary>
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] GameManager m_gamemanager;
     /// <summary>敵データ</summary>
     //[SerializeField] EnemyData m_enemydata;
     [SerializeField] EnemyData m_enemyData;
     private EnemyDataBase m_enemyDatabase;
     /// <summary>敵プレハブ</summary>
     [SerializeField] GameObject m_enemyPrefab;
+    /// <summary>現在出現中の全敵データ　戦闘中に使う</summary>
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
     /// <summary>敵の総数。終了判定用</summary>
     private int m_enemyCount = 0;

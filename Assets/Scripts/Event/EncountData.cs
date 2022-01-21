@@ -6,7 +6,8 @@ using System;
 [CreateAssetMenu]
 public class EncountData : ScriptableObject
 {
-    public List<EncountDataBase> m_data = new List<EncountDataBase>();
+    [SerializeField] List<EncountDataBase> m_enemyData = new List<EncountDataBase>();
+    public EncountDataBase Encount(int index) => m_enemyData[index];
 }
 
 [Serializable]

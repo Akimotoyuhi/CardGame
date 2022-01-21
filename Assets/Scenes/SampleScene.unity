@@ -1899,6 +1899,7 @@ MonoBehaviour:
   m_playerPos: {fileID: 673890279}
   m_costViewText: {fileID: 183109582}
   m_enemies: {fileID: 1844585986}
+  m_enemyData: {fileID: 11400000, guid: 8febba63acd6ad84e9fbddf3976ebf2b, type: 2}
   m_encountData: {fileID: 11400000, guid: 7265d44935f4b41448a01cacee5265c4, type: 2}
   m_deck: {fileID: 1883843276}
   m_discard: {fileID: 1728880376}
@@ -2048,7 +2049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63fe951faf80c04b9be4c7ba9345362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gamemanager: {fileID: 911093667}
   m_enemyData: {fileID: 11400000, guid: 8febba63acd6ad84e9fbddf3976ebf2b, type: 2}
   m_enemyPrefab: {fileID: 8787646866016234159, guid: 0c202af5872ee384f97e108b572029cf,
     type: 3}

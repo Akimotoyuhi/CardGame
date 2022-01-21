@@ -16,6 +16,7 @@ MonoBehaviour:
   - m_name: "\u30AA\u30EA\u30B8\u30E0\u30B7"
     m_life: 30
     m_image: {fileID: 21300000, guid: 24a793a574247fe4ea1d2f84eeaf7db8, type: 3}
+    m_enemyAppearanceEria: 0
     m_NodeType: 1
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -41,6 +42,7 @@ MonoBehaviour:
   - m_name: "\u30EC\u30E6\u30CB\u30AA\u30F3\u5175"
     m_life: 50
     m_image: {fileID: 21300000, guid: f88bc2cc103c0e34f9f3aa5b2fcce452, type: 3}
+    m_enemyAppearanceEria: 0
     m_NodeType: 1
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -58,6 +60,21 @@ MonoBehaviour:
         m_isProbability: 0
       m_actionCommnad:
         m_power: 5
+        m_block: 0
+        m_condition: []
+        m_target: 0
+  - m_name: "\u898B\u68C4\u3066\u3089\u308C\u305F\u8005"
+    m_life: 100
+    m_image: {fileID: 21300000, guid: f88bc2cc103c0e34f9f3aa5b2fcce452, type: 3}
+    m_enemyAppearanceEria: 2
+    m_NodeType: 1
+    m_enemyBaseState:
+    - m_conditionalCommand:
+      - m_type: 6
+        m_value: 0
+        m_isProbability: 0
+      m_actionCommnad:
+        m_power: 0
         m_block: 0
         m_condition: []
         m_target: 0

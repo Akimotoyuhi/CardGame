@@ -1,12 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
-    [SerializeField] List<EnemyDataBase> m_enemyDataBases;
+    [SerializeField] int m_useData = 3;
+    [SerializeField] List<EnemyDataBase> m_enemyDataBases = new List<EnemyDataBase>();
+    private List<EnemyDataBase> m_act1Enemies = new List<EnemyDataBase>();
+    private List<EnemyDataBase> m_act1Elites = new List<EnemyDataBase>();
+    private List<EnemyDataBase> m_act1Boss = new List<EnemyDataBase>();
     public EnemyDataBase EnemyDataBase(int index) => m_enemyDataBases[index];
+    public List<EnemyDataBase> Act1Enemy => m_act1Enemies;
+    public List<EnemyDataBase> Act1Elite => m_act1Elites;
+    public List<EnemyDataBase> Act1Boss => m_act1Boss;
+    public void Assignment()
+    {
+        m_act1Enemies.Clear();
+        m_act1Elites.Clear();
+        m_act1Boss.Clear();
+        Debug.Log("割り当て関数に入った");
+        for (int i = 0; i < m_useData; i++)
+        {
+            EnemyDataBase data = m_enemyDataBases[i];
+            switch (data.EnemyAppearanceEria)
+            {
+                case EnemyAppearanceEria.Act1Enemy:
+                    Debug.Log(data.Name);
+                    m_act1Enemies.Add(data);
+                    Debug.Log(m_act1Enemies.Count);
+                    break;
+                case EnemyAppearanceEria.Act1Elite:
+                    m_act1Elites.Add(data);
+                    break;
+                case EnemyAppearanceEria.Act1Boss:
+                    m_act1Boss.Add(data);
+                    break;
+                default:
+                    Debug.LogWarning("与えられたパラメーターに対する値がありません");
+                    break;
+            }
+        }
+    }
 }
 
 /// <summary>
@@ -14,8 +50,11 @@ public class EnemyData : ScriptableObject
 /// </summary>
 public enum EnemyID
 {
+    /// <summary>オリジムシ</summary>
     origimusi,
+    /// <summary>レユニオン兵</summary>
     Soldier,
+    /// <summary>見棄てられた者</summary>
     ForsakenOne,
     endLength,
 }
@@ -45,8 +84,9 @@ public class EnemyDataBase
     public string Name => m_name;
     public int Life => m_life;
     public Sprite Image => m_image;
+    public EnemyAppearanceEria EnemyAppearanceEria => m_enemyAppearanceEria;
     public enum NodeType { Selector, Sequence }
-    public NodeType m_NodeType = NodeType.Sequence;
+    private NodeType m_NodeType = NodeType.Sequence;
     public List<EnemyBaseState> m_enemyBaseState;
     public EnemyActionCommnad3 CommandSelect(EnemyBase enemy, int turn)
     {

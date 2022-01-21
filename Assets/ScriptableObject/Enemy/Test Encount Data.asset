@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda319e6898c6b64f99c27bf7e6179b7, type: 3}
   m_Name: Test Encount Data
   m_EditorClassIdentifier: 
-  m_data:
+  m_enemyData:
   - m_enemyID: 00000000
-  - m_enemyID: 00000000
+  - m_enemyID: 01000000
