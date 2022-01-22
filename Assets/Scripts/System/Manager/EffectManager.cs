@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 /// <summary>
-/// エフェクトやってくれるクラス
+/// エフェクトやってくれるクラス<br/>
+/// 演出用のテキストやパーティクルを表示してくれる
 /// </summary>
 public class EffectManager : MonoBehaviour
 {
@@ -20,8 +21,6 @@ public class EffectManager : MonoBehaviour
 
     void Start()
     {
-        RectTransform rt = GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(500, 500);
-        rt.position = new Vector2(500, 500);
+        gameObject.GetRectTransform().anchoredPosition = new Vector2(500, 500);
     }
 }

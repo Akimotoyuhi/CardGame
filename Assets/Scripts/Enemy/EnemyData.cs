@@ -20,7 +20,7 @@ public class EnemyData : ScriptableObject
         m_act1Enemies.Clear();
         m_act1Elites.Clear();
         m_act1Boss.Clear();
-        for (int i = 0; i < m_useData; i++)
+        for (int i = 0; i < m_enemyDataBases.Count; i++)
         {
             EnemyDataBase data = m_enemyDataBases[i];
             switch (data.EnemyAppearanceEria)

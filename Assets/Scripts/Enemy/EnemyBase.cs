@@ -52,7 +52,7 @@ public class EnemyBase : CharactorBase, IDrop
             {
                 m_isDead = true;
                 m_enemyManager.Removed();
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
         }
         SetUI();
