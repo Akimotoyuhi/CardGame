@@ -10,7 +10,7 @@ using DG.Tweening;
 /// </summary>
 public class EffectManager : MonoBehaviour
 {
-    [SerializeField] RectTransform Text;
+    [SerializeField] GameObject Text;
 
     public static EffectManager Instance { get; private set; }
 
@@ -19,8 +19,21 @@ public class EffectManager : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    public void ViewText(string text, Vector2 position, Transform parent)
     {
-        gameObject.GetRectTransform().anchoredPosition = new Vector2(500, 500);
+        GameObject obj = Instantiate(Text);
+        obj.transform.SetParent(parent, false);
+        obj.SetText(text);
+        obj.GetRectTransform().anchoredPosition = position;
+    }
+    public void MoveText(string text, Vector2 position, Transform parent, Vector2 endValue, float duration, System.Action action)
+    {
+        GameObject obj = Instantiate(Text);
+        obj.transform.SetParent(parent, false);
+        obj.SetText(text);
+        RectTransform rt = obj.GetRectTransform();
+        rt.anchoredPosition = position;
+        DOTween.Sequence().Append(rt.DOAnchorPos(endValue, duration))
+            .OnComplete(() => action());
     }
 }
