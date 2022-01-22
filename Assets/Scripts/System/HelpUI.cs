@@ -12,6 +12,10 @@ public static class HelpUI
     {
         return obj.GetComponent<RectTransform>();
     }
+    public static Text GetText(this GameObject obj)
+    {
+        return obj.GetComponent<Text>();
+    }
     public static Text SetText(this GameObject obj, string text)
     {
         Text t = obj.GetComponent<Text>();
