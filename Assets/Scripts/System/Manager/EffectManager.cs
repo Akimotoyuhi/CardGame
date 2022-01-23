@@ -50,8 +50,6 @@ public class EffectManager : MonoBehaviour
     {
         GameObject obj = Instantiate(m_textPrefab);
         Text viewText = obj.SetText(text, Color.clear);
-        //viewText.text = text;
-        //viewText.color = Color.clear;
         obj.transform.SetParent(parent, false);
         RectTransform rt = obj.GetRectTransform();
         rt.localScale = scaleChanged ? new Vector2(-1, 1) : Vector2.one;

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// UI関連を便利にする拡張メソッド
+/// UI関連を便利にする拡張メソッド<br/>随時拡張
 /// </summary>
-public static class HelpUI
+public static class UIHelper
 {
     public static RectTransform GetRectTransform(this GameObject obj)
     {
