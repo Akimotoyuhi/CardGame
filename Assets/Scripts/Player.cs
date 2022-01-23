@@ -82,7 +82,14 @@ public class Player : CharactorBase, IDrop
         else
         {
             m_life -= damage;
-            BattleManager.Instance.ViewText(damage.ToString(), m_rectTransform, ColorType.Red);
+            if (m_life <= 0)
+            {
+                Debug.Log("がめおべｒ");
+            }
+            else
+            {
+                EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform);
+            }
         }
         SetUI();
     }

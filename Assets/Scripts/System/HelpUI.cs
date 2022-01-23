@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// RectTransformを勝手に取ってくれる拡張メソッド
+/// UI関連を便利にする拡張メソッド
 /// </summary>
 public static class HelpUI
 {
@@ -20,6 +20,28 @@ public static class HelpUI
     {
         Text t = obj.GetComponent<Text>();
         t.text = text;
+        return t;
+    }
+    public static Text SetText(this GameObject obj, string text, Color color)
+    {
+        Text t = obj.GetComponent<Text>();
+        t.text = text;
+        t.color = color;
+        return t;
+    }
+    public static Text SetText(this GameObject obj, string text, int fontSize)
+    {
+        Text t = obj.GetComponent<Text>();
+        t.text = text;
+        t.fontSize = fontSize;
+        return t;
+    }
+    public static Text SetText(this GameObject obj, string text, Color color, int fontSize)
+    {
+        Text t = obj.GetComponent<Text>();
+        t.text = text;
+        t.color = color;
+        t.fontSize = fontSize;
         return t;
     }
 }

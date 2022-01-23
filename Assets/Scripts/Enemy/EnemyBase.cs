@@ -45,14 +45,16 @@ public class EnemyBase : CharactorBase, IDrop
         if (damage < 0) { }
         else
         {
-            //StartCoroutine(ContinuousReaction(GetCardType.Damage, damage, card.AttackNum));
             m_life -= damage;
-            BattleManager.Instance.ViewText(damage.ToString(), m_rectTransform, ColorType.Red);
             if (m_life <= 0)
             {
                 m_isDead = true;
                 m_enemyManager.Removed();
                 Destroy(gameObject);
+            }
+            else
+            {
+                EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform, true);
             }
         }
         SetUI();
