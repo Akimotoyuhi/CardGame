@@ -63,6 +63,8 @@ public class BattleManager : MonoBehaviour
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
     private bool m_isGame = false;
+    /// <summary>戦闘中のコルーチンに使うフラグ</summary>
+    private bool m_battleFlag = false;
     #endregion
     #endregion
     #region プロパティ
@@ -179,7 +181,6 @@ public class BattleManager : MonoBehaviour
         //}
 
         int r = UnityEngine.Random.Range(0, m_enemyData.Act1Enemy.Count);
-        Debug.Log("Random" + r);
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
         m_enemyManager.CreateEnemies(r);
 

@@ -10,11 +10,12 @@ public class Player : CharactorBase, IDrop
     private int m_maxCost = 3;
     [SerializeField]
     private int m_cost = default;
-    /// <summary>デフォルトドロー枚数。何らかの効果で下げられた後元の値に戻す時に使う　いらんかも</summary>
-    private int m_maxDrowNum = 5;
     private int m_drowNum = 5;
+    /// <summary>最大コスト</summary>
     public int MaxCost => m_maxCost;
+    /// <summary>現在コスト</summary>
     public int CurrrentCost { get => m_cost; set => m_cost = value; }
+    /// <summary>カードをドローする枚数</summary>
     public int DrowNum { get => m_drowNum; set => m_drowNum = value; }
     public Player Instance { get; private set; }
 

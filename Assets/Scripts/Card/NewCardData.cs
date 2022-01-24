@@ -75,6 +75,12 @@ public enum CardID
     ShellShapedDEF,
     /// <summary>海嘯の悲歌</summary>
     TidalElegy,
+    /// <summary>ウルサスの雄叫び</summary>
+    RoarofUrsus,
+    /// <summary>「かかってこい！」</summary>
+    BeatenUp,
+    /// <summary>鉄壁の構え</summary>
+    GuardMode,
 }
 public enum Rarity
 {

@@ -191,30 +191,6 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 状態異常のターン加算処理
-    /// </summary>
-    /// <param name="states"></param>
-    protected void SetCondisionTurn(int[] states)
-    {
-        if (states == null) return;
-        int[] nums = new int[(int)ConditionID.end];
-        nums = states;
-        for (int i = 0; i < states.Length; i++)
-        {
-            if (i == (int)ConditionID.Vulnerable)
-            {
-                //m_condition.vulnerable.turn += nums[(int)BuffDebuff.Vulnerable];
-                return;
-            }
-            else if (i == (int)ConditionID.Weakness)
-            {
-                //m_condition.weakness.turn += nums[(int)BuffDebuff.Weakness];
-                return;
-            }
-        }
-    }
-
-    /// <summary>
     /// ターン終了時に起こる効果
     /// </summary>
     public virtual void TurnEnd(int i = 0)

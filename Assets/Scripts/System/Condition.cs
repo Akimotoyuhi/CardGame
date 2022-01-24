@@ -8,24 +8,32 @@ using System;
 /// </summary>
 public enum ConditionID
 {
-    /// <summary>脱力:与えるダメージが25%低下</summary>
+    /// <summary>脱力<br/>与えるダメージが25%低下</summary>
     Weakness,
-    /// <summary>脆弱化:得るブロックが25%低下</summary>
+    /// <summary>脆弱化<br/>得るブロックが25%低下</summary>
     Vulnerable,
-    /// <summary>筋力:与えるダメージが+X</summary>
+    /// <summary>筋力<br/>与えるダメージが+X</summary>
     Strength,
-    /// <summary>敏捷性:得るブロックが+X</summary>
+    /// <summary>敏捷性<br/>得るブロックが+X</summary>
     Agile,
-    end,
+    /// <summary>プレートアーマー<br/>自分のターン終了時にnブロックを得る。攻撃されると効果-1</summary>
+    PlateArmor,
 }
-
+/// <summary>
+/// バフデバフが効果を発動するタイミング
+/// </summary>
 public enum EventTiming
 {
+    /// <summary>ターン開始時</summary>
     TurnBegin,
+    /// <summary>ターン終了時</summary>
     TurnEnd,
-    Hit,
+    /// <summary>被弾時</summary>
+    Damaged,
+    /// <summary>攻撃時(カードプレイ時)</summary>
     Attacked,
-    Drow
+    /// <summary>カードを引いた時</summary>
+    Drow,
 }
 
 public enum ParametorType
@@ -73,8 +81,20 @@ public class ConditionSelection
                     Condition vul = new Vulnerable();
                     vul.Turn = m_turn;
                     return vul;
+                case ConditionID.Strength:
+                    Condition str = new Strength();
+                    str.Turn = m_turn;
+                    return str;
+                case ConditionID.Agile:
+                    Condition agile = new Agile();
+                    agile.Turn = m_turn;
+                    return agile;
+                case ConditionID.PlateArmor:
+                    Condition pa = new PlateArmor();
+                    pa.Turn = m_turn;
+                    return pa;
                 default:
-                    Debug.Log("未設定のIDが渡されました");
+                    Debug.LogWarning("未設定のIDが渡されました");
                     return null;
             }
         }
