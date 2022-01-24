@@ -84,7 +84,7 @@ public class PlateArmor : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 && parametorType != ParametorType.Block) return 0;
+        if (Turn <= 0 && parametorType != ParametorType.Block) return block;
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
@@ -93,7 +93,7 @@ public class PlateArmor : Condition
                 Turn--;
                 return 0;
             default:
-                return 0;
+                return block;
         }
     }
     public override ConditionID ConditionID() => global::ConditionID.PlateArmor;
