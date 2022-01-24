@@ -19,9 +19,9 @@ public class BattleUIController : MonoBehaviour
 
     private void Start()
     {
-        Setup();
         m_playerRecttra = GetComponent<RectTransform>();
         m_enemyRecttra = GetComponent<RectTransform>();
+        Setup();
     }
 
     private void Setup()
@@ -29,6 +29,7 @@ public class BattleUIController : MonoBehaviour
         m_battleStartText.color = Color.clear;
         m_playerTurn.color = Color.clear;
         m_enemyTurn.color = Color.clear;
+        m_playerRecttra.anchoredPosition = Vector2.zero;
     }
 
     public void Play(BattleUIType type, System.Action action)

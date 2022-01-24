@@ -113,6 +113,7 @@ public class BattleManager : MonoBehaviour
         m_isGame = true;
         Setup();
         CreateField(enemyid);
+        //StartCoroutine(OnBattle());
         m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
         //FirstTurn();
     }
@@ -189,7 +190,15 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator OnBattle()
     {
-        yield return null;
+        if (m_progressTurn == 0)
+        {
+            while (!m_battleFlag)
+            {
+                m_battleUIController.Play(BattleUIType.BattleStart, () => m_battleFlag = true);
+                yield return null;
+            }
+            FirstTurn();
+        }
     }
 
     /// <summary>
