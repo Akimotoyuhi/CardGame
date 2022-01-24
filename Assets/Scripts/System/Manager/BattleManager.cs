@@ -258,4 +258,11 @@ public class BattleManager : MonoBehaviour
         text.ChangeText(str);
         text.RandomMove();
     }
+    /// <summary>
+    /// カード使用時に呼ばれて手札の全カードのテキストを更新させる関数
+    /// </summary>
+    public void CardCast()
+    {
+        m_hand.UpdateTooltip();
+    }
 }

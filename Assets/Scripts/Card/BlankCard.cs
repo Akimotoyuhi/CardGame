@@ -26,12 +26,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private bool m_isDrag = false;
     private bool m_isAnim = false;
     private string m_tooltip;
-    //private int m_power;
+    private string m_cost;
+    private UseType m_useType;
+    private Player m_player;
+    /// <summary>移動前の場所保存用</summary>
+    private Vector2 m_defPos;
+    /// <summary>捨て札</summary>
+    private Transform m_discard;
     public int Power { get; private set; }
     public int AttackNum { get; private set; }
     public int Block { get; private set; }
     public int BlockNum { get; private set; }
-    private string m_cost;
     public int Cost
     {
         get
@@ -49,12 +54,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
     }
     public List<Condition> Conditions { get; private set; }
-    private UseType m_useType;
-    private Player m_player;
-    /// <summary>移動前の場所保存用</summary>
-    private Vector2 m_defPos;
-    /// <summary>捨て札</summary>
-    private Transform m_discard;
 
     private void Setup()
     {
@@ -121,6 +120,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         transform.SetParent(m_discard, false); //捨て札に移動
         //BattleManager.Instance.SetHandUI();
+        BattleManager.Instance.CardCast();
         return this;
     }
     

@@ -18,12 +18,11 @@ public class Hand : CardManagement
             transform.GetChild(i).SetParent(m_deck, false);
         }
     }
-
-    //public void SetChildDefpos()
-    //{
-    //    for (int i = 0; i < transform.childCount; i++)
-    //    {
-    //        transform.GetChild(i).GetComponent<BlankCard>().SetDefpos();
-    //    }
-    //}
+    public void UpdateTooltip()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<BlankCard>().GetPlayerEffect();
+        }
+    }
 }
