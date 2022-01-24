@@ -113,8 +113,8 @@ public class BattleManager : MonoBehaviour
         m_isGame = true;
         Setup();
         CreateField(enemyid);
-        //StartCoroutine(OnBattle());
-        m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
+        StartCoroutine(OnBattle());
+        //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
         //FirstTurn();
     }
     /// <summary>
@@ -192,13 +192,31 @@ public class BattleManager : MonoBehaviour
     {
         if (m_progressTurn == 0)
         {
+            m_battleUIController.Play(BattleUIType.BattleStart, () => m_battleFlag = true);
             while (!m_battleFlag)
             {
-                m_battleUIController.Play(BattleUIType.BattleStart, () => m_battleFlag = true);
                 yield return null;
             }
             FirstTurn();
+            m_battleFlag = false;
         }
+        else
+        {
+            m_battleUIController.Play(BattleUIType.EnemyTurn, () => m_battleFlag = true);
+            while (!m_battleFlag)
+            {
+                yield return null;
+            }
+            TurnEnd();
+            m_battleFlag = false;
+        }
+        m_battleUIController.Play(BattleUIType.PlayerTurn, () => m_battleFlag = true);
+        while (!m_battleFlag)
+        {
+            yield return null;
+        }
+        TurnStart();
+        m_battleFlag = false;
     }
 
     /// <summary>
@@ -211,14 +229,15 @@ public class BattleManager : MonoBehaviour
         //m_turnBegin.OnNext(m_progressTurn);
         m_enemyManager.EnemyTrun(m_progressTurn);
         m_progressTurn++;
-        m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
+        //m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
         //TurnStart();
     }
 
     public void OnClick()
     {
         if (m_isPress) return;
-        m_battleUIController.Play(BattleUIType.EnemyTurn, TurnEnd);
+        StartCoroutine(OnBattle());
+        //m_battleUIController.Play(BattleUIType.EnemyTurn, TurnEnd);
         //TurnEnd();
     }
 
@@ -230,7 +249,7 @@ public class BattleManager : MonoBehaviour
         m_turnEnd.OnNext(m_progressTurn);
         m_player.TurnEnd();
         m_progressTurn++;
-        m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
+        //m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
     }
 
     /// <summary>
