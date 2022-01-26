@@ -228,7 +228,7 @@ public class CharactorBase : MonoBehaviour
         SetUI();
     }
 
-    public void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
+    protected void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
     {
         foreach (var c in m_conditions)
         {
@@ -236,6 +236,7 @@ public class CharactorBase : MonoBehaviour
             {
                 case ConditionID.PlateArmor:
                     m_block = c.Effect(eventTiming, parametorType);
+                    Debug.Log("ブロック値" + m_block);
                     break;
                 default:
                     c.Effect(eventTiming, parametorType);

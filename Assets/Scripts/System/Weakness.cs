@@ -96,13 +96,11 @@ public class PlateArmor : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (parametorType != ParametorType.Any)
-        {
-            if (Turn <= 0 || parametorType != ParametorType.Block) return block;
-        }
+        if (Turn <= 0 || parametorType != ParametorType.Any) return block;
         switch (eventTiming)
         {
-            case EventTiming.TurnBegin:
+            case EventTiming.TurnEnd:
+                Debug.Log("プレートアーマー" + Turn);
                 return Turn;
             case EventTiming.Damaged:
                 Turn--;

@@ -244,8 +244,8 @@ public class BattleManager : MonoBehaviour
     {
         m_isPress = true;
         m_hand.AllCast();
-        m_turnEnd.OnNext(m_progressTurn);
         m_player.TurnEnd();
+        m_turnEnd.OnNext(m_progressTurn);
         m_progressTurn++;
         //m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
     }
@@ -256,10 +256,9 @@ public class BattleManager : MonoBehaviour
     private void TurnStart()
     {
         m_isPress = false;
-        m_turnBegin.OnNext(m_progressTurn);
-        //m_deck.Draw(m_drowNum);
-        Debug.Log(m_progressTurn + "ターン目");
         m_player.TurnStart();
+        m_turnBegin.OnNext(m_progressTurn);
+        Debug.Log(m_progressTurn + "ターン目");
         SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
     }
 

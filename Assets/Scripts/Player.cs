@@ -71,10 +71,11 @@ public class Player : CharactorBase, IDrop
     //    }
     //    SetUI();
     //}
-    public void GetAcceptDamage(int power, int blk ,List<Condition> conditions)
+    public void GetAcceptDamage(int power, int blk, List<Condition> conditions)
     {
+        EffectChecker(EventTiming.Damaged, ParametorType.Any);
         AddEffect(conditions);
-        int damage = CalculationAcceptDamage(power);
+        int damage = power;
         Debug.Log($"受けたダメージ{damage}");
         damage = m_block -= damage;
         if (m_block < 0) { m_block = 0; }
@@ -93,16 +94,6 @@ public class Player : CharactorBase, IDrop
             }
         }
         SetUI();
-    }
-
-    /// <summary>
-    /// バフデバフを含めた被ダメージ計算
-    /// </summary>
-    /// <param name="num">被ダメージ</param>
-    /// <returns>計算後の被ダメージ</returns>
-    private int CalculationAcceptDamage(int num)
-    {
-        return num;
     }
 
     public void GetDrop(BlankCard card)

@@ -108,16 +108,13 @@ public class EnemyDataBase
                     {
                         if (!m_enemyBaseState[i].m_conditionalCommand[n].Conditional(enemy, turn))
                         {
-                            Debug.Log($"条件{n}結果 false");
                             flag = false;
                             break;
                         }
-                        Debug.Log($"条件{n}結果 true");
                         flag = true;
                     }
                     if (flag) return m_enemyBaseState[i].m_actionCommnad;
                 }
-                Debug.Log("条件未一致");
                 return null;
             default:
                 Debug.LogError("無効なケース");
@@ -177,7 +174,6 @@ public class EnemyConditionalCommand3
     /// <returns>成功可否</returns>
     public bool Conditional(EnemyBase enemy, int turn)
     {
-        Debug.Log($"条件式入った  ターン数{turn}:type{m_type}");
         if (turn == 0)
         {
             if (m_type == WhereType.BattleBegin)
