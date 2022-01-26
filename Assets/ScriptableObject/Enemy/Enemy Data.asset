@@ -30,6 +30,7 @@ MonoBehaviour:
         - m_conditionID: 0
           m_turn: 2
         m_target: 0
+        m_plan: 03000000
     - m_conditionalCommand:
       - m_type: 2
         m_value: 1
@@ -39,6 +40,7 @@ MonoBehaviour:
         m_block: 0
         m_condition: []
         m_target: 0
+        m_plan: 00000000
   - m_name: "\u30EC\u30E6\u30CB\u30AA\u30F3\u5175"
     m_life: 50
     m_image: {fileID: 21300000, guid: f88bc2cc103c0e34f9f3aa5b2fcce452, type: 3}
@@ -53,6 +55,7 @@ MonoBehaviour:
         m_block: 0
         m_condition: []
         m_target: 0
+        m_plan: 00000000
     - m_conditionalCommand:
       - m_type: 2
         m_value: 1
@@ -62,6 +65,7 @@ MonoBehaviour:
         m_block: 0
         m_condition: []
         m_target: 0
+        m_plan: 00000000
   - m_name: "\u898B\u68C4\u3066\u3089\u308C\u305F\u8005"
     m_life: 100
     m_image: {fileID: 21300000, guid: 41ad27ca677ff0944aa3b268615213ba, type: 3}
@@ -76,3 +80,4 @@ MonoBehaviour:
         m_block: 0
         m_condition: []
         m_target: 0
+        m_plan: 

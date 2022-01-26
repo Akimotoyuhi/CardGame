@@ -10,16 +10,19 @@ public class PlanController : MonoBehaviour
 {
     [SerializeField, Tooltip("行動予定表示用の画像 表示順は\nAttack\nBlock\nBuff\nDebuff\nUnknown\nの順")]
     Sprite[] m_viewPlanSprite;
+    [SerializeField] Text m_text;
     private Image m_image;
 
-    public void SetImage(ActionPlan actionPlan)
+    public void SetImage(ActionPlan actionPlan, int textValue = 0)
     {
         m_image = GetComponent<Image>();
+        m_text.text = "";
         switch (actionPlan)
         {
             case ActionPlan.Attack:
                 m_image.sprite = m_viewPlanSprite[0];
                 m_image.color = Color.red;
+                m_text.text = textValue.ToString();
                 break;
             case ActionPlan.Block:
                 m_image.sprite = m_viewPlanSprite[1];

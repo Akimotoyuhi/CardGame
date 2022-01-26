@@ -229,19 +229,14 @@ public class BattleManager : MonoBehaviour
     private void FirstTurn()
     {
         Debug.Log(m_progressTurn + "ターン目");
-        //m_turnBegin.OnNext(m_progressTurn);
         m_enemyManager.EnemyTrun(m_progressTurn);
         m_progressTurn++;
-        //m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
-        //TurnStart();
     }
 
     public void OnClick()
     {
         if (m_isPress) return;
         StartCoroutine(OnBattle());
-        //m_battleUIController.Play(BattleUIType.EnemyTurn, TurnEnd);
-        //TurnEnd();
     }
 
     /// <summary>ターン終了</summary>

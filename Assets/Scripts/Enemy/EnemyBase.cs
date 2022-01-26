@@ -90,13 +90,14 @@ public class EnemyBase : CharactorBase, IDrop
     {
         for (int i = 0; i < m_planImageParent.childCount; i++)
         {
-            Destroy(m_planImageParent.GetChild(i));
+            Destroy(m_planImageParent.GetChild(i).gameObject);
         }
         for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Plan.Count; i++)
         {
             GameObject g = Instantiate(m_planImage);
             g.transform.SetParent(m_planImageParent);
-            g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn).Plan[i]);
+            g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn).Plan[i],
+                ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn).Power));
         }
     }
 }
