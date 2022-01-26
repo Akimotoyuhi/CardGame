@@ -6,7 +6,7 @@ public class Weakness : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
-        if (Turn <= 0 && parametorType != ParametorType.Attack) return power;
+        if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
         float ret = default;
         switch (eventTiming)
         {
@@ -29,7 +29,7 @@ public class Vulnerable : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 && parametorType != ParametorType.Block) return block;
+        if (Turn <= 0 || parametorType != ParametorType.Block) return block;
         float ret = default;
         switch (eventTiming)
         {
@@ -52,7 +52,7 @@ public class Strength : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
-        if (Turn <= 0 && parametorType != ParametorType.Attack) return power;
+        if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
@@ -68,7 +68,7 @@ public class Agile : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 && parametorType != ParametorType.Block) return block;
+        if (Turn <= 0 || parametorType != ParametorType.Block) return block;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
@@ -84,7 +84,7 @@ public class PlateArmor : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 && parametorType != ParametorType.Block) return block;
+        if (Turn <= 0 || parametorType != ParametorType.Block) return block;
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
