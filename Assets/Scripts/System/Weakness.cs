@@ -6,7 +6,10 @@ public class Weakness : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
+        if (parametorType != ParametorType.Any)
+        {
+            if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
+        }
         float ret = default;
         switch (eventTiming)
         {
@@ -23,13 +26,16 @@ public class Weakness : Condition
         return power;
     }
     public override int IsBuff() => 1;
-    public override ConditionID ConditionID() => global::ConditionID.Strength;
+    public override ConditionID ConditionID() => global::ConditionID.Weakness;
 }
-public class Vulnerable : Condition
+public class Frail : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+        if (parametorType != ParametorType.Any)
+        {
+            if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+        }
         float ret = default;
         switch (eventTiming)
         {
@@ -52,7 +58,10 @@ public class Strength : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
+        if (parametorType != ParametorType.Any)
+        {
+            if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
+        }
         switch (eventTiming)
         {
             case EventTiming.Attacked:
@@ -68,7 +77,10 @@ public class Agile : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+        if (parametorType != ParametorType.Any)
+        {
+            if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+        }
         switch (eventTiming)
         {
             case EventTiming.Attacked:
@@ -84,10 +96,13 @@ public class PlateArmor : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+        if (parametorType != ParametorType.Any)
+        {
+            if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+        }
         switch (eventTiming)
         {
-            case EventTiming.TurnEnd:
+            case EventTiming.TurnBegin:
                 return Turn;
             case EventTiming.Damaged:
                 Turn--;

@@ -143,7 +143,6 @@ public class CharactorBase : MonoBehaviour
         }
         foreach (var item in m_conditions)
         {
-            Debug.Log("ViewConditionUI");
             GameObject obj = Instantiate(m_conditionUIPrefab);
             obj.transform.SetParent(m_conditionUIParent);
             obj.GetComponent<ConditionUI>().SetUI(item.ConditionID(), item.Turn);
@@ -215,10 +214,7 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     public virtual void TurnEnd(int i = 0)
     {
-        foreach (var c in m_conditions)
-        {
-            c.Effect(EventTiming.TurnEnd, ParametorType.Attack);
-        }
+        EffectChecker(EventTiming.TurnEnd, ParametorType.Any);
         RemoveEffect();
     }
 
@@ -228,6 +224,23 @@ public class CharactorBase : MonoBehaviour
     public virtual void TurnStart()
     {
         m_block = 0;
+        EffectChecker(EventTiming.TurnBegin, ParametorType.Any);
         SetUI();
+    }
+
+    public void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
+    {
+        foreach (var c in m_conditions)
+        {
+            switch (c.ConditionID())
+            {
+                case ConditionID.PlateArmor:
+                    m_block = c.Effect(eventTiming, parametorType);
+                    break;
+                default:
+                    c.Effect(eventTiming, parametorType);
+                    break;
+            }
+        }
     }
 }

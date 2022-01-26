@@ -81,6 +81,8 @@ public enum CardID
     BeatenUp,
     /// <summary>鉄壁の構え</summary>
     GuardMode,
+    /// <summary>冥蝶の抱擁</summary>
+    ButterflysEmbrace,
 }
 public enum Rarity
 {

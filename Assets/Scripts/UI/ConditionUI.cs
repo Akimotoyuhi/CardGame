@@ -21,6 +21,7 @@ public class ConditionUI : MonoBehaviour
 
     public void SetUI(ConditionID conditionID, int turn)
     {
+        Debug.Log($"付与されたデバフ{conditionID}, ターン{turn}");
         Image image = GetComponent<Image>();
         m_viewText.text = "";
         switch (conditionID)

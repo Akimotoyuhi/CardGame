@@ -40,7 +40,8 @@ public enum ParametorType
 {
     Attack,
     Block,
-    Life
+    Life,
+    Any,
 }
 
 /// <summary>
@@ -78,7 +79,7 @@ public class ConditionSelection
                     weak.Turn = m_turn;
                     return weak;
                 case ConditionID.Frail:
-                    Condition vul = new Vulnerable();
+                    Condition vul = new Frail();
                     vul.Turn = m_turn;
                     return vul;
                 case ConditionID.Strength:
