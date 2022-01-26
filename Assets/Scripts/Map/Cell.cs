@@ -58,11 +58,11 @@ public class Cell : MonoBehaviour
     {
         if (type == CellChildType.Begin)
         {
-            return transform.GetChild(0).position;
+            return transform.GetChild(0).gameObject.GetRectTransform().anchoredPosition;
         }
         else
         {
-            return transform.GetChild(1).position;
+            return transform.GetChild(1).gameObject.GetRectTransform().anchoredPosition;
         }
     }
 

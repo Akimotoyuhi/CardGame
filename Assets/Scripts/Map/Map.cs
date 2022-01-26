@@ -100,9 +100,9 @@ public class Map : MonoBehaviour
         //    line.transform.rotation = Quaternion.Euler(0, 0, angle);
         //    float mX = x / 2;
         //    float mY = y / 2;
-        //    line.transform.position = new Vector2(mX, mY);
+        //    line.GetRectTransform().anchoredPosition = new Vector2(mX, mY);
         //    float distance = Vector2.Distance(beforeCell.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
-        //    RectTransform rect = line.GetComponent<RectTransform>();
+        //    RectTransform rect = line.GetRectTransform();
         //    rect.sizeDelta = new Vector2(distance, rect.rect.height);
         //}
         #endregion

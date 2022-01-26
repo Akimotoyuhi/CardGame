@@ -8,10 +8,10 @@ using System.Linq;
 
 public class EnemyBase : CharactorBase, IDrop
 {
+    [SerializeField] GameObject m_planImage;
+    [SerializeField] Transform m_planImageParent;
     private Player m_player;
     private EnemyManager m_enemyManager;
-    //private EnemyCommand[] m_command;
-    //private List<EnemyCommand> m_enemyCommands = new List<EnemyCommand>();
     private EnemyDataBase m_enemyDataBase = new EnemyDataBase();
 
     void Start()
@@ -61,13 +61,6 @@ public class EnemyBase : CharactorBase, IDrop
         card.OnCast();
     }
 
-    private int SetAttack(int power)
-    {
-        //EnemyCommand ret = new EnemyCommand();
-        int ret = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, power);
-        return ret;
-    }
-
     /// <summary>
     /// ActionDataÇ…äÓÇ√Ç¢ÇΩìGÇÃçsìÆ
     /// </summary>
@@ -87,5 +80,23 @@ public class EnemyBase : CharactorBase, IDrop
         List<Condition> conditions = command.Conditions;
         m_player.GetAcceptDamage(atk, blk, conditions);
         AttackAnim(false);
+    }
+
+    /// <summary>
+    /// çsìÆó\íËÇÃï\é¶
+    /// </summary>
+    /// <param name="turn"></param>
+    public void ActionPlan(int turn)
+    {
+        for (int i = 0; i < m_planImageParent.childCount; i++)
+        {
+            Destroy(m_planImageParent.GetChild(i));
+        }
+        for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Plan.Count; i++)
+        {
+            GameObject g = Instantiate(m_planImage);
+            g.transform.SetParent(m_planImageParent);
+            g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn).Plan[i]);
+        }
     }
 }

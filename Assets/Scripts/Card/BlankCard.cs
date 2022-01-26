@@ -63,7 +63,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
 
     public Player Player { set => m_player = value; }
-
     public void SetInfo(NewCardDataBase carddata, Player player)
     {
         m_viewName.text = carddata.Name;
@@ -103,6 +102,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value));
             text = text.Replace(m.Value, Block.ToString());
         }
+        
         SetText(text);
     }
 

@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         BattleManager.Instance.TurnEnd2.Subscribe(turn => EnemyTrun(turn));
+        BattleManager.Instance.TurnBegin.Subscribe(turn => ActionPlan(turn));
     }
 
     public void CreateEnemies(int id)
@@ -57,6 +58,15 @@ public class EnemyManager : MonoBehaviour
             m_enemies[i].TurnStart();
             m_enemies[i].Action(turn);
             m_enemies[i].TurnEnd();
+        }
+    }
+
+    private void ActionPlan(int turn)
+    {
+        for (int i = 0; i < m_enemies.Count; i++)
+        {
+            if (m_enemies[i].IsDead) continue;
+            m_enemies[i].ActionPlan(turn + 1);
         }
     }
 

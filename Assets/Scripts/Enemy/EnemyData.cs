@@ -70,7 +70,14 @@ public enum EnemyAppearanceEria
     Act3Elite,
     Act3Boss,
 }
-
+public enum ActionPlan
+{
+    Attack,
+    Block,
+    Buff,
+    Debuff,
+    Unknown,
+}
 [System.Serializable]
 public class EnemyDataBase
 {
@@ -131,11 +138,11 @@ public class EnemyActionCommnad3
 {
     [Header("行動データ")]
     [SerializeField] int m_power = 0;
-    //private int m_initPower = 0;
     [SerializeField] int m_block = 0;
-    //private int m_initBlock = 0;
     [SerializeField] List<ConditionSelection> m_condition;
     [SerializeField] TargetType m_target;
+    [SerializeField] List<ActionPlan> m_plan;
+
     public int Power { get => m_power; set => m_power = value; }
     public int Block { get => m_block; set => m_block = value; }
     public List<Condition> Conditions
@@ -154,6 +161,7 @@ public class EnemyActionCommnad3
         }
     }
     public TargetType Target => m_target;
+    public List<ActionPlan> Plan => m_plan;
 }
 
 [System.Serializable]

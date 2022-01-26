@@ -187,7 +187,10 @@ public class BattleManager : MonoBehaviour
 
         m_enemyManager.EnemyCount();
     }
-
+    /// <summary>
+    /// ƒoƒgƒ‹’†‚Ì—¬‚ê
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator OnBattle()
     {
         if (m_progressTurn == 0)
