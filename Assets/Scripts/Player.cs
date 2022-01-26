@@ -108,10 +108,7 @@ public class Player : CharactorBase, IDrop
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != UseType.ToPlayer) return;
-        foreach (var item in card.Conditions)
-        {
-            m_conditions.Add(item);
-        }
+        AddEffect(card.Conditions);
         m_block += card.Block;
         SetUI();
         card.OnCast();

@@ -66,7 +66,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < m_enemies.Count; i++)
         {
             if (m_enemies[i].IsDead) continue;
-            m_enemies[i].ActionPlan(turn + 1);
+            m_enemies[i].ActionPlan(turn);
         }
     }
 

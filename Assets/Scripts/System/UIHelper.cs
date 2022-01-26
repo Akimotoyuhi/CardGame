@@ -44,4 +44,10 @@ public static class UIHelper
         t.fontSize = fontSize;
         return t;
     }
+    public static Image SetImage(this Image img, Color color, Sprite sprite)
+    {
+        img.color = color;
+        img.sprite = sprite;
+        return img;
+    }
 }

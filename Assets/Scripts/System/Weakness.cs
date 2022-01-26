@@ -46,7 +46,7 @@ public class Vulnerable : Condition
         return block;
     }
     public override int IsBuff() => 1;
-    public override ConditionID ConditionID() => global::ConditionID.Vulnerable;
+    public override ConditionID ConditionID() => global::ConditionID.Frail;
 }
 public class Strength : Condition
 {

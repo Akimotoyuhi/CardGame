@@ -90,21 +90,21 @@ public class Map : MonoBehaviour
         if (sectorIndex + 1 >= m_sector) return;
         #region 未完成の線引く処理
         //線引く
-        //if (beforeCell)
-        //{
-        //    GameObject line = Instantiate(m_linePrefab);
-        //    line.transform.SetParent(c.transform, false);
-        //    float x = beforeCell.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
-        //    float y = beforeCell.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
-        //    float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-        //    line.transform.rotation = Quaternion.Euler(0, 0, angle);
-        //    float mX = x / 2;
-        //    float mY = y / 2;
-        //    line.GetRectTransform().anchoredPosition = new Vector2(mX, mY);
-        //    float distance = Vector2.Distance(beforeCell.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
-        //    RectTransform rect = line.GetRectTransform();
-        //    rect.sizeDelta = new Vector2(distance, rect.rect.height);
-        //}
+        if (beforeCell)
+        {
+            GameObject line = Instantiate(m_linePrefab);
+            line.transform.SetParent(c.transform, false);
+            float x = beforeCell.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
+            float y = beforeCell.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
+            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+            line.transform.rotation = Quaternion.Euler(0, 0, angle);
+            float mX = x / 2;
+            float mY = y / 2;
+            line.GetRectTransform().anchoredPosition = new Vector2(mX, mY);
+            float distance = Vector2.Distance(beforeCell.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
+            RectTransform rect = line.GetRectTransform();
+            rect.sizeDelta = new Vector2(distance, rect.rect.height);
+        }
         #endregion
         //今のセルに次のインデックスを教えてあげる
         int r = Random.Range(0, m_sectorLocation[sectorIndex + 1].transform.childCount);

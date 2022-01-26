@@ -27,6 +27,10 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] protected Slider m_blkSlider;
     /// <summary>HPバー前にあるテキスト</summary>
     [SerializeField] protected Text m_text;
+    /// <summary>バフデバフアイコンを表示するオブジェクトのプレハブ</summary>
+    [SerializeField] GameObject m_conditionUIPrefab;
+    /// <summary>バフデバフアイコンを表示するオブジェクトのプレハブの親</summary>
+    [SerializeField] Transform m_conditionUIParent;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
     /// <summary>アニメーション中判定</summary>
@@ -113,6 +117,7 @@ public class CharactorBase : MonoBehaviour
                 m_conditions.Add(conditions[i]);
             }
         }
+        ViewConditionUI();
     }
 
     /// <summary>
@@ -127,6 +132,20 @@ public class CharactorBase : MonoBehaviour
                 m_conditions.RemoveAt(i);
                 Debug.Log("デバフを除去");
             }
+        }
+        ViewConditionUI();
+    }
+    private void ViewConditionUI()
+    {
+        for (int i = 0; i < m_conditionUIParent.childCount; i++)
+        {
+            Destroy(m_conditionUIParent.GetChild(i).gameObject);
+        }
+        foreach (var item in m_conditions)
+        {
+            GameObject obj = Instantiate(m_conditionUIPrefab);
+            obj.transform.SetParent(m_conditionUIParent);
+            obj.GetComponent<ConditionUI>().SetUI(item.ConditionID(), item.Turn);
         }
     }
 

@@ -11,7 +11,7 @@ public enum ConditionID
     /// <summary>脱力<br/>与えるダメージが25%低下</summary>
     Weakness,
     /// <summary>脆弱化<br/>得るブロックが25%低下</summary>
-    Vulnerable,
+    Frail,
     /// <summary>筋力<br/>与えるダメージが+X</summary>
     Strength,
     /// <summary>敏捷性<br/>得るブロックが+X</summary>
@@ -77,7 +77,7 @@ public class ConditionSelection
                     Condition weak = new Weakness();
                     weak.Turn = m_turn;
                     return weak;
-                case ConditionID.Vulnerable:
+                case ConditionID.Frail:
                     Condition vul = new Vulnerable();
                     vul.Turn = m_turn;
                     return vul;
