@@ -107,7 +107,7 @@ public class CharactorBase : MonoBehaviour
             {
                 if (conditions[i].ConditionID() == m_conditions[n].ConditionID())
                 {
-                    m_conditions[i].Turn += conditions[n].Turn;
+                    m_conditions[n].Turn += conditions[i].Turn;
                     flag = true;
                 }
             }
@@ -143,6 +143,7 @@ public class CharactorBase : MonoBehaviour
         }
         foreach (var item in m_conditions)
         {
+            Debug.Log("ViewConditionUI");
             GameObject obj = Instantiate(m_conditionUIPrefab);
             obj.transform.SetParent(m_conditionUIParent);
             obj.GetComponent<ConditionUI>().SetUI(item.ConditionID(), item.Turn);
