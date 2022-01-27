@@ -74,11 +74,36 @@ public class EnemyBase : CharactorBase, IDrop
             return;
         }
         EnemyActionCommnad3 command = m_enemyDataBase.CommandSelect(this, turn);
-        Debug.Log($"与えるダメージ{command.Power}");
-        int atk = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.Power);
-        int blk = command.Block;
-        List<Condition> conditions = command.Conditions;
-        m_player.GetAcceptDamage(atk, blk, conditions);
+        if (command.Target == TargetType.ToEnemy)
+        {
+            EffectChecker(EventTiming.Damaged, ParametorType.Any);
+            m_block += command.Block;
+            int damage = m_block - command.Power;
+            if (m_block < 0) { m_block = 0; }
+            damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
+            if (damage < 0) { }
+            else
+            {
+                m_life -= damage;
+                if (m_life <= 0)
+                {
+                    Debug.Log("がめおべｒ");
+                }
+                else
+                {
+                    EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform, true);
+                }
+                AddEffect(command.Conditions);
+            }
+            SetUI();
+        }
+        else
+        {
+            int atk = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.Power);
+            int blk = command.Block;
+            List<Condition> conditions = command.Conditions;
+            m_player.GetAcceptDamage(atk, blk, conditions);
+        }
         AttackAnim(false);
     }
 

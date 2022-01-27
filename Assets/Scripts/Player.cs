@@ -104,6 +104,7 @@ public class Player : CharactorBase, IDrop
         SetUI();
         card.OnCast();
     }
+
     public void PlayerAnim()
     {
         AttackAnim(true);

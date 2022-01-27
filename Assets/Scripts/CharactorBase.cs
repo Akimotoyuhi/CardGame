@@ -135,8 +135,13 @@ public class CharactorBase : MonoBehaviour
         }
         ViewConditionUI();
     }
+
+    /// <summary>
+    /// バフデバフをUIに表示する
+    /// </summary>
     private void ViewConditionUI()
     {
+        //一旦Spriteを全部消す
         for (int i = 0; i < m_conditionUIParent.childCount; i++)
         {
             Destroy(m_conditionUIParent.GetChild(i).gameObject);
@@ -183,7 +188,7 @@ public class CharactorBase : MonoBehaviour
         float t = num * (1 - parsent);
         return (int)t;
     }
-    Vector2 defpos = default;
+    //Vector2 defpos = default;
     protected void AttackAnim(bool isRightMove)
     {
         //float moveDura = 50;
