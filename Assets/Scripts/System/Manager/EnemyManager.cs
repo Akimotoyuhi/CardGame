@@ -25,13 +25,22 @@ public class EnemyManager : MonoBehaviour
         BattleManager.Instance.TurnBegin.Subscribe(turn => ActionPlan(turn));
     }
 
-    public void CreateEnemies(int id)
+    public void CreateEnemies(CellState cellstate)
     {
-        m_enemyDatabase = m_enemyData.EnemyDataBase(id);
+        EnemyDataBase enemy = default;
+        switch (cellstate)
+        {
+            case CellState.Enemy:
+                enemy = m_enemyData.Act1Enemy[Random.Range(0, m_enemyData.Act1Enemy.Count)];
+                break;
+            case CellState.Boss:
+                enemy = m_enemyData.Act1Boss[Random.Range(0, m_enemyData.Act1Boss.Count)];
+                break;
+        }
         Transform tra = Instantiate(m_enemyPrefab, transform).transform;
         tra.SetParent(transform, false);
         EnemyBase e = tra.GetComponent<EnemyBase>();
-        e.SetParam(m_enemyDatabase);
+        e.SetParam(enemy);
     }
 
     /// <summary>

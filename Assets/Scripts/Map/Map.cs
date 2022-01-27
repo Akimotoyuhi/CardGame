@@ -81,6 +81,11 @@ public class Map : MonoBehaviour
         {
             c.SetCellState = CellState.Rest;
         }
+        else if (sectorIndex == m_sector - 1)
+        {
+            c.SetCellState = CellState.Boss;
+            c.m_encountId = Random.Range(0, (int)EnemyID.endLength);
+        }
         else
         {
             c.SetCellState = CellState.Enemy;

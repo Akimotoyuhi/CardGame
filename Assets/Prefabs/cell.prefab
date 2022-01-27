@@ -152,7 +152,9 @@ MonoBehaviour:
   m_cellState: 0
   m_enemyColor: {r: 1, g: 0, b: 0, a: 1}
   m_restColor: {r: 0, g: 0, b: 1, a: 1}
+  m_bossColor: {r: 0.7924528, g: 0.4482622, b: 0.2197935, a: 1}
   m_encountId: 0
+  Step: 0
 --- !u!1 &2651333789805388172
 GameObject:
   m_ObjectHideFlags: 0

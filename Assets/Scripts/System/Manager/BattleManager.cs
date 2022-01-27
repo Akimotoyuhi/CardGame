@@ -65,12 +65,13 @@ public class BattleManager : MonoBehaviour
     private bool m_isGame = false;
     /// <summary>戦闘中のコルーチンに使うフラグ</summary>
     private bool m_battleFlag = false;
+    private Subject<int> m_turnBegin = new Subject<int>();
+    private Subject<int> m_turnEnd = new Subject<int>();
     #endregion
     #endregion
     #region プロパティ
     public static BattleManager Instance { get; private set; }
-    private Subject<int> m_turnBegin = new Subject<int>();
-    private Subject<int> m_turnEnd = new Subject<int>();
+    //public EnemyData EnemyData => m_enemyData;
     public IObservable<int> TurnBegin => m_turnBegin;
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
@@ -107,12 +108,12 @@ public class BattleManager : MonoBehaviour
     /// 戦闘開始
     /// </summary>
     /// <param name="enemyid">エンカウントした敵のID</param>
-    public void BattleStart(int enemyid)
+    public void BattleStart(CellState cellstate)
     {
         m_progressTurn = 0;
         m_isGame = true;
         Setup();
-        CreateField(enemyid);
+        CreateField(cellstate);
         StartCoroutine(OnBattle());
         //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
         //FirstTurn();
@@ -146,7 +147,7 @@ public class BattleManager : MonoBehaviour
     /// プレイヤーや敵の生成を行う
     /// </summary>
     /// <param name="enemyid"></param>
-    private void CreateField(int enemyid)
+    private void CreateField(CellState cellState)
     {
         //デッキとプレイヤー構築
         if (DataManager.Instance.IsSaveData())
@@ -181,10 +182,8 @@ public class BattleManager : MonoBehaviour
         //    m_enemyManager.CreateEnemies(m_encountDatabase.GetID(i));
         //}
 
-        int r = UnityEngine.Random.Range(0, m_enemyData.Act1Enemy.Count);
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
-        m_enemyManager.CreateEnemies(r);
-
+        m_enemyManager.CreateEnemies(cellState);
         m_enemyManager.EnemyCount();
     }
     /// <summary>

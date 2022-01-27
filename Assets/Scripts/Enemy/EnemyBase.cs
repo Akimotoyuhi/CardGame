@@ -117,6 +117,7 @@ public class EnemyBase : CharactorBase, IDrop
         {
             Destroy(m_planImageParent.GetChild(i).gameObject);
         }
+        if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
         for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Plan.Count; i++)
         {
             GameObject g = Instantiate(m_planImage);

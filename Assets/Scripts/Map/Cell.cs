@@ -17,6 +17,7 @@ public class Cell : MonoBehaviour
     [Header("セルの状態に応じて変わる色の設定")]
     [SerializeField] Color m_enemyColor = Color.red;
     [SerializeField] Color m_restColor = Color.blue;
+    [SerializeField] Color m_bossColor = Color.red;
     private List<int> m_nextCellList = new List<int>();
     /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
@@ -46,7 +47,7 @@ public class Cell : MonoBehaviour
             return;
         }
         //とりあえず
-        GameManager.Instance.OnClick(m_cellState, m_encountId);
+        GameManager.Instance.OnClick(m_cellState);
     }
 
     /// <summary>
@@ -81,6 +82,9 @@ public class Cell : MonoBehaviour
                 break;
             case CellState.Rest:
                 image.color = m_restColor;
+                break;
+            case CellState.Boss:
+                image.color = m_bossColor;
                 break;
         }
         if (GameManager.Instance.Step != Step)

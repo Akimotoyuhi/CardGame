@@ -39,13 +39,17 @@ public class GameManager : MonoBehaviour
         m_step = DataManager.Instance.Step;
     }
 
-    public void OnClick(CellState cellState, int id)
+    public void OnClick(CellState cellState)
     {
         m_mapCanvas.enabled = false;
         switch (cellState)
         {
             case CellState.Enemy:
-                BattleManager.Instance.BattleStart(id);
+                BattleManager.Instance.BattleStart(cellState);
+                m_battleCanvas.enabled = true;
+                break;
+            case CellState.Boss:
+                BattleManager.Instance.BattleStart(cellState);
                 m_battleCanvas.enabled = true;
                 break;
             case CellState.Rest:
