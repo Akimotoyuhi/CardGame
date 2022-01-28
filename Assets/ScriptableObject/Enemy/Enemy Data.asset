@@ -20,8 +20,8 @@ MonoBehaviour:
     m_enemyAppearanceEria: 0
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 3
-        m_value: 2
+      - m_type: 4
+        m_value: 3
         m_isProbability: 0
       m_actionCommnad:
         m_power: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
         m_target: 0
         m_plan: 03000000
     - m_conditionalCommand:
-      - m_type: 2
+      - m_type: 0
         m_value: 1
         m_isProbability: 0
       m_actionCommnad:
@@ -47,8 +47,8 @@ MonoBehaviour:
     m_enemyAppearanceEria: 0
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 3
-        m_value: 3
+      - m_type: 4
+        m_value: 2
         m_isProbability: 0
       m_actionCommnad:
         m_power: 7
@@ -57,7 +57,7 @@ MonoBehaviour:
         m_target: 0
         m_plan: 00000000
     - m_conditionalCommand:
-      - m_type: 2
+      - m_type: 0
         m_value: 1
         m_isProbability: 0
       m_actionCommnad:
@@ -84,14 +84,21 @@ MonoBehaviour:
         m_target: 1
         m_plan: 02000000
     - m_conditionalCommand:
-      - m_type: 4
-        m_value: 50
-        m_isProbability: 0
       - m_type: 3
         m_value: 2
         m_isProbability: 0
       m_actionCommnad:
         m_power: 10
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 00000000
+    - m_conditionalCommand:
+      - m_type: 0
+        m_value: 0
+        m_isProbability: 0
+      m_actionCommnad:
+        m_power: 7
         m_block: 0
         m_condition: []
         m_target: 0
