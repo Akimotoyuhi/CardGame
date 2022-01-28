@@ -108,4 +108,11 @@ public class ConditionSelection
             }
         }
     }
+    public static Condition SetCondition(ConditionID conditionID, int turn)
+    {
+        ConditionSelection cs = new ConditionSelection();
+        cs.m_conditionID = conditionID;
+        cs.m_turn = turn;
+        return cs.GetCondition;
+    }
 }

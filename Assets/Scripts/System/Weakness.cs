@@ -116,11 +116,16 @@ public class StrengthDown : Condition
 {
     public override int Effect(EventTiming eventTiming, ParametorType parametorType, int value = 0)
     {
-        if (parametorType == ParametorType.Any) return Turn;
-        if (Turn <= 0 || parametorType != ParametorType.Condition) return value;
-        if (eventTiming == EventTiming.TurnBegin && value == (int)ConditionID.StrengthDown)
+        Debug.Log($"“n‚³‚ê‚½’l {eventTiming}:{parametorType}:{value}({(ConditionID)value})");
+        if (parametorType != ParametorType.Any)
         {
-            return -Turn;
+            if (Turn <= 0 || parametorType != ParametorType.Condition) return 0;
+        }
+        if (eventTiming == EventTiming.TurnBegin)
+        {
+            int ret = Turn;
+            Turn = 0;
+            return -ret;
         }
         return 0;
     }

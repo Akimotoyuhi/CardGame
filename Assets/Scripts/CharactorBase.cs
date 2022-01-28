@@ -237,9 +237,29 @@ public class CharactorBase : MonoBehaviour
         EffectChecker(EventTiming.TurnBegin, ParametorType.Any);
         SetUI();
     }
-
+    /// <summary>
+    /// Conditionを動かすためのあれこれをする
+    /// </summary>
+    /// <param name="eventTiming"></param>
+    /// <param name="parametorType"></param>
     protected void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
     {
+        //if (parametorType == ParametorType.Any)
+        //{
+        //    for (int cBase = 0; cBase < m_conditions.Count; cBase++)
+        //    {
+        //        for (int cEvaluation = 0; cEvaluation < m_conditions.Count; cEvaluation++)
+        //        {
+        //            int i = m_conditions[cEvaluation].Effect(eventTiming, parametorType, (int)m_conditions[cBase].GetConditionID());
+        //            if (i != 0)
+        //            {
+        //                List<Condition> c = new List<Condition>();
+        //                c.Add(ConditionSelection.SetCondition((ConditionID)cBase, i));
+        //                AddEffect(c);
+        //            }
+        //        }
+        //    }
+        //}
         foreach (var c in m_conditions)
         {
             switch (c.GetConditionID())
@@ -249,18 +269,7 @@ public class CharactorBase : MonoBehaviour
                     Debug.Log("ブロック値" + m_block);
                     break;
                 default:
-                    if (parametorType == ParametorType.Condition)
-                    {
-                        for (int i = 0; i < m_conditions.Count; i++)
-                        {
-                            m_conditions[i].Turn += c.Effect(eventTiming, parametorType, (int)m_conditions[i].GetConditionID());
-                            Debug.Log("aaaaaaaaaaaaaa");
-                        }
-                    }
-                    else
-                    {
-                        c.Effect(eventTiming, parametorType);
-                    }
+                    c.Effect(eventTiming, parametorType);
                     break;
             }
         }

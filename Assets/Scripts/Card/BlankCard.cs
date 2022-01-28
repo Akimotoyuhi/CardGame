@@ -25,6 +25,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     List<Color> m_cardColor = new List<Color>();
     private bool m_isDrag = false;
     private bool m_isAnim = false;
+    private bool m_isDiscarding = false;
     private string m_tooltip;
     private string m_cost;
     private UseType m_useType;
@@ -75,6 +76,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_cost = carddata.Cost;
         Conditions = carddata.Conditions;
         m_useType = carddata.UseType;
+        m_isDiscarding = carddata.IsDiscarding;
         m_player = player;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         Setup();
@@ -113,15 +115,22 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public UseType GetCardType { get => m_useType; }
 
-    public BlankCard OnCast()
+    public void OnCast()
     {
         m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
         m_player.PlayerAnim();
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
-        transform.SetParent(m_discard, false); //捨て札に移動
         //BattleManager.Instance.SetHandUI();
         BattleManager.Instance.CardCast();
-        return this;
+        if (m_isDiscarding)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            transform.SetParent(m_discard, false); //捨て札に移動
+        }
+        return;
     }
     
     public void PointerEntor()
