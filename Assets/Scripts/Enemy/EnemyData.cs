@@ -42,9 +42,7 @@ public class EnemyData : ScriptableObject
     }
 }
 
-/// <summary>
-/// “GID
-/// </summary>
+/// <summary>“GID</summary>
 public enum EnemyID
 {
     /// <summary>ƒIƒŠƒWƒ€ƒV</summary>
@@ -55,9 +53,7 @@ public enum EnemyID
     ForsakenOne,
     endLength,
 }
-/// <summary>
-/// “GoŒ»êŠ
-/// </summary>
+/// <summary>“GoŒ»êŠ</summary>
 public enum EnemyAppearanceEria
 {
     Act1Enemy,
@@ -100,10 +96,6 @@ public class EnemyDataBase
                 for (int i = 0; i < m_enemyBaseState.Count; i++)
                 {
                     bool flag = false;
-                    //if (m_enemyBaseState[i].m_conditionalCommand.Count <= 0)
-                    //{
-                    //    return m_enemyBaseState[i].m_actionCommnad; //‚±‚¢‚Â‚ªˆ«‚¢
-                    //}
                     for (int n = 0; n < m_enemyBaseState[i].m_conditionalCommand.Count; n++)
                     {
                         if (!m_enemyBaseState[i].m_conditionalCommand[n].Conditional(enemy, turn))
@@ -188,6 +180,8 @@ public class EnemyConditionalCommand3
 
         switch (m_type)
         {
+            case WhereType.Any:
+                return true;
             case WhereType.Turn:
                 if (turn == m_value)
                 {
@@ -230,15 +224,14 @@ public class EnemyConditionalCommand3
         }
     }
 }
-
 public enum TargetType
 {
     ToPlayer,
     ToEnemy,
 }
-
 public enum WhereType
 {
+    Any,
     Turn,
     RowTurn,
     HighTurn,

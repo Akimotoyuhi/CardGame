@@ -11,12 +11,13 @@ using DG.Tweening;
 /// </summary>
 public class CharactorBase : MonoBehaviour
 {
+    #region Field
     /// <summary>名前</summary>
     [SerializeField] protected string m_name = "name";
     /// <summary>最大HP</summary>
     [SerializeField] protected int m_maxLife = 1;
     /// <summary>現在HP</summary>
-    protected int m_life;
+    [SerializeField] protected int m_life;
     /// <summary>ブロック値</summary>
     protected int m_block;
     /// <summary>画像</summary>
@@ -36,7 +37,10 @@ public class CharactorBase : MonoBehaviour
     /// <summary>アニメーション中判定</summary>
     private bool m_isAnim = false;
     protected List<Condition> m_conditions = new List<Condition>();
+    /// <summary>位置保存用　アニメーション用に作ったが今は使ってない</summary>
     protected RectTransform m_rectTransform;
+    #endregion
+    #region プロパティ
     public string Name => m_name;
     public int MaxLife => m_maxLife;
     public int CurrentLife
@@ -64,6 +68,7 @@ public class CharactorBase : MonoBehaviour
         m_rectTransform = GetComponent<RectTransform>();
         SetUI();
     }
+    #endregion
 
     /// <summary>
     /// キャラクター下のスライダーとテキストの処理
@@ -240,7 +245,7 @@ public class CharactorBase : MonoBehaviour
             switch (c.ConditionID())
             {
                 case ConditionID.PlateArmor:
-                    m_block = c.Effect(eventTiming, parametorType);
+                    m_block += c.Effect(eventTiming, parametorType);
                     Debug.Log("ブロック値" + m_block);
                     break;
                 default:
