@@ -16,8 +16,10 @@ public enum ConditionID
     Strength,
     /// <summary>敏捷性<br/>得るブロックが+X</summary>
     Agile,
-    /// <summary>プレートアーマー<br/>自分のターン終了時にnブロックを得る。攻撃されると効果-1</summary>
+    /// <summary>プレートアーマー<br/>自分のターン終了時にXブロックを得る。攻撃されると効果-1</summary>
     PlateArmor,
+    /// <summary>筋力低下<br/>ターン開始時に筋力Xを失う</summary>
+    StrengthDown,
 }
 /// <summary>
 /// バフデバフが効果を発動するタイミング
@@ -41,6 +43,7 @@ public enum ParametorType
     Attack,
     Block,
     Life,
+    Condition,
     Any,
 }
 
@@ -58,7 +61,7 @@ public abstract class Condition
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
     public abstract int IsBuff();
-    public abstract ConditionID ConditionID();
+    public abstract ConditionID GetConditionID();
 }
 
 [Serializable]
@@ -72,28 +75,33 @@ public class ConditionSelection
         get
         {
             if (m_turn <= 0) return null;
+            Condition ret = default;
             switch (m_conditionID)
             {
                 case ConditionID.Weakness:
-                    Condition weak = new Weakness();
-                    weak.Turn = m_turn;
-                    return weak;
+                    ret = new Weakness();
+                    ret.Turn = m_turn;
+                    return ret;
                 case ConditionID.Frail:
-                    Condition vul = new Frail();
-                    vul.Turn = m_turn;
-                    return vul;
+                    ret = new Frail();
+                    ret.Turn = m_turn;
+                    return ret;
                 case ConditionID.Strength:
-                    Condition str = new Strength();
-                    str.Turn = m_turn;
-                    return str;
+                    ret = new Strength();
+                    ret.Turn = m_turn;
+                    return ret;
                 case ConditionID.Agile:
-                    Condition agile = new Agile();
-                    agile.Turn = m_turn;
-                    return agile;
+                    ret = new Agile();
+                    ret.Turn = m_turn;
+                    return ret;
                 case ConditionID.PlateArmor:
-                    Condition pa = new PlateArmor();
-                    pa.Turn = m_turn;
-                    return pa;
+                    ret = new PlateArmor();
+                    ret.Turn = m_turn;
+                    return ret;
+                case ConditionID.StrengthDown:
+                    ret = new StrengthDown();
+                    ret.Turn = m_turn;
+                    return ret;
                 default:
                     Debug.LogWarning("未設定のIDが渡されました");
                     return null;

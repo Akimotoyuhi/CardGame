@@ -15,8 +15,10 @@ public class ConditionUI : MonoBehaviour
     {
         [SerializeField] Sprite m_sprite;
         [SerializeField] Color m_color;
+        [SerializeField] string m_tooltip;
         public Sprite Sprite => m_sprite;
         public Color Color => m_color;
+        public string Tooltip => m_tooltip;
     }
 
     public void SetUI(ConditionID conditionID, int turn)
@@ -24,27 +26,12 @@ public class ConditionUI : MonoBehaviour
         Debug.Log($"付与されたデバフ{conditionID}, ターン{turn}");
         Image image = GetComponent<Image>();
         m_viewText.text = "";
-        switch (conditionID)
-        {
-            case ConditionID.Weakness:
-                image.SetImage(m_conditionSpriteData[0].Color, m_conditionSpriteData[0].Sprite);
-                break;
-            case ConditionID.Frail:
-                image.SetImage(m_conditionSpriteData[1].Color, m_conditionSpriteData[1].Sprite);
-                break;
-            case ConditionID.Strength:
-                image.SetImage(m_conditionSpriteData[2].Color, m_conditionSpriteData[2].Sprite);
-                break;
-            case ConditionID.Agile:
-                image.SetImage(m_conditionSpriteData[3].Color, m_conditionSpriteData[3].Sprite);
-                break;
-            case ConditionID.PlateArmor:
-                image.SetImage(m_conditionSpriteData[4].Color, m_conditionSpriteData[4].Sprite);
-                break;
-            default:
-                Debug.LogError("変な値渡すな");
-                break;
-        }
+        image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
         m_viewText.text = turn.ToString();
+    }
+
+    public void OnCursorEntor()
+    {
+
     }
 }

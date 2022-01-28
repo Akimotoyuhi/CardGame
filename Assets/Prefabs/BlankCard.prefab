@@ -150,10 +150,10 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30C9\u30AF\u30BF\u30FC\u306E\u8CA1\u5E03\u306B\n2\u81C6\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+  m_Text: "\u30C9\u30AF\u30BF\u30FC\u306E\u8CA1\u5E03\u306B2\u81C6\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
 --- !u!1 &4756192354113062014
 GameObject:
   m_ObjectHideFlags: 0

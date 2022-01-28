@@ -83,6 +83,8 @@ public enum CardID
     GuardMode,
     /// <summary>冥蝶の抱擁</summary>
     ButterflysEmbrace,
+    /// <summary>コンシールメント</summary>
+    FlexibleCamouflage,
 }
 public enum Rarity
 {

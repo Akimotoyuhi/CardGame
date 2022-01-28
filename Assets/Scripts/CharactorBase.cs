@@ -94,7 +94,7 @@ public class CharactorBase : MonoBehaviour
         int ret = value;
         foreach (var item in m_conditions)
         {
-            ret = item.Effect(eventTiming, parametorType, value);
+            ret = item.Effect(eventTiming, parametorType, ret);
         }
         return ret;
     }
@@ -110,7 +110,7 @@ public class CharactorBase : MonoBehaviour
             bool flag = false;
             for (int n = 0; n < m_conditions.Count; n++)
             {
-                if (conditions[i].ConditionID() == m_conditions[n].ConditionID())
+                if (conditions[i].GetConditionID() == m_conditions[n].GetConditionID())
                 {
                     m_conditions[n].Turn += conditions[i].Turn;
                     flag = true;
@@ -155,7 +155,7 @@ public class CharactorBase : MonoBehaviour
         {
             GameObject obj = Instantiate(m_conditionUIPrefab);
             obj.transform.SetParent(m_conditionUIParent);
-            obj.GetComponent<ConditionUI>().SetUI(item.ConditionID(), item.Turn);
+            obj.GetComponent<ConditionUI>().SetUI(item.GetConditionID(), item.Turn);
         }
     }
 
@@ -242,14 +242,25 @@ public class CharactorBase : MonoBehaviour
     {
         foreach (var c in m_conditions)
         {
-            switch (c.ConditionID())
+            switch (c.GetConditionID())
             {
                 case ConditionID.PlateArmor:
                     m_block += c.Effect(eventTiming, parametorType);
                     Debug.Log("ブロック値" + m_block);
                     break;
                 default:
-                    c.Effect(eventTiming, parametorType);
+                    if (parametorType == ParametorType.Condition)
+                    {
+                        for (int i = 0; i < m_conditions.Count; i++)
+                        {
+                            m_conditions[i].Turn += c.Effect(eventTiming, parametorType, (int)m_conditions[i].GetConditionID());
+                            Debug.Log("aaaaaaaaaaaaaa");
+                        }
+                    }
+                    else
+                    {
+                        c.Effect(eventTiming, parametorType);
+                    }
                     break;
             }
         }

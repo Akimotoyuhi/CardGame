@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public int Step => DataManager.Instance.Step;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
-    //public SpecialCardID CardID { get; set; }
 
     private void Awake()
     {
