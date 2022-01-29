@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6989702592138525681}
   - component: {fileID: 6546907504111189311}
   - component: {fileID: -6394686715113199277}
+  - component: {fileID: 2313634686770434370}
   m_Layer: 5
   m_Name: ConditionUI
   m_TagString: Untagged
@@ -93,22 +94,68 @@ MonoBehaviour:
   m_conditionSpriteData:
   - m_sprite: {fileID: 21300000, guid: 5ac4a8d368fba3d4f9a9bb766c814658, type: 3}
     m_color: {r: 0, g: 1, b: 0.054290295, a: 1}
-    m_tooltip: 
+    m_tooltip: "\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C25%\u4F4E\u4E0B"
   - m_sprite: {fileID: 21300000, guid: ed7a8320358fd2e4099e2f1ee1c9dc29, type: 3}
     m_color: {r: 0, g: 0.8794136, b: 1, a: 1}
-    m_tooltip: 
+    m_tooltip: "\u5F97\u308B\u30D6\u30ED\u30C3\u30AF\u304C25%\u4F4E\u4E0B"
   - m_sprite: {fileID: 21300000, guid: 5ac4a8d368fba3d4f9a9bb766c814658, type: 3}
     m_color: {r: 1, g: 0, b: 0, a: 1}
-    m_tooltip: 
+    m_tooltip: "\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C+X"
   - m_sprite: {fileID: 21300000, guid: 3a70f6f60a26f744d8fede14e4130d5a, type: 3}
     m_color: {r: 0, g: 1, b: 0.2274468, a: 1}
-    m_tooltip: 
+    m_tooltip: "\u5F97\u308B\u30D6\u30ED\u30C3\u30AF\u304C+X"
   - m_sprite: {fileID: 21300000, guid: 82d473f40e7a73149b9c9b2e3c2b8a1f, type: 3}
     m_color: {r: 0, g: 1, b: 1, a: 1}
-    m_tooltip: 
+    m_tooltip: "\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\u3002\u653B\u6483\u3055\u308C\u308B\u3068\u52B9\u679C-1"
   - m_sprite: {fileID: 21300000, guid: 5ac4a8d368fba3d4f9a9bb766c814658, type: 3}
     m_color: {r: 0, g: 1, b: 1, a: 1}
-    m_tooltip: 
+    m_tooltip: "\u30BF\u30FC\u30F3\u958B\u59CB\u6642\u306B\u7B4B\u529BX\u3092\u5931\u3046"
+  m_text: 
+--- !u!114 &2313634686770434370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381488700500542313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -6394686715113199277}
+          m_TargetAssemblyTypeName: ConditionUI, Assembly-CSharp
+          m_MethodName: OnCursor
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -6394686715113199277}
+          m_TargetAssemblyTypeName: ConditionUI, Assembly-CSharp
+          m_MethodName: OnCursor
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4338332183490030025
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,28 +11,44 @@ using DG.Tweening;
 public class EffectManager : MonoBehaviour
 {
     [SerializeField] int m_textFontSize = 40;
+    [SerializeField] GameObject m_overfrowTextPrefab;
     [SerializeField] GameObject m_textPrefab;
+    [SerializeField] GameObject m_battleUI;
     private Text m_text;
-
     public static EffectManager Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
     }
+    private void Start()
+    {
+        RemoveBattleUIText();
+    }
 
-    public void ViewText(string text, Vector2 position, Transform parent)
+    public GameObject ViewText(string text, Vector2 position, Transform parent)
     {
         GameObject obj = Instantiate(m_textPrefab);
         obj.transform.SetParent(parent, false);
-        obj.SetText(text);
+        obj.GetText(text);
         obj.GetRectTransform().anchoredPosition = position;
+        return obj;
+    }
+    public void SetBattleUIText(string text, Color color)
+    {
+        m_battleUI.transform.GetChild(0).gameObject.GetText().SetText(text, color);
+        m_battleUI.SetActive(true);
+    }
+    public void RemoveBattleUIText()
+    {
+        m_battleUI.transform.GetChild(0).gameObject.GetText("");
+        m_battleUI.SetActive(false);
     }
     public void MoveText(string text, Color color, Vector2 position, Transform parent, Vector2 endValue, float duration, System.Action action)
     {
         m_text.text = text;
         m_text.color = color;
-        GameObject obj = Instantiate(m_textPrefab);
+        GameObject obj = Instantiate(m_overfrowTextPrefab);
         obj.transform.SetParent(parent, false);
         RectTransform rt = obj.GetRectTransform();
         rt.anchoredPosition = position;
@@ -48,8 +64,8 @@ public class EffectManager : MonoBehaviour
     /// <param name="parent">生成するテキストの親</param>
     public void DamageText(string text, Color color, Vector2 position, Transform parent, bool scaleChanged = false)
     {
-        GameObject obj = Instantiate(m_textPrefab);
-        Text viewText = obj.SetText(text, Color.clear);
+        GameObject obj = Instantiate(m_overfrowTextPrefab);
+        Text viewText = obj.GetText(text, Color.clear);
         obj.transform.SetParent(parent, false);
         RectTransform rt = obj.GetRectTransform();
         rt.localScale = scaleChanged ? new Vector2(-1, 1) : Vector2.one;

@@ -10,6 +10,7 @@ public class ConditionUI : MonoBehaviour
 {
     [SerializeField] Text m_viewText;
     [SerializeField] ConditionSpriteData[] m_conditionSpriteData;
+    [SerializeField] string m_text = "";
     [System.Serializable]
     public class ConditionSpriteData
     {
@@ -27,11 +28,19 @@ public class ConditionUI : MonoBehaviour
         Image image = GetComponent<Image>();
         m_viewText.text = "";
         image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
+        m_text = m_conditionSpriteData[(int)conditionID].Tooltip;
         m_viewText.text = turn.ToString();
     }
 
-    public void OnCursorEntor()
+    public void OnCursor(bool flag)
     {
-
+        if (flag)
+        {
+            EffectManager.Instance.SetBattleUIText(m_text, Color.black);
+        }
+        else
+        {
+            EffectManager.Instance.RemoveBattleUIText();
+        }
     }
 }

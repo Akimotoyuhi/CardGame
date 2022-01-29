@@ -136,13 +136,13 @@ MonoBehaviour:
     m_blockNum: 0
     m_concitions:
     - m_conditionID: 2
-      m_turn: 1
+      m_turn: 2
     - m_conditionID: 3
-      m_turn: 1
+      m_turn: 2
     - m_conditionID: 4
       m_turn: 5
     m_cardType: 0
-    m_isDiscarding: 0
+    m_isDiscarding: 1
   - m_name: "\u30A6\u30EB\u30B5\u30B9\u306E\u96C4\u53EB\u3073"
     m_cost: 1
     m_image: {fileID: 21300000, guid: bc5295be6ea83814c824a2061d933912, type: 3}
