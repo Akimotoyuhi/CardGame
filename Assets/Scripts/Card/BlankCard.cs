@@ -122,14 +122,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         //BattleManager.Instance.SetHandUI();
         BattleManager.Instance.CardCast();
-        if (m_isDiscarding)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            transform.SetParent(m_discard, false); //捨て札に移動
-        }
+        if (m_isDiscarding) Destroy(gameObject);
+        else transform.SetParent(m_discard, false); //捨て札に移動
         return;
     }
     

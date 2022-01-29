@@ -79,7 +79,14 @@ public class EnemyBase : CharactorBase, IDrop
             EffectChecker(EventTiming.Damaged, ParametorType.Any);
             m_block += command.Block;
             int damage = m_block - command.Power;
-            if (m_block < 0) { m_block = 0; }
+            if (m_block < 0)
+            {
+                m_block = 0;
+            }
+            else
+            {
+                EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform, true);
+            }
             damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
             if (damage < 0) { }
             else
