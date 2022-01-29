@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// フィールド上のキャラクターがバフやデバフにかかった時に、それをUIとして表示する用のクラス
@@ -24,14 +25,24 @@ public class ConditionUI : MonoBehaviour
 
     public void SetUI(ConditionID conditionID, int turn)
     {
-        Debug.Log($"付与されたデバフ{conditionID}, ターン{turn}");
         Image image = GetComponent<Image>();
         m_viewText.text = "";
         image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
-        m_text = m_conditionSpriteData[(int)conditionID].Tooltip;
+        string s = m_conditionSpriteData[(int)conditionID].Tooltip;
+        //MatchCollection matchs = Regex.Matches(s, "{%value}");
+        //Debug.Log(s);
+        //foreach (Match m in matchs)
+        //{
+        //    Debug.Log(m.Value);
+        //    s.Replace(m.Value, turn.ToString());
+        //}
+        m_text = s;
         m_viewText.text = turn.ToString();
     }
-
+    /// <summary>
+    /// ゲーム画面にテキストを表示<br/>EventTriggerから呼ばれる事を想定している
+    /// </summary>
+    /// <param name="flag"></param>
     public void OnCursor(bool flag)
     {
         if (flag)

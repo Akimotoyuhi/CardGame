@@ -80,11 +80,11 @@ public class BattleManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        m_cardData.Setup();
     }
 
     void Start()
     {
+        m_cardData.Setup();
         m_enemyData.Assignment();
         Setup();
         m_reward.RewardDisabled();

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7385166911817830926}
   - component: {fileID: 4417846656051121862}
   - component: {fileID: 8318824862069786081}
+  - component: {fileID: 3922583524242414392}
   m_Layer: 5
   m_Name: ConditionUIPos
   m_TagString: Untagged
@@ -75,6 +76,32 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3922583524242414392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690358271041296017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 5
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &4352499861738723550
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_name: name
   m_maxLife: 1
+  m_life: 0
   m_hpSlider: {fileID: 8787646867460073395}
   m_blkSlider: {fileID: 8787646867012228804}
   m_text: {fileID: 8787646866304533854}

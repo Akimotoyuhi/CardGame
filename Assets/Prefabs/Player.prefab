@@ -569,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_name: name
   m_maxLife: 1
+  m_life: 0
   m_hpSlider: {fileID: 4774533046637096720}
   m_blkSlider: {fileID: 4774533045999032423}
   m_text: {fileID: 4774533046712527476}
@@ -576,6 +577,7 @@ MonoBehaviour:
     type: 3}
   m_conditionUIParent: {fileID: 379568926489689814}
   m_cost: 0
+  m_drowNum: 5
 --- !u!1 &4774533046680980724
 GameObject:
   m_ObjectHideFlags: 0

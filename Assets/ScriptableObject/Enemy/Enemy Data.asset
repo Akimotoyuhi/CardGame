@@ -72,7 +72,7 @@ MonoBehaviour:
     m_enemyAppearanceEria: 2
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 3
+      - m_type: 4
         m_value: 5
         m_isProbability: 0
       m_actionCommnad:
@@ -84,7 +84,7 @@ MonoBehaviour:
         m_target: 1
         m_plan: 02000000
     - m_conditionalCommand:
-      - m_type: 3
+      - m_type: 4
         m_value: 2
         m_isProbability: 0
       m_actionCommnad:

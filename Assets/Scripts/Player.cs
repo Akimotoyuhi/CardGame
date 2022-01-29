@@ -8,9 +8,8 @@ public class Player : CharactorBase, IDrop
 {
     /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
     private int m_maxCost = 3;
-    [SerializeField]
-    private int m_cost = default;
-    private int m_drowNum = 5;
+    [SerializeField] int m_cost = default;
+    [SerializeField] int m_drowNum = 5;
     /// <summary>最大コスト</summary>
     public int MaxCost => m_maxCost;
     /// <summary>現在コスト</summary>
