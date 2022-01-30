@@ -4,17 +4,17 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// オブジェクトに付けるクラス
+/// オブジェクトに付けるテスト用のクラス
 /// </summary>
 public class Sample : MonoBehaviour
 {
-    private void Test<T>(T a, T b)
-    {
-        
-    }
+    [SerializeField] GameObject m_image;
+    [SerializeField] Transform m_paraent;
 
-    private void AAAA()
+    private void Start()
     {
-        Test<int>(1, 2);
+        GameObject obj = Instantiate(m_image);
+        obj.transform.SetParent(m_paraent);
+        obj.GetRectTransform().position = Vector2.zero;
     }
 }
