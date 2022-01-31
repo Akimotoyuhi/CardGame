@@ -212,6 +212,11 @@ public class CharactorBase : MonoBehaviour
         //}
     }
 
+    protected virtual void Damage(int damage, int block, List<Condition> conditions)
+    {
+
+    }
+
     public void SetParam(string name, Sprite image, int hp)
     {
         m_name = name;

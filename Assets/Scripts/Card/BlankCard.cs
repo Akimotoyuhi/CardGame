@@ -55,6 +55,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
     }
     public List<Condition> Conditions { get; private set; }
+    public UseType GetCardType { get => m_useType; }
 
     private void Setup()
     {
@@ -62,14 +63,12 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewTooltip.text = m_tooltip;
         m_viewCost.text = m_cost;
     }
-
-    public Player Player { set => m_player = value; }
     public void SetInfo(NewCardDataBase carddata, Player player)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
         m_tooltip = carddata.Tooltip;
-        //Power = carddata.Attack;
+        Power = carddata.Attack;
         AttackNum = carddata.AttackNum;
         Block = carddata.Block;
         BlockNum = carddata.BlockNum;
@@ -112,8 +111,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         m_viewTooltip.text = text;
     }
-
-    public UseType GetCardType { get => m_useType; }
 
     public void OnCast()
     {

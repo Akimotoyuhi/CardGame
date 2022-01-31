@@ -9,11 +9,13 @@ using UniRx;
 public class EnemyManager : MonoBehaviour
 {
     /// <summary>敵データ</summary>
-    //[SerializeField] EnemyData m_enemydata;
     [SerializeField] EnemyData m_enemyData;
-    private EnemyDataBase m_enemyDatabase;
     /// <summary>敵プレハブ</summary>
     [SerializeField] GameObject m_enemyPrefab;
+    /// <summary>敵の親</summary>
+    [SerializeField] Transform m_enemyParent;
+    /// <summary>ターゲット</summary>
+    [SerializeField] EnemiesTarget m_enemyTarget;
     /// <summary>現在出現中の全敵データ　戦闘中に使う</summary>
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
     /// <summary>敵の総数。終了判定用</summary>
@@ -23,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     {
         BattleManager.Instance.TurnEnd2.Subscribe(turn => EnemyTrun(turn));
         BattleManager.Instance.TurnBegin.Subscribe(turn => ActionPlan(turn));
+        m_enemyTarget.Setup(this);
     }
 
     public void CreateEnemies(CellState cellstate)
@@ -38,7 +41,7 @@ public class EnemyManager : MonoBehaviour
                 break;
         }
         Transform tra = Instantiate(m_enemyPrefab, transform).transform;
-        tra.SetParent(transform, false);
+        tra.SetParent(m_enemyParent, false);
         EnemyBase e = tra.GetComponent<EnemyBase>();
         e.SetParam(enemy);
     }
@@ -48,9 +51,9 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     public void EnemyCount()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < m_enemyParent.childCount; i++)
         {
-            m_enemies.Add(transform.GetChild(i).GetComponent<EnemyBase>());
+            m_enemies.Add(m_enemyParent.GetChild(i).GetComponent<EnemyBase>());
             m_enemyCount++;
         }
     }
@@ -70,6 +73,19 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 敵全体に効果のあるカードが使われた場合に呼ばれる
+    /// </summary>
+    /// <param name="card"></param>
+    public void AllEnemiesDamage(BlankCard card)
+    {
+
+    }
+
+    /// <summary>
+    /// 敵の行動予定を表示させる
+    /// </summary>
+    /// <param name="turn"></param>
     private void ActionPlan(int turn)
     {
         for (int i = 0; i < m_enemies.Count; i++)

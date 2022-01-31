@@ -99,6 +99,7 @@ public enum UseType
 {
     ToPlayer,
     ToEnemy,
+    ToAllEnemies,
 }
 [Serializable]
 public class NewCardDataBase
