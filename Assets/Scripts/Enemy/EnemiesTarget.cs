@@ -13,9 +13,8 @@ public class EnemiesTarget : MonoBehaviour, IDrop
 
     public void GetDrop(BlankCard card)
     {
-        Debug.Log("‚¨‚¬‚á");
         if (!card || card.GetCardType != UseType.ToAllEnemies) return;
-        
-        //m_enemyManager.AllEnemiesDamage(card);
+        card.OnCast();
+        m_enemyManager.AllEnemiesDamage(card);
     }
 }

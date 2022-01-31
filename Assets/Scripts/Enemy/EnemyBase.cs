@@ -37,15 +37,26 @@ public class EnemyBase : CharactorBase, IDrop
     public void GetDrop(BlankCard card)
     {
         if (card == null || card.GetCardType != UseType.ToEnemy) return;
-        AddEffect(card.Conditions);
-        int damage = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, card.Power);
-        damage = m_block -= damage;
+        card.OnCast();
+        Damage(card.Power, card.Block, card.Conditions);
+    }
+
+    public void GetDamage(BlankCard card)
+    {
+        Damage(card.Power, card.Block, card.Conditions);
+    }
+
+    protected override void Damage(int damage, int block, List<Condition> conditions)
+    {
+        AddEffect(conditions);
+        int dmg = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, damage);
+        dmg = m_block -= dmg;
         if (m_block < 0) { m_block = 0; }
-        damage *= -1;
-        if (damage < 0) { }
+        dmg *= -1;
+        if (dmg < 0) { }
         else
         {
-            m_life -= damage;
+            m_life -= dmg;
             if (m_life <= 0)
             {
                 m_isDead = true;
@@ -54,11 +65,10 @@ public class EnemyBase : CharactorBase, IDrop
             }
             else
             {
-                EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform, true);
+                EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform, true);
             }
         }
         SetUI();
-        card.OnCast();
     }
 
     /// <summary>

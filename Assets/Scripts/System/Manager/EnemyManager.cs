@@ -79,7 +79,11 @@ public class EnemyManager : MonoBehaviour
     /// <param name="card"></param>
     public void AllEnemiesDamage(BlankCard card)
     {
-
+        for (int i = 0; i < m_enemies.Count; i++)
+        {
+            if (m_enemies[i].IsDead) continue;
+            m_enemies[i].GetDamage(card);
+        }
     }
 
     /// <summary>
