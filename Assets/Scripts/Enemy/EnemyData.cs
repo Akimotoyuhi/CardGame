@@ -6,8 +6,7 @@ using System.Linq;
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
-    [SerializeField] int m_useData = 3;
-    [SerializeField] List<EnemyDataBase> m_enemyDataBases = new List<EnemyDataBase>();
+    [SerializeField, Header("敵ステータスのデータ")] List<EnemyDataBase> m_enemyDataBases = new List<EnemyDataBase>();
     private List<EnemyDataBase> m_act1Enemies = new List<EnemyDataBase>();
     private List<EnemyDataBase> m_act1Elites = new List<EnemyDataBase>();
     private List<EnemyDataBase> m_act1Boss = new List<EnemyDataBase>();
@@ -35,11 +34,18 @@ public class EnemyData : ScriptableObject
                     m_act1Boss.Add(data);
                     break;
                 default:
-                    Debug.LogWarning("与えられたパラメーターに対する値がありません");
+                    Debug.LogWarning("与えられたパラメーターに対するデータがありません");
                     break;
             }
         }
     }
+    [Header("エンカウントデータ")]
+    [SerializeField] List<EncountDataBase> m_act1EnemyEncountData = new List<EncountDataBase>();
+    [SerializeField] List<EncountDataBase> m_act1EliteEncountData = new List<EncountDataBase>();
+    [SerializeField] List<EncountDataBase> m_act1BossEncountData = new List<EncountDataBase>();
+    public List<EncountDataBase> Act1EnemyEncountDataBases => m_act1EnemyEncountData;
+    public List<EncountDataBase> Act1EliteEncountDataBases => m_act1EliteEncountData;
+    public List<EncountDataBase> Act1BossEncountDataBases => m_act1BossEncountData;
 }
 
 /// <summary>敵ID</summary>
@@ -66,6 +72,7 @@ public enum EnemyAppearanceEria
     Act3Elite,
     Act3Boss,
 }
+/// <summary>行動予定</summary>
 public enum ActionPlan
 {
     Attack,
@@ -74,14 +81,34 @@ public enum ActionPlan
     Debuff,
     Unknown,
 }
+/// <summary>攻撃の標的</summary>
+public enum TargetType
+{
+    ToPlayer,
+    ToEnemy,
+}
+/// <summary>敵行動条件</summary>
+public enum WhereType
+{
+    Any,
+    Turn,
+    RowTurn,
+    HighTurn,
+    MultipleTurn,
+    RowLife,
+    HighLife,
+    BattleBegin,
+}
 [System.Serializable]
 public class EnemyDataBase
 {
     [SerializeField, Tooltip("名前")] string m_name;
+    [SerializeField, Tooltip("敵ID")] EnemyID m_id;
     [SerializeField, Tooltip("最大体力")] int m_life;
     [SerializeField, Tooltip("画像")] Sprite m_image;
     [SerializeField, Tooltip("出現場所")] EnemyAppearanceEria m_enemyAppearanceEria;
     public string Name => m_name;
+    public EnemyID ID => m_id;
     public int Life => m_life;
     public Sprite Image => m_image;
     public EnemyAppearanceEria EnemyAppearanceEria => m_enemyAppearanceEria;
@@ -224,19 +251,16 @@ public class EnemyConditionalCommand3
         }
     }
 }
-public enum TargetType
+[System.Serializable]
+public class EncountDataBase
 {
-    ToPlayer,
-    ToEnemy,
-}
-public enum WhereType
-{
-    Any,
-    Turn,
-    RowTurn,
-    HighTurn,
-    MultipleTurn,
-    RowLife,
-    HighLife,
-    BattleBegin,
+    [SerializeField] EnemyID[] m_enemyID = new EnemyID[(int)EnemyID.endLength];
+
+    /// <summary>
+    /// 敵IDの取得
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public int GetID(int index) { return (int)m_enemyID[index]; }
+    public int GetLength { get => m_enemyID.Length; }
 }

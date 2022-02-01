@@ -30,9 +30,6 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject m_enemies;
     /// <summary>敵データ管理クラス</summary>
     [SerializeField] EnemyData m_enemyData;
-    /// <summary>敵グループのデータ</summary>
-    [SerializeField] EncountData m_encountData;
-    private EncountDataBase m_encountDatabase;
     /// <summary>敵グループの管理クラス</summary>
     private EnemyManager m_enemyManager;
     [Header("バトル中のパラメーター管理")]
@@ -174,14 +171,6 @@ public class BattleManager : MonoBehaviour
             }
         }
         //敵グループ生成
-        //m_encountDatabase = m_encountData.Encount(enemyid);
-        //m_enemyManager = m_enemies.GetComponent<EnemyManager>();
-        //for (int i = 0; i < m_encountDatabase.GetLength; i++)
-        //{
-        //    //Debug.Log(m_encountDatabase.GetID(i));
-        //    m_enemyManager.CreateEnemies(m_encountDatabase.GetID(i));
-        //}
-
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
         m_enemyManager.CreateEnemies(cellState);
         m_enemyManager.EnemyCount();
