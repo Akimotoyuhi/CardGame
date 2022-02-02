@@ -17,7 +17,6 @@ public class EnemyBase : CharactorBase, IDrop
     void Start()
     {
         gameObject.name = m_name;
-        m_enemyManager = transform.parent.gameObject.GetComponent<EnemyManager>();
         SetUp();
     }
 
@@ -26,12 +25,13 @@ public class EnemyBase : CharactorBase, IDrop
         base.SetUp();
     }
 
-    public void SetParam(EnemyDataBase data)
+    public void SetParam(EnemyDataBase data, EnemyManager enemyManager)
     {
         m_name = data.Name;
         m_maxLife = data.Life;
         m_image = data.Image;
         m_enemyDataBase = data;
+        m_enemyManager = enemyManager;
     }
 
     public void GetDrop(BlankCard card)

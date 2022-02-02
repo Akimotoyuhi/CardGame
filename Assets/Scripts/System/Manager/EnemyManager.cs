@@ -45,7 +45,7 @@ public class EnemyManager : MonoBehaviour
             Transform tra = Instantiate(m_enemyPrefab, transform).transform;
             tra.SetParent(m_enemyParent, false);
             EnemyBase e = tra.GetComponent<EnemyBase>();
-            e.SetParam(item);
+            e.SetParam(item, this);
         }
     }
 
