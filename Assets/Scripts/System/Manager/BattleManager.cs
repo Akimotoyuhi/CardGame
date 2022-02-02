@@ -82,7 +82,7 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         m_cardData.Setup();
-        m_enemyData.Assignment();
+        //m_enemyData.Assignment();
         Setup();
         m_reward.RewardDisabled();
     }
@@ -105,12 +105,12 @@ public class BattleManager : MonoBehaviour
     /// 戦闘開始
     /// </summary>
     /// <param name="enemyid">エンカウントした敵のID</param>
-    public void BattleStart(CellState cellstate)
+    public void BattleStart(EnemyAppearanceEria eria)
     {
         m_progressTurn = 0;
         m_isGame = true;
         Setup();
-        CreateField(cellstate);
+        CreateField(eria);
         StartCoroutine(OnBattle());
         //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
         //FirstTurn();
@@ -144,7 +144,7 @@ public class BattleManager : MonoBehaviour
     /// プレイヤーや敵の生成を行う
     /// </summary>
     /// <param name="enemyid"></param>
-    private void CreateField(CellState cellState)
+    private void CreateField(EnemyAppearanceEria eria)
     {
         //デッキとプレイヤー構築
         if (DataManager.Instance.IsSaveData())
@@ -172,7 +172,7 @@ public class BattleManager : MonoBehaviour
         }
         //敵グループ生成
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
-        m_enemyManager.CreateEnemies(cellState);
+        m_enemyManager.CreateEnemies(eria);
         m_enemyManager.EnemyCount();
     }
     /// <summary>

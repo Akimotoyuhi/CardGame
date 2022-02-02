@@ -14,6 +14,7 @@ public class Cell : MonoBehaviour
     [SerializeField] Image m_endPos;
     /// <summary>セルの状態</summary>
     [SerializeField] CellState m_cellState = default;
+    //[SerializeField] EnemyAppearanceEria m_enemyAppearanceEria = default;
     [Header("セルの状態に応じて変わる色の設定")]
     [SerializeField] Color m_enemyColor = Color.red;
     [SerializeField] Color m_restColor = Color.blue;
@@ -31,6 +32,14 @@ public class Cell : MonoBehaviour
             ColorChange();
         }
     }
+    //public EnemyAppearanceEria EnemyAppearanceEria
+    //{
+    //    set
+    //    {
+    //        m_enemyAppearanceEria = value;
+    //        ColorChange();
+    //    }
+    //}
     /// <summary>このセルが所属するセクター番号</summary>
     public int SectorIndex { get; set; }
     /// <summary>このセルが所属するステップ数</summary>

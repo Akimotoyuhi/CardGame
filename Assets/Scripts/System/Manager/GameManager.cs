@@ -44,11 +44,25 @@ public class GameManager : MonoBehaviour
         switch (cellState)
         {
             case CellState.Enemy:
-                BattleManager.Instance.BattleStart(cellState);
+                if (DataManager.Instance.Act == 1)
+                {
+                    BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy);
+                }
+                else
+                {
+                    Debug.LogError("まだ作ってないねん");
+                }
                 m_battleCanvas.enabled = true;
                 break;
             case CellState.Boss:
-                BattleManager.Instance.BattleStart(cellState);
+                if (DataManager.Instance.Act == 1)
+                {
+                    BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss);
+                }
+                else
+                {
+                    Debug.LogError("まだ作ってないねん");
+                }
                 m_battleCanvas.enabled = true;
                 break;
             case CellState.Rest:

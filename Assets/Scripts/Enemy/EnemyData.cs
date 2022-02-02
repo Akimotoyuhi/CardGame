@@ -6,46 +6,70 @@ using System.Linq;
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
-    [SerializeField, Header("敵ステータスのデータ")] List<EnemyDataBase> m_enemyDataBases = new List<EnemyDataBase>();
-    private List<EnemyDataBase> m_act1Enemies = new List<EnemyDataBase>();
-    private List<EnemyDataBase> m_act1Elites = new List<EnemyDataBase>();
-    private List<EnemyDataBase> m_act1Boss = new List<EnemyDataBase>();
-    public EnemyDataBase EnemyDataBase(int index) => m_enemyDataBases[index];
-    public List<EnemyDataBase> Act1Enemy => m_act1Enemies;
-    public List<EnemyDataBase> Act1Elite => m_act1Elites;
-    public List<EnemyDataBase> Act1Boss => m_act1Boss;
-    public void Assignment()
-    {
-        m_act1Enemies.Clear();
-        m_act1Elites.Clear();
-        m_act1Boss.Clear();
-        for (int i = 0; i < m_enemyDataBases.Count; i++)
-        {
-            EnemyDataBase data = m_enemyDataBases[i];
-            switch (data.EnemyAppearanceEria)
-            {
-                case EnemyAppearanceEria.Act1Enemy:
-                    m_act1Enemies.Add(data);
-                    break;
-                case EnemyAppearanceEria.Act1Elite:
-                    m_act1Elites.Add(data);
-                    break;
-                case EnemyAppearanceEria.Act1Boss:
-                    m_act1Boss.Add(data);
-                    break;
-                default:
-                    Debug.LogWarning("与えられたパラメーターに対するデータがありません");
-                    break;
-            }
-        }
-    }
+    [SerializeField, Header("敵ステータスのデータ")]
+    List<EnemyDataBase> m_enemyDataBases = new List<EnemyDataBase>();
+    //private List<EnemyDataBase> m_act1Enemies = new List<EnemyDataBase>();
+    //private List<EnemyDataBase> m_act1Elites = new List<EnemyDataBase>();
+    //private List<EnemyDataBase> m_act1Boss = new List<EnemyDataBase>();
+    //public List<EnemyDataBase> EnemyDataBase => m_enemyDataBases;
+    //public List<EnemyDataBase> Act1Enemy => m_act1Enemies;
+    //public List<EnemyDataBase> Act1Elite => m_act1Elites;
+    //public List<EnemyDataBase> Act1Boss => m_act1Boss;
+    //public void Assignment()
+    //{
+    //    m_act1Enemies.Clear();
+    //    m_act1Elites.Clear();
+    //    m_act1Boss.Clear();
+    //    for (int i = 0; i < m_enemyDataBases.Count; i++)
+    //    {
+    //        EnemyDataBase data = m_enemyDataBases[i];
+    //        switch (data.EnemyAppearanceEria)
+    //        {
+    //            case EnemyAppearanceEria.Act1Enemy:
+    //                m_act1Enemies.Add(data);
+    //                break;
+    //            case EnemyAppearanceEria.Act1Elite:
+    //                m_act1Elites.Add(data);
+    //                break;
+    //            case EnemyAppearanceEria.Act1Boss:
+    //                m_act1Boss.Add(data);
+    //                break;
+    //            default:
+    //                Debug.LogWarning("与えられたパラメーターに対するデータがありません");
+    //                break;
+    //        }
+    //    }
+    //}
     [Header("エンカウントデータ")]
     [SerializeField] List<EncountDataBase> m_act1EnemyEncountData = new List<EncountDataBase>();
     [SerializeField] List<EncountDataBase> m_act1EliteEncountData = new List<EncountDataBase>();
     [SerializeField] List<EncountDataBase> m_act1BossEncountData = new List<EncountDataBase>();
-    public List<EncountDataBase> Act1EnemyEncountDataBases => m_act1EnemyEncountData;
-    public List<EncountDataBase> Act1EliteEncountDataBases => m_act1EliteEncountData;
-    public List<EncountDataBase> Act1BossEncountDataBases => m_act1BossEncountData;
+    public List<EnemyDataBase> Encount(EnemyAppearanceEria eria)
+    {
+        List<EnemyDataBase> ret = new List<EnemyDataBase>();
+        List<EncountDataBase> encountData = new List<EncountDataBase>();
+        switch (eria)
+        {
+            case EnemyAppearanceEria.Act1Enemy:
+                encountData = m_act1EnemyEncountData;
+                break;
+            case EnemyAppearanceEria.Act1Elite:
+                encountData = m_act1EliteEncountData;
+                break;
+            case EnemyAppearanceEria.Act1Boss:
+                encountData = m_act1BossEncountData;
+                break;
+            default:
+                Debug.Log("変な値入れんな");
+                return null;
+        }
+        int r = Random.Range(0, encountData.Count);
+        for (int i = 0; i < encountData[r].GetLength; i++)
+        {
+            ret.Add(m_enemyDataBases[encountData[r].GetID(i)]);
+        }
+        return ret;
+    }
 }
 
 /// <summary>敵ID</summary>

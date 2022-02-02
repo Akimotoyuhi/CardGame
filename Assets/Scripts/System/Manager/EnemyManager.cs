@@ -28,22 +28,25 @@ public class EnemyManager : MonoBehaviour
         m_enemyTarget.Setup(this);
     }
 
-    public void CreateEnemies(CellState cellstate)
+    public void CreateEnemies(EnemyAppearanceEria eria)
     {
-        EnemyDataBase enemy = default;
-        switch (cellstate)
+        //switch (eria)
+        //{
+        //    case EnemyAppearanceEria:
+        //        enemy = m_enemyData.Act1Enemy[Random.Range(0, m_enemyData.Act1Enemy.Count)];
+        //        break;
+        //    case CellState.Boss:
+        //        enemy = m_enemyData.Act1Boss[Random.Range(0, m_enemyData.Act1Boss.Count)];
+        //        break;
+        //}
+        List<EnemyDataBase> enemies = m_enemyData.Encount(eria);
+        foreach (var item in enemies)
         {
-            case CellState.Enemy:
-                enemy = m_enemyData.Act1Enemy[Random.Range(0, m_enemyData.Act1Enemy.Count)];
-                break;
-            case CellState.Boss:
-                enemy = m_enemyData.Act1Boss[Random.Range(0, m_enemyData.Act1Boss.Count)];
-                break;
+            Transform tra = Instantiate(m_enemyPrefab, transform).transform;
+            tra.SetParent(m_enemyParent, false);
+            EnemyBase e = tra.GetComponent<EnemyBase>();
+            e.SetParam(item);
         }
-        Transform tra = Instantiate(m_enemyPrefab, transform).transform;
-        tra.SetParent(m_enemyParent, false);
-        EnemyBase e = tra.GetComponent<EnemyBase>();
-        e.SetParam(enemy);
     }
 
     /// <summary>

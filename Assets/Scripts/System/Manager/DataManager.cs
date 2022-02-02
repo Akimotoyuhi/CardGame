@@ -8,11 +8,10 @@ namespace Mastar
     {
         private static DataManager m_instance = new DataManager();
         public static DataManager Instance => m_instance;
-        //private DataManager() { }
         private int m_currentLife = 0;
-
         /// <summary>現在の進行状況</summary>
         public int Step { get; set; } = 0;
+        public int Act { get; set; } = 1;
         //プレイヤー情報関連
         private List<CardID> m_cards = new List<CardID>();
         public string Name { get; private set; }
