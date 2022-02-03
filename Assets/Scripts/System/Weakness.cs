@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Weakness : Condition
 {
-    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
         if (parametorType != ParametorType.Any)
         {
-            if (Turn <= 0 || parametorType != GetParametorType()) return power;
+            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { power };
         }
         float ret = default;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
                 ret = power * (1 - 0.25f);
-                return (int)ret;
+                return new int[] { (int)ret };
             case EventTiming.Drow:
                 ret = power * (1 - 0.25f);
-                return (int)ret;
+                return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
                 break;
         }
-        return power;
+        return new int[] { power };
     }
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Weakness;
@@ -31,26 +31,26 @@ public class Weakness : Condition
 }
 public class Frail : Condition
 {
-    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
         if (parametorType != ParametorType.Any)
         {
-            if (Turn <= 0 || parametorType != GetParametorType()) return block;
+            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { block };
         }
         float ret = default;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
                 ret = block * (1 - 0.25f);
-                return (int)ret;
+                return new int[] { (int)ret };
             case EventTiming.Drow:
                 ret = block * (1 - 0.25f);
-                return (int)ret;
+                return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
                 break;
         }
-        return block;
+        return new int[] { block };
     }
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Frail;
@@ -58,18 +58,18 @@ public class Frail : Condition
 }
 public class Strength : Condition
 {
-    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
         if (parametorType != ParametorType.Any)
         {
-            if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
+            if (Turn == 0 || parametorType != ParametorType.Attack) return new int[] { power };
         }
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                return power + Turn;
+                return new int[] { power + Turn };
             default:
-                return power;
+                return new int[] { power };
         }
     }
     public override ConditionID GetConditionID() => ConditionID.Strength;
@@ -78,18 +78,18 @@ public class Strength : Condition
 }
 public class Agile : Condition
 {
-    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
         if (parametorType != ParametorType.Any)
         {
-            if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+            if (Turn == 0 || parametorType != ParametorType.Block) return new int[] { block };
         }
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                return block + Turn;
+                return new int[] { block + Turn };
             default:
-                return block;
+                return new int[] { block };
         }
     }
     public override ConditionID GetConditionID() => ConditionID.Agile;
@@ -98,19 +98,18 @@ public class Agile : Condition
 }
 public class PlateArmor : Condition
 {
-    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Any) return block;
+        if (Turn <= 0 || parametorType != ParametorType.Any) return new int[] { block };
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
-                Debug.Log("プレートアーマー" + Turn);
-                return Turn;
+                return new int[] { Turn };
             case EventTiming.Damaged:
                 Turn--;
-                return 0;
+                return new int[] { 0 };
             default:
-                return block;
+                return new int[] { block };
         }
     }
     public override ConditionID GetConditionID() => global::ConditionID.PlateArmor;
@@ -119,20 +118,20 @@ public class PlateArmor : Condition
 }
 public class StrengthDown : Condition
 {
-    public override int Effect(EventTiming eventTiming, ParametorType parametorType, int value = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int value = 0)
     {
         Debug.Log($"渡された値 {eventTiming}:{parametorType}:{value}({(ConditionID)value})");
         if (parametorType != ParametorType.Any)
         {
-            if (Turn <= 0 || parametorType != ParametorType.Condition) return 0;
+            if (Turn <= 0 || parametorType != ParametorType.Condition) return new int[] { value };
         }
         if (eventTiming == EventTiming.TurnBegin && (ConditionID)value == ConditionID.Strength)
         {
-            int ret = Turn;
+            int[] ret = new int[] { (int)ConditionID.Strength, -Turn };
             Turn = 0;
-            return -ret;
+            return ret;
         }
-        return 0;
+        return new int[] { -1, 0 };
     }
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.StrengthDown;

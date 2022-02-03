@@ -94,7 +94,7 @@ public class CharactorBase : MonoBehaviour
         int ret = value;
         foreach (var item in m_conditions)
         {
-            ret = item.Effect(eventTiming, parametorType, ret);
+            ret = item.Effect(eventTiming, parametorType, ret)[0];
         }
         return ret;
     }
@@ -249,30 +249,31 @@ public class CharactorBase : MonoBehaviour
     /// <param name="parametorType"></param>
     protected void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
     {
-        //cBase = 自分が持ってる(付与されているバフデバフ)
-        //cEvaluation = cBaseを評価するやつ(この場合はStrengthを見つけるやつ)
-        //for (int cBase = 0; cBase < m_conditions.Count; cBase++)
-        //{
-        //    for (int cEvaluation = 0; cEvaluation < m_conditions.Count; cEvaluation++)
-        //    {
-        //        if (m_conditions[cEvaluation].GetParametorType() == ParametorType.Condition)
-        //        {
-        //            int i = m_conditions[cEvaluation].Effect(eventTiming, parametorType, (int)m_conditions[cBase].GetConditionID());
-        //            if (i != 0)
-        //            {
-        //                List<Condition> c = new List<Condition>();
-        //                c.Add(ConditionSelection.SetCondition((ConditionID)cBase, i));
-        //                AddEffect(c);
-        //            }
-        //        }
-        //    }
-        //}
         foreach (var c in m_conditions)
         {
+            switch (c.GetParametorType())
+            {
+                case ParametorType.Condition:
+                    for (int evaluation = 0; evaluation < m_conditions.Count; evaluation++)
+                    {
+                        int[] i = c.Effect(eventTiming, parametorType, (int)m_conditions[evaluation].GetConditionID());
+                        if (i[0] >= 0)
+                        {
+                            Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
+                            List<Condition> conlist = new List<Condition>();
+                            ConditionSelection cs = new ConditionSelection();
+                            conlist.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+                            AddEffect(conlist);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
             switch (c.GetConditionID())
             {
                 case ConditionID.PlateArmor:
-                    m_block += c.Effect(eventTiming, parametorType);
+                    m_block += c.Effect(eventTiming, parametorType)[0];
                     Debug.Log("ブロック値" + m_block);
                     break;
                 default:

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-/// <summary>
-/// バフデバフ
-/// </summary>
+/// <summary>バフデバフ</summary>
 public enum ConditionID
 {
     /// <summary>脱力<br/>与えるダメージが25%低下</summary>
@@ -21,9 +19,7 @@ public enum ConditionID
     /// <summary>筋力低下<br/>ターン開始時に筋力Xを失う</summary>
     StrengthDown,
 }
-/// <summary>
-/// バフデバフが効果を発動するタイミング
-/// </summary>
+/// <summary>バフデバフが効果を発動するタイミング</summary>
 public enum EventTiming
 {
     /// <summary>ターン開始時</summary>
@@ -56,7 +52,7 @@ public abstract class Condition
     /// <param name="eventTiming">評価されるタイミング</param>
     /// <param name="num">影響を受ける数値</param>
     /// <returns>計算後の数値</returns>
-    public abstract int Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0);
+    public abstract int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0);
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
     public abstract int IsBuff();
@@ -73,7 +69,6 @@ public class ConditionSelection
 {
     [SerializeField] ConditionID m_conditionID;
     [SerializeField] int m_turn;
-
     public Condition GetCondition
     {
         get
@@ -112,7 +107,7 @@ public class ConditionSelection
             }
         }
     }
-    public static Condition SetCondition(ConditionID conditionID, int turn)
+    public Condition SetCondition(ConditionID conditionID, int turn)
     {
         ConditionSelection cs = new ConditionSelection();
         cs.m_conditionID = conditionID;
