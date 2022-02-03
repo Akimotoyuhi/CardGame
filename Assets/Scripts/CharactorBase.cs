@@ -249,11 +249,13 @@ public class CharactorBase : MonoBehaviour
     /// <param name="parametorType"></param>
     protected void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
     {
-        //if (parametorType == ParametorType.Any)
+        //cBase = 自分が持ってる(付与されているバフデバフ)
+        //cEvaluation = cBaseを評価するやつ(この場合はStrengthを見つけるやつ)
+        //for (int cBase = 0; cBase < m_conditions.Count; cBase++)
         //{
-        //    for (int cBase = 0; cBase < m_conditions.Count; cBase++)
+        //    for (int cEvaluation = 0; cEvaluation < m_conditions.Count; cEvaluation++)
         //    {
-        //        for (int cEvaluation = 0; cEvaluation < m_conditions.Count; cEvaluation++)
+        //        if (m_conditions[cEvaluation].GetParametorType() == ParametorType.Condition)
         //        {
         //            int i = m_conditions[cEvaluation].Effect(eventTiming, parametorType, (int)m_conditions[cBase].GetConditionID());
         //            if (i != 0)

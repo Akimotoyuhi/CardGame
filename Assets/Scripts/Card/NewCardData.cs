@@ -117,6 +117,7 @@ public class NewCardDataBase
     [SerializeField] List<ConditionSelection> m_concitions;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
+    private bool m_isUpgrade = false;
     /// <summary>カードの名前</summary>
     public string Name => m_name;
     /// <summary>コスト</summary>

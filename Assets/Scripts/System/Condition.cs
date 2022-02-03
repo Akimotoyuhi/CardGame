@@ -37,7 +37,6 @@ public enum EventTiming
     /// <summary>カードを引いた時</summary>
     Drow,
 }
-
 public enum ParametorType
 {
     Attack,
@@ -61,7 +60,12 @@ public abstract class Condition
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
     public abstract int IsBuff();
+    /// <summary>このConditionが持つID</summary>
+    /// <returns></returns>
     public abstract ConditionID GetConditionID();
+    /// <summary>このConditionが評価したい値</summary>
+    /// <returns></returns>
+    public abstract ParametorType GetParametorType();
 }
 
 [Serializable]

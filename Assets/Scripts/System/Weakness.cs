@@ -8,7 +8,7 @@ public class Weakness : Condition
     {
         if (parametorType != ParametorType.Any)
         {
-            if (Turn <= 0 || parametorType != ParametorType.Attack) return power;
+            if (Turn <= 0 || parametorType != GetParametorType()) return power;
         }
         float ret = default;
         switch (eventTiming)
@@ -26,7 +26,8 @@ public class Weakness : Condition
         return power;
     }
     public override int IsBuff() => 1;
-    public override ConditionID GetConditionID() => global::ConditionID.Weakness;
+    public override ConditionID GetConditionID() => ConditionID.Weakness;
+    public override ParametorType GetParametorType() => ParametorType.Attack;
 }
 public class Frail : Condition
 {
@@ -34,7 +35,7 @@ public class Frail : Condition
     {
         if (parametorType != ParametorType.Any)
         {
-            if (Turn <= 0 || parametorType != ParametorType.Block) return block;
+            if (Turn <= 0 || parametorType != GetParametorType()) return block;
         }
         float ret = default;
         switch (eventTiming)
@@ -52,7 +53,8 @@ public class Frail : Condition
         return block;
     }
     public override int IsBuff() => 1;
-    public override ConditionID GetConditionID() => global::ConditionID.Frail;
+    public override ConditionID GetConditionID() => ConditionID.Frail;
+    public override ParametorType GetParametorType() => ParametorType.Block;
 }
 public class Strength : Condition
 {
@@ -70,8 +72,9 @@ public class Strength : Condition
                 return power;
         }
     }
-    public override ConditionID GetConditionID() => global::ConditionID.Strength;
+    public override ConditionID GetConditionID() => ConditionID.Strength;
     public override int IsBuff() => 0;
+    public override ParametorType GetParametorType() => ParametorType.Attack;
 }
 public class Agile : Condition
 {
@@ -89,8 +92,9 @@ public class Agile : Condition
                 return block;
         }
     }
-    public override ConditionID GetConditionID() => global::ConditionID.Agile;
+    public override ConditionID GetConditionID() => ConditionID.Agile;
     public override int IsBuff() => 0;
+    public override ParametorType GetParametorType() => ParametorType.Block;
 }
 public class PlateArmor : Condition
 {
@@ -111,6 +115,7 @@ public class PlateArmor : Condition
     }
     public override ConditionID GetConditionID() => global::ConditionID.PlateArmor;
     public override int IsBuff() => 0;
+    public override ParametorType GetParametorType() => ParametorType.Any;
 }
 public class StrengthDown : Condition
 {
@@ -121,7 +126,7 @@ public class StrengthDown : Condition
         {
             if (Turn <= 0 || parametorType != ParametorType.Condition) return 0;
         }
-        if (eventTiming == EventTiming.TurnBegin)
+        if (eventTiming == EventTiming.TurnBegin && (ConditionID)value == ConditionID.Strength)
         {
             int ret = Turn;
             Turn = 0;
@@ -130,5 +135,6 @@ public class StrengthDown : Condition
         return 0;
     }
     public override int IsBuff() => 1;
-    public override ConditionID GetConditionID() => global::ConditionID.StrengthDown;
+    public override ConditionID GetConditionID() => ConditionID.StrengthDown;
+    public override ParametorType GetParametorType() => ParametorType.Condition;
 }

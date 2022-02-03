@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ca6e485ae8720c41a5fb1f715ee975a, type: 3}
-  m_Name: Relic
+  m_Script: {fileID: 11500000, guid: 151066133acc2d841a8e338ed8ceffeb, type: 3}
+  m_Name: RelicData
   m_EditorClassIdentifier: 
-  m_relicDataBases: []
+  m_relicDataBases:
+  - m_name: aaaa
+    m_sprite: {fileID: 0}

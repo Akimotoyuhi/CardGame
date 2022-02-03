@@ -30,15 +30,6 @@ public class EnemyManager : MonoBehaviour
 
     public void CreateEnemies(EnemyAppearanceEria eria)
     {
-        //switch (eria)
-        //{
-        //    case EnemyAppearanceEria:
-        //        enemy = m_enemyData.Act1Enemy[Random.Range(0, m_enemyData.Act1Enemy.Count)];
-        //        break;
-        //    case CellState.Boss:
-        //        enemy = m_enemyData.Act1Boss[Random.Range(0, m_enemyData.Act1Boss.Count)];
-        //        break;
-        //}
         List<EnemyDataBase> enemies = m_enemyData.Encount(eria);
         foreach (var item in enemies)
         {
