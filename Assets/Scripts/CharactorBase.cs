@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 /// <summary>
-/// 敵とプレイヤーの基底クラス<br/>
-/// 共通処理をまとめておく
+/// 敵とプレイヤーの基底クラス
 /// </summary>
 public class CharactorBase : MonoBehaviour
 {
@@ -89,6 +88,13 @@ public class CharactorBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 戦闘時にバフデバフを評価する
+    /// </summary>
+    /// <param name="eventTiming">評価タイミング</param>
+    /// <param name="parametorType">評価するパラメーター名</param>
+    /// <param name="value">評価する数値</param>
+    /// <returns>評価された後のパラメーター</returns>
     public int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
     {
         int ret = value;
@@ -122,6 +128,7 @@ public class CharactorBase : MonoBehaviour
                 m_conditions.Add(conditions[i]);
             }
         }
+        RemoveEffect();
         ViewConditionUI();
     }
 
@@ -132,10 +139,10 @@ public class CharactorBase : MonoBehaviour
     {
         for (int i = 0; i < m_conditions.Count; i++)
         {
-            if (m_conditions[i].Turn <= 0)
+            if (m_conditions[i].IsRemove())
             {
                 m_conditions.RemoveAt(i);
-                Debug.Log("デバフを除去");
+                Debug.Log($"{m_conditions[i].GetConditionID()}デバフを除去");
             }
         }
         ViewConditionUI();
@@ -257,7 +264,7 @@ public class CharactorBase : MonoBehaviour
                     for (int evaluation = 0; evaluation < m_conditions.Count; evaluation++)
                     {
                         int[] i = c.Effect(eventTiming, parametorType, (int)m_conditions[evaluation].GetConditionID());
-                        if (i[0] >= 0)
+                        if (i.Length >= 2)
                         {
                             Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
                             List<Condition> conlist = new List<Condition>();

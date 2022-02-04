@@ -25,6 +25,11 @@ public class Weakness : Condition
         }
         return new int[] { power };
     }
+    public override bool IsRemove()
+    {
+        if (Turn < 0) return true;
+        return false;
+    }
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Weakness;
     public override ParametorType GetParametorType() => ParametorType.Attack;
@@ -52,6 +57,11 @@ public class Frail : Condition
         }
         return new int[] { block };
     }
+    public override bool IsRemove()
+    {
+        if (Turn < 0) return true;
+        return false;
+    }
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Frail;
     public override ParametorType GetParametorType() => ParametorType.Block;
@@ -71,6 +81,11 @@ public class Strength : Condition
             default:
                 return new int[] { power };
         }
+    }
+    public override bool IsRemove()
+    {
+        if (Turn == 0) return true;
+        return false;
     }
     public override ConditionID GetConditionID() => ConditionID.Strength;
     public override int IsBuff() => 0;
@@ -92,6 +107,11 @@ public class Agile : Condition
                 return new int[] { block };
         }
     }
+    public override bool IsRemove()
+    {
+        if (Turn == 0) return true;
+        return false;
+    }
     public override ConditionID GetConditionID() => ConditionID.Agile;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Block;
@@ -112,6 +132,11 @@ public class PlateArmor : Condition
                 return new int[] { block };
         }
     }
+    public override bool IsRemove()
+    {
+        if (Turn < 0) return true;
+        return false;
+    }
     public override ConditionID GetConditionID() => global::ConditionID.PlateArmor;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Any;
@@ -131,7 +156,12 @@ public class StrengthDown : Condition
             Turn = 0;
             return ret;
         }
-        return new int[] { -1, 0 };
+        return new int[] { 0 };
+    }
+    public override bool IsRemove()
+    {
+        if (Turn < 0) return true;
+        return false;
     }
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.StrengthDown;

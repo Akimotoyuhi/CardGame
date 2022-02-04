@@ -48,10 +48,10 @@ public enum ParametorType
 public abstract class Condition
 {
     public int Turn { get; set; }
-    /// <summary> 効果 </summary>
+    /// <summary>Conditionの効果</summary>
     /// <param name="eventTiming">評価されるタイミング</param>
     /// <param name="num">影響を受ける数値</param>
-    /// <returns>計算後の数値</returns>
+    /// <returns>Condition評価後の数値</returns>
     public abstract int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0);
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
@@ -62,6 +62,9 @@ public abstract class Condition
     /// <summary>このConditionが評価したい値</summary>
     /// <returns></returns>
     public abstract ParametorType GetParametorType();
+    /// <summary>Conditionが消去される条件</summary>
+    /// <returns></returns>
+    public abstract bool IsRemove();
 }
 
 [Serializable]
@@ -73,7 +76,7 @@ public class ConditionSelection
     {
         get
         {
-            if (m_turn <= 0) return null;
+            //if (m_turn <= 0) return null;
             Condition ret = default;
             switch (m_conditionID)
             {
@@ -109,9 +112,8 @@ public class ConditionSelection
     }
     public Condition SetCondition(ConditionID conditionID, int turn)
     {
-        ConditionSelection cs = new ConditionSelection();
-        cs.m_conditionID = conditionID;
-        cs.m_turn = turn;
-        return cs.GetCondition;
+        m_conditionID = conditionID;
+        m_turn = turn;
+        return GetCondition;
     }
 }

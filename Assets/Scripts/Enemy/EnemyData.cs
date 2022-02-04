@@ -3,43 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "EnemyData")]
 public class EnemyData : ScriptableObject
 {
     [SerializeField, Header("敵ステータスのデータ")]
     List<EnemyDataBase> m_enemyDataBases = new List<EnemyDataBase>();
-    //private List<EnemyDataBase> m_act1Enemies = new List<EnemyDataBase>();
-    //private List<EnemyDataBase> m_act1Elites = new List<EnemyDataBase>();
-    //private List<EnemyDataBase> m_act1Boss = new List<EnemyDataBase>();
-    //public List<EnemyDataBase> EnemyDataBase => m_enemyDataBases;
-    //public List<EnemyDataBase> Act1Enemy => m_act1Enemies;
-    //public List<EnemyDataBase> Act1Elite => m_act1Elites;
-    //public List<EnemyDataBase> Act1Boss => m_act1Boss;
-    //public void Assignment()
-    //{
-    //    m_act1Enemies.Clear();
-    //    m_act1Elites.Clear();
-    //    m_act1Boss.Clear();
-    //    for (int i = 0; i < m_enemyDataBases.Count; i++)
-    //    {
-    //        EnemyDataBase data = m_enemyDataBases[i];
-    //        switch (data.EnemyAppearanceEria)
-    //        {
-    //            case EnemyAppearanceEria.Act1Enemy:
-    //                m_act1Enemies.Add(data);
-    //                break;
-    //            case EnemyAppearanceEria.Act1Elite:
-    //                m_act1Elites.Add(data);
-    //                break;
-    //            case EnemyAppearanceEria.Act1Boss:
-    //                m_act1Boss.Add(data);
-    //                break;
-    //            default:
-    //                Debug.LogWarning("与えられたパラメーターに対するデータがありません");
-    //                break;
-    //        }
-    //    }
-    //}
     [Header("エンカウントデータ")]
     [SerializeField] List<EncountDataBase> m_act1EnemyEncountData = new List<EncountDataBase>();
     [SerializeField] List<EncountDataBase> m_act1EliteEncountData = new List<EncountDataBase>();
