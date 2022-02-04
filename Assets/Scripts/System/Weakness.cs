@@ -160,7 +160,7 @@ public class StrengthDown : Condition
     }
     public override bool IsRemove()
     {
-        if (Turn < 0) return true;
+        if (Turn <= 0) return true;
         return false;
     }
     public override int IsBuff() => 1;

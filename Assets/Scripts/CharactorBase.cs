@@ -128,7 +128,6 @@ public class CharactorBase : MonoBehaviour
                 m_conditions.Add(conditions[i]);
             }
         }
-        RemoveEffect();
         ViewConditionUI();
     }
 
@@ -137,12 +136,12 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     protected void RemoveEffect()
     {
-        for (int i = 0; i < m_conditions.Count; i++)
+        for (int i = m_conditions.Count - 1; i >= 0; i--)
         {
             if (m_conditions[i].IsRemove())
             {
-                m_conditions.RemoveAt(i);
                 Debug.Log($"{m_conditions[i].GetConditionID()}デバフを除去");
+                m_conditions.RemoveAt(i);
             }
         }
         ViewConditionUI();
@@ -288,5 +287,6 @@ public class CharactorBase : MonoBehaviour
                     break;
             }
         }
+        RemoveEffect();
     }
 }
