@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// 構造体テスト用
+/// </summary>
 public struct Parametor
 {
     /// <summary>

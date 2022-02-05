@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UniRxのオブジェクトプールを使う用クラス
+/// </summary>
 public class PoolTestManager : MonoBehaviour
 {
     [SerializeField] PoolObj m_prefab;

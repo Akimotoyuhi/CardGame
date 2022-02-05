@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class childtest : MonoBehaviour
+/// <summary>
+/// 子オブジェクトにする処理が分からんくなったのでテスト用
+/// </summary>
+public class Childtest : MonoBehaviour
 {
     [SerializeField] private Transform m_target;
     void Start()

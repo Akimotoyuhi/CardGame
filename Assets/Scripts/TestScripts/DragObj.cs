@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// imageをマウスクリックで移動させるテスト
+/// </summary>
 public class DragObj : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler
 {
     private Vector2 m_defPos;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// マウスクリックで移動させたimageがドロップされた事を判定するテスト
+/// </summary>
 public class DropObj : MonoBehaviour,IDropHandler
 {
     //ドロップしたいオブジェクトに付ける

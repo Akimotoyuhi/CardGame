@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 敵データベースが正しく動くかのテスト用
+/// </summary>
 public class EnemyCommandTest : MonoBehaviour
 {
     //[SerializeField] EnemyData3 m_enemyData;

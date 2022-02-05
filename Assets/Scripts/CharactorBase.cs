@@ -218,7 +218,7 @@ public class CharactorBase : MonoBehaviour
         //}
     }
 
-    protected virtual void Damage(int damage, int block, List<Condition> conditions)
+    public virtual void Damage(int damage, int block, List<Condition> conditions)
     {
 
     }

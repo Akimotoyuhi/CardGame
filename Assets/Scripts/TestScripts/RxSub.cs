@@ -4,6 +4,9 @@ using UnityEngine;
 using System;
 using UniRx;
 
+/// <summary>
+/// UniRxオブザーバーを使う側のサンプルクラス
+/// </summary>
 public class RxSub : MonoBehaviour
 {
     [SerializeField] RxObserverTest m_test;

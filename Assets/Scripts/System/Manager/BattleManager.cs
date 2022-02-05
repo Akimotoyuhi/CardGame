@@ -227,7 +227,9 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(OnBattle());
     }
 
-    /// <summary>ターン終了</summary>
+    /// <summary>
+    /// ターン終了
+    /// </summary>
     private void TurnEnd()
     {
         m_isPress = true;
@@ -244,9 +246,9 @@ public class BattleManager : MonoBehaviour
     private void TurnStart()
     {
         m_isPress = false;
-        m_turnBegin.OnNext(m_progressTurn);
         Debug.Log(m_progressTurn + "ターン目");
         m_player.TurnStart();
+        m_turnBegin.OnNext(m_progressTurn);
         SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
     }
 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// 何のテストクラスか忘れた
+/// </summary>
 public class EffectSample : MonoBehaviour
 {
     private bool m_flag = false;

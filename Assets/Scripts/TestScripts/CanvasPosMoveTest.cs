@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+/// <summary>
+/// 3DÀ•W‚Æ2DÀ•W‚Å‚ÌˆÚ“®‚Ì‹““®‚Ìˆá‚¢ŒŸØ—p
+/// </summary>
 public class CanvasPosMoveTest : MonoBehaviour
 {
     [SerializeField] Image m_image;

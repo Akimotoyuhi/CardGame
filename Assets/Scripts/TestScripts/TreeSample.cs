@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 敵AI作る前にビヘイビアツリーを理解しようクラス
+/// </summary>
 public class TreeSample : MonoBehaviour
 {
     //とりあえずやってみるクラス

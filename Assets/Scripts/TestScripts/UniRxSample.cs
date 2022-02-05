@@ -4,6 +4,9 @@ using UnityEngine;
 using UniRx;
 using System;
 
+/// <summary>
+/// UniRx‚Ì—‰ğ[‚ß‚æ‚¤ƒNƒ‰ƒX
+/// </summary>
 public class UniRxSample : MonoBehaviour
 {
     void Start()

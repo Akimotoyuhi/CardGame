@@ -106,7 +106,7 @@ MonoBehaviour:
         m_target: 0
         m_plan: 00000000
   m_act1EnemyEncountData:
-  - m_enemyID: 000000000000000000000000
+  - m_enemyID: 00000000
   - m_enemyID: 01000000
   m_act1EliteEncountData: []
   m_act1BossEncountData:

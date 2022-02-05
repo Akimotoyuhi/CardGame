@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// 構造体テスト用クラス(使う側)
+/// </summary>
 public class StructSample : MonoBehaviour
 {
     Parametor p;

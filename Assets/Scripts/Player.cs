@@ -72,7 +72,6 @@ public class Player : CharactorBase, IDrop
     //}
     public void GetAcceptDamage(int power, int blk, List<Condition> conditions)
     {
-        EffectChecker(EventTiming.Damaged, ParametorType.Any);
         AddEffect(conditions);
         if (power > 0)
         {
@@ -91,6 +90,7 @@ public class Player : CharactorBase, IDrop
             else
             {
                 m_life -= damage;
+                EffectChecker(EventTiming.Damaged, ParametorType.Any);
                 if (m_life <= 0)
                 {
                     Debug.Log("がめおべｒ");
@@ -104,13 +104,21 @@ public class Player : CharactorBase, IDrop
         SetUI();
     }
 
-    public void GetDrop(BlankCard card)
+    public void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast)
     {
-        if (card == null || card.GetCardType != UseType.ToPlayer) return;
-        AddEffect(card.Conditions);
-        m_block += card.Block;
+        if (useType != UseType.ToPlayer) return;
+        Damage(power, block, conditions);
+        //card.OnCast();
+        //AddEffect(card.Conditions);
+        //m_block += card.Block;
+        //SetUI();
+        onCast();
+    }
+    public override void Damage(int damage, int block, List<Condition> conditions)
+    {
+        AddEffect(conditions);
+        m_block += block;
         SetUI();
-        card.OnCast();
     }
 
     public void PlayerAnim()

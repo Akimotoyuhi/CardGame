@@ -8,5 +8,5 @@ using UnityEngine;
 public interface IDrop
 {
     /// <summary>ƒhƒƒbƒv‚³‚ê‚½‚Ìˆ—</summary>
-    void GetDrop(BlankCard card);
+    void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast);
 }

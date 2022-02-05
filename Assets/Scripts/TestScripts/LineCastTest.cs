@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// LineRendererテスト用
+/// </summary>
 public class LineCastTest : MonoBehaviour
 {
     public RectTransform obj1;

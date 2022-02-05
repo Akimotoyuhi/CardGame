@@ -103,7 +103,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value));
             text = text.Replace(m.Value, Block.ToString());
         }
-        
         SetText(text);
     }
 
@@ -121,7 +120,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.CardCast();
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard, false); //捨て札に移動
-        return;
     }
     
     public void PointerEntor()
@@ -160,7 +158,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             //ドロップされたオブジェクトがドロップを受け付けるインターフェースが実装されていれば自分の情報を渡す
             IDrop item = hit.gameObject.GetComponent<IDrop>();
             if (item == null) continue;
-            item.GetDrop(this);
+            List<Condition> conditions = Conditions;
+            item.GetDrop(Power, Block, conditions, m_useType, OnCast);
         }
     }
 

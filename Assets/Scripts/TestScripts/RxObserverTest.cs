@@ -4,6 +4,9 @@ using UnityEngine;
 using UniRx;
 using System;
 
+/// <summary>
+/// UniRxオブザーバーのテスト用
+/// </summary>
 public class RxObserverTest : MonoBehaviour
 {
     Subject<int> m_subject = new Subject<int>();

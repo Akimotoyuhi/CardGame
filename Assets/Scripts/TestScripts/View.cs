@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 何しようとしてるか忘れた
+/// </summary>
 public class View : MonoBehaviour
 {
     [SerializeField] private GameObject m_thisObj;
