@@ -117,7 +117,7 @@ public class NewCardDataBase
     [SerializeField] List<ConditionSelection> m_concitions;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
-    private int m_upgrade = 0;
+    [SerializeField] List<NewCardDataBase> m_upgradeDatas;
     /// <summary>カードの名前</summary>
     public string Name => m_name;
     /// <summary>コスト</summary>
@@ -155,5 +155,6 @@ public class NewCardDataBase
     public UseType UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
-    public int Upgrade { get => m_upgrade; set => m_upgrade = value; }
+    /// <summary>アップグレード後のカードデータ</summary>
+    public NewCardDataBase UpgradeData => m_upgradeDatas[0];
 }

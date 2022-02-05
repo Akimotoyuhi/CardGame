@@ -8,11 +8,19 @@ public class PlayerStatsData : ScriptableObject
     [SerializeField] string m_name;
     [SerializeField] Sprite m_image;
     [SerializeField] int m_maxHp;
-    [SerializeField, Tooltip("初期カード")] CardID[] m_cardID;
-
-    public string Name { get => m_name; }
-    public Sprite Image { get => m_image; }
-    public int HP { get => m_maxHp; }
-    public int GetCard(int index) { return (int)m_cardID[index]; }
-    public int GetCardLength { get { return m_cardID.Length; } }
+    [SerializeField] List<CardData> m_cardData;
+    [System.Serializable]
+    public class CardData
+    {
+        [SerializeField, Tooltip("開始時に所持しているカードID")] CardID m_cardID;
+        [SerializeField, Tooltip("アップグレードが何度されているか")] int m_upgrade;
+        public CardID CardID => m_cardID;
+        public int Upgrade => m_upgrade;
+    }
+    public string Name => m_name;
+    public Sprite Image => m_image;
+    public int HP => m_maxHp;
+    public int GetCardData(int index) => (int)m_cardData[index].CardID;
+    public int IsUpgrade(int index) => m_cardData[index].Upgrade;
+    public int GetCardLength => m_cardData.Count;
 }

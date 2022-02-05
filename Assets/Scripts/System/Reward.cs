@@ -20,14 +20,14 @@ public class Reward : MonoBehaviour
         m_panel.SetActive(true);
         Transform obj = Instantiate(m_uiCard).transform;
         obj.SetParent(m_cardsParent);
-        obj.GetComponent<UICard>().Setup(cardDataBase);
+        obj.GetComponent<UICard>().Setup(cardDataBase, 0);
     }
 
-    public void OnClick(CardID id)
-    {
-        BattleManager.Instance.RewardEnd(id);
-        m_panel.SetActive(false);
-    }
+    //public void OnClick(CardID id)
+    //{
+    //    //BattleManager.Instance.RewardEnd(id);
+    //    m_panel.SetActive(false);
+    //}
 
     public void RewardDisabled()
     {

@@ -16,14 +16,16 @@ public class UICard : MonoBehaviour
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
     List<Color> m_cardColor = new List<Color>();
     private CardID m_id;
+    private int m_isUpgrade;
 
-    public void Setup(NewCardDataBase cardData)
+    public void Setup(NewCardDataBase cardData, int isUpgrade)
     {
         m_viewName.text = cardData.Name;
         m_viewImage.sprite = cardData.Sprite;
         m_viewCost.text = cardData.Cost;
         m_viewTooltip.text = SetTooltip(cardData.Tooltip);
         m_id = cardData.CardId;
+        m_isUpgrade = isUpgrade;
         GetComponent<Image>().color = m_cardColor[(int)cardData.Rarity];
     }
     private string SetTooltip(string text)
@@ -46,6 +48,6 @@ public class UICard : MonoBehaviour
 
     public void OnClick()
     {
-        BattleManager.Instance.RewardEnd(m_id);
+        BattleManager.Instance.RewardEnd((int)m_id, m_isUpgrade);
     }
 }

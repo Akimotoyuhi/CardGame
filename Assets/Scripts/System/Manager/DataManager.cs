@@ -13,8 +13,8 @@ namespace Mastar
         public int Step { get; set; } = 0;
         public int Act { get; set; } = 1;
         //プレイヤー情報関連
-        private List<CardID> m_cards = new List<CardID>();
-        private List<int[]> a = new List<int[]>();
+        //private List<CardID> m_cards = new List<CardID>();
+        private List<int[]> m_cards = new List<int[]>();
         public string Name { get; private set; }
         public Sprite Sprite { get; private set; }
         public int CurrentLife
@@ -38,7 +38,13 @@ namespace Mastar
             CurrentLife = currentLife;
             StartFlag = true;
         }
-        public List<CardID> Cards { get => m_cards; set => m_cards = value; }
+        //public List<CardID> Cards { get => m_cards; set => m_cards = value; }
+        public List<int[]> Cards { get => m_cards; }
+        public void AddCards(int id, int isUpgrade)
+        {
+            int[] vs = new int[] { id, isUpgrade };
+            m_cards.Add(vs);
+        }
         public bool StartFlag { get; private set; } = false;
         /// <summary>
         /// 初回の特別処理判定用<br/>

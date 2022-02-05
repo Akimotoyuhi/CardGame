@@ -133,9 +133,9 @@ public class BattleManager : MonoBehaviour
     /// 報酬画面終了
     /// </summary>
     /// <param name="getCardId"></param>
-    public void RewardEnd(CardID getCardId)
+    public void RewardEnd(int getCardId, int isUpgrade)
     {
-        DataManager.Instance.Cards.Add(getCardId);
+        DataManager.Instance.AddCards(getCardId, isUpgrade);
         m_reward.RewardDisabled();
         GameManager.Instance.FloorFinished(m_player);
     }
@@ -155,7 +155,8 @@ public class BattleManager : MonoBehaviour
             m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.Sprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
             for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
             {
-                CreateCard((int)DataManager.Instance.Cards[i]);
+                int[] nms = DataManager.Instance.Cards[i];
+                CreateCard(nms[0], nms[1]);
             }
         }
         else
@@ -166,8 +167,8 @@ public class BattleManager : MonoBehaviour
             m_player.SetParam(m_playerStatsData.Name, m_playerStatsData.Image, m_playerStatsData.HP, m_playerStatsData.HP);
             for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
             {
-                CreateCard(m_playerStatsData.GetCard(i));
-                DataManager.Instance.Cards.Add((CardID)m_playerStatsData.GetCard(i));
+                CreateCard(m_playerStatsData.GetCardData(i), m_playerStatsData.IsUpgrade(i));
+                DataManager.Instance.AddCards(m_playerStatsData.GetCardData(i), m_playerStatsData.IsUpgrade(i));
             }
         }
         //敵グループ生成
@@ -255,11 +256,13 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// カードの作成
     /// </summary>
-    public void CreateCard(int id)
+    public void CreateCard(int id, int isUpgrade)
     {
         GameObject obj = Instantiate(m_cardPrefab);
         BlankCard card = obj.GetComponent<BlankCard>();
-        NewCardDataBase cardData = m_cardData.CardDatas[id];
+        NewCardDataBase cardData;
+        if (isUpgrade == 1) { cardData = m_cardData.CardDatas[id].UpgradeData; }
+        else { cardData = m_cardData.CardDatas[id]; }
         card.SetInfo(cardData, m_player);
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
