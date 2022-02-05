@@ -99,7 +99,7 @@ public enum UseType
 {
     ToPlayer,
     ToEnemy,
-    ToAllEnemies,
+    ToAll,
 }
 [Serializable]
 public class NewCardDataBase
@@ -117,7 +117,7 @@ public class NewCardDataBase
     [SerializeField] List<ConditionSelection> m_concitions;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
-    private bool m_isUpgrade = false;
+    private int m_upgrade = 0;
     /// <summary>カードの名前</summary>
     public string Name => m_name;
     /// <summary>コスト</summary>
@@ -155,4 +155,5 @@ public class NewCardDataBase
     public UseType UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
+    public int Upgrade { get => m_upgrade; set => m_upgrade = value; }
 }

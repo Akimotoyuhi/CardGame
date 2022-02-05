@@ -13,7 +13,7 @@ public class EnemiesTarget : MonoBehaviour, IDrop
 
     public void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast)
     {
-        if (useType != UseType.ToAllEnemies) return;
+        if (useType != UseType.ToAll) return;
         onCast();
         m_enemyManager.AllEnemiesDamage(power, block, conditions);
     }

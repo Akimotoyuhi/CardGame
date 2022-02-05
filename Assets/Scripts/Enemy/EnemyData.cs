@@ -15,7 +15,7 @@ public class EnemyData : ScriptableObject
     public List<EnemyDataBase> Encount(EnemyAppearanceEria eria)
     {
         List<EnemyDataBase> ret = new List<EnemyDataBase>();
-        List<EncountDataBase> encountData = new List<EncountDataBase>();
+        List<EncountDataBase> encountData;
         switch (eria)
         {
             case EnemyAppearanceEria.Act1Enemy:
@@ -39,7 +39,7 @@ public class EnemyData : ScriptableObject
         return ret;
     }
 }
-
+#region Enums
 /// <summary>“GID</summary>
 public enum EnemyID
 {
@@ -91,6 +91,8 @@ public enum WhereType
     HighLife,
     BattleBegin,
 }
+#endregion
+#region “Gƒf[ƒ^İ’èŠÖŒW
 [System.Serializable]
 public class EnemyDataBase
 {
@@ -243,6 +245,7 @@ public class EnemyConditionalCommand3
         }
     }
 }
+#endregion
 [System.Serializable]
 public class EncountDataBase
 {

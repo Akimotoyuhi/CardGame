@@ -14,6 +14,7 @@ namespace Mastar
         public int Act { get; set; } = 1;
         //プレイヤー情報関連
         private List<CardID> m_cards = new List<CardID>();
+        private List<int[]> a = new List<int[]>();
         public string Name { get; private set; }
         public Sprite Sprite { get; private set; }
         public int CurrentLife
