@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// 休憩マスの処理<br/>
 /// イベント出来たら消す
 /// </summary>
 public class RestTest : MonoBehaviour
