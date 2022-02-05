@@ -56,6 +56,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject m_damageTextPrefab;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
+    /// <summary>カメラ</summary>
+    [SerializeField] Camera m_camera;
     /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
@@ -263,7 +265,7 @@ public class BattleManager : MonoBehaviour
         NewCardDataBase cardData;
         if (isUpgrade == 1) { cardData = m_cardData.CardDatas[id].UpgradeData; }
         else { cardData = m_cardData.CardDatas[id]; }
-        card.SetInfo(cardData, m_player);
+        card.SetInfo(cardData, m_player, m_camera);
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
     }

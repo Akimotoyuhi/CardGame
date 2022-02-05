@@ -141,6 +141,7 @@ public class EnemyBase : CharactorBase, IDrop
         {
             GameObject g = Instantiate(m_planImage);
             g.transform.SetParent(m_planImageParent);
+            g.transform.localScale = new Vector2(-1, 1);
             g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn).Plan[i],
                 ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn).Power));
         }

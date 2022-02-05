@@ -34,6 +34,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
     private Transform m_discard;
+    private Camera m_camera;
     public int Power { get; private set; }
     public int AttackNum { get; private set; }
     public int Block { get; private set; }
@@ -63,7 +64,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewTooltip.text = m_tooltip;
         m_viewCost.text = m_cost;
     }
-    public void SetInfo(NewCardDataBase carddata, Player player)
+    public void SetInfo(NewCardDataBase carddata, Player player, Camera camera)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
@@ -78,6 +79,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_isDiscarding = carddata.IsDiscarding;
         m_player = player;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
+        m_camera = camera;
         Setup();
     }
 
@@ -171,7 +173,16 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position;
+        //transform.position = eventData.position;
+        //Debug.Log(eventData.position);
+        //参考サイト https://shibuya24.info/entry/screen2world
+        // マウスのスクリーン座標  
+        Vector3 screenPos = eventData.position;
+        // 例としてカメラから5m離れた場所を指定  
+        screenPos.z = 5;
+        // スクリーン座標をワールド座標に変換  
+        var worldPos = m_camera.ScreenToWorldPoint(screenPos);
+        transform.position = worldPos;
     }
 
     public void OnEndDrag(PointerEventData eventData)

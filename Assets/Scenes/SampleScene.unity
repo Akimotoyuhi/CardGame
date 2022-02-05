@@ -2619,7 +2619,7 @@ Canvas:
   m_GameObject: {fileID: 1819076723}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2691,6 +2691,7 @@ MonoBehaviour:
   m_damageTextPrefab: {fileID: 3589477616511004303, guid: 3fc45f6c1cb5c0e4785baaf4d3032234,
     type: 3}
   m_rewardNum: 3
+  m_camera: {fileID: 519420031}
 --- !u!1 &1830025914
 GameObject:
   m_ObjectHideFlags: 0
