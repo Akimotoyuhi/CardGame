@@ -161,6 +161,7 @@ public class CharactorBase : MonoBehaviour
         {
             GameObject obj = Instantiate(m_conditionUIPrefab);
             obj.transform.SetParent(m_conditionUIParent);
+            obj.transform.localScale = Vector2.one;
             obj.GetComponent<ConditionUI>().SetUI(item.GetConditionID(), item.Turn);
         }
     }
@@ -249,7 +250,7 @@ public class CharactorBase : MonoBehaviour
         SetUI();
     }
     /// <summary>
-    /// Conditionを動かすためのあれこれをする
+    /// Conditionを動かす
     /// </summary>
     /// <param name="eventTiming"></param>
     /// <param name="parametorType"></param>

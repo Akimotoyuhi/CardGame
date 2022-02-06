@@ -91,7 +91,6 @@ public class ConditionSelection
                 case ConditionID.Strength:
                     ret = new Strength();
                     ret.Turn = m_turn;
-                    Debug.Log($"Strength {ret.Turn}");
                     return ret;
                 case ConditionID.Agile:
                     ret = new Agile();
@@ -115,7 +114,6 @@ public class ConditionSelection
     {
         m_conditionID = conditionID;
         m_turn = turn;
-        Debug.Log($"SetCondition  {m_turn}");
         return GetCondition;
     }
 }

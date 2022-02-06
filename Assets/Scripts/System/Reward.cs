@@ -18,9 +18,10 @@ public class Reward : MonoBehaviour
     public void RewardView(NewCardDataBase cardDataBase)
     {
         m_panel.SetActive(true);
-        Transform obj = Instantiate(m_uiCard).transform;
-        obj.SetParent(m_cardsParent);
-        obj.GetComponent<UICard>().Setup(cardDataBase, 0);
+        Transform tra = Instantiate(m_uiCard).transform;
+        tra.SetParent(m_cardsParent);
+        tra.localScale = Vector2.one;
+        tra.GetComponent<UICard>().Setup(cardDataBase, 0);
     }
 
     //public void OnClick(CardID id)

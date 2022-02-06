@@ -129,6 +129,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (!m_isDrag && !m_isAnim)
         {
             m_isAnim = true;
+            //Vector3 screenPos = transform.position;
+            // カメラから5m離れた場所を指定
+            //screenPos.z = 5;
+            // スクリーン座標をワールド座標に変換  
+            //m_defPos = m_camera.ScreenToWorldPoint(screenPos);
             m_defPos = transform.position;
             transform.DOMoveY(m_defPos.y + 30, 0.05f).OnComplete(() => m_isAnim = false);
         }
@@ -173,12 +178,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        //transform.position = eventData.position;
-        //Debug.Log(eventData.position);
-        //参考サイト https://shibuya24.info/entry/screen2world
+        // 参考サイト https://shibuya24.info/entry/screen2world
         // マウスのスクリーン座標  
         Vector3 screenPos = eventData.position;
-        // 例としてカメラから5m離れた場所を指定  
+        // カメラから5m離れた場所を指定
         screenPos.z = 5;
         // スクリーン座標をワールド座標に変換  
         var worldPos = m_camera.ScreenToWorldPoint(screenPos);
