@@ -37,7 +37,10 @@ public class BattleManager : MonoBehaviour
     private int m_progressTurn = 0;
     #endregion
     #region その他のメンバ
-    [Space]
+    /// <summary>バトル画面表示用キャンバス</summary>
+    [Space, SerializeField] Canvas m_battleCanvas;
+    /// <summary>バトル画面のUI表示用キャンバス</summary>
+    [SerializeField] Canvas m_battleUICanvas;
     /// <summary>デッキ</summary>
     [SerializeField] Deck m_deck;
     /// <summary>捨て札</summary>
@@ -64,7 +67,9 @@ public class BattleManager : MonoBehaviour
     private bool m_isGame = false;
     /// <summary>戦闘中のコルーチンに使うフラグ</summary>
     private bool m_battleFlag = false;
+    /// <summary>ターン開始を通知する</summary>
     private Subject<int> m_turnBegin = new Subject<int>();
+    /// <summary>ターン終了を通知する</summary>
     private Subject<int> m_turnEnd = new Subject<int>();
     #endregion
     #endregion
