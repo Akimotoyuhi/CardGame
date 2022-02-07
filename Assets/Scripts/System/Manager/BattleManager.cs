@@ -10,7 +10,6 @@ enum Timing { Start, End }
 
 public class BattleManager : MonoBehaviour
 {
-    #region メンバ変数
     #region Player関連のメンバ
     [Header("プレイヤー関連")]
     /// <summary>プレイヤー初期データ</summary>
@@ -72,13 +71,12 @@ public class BattleManager : MonoBehaviour
     /// <summary>ターン終了を通知する</summary>
     private Subject<int> m_turnEnd = new Subject<int>();
     #endregion
-    #endregion
     #region プロパティ
     public static BattleManager Instance { get; private set; }
-    //public EnemyData EnemyData => m_enemyData;
     public IObservable<int> TurnBegin => m_turnBegin;
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
+    public bool IsGame { get => m_isGame; set => m_isGame = value; }
     #endregion
 
     private void Awake()
@@ -89,19 +87,21 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         m_cardData.Setup();
-        //m_enemyData.Assignment();
-        Setup();
+        SetCanvas();
         m_reward.RewardDisabled();
     }
-
-    /// <summary>
-    /// セットアップ<br/>
-    /// 最初に呼ぶ
-    /// </summary>
-    public void Setup()
+    public void SetCanvas()
     {
-        if (m_isGame) GetComponent<Canvas>().enabled = true;
-        else GetComponent<Canvas>().enabled = false;
+        if (m_isGame)
+        {
+            m_battleCanvas.enabled = true;
+            m_battleUICanvas.enabled = true;
+        }
+        else
+        {
+            m_battleCanvas.enabled = false;
+            m_battleUICanvas.enabled = false;
+        }
     }
 
     public void SetCostText(string maxCost, string currentCost)
@@ -116,7 +116,7 @@ public class BattleManager : MonoBehaviour
     {
         m_progressTurn = 0;
         m_isGame = true;
-        Setup();
+        SetCanvas();
         CreateField(eria);
         StartCoroutine(OnBattle());
         //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);

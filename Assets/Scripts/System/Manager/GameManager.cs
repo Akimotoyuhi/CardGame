@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     [Space]
     [SerializeField] Canvas m_mapCanvas;
     [SerializeField] Map m_map;
-    [SerializeField] Canvas m_battleCanvas;
     [SerializeField] Canvas m_eventCanvas;
 
     public static GameManager Instance { get; private set; }
@@ -52,7 +51,8 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.LogError("まだ作ってないねん");
                 }
-                m_battleCanvas.enabled = true;
+                BattleManager.Instance.IsGame = true;
+                BattleManager.Instance.SetCanvas();
                 break;
             case CellState.Boss:
                 if (DataManager.Instance.Act == 1)
@@ -63,7 +63,8 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.LogError("まだ作ってないねん");
                 }
-                m_battleCanvas.enabled = true;
+                BattleManager.Instance.IsGame = true;
+                BattleManager.Instance.SetCanvas();
                 break;
             case CellState.Rest:
                 m_eventCanvas.GetComponent<RestTest>().StartEvent();
@@ -87,7 +88,8 @@ public class GameManager : MonoBehaviour
         m_step = DataManager.Instance.Step;
         m_map.AllColorChange();
         m_mapCanvas.enabled = true;
-        m_battleCanvas.enabled = false;
+        BattleManager.Instance.IsGame = false;
+        BattleManager.Instance.SetCanvas();
         m_eventCanvas.enabled = false;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
