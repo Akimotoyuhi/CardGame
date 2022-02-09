@@ -34,7 +34,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
     private Transform m_discard;
+    private RectTransform m_rectTransform;
     private Camera m_camera;
+    private RectTransform m_canvasRect;
     public int Power { get; private set; }
     public int AttackNum { get; private set; }
     public int Block { get; private set; }
@@ -63,8 +65,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_discard = GameObject.Find("Discard").transform;
         m_viewTooltip.text = m_tooltip;
         m_viewCost.text = m_cost;
+        m_rectTransform = gameObject.GetComponent<RectTransform>();
     }
-    public void SetInfo(NewCardDataBase carddata, Player player, Camera camera)
+    public void SetInfo(NewCardDataBase carddata, Player player, Camera camera, RectTransform canvasRect)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
@@ -80,6 +83,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_player = player;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_camera = camera;
+        m_canvasRect = canvasRect;
         Setup();
     }
 
@@ -129,13 +133,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (!m_isDrag && !m_isAnim)
         {
             m_isAnim = true;
-            //Vector3 screenPos = transform.position;
-            // カメラから5m離れた場所を指定
-            //screenPos.z = 5;
-            // スクリーン座標をワールド座標に変換  
-            //m_defPos = m_camera.ScreenToWorldPoint(screenPos);
-            m_defPos = transform.position;
-            transform.DOMoveY(m_defPos.y + 30, 0.05f).OnComplete(() => m_isAnim = false);
+            m_defPos = m_rectTransform.anchoredPosition;
+            Debug.Log(m_defPos);
+            m_rectTransform.DOAnchorPosY(m_defPos.y + 10f, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
     public void PointerExit()
@@ -143,7 +143,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (!m_isDrag)
         {
             m_isAnim = true;
-            transform.DOMoveY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
+            m_rectTransform.DOAnchorPos3DY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
+            //transform.DOMoveY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
     //public void SetDefpos()
@@ -175,23 +176,27 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         //m_defPos = transform.position;
         m_isDrag = true;
     }
-
+    //Vector3 m_canvasRectTransform = new Vector3(0, 0, 100);
     public void OnDrag(PointerEventData eventData)
     {
-        // 参考サイト https://shibuya24.info/entry/screen2world
-        // マウスのスクリーン座標  
-        Vector3 screenPos = eventData.position;
-        // カメラから5m離れた場所を指定
-        screenPos.z = 5;
-        // スクリーン座標をワールド座標に変換  
-        var worldPos = m_camera.ScreenToWorldPoint(screenPos);
-        transform.position = worldPos;
+        //Vector2 pos = eventData.position;
+        ////m_rectTransform.anchoredPosition = pos;
+        //Debug.Log("eventData" + eventData.position);
+        //Debug.Log("anchoredPosition" + m_rectTransform.anchoredPosition);
+        //Debug.Log("rectTransform.position" + m_rectTransform.position);
+        //Debug.Log("transform.position" + transform.position);
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
+        localPoint.y += 230;
+        m_rectTransform.localPosition = localPoint;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.DOMove(m_defPos, 0.1f);
+        m_rectTransform.DOAnchorPos(m_defPos, 0.1f)
+            .OnComplete(() => m_isDrag = false);
+        //transform.DOMove(m_defPos, 0.1f);
         //transform.position = m_defPos;
-        m_isDrag = false;
+        //m_isDrag = false;
     }
 }
