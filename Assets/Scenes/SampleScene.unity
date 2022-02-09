@@ -7339,7 +7339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panel: {fileID: 221237994}
-  m_uiCard: {fileID: 4678181638202814143, guid: 61b9bfc1f2a953f4fbc2bf241b31ebea,
+  m_uiCard: {fileID: 4756192355611260294, guid: ad5ff9493237f6f44a07a22bff2b1928,
     type: 3}
   m_cardsParent: {fileID: 26662148}
 --- !u!1 &1728880371

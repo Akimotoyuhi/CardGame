@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Discard : CardManagement
 {
-    [SerializeField] private Transform m_deck;
+    [SerializeField] private Deck m_deck;
 
     /// <summary>捨て札から山札にカードを移す</summary>
     public void ConvartToDeck()
     {
-        for (int i = transform.childCount - 1; 0 <= i; i--)
+        for (int i = m_cardParent.childCount - 1; 0 <= i; i--)
         {
             //transform.GetChild(i).GetComponent<BlankCard>().GetPlayerEffect();
-            transform.GetChild(i).SetParent(m_deck, false);
+            m_cardParent.GetChild(i).SetParent(m_deck.CardParent, false);
+            //m_deck.SetParent(m_cardParent.GetChild(i));
         }
     }
 }

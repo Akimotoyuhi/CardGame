@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CardManagement : MonoBehaviour
 {
+    [SerializeField] protected Transform m_cardParent;
+    public Transform CardParent => m_cardParent;
+
     /// <summary>
     /// このクラスの子オブジェクトを全て破棄する
     /// </summary>
@@ -11,11 +14,11 @@ public class CardManagement : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            Destroy(transform.GetChild(i).gameObject);
+            Destroy(m_cardParent.GetChild(i).gameObject);
         }
     }
-    public void SetParent(Transform child)
-    {
-        child.SetParent(transform, false);
-    }
+    //public void SetParent(Transform child)
+    //{
+    //    child.SetParent(m_cardParent, false);
+    //}
 }

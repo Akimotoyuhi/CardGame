@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// 休憩マスの処理<br/>
-/// イベント出来たら消す
+/// イベント出来たら消す気がする
 /// </summary>
 public class RestTest : MonoBehaviour
 {
@@ -16,10 +16,15 @@ public class RestTest : MonoBehaviour
         GetComponent<Canvas>().enabled = true;
     }
 
-    public void OnClick()
+    public void HealButton()
     {
         Debug.Log($"Playerの体力が{m_healValue}回復した");
         GameManager.Instance.Heal = m_healValue;
         GameManager.Instance.FloorFinished();
+    }
+
+    public void UpgradeButton()
+    {
+
     }
 }

@@ -96,6 +96,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_camera = camera;
         m_canvasRect = canvasRect;
+        m_reward = null;
         Setup();
     }
 
@@ -184,7 +185,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void PointerUp()
     {
-        if (!m_isPlayCard)
+        if (m_reward)
         {
             m_reward.OnClick(m_cardID, m_upgrade);
         }

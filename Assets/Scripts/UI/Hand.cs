@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hand : CardManagement
 {
-    [SerializeField] private Transform m_deck;
+    [SerializeField] private Deck m_deck;
 
     /// <summary>
     /// 手札にある全てのカードを捨て札に移動させる
@@ -15,7 +15,8 @@ public class Hand : CardManagement
         for (int i = transform.childCount - 1; 0 <= i; i--)
         {
             //m_deck.GetComponent<Deck>().SetParent(transform.GetChild(i));
-            transform.GetChild(i).SetParent(m_deck, false);
+            //transform.GetChild(i).SetParent(m_deck, false);
+            m_cardParent.GetChild(i).SetParent(m_deck.transform, false);
         }
     }
     public void UpdateTooltip()
