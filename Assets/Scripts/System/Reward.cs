@@ -23,16 +23,14 @@ public class Reward : MonoBehaviour
         obj.transform.SetParent(m_cardsParent, false);
         obj.transform.localScale = Vector2.one;
         //obj.GetRectTransform().anchoredPosition = Vector3.zero;
-        BlankCard b = obj.GetComponent<BlankCard>();
-        b.SetInfo(cardDataBase, CanvasRectTransform);
-        b.Reward = this;
+        obj.GetComponent<BlankCard>().SetInfo(cardDataBase, 0, this);
     }
 
-    //public void OnClick(CardID id)
-    //{
-    //    //BattleManager.Instance.RewardEnd(id);
-    //    m_panel.SetActive(false);
-    //}
+    public void OnClick(CardID id, int upgrade)
+    {
+        BattleManager.Instance.RewardEnd((int)id, upgrade);
+        m_panel.SetActive(false);
+    }
 
     public void RewardDisabled()
     {

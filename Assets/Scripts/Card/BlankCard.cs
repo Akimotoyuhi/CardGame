@@ -33,7 +33,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private bool m_isPlayCard = false;
     private string m_tooltip;
     private string m_cost;
+    private int m_upgrade;
+    private CardID m_cardID;
     private UseType m_useType;
+    private Reward m_reward;
     private Player m_player;
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
@@ -68,7 +71,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
     public List<Condition> Conditions { get; private set; }
     public UseType GetCardType { get => m_useType; }
-    public Reward Reward { private get; set; }
 
     private void Setup()
     {
@@ -77,7 +79,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewCost.text = m_cost;
         m_rectTransform = gameObject.GetComponent<RectTransform>();
     }
-    public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect = null, Player player = null, Camera camera = null)
+    public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect, Player player, Camera camera)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
@@ -95,6 +97,25 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_camera = camera;
         m_canvasRect = canvasRect;
         Setup();
+    }
+
+    public void SetInfo(NewCardDataBase carddata, int upgrade, Reward reward)
+    {
+        m_viewName.text = carddata.Name;
+        m_viewImage.sprite = carddata.Sprite;
+        m_tooltip = carddata.Tooltip;
+        Power = carddata.Attack;
+        AttackNum = carddata.AttackNum;
+        Block = carddata.Block;
+        BlockNum = carddata.BlockNum;
+        m_cost = carddata.Cost;
+        Conditions = carddata.Conditions;
+        GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
+        m_cardID = carddata.CardId;
+        m_upgrade = upgrade;
+        m_reward = reward;
+        Setup();
+        GetPlayerEffect();
     }
 
     /// <summary>
@@ -150,6 +171,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             m_rectTransform.DOAnchorPosY(m_defPos.y + 10f, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
+
     public void PointerExit()
     {
         if (!m_isDrag && m_isPlayCard)
@@ -160,11 +182,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
     }
 
-    public void PointerDown()
+    public void PointerUp()
     {
         if (!m_isPlayCard)
         {
-
+            m_reward.OnClick(m_cardID, m_upgrade);
         }
     }
 

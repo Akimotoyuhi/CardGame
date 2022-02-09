@@ -16,13 +16,14 @@ public class EnemyBase : CharactorBase, IDrop
 
     void Start()
     {
-        gameObject.name = m_name;
         SetUp();
     }
 
     protected override void SetUp()
     {
+        gameObject.name = m_name;
         base.SetUp();
+        m_isEnemy = true;
     }
 
     public void SetParam(EnemyDataBase data, EnemyManager enemyManager)

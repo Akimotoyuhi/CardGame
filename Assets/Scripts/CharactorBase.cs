@@ -33,6 +33,8 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] Transform m_conditionUIParent;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
+    /// <summary>敵かどうか</summary>
+    protected bool m_isEnemy = false;
     /// <summary>アニメーション中判定</summary>
     private bool m_isAnim = false;
     protected List<Condition> m_conditions = new List<Condition>();
@@ -161,7 +163,8 @@ public class CharactorBase : MonoBehaviour
         {
             GameObject obj = Instantiate(m_conditionUIPrefab);
             obj.transform.SetParent(m_conditionUIParent, false);
-            obj.transform.localScale = Vector2.one;
+            if (m_isEnemy) { obj.transform.localScale = new Vector2(-1, 1); }
+            else { obj.transform.localScale = Vector2.one; }
             obj.GetComponent<ConditionUI>().SetUI(item.GetConditionID(), item.Turn);
         }
     }
