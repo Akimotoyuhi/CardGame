@@ -89,6 +89,7 @@ public class BattleManager : MonoBehaviour
         m_cardData.Setup();
         SetCanvas();
         m_reward.RewardDisabled();
+        m_reward.CanvasRectTransform = m_battleUICanvas.GetComponent<RectTransform>();
     }
     public void SetCanvas()
     {
@@ -270,7 +271,7 @@ public class BattleManager : MonoBehaviour
         NewCardDataBase cardData;
         if (isUpgrade == 1) { cardData = m_cardData.CardDatas[id].UpgradeData; }
         else { cardData = m_cardData.CardDatas[id]; }
-        card.SetInfo(cardData, m_player, m_camera, m_battleUICanvas.GetComponent<RectTransform>());
+        card.SetInfo(cardData, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera);
         obj.transform.SetParent(m_deck.transform, false);
         card.GetPlayerEffect();
     }

@@ -160,7 +160,7 @@ public class CharactorBase : MonoBehaviour
         foreach (var item in m_conditions)
         {
             GameObject obj = Instantiate(m_conditionUIPrefab);
-            obj.transform.SetParent(m_conditionUIParent);
+            obj.transform.SetParent(m_conditionUIParent, false);
             obj.transform.localScale = Vector2.one;
             obj.GetComponent<ConditionUI>().SetUI(item.GetConditionID(), item.Turn);
         }

@@ -11,6 +11,7 @@ public class Reward : MonoBehaviour
     [SerializeField] GameObject m_uiCard;
     /// <summary>カードの親オブジェクト(レイアウトグループ用)</summary>
     [SerializeField] Transform m_cardsParent;
+    public RectTransform CanvasRectTransform { private get; set; }
 
     /// <summary>
     /// 報酬画面表示
@@ -18,10 +19,13 @@ public class Reward : MonoBehaviour
     public void RewardView(NewCardDataBase cardDataBase)
     {
         m_panel.SetActive(true);
-        Transform tra = Instantiate(m_uiCard).transform;
-        tra.SetParent(m_cardsParent);
-        tra.localScale = Vector2.one;
-        tra.GetComponent<UICard>().Setup(cardDataBase, 0);
+        GameObject obj = Instantiate(m_uiCard);
+        obj.transform.SetParent(m_cardsParent, false);
+        obj.transform.localScale = Vector2.one;
+        //obj.GetRectTransform().anchoredPosition = Vector3.zero;
+        BlankCard b = obj.GetComponent<BlankCard>();
+        b.SetInfo(cardDataBase, CanvasRectTransform);
+        b.Reward = this;
     }
 
     //public void OnClick(CardID id)

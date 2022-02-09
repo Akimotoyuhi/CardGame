@@ -30,8 +30,10 @@ public class Deck : CardManagement
                     return;
                 }
             }
-            int r = Random.Range(0, this.transform.childCount);
-            transform.GetChild(r).GetComponent<BlankCard>().GetPlayerEffect();
+            int r = Random.Range(0, transform.childCount);
+            BlankCard b = transform.GetChild(r).GetComponent<BlankCard>();
+            b.GetPlayerEffect();
+            b.IsPlayCard = true;
             transform.GetChild(r).SetParent(m_hand, false);
         }
         //m_hand.GetComponent<Hand>().SetChildDefpos();

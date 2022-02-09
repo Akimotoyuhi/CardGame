@@ -22,10 +22,15 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Image m_viewImage;
     [SerializeField] Text m_viewTooltip;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
-    List<Color> m_cardColor = new List<Color>();
+    private List<Color> m_cardColor = default;
+    /// <summary>ドラッグ中フラグ</summary>
     private bool m_isDrag = false;
+    /// <summary>アニメーション中フラグ</summary>
     private bool m_isAnim = false;
+    /// <summary>廃棄カードフラグ</summary>
     private bool m_isDiscarding = false;
+    /// <summary>使用できるフラグ</summary>
+    private bool m_isPlayCard = false;
     private string m_tooltip;
     private string m_cost;
     private UseType m_useType;
@@ -34,13 +39,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
     private Transform m_discard;
+    /// <summary>自分のRectTransform</summary>
     private RectTransform m_rectTransform;
+    /// <summary>カメラ</summary>
     private Camera m_camera;
+    /// <summary>CanvasのRectTransform</summary>
     private RectTransform m_canvasRect;
     public int Power { get; private set; }
     public int AttackNum { get; private set; }
     public int Block { get; private set; }
     public int BlockNum { get; private set; }
+    public bool IsPlayCard { set => m_isPlayCard = value; }
     public int Cost
     {
         get
@@ -59,6 +68,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
     public List<Condition> Conditions { get; private set; }
     public UseType GetCardType { get => m_useType; }
+    public Reward Reward { private get; set; }
 
     private void Setup()
     {
@@ -67,7 +77,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewCost.text = m_cost;
         m_rectTransform = gameObject.GetComponent<RectTransform>();
     }
-    public void SetInfo(NewCardDataBase carddata, Player player, Camera camera, RectTransform canvasRect)
+    public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect = null, Player player = null, Camera camera = null)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
@@ -99,14 +109,16 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value));
+            if (m_isPlayCard) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
+            else { Power = int.Parse(m.Groups[1].Value); }
             text = text.Replace(m.Value, Power.ToString());
         }
         matches = Regex.Matches(m_tooltip, "{%def([0-9]*)}");
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value));
+            if (m_isPlayCard) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
+            else { Block = int.Parse(m.Groups[1].Value); }
             text = text.Replace(m.Value, Block.ToString());
         }
         SetText(text);
@@ -124,35 +136,41 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         //BattleManager.Instance.SetHandUI();
         BattleManager.Instance.CardCast();
+        m_isPlayCard = false;
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard, false); //捨て札に移動
     }
-    
+
     public void PointerEntor()
     {
-        if (!m_isDrag && !m_isAnim)
+        if (!m_isDrag && !m_isAnim && m_isPlayCard)
         {
             m_isAnim = true;
             m_defPos = m_rectTransform.anchoredPosition;
-            Debug.Log(m_defPos);
             m_rectTransform.DOAnchorPosY(m_defPos.y + 10f, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
     public void PointerExit()
     {
-        if (!m_isDrag)
+        if (!m_isDrag && m_isPlayCard)
         {
             m_isAnim = true;
             m_rectTransform.DOAnchorPos3DY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
             //transform.DOMoveY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
-    //public void SetDefpos()
-    //{
-    //    m_defPos = transform.position;
-    //}
+
+    public void PointerDown()
+    {
+        if (!m_isPlayCard)
+        {
+
+        }
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
+        if (!m_isPlayCard) return;
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
         {
             Debug.Log($"コストが足りない!\nカードのコスト:{Cost} プレイヤーのコスト:{m_player.CurrrentCost}");
@@ -173,30 +191,29 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //m_defPos = transform.position;
-        m_isDrag = true;
+        if (m_isPlayCard)
+        {
+            m_isDrag = true;
+        }
     }
-    //Vector3 m_canvasRectTransform = new Vector3(0, 0, 100);
+
     public void OnDrag(PointerEventData eventData)
     {
-        //Vector2 pos = eventData.position;
-        ////m_rectTransform.anchoredPosition = pos;
-        //Debug.Log("eventData" + eventData.position);
-        //Debug.Log("anchoredPosition" + m_rectTransform.anchoredPosition);
-        //Debug.Log("rectTransform.position" + m_rectTransform.position);
-        //Debug.Log("transform.position" + transform.position);
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
-        localPoint.y += 230;
-        m_rectTransform.localPosition = localPoint;
+        if (m_isPlayCard)
+        {
+            Vector2 localPoint;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
+            localPoint.y += 230;
+            m_rectTransform.localPosition = localPoint;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        m_rectTransform.DOAnchorPos(m_defPos, 0.1f)
-            .OnComplete(() => m_isDrag = false);
-        //transform.DOMove(m_defPos, 0.1f);
-        //transform.position = m_defPos;
-        //m_isDrag = false;
+        if (m_isPlayCard)
+        {
+            m_rectTransform.DOAnchorPos(m_defPos, 0.1f)
+                .OnComplete(() => m_isDrag = false);
+        }
     }
 }

@@ -14,7 +14,7 @@ public class UICard : MonoBehaviour
     [SerializeField] Text m_viewCost;
     [SerializeField] Text m_viewTooltip;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
-    List<Color> m_cardColor = new List<Color>();
+    private List<Color> m_cardColor = default;
     private CardID m_id;
     private int m_isUpgrade;
 
