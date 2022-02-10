@@ -6,6 +6,11 @@ public class Discard : CardManagement
 {
     [SerializeField] private Deck m_deck;
 
+    private void Start()
+    {
+        m_canvas = GetComponent<Canvas>();
+        m_canvas.enabled = false;
+    }
     /// <summary>捨て札から山札にカードを移す</summary>
     public void ConvartToDeck()
     {

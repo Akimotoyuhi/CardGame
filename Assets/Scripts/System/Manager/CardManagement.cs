@@ -6,7 +6,7 @@ public class CardManagement : MonoBehaviour
 {
     [SerializeField] protected Transform m_cardParent;
     public Transform CardParent => m_cardParent;
-
+    protected Canvas m_canvas = default;
     /// <summary>
     /// このクラスの子オブジェクトを全て破棄する
     /// </summary>
@@ -17,8 +17,9 @@ public class CardManagement : MonoBehaviour
             Destroy(m_cardParent.GetChild(i).gameObject);
         }
     }
-    //public void SetParent(Transform child)
-    //{
-    //    child.SetParent(m_cardParent, false);
-    //}
+    public void OnClick(bool flag)
+    {
+        if (!m_canvas) { return; }
+        m_canvas.enabled = flag;
+    }
 }

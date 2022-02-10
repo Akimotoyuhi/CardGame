@@ -11,6 +11,8 @@ public class Deck : CardManagement
     private void Start()
     {
         BattleManager.Instance.TurnBegin.Subscribe(turn => Draw(BattleManager.Instance.GetDrowNum));
+        m_canvas = GetComponent<Canvas>();
+        m_canvas.enabled = false;
     }
 
     /// <summary>山札から手札にカードを移す</summary>
