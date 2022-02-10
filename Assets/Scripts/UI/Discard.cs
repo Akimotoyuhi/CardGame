@@ -21,4 +21,15 @@ public class Discard : CardManagement
             //m_deck.SetParent(m_cardParent.GetChild(i));
         }
     }
+    public override void OnPointer(bool flag)
+    {
+        if (flag)
+        {
+            EffectManager.Instance.SetBattleUIText("捨て札を表示する", Color.black);
+        }
+        else
+        {
+            EffectManager.Instance.RemoveBattleUIText();
+        }
+    }
 }
