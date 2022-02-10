@@ -41,7 +41,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
     /// <summary>捨て札</summary>
-    private Transform m_discard;
+    private Discard m_discard;
     /// <summary>自分のRectTransform</summary>
     private RectTransform m_rectTransform;
     /// <summary>カメラ</summary>
@@ -74,12 +74,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     private void Setup()
     {
-        m_discard = GameObject.Find("Discard").transform;
         m_viewTooltip.text = m_tooltip;
         m_viewCost.text = m_cost;
         m_rectTransform = gameObject.GetComponent<RectTransform>();
     }
-    public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect, Player player, Camera camera)
+    public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect, Player player, Camera camera, Discard discard)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
@@ -97,6 +96,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_camera = camera;
         m_canvasRect = canvasRect;
         m_reward = null;
+        m_discard = discard;
         Setup();
     }
 
@@ -160,7 +160,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.CardCast();
         m_isPlayCard = false;
         if (m_isDiscarding) Destroy(gameObject);
-        else transform.SetParent(m_discard, false); //捨て札に移動
+        else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
     }
 
     public void PointerEntor()
@@ -239,4 +239,5 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                 .OnComplete(() => m_isDrag = false);
         }
     }
+    public string Name => m_viewName.text;
 }

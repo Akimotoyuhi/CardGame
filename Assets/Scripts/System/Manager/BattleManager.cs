@@ -271,7 +271,7 @@ public class BattleManager : MonoBehaviour
         NewCardDataBase cardData;
         if (isUpgrade == 1) { cardData = m_cardData.CardDatas[id].UpgradeData; }
         else { cardData = m_cardData.CardDatas[id]; }
-        card.SetInfo(cardData, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera);
+        card.SetInfo(cardData, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera, m_discard);
         //m_deck.SetParent(obj.transform);
         obj.transform.SetParent(m_deck.CardParent, false);
         card.GetPlayerEffect();

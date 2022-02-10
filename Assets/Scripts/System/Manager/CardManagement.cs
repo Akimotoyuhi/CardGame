@@ -12,7 +12,7 @@ public class CardManagement : MonoBehaviour
     /// </summary>
     public void CardDelete()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = m_cardParent.childCount - 1; i >= 0; i--)
         {
             Destroy(m_cardParent.GetChild(i).gameObject);
         }

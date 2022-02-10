@@ -26,7 +26,7 @@ public class Deck : CardManagement
                 if (m_cardParent.childCount == 0)
                 {
                     Debug.Log("デッキ枚数不足"); //捨て札からカードを戻しても山札がないなら引くのをやめる
-                    //m_hand.GetComponent<Hand>().SetChildDefpos();
+                    //m_hand.SetChildDefpos();
                     return;
                 }
             }

@@ -11,12 +11,12 @@ public class Hand : CardManagement
     /// </summary>
     public void AllCast(int n = 0)
     {
-        if (transform.childCount == 0) { return; }
-        for (int i = transform.childCount - 1; 0 <= i; i--)
+        if (m_cardParent.childCount == 0) { return; }
+        for (int i = m_cardParent.childCount - 1; 0 <= i; i--)
         {
             //m_deck.GetComponent<Deck>().SetParent(transform.GetChild(i));
             //transform.GetChild(i).SetParent(m_deck, false);
-            m_cardParent.GetChild(i).SetParent(m_deck.transform, false);
+            m_cardParent.GetChild(i).SetParent(m_deck.CardParent, false);
         }
     }
     public void UpdateTooltip()
