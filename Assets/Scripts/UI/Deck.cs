@@ -35,7 +35,7 @@ public class Deck : CardManagement
             int r = Random.Range(0, m_cardParent.childCount);
             BlankCard b = m_cardParent.GetChild(r).GetComponent<BlankCard>();
             b.GetPlayerEffect();
-            b.IsPlayCard = true;
+            b.IsPlayCard = CardState.Play;
             //m_hand.SetParent(m_cardParent.GetChild(r));
             m_cardParent.GetChild(r).SetParent(m_hand.CardParent, false);
         }

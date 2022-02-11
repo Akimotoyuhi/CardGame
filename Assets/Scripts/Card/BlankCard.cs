@@ -11,11 +11,18 @@ public enum ReplaceType
     Attack,
     Block
 }
+public enum CardState
+{
+    None,
+    Play,
+    Upgrade,
+    Reward,
+}
 
 /// <summary>
 /// カードの実体
 /// </summary>
-public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
+public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Text m_viewCost;
     [SerializeField] Text m_viewName;
@@ -29,14 +36,18 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private bool m_isAnim = false;
     /// <summary>廃棄カードフラグ</summary>
     private bool m_isDiscarding = false;
-    /// <summary>使用できるフラグ</summary>
-    private bool m_isPlayCard = false;
+    /// <summary>カードの状態</summary>
+    private CardState m_cardState = default;
     private string m_tooltip;
     private string m_cost;
+    /// <summary>強化されたかどうか</summary>
     private int m_upgrade;
+    /// <summary>DataManagerが管理しているこのカードのindex</summary>
+    private int m_index;
     private CardID m_cardID;
     private UseType m_useType;
     private Reward m_reward;
+    private Rest m_rest;
     private Player m_player;
     /// <summary>移動前の場所保存用</summary>
     private Vector2 m_defPos;
@@ -52,7 +63,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public int AttackNum { get; private set; }
     public int Block { get; private set; }
     public int BlockNum { get; private set; }
-    public bool IsPlayCard { set => m_isPlayCard = value; }
+    public CardState IsPlayCard { set => m_cardState = value; }
     public int Cost
     {
         get
@@ -99,7 +110,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_discard = discard;
         Setup();
     }
-
     public void SetInfo(NewCardDataBase carddata, int upgrade, Reward reward)
     {
         m_viewName.text = carddata.Name;
@@ -118,6 +128,24 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         Setup();
         GetPlayerEffect();
     }
+    public void SetInfo(NewCardDataBase carddata, int index, Rest rest)
+    {
+        m_viewName.text = carddata.Name;
+        m_viewImage.sprite = carddata.Sprite;
+        m_tooltip = carddata.Tooltip;
+        Power = carddata.Attack;
+        AttackNum = carddata.AttackNum;
+        Block = carddata.Block;
+        BlockNum = carddata.BlockNum;
+        m_cost = carddata.Cost;
+        Conditions = carddata.Conditions;
+        GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
+        m_cardID = carddata.CardId;
+        m_index = index;
+        m_rest = rest;
+        Setup();
+        GetPlayerEffect();
+    }
 
     /// <summary>
     /// プレイヤーの状態を参照してカードのパラメーターを変える
@@ -131,7 +159,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            if (m_isPlayCard) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
+            if (m_cardState == CardState.Play) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
             else { Power = int.Parse(m.Groups[1].Value); }
             text = text.Replace(m.Value, Power.ToString());
         }
@@ -139,7 +167,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            if (m_isPlayCard) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
+            if (m_cardState == CardState.Play) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
             else { Block = int.Parse(m.Groups[1].Value); }
             text = text.Replace(m.Value, Block.ToString());
         }
@@ -158,14 +186,14 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         //BattleManager.Instance.SetHandUI();
         BattleManager.Instance.CardCast();
-        m_isPlayCard = false;
+        m_cardState = CardState.None;
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
     }
 
-    public void PointerEntor()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!m_isDrag && !m_isAnim && m_isPlayCard)
+        if (!m_isDrag && !m_isAnim && m_cardState == CardState.Play)
         {
             m_isAnim = true;
             m_defPos = m_rectTransform.anchoredPosition;
@@ -173,9 +201,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
     }
 
-    public void PointerExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        if (!m_isDrag && m_isPlayCard)
+        if (!m_isDrag && m_cardState == CardState.Play)
         {
             m_isAnim = true;
             m_rectTransform.DOAnchorPos3DY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
@@ -183,17 +211,23 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
     }
 
-    public void PointerUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
-        if (m_reward)
+        if (m_cardState == CardState.Reward)
         {
+            if (!m_reward) { return; }
             m_reward.OnClick(m_cardID, m_upgrade);
+        }
+        else if (m_cardState == CardState.Upgrade)
+        {
+            if (!m_rest) { return; }
+            //m_rest.UpgradeButton(m_index);
         }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (!m_isPlayCard) return;
+        if (m_cardState != CardState.Play) return;
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
         {
             Debug.Log($"コストが足りない!\nカードのコスト:{Cost} プレイヤーのコスト:{m_player.CurrrentCost}");
@@ -214,7 +248,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (m_isPlayCard)
+        if (m_cardState == CardState.Play)
         {
             m_isDrag = true;
         }
@@ -222,7 +256,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (m_isPlayCard)
+        if (m_cardState == CardState.Play)
         {
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
@@ -233,7 +267,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (m_isPlayCard)
+        if (m_cardState == CardState.Play)
         {
             m_rectTransform.DOAnchorPos(m_defPos, 0.1f)
                 .OnComplete(() => m_isDrag = false);

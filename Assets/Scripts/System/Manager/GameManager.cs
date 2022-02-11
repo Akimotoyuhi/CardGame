@@ -7,8 +7,15 @@ using Mastar;
 public enum CellClickEventType { Battle, Event, Rest }
 public class GameManager : MonoBehaviour
 {
+    /// <summary>ゲームの進行状況</summary>
     [SerializeField] int m_step;
+    /// <summary>Relicの画像の親</summary>
     [Space]
+    [SerializeField] Transform m_relicParent;
+    /// <summary>カードを表示させるためのCanvas</summary>
+    [SerializeField] Canvas m_cardDisplayCanvas;
+    /// <summary>CardDisplayCanvasに表示させるカードの親</summary>
+    [SerializeField] Transform m_cardDisplayParent;
     [SerializeField] Canvas m_mapCanvas;
     [SerializeField] Map m_map;
     [SerializeField] Canvas m_eventCanvas;
@@ -34,6 +41,7 @@ public class GameManager : MonoBehaviour
             m_map.CreateMap();
         }
         m_eventCanvas.enabled = false;
+        //m_cardDisplayCanvas.enabled = false;
         m_step = DataManager.Instance.Step;
     }
 
@@ -43,34 +51,26 @@ public class GameManager : MonoBehaviour
         switch (cellState)
         {
             case CellState.Enemy:
-                if (DataManager.Instance.Act == 1)
-                {
-                    BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy);
-                }
-                else
-                {
-                    Debug.LogError("まだ作ってないねん");
-                }
+                if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy); }
+                else { Debug.LogError("まだ作ってないねん"); }
                 BattleManager.Instance.IsGame = true;
                 BattleManager.Instance.SetCanvas();
                 break;
             case CellState.Boss:
-                if (DataManager.Instance.Act == 1)
-                {
-                    BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss);
-                }
-                else
-                {
-                    Debug.LogError("まだ作ってないねん");
-                }
+                if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss); }
+                else { Debug.LogError("まだ作ってないねん"); }
                 BattleManager.Instance.IsGame = true;
                 BattleManager.Instance.SetCanvas();
                 break;
             case CellState.Rest:
-                m_eventCanvas.GetComponent<RestTest>().StartEvent();
+                m_eventCanvas.GetComponent<Rest>().StartEvent();
                 m_eventCanvas.enabled = true;
                 break;
         }
+    }
+
+    public void DisplayCard() 
+    {
 
     }
 

@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class Relic
+public class Relic : MonoBehaviour
 {
-    
-}
-public enum RelicID
-{
+    [SerializeField] Image m_image;
+    public int Power { get; private set; }
+    public int Block { get; private set; }
+    public List<Condition> Conditions { get; private set; }
+    public List<RelicTriggerTiming> RelicTriggerTiming { get; private set; }
 
-}
-[System.Serializable]
-public class RelicSelector
-{
-
+    public void SetParam(RelicDataBase dataBase)
+    {
+        Power = dataBase.Power;
+        Block = dataBase.Block;
+        Conditions = dataBase.Conditions;
+        RelicTriggerTiming = dataBase.RelicTriggerTiming;
+    }
 }

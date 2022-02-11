@@ -17,12 +17,18 @@ MonoBehaviour:
   m_maxHp: 70
   m_cardData:
   - m_cardID: 0
-    m_upgrade: 1
-  - m_cardID: 1
-    m_upgrade: 1
-  - m_cardID: 5
     m_upgrade: 0
-  - m_cardID: 5
-    m_upgrade: 1
-  - m_cardID: 13
-    m_upgrade: 1
+  - m_cardID: 0
+    m_upgrade: 0
+  - m_cardID: 1
+    m_upgrade: 0
+  - m_cardID: 1
+    m_upgrade: 0
+  - m_cardID: 3
+    m_upgrade: 0
+  - m_cardID: 3
+    m_upgrade: 0
+  - m_cardID: 9
+    m_upgrade: 0
+  - m_cardID: 9
+    m_upgrade: 0

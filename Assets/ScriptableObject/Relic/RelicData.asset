@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: RelicData
   m_EditorClassIdentifier: 
   m_relicDataBases:
-  - m_name: aaaa
-    m_sprite: {fileID: 0}
+  - m_name: "\u5947\u5999\u306A\u30B0\u30EB\u30B0\u30EB\u304A\u9762"
+    m_sprite: {fileID: 21300000, guid: 7e3eccbb369b8534ba7539cdf62091a8, type: 3}
+    m_timing: 
+    m_triggerCount: 0
+    m_power: 0
+    m_block: 0
+    m_condition: []

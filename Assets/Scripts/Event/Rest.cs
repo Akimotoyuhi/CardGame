@@ -6,7 +6,7 @@ using UnityEngine;
 /// 休憩マスの処理<br/>
 /// イベント出来たら消す気がする
 /// </summary>
-public class RestTest : MonoBehaviour
+public class Rest : MonoBehaviour
 {
     /// <summary>回復量</summary>
     [SerializeField] int m_healValue;

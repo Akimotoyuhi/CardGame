@@ -114,7 +114,7 @@ public class NewCardDataBase
     [SerializeField] int m_attackNum;
     [SerializeField] int m_block;
     [SerializeField] int m_blockNum;
-    [SerializeField] List<ConditionSelection> m_concitions;
+    [SerializeField] List<ConditionSelection> m_conditions;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
     [SerializeField] List<NewCardDataBase> m_upgradeDatas;
@@ -144,7 +144,7 @@ public class NewCardDataBase
         get
         {
             List<Condition> ret = new List<Condition>();
-            foreach (var item in m_concitions)
+            foreach (var item in m_conditions)
             {
                 ret.Add(item.GetCondition);
             }
@@ -157,4 +157,8 @@ public class NewCardDataBase
     public bool IsDiscarding => m_isDiscarding;
     /// <summary>アップグレード後のカードデータ</summary>
     public NewCardDataBase UpgradeData => m_upgradeDatas[0];
+    //public class CardUpgradeData
+    //{
+
+    //}
 }
