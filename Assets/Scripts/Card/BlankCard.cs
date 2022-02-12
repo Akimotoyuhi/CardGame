@@ -112,23 +112,25 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
     public void SetInfo(NewCardDataBase carddata, int upgrade, Reward reward)
     {
-        m_viewName.text = carddata.Name;
-        m_viewImage.sprite = carddata.Sprite;
-        m_tooltip = carddata.Tooltip;
-        Power = carddata.Attack;
-        AttackNum = carddata.AttackNum;
-        Block = carddata.Block;
-        BlockNum = carddata.BlockNum;
-        m_cost = carddata.Cost;
-        Conditions = carddata.Conditions;
-        GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
-        m_cardID = carddata.CardId;
+        SetCard(carddata);
         m_upgrade = upgrade;
         m_reward = reward;
         Setup();
         GetPlayerEffect();
     }
     public void SetInfo(NewCardDataBase carddata, int index, Rest rest)
+    {
+        SetCard(carddata);
+        m_index = index;
+        m_rest = rest;
+        Setup();
+        GetPlayerEffect();
+    }
+    public void SetInfo(NewCardDataBase carddata)
+    {
+        SetCard(carddata);
+    }
+    private void SetCard(NewCardDataBase carddata)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
@@ -141,10 +143,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         Conditions = carddata.Conditions;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
-        m_index = index;
-        m_rest = rest;
-        Setup();
-        GetPlayerEffect();
     }
 
     /// <summary>

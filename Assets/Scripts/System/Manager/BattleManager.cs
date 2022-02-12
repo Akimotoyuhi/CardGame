@@ -50,16 +50,16 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Reward m_reward;
     /// <summary>戦闘時のUI管理クラス</summary>
     [SerializeField] BattleUIController m_battleUIController;
-    /// <summary>カードデータ</summary>
-    [SerializeField] NewCardData m_cardData;
-    /// <summary>カードのプレハブ</summary>
-    [SerializeField] GameObject m_cardPrefab;
     /// <summary>ダメージ表示用のテキスト</summary>
     [SerializeField] GameObject m_damageTextPrefab;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
     /// <summary>カメラ</summary>
     [SerializeField] Camera m_camera;
+    /// <summary>カードデータ</summary>
+    private NewCardData m_cardData;
+    /// <summary>カードのプレハブ</summary>
+    private BlankCard m_cardPrefab;
     /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
@@ -90,6 +90,8 @@ public class BattleManager : MonoBehaviour
         SetCanvas();
         m_reward.RewardDisabled();
         m_reward.CanvasRectTransform = m_battleUICanvas.GetComponent<RectTransform>();
+        m_cardData = GameManager.Instance.CardData;
+        m_cardPrefab = GameManager.Instance.CardPrefab;
     }
     public void SetCanvas()
     {
@@ -266,14 +268,14 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void CreateCard(int id, int isUpgrade)
     {
-        GameObject obj = Instantiate(m_cardPrefab);
-        BlankCard card = obj.GetComponent<BlankCard>();
+        //GameObject obj = Instantiate(m_cardPrefab);
+        BlankCard card = Instantiate(m_cardPrefab);
         NewCardDataBase cardData;
         if (isUpgrade == 1) { cardData = m_cardData.CardDatas[id].UpgradeData; }
         else { cardData = m_cardData.CardDatas[id]; }
         card.SetInfo(cardData, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera, m_discard);
         //m_deck.SetParent(obj.transform);
-        obj.transform.SetParent(m_deck.CardParent, false);
+        card.transform.SetParent(m_deck.CardParent, false);
         card.GetPlayerEffect();
     }
     public void ViewText(string str, RectTransform tra, ColorType colorType)
