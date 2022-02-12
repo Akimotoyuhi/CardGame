@@ -8,7 +8,7 @@ public class Reward : MonoBehaviour
     /// <summary>報酬画面パネル</summary>
     [SerializeField] GameObject m_panel;
     /// <summary>表示するカードのプレハブ</summary>
-    [SerializeField] GameObject m_uiCard;
+    [SerializeField] BlankCard m_uiCard;
     /// <summary>カードの親オブジェクト(レイアウトグループ用)</summary>
     [SerializeField] Transform m_cardsParent;
     public RectTransform CanvasRectTransform { private get; set; }
@@ -19,11 +19,12 @@ public class Reward : MonoBehaviour
     public void RewardView(NewCardDataBase cardDataBase)
     {
         m_panel.SetActive(true);
-        GameObject obj = Instantiate(m_uiCard);
-        obj.transform.SetParent(m_cardsParent, false);
-        obj.transform.localScale = Vector2.one;
+        BlankCard card = Instantiate(m_uiCard);
+        card.transform.SetParent(m_cardsParent, false);
+        card.transform.localScale = Vector2.one;
         //obj.GetRectTransform().anchoredPosition = Vector3.zero;
-        obj.GetComponent<BlankCard>().SetInfo(cardDataBase, 0, this);
+        card.SetInfo(cardDataBase, 0, this);
+        card.CardState = CardState.Reward;
     }
 
     public void OnClick(CardID id, int upgrade)

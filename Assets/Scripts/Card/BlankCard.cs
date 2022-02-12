@@ -22,7 +22,7 @@ public enum CardState
 /// <summary>
 /// カードの実体
 /// </summary>
-public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     [SerializeField] Text m_viewCost;
     [SerializeField] Text m_viewName;
@@ -63,7 +63,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public int AttackNum { get; private set; }
     public int Block { get; private set; }
     public int BlockNum { get; private set; }
-    public CardState IsPlayCard { set => m_cardState = value; }
+    public CardState CardState { set => m_cardState = value; }
     public int Cost
     {
         get
@@ -115,20 +115,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         SetCard(carddata);
         m_upgrade = upgrade;
         m_reward = reward;
-        Setup();
-        GetPlayerEffect();
     }
     public void SetInfo(NewCardDataBase carddata, int index, Rest rest)
     {
         SetCard(carddata);
         m_index = index;
         m_rest = rest;
-        Setup();
-        GetPlayerEffect();
     }
     public void SetInfo(NewCardDataBase carddata)
     {
         SetCard(carddata);
+        m_cardState = CardState.None;
     }
     private void SetCard(NewCardDataBase carddata)
     {
@@ -143,6 +140,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         Conditions = carddata.Conditions;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
+        GetPlayerEffect();
+        Setup();
     }
 
     /// <summary>
@@ -209,6 +208,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        //これが無いとOnPointerUpが呼ばれない
+    }
     public void OnPointerUp(PointerEventData eventData)
     {
         if (m_cardState == CardState.Reward)
@@ -219,7 +222,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         else if (m_cardState == CardState.Upgrade)
         {
             if (!m_rest) { return; }
-            //m_rest.UpgradeButton(m_index);
+            m_rest.UpgradeButton(m_index);
         }
     }
 

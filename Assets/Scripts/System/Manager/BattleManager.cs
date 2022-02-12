@@ -83,15 +83,14 @@ public class BattleManager : MonoBehaviour
     {
         Instance = this;
     }
-
-    void Start()
+    public void Setup()
     {
+        m_cardData = GameManager.Instance.CardData;
+        m_cardPrefab = GameManager.Instance.CardPrefab;
         m_cardData.Setup();
         SetCanvas();
         m_reward.RewardDisabled();
         m_reward.CanvasRectTransform = m_battleUICanvas.GetComponent<RectTransform>();
-        m_cardData = GameManager.Instance.CardData;
-        m_cardPrefab = GameManager.Instance.CardPrefab;
     }
     public void SetCanvas()
     {

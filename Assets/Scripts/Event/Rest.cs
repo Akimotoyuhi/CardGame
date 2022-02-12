@@ -25,6 +25,11 @@ public class Rest : MonoBehaviour
 
     public void UpgradeButton()
     {
+        GameManager.Instance.DisplayCard();
+    }
+
+    public void OnUpgrade()
+    {
 
     }
 }

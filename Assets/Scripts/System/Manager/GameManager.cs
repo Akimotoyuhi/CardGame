@@ -40,18 +40,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //if (DataManager.Instance.IsSaveData())
+        //{
 
-        if (DataManager.Instance.IsSaveData())
-        {
-
-        }
-        else
-        {
-            m_map.CreateMap();
-        }
+        //}
+        //else
+        //{
+        //    m_map.CreateMap();
+        //}
+        m_map.CreateMap();
         m_eventCanvas.enabled = false;
         m_cardDisplayCanvas.enabled = false;
         m_step = DataManager.Instance.Step;
+        BattleManager.Instance.Setup();
     }
 
     public void OnClick(CellState cellState)
@@ -106,7 +107,15 @@ public class GameManager : MonoBehaviour
     }
     public void DisplayCard()
     {
-
+        List<int[]> data = DataManager.Instance.Cards;
+        for (int i = 0; i < data.Count; i++)
+        {
+            BlankCard card = Instantiate(CardPrefab);
+            card.transform.SetParent(m_cardDisplayParent, false);
+            card.SetInfo(m_cardData.CardDatas[data[i][0]]);
+            card.CardState = CardState.Upgrade;
+        }
+        m_cardDisplayCanvas.enabled = true;
     }
 
     /// <summary>
