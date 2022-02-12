@@ -29,13 +29,6 @@ public class ConditionUI : MonoBehaviour
         m_viewText.text = "";
         image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
         string s = m_conditionSpriteData[(int)conditionID].Tooltip;
-        //MatchCollection matchs = Regex.Matches(s, "{%value}");
-        //Debug.Log(s);
-        //foreach (Match m in matchs)
-        //{
-        //    Debug.Log(m.Value);
-        //    s.Replace(m.Value, turn.ToString());
-        //}
         m_text = s;
         m_viewText.text = turn.ToString();
     }

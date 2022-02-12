@@ -24,7 +24,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 1
     m_isDiscarding: 0
     m_upgradeDatas:
@@ -37,7 +37,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions: []
+      m_conditions: []
       m_cardType: 1
       m_isDiscarding: 0
       m_upgradeDatas: []
@@ -50,7 +50,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 5
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 0
     m_isDiscarding: 0
     m_upgradeDatas:
@@ -63,7 +63,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 8
       m_blockNum: 0
-      m_concitions: []
+      m_conditions: []
       m_cardType: 0
       m_isDiscarding: 0
       m_upgradeDatas: []
@@ -76,7 +76,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 0
     m_isDiscarding: 0
     m_upgradeDatas: []
@@ -89,7 +89,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 2
     m_isDiscarding: 0
     m_upgradeDatas:
@@ -102,7 +102,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions: []
+      m_conditions: []
       m_cardType: 2
       m_isDiscarding: 0
       m_upgradeDatas: []
@@ -115,7 +115,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 0
     m_isDiscarding: 0
     m_upgradeDatas: []
@@ -128,7 +128,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 1
     m_isDiscarding: 0
     m_upgradeDatas:
@@ -141,7 +141,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions: []
+      m_conditions: []
       m_cardType: 2
       m_isDiscarding: 0
       m_upgradeDatas: []
@@ -154,7 +154,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 1
     m_isDiscarding: 0
     m_upgradeDatas:
@@ -167,7 +167,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions: []
+      m_conditions: []
       m_cardType: 1
       m_isDiscarding: 0
       m_upgradeDatas: []
@@ -180,7 +180,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions:
+    m_conditions:
     - m_conditionID: 0
       m_turn: 2
     m_cardType: 1
@@ -195,7 +195,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions:
+      m_conditions:
       - m_conditionID: 0
         m_turn: 2
       m_cardType: 1
@@ -210,7 +210,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 8
     m_blockNum: 0
-    m_concitions: []
+    m_conditions: []
     m_cardType: 0
     m_isDiscarding: 0
     m_upgradeDatas:
@@ -223,7 +223,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 14
       m_blockNum: 0
-      m_concitions: []
+      m_conditions: []
       m_cardType: 0
       m_isDiscarding: 0
       m_upgradeDatas: []
@@ -236,7 +236,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions:
+    m_conditions:
     - m_conditionID: 2
       m_turn: 2
     - m_conditionID: 3
@@ -255,7 +255,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions:
+      m_conditions:
       - m_conditionID: 2
         m_turn: 2
       - m_conditionID: 3
@@ -274,7 +274,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions:
+    m_conditions:
     - m_conditionID: 2
       m_turn: 2
     m_cardType: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions:
+      m_conditions:
       - m_conditionID: 2
         m_turn: 4
       m_cardType: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions:
+    m_conditions:
     - m_conditionID: 3
       m_turn: 2
     m_cardType: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions:
+      m_conditions:
       - m_conditionID: 3
         m_turn: 4
       m_cardType: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 10
     m_blockNum: 0
-    m_concitions:
+    m_conditions:
     - m_conditionID: 4
       m_turn: 5
     m_cardType: 0
@@ -343,13 +343,13 @@ MonoBehaviour:
     - m_name: "\u9244\u58C1\u306E\u69CB\u3048+"
       m_cost: 2
       m_image: {fileID: 21300000, guid: bdefb99a70032264a91323f60de65225, type: 3}
-      m_tooltip: "{%def17}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30D7\u30EC\u30FC\u30C8\u30A2\u30FC\u30DE\u30FC5\u3092\u5F97\u308B"
+      m_tooltip: "{%def15}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30D7\u30EC\u30FC\u30C8\u30A2\u30FC\u30DE\u30FC5\u3092\u5F97\u308B"
       m_rarity: 2
       m_power: 0
       m_attackNum: 0
       m_block: 17
       m_blockNum: 0
-      m_concitions:
+      m_conditions:
       - m_conditionID: 4
         m_turn: 5
       m_cardType: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions:
+    m_conditions:
     - m_conditionID: 0
       m_turn: 5
     - m_conditionID: 1
@@ -387,7 +387,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions:
+      m_conditions:
       - m_conditionID: 0
         m_turn: 99
       - m_conditionID: 1
@@ -410,7 +410,7 @@ MonoBehaviour:
     m_attackNum: 0
     m_block: 0
     m_blockNum: 0
-    m_concitions:
+    m_conditions:
     - m_conditionID: 2
       m_turn: 2
     - m_conditionID: 5
@@ -427,7 +427,7 @@ MonoBehaviour:
       m_attackNum: 0
       m_block: 0
       m_blockNum: 0
-      m_concitions:
+      m_conditions:
       - m_conditionID: 2
         m_turn: 4
       - m_conditionID: 5
