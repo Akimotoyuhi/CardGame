@@ -275,6 +275,7 @@ MonoBehaviour:
   m_conditionUIPrefab: {fileID: 1381488700500542313, guid: fc016acdd04f9124398e42789d21ab1e,
     type: 3}
   m_conditionUIParent: {fileID: 7385166911817830926}
+  m_image: {fileID: 8787646866016234153}
   m_planImage: {fileID: 810085787700751314, guid: 574ab09eede9aa04286ef3f715c3d313,
     type: 3}
   m_planImageParent: {fileID: 5142048830927632287}

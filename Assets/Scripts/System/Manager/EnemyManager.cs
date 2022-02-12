@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System;
 
 /// <summary>
 /// 敵グループの制御
@@ -104,9 +105,9 @@ public class EnemyManager : MonoBehaviour
         {
             for (int i = 0; i < m_enemyParent.childCount; i++)
             {
-                Destroy(m_enemyParent.GetChild(i).gameObject);
+                m_enemyParent.GetChild(i).GetComponent<EnemyBase>().Destroy();
             }
-            BattleManager.Instance.BatlteEnd();
+            Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(i => { BattleManager.Instance.BatlteEnd(); }).AddTo(this);
         }
     }
 }

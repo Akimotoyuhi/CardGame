@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using System;
-using System.Linq;
+using DG.Tweening;
 
 public class EnemyBase : CharactorBase, IDrop
 {
@@ -30,7 +27,7 @@ public class EnemyBase : CharactorBase, IDrop
     {
         m_name = data.Name;
         m_maxLife = data.Life;
-        m_image = data.Image;
+        m_sprite = data.Image;
         m_enemyDataBase = data;
         m_enemyManager = enemyManager;
     }
@@ -146,5 +143,11 @@ public class EnemyBase : CharactorBase, IDrop
             g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn).Plan[i],
                 ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn).Power));
         }
+    }
+
+    public void Destroy()
+    {
+        m_image.DOColor(Color.clear, 0.7f)
+            .OnComplete(() => Destroy(gameObject));
     }
 }

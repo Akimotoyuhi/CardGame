@@ -36,7 +36,7 @@ public class Player : CharactorBase, IDrop
 
     protected override void SetUp()
     {
-        GetComponent<Image>().sprite = m_image;
+        GetComponent<Image>().sprite = m_sprite;
         m_hpSlider.maxValue = m_maxLife;
         m_hpSlider.value = m_life;
         m_blkSlider.value = m_block;
@@ -46,7 +46,7 @@ public class Player : CharactorBase, IDrop
     public void SetParam(string name, Sprite image, int maxLife, int currentLife)
     {
         m_name = name;
-        m_image = image;
+        m_sprite = image;
         m_maxLife = maxLife;
         m_life = currentLife;
     }

@@ -576,6 +576,7 @@ MonoBehaviour:
   m_conditionUIPrefab: {fileID: 1381488700500542313, guid: fc016acdd04f9124398e42789d21ab1e,
     type: 3}
   m_conditionUIParent: {fileID: 379568926489689814}
+  m_image: {fileID: 4774533046676721404}
   m_cost: 0
   m_drowNum: 5
 --- !u!1 &4774533046680980724

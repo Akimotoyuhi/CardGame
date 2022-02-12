@@ -20,7 +20,7 @@ public class CharactorBase : MonoBehaviour
     /// <summary>ブロック値</summary>
     protected int m_block;
     /// <summary>画像</summary>
-    protected Sprite m_image;
+    protected Sprite m_sprite;
     /// <summary>HPのスライダー</summary>
     [SerializeField] protected Slider m_hpSlider;
     /// <summary>ブロック値のスライダー</summary>
@@ -31,6 +31,8 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] GameObject m_conditionUIPrefab;
     /// <summary>バフデバフアイコンを表示するオブジェクトのプレハブの親</summary>
     [SerializeField] Transform m_conditionUIParent;
+    /// <summary>image</summary>
+    [SerializeField] protected Image m_image;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
     /// <summary>敵かどうか</summary>
@@ -56,12 +58,12 @@ public class CharactorBase : MonoBehaviour
             }
         }
     }
-    public Sprite Image => m_image;
+    public Sprite Image => m_sprite;
     public bool IsDead { get => m_isDead; }
     protected enum GetCardType { Damage, Block }
     protected virtual void SetUp()
     {
-        GetComponent<Image>().sprite = m_image;
+        GetComponent<Image>().sprite = m_sprite;
         m_life = m_maxLife;
         m_hpSlider.maxValue = m_maxLife;
         m_hpSlider.value = m_life;
@@ -230,7 +232,7 @@ public class CharactorBase : MonoBehaviour
     public void SetParam(string name, Sprite image, int hp)
     {
         m_name = name;
-        m_image = image;
+        m_sprite = image;
         m_maxLife = hp;
     }
 
