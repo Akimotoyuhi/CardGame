@@ -85,7 +85,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     private void Setup()
     {
-        m_viewTooltip.text = m_tooltip;
+        //m_viewTooltip.text = m_tooltip;
         m_viewCost.text = m_cost;
         m_rectTransform = gameObject.GetComponent<RectTransform>();
     }
@@ -156,7 +156,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            Debug.Log($"Attack{m.Groups[1].Value}");
             if (m_cardState == CardState.Play) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
             else { Power = int.Parse(m.Groups[1].Value); }
             text = text.Replace(m.Value, Power.ToString());
@@ -165,7 +164,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (Match m in matches)
         {
             int index = int.Parse(m.Groups[1].Value);
-            Debug.Log($"Block{m.Groups[1].Value}");
             if (m_cardState == CardState.Play) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
             else { Block = int.Parse(m.Groups[1].Value); }
             text = text.Replace(m.Value, Block.ToString());
