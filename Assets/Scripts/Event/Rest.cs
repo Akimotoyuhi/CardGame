@@ -25,11 +25,13 @@ public class Rest : MonoBehaviour
 
     public void UpgradeButton()
     {
-        GameManager.Instance.DisplayCard();
+        Debug.Log("ÉJÅ[Éhã≠âª");
+        GameManager.Instance.DisplayCard(this);
     }
 
-    public void OnUpgrade()
+    public void OnUpgrade(int index)
     {
-
+        GameManager.Instance.CardUpgrade(index);
+        GameManager.Instance.FloorFinished();
     }
 }

@@ -45,6 +45,15 @@ namespace Mastar
             int[] vs = new int[] { id, isUpgrade };
             m_cards.Add(vs);
         }
+        /// <summary>
+        /// カードアップグレード<br/>
+        /// 後に変える
+        /// </summary>
+        /// <param name="index"></param>
+        public void CardUpgrade(int index)
+        {
+            m_cards[index][1] = 1;
+        }
         public bool StartFlag { get; private set; } = false;
         /// <summary>
         /// 初回の特別処理判定用<br/>

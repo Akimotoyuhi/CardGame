@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public NewCardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
+    public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
 
     private void Awake()
     {
@@ -105,14 +106,14 @@ public class GameManager : MonoBehaviour
             card.SetInfo(m_cardData.CardDatas[data[i][0]]);
         }
     }
-    public void DisplayCard()
+    public void DisplayCard(Rest rest = null)
     {
         List<int[]> data = DataManager.Instance.Cards;
         for (int i = 0; i < data.Count; i++)
         {
             BlankCard card = Instantiate(CardPrefab);
             card.transform.SetParent(m_cardDisplayParent, false);
-            card.SetInfo(m_cardData.CardDatas[data[i][0]]);
+            card.SetInfo(m_cardData.CardDatas[data[i][0]], i, rest);
             card.CardState = CardState.Upgrade;
         }
         m_cardDisplayCanvas.enabled = true;
@@ -135,6 +136,7 @@ public class GameManager : MonoBehaviour
         BattleManager.Instance.IsGame = false;
         BattleManager.Instance.SetCanvas();
         m_eventCanvas.enabled = false;
+        m_cardDisplayCanvas.enabled = false;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #region エディタ拡張
