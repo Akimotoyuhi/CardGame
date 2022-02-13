@@ -58,9 +58,9 @@ public class EnemyBase : CharactorBase, IDrop
             m_life -= dmg;
             if (m_life <= 0)
             {
+                m_life = 0;
                 m_isDead = true;
-                m_enemyManager.Removed();
-                //Destroy(gameObject);
+                Dead();
             }
             else
             {
@@ -96,15 +96,16 @@ public class EnemyBase : CharactorBase, IDrop
             {
                 EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform, true);
             }
-            damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
+            damage *= -1;
             if (damage <= 0) { }
             else
             {
                 m_life -= damage;
                 if (m_life <= 0)
                 {
+                    m_life = 0;
                     m_isDead = true;
-                    m_enemyManager.Removed();
+                    Dead();
                 }
                 else
                 {
@@ -145,9 +146,17 @@ public class EnemyBase : CharactorBase, IDrop
         }
     }
 
-    public void Destroy()
+    public void Dead()
     {
-        m_image.DOColor(Color.clear, 0.7f)
-            .OnComplete(() => Destroy(gameObject));
+        m_image.DOColor(Color.clear, 0.5f)
+            .OnComplete(() =>
+            {
+                m_enemyManager.Removed();
+                m_image.enabled = false;
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    Destroy(transform.GetChild(i).gameObject);
+                }
+            });
     }
 }
