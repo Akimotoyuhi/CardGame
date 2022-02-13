@@ -232,6 +232,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
         {
             Debug.Log($"コストが足りない!\nカードのコスト:{Cost} プレイヤーのコスト:{m_player.CurrrentCost}");
+            EffectManager.Instance.SetBattleUIText("コストが足りない！", Color.red, 1f);
             return;
         }
         //ドロップ時に自分の座標にRayを飛ばす

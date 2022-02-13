@@ -39,6 +39,11 @@ public class EffectManager : MonoBehaviour
         m_battleUI.transform.GetChild(0).gameObject.GetText().SetText(text, color);
         m_battleUI.SetActive(true);
     }
+    public void SetBattleUIText(string text, Color color, float removeTime)
+    {
+        SetBattleUIText(text, color);
+        DOVirtual.DelayedCall(removeTime, () => RemoveBattleUIText());
+    }
     public void RemoveBattleUIText()
     {
         m_battleUI.transform.GetChild(0).gameObject.GetText("");
