@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 [CreateAssetMenu(fileName = "EnemyData")]
 public class EnemyData : ScriptableObject
@@ -31,7 +32,7 @@ public class EnemyData : ScriptableObject
                 Debug.Log("変な値入れんな");
                 return null;
         }
-        int r = Random.Range(0, encountData.Count);
+        int r = UnityEngine.Random.Range(0, encountData.Count);
         for (int i = 0; i < encountData[r].GetLength; i++)
         {
             ret.Add(m_enemyDataBases[encountData[r].GetID(i)]);
@@ -47,9 +48,12 @@ public enum EnemyID
     origimusi,
     /// <summary>レユニオン兵</summary>
     Soldier,
-    /// <summary>見棄てられた者</summary>
+    /// <summary>「見棄てし者」</summary>
     ForsakenOne,
-    endLength,
+    /// <summary>クラウンスレイヤー</summary>
+    Crownslayer,
+    /// <summary>火炎瓶暴徒</summary>
+    CocktailThrower,
 }
 /// <summary>敵出現場所</summary>
 public enum EnemyAppearanceEria
@@ -189,14 +193,8 @@ public class EnemyConditionalCommand3
     {
         if (turn == 0)
         {
-            if (m_type == WhereType.BattleBegin)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (m_type == WhereType.BattleBegin) { return true; }
+            else { return false; }
         }
 
         switch (m_type)
@@ -239,6 +237,8 @@ public class EnemyConditionalCommand3
                     return true;
                 }
                 return false;
+            case WhereType.BattleBegin:
+                return false;
             default:
                 Debug.LogError("無効な条件ケース");
                 return false;
@@ -246,11 +246,10 @@ public class EnemyConditionalCommand3
     }
 }
 #endregion
-[System.Serializable]
+[Serializable]
 public class EncountDataBase
 {
-    [SerializeField] EnemyID[] m_enemyID = new EnemyID[(int)EnemyID.endLength];
-
+    [SerializeField] EnemyID[] m_enemyID = new EnemyID[Enum.GetNames(typeof(EnemyID)).Length];
     /// <summary>
     /// 敵IDの取得
     /// </summary>

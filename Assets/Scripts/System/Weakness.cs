@@ -167,3 +167,23 @@ public class StrengthDown : Condition
     public override ConditionID GetConditionID() => ConditionID.StrengthDown;
     public override ParametorType GetParametorType() => ParametorType.Condition;
 }
+public class Ranger : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
+    {
+        if (eventTiming == EventTiming.Damaged && parametorType == ParametorType.Attack)
+        {
+            float ret = power * (1 - 0.25f);
+            return new int[] { (int)ret };
+        }
+        else return new int[] { power };
+    }
+    public override int IsBuff() => 0;
+    public override bool IsRemove()
+    {
+        if (Turn <= 0) return true;
+        return false;
+    }
+    public override ParametorType GetParametorType() => ParametorType.Attack;
+    public override ConditionID GetConditionID() => ConditionID.Ranger;
+}

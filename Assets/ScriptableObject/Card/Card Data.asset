@@ -68,18 +68,44 @@ MonoBehaviour:
       m_isDiscarding: 0
       m_upgradeDatas: []
   - m_name: "\u6307\u4EE4\uFF1A\u69CB\u9020\u5F37\u5316"
-    m_cost: 1
+    m_cost: 3
     m_image: {fileID: 21300000, guid: ad5765035bd0c744db85d1357d977c9e, type: 3}
-    m_tooltip: 
+    m_tooltip: "{%def30}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
     m_rarity: 3
     m_power: 0
     m_attackNum: 0
-    m_block: 0
+    m_block: 40
     m_blockNum: 0
     m_conditions: []
     m_cardType: 0
     m_isDiscarding: 0
-    m_upgradeDatas: []
+    m_upgradeDatas:
+    - m_name: "\u6307\u4EE4\uFF1A\u69CB\u9020\u5F37\u5316"
+      m_cost: 3
+      m_image: {fileID: 21300000, guid: ad5765035bd0c744db85d1357d977c9e, type: 3}
+      m_tooltip: "{%def40}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_rarity: 3
+      m_power: 0
+      m_attackNum: 0
+      m_block: 40
+      m_blockNum: 0
+      m_conditions: []
+      m_cardType: 0
+      m_isDiscarding: 0
+      m_upgradeDatas:
+      - m_name: 
+        m_cost: 
+        m_image: {fileID: 0}
+        m_tooltip: 
+        m_rarity: 0
+        m_power: 0
+        m_attackNum: 0
+        m_block: 0
+        m_blockNum: 0
+        m_conditions: []
+        m_cardType: 0
+        m_isDiscarding: 0
+        m_upgradeDatas: []
   - m_name: "\u6307\u4EE4\uFF1A\u6226\u8853\u9023\u643A"
     m_cost: 2
     m_image: {fileID: 21300000, guid: 8e7662195db030746805634c581d00c9, type: 3}

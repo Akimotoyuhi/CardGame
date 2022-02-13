@@ -75,6 +75,7 @@ public class Player : CharactorBase, IDrop
         AddEffect(conditions);
         if (power > 0)
         {
+            power = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, power);
             Debug.Log($"受けたダメージ{power}");
             int damage = m_block -= power;
             if (m_block < 0)

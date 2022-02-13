@@ -48,7 +48,7 @@ public class EnemyBase : CharactorBase, IDrop
     public override void Damage(int damage, int block, List<Condition> conditions)
     {
         AddEffect(conditions);
-        int dmg = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, damage);
+        int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
         dmg = m_block -= dmg;
         if (m_block < 0) { m_block = 0; }
         dmg *= -1;

@@ -11,13 +11,13 @@ public class ConditionUI : MonoBehaviour
 {
     [SerializeField] Text m_viewText;
     [SerializeField] ConditionSpriteData[] m_conditionSpriteData;
-    [SerializeField] string m_text = "";
+    private string m_text = "";
     [System.Serializable]
     public class ConditionSpriteData
     {
         [SerializeField] Sprite m_sprite;
         [SerializeField] Color m_color;
-        [SerializeField] string m_tooltip;
+        [SerializeField, TextArea] string m_tooltip;
         public Sprite Sprite => m_sprite;
         public Color Color => m_color;
         public string Tooltip => m_tooltip;

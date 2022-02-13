@@ -34,16 +34,30 @@ public class EffectManager : MonoBehaviour
         obj.GetRectTransform().anchoredPosition = position;
         return obj;
     }
+    /// <summary>
+    /// 戦闘時の説明用のテキストに表示する
+    /// </summary>
+    /// <param name="text">表示する文字列</param>
+    /// <param name="color">テキストの色</param>
     public void SetBattleUIText(string text, Color color)
     {
         m_battleUI.transform.GetChild(0).gameObject.GetText().SetText(text, color);
         m_battleUI.SetActive(true);
     }
+    /// <summary>
+    /// 戦闘時の説明用のテキストを表示し、n秒後に消す
+    /// </summary>
+    /// <param name="text">表示する文字列</param>
+    /// <param name="color">テキストの色</param>
+    /// <param name="removeTime">消すまでの時間</param>
     public void SetBattleUIText(string text, Color color, float removeTime)
     {
         SetBattleUIText(text, color);
         DOVirtual.DelayedCall(removeTime, () => RemoveBattleUIText());
     }
+    /// <summary>
+    /// 現在表示中の説明用のテキストを非表示にする
+    /// </summary>
     public void RemoveBattleUIText()
     {
         m_battleUI.transform.GetChild(0).gameObject.GetText("");

@@ -18,6 +18,8 @@ public enum ConditionID
     PlateArmor,
     /// <summary>筋力低下<br/>ターン開始時に筋力Xを失う</summary>
     StrengthDown,
+    /// <summary>遠距離ユニット</summary>
+    Ranger,
 }
 /// <summary>バフデバフが効果を発動するタイミング</summary>
 public enum EventTiming
@@ -102,6 +104,10 @@ public class ConditionSelection
                     return ret;
                 case ConditionID.StrengthDown:
                     ret = new StrengthDown();
+                    ret.Turn = m_turn;
+                    return ret;
+                case ConditionID.Ranger:
+                    ret = new Ranger();
                     ret.Turn = m_turn;
                     return ret;
                 default:
