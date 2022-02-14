@@ -6,11 +6,11 @@ using DG.Tweening;
 
 /// <summary>
 /// エフェクトやってくれるクラス<br/>
-/// 演出用のテキストやパーティクルを表示してくれる
+/// 演出用のテキストやパーティクルを表示したりフェードの管理をしたりする
 /// </summary>
 public class EffectManager : MonoBehaviour
 {
-    [SerializeField] int m_textFontSize = 40;
+    [SerializeField] Image m_fadePanel;
     [SerializeField] GameObject m_overfrowTextPrefab;
     [SerializeField] GameObject m_textPrefab;
     [SerializeField] GameObject m_battleUI;
@@ -24,6 +24,7 @@ public class EffectManager : MonoBehaviour
     private void Start()
     {
         RemoveBattleUIText();
+        //Fade(Color.clear, 0.1f);
     }
 
     public GameObject ViewText(string text, Vector2 position, Transform parent)
@@ -95,5 +96,22 @@ public class EffectManager : MonoBehaviour
             .Join(viewText.DOColor(color, 0.1f))
             .Append(viewText.DOColor(Color.clear, 1f))
             .OnComplete(() => Destroy(obj));
+    }
+    /// <summary>
+    /// フェード
+    /// </summary>
+    /// <param name="duration">間隔</param>
+    /// <param name="color">フェード後の色</param>
+    /// <param name="action">フェード後にする事があれば書く</param>
+    public void Fade(Color color, float duration, System.Action action = null)
+    {
+        m_fadePanel.DOColor(color, duration)
+                .OnComplete(() =>
+                {
+                    if (action != null)
+                    {
+                        action();
+                    }
+                });
     }
 }

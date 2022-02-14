@@ -58,7 +58,11 @@ public class GameManager : MonoBehaviour
 
     public void OnClick(CellState cellState)
     {
-        m_mapCanvas.enabled = false;
+        EffectManager.Instance.Fade(Color.black, 0.3f, () =>
+        {
+            m_mapCanvas.enabled = false;
+            EffectManager.Instance.Fade(Color.clear, 0.3f);
+        });
         switch (cellState)
         {
             case CellState.Enemy:
@@ -79,11 +83,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-
-    /// <summary>
-    /// カード表示<br/>
-    /// 自分のデッキ表示や強化画面で使われる
-    /// </summary>
+    
     public void DisplayCard(CardDisplayType cardDisplayType)
     {
         List<int[]> data;
@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour
             card.SetInfo(m_cardData.CardDatas[data[i][0]]);
         }
     }
+    /// <summary>
+    /// カード表示<br/>
+    /// 自分のデッキ表示や強化画面で使われる
+    /// </summary>
     public void DisplayCard(Rest rest = null)
     {
         List<int[]> data = DataManager.Instance.Cards;
