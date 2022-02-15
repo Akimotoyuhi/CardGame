@@ -10,6 +10,8 @@ public class Rest : MonoBehaviour
 {
     /// <summary>回復量</summary>
     [SerializeField] int m_healValue;
+    /// <summary>アップグレードさせるカードのインデックス保存用</summary>
+    private int m_upgradeCardIndex;
 
     public void StartEvent()
     {
@@ -26,6 +28,7 @@ public class Rest : MonoBehaviour
         GameManager.Instance.Heal = m_healValue;
         GameManager.Instance.FloorFinished();
     }
+
     /// <summary>
     /// 強化ボタンが押された処理<br/>
     /// Buttonから呼ばれる事を想定している
@@ -38,7 +41,18 @@ public class Rest : MonoBehaviour
 
     public void OnUpgrade(int index)
     {
-        GameManager.Instance.CardUpgrade(index);
+        m_upgradeCardIndex = index;
+        GameManager.Instance.UpgradeConfirmationPanel(index);
+    }
+
+    public void UpgradeApplyButton()
+    {
+        GameManager.Instance.CardUpgrade(m_upgradeCardIndex);
         GameManager.Instance.FloorFinished();
+    }
+
+    public void UpgradeBackButton()
+    {
+        GameManager.Instance.UpgradeConfirmationPanelDisabled();
     }
 }

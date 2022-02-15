@@ -25,7 +25,7 @@ public class NewCardData : ScriptableObject
     /// <returns>カードデータ</returns>
     public NewCardDataBase GetCardRarityRandom()
     {
-        Rarity rarity = new Rarity();
+        Rarity rarity;
         int r = UnityEngine.Random.Range(0, 100);
         if (r < m_eliteProbability)
         {

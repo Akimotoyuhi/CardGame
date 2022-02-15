@@ -106,20 +106,22 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
     public void SetInfo(NewCardDataBase carddata, int upgrade, Reward reward)
     {
+        Init();
         SetCard(carddata);
         m_upgrade = upgrade;
         m_reward = reward;
     }
     public void SetInfo(NewCardDataBase carddata, int index, Rest rest)
     {
+        Init();
         SetCard(carddata);
         m_index = index;
         m_rest = rest;
     }
     public void SetInfo(NewCardDataBase carddata)
     {
+        Init();
         SetCard(carddata);
-        m_cardState = CardState.None;
     }
     private void SetCard(NewCardDataBase carddata)
     {
@@ -134,6 +136,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         Conditions = carddata.Conditions;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
+        m_useType = carddata.UseType;
         GetPlayerEffect();
         Setup();
     }
