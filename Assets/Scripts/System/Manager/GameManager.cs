@@ -137,7 +137,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+            for (int i = 0; i < data.Count; i++)
+            {
+                BlankCard card = Instantiate(CardPrefab);
+                card.transform.SetParent(m_cardDisplayParent, false);
+                if (data[i][1] == 0) card.SetInfo(m_cardData.CardDatas[data[i][0]], i, rest);
+                else card.SetInfo(m_cardData.CardDatas[data[i][0]].UpgradeData, i, rest);
+                card.CardState = CardState.Upgrade;
+            }
         }
         m_cardDisplayCanvas.enabled = true;
     }

@@ -10722,6 +10722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d249bd329ed9e6d4b90188a891f237bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_sector: 7
   m_maxCell: 3
   m_parentSector: {fileID: 8837727758879024943}
   m_sectorPrefab: {fileID: 4689219055565768202, guid: 6c611e1ee71f5e24282777e86147d07f,
@@ -10730,7 +10731,7 @@ MonoBehaviour:
     type: 3}
   m_linePrefab: {fileID: 538390810350223235, guid: ffc7a88d40db5ff49b83891c08204752,
     type: 3}
-  m_restIndex: 1
+  m_restIndex: 3
 --- !u!114 &8837727758879024942
 MonoBehaviour:
   m_ObjectHideFlags: 0

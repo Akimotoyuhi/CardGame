@@ -11,7 +11,7 @@ public class Map : MonoBehaviour
     //これをm_maxCell回繰り返す
 
     /// <summary>セクター数</summary>
-    private int m_sector = 7;
+    [SerializeField] int m_sector = 7;
     /// <summary>各セクターに生成するセルの最大数</summary>
     [SerializeField] int m_maxCell = 3;
     /// <summary>親セクター</summary>
