@@ -56,6 +56,7 @@ public class EnemyBase : CharactorBase, IDrop
         else
         {
             m_life -= dmg;
+            //EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform, true);
             if (m_life <= 0)
             {
                 m_life = 0;
@@ -101,15 +102,12 @@ public class EnemyBase : CharactorBase, IDrop
             else
             {
                 m_life -= damage;
+                //EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform, true);
                 if (m_life <= 0)
                 {
                     m_life = 0;
                     m_isDead = true;
                     Dead();
-                }
-                else
-                {
-                    EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform, true);
                 }
             }
             AddEffect(command.Conditions);

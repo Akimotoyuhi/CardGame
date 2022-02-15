@@ -16,13 +16,20 @@ public class Rest : MonoBehaviour
         GetComponent<Canvas>().enabled = true;
     }
 
+    /// <summary>
+    /// 回復ボタンが押された処理<br/>
+    /// Buttonから呼ばれる事を想定している
+    /// </summary>
     public void HealButton()
     {
         Debug.Log($"Playerの体力が{m_healValue}回復した");
         GameManager.Instance.Heal = m_healValue;
         GameManager.Instance.FloorFinished();
     }
-
+    /// <summary>
+    /// 強化ボタンが押された処理<br/>
+    /// Buttonから呼ばれる事を想定している
+    /// </summary>
     public void UpgradeButton()
     {
         Debug.Log("カード強化");

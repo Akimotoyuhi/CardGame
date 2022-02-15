@@ -89,24 +89,18 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewCost.text = m_cost;
         m_rectTransform = gameObject.GetComponent<RectTransform>();
     }
+    private void Init()
+    {
+        m_reward = null;
+        m_player = null;
+    }
     public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect, Player player, Camera camera, Discard discard)
     {
-        m_viewName.text = carddata.Name;
-        m_viewImage.sprite = carddata.Sprite;
-        m_tooltip = carddata.Tooltip;
-        Power = carddata.Attack;
-        AttackNum = carddata.AttackNum;
-        Block = carddata.Block;
-        BlockNum = carddata.BlockNum;
-        m_cost = carddata.Cost;
-        Conditions = carddata.Conditions;
-        m_useType = carddata.UseType;
-        m_isDiscarding = carddata.IsDiscarding;
+        Init();
+        SetCard(carddata);
         m_player = player;
-        GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_camera = camera;
         m_canvasRect = canvasRect;
-        m_reward = null;
         m_discard = discard;
         Setup();
     }
@@ -216,12 +210,12 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         if (m_cardState == CardState.Reward)
         {
-            if (!m_reward) { return; }
+            if (!m_reward) return;
             m_reward.OnClick(m_cardID, m_upgrade);
         }
         else if (m_cardState == CardState.Upgrade)
         {
-            if (!m_rest) { return; }
+            if (!m_rest) return;
             m_rest.OnUpgrade(m_index);
         }
     }

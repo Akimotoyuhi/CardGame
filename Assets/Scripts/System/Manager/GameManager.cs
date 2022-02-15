@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     /// <summary>カードのプレハブ</summary>
     [SerializeField] BlankCard m_cardPrefab;
     /// <summary>Relicの画像の親</summary>
-    [Header("UI関連")]
     [SerializeField] Transform m_relicParent;
     /// <summary>カードを表示させるためのCanvas</summary>
     [SerializeField] Canvas m_cardDisplayCanvas;
@@ -61,27 +60,27 @@ public class GameManager : MonoBehaviour
         EffectManager.Instance.Fade(Color.black, 0.3f, () =>
         {
             m_mapCanvas.enabled = false;
+            switch (cellState)
+            {
+                case CellState.Enemy:
+                    if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy); }
+                    else { Debug.LogError("まだ作ってないねん"); }
+                    BattleManager.Instance.IsGame = true;
+                    BattleManager.Instance.SetCanvas();
+                    break;
+                case CellState.Boss:
+                    if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss); }
+                    else { Debug.LogError("まだ作ってないねん"); }
+                    BattleManager.Instance.IsGame = true;
+                    BattleManager.Instance.SetCanvas();
+                    break;
+                case CellState.Rest:
+                    m_eventCanvas.GetComponent<Rest>().StartEvent();
+                    m_eventCanvas.enabled = true;
+                    break;
+            }
             EffectManager.Instance.Fade(Color.clear, 0.3f);
         });
-        switch (cellState)
-        {
-            case CellState.Enemy:
-                if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy); }
-                else { Debug.LogError("まだ作ってないねん"); }
-                BattleManager.Instance.IsGame = true;
-                BattleManager.Instance.SetCanvas();
-                break;
-            case CellState.Boss:
-                if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss); }
-                else { Debug.LogError("まだ作ってないねん"); }
-                BattleManager.Instance.IsGame = true;
-                BattleManager.Instance.SetCanvas();
-                break;
-            case CellState.Rest:
-                m_eventCanvas.GetComponent<Rest>().StartEvent();
-                m_eventCanvas.enabled = true;
-                break;
-        }
     }
     
     public void DisplayCard(CardDisplayType cardDisplayType)
@@ -122,6 +121,13 @@ public class GameManager : MonoBehaviour
         }
         m_cardDisplayCanvas.enabled = true;
     }
+    /// <summary>
+    /// アップグレードの確認画面
+    /// </summary>
+    public void UpgradeConfirmationPanel()
+    {
+
+    }
 
     /// <summary>
     /// 現在のフロアが終了した時の処理
@@ -136,11 +142,15 @@ public class GameManager : MonoBehaviour
         DataManager.Instance.Step++;
         m_step = DataManager.Instance.Step;
         m_map.AllColorChange();
-        m_mapCanvas.enabled = true;
         BattleManager.Instance.IsGame = false;
-        BattleManager.Instance.SetCanvas();
-        m_eventCanvas.enabled = false;
-        m_cardDisplayCanvas.enabled = false;
+        EffectManager.Instance.Fade(Color.black, 0.5f, () =>
+        {
+            BattleManager.Instance.SetCanvas();
+            m_mapCanvas.enabled = true;
+            m_eventCanvas.enabled = false;
+            m_cardDisplayCanvas.enabled = false;
+            EffectManager.Instance.Fade(Color.clear, 0.2f);
+        });
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #region エディタ拡張
