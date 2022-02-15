@@ -122,12 +122,22 @@ public class GameManager : MonoBehaviour
     public void DisplayCard(Rest rest = null)
     {
         List<int[]> data = DataManager.Instance.Cards;
-        for (int i = 0; i < data.Count; i++)
+        if (rest)
         {
-            BlankCard card = Instantiate(CardPrefab);
-            card.transform.SetParent(m_cardDisplayParent, false);
-            card.SetInfo(m_cardData.CardDatas[data[i][0]], i, rest);
-            card.CardState = CardState.Upgrade;
+            for (int i = 0; i < data.Count; i++)
+            {
+                if (data[i][1] == 0)
+                {
+                    BlankCard card = Instantiate(CardPrefab);
+                    card.transform.SetParent(m_cardDisplayParent, false);
+                    card.SetInfo(m_cardData.CardDatas[data[i][0]], i, rest);
+                    card.CardState = CardState.Upgrade;
+                }
+            }
+        }
+        else
+        {
+
         }
         m_cardDisplayCanvas.enabled = true;
     }
