@@ -127,7 +127,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// í“¬I—¹
     /// </summary>
-    public void BatlteEnd()
+    public void BattleEnd()
     {
         m_discard.CardDelete();
         m_deck.CardDelete();

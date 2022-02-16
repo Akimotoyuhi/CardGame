@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_name: "\u3042\u307F\u3083"
   m_image: {fileID: 21300000, guid: 494e93f398d869546b979d744682dc11, type: 3}
-  m_maxHp: 70
+  m_maxHp: 1
   m_cardData:
   - m_cardID: 0
     m_upgrade: 0

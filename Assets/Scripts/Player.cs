@@ -8,6 +8,7 @@ public class Player : CharactorBase, IDrop
 {
     /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
     private int m_maxCost = 3;
+    [SerializeField] Sprite m_gameoverSprite;
     [SerializeField] int m_cost = default;
     [SerializeField] int m_drowNum = 5;
     /// <summary>最大コスト</summary>
@@ -78,7 +79,7 @@ public class Player : CharactorBase, IDrop
             power = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, power);
             Debug.Log($"受けたダメージ{power}");
             int damage = m_block -= power;
-            if (m_block < 0)
+            if (m_block <= 0)
             {
                 m_block = 0;
             }
@@ -94,6 +95,8 @@ public class Player : CharactorBase, IDrop
                 EffectChecker(EventTiming.Damaged, ParametorType.Any);
                 if (m_life <= 0)
                 {
+                    m_image.sprite = m_gameoverSprite;
+                    GameManager.Instance.Gameover();
                     Debug.Log("がめおべｒ");
                 }
                 else

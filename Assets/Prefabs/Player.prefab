@@ -577,6 +577,7 @@ MonoBehaviour:
     type: 3}
   m_conditionUIParent: {fileID: 379568926489689814}
   m_image: {fileID: 4774533046676721404}
+  m_gameoverSprite: {fileID: 21300000, guid: 8c398018614bf30438cb2add334e59af, type: 3}
   m_cost: 0
   m_drowNum: 5
 --- !u!1 &4774533046680980724

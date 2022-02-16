@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UniRx;
 using Mastar;
 
 public enum CellClickEventType { Battle, Event, Rest }
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Map m_map;
     /// <summary>EventCanvas</summary>
     [SerializeField] Canvas m_eventCanvas;
+    /// <summary>GameoverScreen</summary>
+    [SerializeField] GameoverScreen m_gameoverScreen;
 
     public static GameManager Instance { get; private set; }
     public int Step => DataManager.Instance.Step;
@@ -51,7 +55,6 @@ public class GameManager : MonoBehaviour
     {
         //if (DataManager.Instance.IsSaveData())
         //{
-
         //}
         //else
         //{
@@ -197,6 +200,21 @@ public class GameManager : MonoBehaviour
             EffectManager.Instance.Fade(Color.clear, 0.2f);
         });
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    /// <summary>
+    /// ゲームオーバー
+    /// </summary>
+    public void Gameover()
+    {
+        BattleManager.Instance.IsGame = false;
+        Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ =>
+        {
+            EffectManager.Instance.Fade(Color.black, 3f, () =>
+            {
+                m_gameoverScreen.ShowPanel(DataManager.Instance.Cards.Count, Step);
+                //EffectManager.Instance.Fade(Color.clear, 0.1f);
+            });
+        });
     }
     #region エディタ拡張
     /// <summary>

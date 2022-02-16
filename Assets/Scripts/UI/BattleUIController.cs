@@ -12,6 +12,9 @@ public class BattleUIController : MonoBehaviour
     private RectTransform m_playerRecttra;
     [SerializeField] Text m_enemyTurn;
     private RectTransform m_enemyRecttra;
+    [SerializeField] Color m_battleStartTextColor = Color.white;
+    [SerializeField] Color m_playerTurnTextColor = Color.white;
+    [SerializeField] Color m_enemyTurnTextColor = Color.white;
     [SerializeField, Tooltip("ç∂âEÇ…ìÆÇ©Ç∑UIÇÃâ“ì≠ïù")]
     float m_moveX = 1000;
     [SerializeField, Tooltip("ç∂âEÇ…ìÆÇ©Ç∑UIÇÃà⁄ìÆä‘äu")]
@@ -39,12 +42,12 @@ public class BattleUIController : MonoBehaviour
         {
             case BattleUIType.BattleStart:
                 s = DOTween.Sequence();
-                s.Append(m_battleStartText.DOColor(Color.black, 0.5f))
+                s.Append(m_battleStartText.DOColor(m_battleStartTextColor, 0.5f))
                 .AppendInterval(0.5f)
                 .Append(m_battleStartText.DOColor(Color.clear, 0.5f));
                 break;
             case BattleUIType.PlayerTurn:
-                m_playerTurn.color = Color.blue;
+                m_playerTurn.color = m_playerTurnTextColor;
                 m_playerRecttra.anchoredPosition = new Vector2(-m_moveX, 0);
                 s = DOTween.Sequence();
                 s.Append(m_playerRecttra.DOAnchorPosX(0, m_moveDura))
@@ -52,7 +55,7 @@ public class BattleUIController : MonoBehaviour
                 .Append(m_playerRecttra.DOAnchorPosX(m_moveX, m_moveDura));
                 break;
             case BattleUIType.EnemyTurn:
-                m_enemyTurn.color = Color.red;
+                m_enemyTurn.color = m_enemyTurnTextColor;
                 m_enemyRecttra.anchoredPosition = new Vector2(m_moveX, 0);
                 s = DOTween.Sequence();
                 s.Append(m_enemyRecttra.DOAnchorPosX(0, m_moveDura))

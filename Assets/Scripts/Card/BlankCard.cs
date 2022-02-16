@@ -97,7 +97,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect, Player player, Camera camera, Discard discard)
     {
         Init();
-        SetCard(carddata);
+        SetCardData(carddata);
         m_player = player;
         m_camera = camera;
         m_canvasRect = canvasRect;
@@ -107,23 +107,23 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void SetInfo(NewCardDataBase carddata, int upgrade, Reward reward)
     {
         Init();
-        SetCard(carddata);
+        SetCardData(carddata);
         m_upgrade = upgrade;
         m_reward = reward;
     }
     public void SetInfo(NewCardDataBase carddata, int index, Rest rest)
     {
         Init();
-        SetCard(carddata);
+        SetCardData(carddata);
         m_index = index;
         m_rest = rest;
     }
     public void SetInfo(NewCardDataBase carddata)
     {
         Init();
-        SetCard(carddata);
+        SetCardData(carddata);
     }
-    private void SetCard(NewCardDataBase carddata)
+    private void SetCardData(NewCardDataBase carddata)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
@@ -154,7 +154,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             int index = int.Parse(m.Groups[1].Value);
             if (m_cardState == CardState.Play) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
-            else { Power = int.Parse(m.Groups[1].Value); }
+            else Power = int.Parse(m.Groups[1].Value);
             text = text.Replace(m.Value, Power.ToString());
         }
         matches = Regex.Matches(m_tooltip, "{%def([0-9]*)}");
@@ -162,7 +162,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             int index = int.Parse(m.Groups[1].Value);
             if (m_cardState == CardState.Play) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
-            else { Block = int.Parse(m.Groups[1].Value); }
+            else Block = int.Parse(m.Groups[1].Value);
             text = text.Replace(m.Value, Block.ToString());
         }
         SetText(text);

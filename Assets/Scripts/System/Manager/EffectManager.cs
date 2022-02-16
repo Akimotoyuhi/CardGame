@@ -102,15 +102,15 @@ public class EffectManager : MonoBehaviour
     /// </summary>
     /// <param name="duration">間隔</param>
     /// <param name="color">フェード後の色</param>
-    /// <param name="action">フェード後にする事があれば書く</param>
-    public void Fade(Color color, float duration, System.Action action = null)
+    /// <param name="onComplete">フェード後にする事があれば書く</param>
+    public void Fade(Color color, float duration, System.Action onComplete = null)
     {
         m_fadePanel.DOColor(color, duration)
                 .OnComplete(() =>
                 {
-                    if (action != null)
+                    if (onComplete != null)
                     {
-                        action();
+                        onComplete();
                     }
                 });
     }

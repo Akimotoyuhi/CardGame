@@ -107,7 +107,7 @@ public class EnemyManager : MonoBehaviour
             {
                 Destroy(m_enemyParent.GetChild(i).gameObject);
             }
-            Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(i => { BattleManager.Instance.BatlteEnd(); }).AddTo(this);
+            Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(i => { BattleManager.Instance.BattleEnd(); }).AddTo(this);
         }
     }
 }
