@@ -79,7 +79,7 @@ public class Player : CharactorBase, IDrop
             power = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, power);
             Debug.Log($"受けたダメージ{power}");
             int damage = m_block -= power;
-            if (m_block <= 0)
+            if (m_block < 0)
             {
                 m_block = 0;
             }
@@ -88,7 +88,7 @@ public class Player : CharactorBase, IDrop
                 EffectManager.Instance.DamageText(power.ToString(), Color.blue, Vector2.zero, transform);
             }
             damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
-            if (damage < 0) { }
+            if (damage <= 0) { }
             else
             {
                 m_life -= damage;
