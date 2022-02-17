@@ -165,8 +165,8 @@ public class CharactorBase : MonoBehaviour
         {
             GameObject obj = Instantiate(m_conditionUIPrefab);
             obj.transform.SetParent(m_conditionUIParent, false);
-            if (m_isEnemy) { obj.transform.localScale = new Vector2(-1, 1); }
-            else { obj.transform.localScale = Vector2.one; }
+            if (m_isEnemy) obj.transform.localScale = new Vector2(-1, 1);
+            else obj.transform.localScale = Vector2.one;
             obj.GetComponent<ConditionUI>().SetUI(item.GetConditionID(), item.Turn);
         }
     }

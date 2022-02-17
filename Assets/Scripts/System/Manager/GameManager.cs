@@ -30,13 +30,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform m_upgradeBeforeCardParent;
     /// <summary>アップグレードの確認画面の強化後のカードを表示する親</summary>
     [SerializeField] Transform m_upgradeAfterCardParent;
-    /// <summary>MapCanvas</summary>
     [SerializeField] Canvas m_mapCanvas;
-    /// <summary>Map</summary>
     [SerializeField] Map m_map;
-    /// <summary>EventCanvas</summary>
     [SerializeField] Canvas m_eventCanvas;
-    /// <summary>GameoverScreen</summary>
     [SerializeField] GameoverScreen m_gameoverScreen;
 
     public static GameManager Instance { get; private set; }
@@ -53,14 +49,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //if (DataManager.Instance.IsSaveData())
-        //{
-        //}
-        //else
-        //{
-        //    m_map.CreateMap();
-        //}
-        m_map.CreateMap();
+        if (DataManager.Instance.IsSaveData())
+        {
+        }
+        else
+        {
+            m_map.CreateMap();
+        }
+        //m_map.CreateMap();
         m_eventCanvas.enabled = false;
         m_cardDisplayCanvas.enabled = false;
         m_upgradeConfirmationPanel.gameObject.SetActive(false);

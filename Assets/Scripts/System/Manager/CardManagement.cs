@@ -19,7 +19,7 @@ public class CardManagement : MonoBehaviour
     }
     public void OnClick(bool flag)
     {
-        if (!m_canvas) { return; }
+        if (!m_canvas) return;
         m_canvas.enabled = flag;
     }
     public virtual void OnPointer(bool flag) { }

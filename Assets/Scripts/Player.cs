@@ -95,6 +95,7 @@ public class Player : CharactorBase, IDrop
                 EffectChecker(EventTiming.Damaged, ParametorType.Any);
                 if (m_life <= 0)
                 {
+                    m_life = 0;
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();
                     Debug.Log("がめおべｒ");

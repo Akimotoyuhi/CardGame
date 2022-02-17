@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    //memo
     //最初にセルを各セクター内にm_maxCell個作ってスタートからゴールまで一本ずつ道を作る
     //これをm_maxCell回繰り返す
 
@@ -16,12 +15,14 @@ public class Map : MonoBehaviour
     [SerializeField] int m_maxCell = 3;
     /// <summary>親セクター</summary>
     [SerializeField] Transform m_parentSector;
-    /// <summary>セクターｐレハブ</summary>
+    /// <summary>セクタープレハブ</summary>
     [SerializeField] GameObject m_sectorPrefab;
     /// <summary>セルプレハブ</summary>
     [SerializeField] GameObject m_cellPrefab;
     /// <summary>線描画用</summary>
     [SerializeField] GameObject m_linePrefab;
+    /// <summary>線となるオブジェクトの親</summary>
+    [SerializeField] Transform m_lineParent;
     /// <summary>休憩マスを生成する位置</summary>
     [SerializeField] int m_restIndex = 5;
     /// <summary>セクター保存用</summary>
@@ -33,6 +34,7 @@ public class Map : MonoBehaviour
     /// </summary>
     public void CreateMap()
     {
+        //DontDestroyOnLoad(gameObject);
         m_sectorLocation = new GameObject[m_sector];
         for (int i = 0; i < m_sector; i++)
         {
@@ -64,8 +66,10 @@ public class Map : MonoBehaviour
             m_sectorLocation[i] = sector;
             sector.transform.SetParent(m_parentSector, false);
         }
-        AddPath();
-        //AddPath();
+        for (int i = 0; i < m_maxCell; i++)
+        {
+            AddPath();
+        }
         DeleteCell();
     }
     /// <summary>
@@ -95,21 +99,22 @@ public class Map : MonoBehaviour
         if (sectorIndex + 1 >= m_sector) return;
         #region 未完成の線引く処理
         //線引く
-        //if (beforeCell)
-        //{
-        //    GameObject line = Instantiate(m_linePrefab);
-        //    line.transform.SetParent(c.transform, false);
-        //    float x = beforeCell.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
-        //    float y = beforeCell.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
-        //    float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-        //    line.transform.rotation = Quaternion.Euler(0, 0, angle);
-        //    float mX = x / 2;
-        //    float mY = y / 2;
-        //    line.GetRectTransform().anchoredPosition = new Vector2(mX, mY);
-        //    float distance = Vector2.Distance(beforeCell.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
-        //    RectTransform rect = line.GetRectTransform();
-        //    rect.sizeDelta = new Vector2(distance, rect.rect.height);
-        //}
+        if (beforeCell)
+        {
+            GameObject line = Instantiate(m_linePrefab);
+            line.transform.SetParent(c.transform, false);
+            //line.transform.SetParent(m_lineParent, false);
+            float x = beforeCell.GetChildPosition(CellChildType.Begin).x - c.GetChildPosition(CellChildType.End).x;
+            float y = beforeCell.GetChildPosition(CellChildType.Begin).y - c.GetChildPosition(CellChildType.End).y;
+            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+            line.transform.rotation = Quaternion.Euler(0, 0, angle);
+            float mX = x / 2;
+            float mY = y / 2;
+            line.GetRectTransform().anchoredPosition = new Vector2(mX, mY);
+            float distance = Vector2.Distance(beforeCell.GetChildPosition(CellChildType.Begin), c.GetChildPosition(CellChildType.End));
+            RectTransform rect = line.GetRectTransform();
+            rect.localScale = new Vector2(distance, rect.rect.height);
+        }
         #endregion
         //今のセルに次のインデックスを教えてあげる
         int r = Random.Range(0, m_sectorLocation[sectorIndex + 1].transform.childCount);

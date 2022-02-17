@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public enum CellState { Enemy, Rest, Boss }
 public enum CellChildType { Begin, End }
 
 public class Cell : MonoBehaviour
 {
+    /// <summary>点滅間隔</summary>
+    [SerializeField] float m_highLightsDuration;
+    [SerializeField] Image m_image;
     /// <summary>開始位置</summary>
     [SerializeField] Image m_startPos;
     /// <summary>終了位置</summary>
@@ -22,6 +26,8 @@ public class Cell : MonoBehaviour
     private List<int> m_nextCellList = new List<int>();
     /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
+    /// <summary>点滅アニメーション用</summary>
+    private Sequence m_sequence;
     /// <summary>生成済みフラグ とりあえず</summary>
     public bool CreatedFlag { get; set; } = false;
     public CellState SetCellState
@@ -55,6 +61,7 @@ public class Cell : MonoBehaviour
             Debug.Log("選択不可");
             return;
         }
+        DOTween.KillAll();
         //とりあえず
         GameManager.Instance.OnClick(m_cellState);
     }
@@ -83,22 +90,30 @@ public class Cell : MonoBehaviour
     {
         //bool flag = GetComponent<Button>().interactable;
         //if (!flag) return; //使用されていないセルの場合は設定しない
-        Image image = GetComponent<Image>();
+        //Image image = GetComponent<Image>();
         switch (m_cellState)
         {
             case CellState.Enemy:
-                image.color = m_enemyColor;
+                m_image.color = m_enemyColor;
                 break;
             case CellState.Rest:
-                image.color = m_restColor;
+                m_image.color = m_restColor;
                 break;
             case CellState.Boss:
-                image.color = m_bossColor;
+                m_image.color = m_bossColor;
                 break;
         }
         if (GameManager.Instance.Step != Step)
         {
-            image.color -= new Color(0, 0, 0, 0.5f);
+            m_image.color -= new Color(0, 0, 0, 0.5f);
+        }
+        else
+        {
+            Color color = m_image.color;
+            m_sequence = DOTween.Sequence();
+            m_sequence.Append(m_image.DOColor(Color.white, m_highLightsDuration))
+                .Append(m_image.DOColor(color, m_highLightsDuration))
+                .SetLoops(-1);
         }
     }
 }
