@@ -12,11 +12,17 @@ namespace Mastar
         /// <summary>現在の進行状況</summary>
         public int Step { get; set; } = 0;
         public int Act { get; set; } = 1;
+
         //プレイヤー情報関連
-        //private List<CardID> m_cards = new List<CardID>();
+        /// <summary>所持カード</summary>
         private List<int[]> m_cards = new List<int[]>();
+        /// <summary>プレイヤーの名前</summary>
         public string Name { get; private set; }
-        public Sprite Sprite { get; private set; }
+        /// <summary>通常時の画像</summary>
+        public Sprite IdleSprite { get; private set; }
+        /// <summary>ゲームオーバー時の画像</summary>
+        public Sprite GameoverSprite { get; private set; }
+        /// <summary>プレイヤーの現在体力</summary>
         public int CurrentLife
         {
             get => m_currentLife;
@@ -29,14 +35,19 @@ namespace Mastar
                 }
             }
         }
+        /// <summary>プレイヤーの最大体力</summary>
         public int MaxLife { get; set; }
-        public void SavePlayerState(string name, Sprite sprite, int maxLife, int currentLife)
+        /// <summary>
+        /// プレイヤーのステータスを保存しておく
+        /// </summary>
+        public void SavePlayerState(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife)
         {
             Name = name;
-            Sprite = sprite;
+            IdleSprite = idleSprite;
+            GameoverSprite = gameoverSprite;
             MaxLife = maxLife;
             CurrentLife = currentLife;
-            StartFlag = true;
+            IsPlayerData = true;
         }
         //public List<CardID> Cards { get => m_cards; set => m_cards = value; }
         public List<int[]> Cards { get => m_cards; }
@@ -54,16 +65,6 @@ namespace Mastar
         {
             m_cards[index][1] = 1;
         }
-        public bool StartFlag { get; private set; } = false;
-        /// <summary>
-        /// 初回の特別処理判定用<br/>
-        /// いらんかも
-        /// </summary>
-        /// <returns>初回呼び出しならfalse</returns>
-        public bool IsSaveData()
-        {
-            if (StartFlag) { return true; }
-            else return false;
-        }
+        public bool IsPlayerData { get; private set; } = false;
     }
 }

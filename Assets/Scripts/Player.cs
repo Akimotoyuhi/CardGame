@@ -8,7 +8,7 @@ public class Player : CharactorBase, IDrop
 {
     /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
     private int m_maxCost = 3;
-    [SerializeField] Sprite m_gameoverSprite;
+    private Sprite m_gameoverSprite;
     [SerializeField] int m_cost = default;
     [SerializeField] int m_drowNum = 5;
     /// <summary>最大コスト</summary>
@@ -17,6 +17,7 @@ public class Player : CharactorBase, IDrop
     public int CurrrentCost { get => m_cost; set => m_cost = value; }
     /// <summary>カードをドローする枚数</summary>
     public int DrowNum { get => m_drowNum; set => m_drowNum = value; }
+    public Sprite GameoverSprite => m_gameoverSprite;
     public Player Instance { get; private set; }
 
     private void Awake()
@@ -44,10 +45,11 @@ public class Player : CharactorBase, IDrop
         SetUI();
     }
 
-    public void SetParam(string name, Sprite image, int maxLife, int currentLife)
+    public void SetParam(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife)
     {
         m_name = name;
-        m_sprite = image;
+        m_sprite = idleSprite;
+        m_gameoverSprite = gameoverSprite;
         m_maxLife = maxLife;
         m_life = currentLife;
     }

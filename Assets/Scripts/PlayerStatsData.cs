@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerStatsData : ScriptableObject
 {
     [SerializeField] string m_name;
-    [SerializeField] Sprite m_image;
+    [SerializeField] Sprite m_idleSprite;
+    [SerializeField] Sprite m_gameoverSprite;
     [SerializeField] int m_maxHp;
     [SerializeField] List<CardData> m_cardData;
     [System.Serializable]
@@ -18,7 +19,8 @@ public class PlayerStatsData : ScriptableObject
         public int Upgrade => m_upgrade;
     }
     public string Name => m_name;
-    public Sprite Image => m_image;
+    public Sprite IdleSprite => m_idleSprite;
+    public Sprite GameoverSprite => m_gameoverSprite;
     public int HP => m_maxHp;
     public int GetCardData(int index) => (int)m_cardData[index].CardID;
     public int IsUpgrade(int index) => m_cardData[index].Upgrade;

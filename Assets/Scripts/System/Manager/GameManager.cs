@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (DataManager.Instance.IsSaveData())
+        if (DataManager.Instance.IsPlayerData)
         {
         }
         else
@@ -91,29 +91,17 @@ public class GameManager : MonoBehaviour
             EffectManager.Instance.Fade(Color.clear, 0.3f);
         });
     }
-    
-    public void DisplayCard(CardDisplayType cardDisplayType)
+
+    public void PlayerDataSave(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife, int[] cardsID = null, int[] isCardUpgrade = null)
     {
-        List<int[]> data;
-        switch (cardDisplayType)
+        DataManager.Instance.SavePlayerState(name, idleSprite, gameoverSprite, maxLife, currentLife);
+        if (cardsID == null) return;
+        for (int i = 0; i < cardsID.Length; i++)
         {
-            case CardDisplayType.View:
-                data = DataManager.Instance.Cards;
-                break;
-            case CardDisplayType.Upgrade:
-                data = new List<int[]>(DataManager.Instance.Cards.Where(i => i[1] == 0));
-                break;
-            default:
-                Debug.Log("無効なケース");
-                return;
-        }
-        for (int i = 0; i < data.Count; i++)
-        {
-            BlankCard card = Instantiate(CardPrefab);
-            card.transform.SetParent(m_cardDisplayParent, false);
-            card.SetInfo(m_cardData.CardDatas[data[i][0]]);
+            DataManager.Instance.AddCards(cardsID[i], isCardUpgrade[i]);
         }
     }
+    
     /// <summary>
     /// カード表示<br/>
     /// 自分のデッキ表示や強化画面で使われる
@@ -147,6 +135,7 @@ public class GameManager : MonoBehaviour
         }
         m_cardDisplayCanvas.enabled = true;
     }
+
     /// <summary>
     /// アップグレードの確認画面表示
     /// </summary>
@@ -162,6 +151,7 @@ public class GameManager : MonoBehaviour
         card.SetInfo(m_cardData.CardDatas[DataManager.Instance.Cards[index][0]].UpgradeData);
         card.CardState = CardState.None;
     }
+
     /// <summary>
     /// アップグレードの確認画面を消す
     /// </summary>
@@ -179,7 +169,7 @@ public class GameManager : MonoBehaviour
     {
         if (player)
         {
-            DataManager.Instance.SavePlayerState(player.Name, player.Image, player.MaxLife, player.CurrentLife);
+            PlayerDataSave(player.name, player.sprite, player.GameoverSprite, player.MaxLife, player.CurrentLife);
             Destroy(player.gameObject);
         }
         DataManager.Instance.Step++;

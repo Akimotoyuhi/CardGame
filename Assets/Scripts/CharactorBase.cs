@@ -58,7 +58,7 @@ public class CharactorBase : MonoBehaviour
             }
         }
     }
-    public Sprite Image => m_sprite;
+    public Sprite sprite => m_sprite;
     public bool IsDead { get => m_isDead; }
     protected enum GetCardType { Damage, Block }
     protected virtual void SetUp()

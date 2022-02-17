@@ -156,29 +156,23 @@ public class BattleManager : MonoBehaviour
     private void CreateField(EnemyAppearanceEria eria)
     {
         //デッキとプレイヤー構築
-        if (DataManager.Instance.IsSaveData())
+        if (!DataManager.Instance.IsPlayerData)
         {
-            //データが存在する場合は保存されているManagerから取ってくる
-            Debug.Log("保存されたデータが見つかった");
-            m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.Sprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
-            for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
-            {
-                int[] nms = DataManager.Instance.Cards[i];
-                CreateCard(nms[0], nms[1]);
-            }
-        }
-        else
-        {
-            //データが無い場合は初期値のデータから取ってくる
-            Debug.Log("初回起動");
-            m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
-            m_player.SetParam(m_playerStatsData.Name, m_playerStatsData.Image, m_playerStatsData.HP, m_playerStatsData.HP);
+            List<int> cards = new List<int>();
+            List<int> isUpgrade = new List<int>();
             for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
             {
-                CreateCard(m_playerStatsData.GetCardData(i), m_playerStatsData.IsUpgrade(i));
-                DataManager.Instance.AddCards(m_playerStatsData.GetCardData(i), m_playerStatsData.IsUpgrade(i));
+                cards.Add(m_playerStatsData.GetCardData(i));
+                isUpgrade.Add(m_playerStatsData.GetCardData(i));
             }
+            GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
+        }
+        m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
+        m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
+        for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
+        {
+            int[] nms = DataManager.Instance.Cards[i];
+            CreateCard(nms[0], nms[1]);
         }
         //敵グループ生成
         m_enemyManager = m_enemies.GetComponent<EnemyManager>();
