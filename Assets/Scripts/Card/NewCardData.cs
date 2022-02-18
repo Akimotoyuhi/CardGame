@@ -8,8 +8,8 @@ using System.Linq;
 [CreateAssetMenu(fileName = "Card Data")]
 public class NewCardData : ScriptableObject
 {
-    [SerializeField] int m_eliteProbability = 5;
-    [SerializeField] int m_rareProbability = 30;
+    [SerializeField, Range(0, 100)] int m_eliteProbability = 5;
+    [SerializeField, Range(0, 100)] int m_rareProbability = 30;
     [SerializeField] List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
     public List<NewCardDataBase> CardDatas => m_cardData;
     public void Setup()

@@ -140,14 +140,14 @@ public class EnemyDataBase
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class EnemyBaseState
 {
     public List<EnemyConditionalCommand3> m_conditionalCommand;
     public EnemyActionCommnad3 m_actionCommnad;
 }
 
-[System.Serializable]
+[Serializable]
 public class EnemyActionCommnad3
 {
     [Header("行動データ")]
@@ -178,19 +178,32 @@ public class EnemyActionCommnad3
     public List<ActionPlan> Plan => m_plan;
 }
 
-[System.Serializable]
+[Serializable]
 public class EnemyConditionalCommand3
 {
     [Header("条件データ")]
     [SerializeField, Tooltip("条件")] WhereType m_type;
     [SerializeField, Tooltip("評価する値")] int m_value;
-    [SerializeField, Tooltip("確率にするか否か")] bool m_isProbability;
+    [SerializeField, Tooltip("この行動をする確率"), Range(0, 100)] int m_probability;
+    [SerializeField, Tooltip("この行動を一度きりにするかどうか")] bool m_isOnlyOnce;
+    private bool m_isOnlyFlag;
+    public bool SetOnlyFlag
+    {
+        set
+        {
+            if (m_isOnlyOnce) //一度きりにするフラグがtrue出なければ書き換えはしない
+            {
+                m_isOnlyFlag = value;
+            }
+        }
+    }
     /// <summary>
     /// 条件式
     /// </summary>
     /// <returns>成功可否</returns>
     public bool Conditional(EnemyBase enemy, int turn)
     {
+        if (m_isOnlyFlag) return false;
         if (turn == 0)
         {
             if (m_type == WhereType.BattleBegin) { return true; }

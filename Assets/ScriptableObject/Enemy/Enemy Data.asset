@@ -22,7 +22,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 4
         m_value: 3
-        m_isProbability: 0
+        m_probability: 100
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 0
         m_block: 0
@@ -34,7 +35,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 0
         m_value: 1
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 3
         m_block: 0
@@ -50,7 +52,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 4
         m_value: 2
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 7
         m_block: 0
@@ -60,7 +63,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 0
         m_value: 1
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 5
         m_block: 0
@@ -76,7 +80,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 4
         m_value: 5
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 0
         m_block: 0
@@ -88,7 +93,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 4
         m_value: 2
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 10
         m_block: 0
@@ -98,7 +104,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 0
         m_value: 0
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 7
         m_block: 0
@@ -114,7 +121,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 0
         m_value: 0
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 0
         m_block: 0
@@ -130,7 +138,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 7
         m_value: 0
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 0
         m_block: 0
@@ -142,7 +151,8 @@ MonoBehaviour:
     - m_conditionalCommand:
       - m_type: 0
         m_value: 0
-        m_isProbability: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
         m_power: 5
         m_block: 0
