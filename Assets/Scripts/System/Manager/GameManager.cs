@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Map m_map;
     [SerializeField] Canvas m_eventCanvas;
     [SerializeField] GameoverScreen m_gameoverScreen;
+    private Subject<int> m_onSceneReload = new Subject<int>();
 
     public static GameManager Instance { get; private set; }
     public int Step => DataManager.Instance.Floor;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public BlankCard CardPrefab => m_cardPrefab;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
+    public IObservable<int> OnSceneReload => m_onSceneReload;
 
     private void Awake()
     {
@@ -56,14 +58,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (DataManager.Instance.IsPlayerData)
-        {
-        }
-        else
-        {
-            m_map.CreateMap();
-        }
-        //m_map.CreateMap();
+        //if (DataManager.Instance.IsPlayerData)
+        //{
+        //}
+        //else
+        //{
+        //    m_map.CreateMap();
+        //}
+        m_map.CreateMap();
         m_eventCanvas.enabled = false;
         m_cardDisplayCanvas.enabled = false;
         m_upgradeConfirmationPanel.gameObject.SetActive(false);
@@ -239,6 +241,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GUIUpdate()
     {
+        DG.Tweening.DOTween.KillAll();
         DataManager.Instance.Floor = m_step;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

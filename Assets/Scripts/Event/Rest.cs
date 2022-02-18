@@ -39,12 +39,19 @@ public class Rest : MonoBehaviour
         GameManager.Instance.DisplayCard(this);
     }
 
+    /// <summary>
+    /// アップグレード対象のカードのクリックを受け取る
+    /// </summary>
+    /// <param name="index"></param>
     public void OnUpgrade(int index)
     {
         m_upgradeCardIndex = index;
         GameManager.Instance.UpgradeConfirmationPanel(index);
     }
 
+    /// <summary>
+    /// アップグレードの確定用ボタンが押されたときに呼ばれる
+    /// </summary>
     public void UpgradeApplyButton()
     {
         GameManager.Instance.CardUpgrade(m_upgradeCardIndex);
