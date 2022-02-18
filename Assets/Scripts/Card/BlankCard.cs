@@ -123,6 +123,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         Init();
         SetCardData(carddata);
     }
+    /// <summary>
+    /// カードデータの反映
+    /// </summary>
+    /// <param name="carddata"></param>
     private void SetCardData(NewCardDataBase carddata)
     {
         m_viewName.text = carddata.Name;
@@ -137,6 +141,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
         m_useType = carddata.UseType;
+        m_isDiscarding = carddata.IsDiscarding;
         GetPlayerEffect();
         Setup();
     }
