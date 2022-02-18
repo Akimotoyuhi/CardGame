@@ -83,6 +83,7 @@ public class BattleManager : MonoBehaviour
     {
         Instance = this;
     }
+
     public void Setup()
     {
         m_cardData = GameManager.Instance.CardData;
@@ -91,7 +92,20 @@ public class BattleManager : MonoBehaviour
         SetCanvas();
         m_reward.RewardDisabled();
         m_reward.CanvasRectTransform = m_battleUICanvas.GetComponent<RectTransform>();
+        //プレイヤーデータの保存
+        List<int> cards = new List<int>();
+        List<int> isUpgrade = new List<int>();
+        for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
+        {
+            cards.Add(m_playerStatsData.GetCardData(i));
+            isUpgrade.Add(m_playerStatsData.GetCardData(i));
+        }
+        GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
     }
+
+    /// <summary>
+    /// バトル中フラグによってCanvasの表示を切り替える
+    /// </summary>
     public void SetCanvas()
     {
         if (m_isGame)
@@ -106,10 +120,14 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// コストテキストの更新
+    /// </summary>
     public void SetCostText(string maxCost, string currentCost)
     {
         m_costViewText.text = currentCost + "/" + maxCost;
     }
+
     /// <summary>
     /// 戦闘開始
     /// </summary>
@@ -124,6 +142,7 @@ public class BattleManager : MonoBehaviour
         //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
         //FirstTurn();
     }
+
     /// <summary>
     /// 戦闘終了
     /// </summary>
@@ -156,17 +175,17 @@ public class BattleManager : MonoBehaviour
     private void CreateField(EnemyAppearanceEria eria)
     {
         //デッキとプレイヤー構築
-        if (!DataManager.Instance.IsPlayerData)
-        {
-            List<int> cards = new List<int>();
-            List<int> isUpgrade = new List<int>();
-            for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
-            {
-                cards.Add(m_playerStatsData.GetCardData(i));
-                isUpgrade.Add(m_playerStatsData.GetCardData(i));
-            }
-            GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
-        }
+        //if (!DataManager.Instance.IsPlayerData)
+        //{
+        //    List<int> cards = new List<int>();
+        //    List<int> isUpgrade = new List<int>();
+        //    for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
+        //    {
+        //        cards.Add(m_playerStatsData.GetCardData(i));
+        //        isUpgrade.Add(m_playerStatsData.GetCardData(i));
+        //    }
+        //    GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
+        //}
         m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
         m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
@@ -179,6 +198,7 @@ public class BattleManager : MonoBehaviour
         m_enemyManager.CreateEnemies(eria);
         m_enemyManager.EnemyCount();
     }
+
     /// <summary>
     /// バトル中の流れ
     /// </summary>
@@ -271,17 +291,18 @@ public class BattleManager : MonoBehaviour
         card.transform.SetParent(m_deck.CardParent, false);
         card.GetPlayerEffect();
     }
-    public void ViewText(string str, RectTransform tra, ColorType colorType)
-    {
-        DamageText text = Instantiate(m_damageTextPrefab).GetComponent<DamageText>();
-        text.transform.SetParent(tra);
-        text.transform.position = tra.anchoredPosition;
-        text.Color(colorType);
-        text.ChangeText(str);
-        text.RandomMove();
-    }
+    //public void ViewText(string str, RectTransform tra, ColorType colorType)
+    //{
+    //    DamageText text = Instantiate(m_damageTextPrefab).GetComponent<DamageText>();
+    //    text.transform.SetParent(tra);
+    //    text.transform.position = tra.anchoredPosition;
+    //    text.Color(colorType);
+    //    text.ChangeText(str);
+    //    text.RandomMove();
+    //}
     /// <summary>
-    /// カード使用時に呼ばれて手札の全カードのテキストを更新させる関数
+    /// 手札の全カードのテキストを更新させる
+    /// <br/>カード使用時に呼ばれる
     /// </summary>
     public void CardCast()
     {

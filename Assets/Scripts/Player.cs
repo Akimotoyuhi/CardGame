@@ -95,6 +95,7 @@ public class Player : CharactorBase, IDrop
             {
                 m_life -= damage;
                 EffectChecker(EventTiming.Damaged, ParametorType.Any);
+                GameManager.Instance.SetGameInfoPanel(this);
                 if (m_life <= 0)
                 {
                     m_life = 0;

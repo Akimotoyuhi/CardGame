@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas m_cardDisplayCanvas;
     /// <summary>CardDisplayCanvasに表示させるカードの親</summary>
     [SerializeField] Transform m_cardDisplayParent;
+    [SerializeField] GameInfomation m_gameInfo;
     /// <summary>アップグレードの確認画面</summary>
     [SerializeField] Transform m_upgradeConfirmationPanel;
     /// <summary>アップグレードの確認画面の強化前のカードを表示する親</summary>
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameoverScreen m_gameoverScreen;
 
     public static GameManager Instance { get; private set; }
-    public int Step => DataManager.Instance.Step;
+    public int Step => DataManager.Instance.Floor;
     public NewCardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
@@ -60,10 +61,15 @@ public class GameManager : MonoBehaviour
         m_eventCanvas.enabled = false;
         m_cardDisplayCanvas.enabled = false;
         m_upgradeConfirmationPanel.gameObject.SetActive(false);
-        m_step = DataManager.Instance.Step;
+        m_step = DataManager.Instance.Floor;
         BattleManager.Instance.Setup();
+        SetGameInfoPanel();
     }
 
+    /// <summary>
+    /// マップのボタンのクリック後のデータを受け取る
+    /// </summary>
+    /// <param name="cellState"></param>
     public void OnClick(CellState cellState)
     {
         EffectManager.Instance.Fade(Color.black, 0.3f, () =>
@@ -72,14 +78,14 @@ public class GameManager : MonoBehaviour
             switch (cellState)
             {
                 case CellState.Enemy:
-                    if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy); }
-                    else { Debug.LogError("まだ作ってないねん"); }
+                    if (DataManager.Instance.Act == 1) BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy);
+                    else Debug.LogError("まだ作ってない");
                     BattleManager.Instance.IsGame = true;
                     BattleManager.Instance.SetCanvas();
                     break;
                 case CellState.Boss:
-                    if (DataManager.Instance.Act == 1) { BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss); }
-                    else { Debug.LogError("まだ作ってないねん"); }
+                    if (DataManager.Instance.Act == 1) BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss);
+                    else Debug.LogError("まだ作ってない");
                     BattleManager.Instance.IsGame = true;
                     BattleManager.Instance.SetCanvas();
                     break;
@@ -92,6 +98,24 @@ public class GameManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// ゲームの進行情報を表示しておくテキストの更新
+    /// </summary>
+    public void SetGameInfoPanel(Player player = null)
+    {
+        if (player)
+        {
+            m_gameInfo.SetText(DataManager.Instance.Name, player.MaxLife.ToString(), player.CurrentLife.ToString(), DataManager.Instance.Floor.ToString());
+        }
+        else
+        {
+            m_gameInfo.SetText(DataManager.Instance.Name, DataManager.Instance.MaxLife.ToString(), DataManager.Instance.CurrentLife.ToString(), DataManager.Instance.Floor.ToString());
+        }
+    }
+
+    /// <summary>
+    /// プレイヤーデータの保存
+    /// </summary>
     public void PlayerDataSave(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife, int[] cardsID = null, int[] isCardUpgrade = null)
     {
         DataManager.Instance.SavePlayerState(name, idleSprite, gameoverSprite, maxLife, currentLife);
@@ -169,11 +193,12 @@ public class GameManager : MonoBehaviour
     {
         if (player)
         {
-            PlayerDataSave(player.name, player.sprite, player.GameoverSprite, player.MaxLife, player.CurrentLife);
+            PlayerDataSave(player.Name, player.sprite, player.GameoverSprite, player.MaxLife, player.CurrentLife);
             Destroy(player.gameObject);
         }
-        DataManager.Instance.Step++;
-        m_step = DataManager.Instance.Step;
+        DataManager.Instance.Floor++;
+        SetGameInfoPanel();
+        m_step = DataManager.Instance.Floor;
         m_map.AllColorChange();
         BattleManager.Instance.IsGame = false;
         EffectManager.Instance.Fade(Color.black, 0.5f, () =>
@@ -208,7 +233,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GUIUpdate()
     {
-        DataManager.Instance.Step = m_step;
+        DataManager.Instance.Floor = m_step;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #endregion

@@ -10,7 +10,7 @@ namespace Mastar
         public static DataManager Instance => m_instance;
         private int m_currentLife = 0;
         /// <summary>現在の進行状況</summary>
-        public int Step { get; set; } = 0;
+        public int Floor { get; set; } = 0;
         public int Act { get; set; } = 1;
 
         //プレイヤー情報関連
