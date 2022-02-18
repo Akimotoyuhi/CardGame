@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 {
     /// <summary>ゲームの進行状況</summary>
     [SerializeField] int m_step;
+    [SerializeField] bool m_isSeed;
+    [SerializeField] int m_seed;
     /// <summary>カードデータ</summary>
     [Space]
     [SerializeField] NewCardData m_cardData;
@@ -46,6 +48,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if (m_isSeed)
+        {
+            UnityEngine.Random.InitState(m_seed);
+        }
     }
 
     void Start()
