@@ -33,16 +33,12 @@ public class Map : MonoBehaviour
     public class DetailSettings
     {
         /// <summary>休憩マスを生成する最小位置</summary>
-        [SerializeField] int m_restMinIndex;
+        [SerializeField, Tooltip("休憩マスを生成する最小位置")] int m_restMinIndex;
         /// <summary>休憩マスを生成する最大位置</summary>
-        [SerializeField] int m_restMaxIndex;
-        public int RestIndex
-        {
-            get
-            {
-                return Random.Range(m_restMinIndex, m_restMaxIndex + 1);
-            }
-        }
+        [SerializeField, Tooltip("休憩マスを生成する最大位置")] int m_restMaxIndex;
+        [SerializeField, Tooltip("絶対に休憩マスを生成する位置")] int m_restAbsolutelyIndex;
+        public int RestIndex => Random.Range(m_restMinIndex, m_restMaxIndex + 1);
+        public int RestAbsolutelyIndex => m_restAbsolutelyIndex;
     }
 
     /// <summary>
@@ -97,7 +93,7 @@ public class Map : MonoBehaviour
         //次のセクターから進むセルを一つ抽選する
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
         c.Step = sectorIndex;
-        if (sectorIndex == m_detailSettings.RestIndex)
+        if (sectorIndex == m_detailSettings.RestIndex || sectorIndex == m_detailSettings.RestAbsolutelyIndex)
         {
             c.SetCellState = CellState.Rest;
         }
