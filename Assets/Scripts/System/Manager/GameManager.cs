@@ -91,6 +91,12 @@ public class GameManager : MonoBehaviour
                     BattleManager.Instance.IsGame = true;
                     BattleManager.Instance.SetCanvas();
                     break;
+                case CellState.Elite:
+                    if (DataManager.Instance.Act == 1) BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Elite);
+                    else Debug.LogError("まだ作ってない");
+                    BattleManager.Instance.IsGame = true;
+                    BattleManager.Instance.SetCanvas();
+                    break;
                 case CellState.Boss:
                     if (DataManager.Instance.Act == 1) BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss);
                     else Debug.LogError("まだ作ってない");

@@ -113,6 +113,9 @@ MonoBehaviour:
   - m_sprite: {fileID: 21300000, guid: 4ad737ead4a216b42a4c13015fdd4162, type: 3}
     m_color: {r: 0.95214605, g: 1, b: 0, a: 1}
     m_tooltip: "\u9060\u8DDD\u96E2\u653B\u6483\n\u3053\u306E\u30A8\u30CD\u30DF\u30FC\u304C\u53D7\u3051\u308B\u30C0\u30E1\u30FC\u30B8\u306F25%\u8EFD\u6E1B\u3055\u308C\u308B"
+  - m_sprite: {fileID: 21300000, guid: b788e695e23fe864794999e8c5524090, type: 3}
+    m_color: {r: 0.9917425, g: 1, b: 0.82452834, a: 1}
+    m_tooltip: "\u91D1\u5C5E\u5316\n\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
 --- !u!114 &2313634686770434370
 MonoBehaviour:
   m_ObjectHideFlags: 0
