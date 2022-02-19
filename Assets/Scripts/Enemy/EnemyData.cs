@@ -54,6 +54,8 @@ public enum EnemyID
     Crownslayer,
     /// <summary>‰Î‰Š•r–\“k</summary>
     CocktailThrower,
+    /// <summary>d‘••º</summary>
+    HeavyDefender,
 }
 /// <summary>“GoŒ»êŠ</summary>
 public enum EnemyAppearanceEria

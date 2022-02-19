@@ -137,7 +137,7 @@ public class PlateArmor : Condition
         if (Turn < 0) return true;
         return false;
     }
-    public override ConditionID GetConditionID() => global::ConditionID.PlateArmor;
+    public override ConditionID GetConditionID() => ConditionID.PlateArmor;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Any;
 }
@@ -186,4 +186,26 @@ public class Ranger : Condition
     }
     public override ParametorType GetParametorType() => ParametorType.Attack;
     public override ConditionID GetConditionID() => ConditionID.Ranger;
+}
+public class Metallicize : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
+    {
+        if (Turn <= 0 || parametorType != ParametorType.Any) return new int[] { block };
+        switch (eventTiming)
+        {
+            case EventTiming.TurnEnd:
+                return new int[] { Turn };
+            default:
+                return new int[] { block };
+        }
+    }
+    public override bool IsRemove()
+    {
+        if (Turn < 0) return true;
+        return false;
+    }
+    public override ConditionID GetConditionID() => ConditionID.Metallicize;
+    public override int IsBuff() => 0;
+    public override ParametorType GetParametorType() => ParametorType.Any;
 }

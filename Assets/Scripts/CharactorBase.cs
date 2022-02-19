@@ -286,7 +286,9 @@ public class CharactorBase : MonoBehaviour
             {
                 case ConditionID.PlateArmor:
                     m_block += c.Effect(eventTiming, parametorType)[0];
-                    Debug.Log("ブロック値" + m_block);
+                    break;
+                case ConditionID.Metallicize:
+                    m_block += c.Effect(eventTiming, parametorType)[0];
                     break;
                 default:
                     c.Effect(eventTiming, parametorType);
