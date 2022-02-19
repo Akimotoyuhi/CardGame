@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public enum CellState { Enemy, Rest, Boss }
+public enum CellState { Enemy, Rest, Boss, Elite }
 public enum CellChildType { Begin, End }
 
 public class Cell : MonoBehaviour
@@ -23,6 +23,7 @@ public class Cell : MonoBehaviour
     [SerializeField] Color m_enemyColor = Color.red;
     [SerializeField] Color m_restColor = Color.blue;
     [SerializeField] Color m_bossColor = Color.red;
+    [SerializeField] Color m_eliteColor = Color.red;
     private List<int> m_nextCellList = new List<int>();
     /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
@@ -101,6 +102,9 @@ public class Cell : MonoBehaviour
                 break;
             case CellState.Boss:
                 m_image.color = m_bossColor;
+                break;
+            case CellState.Elite:
+                m_image.color = m_eliteColor;
                 break;
         }
         if (GameManager.Instance.Step != Step)

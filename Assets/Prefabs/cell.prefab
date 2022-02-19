@@ -155,6 +155,7 @@ MonoBehaviour:
   m_enemyColor: {r: 1, g: 0, b: 0, a: 1}
   m_restColor: {r: 0, g: 0, b: 1, a: 1}
   m_bossColor: {r: 0.7924528, g: 0.4482622, b: 0.2197935, a: 1}
+  m_eliteColor: {r: 0.7735849, g: 0, b: 0.42666662, a: 1}
   m_encountId: 0
   Step: 0
 --- !u!1 &2651333789805388172

@@ -98,7 +98,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
         {
             cards.Add(m_playerStatsData.GetCardData(i));
-            isUpgrade.Add(m_playerStatsData.GetCardData(i));
+            isUpgrade.Add(m_playerStatsData.IsUpgrade(i));
         }
         GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
     }
@@ -175,17 +175,17 @@ public class BattleManager : MonoBehaviour
     private void CreateField(EnemyAppearanceEria eria)
     {
         //デッキとプレイヤー構築
-        //if (!DataManager.Instance.IsPlayerData)
-        //{
-        //    List<int> cards = new List<int>();
-        //    List<int> isUpgrade = new List<int>();
-        //    for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
-        //    {
-        //        cards.Add(m_playerStatsData.GetCardData(i));
-        //        isUpgrade.Add(m_playerStatsData.GetCardData(i));
-        //    }
-        //    GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
-        //}
+        if (!DataManager.Instance.IsPlayerData)
+        {
+            List<int> cards = new List<int>();
+            List<int> isUpgrade = new List<int>();
+            for (int i = 0; i < m_playerStatsData.GetCardLength; i++)
+            {
+                cards.Add(m_playerStatsData.GetCardData(i));
+                isUpgrade.Add(m_playerStatsData.IsUpgrade(i));
+            }
+            GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
+        }
         m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
         m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)

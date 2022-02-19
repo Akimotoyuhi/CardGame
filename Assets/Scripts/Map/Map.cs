@@ -32,13 +32,14 @@ public class Map : MonoBehaviour
     [System.Serializable]
     public class DetailSettings
     {
-        /// <summary>休憩マスを生成する最小位置</summary>
         [SerializeField, Tooltip("休憩マスを生成する最小位置")] int m_restMinIndex;
-        /// <summary>休憩マスを生成する最大位置</summary>
         [SerializeField, Tooltip("休憩マスを生成する最大位置")] int m_restMaxIndex;
         [SerializeField, Tooltip("絶対に休憩マスを生成する位置")] int m_restAbsolutelyIndex;
-        public int RestIndex => Random.Range(m_restMinIndex, m_restMaxIndex + 1);
+        [SerializeField, Tooltip("エリートマスを生成する最小位置")] int m_eliteMinIndex;
+        [SerializeField, Tooltip("エリートマスを生成する最大位置")] int m_eliteMaxIndex;
+        public int RestIndex => Random.Range(m_restMinIndex, m_restMaxIndex);
         public int RestAbsolutelyIndex => m_restAbsolutelyIndex;
+        public int EliteIndex => Random.Range(m_eliteMinIndex, m_eliteMaxIndex);
     }
 
     /// <summary>
@@ -96,6 +97,10 @@ public class Map : MonoBehaviour
         if (sectorIndex == m_detailSettings.RestIndex || sectorIndex == m_detailSettings.RestAbsolutelyIndex)
         {
             c.SetCellState = CellState.Rest;
+        }
+        else if (sectorIndex == m_detailSettings.EliteIndex)
+        {
+            c.SetCellState = CellState.Elite;
         }
         else if (sectorIndex == m_sector - 1)
         {
