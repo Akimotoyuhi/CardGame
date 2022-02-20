@@ -59,6 +59,7 @@ public class EnemyBase : CharactorBase, IDrop
             //EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform, true);
             if (m_life <= 0)
             {
+                DOTween.KillAll();
                 m_life = 0;
                 m_isDead = true;
                 Dead();
@@ -107,6 +108,7 @@ public class EnemyBase : CharactorBase, IDrop
                 {
                     m_life = 0;
                     m_isDead = true;
+                    DOTween.KillAll();
                     Dead();
                 }
             }

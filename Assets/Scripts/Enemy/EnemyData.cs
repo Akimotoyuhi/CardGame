@@ -132,7 +132,11 @@ public class EnemyDataBase
                         }
                         flag = true;
                     }
-                    if (flag) return m_enemyBaseState[i].m_actionCommnad;
+                    if (flag)
+                    {
+                        //m_enemyBaseState[i].m_conditionalCommand
+                        return m_enemyBaseState[i].m_actionCommnad;
+                    }
                 }
                 return null;
             default:
