@@ -37,39 +37,28 @@ public class EnemyBase : CharactorBase, IDrop
         if (useType != UseType.ToEnemy) return;
         onCast();
         //card.OnCast();
-        Damage(power, block, conditions);
-    }
-
-    public void GetDamage(BlankCard card)
-    {
-        Damage(card.Power, card.Block, card.Conditions);
-    }
-
-    public override void Damage(int damage, int block, List<Condition> conditions)
-    {
-        AddEffect(conditions);
-        int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
-        dmg = m_block -= dmg;
-        if (m_block < 0) { m_block = 0; }
-        dmg *= -1;
-        if (dmg < 0) { }
-        else
+        Damage(power, block, conditions, false, () =>
         {
-            m_life -= dmg;
-            //EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform, true);
-            if (m_life <= 0)
-            {
-                DOTween.KillAll();
-                m_life = 0;
-                m_isDead = true;
-                Dead();
-            }
-            else
-            {
-                EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform, true);
-            }
-        }
-        SetUI();
+            //DOTween.KillAll();
+            m_isDead = true;
+            Dead();
+        });
+    }
+
+    /// <summary>
+    /// プレイヤー以外からのダメージ受け付け用
+    /// </summary>
+    /// <param name="damagem"></param>
+    /// <param name="block"></param>
+    /// <param name="conditions"></param>
+    public void GetDamage(int damage, int block, List<Condition> conditions)
+    {
+        Damage(damage, block, conditions, false, () =>
+        {
+            //DOTween.KillAll();
+            m_isDead = true;
+            Dead();
+        });
     }
 
     /// <summary>
@@ -87,42 +76,18 @@ public class EnemyBase : CharactorBase, IDrop
         EnemyActionCommnad3 command = m_enemyDataBase.CommandSelect(this, turn);
         if (command.Target == TargetType.ToEnemy)
         {
-            EffectChecker(EventTiming.Damaged, ParametorType.Any);
-            m_block += command.Block;
-            int damage = m_block - command.Power;
-            if (m_block <= 0)
+            Damage(command.Power, command.Block, command.Conditions, false, () =>
             {
-                m_block = 0;
-            }
-            else
-            {
-                EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform, true);
-            }
-            damage *= -1;
-            if (damage <= 0) { }
-            else
-            {
-                m_life -= damage;
-                //EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform, true);
-                if (m_life <= 0)
-                {
-                    m_life = 0;
-                    m_isDead = true;
-                    DOTween.KillAll();
-                    Dead();
-                }
-            }
-            AddEffect(command.Conditions);
-            SetUI();
+                //DOTween.KillAll();
+                m_isDead = true;
+                Dead();
+            });
         }
         else
         {
-            int atk = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, command.Power);
-            int blk = command.Block;
-            List<Condition> conditions = command.Conditions;
-            m_player.GetAcceptDamage(atk, blk, conditions);
+            m_player.GetAcceptDamage(command);
         }
-        AttackAnim(false);
+        //AttackAnim(false);
     }
 
     /// <summary>

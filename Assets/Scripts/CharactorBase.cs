@@ -205,28 +205,64 @@ public class CharactorBase : MonoBehaviour
         float t = num * (1 - parsent);
         return (int)t;
     }
-    //Vector2 defpos = default;
-    protected void AttackAnim(bool isRightMove)
-    {
-        //float moveDura = 50;
-        //if (!isRightMove)
-        //{
-        //    moveDura *= -1;
-        //}
-        //if (!m_isAnim)
-        //{
-        //    m_isAnim = true;
-        //    defpos = transform.position;
-        //    Sequence s = DOTween.Sequence();
-        //    s.Append(transform.DOMoveX(defpos.y + moveDura, 0.1f))
-        //        .Append(transform.DOMoveX(defpos.y, 0.1f))
-        //        .OnComplete(() => m_isAnim = false);
-        //}
-    }
 
-    public virtual void Damage(int damage, int block, List<Condition> conditions)
-    {
+    //protected void AttackAnim(bool isRightMove)
+    //{
+    //float moveDura = 50;
+    //if (!isRightMove)
+    //{
+    //    moveDura *= -1;
+    //}
+    //if (!m_isAnim)
+    //{
+    //    m_isAnim = true;
+    //    defpos = transform.position;
+    //    Sequence s = DOTween.Sequence();
+    //    s.Append(transform.DOMoveX(defpos.y + moveDura, 0.1f))
+    //        .Append(transform.DOMoveX(defpos.y, 0.1f))
+    //        .OnComplete(() => m_isAnim = false);
+    //}
+    //}
 
+    /// <summary>
+    /// 被ダメージ処理
+    /// </summary>
+    public void Damage(int damage, int block, List<Condition> conditions, bool isPlayer, Action dead)
+    {
+        AddEffect(conditions);
+        if (damage > 0)
+        {
+            int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
+            dmg = m_block -= dmg;
+            if (m_block < 0) { m_block = 0; }
+            else
+            {
+                if (isPlayer) EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);
+                else EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform, true);
+            }
+            dmg *= -1; //ブロック値計算の後ダメージの符号が反転してうざいので戻す
+            if (dmg <= 0) { }
+            else
+            {
+                m_life -= dmg;
+                EffectChecker(EventTiming.Damaged, ParametorType.Any);
+                if (isPlayer) GameManager.Instance.SetGameInfoPanel(this);
+                if (m_life <= 0)
+                {
+                    //DOTween.KillAll();
+                    m_life = 0;
+                    //m_isDead = true;
+                    dead();
+                }
+                else
+                {
+                    if (isPlayer) EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform);
+                    else EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform, true);
+                }
+            }
+        }
+        m_block += block;
+        SetUI();
     }
 
     public void SetParam(string name, Sprite image, int hp)

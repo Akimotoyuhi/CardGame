@@ -58,79 +58,34 @@ public class Player : CharactorBase, IDrop
     /// 被ダメージ処理
     /// </summary>
     /// <param name="damage">被ダメージ</param>
-    //public void GetAcceptDamage(EnemyActionCommnad3 enemy)
-    //{
-    //    AddEffect(enemy.Conditions);
-    //    int damage = CalculationAcceptDamage(enemy.Power);
-    //    Debug.Log($"受けたダメージ{damage}");
-    //    damage = m_block -= damage;
-    //    if (m_block < 0) { m_block = 0; }
-    //    damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
-    //    if (damage < 0) { }
-    //    else
-    //    {
-    //        m_life -= damage;
-    //    }
-    //    SetUI();
-    //}
-    public void GetAcceptDamage(int power, int blk, List<Condition> conditions)
+    public void GetAcceptDamage(EnemyActionCommnad3 enemy)
     {
-        AddEffect(conditions);
-        if (power > 0)
+        Damage(enemy.Power, enemy.Block, enemy.Conditions, true, () =>
         {
-            power = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, power);
-            Debug.Log($"受けたダメージ{power}");
-            int damage = m_block -= power;
-            if (m_block < 0)
-            {
-                m_block = 0;
-            }
-            else
-            {
-                EffectManager.Instance.DamageText(power.ToString(), Color.blue, Vector2.zero, transform);
-            }
-            damage *= -1; //ブロック値計算の後ダメージの符号が反転するので戻す
-            if (damage <= 0) { }
-            else
-            {
-                m_life -= damage;
-                EffectChecker(EventTiming.Damaged, ParametorType.Any);
-                GameManager.Instance.SetGameInfoPanel(this);
-                if (m_life <= 0)
-                {
-                    m_life = 0;
-                    m_image.sprite = m_gameoverSprite;
-                    GameManager.Instance.Gameover();
-                    Debug.Log("がめおべｒ");
-                }
-                else
-                {
-                    EffectManager.Instance.DamageText(damage.ToString(), Color.red, Vector2.zero, transform);
-                }
-            }
-        }
-        SetUI();
+            m_image.sprite = m_gameoverSprite;
+            GameManager.Instance.Gameover();
+        });
     }
 
     public void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast)
     {
         if (useType != UseType.ToPlayer) return;
-        Damage(power, block, conditions);
-        //card.OnCast();
-        //AddEffect(card.Conditions);
-        //m_block += card.Block;
-        //SetUI();
+        Damage(power, block, conditions, true, () =>
+        {
+            m_image.sprite = m_gameoverSprite;
+            GameManager.Instance.Gameover();
+        });
         onCast();
     }
-    public override void Damage(int damage, int block, List<Condition> conditions)
-    {
-        AddEffect(conditions);
-        m_block += block;
-        SetUI();
-    }
+    //public override void Damage(int damage, int block, List<Condition> conditions)
+    //{
+    //    //AddEffect(conditions);
+    //    //m_block += block;
+    //    //SetUI();
+    //}
 
     public void PlayerAnim()
     {
-        AttackAnim(true);
+        //AttackAnim(true);
     }
 }

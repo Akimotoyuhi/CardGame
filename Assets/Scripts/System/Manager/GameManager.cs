@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// ゲームの進行情報を表示しておくテキストの更新
     /// </summary>
-    public void SetGameInfoPanel(Player player = null)
+    public void SetGameInfoPanel(CharactorBase player = null)
     {
         if (player)
         {
