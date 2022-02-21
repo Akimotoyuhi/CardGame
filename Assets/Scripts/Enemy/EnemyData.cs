@@ -115,7 +115,7 @@ public class EnemyDataBase
     public enum NodeType { Selector, Sequence }
     private NodeType m_NodeType = NodeType.Sequence;
     public List<EnemyBaseState> m_enemyBaseState;
-    public EnemyActionCommnad3 CommandSelect(EnemyBase enemy, int turn)
+    public List<EnemyActionCommnad3> CommandSelect(EnemyBase enemy, int turn)
     {
         switch (m_NodeType)
         {
@@ -150,7 +150,7 @@ public class EnemyDataBase
 public class EnemyBaseState
 {
     public List<EnemyConditionalCommand3> m_conditionalCommand;
-    public EnemyActionCommnad3 m_actionCommnad;
+    public List<EnemyActionCommnad3> m_actionCommnad;
 }
 
 [Serializable]

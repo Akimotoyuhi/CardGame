@@ -15,7 +15,7 @@ MonoBehaviour:
   m_enemyDataBases:
   - m_name: "\u30AA\u30EA\u30B8\u30E0\u30B7"
     m_id: 0
-    m_life: 16
+    m_life: 15
     m_image: {fileID: 21300000, guid: 24a793a574247fe4ea1d2f84eeaf7db8, type: 3}
     m_enemyAppearanceEria: 0
     m_enemyBaseState:
@@ -25,7 +25,7 @@ MonoBehaviour:
         m_probability: 100
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 0
+      - m_power: 0
         m_block: 0
         m_condition:
         - m_conditionID: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 3
+      - m_power: 3
         m_block: 0
         m_condition: []
         m_target: 0
@@ -51,11 +51,22 @@ MonoBehaviour:
     m_enemyBaseState:
     - m_conditionalCommand:
       - m_type: 4
+        m_value: 3
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+      - m_power: 3
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 00000000
+    - m_conditionalCommand:
+      - m_type: 4
         m_value: 2
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 7
+      - m_power: 7
         m_block: 0
         m_condition: []
         m_target: 0
@@ -66,7 +77,7 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 5
+      - m_power: 5
         m_block: 0
         m_condition: []
         m_target: 0
@@ -83,11 +94,11 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 0
+      - m_power: 0
         m_block: 0
         m_condition:
-        - m_conditionID: 2
-          m_turn: 1
+        - m_conditionID: 0
+          m_turn: 0
         m_target: 1
         m_plan: 02000000
     - m_conditionalCommand:
@@ -96,7 +107,7 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 10
+      - m_power: 10
         m_block: 0
         m_condition: []
         m_target: 0
@@ -107,14 +118,14 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 7
+      - m_power: 7
         m_block: 0
         m_condition: []
         m_target: 0
         m_plan: 00000000
   - m_name: "\u30AF\u30E9\u30A6\u30F3\u30B9\u30EC\u30A4\u30E4\u30FC"
     m_id: 3
-    m_life: 120
+    m_life: 100
     m_image: {fileID: 21300000, guid: be60df9d182eb3b4eb6e3676710d6456, type: 3}
     m_enemyAppearanceEria: 2
     m_enemyBaseState:
@@ -124,11 +135,11 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 0
+      - m_power: 10
         m_block: 0
         m_condition: []
         m_target: 0
-        m_plan: 04000000
+        m_plan: 00000000
   - m_name: "\u706B\u708E\u74F6\u66B4\u5F92"
     m_id: 4
     m_life: 20
@@ -141,24 +152,62 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 0
+      - m_power: 0
         m_block: 0
-        m_condition:
-        - m_conditionID: 6
-          m_turn: 1
-        m_target: 1
-        m_plan: 02000000
+        m_condition: []
+        m_target: 0
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
     - m_conditionalCommand:
       - m_type: 0
         m_value: 0
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 5
+      - m_power: 0
         m_block: 0
         m_condition: []
         m_target: 0
-        m_plan: 00000000
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
+      - m_power: 0
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 
   - m_name: "\u91CD\u88C5\u5175"
     m_id: 5
     m_life: 50
@@ -175,18 +224,23 @@ MonoBehaviour:
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 0
-        m_block: 8
+      - m_power: 0
+        m_block: 5
         m_condition: []
         m_target: 1
         m_plan: 01000000
+      - m_power: 5
+        m_block: 0
+        m_condition: []
+        m_target: 0
+        m_plan: 00000000
     - m_conditionalCommand:
       - m_type: 0
         m_value: 0
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
-        m_power: 8
+      - m_power: 10
         m_block: 0
         m_condition: []
         m_target: 0

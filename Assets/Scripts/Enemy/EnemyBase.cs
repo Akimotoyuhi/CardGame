@@ -73,20 +73,24 @@ public class EnemyBase : CharactorBase, IDrop
             Debug.Log("‰½‚à‚µ‚È‚¢");
             return;
         }
-        EnemyActionCommnad3 command = m_enemyDataBase.CommandSelect(this, turn);
-        if (command.Target == TargetType.ToEnemy)
+        List<EnemyActionCommnad3> commands = m_enemyDataBase.CommandSelect(this, turn);
+        foreach (var item in commands)
         {
-            Damage(command.Power, command.Block, command.Conditions, false, () =>
+            if (item.Target == TargetType.ToEnemy)
             {
-                //DOTween.KillAll();
-                m_isDead = true;
-                Dead();
-            });
+                Damage(item.Power, item.Block, item.Conditions, false, () =>
+                {
+                    //DOTween.KillAll();
+                    m_isDead = true;
+                    Dead();
+                });
+            }
+            else
+            {
+                m_player.GetAcceptDamage(item);
+            }
         }
-        else
-        {
-            m_player.GetAcceptDamage(command);
-        }
+        
         //AttackAnim(false);
     }
 
@@ -101,13 +105,16 @@ public class EnemyBase : CharactorBase, IDrop
             Destroy(m_planImageParent.GetChild(i).gameObject);
         }
         if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
-        for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Plan.Count; i++)
+        for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Count; i++)
         {
-            GameObject g = Instantiate(m_planImage);
-            g.transform.SetParent(m_planImageParent, false);
-            g.transform.localScale = new Vector2(-1, 1);
-            g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn).Plan[i],
-                ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn).Power));
+            for (int n = 0; n < m_enemyDataBase.CommandSelect(this, turn)[i].Plan.Count; n++)
+            {
+                GameObject g = Instantiate(m_planImage);
+                g.transform.SetParent(m_planImageParent, false);
+                g.transform.localScale = new Vector2(-1, 1);
+                g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn)[i].Plan[n],
+                    ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn)[i].Power));
+            }
         }
     }
 
