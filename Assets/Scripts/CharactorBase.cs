@@ -194,37 +194,6 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
-    /// n%引を返す
-    /// </summary>
-    /// <param name="num">割りたい数</param>
-    /// <param name="parsent">何%引きか</param>
-    /// <returns></returns>
-    protected int Parsent(int num, float parsent)
-    {
-        parsent /= 100;
-        float t = num * (1 - parsent);
-        return (int)t;
-    }
-
-    //protected void AttackAnim(bool isRightMove)
-    //{
-    //float moveDura = 50;
-    //if (!isRightMove)
-    //{
-    //    moveDura *= -1;
-    //}
-    //if (!m_isAnim)
-    //{
-    //    m_isAnim = true;
-    //    defpos = transform.position;
-    //    Sequence s = DOTween.Sequence();
-    //    s.Append(transform.DOMoveX(defpos.y + moveDura, 0.1f))
-    //        .Append(transform.DOMoveX(defpos.y, 0.1f))
-    //        .OnComplete(() => m_isAnim = false);
-    //}
-    //}
-
-    /// <summary>
     /// 被ダメージ処理
     /// </summary>
     public void Damage(int damage, int block, List<Condition> conditions, bool isPlayer, Action dead)
@@ -232,6 +201,7 @@ public class CharactorBase : MonoBehaviour
         AddEffect(conditions);
         if (damage > 0)
         {
+            EffectManager.Instance.ShowParticle(ParticleID.a, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
             int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
             dmg = m_block -= dmg;
             if (m_block < 0) { m_block = 0; }

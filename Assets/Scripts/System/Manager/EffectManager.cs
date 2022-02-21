@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+public enum ParticleID
+{
+    a,
+}
+
 /// <summary>
 /// エフェクトやってくれるクラス<br/>
 /// 演出用のテキストやパーティクルを表示したりフェードの管理をしたりする
@@ -11,10 +16,15 @@ using DG.Tweening;
 public class EffectManager : MonoBehaviour
 {
     [SerializeField] Image m_fadePanel;
-    [SerializeField] GameObject m_overfrowTextPrefab;
-    [SerializeField] GameObject m_textPrefab;
+    [SerializeField] Text m_overfrowTextPrefab;
+    [SerializeField] Text m_textPrefab;
     [SerializeField] GameObject m_battleUI;
+    [SerializeField] GameObject[] m_particlePrefab;
+    /// <summary>パーティクルを止めてから削除するまでの時間</summary>
+    [SerializeField] float m_particleDestroyDuration;
     private Text m_text;
+    private Sequence m_particleSequence;
+
     public static EffectManager Instance { get; private set; }
 
     private void Awake()
@@ -27,13 +37,13 @@ public class EffectManager : MonoBehaviour
         //Fade(Color.clear, 0.1f);
     }
 
-    public GameObject ViewText(string text, Vector2 position, Transform parent)
+    public Text ViewText(string text, Vector2 position, Transform parent)
     {
-        GameObject obj = Instantiate(m_textPrefab);
-        obj.transform.SetParent(parent, false);
-        obj.GetText(text);
-        obj.GetRectTransform().anchoredPosition = position;
-        return obj;
+        Text txt = Instantiate(m_textPrefab);
+        txt.transform.SetParent(parent, false);
+        //txt.GetText(text);
+        txt.gameObject.GetRectTransform().anchoredPosition = position;
+        return txt;
     }
     /// <summary>
     /// 戦闘時の説明用のテキストに表示する
@@ -68,7 +78,7 @@ public class EffectManager : MonoBehaviour
     {
         m_text.text = text;
         m_text.color = color;
-        GameObject obj = Instantiate(m_overfrowTextPrefab);
+        GameObject obj = Instantiate(m_overfrowTextPrefab).gameObject;
         obj.transform.SetParent(parent, false);
         RectTransform rt = obj.GetRectTransform();
         rt.anchoredPosition = position;
@@ -84,10 +94,10 @@ public class EffectManager : MonoBehaviour
     /// <param name="parent">生成するテキストの親</param>
     public void DamageText(string text, Color color, Vector2 position, Transform parent, bool isScaleChange = false)
     {
-        GameObject obj = Instantiate(m_overfrowTextPrefab);
-        Text viewText = obj.GetText(text, Color.clear);
-        obj.transform.SetParent(parent, false);
-        RectTransform rt = obj.GetRectTransform();
+        Text txt = Instantiate(m_overfrowTextPrefab);
+        Text viewText = txt.SetText(text, Color.clear);
+        txt.transform.SetParent(parent, false);
+        RectTransform rt = txt.gameObject.GetRectTransform();
         rt.localScale = isScaleChange ? new Vector2(-1, 1) : Vector2.one;
         rt.anchoredPosition = position;
         float endValueX = Random.Range(-100, 100);
@@ -95,7 +105,7 @@ public class EffectManager : MonoBehaviour
         DOTween.Sequence().Append(rt.DOAnchorPos(new Vector2(endValueX, endValueY), 1f))
             .Join(viewText.DOColor(color, 0.1f))
             .Append(viewText.DOColor(Color.clear, 1f))
-            .OnComplete(() => Destroy(obj));
+            .OnComplete(() => Destroy(txt));
     }
     /// <summary>
     /// フェード
@@ -113,5 +123,29 @@ public class EffectManager : MonoBehaviour
                         onComplete();
                     }
                 });
+    }
+
+    /// <summary>
+    /// パーティクルを出す
+    /// </summary>
+    /// <param name="particleID">出すパーティクルのID</param>
+    /// <param name="stopDuration">止めるまでの時間</param>
+    public void ShowParticle(ParticleID particleID, float stopDuration, Vector3 position)
+    {
+        GameObject obj = Instantiate(m_particlePrefab[(int)particleID], position, Quaternion.identity);
+        List<ParticleSystem> pss = new List<ParticleSystem>();
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            pss.Add(obj.transform.GetChild(i).GetComponent<ParticleSystem>());
+        }
+        DOVirtual.DelayedCall(stopDuration, () =>
+        {
+            foreach (var p in pss)
+            {
+                if (!p) continue;
+                p.Stop();
+            }
+            DOVirtual.DelayedCall(m_particleDestroyDuration, () => Destroy(obj.gameObject));
+        });
     }
 }
