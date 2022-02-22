@@ -174,16 +174,26 @@ public class GameManager : MonoBehaviour
         m_cardDisplayCanvas.enabled = true;
     }
 
+    public void CrearCardDisplayPanel()
+    {
+        for (int i = 0; i < m_cardDisplayParent.childCount; i++)
+        {
+            Destroy(m_cardDisplayParent.GetChild(i).gameObject);
+        }
+    }
+
     /// <summary>
     /// アップグレードの確認画面表示
     /// </summary>
     public void UpgradeConfirmationPanel(int index)
     {
         m_upgradeConfirmationPanel.gameObject.SetActive(true);
+        //アップグレード前のカード表示
         BlankCard card = Instantiate(CardPrefab);
         card.transform.SetParent(m_upgradeBeforeCardParent, false);
         card.SetInfo(m_cardData.CardDatas[DataManager.Instance.Cards[index][0]]);
         card.CardState = CardState.None;
+        //アップグレード後のカード表示
         card = Instantiate(CardPrefab);
         card.transform.SetParent(m_upgradeAfterCardParent, false);
         card.SetInfo(m_cardData.CardDatas[DataManager.Instance.Cards[index][0]].UpgradeData);
@@ -195,8 +205,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void UpgradeConfirmationPanelDisabled()
     {
+        Debug.Log(DataManager.Instance.Cards.Count);
         Destroy(m_upgradeBeforeCardParent.GetChild(0).gameObject);
         Destroy(m_upgradeAfterCardParent.GetChild(0).gameObject);
+        CrearCardDisplayPanel();
         m_upgradeConfirmationPanel.gameObject.SetActive(false);
     }
 
