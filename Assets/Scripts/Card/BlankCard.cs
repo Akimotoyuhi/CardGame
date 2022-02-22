@@ -94,7 +94,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_reward = null;
         m_player = null;
     }
-    public void SetInfo(NewCardDataBase carddata, RectTransform canvasRect, Player player, Camera camera, Discard discard)
+    public void SetInfo(CardDataBase carddata, RectTransform canvasRect, Player player, Camera camera, Discard discard)
     {
         Init();
         SetCardData(carddata);
@@ -104,21 +104,21 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_discard = discard;
         Setup();
     }
-    public void SetInfo(NewCardDataBase carddata, int upgrade, Reward reward)
+    public void SetInfo(CardDataBase carddata, int upgrade, Reward reward)
     {
         Init();
         SetCardData(carddata);
         m_upgrade = upgrade;
         m_reward = reward;
     }
-    public void SetInfo(NewCardDataBase carddata, int index, Rest rest)
+    public void SetInfo(CardDataBase carddata, int index, Rest rest)
     {
         Init();
         SetCardData(carddata);
         m_index = index;
         m_rest = rest;
     }
-    public void SetInfo(NewCardDataBase carddata)
+    public void SetInfo(CardDataBase carddata)
     {
         Init();
         SetCardData(carddata);
@@ -127,7 +127,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// カードデータの反映
     /// </summary>
     /// <param name="carddata"></param>
-    private void SetCardData(NewCardDataBase carddata)
+    private void SetCardData(CardDataBase carddata)
     {
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;

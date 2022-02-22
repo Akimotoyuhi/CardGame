@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int m_seed;
     /// <summary>カードデータ</summary>
     [Space]
-    [SerializeField] NewCardData m_cardData;
+    [SerializeField] CardData m_cardData;
     /// <summary>カードのプレハブ</summary>
     [SerializeField] BlankCard m_cardPrefab;
     /// <summary>Relicの画像の親</summary>
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
     public int Step => DataManager.Instance.Floor;
-    public NewCardData CardData => m_cardData;
+    public CardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);

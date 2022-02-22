@@ -57,7 +57,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>カメラ</summary>
     [SerializeField] Camera m_camera;
     /// <summary>カードデータ</summary>
-    private NewCardData m_cardData;
+    private CardData m_cardData;
     /// <summary>カードのプレハブ</summary>
     private BlankCard m_cardPrefab;
     /// <summary>ボタンの受付</summary>
@@ -283,7 +283,7 @@ public class BattleManager : MonoBehaviour
     {
         //GameObject obj = Instantiate(m_cardPrefab);
         BlankCard card = Instantiate(m_cardPrefab);
-        NewCardDataBase cardData;
+        CardDataBase cardData;
         if (isUpgrade == 1) { cardData = m_cardData.CardDatas[id].UpgradeData; }
         else { cardData = m_cardData.CardDatas[id]; }
         card.SetInfo(cardData, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera, m_discard);

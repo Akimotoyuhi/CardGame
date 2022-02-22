@@ -6,12 +6,12 @@ using System;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "Card Data")]
-public class NewCardData : ScriptableObject
+public class CardData : ScriptableObject
 {
     [SerializeField, Range(0, 100)] int m_eliteProbability = 5;
     [SerializeField, Range(0, 100)] int m_rareProbability = 30;
-    [SerializeField] List<NewCardDataBase> m_cardData = new List<NewCardDataBase>();
-    public List<NewCardDataBase> CardDatas => m_cardData;
+    [SerializeField] List<CardDataBase> m_cardData = new List<CardDataBase>();
+    public List<CardDataBase> CardDatas => m_cardData;
     public void Setup()
     {
         for (int i = 0; i < m_cardData.Count; i++)
@@ -23,7 +23,7 @@ public class NewCardData : ScriptableObject
     /// ランダムで抽選したレア度の中からランダムで１つカードを抽選する
     /// </summary>
     /// <returns>カードデータ</returns>
-    public NewCardDataBase GetCardRarityRandom()
+    public CardDataBase GetCardRarityRandom()
     {
         Rarity rarity;
         int r = UnityEngine.Random.Range(0, 100);
@@ -46,7 +46,7 @@ public class NewCardData : ScriptableObject
     /// </summary>
     /// <param name="rarity">抽選するレア度</param>
     /// <returns>カードデータ</returns>
-    public NewCardDataBase GetCardRarityRandom(Rarity rarity)
+    public CardDataBase GetCardRarityRandom(Rarity rarity)
     {
         var list = m_cardData.Where(card => card.Rarity == rarity).ToList();
         int r = UnityEngine.Random.Range(0, list.Count);
@@ -102,7 +102,7 @@ public enum UseType
     ToAll,
 }
 [Serializable]
-public class NewCardDataBase
+public class CardDataBase
 {
     [SerializeField] string m_name;
     [SerializeField] string m_cost;
@@ -117,7 +117,7 @@ public class NewCardDataBase
     [SerializeField] List<ConditionSelection> m_conditions;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
-    [SerializeField] List<NewCardDataBase> m_upgradeDatas;
+    [SerializeField] List<CardDataBase> m_upgradeDatas;
     /// <summary>カードの名前</summary>
     public string Name => m_name;
     /// <summary>コスト</summary>
@@ -156,7 +156,7 @@ public class NewCardDataBase
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
     /// <summary>アップグレード後のカードデータ</summary>
-    public NewCardDataBase UpgradeData => m_upgradeDatas[0];
+    public CardDataBase UpgradeData => m_upgradeDatas[0];
     //public class CardUpgradeData
     //{
 
