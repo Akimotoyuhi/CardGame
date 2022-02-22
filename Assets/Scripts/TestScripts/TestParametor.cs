@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// 構造体テスト用
 /// </summary>
-public struct Parametor
+public struct TestParametor
 {
     /// <summary>
     /// 攻撃力
@@ -25,7 +25,7 @@ public struct Parametor
     public int Defence { get => defence; set => defence = value; }
     public List<int> EffectId { get => effectId; set => effectId = value; }
     public List<int> EffectTurn { get => effectTurn; set => effectTurn = value; }
-    public Parametor(int power, int defence)
+    public TestParametor(int power, int defence)
     {
         this.power = power;
         this.defence = defence;
