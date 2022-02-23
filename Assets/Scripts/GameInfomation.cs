@@ -15,7 +15,7 @@ public class GameInfomation : MonoBehaviour
     public void SetText(string playerName, string maxHp, string currentHp, string floor)
     {
         m_playerName.text = playerName;
-        m_hp.text = $"{currentHp}/{maxHp}";
+        m_hp.text = $"HP:{currentHp}/{maxHp}";
         m_floor.text = $"Floor:{floor}F";
     }
 }
