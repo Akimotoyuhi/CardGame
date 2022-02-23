@@ -58,13 +58,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //if (DataManager.Instance.IsPlayerData)
-        //{
-        //}
-        //else
-        //{
-        //    m_map.CreateMap();
-        //}
+        EffectManager.Instance.Fade(Color.black, 0);
+        EffectManager.Instance.Fade(Color.clear, 0.3f);
         m_map.CreateMap();
         m_eventCanvas.enabled = false;
         m_cardDisplayCanvas.enabled = false;
