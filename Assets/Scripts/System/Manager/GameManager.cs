@@ -200,10 +200,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void UpgradeConfirmationPanelDisabled()
     {
-        Debug.Log(DataManager.Instance.Cards.Count);
         Destroy(m_upgradeBeforeCardParent.GetChild(0).gameObject);
         Destroy(m_upgradeAfterCardParent.GetChild(0).gameObject);
-        CrearCardDisplayPanel();
+        //CrearCardDisplayPanel();
+        m_cardDisplayCanvas.enabled = false;
         m_upgradeConfirmationPanel.gameObject.SetActive(false);
     }
 

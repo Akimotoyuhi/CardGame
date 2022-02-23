@@ -56,6 +56,12 @@ public class Rest : MonoBehaviour
     {
         GameManager.Instance.CardUpgrade(m_upgradeCardIndex);
         GameManager.Instance.UpgradeConfirmationPanelDisabled();
+        GameManager.Instance.CrearCardDisplayPanel();
         GameManager.Instance.FloorFinished();
+    }
+
+    public void UpgradeBackButton()
+    {
+        GameManager.Instance.UpgradeConfirmationPanelDisabled();
     }
 }
