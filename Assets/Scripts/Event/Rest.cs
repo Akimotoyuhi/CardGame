@@ -60,6 +60,9 @@ public class Rest : MonoBehaviour
         GameManager.Instance.FloorFinished();
     }
 
+    /// <summary>
+    /// アップグレードの戻るボタンが押されたときに呼ばれる
+    /// </summary>
     public void UpgradeBackButton()
     {
         GameManager.Instance.UpgradeConfirmationPanelDisabled();

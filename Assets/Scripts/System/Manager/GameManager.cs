@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DisplayCard(Rest rest = null)
     {
+        if (m_cardDisplayParent.childCount > 0) return;
         List<int[]> data = DataManager.Instance.Cards;
         if (rest)
         {
@@ -203,7 +204,7 @@ public class GameManager : MonoBehaviour
         Destroy(m_upgradeBeforeCardParent.GetChild(0).gameObject);
         Destroy(m_upgradeAfterCardParent.GetChild(0).gameObject);
         //CrearCardDisplayPanel();
-        m_cardDisplayCanvas.enabled = false;
+        //m_cardDisplayCanvas.enabled = false;
         m_upgradeConfirmationPanel.gameObject.SetActive(false);
     }
 

@@ -99,7 +99,7 @@ public enum WhereType
 }
 #endregion
 #region 敵データ設定関係
-[System.Serializable]
+[Serializable]
 public class EnemyDataBase
 {
     [SerializeField, Tooltip("名前")] string m_name;

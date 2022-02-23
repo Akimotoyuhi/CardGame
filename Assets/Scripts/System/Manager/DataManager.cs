@@ -37,9 +37,7 @@ namespace Mastar
         }
         /// <summary>プレイヤーの最大体力</summary>
         public int MaxLife { get; set; }
-        /// <summary>
-        /// プレイヤーのステータスを保存しておく
-        /// </summary>
+        /// <summary>プレイヤー情報の保存</summary>
         public void SavePlayerState(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife)
         {
             Name = name;
@@ -51,6 +49,9 @@ namespace Mastar
         }
         //public List<CardID> Cards { get => m_cards; set => m_cards = value; }
         public List<int[]> Cards { get => m_cards; }
+        /// <summary>カードの追加</summary>
+        /// <param name="id"></param>
+        /// <param name="isUpgrade"></param>
         public void AddCards(int id, int isUpgrade)
         {
             int[] vs = new int[] { id, isUpgrade };
