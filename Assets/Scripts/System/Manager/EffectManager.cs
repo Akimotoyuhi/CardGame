@@ -33,7 +33,8 @@ public class EffectManager : MonoBehaviour
     }
     private void Start()
     {
-        RemoveBattleUIText();
+        if (m_battleUI) RemoveBattleUIText();
+        else Debug.LogWarning("BattleUI‚ªƒAƒTƒCƒ“‚³‚ê‚Ä‚È‚¢‚æ");
         //Fade(Color.clear, 0.1f);
     }
 

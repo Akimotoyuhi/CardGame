@@ -82,6 +82,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
     public List<Condition> Conditions { get; private set; }
     public UseType GetCardType { get => m_useType; }
+    public string Name => m_viewName.text;
 
     private void Setup()
     {
@@ -277,5 +278,4 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                 .OnComplete(() => m_isDrag = false);
         }
     }
-    public string Name => m_viewName.text;
 }
