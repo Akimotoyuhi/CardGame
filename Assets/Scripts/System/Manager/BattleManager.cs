@@ -33,7 +33,7 @@ public class BattleManager : MonoBehaviour
     private EnemyManager m_enemyManager;
     [Header("バトル中のパラメーター管理")]
     /// <summary>経過ターン数</summary>
-    private int m_progressTurn = 0;
+    private int m_currentTurn = 0;
     #endregion
     #region その他のメンバ
     /// <summary>バトル画面表示用キャンバス</summary>
@@ -77,6 +77,7 @@ public class BattleManager : MonoBehaviour
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
+    public int CurrentTrun => m_currentTurn;
     #endregion
 
     private void Awake()
@@ -134,7 +135,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="enemyid">エンカウントした敵のID</param>
     public void BattleStart(EnemyAppearanceEria eria)
     {
-        m_progressTurn = 0;
+        m_currentTurn = 0;
         m_isGame = true;
         SetCanvas();
         CreateField(eria);
@@ -205,7 +206,7 @@ public class BattleManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator OnBattle()
     {
-        if (m_progressTurn == 0)
+        if (m_currentTurn == 0)
         {
             m_battleUIController.Play(BattleUIType.BattleStart, () => m_battleFlag = true);
             while (!m_battleFlag)
@@ -240,9 +241,9 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void FirstTurn()
     {
-        Debug.Log(m_progressTurn + "ターン目");
-        m_enemyManager.EnemyTrun(m_progressTurn);
-        m_progressTurn++;
+        Debug.Log(m_currentTurn + "ターン目");
+        m_enemyManager.EnemyTrun(m_currentTurn);
+        m_currentTurn++;
     }
 
     public void OnClick()
@@ -259,8 +260,8 @@ public class BattleManager : MonoBehaviour
         m_isPress = true;
         m_hand.AllCast();
         m_player.TurnEnd();
-        m_turnEnd.OnNext(m_progressTurn);
-        m_progressTurn++;
+        m_turnEnd.OnNext(m_currentTurn);
+        m_currentTurn++;
         //m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
     }
 
@@ -270,9 +271,9 @@ public class BattleManager : MonoBehaviour
     private void TurnStart()
     {
         m_isPress = false;
-        Debug.Log(m_progressTurn + "ターン目");
+        Debug.Log(m_currentTurn + "ターン目");
         m_player.TurnStart();
-        m_turnBegin.OnNext(m_progressTurn);
+        m_turnBegin.OnNext(m_currentTurn);
         SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
     }
 

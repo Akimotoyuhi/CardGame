@@ -204,7 +204,7 @@ public class CharactorBase : MonoBehaviour
             EffectManager.Instance.ShowParticle(ParticleID.a, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
             int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
             dmg = m_block -= dmg;
-            if (m_block < 0) { m_block = 0; }
+            if (m_block < 0) m_block = 0;
             else
             {
                 if (isPlayer) EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);

@@ -20,7 +20,7 @@ public class Weakness : Condition
                 ret = power * (1 - 0.25f);
                 return new int[] { (int)ret };
             case EventTiming.TurnEnd:
-                if (Turn > 0) Turn--;
+                //if (Turn > 0) Turn--;
                 break;
         }
         return new int[] { power };
@@ -52,7 +52,7 @@ public class Frail : Condition
                 ret = block * (1 - 0.25f);
                 return new int[] { (int)ret };
             case EventTiming.TurnEnd:
-                if (Turn > 0) Turn--;
+                //if (Turn > 0) Turn--;
                 break;
         }
         return new int[] { block };

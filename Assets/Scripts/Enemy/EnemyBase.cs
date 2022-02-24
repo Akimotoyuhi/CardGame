@@ -76,6 +76,9 @@ public class EnemyBase : CharactorBase, IDrop
         List<EnemyActionCommnad3> commands = m_enemyDataBase.CommandSelect(this, turn);
         foreach (var item in commands)
         {
+            int power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, item.Power);
+            int block = ConditionEffect(EventTiming.Attacked, ParametorType.Block, item.Block);
+            List<Condition> conditions = item.Conditions;
             if (item.Target == TargetType.ToEnemy)
             {
                 Damage(item.Power, item.Block, item.Conditions, false, () =>
@@ -87,10 +90,9 @@ public class EnemyBase : CharactorBase, IDrop
             }
             else
             {
-                m_player.GetAcceptDamage(item);
+                m_player.GetAcceptDamage(power, block, conditions);
             }
         }
-        
         //AttackAnim(false);
     }
 

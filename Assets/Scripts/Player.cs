@@ -58,9 +58,9 @@ public class Player : CharactorBase, IDrop
     /// 被ダメージ処理
     /// </summary>
     /// <param name="damage">被ダメージ</param>
-    public void GetAcceptDamage(EnemyActionCommnad3 enemy)
+    public void GetAcceptDamage(int power, int block, List<Condition> conditions)
     {
-        Damage(enemy.Power, enemy.Block, enemy.Conditions, true, () =>
+        Damage(power, block, conditions, true, () =>
         {
             m_image.sprite = m_gameoverSprite;
             GameManager.Instance.Gameover();
