@@ -50,10 +50,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        if (m_isSeed)
-        {
-            UnityEngine.Random.InitState(m_seed);
-        }
+        if (m_isSeed) UnityEngine.Random.InitState(m_seed);
+        else Debug.Log("シード値:" + UnityEngine.Random.seed);
     }
 
     void Start()
@@ -219,6 +217,7 @@ public class GameManager : MonoBehaviour
             Destroy(player.gameObject);
         }
         DataManager.Instance.Floor++;
+        if (m_map.ClearCheck(DataManager.Instance.Floor)) Gameover();
         SetGameInfoPanel();
         m_step = DataManager.Instance.Floor;
         m_map.AllColorChange();
@@ -249,6 +248,7 @@ public class GameManager : MonoBehaviour
             });
         });
     }
+    public void DataReset() => DataManager.Instance.Init();
     #region エディタ拡張
     /// <summary>
     /// インスペクタのStepを反映させる<br/>エディタ拡張用

@@ -154,6 +154,18 @@ public class Map : MonoBehaviour
     }
 
     /// <summary>
+    /// マップを踏破したかの判定<br/>
+    /// 後に変える
+    /// </summary>
+    /// <param name="floor"></param>
+    /// <returns></returns>
+    public bool ClearCheck(int floor)
+    {
+        if (floor <= m_sector) return true;
+        else return false;  
+    }
+
+    /// <summary>
     /// マップ生成時に使ってないセルを消す
     /// </summary>
     private void DeleteCell()

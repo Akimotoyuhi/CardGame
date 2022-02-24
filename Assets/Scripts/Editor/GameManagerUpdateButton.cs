@@ -5,7 +5,7 @@ using UnityEditor;
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(GameManager))]
-public class UpdateButton : Editor
+public class GameManagerUpdateButton : Editor
 {
 
     public override void OnInspectorGUI()
@@ -14,6 +14,10 @@ public class UpdateButton : Editor
         if (GUILayout.Button("Update"))
         {
             gameManager.GUIUpdate();
+        }
+        if (GUILayout.Button("Reset"))
+        {
+            gameManager.DataReset();
         }
         base.OnInspectorGUI();
     }

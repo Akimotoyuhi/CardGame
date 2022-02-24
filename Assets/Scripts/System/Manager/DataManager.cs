@@ -37,6 +37,8 @@ namespace Mastar
         }
         /// <summary>プレイヤーの最大体力</summary>
         public int MaxLife { get; set; }
+        /// <summary>プレイヤーデータがあるか</summary>
+        public bool IsPlayerData { get; private set; } = false;
         /// <summary>プレイヤー情報の保存</summary>
         public void SavePlayerState(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife)
         {
@@ -66,6 +68,7 @@ namespace Mastar
         {
             m_cards[index][1] = 1;
         }
-        public bool IsPlayerData { get; private set; } = false;
+        /// <summary>データの初期化</summary>
+        public void Init() => m_instance = new DataManager();
     }
 }
