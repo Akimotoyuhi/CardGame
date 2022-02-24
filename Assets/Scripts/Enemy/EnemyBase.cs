@@ -32,17 +32,25 @@ public class EnemyBase : CharactorBase, IDrop
         m_enemyManager = enemyManager;
     }
 
+    /// <summary>
+    /// カードがドロップされた時
+    /// </summary>
+    /// <param name="power"></param>
+    /// <param name="block"></param>
+    /// <param name="conditions"></param>
+    /// <param name="useType"></param>
+    /// <param name="onCast"></param>
     public void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast)
     {
         if (useType != UseType.ToEnemy) return;
         onCast();
-        //card.OnCast();
         Damage(power, block, conditions, false, () =>
         {
             //DOTween.KillAll();
             m_isDead = true;
             Dead();
         });
+        m_enemyManager.EnemyDamaged();
     }
 
     /// <summary>
@@ -59,6 +67,7 @@ public class EnemyBase : CharactorBase, IDrop
             m_isDead = true;
             Dead();
         });
+        m_enemyManager.EnemyDamaged();
     }
 
     /// <summary>

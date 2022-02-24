@@ -95,6 +95,15 @@ public class EnemyManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 敵がダメージを食らった時の呼ばれる<br/>
+    /// 行動予定の更新用
+    /// </summary>
+    public void EnemyDamaged()
+    {
+        ActionPlan(BattleManager.Instance.CurrentTrun);
+    }
+
+    /// <summary>
     /// 終了判定用<br/>
     /// 敵が死んだ時に呼ばれる
     /// </summary>
