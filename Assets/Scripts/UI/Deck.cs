@@ -21,7 +21,7 @@ public class Deck : CardManagement
     {
         for (int i = 0; i < drawNum; i++)
         {
-            if (m_cardParent.childCount == 0)
+            if (m_cardParent.childCount <= 0)
             {
                 Debug.Log("山札切れ");
                 m_discard.ConvartToDeck(); //山札が無かったら捨て札からカードを戻す
