@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Map m_map;
     [SerializeField] Canvas m_eventCanvas;
     [SerializeField] GameoverScreen m_gameoverScreen;
+    /// <summary>ゲームオーバー時のフェードアウトまでの時間</summary>
+    [SerializeField] float m_gameoverFadeDuration = 3;
     private Subject<int> m_onSceneReload = new Subject<int>();
 
     public static GameManager Instance { get; private set; }
@@ -241,14 +243,36 @@ public class GameManager : MonoBehaviour
         BattleManager.Instance.IsGame = false;
         Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ =>
         {
-            EffectManager.Instance.Fade(Color.black, 3f, () =>
+            EffectManager.Instance.Fade(Color.black, m_gameoverFadeDuration, () =>
             {
                 m_gameoverScreen.ShowPanel(DataManager.Instance.Cards.Count, Step);
-                //EffectManager.Instance.Fade(Color.clear, 0.1f);
+                EffectManager.Instance.Fade(Color.clear, 0);
             });
         });
     }
-    public void DataReset() => DataManager.Instance.Init();
+
+    /// <summary>
+    /// リトライボタン押した時の処理<br/>
+    /// ボタンから呼ばれる事を想定している
+    /// </summary>
+    public void RetryButton()
+    {
+        EffectManager.Instance.Fade(Color.black, 0.5f, () =>
+        {
+            DataManager.Instance.Init();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        });
+    }
+
+    public void TitleButton()
+    {
+        EffectManager.Instance.Fade(Color.black, 0.5f, () =>
+        {
+            DataManager.Instance.Init();
+            SceneManager.LoadScene("Title");
+        });
+    }
+
     #region エディタ拡張
     /// <summary>
     /// インスペクタのStepを反映させる<br/>エディタ拡張用
@@ -257,6 +281,16 @@ public class GameManager : MonoBehaviour
     {
         DG.Tweening.DOTween.KillAll();
         DataManager.Instance.Floor = m_step;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// 保存データの初期化<br/>
+    /// エディタ拡張用
+    /// </summary>
+    public void DataReset()
+    {
+        DataManager.Instance.Init();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #endregion

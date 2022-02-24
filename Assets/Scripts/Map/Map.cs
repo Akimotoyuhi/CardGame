@@ -161,7 +161,7 @@ public class Map : MonoBehaviour
     /// <returns></returns>
     public bool ClearCheck(int floor)
     {
-        if (floor <= m_sector) return true;
+        if (floor >= m_sector) return true;
         else return false;  
     }
 
