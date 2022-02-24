@@ -69,6 +69,7 @@ public abstract class Condition
     /// <summary>Conditionが消去される条件</summary>
     /// <returns></returns>
     public abstract bool IsRemove();
+    public Condition Copy() => (Condition)MemberwiseClone();
 }
 
 [Serializable]

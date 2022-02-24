@@ -115,21 +115,26 @@ public class CharactorBase : MonoBehaviour
     /// <param name="conditions"></param>
     protected void AddEffect(List<Condition> conditions)
     {
-        for (int i = 0; i < conditions.Count; i++)
+        List<Condition> c = new List<Condition>();
+        foreach (var item in conditions)
+        {
+            c.Add(item.Copy());
+        }
+        for (int i = 0; i < c.Count; i++)
         {
             bool flag = false;
             for (int n = 0; n < m_conditions.Count; n++)
             {
-                if (conditions[i].GetConditionID() == m_conditions[n].GetConditionID())
+                if (c[i].GetConditionID() == m_conditions[n].GetConditionID())
                 {
-                    m_conditions[n].Turn += conditions[i].Turn;
+                    m_conditions[n].Turn += c[i].Turn;
                     flag = true;
                 }
             }
             if (!flag)
             {
                 //同じエフェクトが一つも見つからなかったら新たに追加
-                m_conditions.Add(conditions[i]);
+                m_conditions.Add(c[i]);
             }
         }
         ViewConditionUI();

@@ -44,6 +44,11 @@ public class EnemyBase : CharactorBase, IDrop
     {
         if (useType != UseType.ToEnemy) return;
         onCast();
+        //List<Condition> c = new List<Condition>();
+        //foreach (var item in conditions)
+        //{
+        //    c.Add(item.Copy());
+        //}
         Damage(power, block, conditions, false, () =>
         {
             //DOTween.KillAll();
