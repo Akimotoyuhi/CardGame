@@ -18,7 +18,7 @@ public class UICard : MonoBehaviour
     private CardID m_id;
     private int m_isUpgrade;
 
-    public void Setup(CardDataBase cardData, int isUpgrade)
+    public void Setup(CardInfomationData cardData, int isUpgrade)
     {
         m_viewName.text = cardData.Name;
         m_viewImage.sprite = cardData.Sprite;

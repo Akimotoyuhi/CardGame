@@ -16,7 +16,7 @@ public class Reward : MonoBehaviour
     /// <summary>
     /// •ñV‰æ–Ê•\¦
     /// </summary>
-    public void RewardView(CardDataBase cardDataBase)
+    public void RewardView(CardInfomationData cardDataBase)
     {
         m_panel.SetActive(true);
         BlankCard card = Instantiate(m_uiCard);

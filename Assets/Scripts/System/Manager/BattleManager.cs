@@ -154,7 +154,7 @@ public class BattleManager : MonoBehaviour
         m_hand.CardDelete();
         for (int i = 0; i < m_rewardNum; i++)
         {
-            m_reward.RewardView(m_cardData.GetCardRarityRandom());
+            m_reward.RewardView(m_cardData.GetCardRarityRandom(0));
         }
     }
 
@@ -280,13 +280,12 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// ƒJ[ƒh‚Ìì¬
     /// </summary>
-    public void CreateCard(int id, int isUpgrade)
+    public void CreateCard(int id, int upgradeNum)
     {
         //GameObject obj = Instantiate(m_cardPrefab);
         BlankCard card = Instantiate(m_cardPrefab);
-        CardDataBase cardData;
-        if (isUpgrade == 1) { cardData = m_cardData.CardDatas[id].UpgradeData; }
-        else { cardData = m_cardData.CardDatas[id]; }
+        CardInfomationData cardData;
+        cardData = m_cardData.CardDatas(id, upgradeNum);
         card.SetInfo(cardData, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera, m_discard);
         card.CardState = CardState.Play;
         card.transform.SetParent(m_deck.CardParent, false);

@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
                 {
                     BlankCard card = Instantiate(CardPrefab);
                     card.transform.SetParent(m_cardDisplayParent, false);
-                    card.SetInfo(m_cardData.CardDatas[data[i][0]], i, rest);
+                    card.SetInfo(m_cardData.CardDatas(data[i][0], 0), i, rest);
                     card.CardState = CardState.Upgrade;
                 }
             }
@@ -162,8 +162,9 @@ public class GameManager : MonoBehaviour
             {
                 BlankCard card = Instantiate(CardPrefab);
                 card.transform.SetParent(m_cardDisplayParent, false);
-                if (data[i][1] == 0) card.SetInfo(m_cardData.CardDatas[data[i][0]], i, rest);
-                else card.SetInfo(m_cardData.CardDatas[data[i][0]].UpgradeData, i, rest);
+                //if (data[i][1] == 0) card.SetInfo(m_cardData.CardDatas(data[i][0], 0), i, rest);
+                //else card.SetInfo(m_cardData.CardDatas[data[i][0]].UpgradeData, i, rest);
+                card.SetInfo(m_cardData.CardDatas(data[i][0], data[i][1]), i, rest);
                 card.CardState = CardState.Upgrade;
             }
         }
@@ -187,12 +188,12 @@ public class GameManager : MonoBehaviour
         //アップグレード前のカード表示
         BlankCard card = Instantiate(CardPrefab);
         card.transform.SetParent(m_upgradeBeforeCardParent, false);
-        card.SetInfo(m_cardData.CardDatas[DataManager.Instance.Cards[index][0]]);
+        card.SetInfo(m_cardData.CardDatas(DataManager.Instance.Cards[index][0], 0));
         card.CardState = CardState.None;
         //アップグレード後のカード表示
         card = Instantiate(CardPrefab);
         card.transform.SetParent(m_upgradeAfterCardParent, false);
-        card.SetInfo(m_cardData.CardDatas[DataManager.Instance.Cards[index][0]].UpgradeData);
+        card.SetInfo(m_cardData.CardDatas(DataManager.Instance.Cards[index][0], 1));
         card.CardState = CardState.None;
     }
 

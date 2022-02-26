@@ -11,19 +11,20 @@ public class CardData : ScriptableObject
     [SerializeField, Range(0, 100)] int m_eliteProbability = 5;
     [SerializeField, Range(0, 100)] int m_rareProbability = 30;
     [SerializeField] List<CardDataBase> m_cardData = new List<CardDataBase>();
-    public List<CardDataBase> CardDatas => m_cardData;
+    public CardInfomationData CardDatas(int id, int upgrade) => m_cardData[id].GetCardInfo(upgrade);
     public void Setup()
     {
         for (int i = 0; i < m_cardData.Count; i++)
         {
-            m_cardData[i].CardId = (CardID)i;
+            m_cardData[i].Setup((CardID)i);
         }
     }
     /// <summary>
     /// ランダムで抽選したレア度の中からランダムで１つカードを抽選する
     /// </summary>
+    /// <param name="upgradeNum">強化回数</param>
     /// <returns>カードデータ</returns>
-    public CardDataBase GetCardRarityRandom()
+    public CardInfomationData GetCardRarityRandom(int upgradeNum)
     {
         Rarity rarity;
         int r = UnityEngine.Random.Range(0, 100);
@@ -39,20 +40,22 @@ public class CardData : ScriptableObject
         {
             rarity = Rarity.Common;
         }
-        return GetCardRarityRandom(rarity);
+        return GetCardRarityRandom(rarity, upgradeNum);
     }
     /// <summary>
     /// 指定したレア度のカードを１つ抽選する
     /// </summary>
     /// <param name="rarity">抽選するレア度</param>
+    /// <param name="upgradeNum">強化回数</param>
     /// <returns>カードデータ</returns>
-    public CardDataBase GetCardRarityRandom(Rarity rarity)
+    public CardInfomationData GetCardRarityRandom(Rarity rarity, int upgradeNum)
     {
-        var list = m_cardData.Where(card => card.Rarity == rarity).ToList();
+        var list = m_cardData.Where(card => card.GetCardInfo(upgradeNum).Rarity == rarity).ToList();
         int r = UnityEngine.Random.Range(0, list.Count);
-        return list[r];
+        return list[r].GetCardInfo(upgradeNum);
     }
 }
+#region Enums
 public enum CardID
 {
     /// <summary>強撃</summary>
@@ -101,8 +104,34 @@ public enum UseType
     ToEnemy,
     ToAll,
 }
+#endregion
 [Serializable]
 public class CardDataBase
+{
+    public string m_rabel;
+    [SerializeField] CardInfomationData m_cardInfo;
+    [SerializeField] CardInfomationData m_cardUpgrade;
+    public void Setup(CardID id)
+    {
+        m_cardInfo.CardId = id;
+        m_cardUpgrade.CardId = id;
+    }
+    public CardInfomationData GetCardInfo(int upgradeNum)
+    {
+        switch (upgradeNum)
+        {
+            case 0:
+                return m_cardInfo;
+            case 1:
+                return m_cardUpgrade;
+            default:
+                Debug.Log("");
+                return null;
+        }
+    }
+}
+[Serializable]
+public class CardInfomationData
 {
     [SerializeField] string m_name;
     [SerializeField] string m_cost;
@@ -117,7 +146,7 @@ public class CardDataBase
     [SerializeField] List<ConditionSelection> m_conditions;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
-    [SerializeField] List<CardDataBase> m_upgradeDatas;
+    //[SerializeField] List<CardInfomationData> m_upgradeDatas;
     /// <summary>カードの名前</summary>
     public string Name => m_name;
     /// <summary>コスト</summary>
@@ -156,7 +185,7 @@ public class CardDataBase
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
     /// <summary>アップグレード後のカードデータ</summary>
-    public CardDataBase UpgradeData => m_upgradeDatas[0];
+    //public CardInfomationData UpgradeData => m_upgradeDatas[0];
     //public class CardUpgradeData
     //{
 
