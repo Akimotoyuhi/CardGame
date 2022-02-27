@@ -53,7 +53,22 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         if (m_isSeed) UnityEngine.Random.InitState(m_seed);
-        else Debug.Log("シード値:" + UnityEngine.Random.seed);
+        else
+        {
+            int seed = Environment.TickCount;
+            UnityEngine.Random.InitState(seed);
+            Debug.Log("シード値:" + seed);
+        }
+
+        //int[] nums = new int[10];
+        //for (int i = 0; i < nums.Length; i++)
+        //{
+        //    nums[i] = UnityEngine.Random.Range(0, 100);
+        //}
+        //foreach (var item in nums)
+        //{
+        //    Debug.Log(item);
+        //}
     }
 
     void Start()

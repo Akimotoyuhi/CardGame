@@ -14,14 +14,12 @@ public class Sample : MonoBehaviour
 
     private void Start()
     {
-        Random.InitState(m_seed);
-        List<int> vs = new List<int>();
-        for (int i = 0; i < 10; i++)
+        int[] nums = new int[10];
+        for (int i = 0; i < nums.Length; i++)
         {
-            int r = Random.Range(0, 100);
-            vs.Add(r);
+            nums[i] = UnityEngine.Random.Range(0, 100);
         }
-        foreach (var item in vs)
+        foreach (var item in nums)
         {
             Debug.Log(item);
         }

@@ -59,35 +59,35 @@ public class CardData : ScriptableObject
 public enum CardID
 {
     /// <summary>強撃</summary>
-    PowerfulStrike, //スターター
-    /// <summary>防御力強化</summary>
-    DEFStrengthening, //スターター
-    /// <summary>指令：構造強化</summary>
-    StructuralFortification,
-    /// <summary>指令：戦術指令</summary>
-    TacticalCoordination,
-    /// <summary>指令：メルトダウン</summary>
-    Meltdown,
-    /// <summary>断罪</summary>
-    Conviction, //デバッグ用
-    /// <summary>ハンマリング・オン</summary>
-    HammerOn,
-    /// <summary>ひっかき！</summary>
-    CatScratch,
-    /// <summary>シェルガード</summary>
-    ShellShapedDEF,
-    /// <summary>海嘯の悲歌</summary>
-    TidalElegy,
-    /// <summary>ウルサスの雄叫び</summary>
-    RoarofUrsus,
-    /// <summary>「かかってこい！」</summary>
-    BeatenUp,
-    /// <summary>鉄壁の構え</summary>
-    GuardMode,
-    /// <summary>冥蝶の抱擁</summary>
-    ButterflysEmbrace,
-    /// <summary>コンシールメント</summary>
-    FlexibleCamouflage,
+    //PowerfulStrike, //スターター
+    ///// <summary>防御力強化</summary>
+    //DEFStrengthening, //スターター
+    ///// <summary>指令：構造強化</summary>
+    //StructuralFortification,
+    ///// <summary>指令：戦術指令</summary>
+    //TacticalCoordination,
+    ///// <summary>指令：メルトダウン</summary>
+    //Meltdown,
+    ///// <summary>断罪</summary>
+    //Conviction, //デバッグ用
+    ///// <summary>ハンマリング・オン</summary>
+    //HammerOn,
+    ///// <summary>ひっかき！</summary>
+    //CatScratch,
+    ///// <summary>シェルガード</summary>
+    //ShellShapedDEF,
+    ///// <summary>海嘯の悲歌</summary>
+    //TidalElegy,
+    ///// <summary>ウルサスの雄叫び</summary>
+    //RoarofUrsus,
+    ///// <summary>「かかってこい！」</summary>
+    //BeatenUp,
+    ///// <summary>鉄壁の構え</summary>
+    //GuardMode,
+    ///// <summary>冥蝶の抱擁</summary>
+    //ButterflysEmbrace,
+    ///// <summary>コンシールメント</summary>
+    //FlexibleCamouflage,
 }
 public enum Rarity
 {

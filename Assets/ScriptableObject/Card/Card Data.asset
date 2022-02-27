@@ -14,31 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_eliteProbability: 5
   m_rareProbability: 30
-  m_cardData:
-  - m_rabel: name
-    m_cardInfo:
-      m_name: 
-      m_cost: 
-      m_image: {fileID: 0}
-      m_tooltip: 
-      m_rarity: 0
-      m_power: 0
-      m_attackNum: 0
-      m_block: 0
-      m_blockNum: 0
-      m_conditions: []
-      m_cardType: 0
-      m_isDiscarding: 0
-    m_cardUpgrade:
-      m_name: 
-      m_cost: 
-      m_image: {fileID: 0}
-      m_tooltip: 
-      m_rarity: 0
-      m_power: 0
-      m_attackNum: 0
-      m_block: 0
-      m_blockNum: 0
-      m_conditions: []
-      m_cardType: 0
-      m_isDiscarding: 0
+  m_cardData: []
