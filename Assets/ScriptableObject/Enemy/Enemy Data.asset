@@ -16,7 +16,8 @@ MonoBehaviour:
   - m_name: "\u30AA\u30EA\u30B8\u30E0\u30B7"
     m_id: 0
     m_life: 15
-    m_image: {fileID: 21300000, guid: 24a793a574247fe4ea1d2f84eeaf7db8, type: 3}
+    m_sprite: {fileID: 0}
+    m_spriteScaleMagnification: 2
     m_enemyAppearanceEria: 0
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -46,7 +47,8 @@ MonoBehaviour:
   - m_name: "\u30EC\u30E6\u30CB\u30AA\u30F3\u5175"
     m_id: 1
     m_life: 30
-    m_image: {fileID: 21300000, guid: f88bc2cc103c0e34f9f3aa5b2fcce452, type: 3}
+    m_sprite: {fileID: 0}
+    m_spriteScaleMagnification: 1
     m_enemyAppearanceEria: 0
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -85,7 +87,8 @@ MonoBehaviour:
   - m_name: "\u68C4\u3066\u3089\u308C\u305F\u8005"
     m_id: 2
     m_life: 70
-    m_image: {fileID: 21300000, guid: 41ad27ca677ff0944aa3b268615213ba, type: 3}
+    m_sprite: {fileID: 0}
+    m_spriteScaleMagnification: 1
     m_enemyAppearanceEria: 2
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -126,7 +129,8 @@ MonoBehaviour:
   - m_name: "\u30AF\u30E9\u30A6\u30F3\u30B9\u30EC\u30A4\u30E4\u30FC"
     m_id: 3
     m_life: 100
-    m_image: {fileID: 21300000, guid: be60df9d182eb3b4eb6e3676710d6456, type: 3}
+    m_sprite: {fileID: 0}
+    m_spriteScaleMagnification: 1
     m_enemyAppearanceEria: 2
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -143,7 +147,8 @@ MonoBehaviour:
   - m_name: "\u706B\u708E\u74F6\u66B4\u5F92"
     m_id: 4
     m_life: 20
-    m_image: {fileID: 21300000, guid: d909de19afc23bb4db092452f937367c, type: 3}
+    m_sprite: {fileID: 0}
+    m_spriteScaleMagnification: 1
     m_enemyAppearanceEria: 0
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -173,7 +178,8 @@ MonoBehaviour:
   - m_name: "\u91CD\u88C5\u5175"
     m_id: 5
     m_life: 50
-    m_image: {fileID: 21300000, guid: 60990af885eccb247a86542a4b8ca836, type: 3}
+    m_sprite: {fileID: 0}
+    m_spriteScaleMagnification: 1.5
     m_enemyAppearanceEria: 1
     m_enemyBaseState:
     - m_conditionalCommand:

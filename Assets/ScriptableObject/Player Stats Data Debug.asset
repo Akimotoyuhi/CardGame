@@ -19,11 +19,5 @@ MonoBehaviour:
   m_cardData:
   - m_cardID: 1
     m_upgrade: 0
-  - m_cardID: 5
-    m_upgrade: 1
-  - m_cardID: 9
-    m_upgrade: 0
-  - m_cardID: 7
-    m_upgrade: 0
-  - m_cardID: 14
+  - m_cardID: 0
     m_upgrade: 0
