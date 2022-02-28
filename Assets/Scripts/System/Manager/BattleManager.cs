@@ -195,7 +195,7 @@ public class BattleManager : MonoBehaviour
             CreateCard(nms[0], nms[1]);
         }
         //“GƒOƒ‹[ƒv¶¬
-        m_enemyManager = m_enemies.GetComponent<EnemyManager>();
+        if (!m_enemyManager) m_enemyManager = m_enemies.GetComponent<EnemyManager>();
         m_enemyManager.CreateEnemies(eria);
         m_enemyManager.EnemyCount();
     }

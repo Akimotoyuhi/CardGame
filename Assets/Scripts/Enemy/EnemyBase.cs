@@ -30,6 +30,7 @@ public class EnemyBase : CharactorBase, IDrop
         m_sprite = data.Image;
         m_enemyDataBase = data;
         m_enemyManager = enemyManager;
+        transform.localScale = transform.localScale * data.ScaleMagnification;
     }
 
     /// <summary>

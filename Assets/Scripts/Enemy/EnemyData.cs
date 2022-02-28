@@ -105,12 +105,14 @@ public class EnemyDataBase
     [SerializeField, Tooltip("–¼‘O")] string m_name;
     [SerializeField, Tooltip("“GID")] EnemyID m_id;
     [SerializeField, Tooltip("Å‘å‘Ì—Í")] int m_life;
-    [SerializeField, Tooltip("‰æ‘œ")] Sprite m_image;
+    [SerializeField, Tooltip("‰æ‘œ")] Sprite m_sprite;
+    [SerializeField, Tooltip("‰æ‘œ‚ÌƒfƒJ‚³”{—¦")] float m_spriteScaleMagnification = 1;
     [SerializeField, Tooltip("oŒ»êŠ")] EnemyAppearanceEria m_enemyAppearanceEria;
     public string Name => m_name;
     public EnemyID ID => m_id;
     public int Life => m_life;
-    public Sprite Image => m_image;
+    public Sprite Image => m_sprite;
+    public float ScaleMagnification => m_spriteScaleMagnification;
     public EnemyAppearanceEria EnemyAppearanceEria => m_enemyAppearanceEria;
     public enum NodeType { Selector, Sequence }
     private NodeType m_NodeType = NodeType.Sequence;

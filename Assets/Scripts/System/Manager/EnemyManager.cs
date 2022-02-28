@@ -34,10 +34,9 @@ public class EnemyManager : MonoBehaviour
         List<EnemyDataBase> enemies = m_enemyData.Encount(eria);
         foreach (var item in enemies)
         {
-            Transform tra = Instantiate(m_enemyPrefab, transform).transform;
-            tra.SetParent(m_enemyParent, false);
-            EnemyBase e = tra.GetComponent<EnemyBase>();
-            e.SetParam(item, this);
+            EnemyBase enemy = Instantiate(m_enemyPrefab, transform).GetComponent<EnemyBase>();
+            enemy.transform.SetParent(m_enemyParent, false);
+            enemy.SetParam(item, this);
         }
     }
 
