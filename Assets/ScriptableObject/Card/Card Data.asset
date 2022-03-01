@@ -47,7 +47,7 @@ MonoBehaviour:
       m_name: "\u9632\u5FA1"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "{%blk5}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_tooltip: "{%def5}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_power: 0
       m_attackNum: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
       m_name: "\u9632\u5FA1+"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "{%blk8}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_tooltip: "{%def8}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_power: 0
       m_attackNum: 0
