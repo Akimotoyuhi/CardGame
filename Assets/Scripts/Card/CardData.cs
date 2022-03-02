@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
+/// <summary>
+/// カードデータ<br/>
+/// 報酬画面に出現する確率比重を管理している。
+/// </summary>
 [CreateAssetMenu(fileName = "Card Data")]
 public class CardData : ScriptableObject
 {
@@ -79,6 +83,7 @@ public enum UseType
     ToAll,
 }
 #endregion
+/// <summary>カードのデータベース<br/>カードの効果の部分</summary>
 [Serializable]
 public class CardDataBase
 {
@@ -90,6 +95,9 @@ public class CardDataBase
         m_cardInfo.CardId = id;
         m_cardUpgrade.CardId = id;
     }
+    /// <summary>強化前後のカード情報<br/>引数は複数回のカード強化を想定してintにしている</summary>
+    /// <param name="upgradeNum">強化前後。0が前、1が後</param>
+    /// <returns>カード情報</returns>
     public CardInfomationData GetCardInfo(int upgradeNum)
     {
         switch (upgradeNum)
@@ -104,6 +112,7 @@ public class CardDataBase
         }
     }
 }
+/// <summary>カードデータの使用時の効果の部分</summary>
 [Serializable]
 public class CardInfomationData
 {
@@ -158,10 +167,4 @@ public class CardInfomationData
     public UseType UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
-    /// <summary>アップグレード後のカードデータ</summary>
-    //public CardInfomationData UpgradeData => m_upgradeDatas[0];
-    //public class CardUpgradeData
-    //{
-
-    //}
 }
