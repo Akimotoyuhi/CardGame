@@ -6,11 +6,6 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using DG.Tweening;
 
-public enum ReplaceType
-{
-    Attack,
-    Block
-}
 public enum CardState
 {
     None,

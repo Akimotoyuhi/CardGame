@@ -306,6 +306,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DataReset()
     {
+        DG.Tweening.DOTween.KillAll();
         DataManager.Instance.Init();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
