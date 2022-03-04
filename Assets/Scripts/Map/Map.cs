@@ -184,7 +184,8 @@ public class Map : MonoBehaviour
                     //}
                     //else
                     //{
-                    //    m_sectorLocation[i].transform.GetChild(n).GetComponent<Button>().interactable = false;
+                    //    m_sectorLocation[i].transform.GetChild(n).GetComponent<
+                    //    >().interactable = false;
                     //    m_sectorLocation[i].transform.GetChild(n).GetComponent<Image>().color = new Color(0, 0, 0, 1);
                     //}
                 }

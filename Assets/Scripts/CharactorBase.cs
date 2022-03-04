@@ -112,30 +112,24 @@ public class CharactorBase : MonoBehaviour
     /// <summary>
     /// バフデバフを付与された時の加算
     /// </summary>
-    /// <param name="conditions"></param>
-    protected void AddEffect(List<Condition> conditions)
+    /// <param name="condition"></param>
+    protected void AddEffect(Condition condition)
     {
-        List<Condition> c = new List<Condition>();
-        foreach (var item in conditions)
+        if (condition == null) return;
+        Condition c = condition.Copy();
+        bool flag = false;
+        for (int i = 0; i < m_conditions.Count; i++)
         {
-            c.Add(item.Copy());
+            if (c.GetConditionID() == m_conditions[i].GetConditionID())
+            {
+                m_conditions[i].Turn += c.Turn;
+                flag = true;
+            }
         }
-        for (int i = 0; i < c.Count; i++)
+        if (!flag)
         {
-            bool flag = false;
-            for (int n = 0; n < m_conditions.Count; n++)
-            {
-                if (c[i].GetConditionID() == m_conditions[n].GetConditionID())
-                {
-                    m_conditions[n].Turn += c[i].Turn;
-                    flag = true;
-                }
-            }
-            if (!flag)
-            {
-                //同じエフェクトが一つも見つからなかったら新たに追加
-                m_conditions.Add(c[i]);
-            }
+            //同じエフェクトが一つも見つからなかったら新たに追加
+            m_conditions.Add(c);
         }
         ViewConditionUI();
     }
@@ -201,9 +195,9 @@ public class CharactorBase : MonoBehaviour
     /// <summary>
     /// 被ダメージ処理
     /// </summary>
-    public void Damage(int damage, int block, List<Condition> conditions, bool isPlayer, Action dead)
+    public void Damage(int damage, int block, Condition condition, bool isPlayer, Action dead)
     {
-        AddEffect(conditions);
+        AddEffect(condition);
         if (damage > 0)
         {
             EffectManager.Instance.ShowParticle(ParticleID.a, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
@@ -283,10 +277,8 @@ public class CharactorBase : MonoBehaviour
                         if (i.Length >= 2)
                         {
                             Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
-                            List<Condition> conlist = new List<Condition>();
                             ConditionSelection cs = new ConditionSelection();
-                            conlist.Add(cs.SetCondition((ConditionID)i[0], i[1]));
-                            AddEffect(conlist);
+                            AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
                         }
                     }
                     break;

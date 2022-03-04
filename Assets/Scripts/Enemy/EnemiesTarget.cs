@@ -11,10 +11,10 @@ public class EnemiesTarget : MonoBehaviour, IDrop
         m_enemyManager = enemyManager;
     }
 
-    public void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast)
+    public void GetDrop(int power, int block, Condition condition, UseType useType, System.Action onCast)
     {
         if (useType != UseType.ToAll) return;
         onCast();
-        m_enemyManager.AllEnemiesDamage(power, block, conditions);
+        m_enemyManager.AllEnemiesDamage(power, block, condition);
     }
 }

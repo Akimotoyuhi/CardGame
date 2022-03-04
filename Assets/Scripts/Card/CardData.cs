@@ -60,13 +60,15 @@ public class CardData : ScriptableObject
     }
 }
 #region Enums
+/// <summary>カードのレア度</summary>
 public enum CardID
 {
-    /// <summary>強撃</summary>
+    /// <summary>斬撃</summary>
     Slashing, //スターター
-    /// <summary>防御力強化</summary>
+    /// <summary>防御</summary>
     Defense, //スターター
 }
+/// <summary>カードのレア度</summary>
 public enum Rarity
 {
     Common,
@@ -76,11 +78,20 @@ public enum Rarity
     Curse,
     BadEffect
 }
+/// <summary>カードの使用対象</summary>
 public enum UseType
 {
     ToPlayer,
     ToEnemy,
     ToAll,
+    ToRandom,
+}
+/// <summary>カードの使用時の効果が何なのか</summary>
+public enum CommandParam
+{
+    Attack,
+    Block,
+    Conditon,
 }
 #endregion
 /// <summary>カードのデータベース<br/>カードの効果の部分</summary>
@@ -122,12 +133,13 @@ public class CardInfomationData
     [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{%value}のように記述する事")]
     [SerializeField] string m_tooltip;
     [SerializeField] Rarity m_rarity;
-    [SerializeField] int m_power;
-    [SerializeField] int m_attackNum;
-    [SerializeField] int m_block;
-    [SerializeField] int m_blockNum;
-    [SerializeField] List<ConditionSelection> m_conditions;
-    [SerializeField] UseType m_cardType = new UseType();
+    [SerializeReference, SubclassSelector] List<ICardCommand> m_commands;
+    //[SerializeField] int m_power;
+    //[SerializeField] int m_attackNum;
+    //[SerializeField] int m_block;
+    //[SerializeField] int m_blockNum;
+    //[SerializeField] List<ConditionSelection> m_conditions;
+    //[SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
     //[SerializeField] List<CardInfomationData> m_upgradeDatas;
     /// <summary>カードの名前</summary>
@@ -142,29 +154,71 @@ public class CardInfomationData
     public CardID CardId { get; set; }
     /// <summary>レアリティ</summary>
     public Rarity Rarity => m_rarity;
-    /// <summary>攻撃</summary>
-    public int Attack => m_power;
-    /// <summary>攻撃回数</summary>
-    public int AttackNum => m_attackNum;
-    /// <summary>ブロック</summary>
-    public int Block => m_block;
-    /// <summary>ブロック回数</summary>
-    public int BlockNum => m_blockNum;
-    /// <summary>付与するバフデバフ</summary>
-    public List<Condition> Conditions
+    /// <summary>
+    /// カード使用時の効果<br/>{ 使用対象(UseType), 効果(int) }
+    /// </summary>
+    public List<int[]> Command
     {
         get
         {
-            List<Condition> ret = new List<Condition>();
-            foreach (var item in m_conditions)
-            {
-                ret.Add(item.GetCondition);
-            }
+            List<int[]> ret = new List<int[]>();
+            foreach (var c in m_commands)
+                ret.Add(c.Execute());
             return ret;
         }
     }
-    /// <summary>使用する標的</summary>
-    public UseType UseType => m_cardType;
+
+    /// <summary>攻撃</summary>
+    //public int Attack => m_power;
+    ///// <summary>攻撃回数</summary>
+    //public int AttackNum => m_attackNum;
+    ///// <summary>ブロック</summary>
+    //public int Block => m_block;
+    ///// <summary>ブロック回数</summary>
+    //public int BlockNum => m_blockNum;
+    ///// <summary>付与するバフデバフ</summary>
+    //public List<Condition> Conditions
+    //{
+    //    get
+    //    {
+    //        List<Condition> ret = new List<Condition>();
+    //        foreach (var item in m_conditions)
+    //        {
+    //            ret.Add(item.GetCondition);
+    //        }
+    //        return ret;
+    //    }
+    //}
+    ///// <summary>使用する標的</summary>
+    //public UseType UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
+}
+
+public interface ICardCommand
+{
+    /// <summary>カードを使用した時の効果</summary>
+    /// <returns>{ 使用対象(UseType), 効果の種類(CommandParam), 効果(int) }</returns>
+    int[] Execute();
+}
+[Serializable]
+public class CardAttackCommand : ICardCommand
+{
+    [SerializeField] int m_power;
+    [SerializeField] UseType m_useType;
+    public int[] Execute() => new int[] { (int)m_useType, (int)CommandParam.Attack, m_power };
+}
+[Serializable]
+public class CardBlockCommnad : ICardCommand
+{
+    [SerializeField] int m_block;
+    [SerializeField] UseType m_useType;
+    public int[] Execute() => new int[] { (int)m_useType, (int)CommandParam.Block, m_block };
+}
+[Serializable]
+public class CardConditionCommand : ICardCommand
+{
+    [SerializeField] ConditionSelection m_condition;
+    [SerializeField] UseType m_useType;
+    public int[] Execute() => new int[] { (int)m_useType, (int)CommandParam.Conditon, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }

@@ -58,19 +58,27 @@ public class Player : CharactorBase, IDrop
     /// 被ダメージ処理
     /// </summary>
     /// <param name="damage">被ダメージ</param>
-    public void GetAcceptDamage(int power, int block, List<Condition> conditions)
+    public void GetAcceptDamage(int power, int block, List<Condition> condition)
     {
-        Damage(power, block, conditions, true, () =>
+        Damage(power, block, null, true, () =>
         {
             m_image.sprite = m_gameoverSprite;
             GameManager.Instance.Gameover();
         });
+        foreach (var item in condition)
+        {
+            Damage(0, 0, item, true, () =>
+            {
+                m_image.sprite = m_gameoverSprite;
+                GameManager.Instance.Gameover();
+            });
+        }
     }
 
-    public void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast)
+    public void GetDrop(int power, int block, Condition condition, UseType useType, System.Action onCast)
     {
         if (useType != UseType.ToPlayer) return;
-        Damage(power, block, conditions, true, () =>
+        Damage(power, block, condition, true, () =>
         {
             m_image.sprite = m_gameoverSprite;
             GameManager.Instance.Gameover();

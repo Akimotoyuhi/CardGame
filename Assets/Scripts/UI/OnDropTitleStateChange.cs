@@ -6,6 +6,7 @@ public enum TitleState
 {
     SceneChange,
     Exit,
+    Credit,
 }
 public class OnDropTitleStateChange : MonoBehaviour
 {

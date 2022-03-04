@@ -41,7 +41,7 @@ public class EnemyBase : CharactorBase, IDrop
     /// <param name="conditions"></param>
     /// <param name="useType"></param>
     /// <param name="onCast"></param>
-    public void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast)
+    public void GetDrop(int power, int block, Condition conditions, UseType useType, System.Action onCast)
     {
         if (useType != UseType.ToEnemy) return;
         onCast();
@@ -64,10 +64,10 @@ public class EnemyBase : CharactorBase, IDrop
     /// </summary>
     /// <param name="damagem"></param>
     /// <param name="block"></param>
-    /// <param name="conditions"></param>
-    public void GetDamage(int damage, int block, List<Condition> conditions)
+    /// <param name="condition"></param>
+    public void GetDamage(int damage, int block, Condition condition)
     {
-        Damage(damage, block, conditions, false, () =>
+        Damage(damage, block, condition, false, () =>
         {
             //DOTween.KillAll();
             m_isDead = true;
@@ -89,19 +89,27 @@ public class EnemyBase : CharactorBase, IDrop
             return;
         }
         List<EnemyActionCommnad3> commands = m_enemyDataBase.CommandSelect(this, turn);
-        foreach (var item in commands)
+        foreach (var com in commands)
         {
-            int power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, item.Power);
-            int block = ConditionEffect(EventTiming.Attacked, ParametorType.Block, item.Block);
-            List<Condition> conditions = item.Conditions;
-            if (item.Target == TargetType.ToEnemy)
+            int power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, com.Power);
+            int block = ConditionEffect(EventTiming.Attacked, ParametorType.Block, com.Block);
+            List<Condition> conditions = com.Conditions;
+            if (com.Target == TargetType.ToEnemy)
             {
-                Damage(item.Power, item.Block, item.Conditions, false, () =>
+                Damage(com.Power, com.Block, null, false, () =>
                 {
                     //DOTween.KillAll();
                     m_isDead = true;
                     Dead();
                 });
+                foreach (var condition in com.Conditions)
+                {
+                    Damage(0, 0, condition, false, () =>
+                    {
+                        m_isDead = true;
+                        Dead();
+                    });
+                }
             }
             else
             {

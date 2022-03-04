@@ -25,6 +25,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewTooltip;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
     private List<Color> m_cardColor = default;
+    private List<int[]> m_cardCommand = new List<int[]>();
     /// <summary>ドラッグ中フラグ</summary>
     private bool m_isDrag = false;
     /// <summary>アニメーション中フラグ</summary>
@@ -54,10 +55,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private Camera m_camera;
     /// <summary>CanvasのRectTransform</summary>
     private RectTransform m_canvasRect;
-    public int Power { get; private set; }
-    public int AttackNum { get; private set; }
-    public int Block { get; private set; }
-    public int BlockNum { get; private set; }
+    //public int Power { get; private set; }
+    //public int AttackNum { get; private set; }
+    //public int Block { get; private set; }
+    //public int BlockNum { get; private set; }
     public CardState CardState { set => m_cardState = value; }
     public int Cost
     {
@@ -75,7 +76,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             return ret;
         }
     }
-    public List<Condition> Conditions { get; private set; }
+    //public List<Condition> Conditions { get; private set; }
     public UseType GetCardType { get => m_useType; }
     public string Name => m_viewName.text;
 
@@ -128,15 +129,16 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
         m_tooltip = carddata.Tooltip;
-        Power = carddata.Attack;
-        AttackNum = carddata.AttackNum;
-        Block = carddata.Block;
-        BlockNum = carddata.BlockNum;
+        m_cardCommand = carddata.Command;
+        //Power = carddata.Attack;
+        //AttackNum = carddata.AttackNum;
+        //Block = carddata.Block;
+        //BlockNum = carddata.BlockNum;
         m_cost = carddata.Cost;
-        Conditions = carddata.Conditions;
+        //Conditions = carddata.Conditions;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
-        m_useType = carddata.UseType;
+        //m_useType = carddata.UseType;
         m_isDiscarding = carddata.IsDiscarding;
         GetPlayerEffect();
         Setup();
@@ -150,22 +152,24 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void GetPlayerEffect()
     {
         string text = m_tooltip;
-        MatchCollection matches = Regex.Matches(m_tooltip, "{%atk([0-9]*)}");
-        foreach (Match m in matches)
-        {
-            int index = int.Parse(m.Groups[1].Value);
-            if (m_cardState == CardState.Play) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
-            else Power = int.Parse(m.Groups[1].Value);
-            text = text.Replace(m.Value, Power.ToString());
-        }
-        matches = Regex.Matches(m_tooltip, "{%def([0-9]*)}");
-        foreach (Match m in matches)
-        {
-            int index = int.Parse(m.Groups[1].Value);
-            if (m_cardState == CardState.Play) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
-            else Block = int.Parse(m.Groups[1].Value);
-            text = text.Replace(m.Value, Block.ToString());
-        }
+        #region 旧形式
+        //MatchCollection matches = Regex.Matches(m_tooltip, "{%atk([0-9]*)}");
+        //foreach (Match m in matches)
+        //{
+        //    int index = int.Parse(m.Groups[1].Value);
+        //    if (m_cardState == CardState.Play) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
+        //    else Power = int.Parse(m.Groups[1].Value);
+        //    text = text.Replace(m.Value, Power.ToString());
+        //}
+        //matches = Regex.Matches(m_tooltip, "{%def([0-9]*)}");
+        //foreach (Match m in matches)
+        //{
+        //    int index = int.Parse(m.Groups[1].Value);
+        //    if (m_cardState == CardState.Play) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
+        //    else Block = int.Parse(m.Groups[1].Value);
+        //    text = text.Replace(m.Value, Block.ToString());
+        //}
+        #endregion
         SetText(text);
     }
 
@@ -242,8 +246,26 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             //ドロップされたオブジェクトがドロップを受け付けるインターフェースが実装されていれば自分の情報を渡す
             IDrop item = hit.gameObject.GetComponent<IDrop>();
             if (item == null) continue;
-            List<Condition> conditions = Conditions;
-            item.GetDrop(Power, Block, conditions, m_useType, OnCast);
+            foreach (var com in m_cardCommand)
+            {
+                CommandParam param = (CommandParam)com[1];
+                switch (param)
+                {
+                    case CommandParam.Attack:
+                        item.GetDrop(com[2], 0, null, (UseType)com[0], OnCast);
+                        break;
+                    case CommandParam.Block:
+                        item.GetDrop(0, com[2], null, (UseType)com[0], OnCast);
+                        break;
+                    case CommandParam.Conditon:
+                        ConditionSelection cs = new ConditionSelection();
+                        item.GetDrop(0, 0, cs.SetCondition((ConditionID)com[2], com[3]), (UseType)com[0], OnCast);
+                        break;
+                    default:
+                        Debug.LogError("例外");
+                        break;
+                }
+            }
         }
     }
 

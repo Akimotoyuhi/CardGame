@@ -8,5 +8,5 @@ using UnityEngine;
 public interface IDrop
 {
     /// <summary>ƒhƒƒbƒv‚³‚ê‚½‚Ìˆ—</summary>
-    void GetDrop(int power, int block, List<Condition> conditions, UseType useType, System.Action onCast);
+    void GetDrop(int power, int block, Condition condition, UseType useType, System.Action onCast);
 }
