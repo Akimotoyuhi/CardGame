@@ -75,15 +75,19 @@ public class Player : CharactorBase, IDrop
         }
     }
 
-    public void GetDrop(int power, int block, Condition condition, UseType useType, System.Action onCast)
+    public bool CanDrop(UseType useType)
     {
-        if (useType != UseType.ToPlayer) return;
+        if (useType == UseType.ToPlayer) return true;
+        return false;
+    }
+
+    public void GetDrop(int power, int block, Condition condition)
+    {
         Damage(power, block, condition, true, () =>
         {
             m_image.sprite = m_gameoverSprite;
             GameManager.Instance.Gameover();
         });
-        onCast();
     }
     //public override void Damage(int damage, int block, List<Condition> conditions)
     //{

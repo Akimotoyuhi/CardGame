@@ -33,23 +33,14 @@ public class EnemyBase : CharactorBase, IDrop
         transform.localScale = transform.localScale * data.ScaleMagnification;
     }
 
-    /// <summary>
-    /// カードがドロップされた時
-    /// </summary>
-    /// <param name="power"></param>
-    /// <param name="block"></param>
-    /// <param name="conditions"></param>
-    /// <param name="useType"></param>
-    /// <param name="onCast"></param>
-    public void GetDrop(int power, int block, Condition conditions, UseType useType, System.Action onCast)
+    public bool CanDrop(UseType useType)
     {
-        if (useType != UseType.ToEnemy) return;
-        onCast();
-        //List<Condition> c = new List<Condition>();
-        //foreach (var item in conditions)
-        //{
-        //    c.Add(item.Copy());
-        //}
+        if (useType == UseType.ToEnemy) return true;
+        else return false;
+    }
+
+    public void GetDrop(int power, int block, Condition conditions)
+    {
         Damage(power, block, conditions, false, () =>
         {
             //DOTween.KillAll();

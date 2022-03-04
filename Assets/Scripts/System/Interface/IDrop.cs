@@ -8,5 +8,7 @@ using UnityEngine;
 public interface IDrop
 {
     /// <summary>ドロップされた時の処理</summary>
-    void GetDrop(int power, int block, Condition condition, UseType useType, System.Action onCast);
+    void GetDrop(int power, int block, Condition condition);
+    /// <summary>ドロップ可否</summary>
+    bool CanDrop(UseType useType);
 }

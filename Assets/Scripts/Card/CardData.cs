@@ -130,18 +130,12 @@ public class CardInfomationData
     [SerializeField] string m_name;
     [SerializeField] string m_cost;
     [SerializeField] Sprite m_image;
-    [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{%value}のように記述する事")]
+    [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{length0}(数値の部分は配列番号)のように記述する事")]
     [SerializeField] string m_tooltip;
     [SerializeField] Rarity m_rarity;
     [SerializeReference, SubclassSelector] List<ICardCommand> m_commands;
-    //[SerializeField] int m_power;
-    //[SerializeField] int m_attackNum;
-    //[SerializeField] int m_block;
-    //[SerializeField] int m_blockNum;
-    //[SerializeField] List<ConditionSelection> m_conditions;
-    //[SerializeField] UseType m_cardType = new UseType();
+    [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
-    //[SerializeField] List<CardInfomationData> m_upgradeDatas;
     /// <summary>カードの名前</summary>
     public string Name => m_name;
     /// <summary>コスト</summary>
@@ -167,30 +161,8 @@ public class CardInfomationData
             return ret;
         }
     }
-
-    /// <summary>攻撃</summary>
-    //public int Attack => m_power;
-    ///// <summary>攻撃回数</summary>
-    //public int AttackNum => m_attackNum;
-    ///// <summary>ブロック</summary>
-    //public int Block => m_block;
-    ///// <summary>ブロック回数</summary>
-    //public int BlockNum => m_blockNum;
-    ///// <summary>付与するバフデバフ</summary>
-    //public List<Condition> Conditions
-    //{
-    //    get
-    //    {
-    //        List<Condition> ret = new List<Condition>();
-    //        foreach (var item in m_conditions)
-    //        {
-    //            ret.Add(item.GetCondition);
-    //        }
-    //        return ret;
-    //    }
-    //}
-    ///// <summary>使用する標的</summary>
-    //public UseType UseType => m_cardType;
+    /// <summary>使用する標的</summary>
+    public UseType UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
 }

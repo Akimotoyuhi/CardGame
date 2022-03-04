@@ -25,6 +25,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewTooltip;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
     private List<Color> m_cardColor = default;
+    /// <summary>デフォルトカード効果　初期化用</summary>
+    private List<int[]> m_defCardCommand = new List<int[]>();
+    /// <summary>カード効果</summary>
     private List<int[]> m_cardCommand = new List<int[]>();
     /// <summary>ドラッグ中フラグ</summary>
     private bool m_isDrag = false;
@@ -130,6 +133,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewImage.sprite = carddata.Sprite;
         m_tooltip = carddata.Tooltip;
         m_cardCommand = carddata.Command;
+        m_defCardCommand = carddata.Command;
         //Power = carddata.Attack;
         //AttackNum = carddata.AttackNum;
         //Block = carddata.Block;
@@ -152,6 +156,13 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void GetPlayerEffect()
     {
         string text = m_tooltip;
+        MatchCollection match = Regex.Matches(text, "{length([0-9]*)}");
+        foreach (Match m in match)
+        {
+            if (m_cardState == CardState.Play)
+
+            Debug.Log(m.Value);
+        }
         #region 旧形式
         //MatchCollection matches = Regex.Matches(m_tooltip, "{%atk([0-9]*)}");
         //foreach (Match m in matches)
@@ -252,14 +263,14 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                 switch (param)
                 {
                     case CommandParam.Attack:
-                        item.GetDrop(com[2], 0, null, (UseType)com[0], OnCast);
+                        item.GetDrop(com[2], 0, null);
                         break;
                     case CommandParam.Block:
-                        item.GetDrop(0, com[2], null, (UseType)com[0], OnCast);
+                        item.GetDrop(0, com[2], null);
                         break;
                     case CommandParam.Conditon:
                         ConditionSelection cs = new ConditionSelection();
-                        item.GetDrop(0, 0, cs.SetCondition((ConditionID)com[2], com[3]), (UseType)com[0], OnCast);
+                        item.GetDrop(0, 0, cs.SetCondition((ConditionID)com[2], com[3]));
                         break;
                     default:
                         Debug.LogError("例外");
@@ -283,7 +294,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
-            localPoint.y += 230;
+            localPoint.y += 230; //原因は分からないけど座標変換後ちょっとズレるので修正用の定数
             m_rectTransform.localPosition = localPoint;
         }
     }

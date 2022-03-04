@@ -20,7 +20,7 @@ MonoBehaviour:
       m_name: "\u65AC\u6483"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "\u6575\uFF11\u4F53\u306B{%atk5}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+      m_tooltip: "\u6575\uFF11\u4F53\u306B{range0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
       - id: 0
