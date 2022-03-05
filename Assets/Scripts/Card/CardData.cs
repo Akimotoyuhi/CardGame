@@ -67,6 +67,8 @@ public enum CardID
     Slashing, //スターター
     /// <summary>防御</summary>
     Defense, //スターター
+    /// <summary>連撃</summary>
+    Burst,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
@@ -118,7 +120,7 @@ public class CardDataBase
             case 1:
                 return m_cardUpgrade;
             default:
-                Debug.Log("");
+                Debug.LogError("これ以上設定された強化データが存在しない");
                 return null;
         }
     }
