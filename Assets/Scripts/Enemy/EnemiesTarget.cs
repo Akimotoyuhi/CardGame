@@ -17,6 +17,6 @@ public class EnemiesTarget : MonoBehaviour, IDrop
     }
     public void GetDrop(List<int[]> cardCommand)
     {
-        //m_enemyManager.AllEnemiesDamage(power, block, condition);
+        BattleManager.Instance.DropManager.CardExecute(cardCommand);
     }
 }
