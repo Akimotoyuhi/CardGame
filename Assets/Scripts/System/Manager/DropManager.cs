@@ -35,7 +35,7 @@ public class DropManager : MonoBehaviour
                     if (!enemy)
                     {
                         Debug.LogError("敵データが存在しません カードの効果対象が正しいものなのかを確認してください");
-                        continue;
+                        break;
                     }
                     enemy.GetDamage(card);
                     break;
@@ -44,7 +44,12 @@ public class DropManager : MonoBehaviour
                     break;
                 case UseType.ToRandomEnemy:
                     Debug.Log("未作成");
-                    continue;
+                    break;
+                case UseType.System:
+                    Debug.Log("まだ作ってない");
+                    if ((CommandParam)card[0] == CommandParam.AddCard)
+                        Debug.Log($"{(CardID)card[2]}を{card[3]}枚デッキに追加する");
+                    break;
                 default:
                     Debug.Log("例外");
                     break;

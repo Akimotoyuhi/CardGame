@@ -91,6 +91,7 @@ public enum UseType
     ToEnemy,
     ToAll,
     ToRandomEnemy,
+    System,
 }
 /// <summary>カードの使用時の効果が何なのか</summary>
 public enum CommandParam
@@ -98,6 +99,7 @@ public enum CommandParam
     Attack,
     Block,
     Conditon,
+    AddCard,
 }
 #endregion
 /// <summary>カードのデータベース<br/>カードの効果の部分</summary>
@@ -199,4 +201,11 @@ public class CardConditionCommand : ICardCommand
     [SerializeField] ConditionSelection m_condition;
     [SerializeField] UseType m_useType;
     public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
+}
+[Serializable]
+public class AddCardCommand : ICardCommand
+{
+    [SerializeField] int m_addNum;
+    [SerializeField] CardID m_cardID;
+    public int[] Execute() => new int[] { (int)CommandParam.AddCard, (int)UseType.System, (int)m_cardID, m_addNum };
 }
