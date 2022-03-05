@@ -136,7 +136,7 @@ public class CardInfomationData
     [SerializeField] string m_name;
     [SerializeField] string m_cost;
     [SerializeField] Sprite m_image;
-    [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{length0}(数値の部分は配列番号)のように記述する事")]
+    [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{leg0}(数値の部分は配列番号)のように記述する事")]
     [SerializeField] string m_tooltip;
     [SerializeField] Rarity m_rarity;
     [SerializeReference, SubclassSelector] List<ICardCommand> m_commands;

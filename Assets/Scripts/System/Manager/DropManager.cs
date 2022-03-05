@@ -45,7 +45,6 @@ public class DropManager : MonoBehaviour
                 case UseType.ToRandomEnemy:
                     Debug.Log("–¢ì¬");
                     continue;
-                    break;
                 default:
                     Debug.Log("—áŠO");
                     break;

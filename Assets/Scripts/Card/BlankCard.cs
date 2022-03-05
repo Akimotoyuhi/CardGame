@@ -157,28 +157,31 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         string text = m_tooltip;
         m_cardCommand = m_defCardCommand;
-        foreach (var cc in m_cardCommand)
+        if (m_cardState == CardState.Play)
         {
-            CommandParam cp = (CommandParam)cc[0];
-            switch (cp)
+            foreach (var cc in m_cardCommand)
             {
-                case CommandParam.Attack:
-                    //cp.
-                    break;
-                case CommandParam.Block:
-                    break;
-                case CommandParam.Conditon:
-                    break;
-                default:
-                    break;
+                CommandParam cp = (CommandParam)cc[0];
+                switch (cp)
+                {
+                    case CommandParam.Attack:
+                        cc[2] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, cc[2]);
+                        break;
+                    case CommandParam.Block:
+                        cc[2] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, cc[2]);
+                        break;
+                    default:
+                        continue;
+                }
             }
         }
-        MatchCollection match = Regex.Matches(text, "{length([0-9]*)}");
+        MatchCollection match = Regex.Matches(text, "{leg([0-9]*)}");
         foreach (Match m in match)
         {
-            if (m_cardState == CardState.Play)
-
-            Debug.Log(m.Value);
+            int index = int.Parse(m.Groups[1].Value);
+            if (m_cardCommand.Count < index || (CommandParam)m_cardCommand[index][0] == CommandParam.Conditon)
+                continue;
+            text = text.Replace(m.Value, m_cardCommand[index][2].ToString());
         }
         #region 旧形式
         //MatchCollection matches = Regex.Matches(m_tooltip, "{%atk([0-9]*)}");

@@ -20,7 +20,7 @@ MonoBehaviour:
       m_name: "\u65AC\u6483"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "\u6575\uFF11\u4F53\u306B{range0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+      m_tooltip: "\u6575\uFF11\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
       - id: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
       m_name: "\u65AC\u6483+"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "\u6575\uFF11\u4F53\u306B{%atk8}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+      m_tooltip: "\u6575\uFF11\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
       - id: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
       m_name: "\u9632\u5FA1"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "{}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_commands:
       - id: 2
@@ -51,7 +51,7 @@ MonoBehaviour:
       m_name: "\u9632\u5FA1+"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "{%def8}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_commands:
       - id: 3
@@ -62,7 +62,7 @@ MonoBehaviour:
       m_name: "\u9023\u6483"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "{}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u30923\u56DE\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
       - id: 4
@@ -74,7 +74,7 @@ MonoBehaviour:
       m_name: "\u9023\u6483+"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "{%def8}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u30923\u56DE\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
       - id: 5
@@ -108,7 +108,7 @@ MonoBehaviour:
       m_name: "\u3084\u305F\u3089\u3081\u3063\u305F\u3089"
       m_cost: 3
       m_image: {fileID: 0}
-      m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B10\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+      m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 2
       m_commands:
       - id: 10
@@ -119,7 +119,7 @@ MonoBehaviour:
       m_name: "\u3084\u305F\u3089\u3081\u3063\u305F\u3089"
       m_cost: 3
       m_image: {fileID: 0}
-      m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B10\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+      m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 1
       m_commands:
       - id: 5
@@ -131,7 +131,7 @@ MonoBehaviour:
     00000000:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 999
         m_useType: 1
     00000001:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
