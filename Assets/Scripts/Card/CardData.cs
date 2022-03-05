@@ -69,6 +69,10 @@ public enum CardID
     Defense, //スターター
     /// <summary>連撃</summary>
     Burst,
+    /// <summary>虚脱の光</summary>
+    WeaknessLight,
+    /// <summary>やたらめったら</summary>
+    YataraMettara,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

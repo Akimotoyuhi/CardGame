@@ -25,9 +25,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewTooltip;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
     private List<Color> m_cardColor = default;
-    /// <summary>デフォルトカード効果　初期化用</summary>
+    /// <summary>デフォルトカード効果　初期化用<br/>効果の種類(CommandParam), 発動対象(UseType), 効果(int)</summary>
     private List<int[]> m_defCardCommand = new List<int[]>();
-    /// <summary>カード効果</summary>
+    /// <summary>カード効果<br/>効果の種類(CommandParam), 発動対象(UseType), 効果(int)</summary>
     private List<int[]> m_cardCommand = new List<int[]>();
     /// <summary>ドラッグ中フラグ</summary>
     private bool m_isDrag = false;
@@ -149,13 +149,30 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
 
     /// <summary>
-    /// プレイヤーの状態を参照してカードのパラメーターを変える
+    /// プレイヤーの状態を参照してカード内のパラメーターを変える<br/>
     /// 基本ドローした時に呼ばれる
     /// </summary>
     /// <returns></returns>
     public void GetPlayerEffect()
     {
         string text = m_tooltip;
+        m_cardCommand = m_defCardCommand;
+        foreach (var cc in m_cardCommand)
+        {
+            CommandParam cp = (CommandParam)cc[0];
+            switch (cp)
+            {
+                case CommandParam.Attack:
+                    //cp.
+                    break;
+                case CommandParam.Block:
+                    break;
+                case CommandParam.Conditon:
+                    break;
+                default:
+                    break;
+            }
+        }
         MatchCollection match = Regex.Matches(text, "{length([0-9]*)}");
         foreach (Match m in match)
         {
