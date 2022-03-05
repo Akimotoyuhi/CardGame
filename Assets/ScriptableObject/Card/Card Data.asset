@@ -24,6 +24,7 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 0
+      m_cardType: 1
       m_isDiscarding: 0
     m_cardUpgrade:
       m_name: "\u65AC\u6483+"
@@ -33,16 +34,18 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 1
+      m_cardType: 1
       m_isDiscarding: 0
   - m_rabel: "\u9632\u5FA1"
     m_cardInfo:
       m_name: "\u9632\u5FA1"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "{%def5}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_tooltip: "{}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_commands:
       - id: 2
+      m_cardType: 0
       m_isDiscarding: 0
     m_cardUpgrade:
       m_name: "\u9632\u5FA1+"
@@ -52,6 +55,7 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 3
+      m_cardType: 0
       m_isDiscarding: 0
   references:
     version: 1

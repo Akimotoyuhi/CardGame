@@ -41,12 +41,7 @@ public class EnemyBase : CharactorBase, IDrop
 
     public void GetDrop(List<int[]> cardCommand)
     {
-        //Damage(power, block, conditions, false, () =>
-        //{
-        //    //DOTween.KillAll();
-        //    m_isDead = true;
-        //    Dead();
-        //});
+        BattleManager.Instance.DropManager.CardExecute(cardCommand, this);
         m_enemyManager.EnemyDamaged();
     }
 

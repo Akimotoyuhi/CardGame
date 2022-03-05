@@ -142,7 +142,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         //Conditions = carddata.Conditions;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
-        //m_useType = carddata.UseType;
+        m_useType = carddata.UseType;
         m_isDiscarding = carddata.IsDiscarding;
         GetPlayerEffect();
         Setup();
@@ -198,6 +198,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         //BattleManager.Instance.SetHandUI();
         BattleManager.Instance.CardCast();
         m_cardState = CardState.None;
+        m_cardCommand = m_defCardCommand;
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
     }
@@ -258,26 +259,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             if (dropObj == null) continue;
             if (!dropObj.CanDrop(m_useType)) continue;
             dropObj.GetDrop(m_cardCommand);
-            //foreach (var com in m_cardCommand)
-            //{
-            //    CommandParam param = (CommandParam)com[0];
-            //    switch (param)
-            //    {
-            //        case CommandParam.Attack:
-            //            item.GetDrop(com[2], 0, null, (UseType)com[1]);
-            //            break;
-            //        case CommandParam.Block:
-            //            item.GetDrop(0, com[2], null, (UseType)com[1]);
-            //            break;
-            //        case CommandParam.Conditon:
-            //            ConditionSelection cs = new ConditionSelection();
-            //            item.GetDrop(0, 0, cs.SetCondition((ConditionID)com[2], com[3]), (UseType)com[1]);
-            //            break;
-            //        default:
-            //            Debug.LogError("例外");
-            //            break;
-            //    }
-            //}
+            OnCast();
         }
     }
 
