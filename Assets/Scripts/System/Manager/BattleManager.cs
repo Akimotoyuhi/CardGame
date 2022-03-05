@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>プレイヤー初期データ</summary>
     [SerializeField] PlayerStatsData m_playerStatsData;
     /// <summary>プレイヤーのプレハブ</summary>
-    [SerializeField] GameObject m_playerPrefab;
+    [SerializeField] Player m_playerPrefab;
     /// <summary>プレイヤーの配置場所</summary>
     [SerializeField] RectTransform m_playerPos;
     /// <summary>プレイヤークラス</summary>
@@ -28,9 +28,9 @@ public class BattleManager : MonoBehaviour
     /// <summary>敵グループ</summary>
     [SerializeField] GameObject m_enemies;
     /// <summary>敵データ管理クラス</summary>
-    [SerializeField] EnemyData m_enemyData;
+    //[SerializeField] EnemyData m_enemyData;
     /// <summary>敵グループの管理クラス</summary>
-    private EnemyManager m_enemyManager;
+    [SerializeField] EnemyManager m_enemyManager;
     [Header("バトル中のパラメーター管理")]
     /// <summary>経過ターン数</summary>
     private int m_currentTurn = 0;
@@ -51,9 +51,10 @@ public class BattleManager : MonoBehaviour
     /// <summary>戦闘時のUI管理クラス</summary>
     [SerializeField] BattleUIController m_battleUIController;
     /// <summary>ダメージ表示用のテキスト</summary>
-    [SerializeField] GameObject m_damageTextPrefab;
+    //[SerializeField] GameObject m_damageTextPrefab;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
+    [SerializeField] DropManager m_dropManager;
     /// <summary>カメラ</summary>
     [SerializeField] Camera m_camera;
     /// <summary>カードデータ</summary>
@@ -76,6 +77,7 @@ public class BattleManager : MonoBehaviour
     public IObservable<int> TurnBegin => m_turnBegin;
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
+    public DropManager DropManager => m_dropManager;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
     public int CurrentTrun => m_currentTurn;
     #endregion
@@ -187,7 +189,7 @@ public class BattleManager : MonoBehaviour
             }
             GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
         }
-        m_player = Instantiate(m_playerPrefab, m_playerPos).gameObject.GetComponent<Player>();
+        m_player = Instantiate(m_playerPrefab, m_playerPos);
         m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
         {
@@ -195,9 +197,10 @@ public class BattleManager : MonoBehaviour
             CreateCard(nms[0], nms[1]);
         }
         //敵グループ生成
-        if (!m_enemyManager) m_enemyManager = m_enemies.GetComponent<EnemyManager>();
+        //if (!m_enemyManager) m_enemyManager = m_enemies.GetComponent<EnemyManager>();
         m_enemyManager.CreateEnemies(eria);
         m_enemyManager.EnemyCount();
+        m_dropManager.Setup(m_enemyManager, m_player);
     }
 
     /// <summary>
@@ -291,15 +294,7 @@ public class BattleManager : MonoBehaviour
         card.transform.SetParent(m_deck.CardParent, false);
         card.GetPlayerEffect();
     }
-    //public void ViewText(string str, RectTransform tra, ColorType colorType)
-    //{
-    //    DamageText text = Instantiate(m_damageTextPrefab).GetComponent<DamageText>();
-    //    text.transform.SetParent(tra);
-    //    text.transform.position = tra.anchoredPosition;
-    //    text.Color(colorType);
-    //    text.ChangeText(str);
-    //    text.RandomMove();
-    //}
+
     /// <summary>
     /// 手札の全カードのテキストを更新させる
     /// <br/>カード使用時に呼ばれる

@@ -245,7 +245,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (m_cardState != CardState.Play) return;
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
         {
-            Debug.Log($"コストが足りない!\nカードのコスト:{Cost} プレイヤーのコスト:{m_player.CurrrentCost}");
             EffectManager.Instance.SetBattleUIText("コストが足りない！", Color.red, 1f);
             return;
         }
@@ -255,28 +254,30 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         foreach (var hit in result)
         {
             //ドロップされたオブジェクトがドロップを受け付けるインターフェースが実装されていれば自分の情報を渡す
-            IDrop item = hit.gameObject.GetComponent<IDrop>();
-            if (item == null) continue;
-            foreach (var com in m_cardCommand)
-            {
-                CommandParam param = (CommandParam)com[1];
-                switch (param)
-                {
-                    case CommandParam.Attack:
-                        item.GetDrop(com[2], 0, null);
-                        break;
-                    case CommandParam.Block:
-                        item.GetDrop(0, com[2], null);
-                        break;
-                    case CommandParam.Conditon:
-                        ConditionSelection cs = new ConditionSelection();
-                        item.GetDrop(0, 0, cs.SetCondition((ConditionID)com[2], com[3]));
-                        break;
-                    default:
-                        Debug.LogError("例外");
-                        break;
-                }
-            }
+            IDrop dropObj = hit.gameObject.GetComponent<IDrop>();
+            if (dropObj == null) continue;
+            if (!dropObj.CanDrop(m_useType)) continue;
+            dropObj.GetDrop(m_cardCommand);
+            //foreach (var com in m_cardCommand)
+            //{
+            //    CommandParam param = (CommandParam)com[0];
+            //    switch (param)
+            //    {
+            //        case CommandParam.Attack:
+            //            item.GetDrop(com[2], 0, null, (UseType)com[1]);
+            //            break;
+            //        case CommandParam.Block:
+            //            item.GetDrop(0, com[2], null, (UseType)com[1]);
+            //            break;
+            //        case CommandParam.Conditon:
+            //            ConditionSelection cs = new ConditionSelection();
+            //            item.GetDrop(0, 0, cs.SetCondition((ConditionID)com[2], com[3]), (UseType)com[1]);
+            //            break;
+            //        default:
+            //            Debug.LogError("例外");
+            //            break;
+            //    }
+            //}
         }
     }
 

@@ -39,15 +39,48 @@ public class EnemyBase : CharactorBase, IDrop
         else return false;
     }
 
-    public void GetDrop(int power, int block, Condition conditions)
+    public void GetDrop(List<int[]> cardCommand)
     {
-        Damage(power, block, conditions, false, () =>
-        {
-            //DOTween.KillAll();
-            m_isDead = true;
-            Dead();
-        });
+        //Damage(power, block, conditions, false, () =>
+        //{
+        //    //DOTween.KillAll();
+        //    m_isDead = true;
+        //    Dead();
+        //});
         m_enemyManager.EnemyDamaged();
+    }
+
+    public override void GetDamage(int[] cardParam)
+    {
+        CommandParam command = (CommandParam)cardParam[0];
+        switch (command)
+        {
+            case CommandParam.Attack:
+                Damage(cardParam[2], 0, null, false, () =>
+                {
+                    m_isDead = true;
+                    Dead();
+                });
+                break;
+            case CommandParam.Block:
+                Damage(0, cardParam[2], null, false, () =>
+                {
+                    m_isDead = true;
+                    Dead();
+                });
+                break;
+            case CommandParam.Conditon:
+                ConditionSelection cs = new ConditionSelection();
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[2], cardParam[3]), false, () =>
+                {
+                    m_isDead = true;
+                    Dead();
+                });
+                break;
+            default:
+                Debug.LogError("—áŠO");
+                break;
+        }
     }
 
     /// <summary>
@@ -60,7 +93,6 @@ public class EnemyBase : CharactorBase, IDrop
     {
         Damage(damage, block, condition, false, () =>
         {
-            //DOTween.KillAll();
             m_isDead = true;
             Dead();
         });

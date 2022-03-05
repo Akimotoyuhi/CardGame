@@ -23,7 +23,7 @@ public class EffectManager : MonoBehaviour
     /// <summary>パーティクルを止めてから削除するまでの時間</summary>
     [SerializeField] float m_particleDestroyDuration;
     private Text m_text;
-    private Sequence m_particleSequence;
+    //private Sequence m_particleSequence;
 
     public static EffectManager Instance { get; private set; }
 

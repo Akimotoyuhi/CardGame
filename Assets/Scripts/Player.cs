@@ -81,20 +81,43 @@ public class Player : CharactorBase, IDrop
         return false;
     }
 
-    public void GetDrop(int power, int block, Condition condition)
+    public void GetDrop(List<int[]> cardCommand)
     {
-        Damage(power, block, condition, true, () =>
-        {
-            m_image.sprite = m_gameoverSprite;
-            GameManager.Instance.Gameover();
-        });
+        BattleManager.Instance.DropManager.CardExecute(cardCommand);
     }
-    //public override void Damage(int damage, int block, List<Condition> conditions)
-    //{
-    //    //AddEffect(conditions);
-    //    //m_block += block;
-    //    //SetUI();
-    //}
+
+    public override void GetDamage(int[] cardParam)
+    {
+        CommandParam command = (CommandParam)cardParam[0];
+        switch (command)
+        {
+            case CommandParam.Attack:
+                Damage(cardParam[2], 0, null, true, () =>
+                {
+                    m_image.sprite = m_gameoverSprite;
+                    GameManager.Instance.Gameover();
+                });
+                break;
+            case CommandParam.Block:
+                Damage(0, cardParam[2], null, true, () =>
+                {
+                    m_image.sprite = m_gameoverSprite;
+                    GameManager.Instance.Gameover();
+                });
+                break;
+            case CommandParam.Conditon:
+                ConditionSelection cs = new ConditionSelection();
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[2], cardParam[3]), true, () =>
+                {
+                    m_image.sprite = m_gameoverSprite;
+                    GameManager.Instance.Gameover();
+                });
+                break;
+            default:
+                Debug.LogError("例外");
+                break;
+        }
+    }
 
     public void PlayerAnim()
     {

@@ -71,12 +71,12 @@ public class EnemyManager : MonoBehaviour
     /// 敵全体に効果のあるカードが使われた場合に呼ばれる
     /// </summary>
     /// <param name="card"></param>
-    public void AllEnemiesDamage(int power, int block, Condition condition)
+    public void AllEnemiesDamage(int[] cardCommand)
     {
         for (int i = 0; i < m_enemies.Count; i++)
         {
             if (m_enemies[i].IsDead) continue;
-            m_enemies[i].GetDamage(power, block, condition);
+            m_enemies[i].GetDamage(cardCommand);
         }
     }
 

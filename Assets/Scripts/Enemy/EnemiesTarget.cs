@@ -15,8 +15,8 @@ public class EnemiesTarget : MonoBehaviour, IDrop
         if (useType == UseType.ToAll) return true;
         else return false;
     }
-    public void GetDrop(int power, int block, Condition condition)
+    public void GetDrop(List<int[]> cardCommand)
     {
-        m_enemyManager.AllEnemiesDamage(power, block, condition);
+        //m_enemyManager.AllEnemiesDamage(power, block, condition);
     }
 }

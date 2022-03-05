@@ -110,6 +110,11 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
+    /// 被ダメージ情報を受け取る
+    /// </summary>
+    public virtual void GetDamage(int[] cardParam) { }
+
+    /// <summary>
     /// バフデバフを付与された時の加算
     /// </summary>
     /// <param name="condition"></param>
@@ -195,7 +200,7 @@ public class CharactorBase : MonoBehaviour
     /// <summary>
     /// 被ダメージ処理
     /// </summary>
-    public void Damage(int damage, int block, Condition condition, bool isPlayer, Action dead)
+    protected void Damage(int damage, int block, Condition condition, bool isPlayer, Action dead)
     {
         AddEffect(condition);
         if (damage > 0)

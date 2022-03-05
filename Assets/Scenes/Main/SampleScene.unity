@@ -620,6 +620,7 @@ GameObject:
   m_Component:
   - component: {fileID: 164370312}
   - component: {fileID: 164370311}
+  - component: {fileID: 164370313}
   m_Layer: 0
   m_Name: Battle
   m_TagString: Untagged
@@ -640,12 +641,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerStatsData: {fileID: 11400000, guid: 90b25845594935e4082613813d12c510, type: 2}
-  m_playerPrefab: {fileID: 4774533046676721394, guid: bbac139c1fcfaca40b3839a4f9101ec4,
+  m_playerPrefab: {fileID: 4774533046676721406, guid: bbac139c1fcfaca40b3839a4f9101ec4,
     type: 3}
   m_playerPos: {fileID: 636189127}
   m_costViewText: {fileID: 441808998}
   m_enemies: {fileID: 419075627}
-  m_enemyData: {fileID: 11400000, guid: 8febba63acd6ad84e9fbddf3976ebf2b, type: 2}
+  m_enemyManager: {fileID: 419075629}
   m_battleCanvas: {fileID: 685747266}
   m_battleUICanvas: {fileID: 194272880}
   m_deck: {fileID: 1883843276}
@@ -653,9 +654,8 @@ MonoBehaviour:
   m_hand: {fileID: 1016621140}
   m_reward: {fileID: 1644228800}
   m_battleUIController: {fileID: 40818538}
-  m_damageTextPrefab: {fileID: 3589477616511004303, guid: 3fc45f6c1cb5c0e4785baaf4d3032234,
-    type: 3}
   m_rewardNum: 3
+  m_dropManager: {fileID: 164370313}
   m_camera: {fileID: 706788427}
 --- !u!4 &164370312
 Transform:
@@ -673,6 +673,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &164370313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164370310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d486970ba85b42c438b2adf4e6b929fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &172243073
 GameObject:
   m_ObjectHideFlags: 0
@@ -11398,7 +11410,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999704
+  m_Size: 0.79426926
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11680,7 +11692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000067288085}
+  m_AnchoredPosition: {x: 0, y: 0.000104486375}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561

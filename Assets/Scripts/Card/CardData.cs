@@ -84,7 +84,7 @@ public enum UseType
     ToPlayer,
     ToEnemy,
     ToAll,
-    ToRandom,
+    ToRandomEnemy,
 }
 /// <summary>カードの使用時の効果が何なのか</summary>
 public enum CommandParam
@@ -149,7 +149,7 @@ public class CardInfomationData
     /// <summary>レアリティ</summary>
     public Rarity Rarity => m_rarity;
     /// <summary>
-    /// カード使用時の効果<br/>{ 使用対象(UseType), 効果(int) }
+    /// カード使用時の効果<br/>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }
     /// </summary>
     public List<int[]> Command
     {
@@ -170,7 +170,7 @@ public class CardInfomationData
 public interface ICardCommand
 {
     /// <summary>カードを使用した時の効果</summary>
-    /// <returns>{ 使用対象(UseType), 効果の種類(CommandParam), 効果(int) }</returns>
+    /// <returns>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</returns>
     int[] Execute();
 }
 [Serializable]
@@ -178,19 +178,19 @@ public class CardAttackCommand : ICardCommand
 {
     [SerializeField] int m_power;
     [SerializeField] UseType m_useType;
-    public int[] Execute() => new int[] { (int)m_useType, (int)CommandParam.Attack, m_power };
+    public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_useType, m_power };
 }
 [Serializable]
 public class CardBlockCommnad : ICardCommand
 {
     [SerializeField] int m_block;
     [SerializeField] UseType m_useType;
-    public int[] Execute() => new int[] { (int)m_useType, (int)CommandParam.Block, m_block };
+    public int[] Execute() => new int[] { (int)CommandParam.Block, (int)m_useType, m_block };
 }
 [Serializable]
 public class CardConditionCommand : ICardCommand
 {
     [SerializeField] ConditionSelection m_condition;
     [SerializeField] UseType m_useType;
-    public int[] Execute() => new int[] { (int)m_useType, (int)CommandParam.Conditon, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
+    public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }
