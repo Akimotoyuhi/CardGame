@@ -48,7 +48,7 @@ public class DropManager : MonoBehaviour
                 case UseType.System:
                     Debug.Log("まだ作ってない");
                     if ((CommandParam)card[0] == CommandParam.AddCard)
-                        Debug.Log($"{(CardID)card[2]}を{card[3]}枚デッキに追加する");
+                        Debug.Log($"{(CardID)card[2]}を{card[3]}枚{(CardAddDestination)card[4]}に追加する");
                     break;
                 default:
                     Debug.Log("例外");

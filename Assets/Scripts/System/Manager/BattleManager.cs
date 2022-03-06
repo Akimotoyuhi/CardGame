@@ -303,4 +303,27 @@ public class BattleManager : MonoBehaviour
     {
         m_hand.UpdateTooltip();
     }
+
+    /// <summary>
+    /// ê‚ÉƒJ[ƒh‚ğ’Ç‰Á‚·‚é
+    /// </summary>
+    public void AddCard(CardAddDestination addDestination, CardID cardID, int num, int isUpgrade)
+    {
+        switch (addDestination)
+        {
+            case CardAddDestination.ToDeck:
+                for (int i = 0; i < num; i++)
+                {
+                    CardInfomationData c = m_cardData.CardDatas((int)cardID, isUpgrade);
+                }
+                break;
+            case CardAddDestination.ToHand:
+                break;
+            case CardAddDestination.ToDiscard:
+                break;
+            default:
+                Debug.LogError("‘¶İ‚µ‚È‚¢‚Ì’Ç‰Áæ");
+                break;
+        }
+    }
 }

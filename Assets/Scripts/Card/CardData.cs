@@ -73,6 +73,12 @@ public enum CardID
     WeaknessLight,
     /// <summary>やたらめったら</summary>
     YataraMettara,
+    /// <summary>筋力増加</summary>
+    StrengthUp,
+    /// <summary>ガラスのナイフ</summary>
+    GlassKnife,
+    /// <summary>「破片」</summary>
+    Shard,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
@@ -100,6 +106,13 @@ public enum CommandParam
     Block,
     Conditon,
     AddCard,
+}
+/// <summary>カード追加系カードを使用した際のカードの追加先</summary>
+public enum CardAddDestination
+{
+    ToDeck,
+    ToHand,
+    ToDiscard,
 }
 #endregion
 /// <summary>カードのデータベース<br/>カードの効果の部分</summary>
@@ -184,28 +197,34 @@ public interface ICardCommand
 [Serializable]
 public class CardAttackCommand : ICardCommand
 {
-    [SerializeField] int m_power;
-    [SerializeField] UseType m_useType;
+    [SerializeField, Tooltip("何ダメージを与えるか")] int m_power;
+    [SerializeField, Tooltip("付与対象")] UseType m_useType;
     public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_useType, m_power };
 }
 [Serializable]
 public class CardBlockCommnad : ICardCommand
 {
-    [SerializeField] int m_block;
-    [SerializeField] UseType m_useType;
+    [SerializeField, Tooltip("何ブロックを得るか")] int m_block;
+    [SerializeField, Tooltip("付与対象")] UseType m_useType;
     public int[] Execute() => new int[] { (int)CommandParam.Block, (int)m_useType, m_block };
 }
 [Serializable]
 public class CardConditionCommand : ICardCommand
 {
-    [SerializeField] ConditionSelection m_condition;
-    [SerializeField] UseType m_useType;
+    [SerializeField, Tooltip("付与するバフデバフの設定")] ConditionSelection m_condition;
+    [SerializeField, Tooltip("付与対象")] UseType m_useType;
     public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }
 [Serializable]
 public class AddCardCommand : ICardCommand
 {
-    [SerializeField] int m_addNum;
-    [SerializeField] CardID m_cardID;
-    public int[] Execute() => new int[] { (int)CommandParam.AddCard, (int)UseType.System, (int)m_cardID, m_addNum };
+    [SerializeField, Tooltip("カードの追加枚数")] int m_addNum;
+    [SerializeField, Tooltip("追加するカードのID")] CardID m_cardID;
+    [SerializeField, Tooltip("カード追加先")] CardAddDestination m_cardAddDestination;
+    [SerializeField, Tooltip("追加するカードを強化済みにする")] bool m_isUpgrade;
+    public int[] Execute()
+    {
+        int i = m_isUpgrade ? 0 : 1;
+        return new int[] { (int)CommandParam.AddCard, (int)UseType.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
+    }
 }
