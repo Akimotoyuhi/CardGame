@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using DG.Tweening;
 
+/// <summary>カードの状態<br/>何に使用するカードかを設定するため</summary>
 public enum CardState
 {
     None,

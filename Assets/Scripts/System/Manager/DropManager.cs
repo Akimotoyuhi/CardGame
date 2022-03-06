@@ -46,9 +46,9 @@ public class DropManager : MonoBehaviour
                     Debug.Log("–¢ì¬");
                     break;
                 case UseType.System:
-                    Debug.Log("‚Ü‚¾ì‚Á‚Ä‚È‚¢");
                     if ((CommandParam)card[0] == CommandParam.AddCard)
-                        Debug.Log($"{(CardID)card[2]}‚ğ{card[3]}–‡{(CardAddDestination)card[4]}‚É’Ç‰Á‚·‚é");
+                        BattleManager.Instance.AddCard((CardAddDestination)card[4], (CardID)2, card[3], card[5]);
+                        //Debug.Log($"{(CardID)card[2]}‚ğ{card[3]}–‡{(CardAddDestination)card[4]}‚É’Ç‰Á‚·‚é");
                     break;
                 default:
                     Debug.Log("—áŠO");

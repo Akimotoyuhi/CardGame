@@ -309,21 +309,27 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void AddCard(CardAddDestination addDestination, CardID cardID, int num, int isUpgrade)
     {
-        switch (addDestination)
+        for (int i = 0; i < num; i++)
         {
-            case CardAddDestination.ToDeck:
-                for (int i = 0; i < num; i++)
-                {
-                    CardInfomationData c = m_cardData.CardDatas((int)cardID, isUpgrade);
-                }
-                break;
-            case CardAddDestination.ToHand:
-                break;
-            case CardAddDestination.ToDiscard:
-                break;
-            default:
-                Debug.LogError("ë∂ç›ÇµÇ»Ç¢ÇÃí«â¡êÊ");
-                break;
+            CardInfomationData c = m_cardData.CardDatas((int)cardID, isUpgrade);
+            BlankCard b = Instantiate(m_cardPrefab);
+            b.SetInfo(c, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera, m_discard);
+            switch (addDestination)
+            {
+                case CardAddDestination.ToDeck:
+                    b.transform.SetParent(m_deck.CardParent, false);
+                    break;
+                case CardAddDestination.ToHand:
+                    b.transform.SetParent(m_hand.CardParent, false);
+                    b.CardState = CardState.Play;
+                    break;
+                case CardAddDestination.ToDiscard:
+                    b.transform.SetParent(m_discard.CardParent, false);
+                    break;
+                default:
+                    Debug.LogError("ë∂ç›ÇµÇ»Ç¢ÇÃí«â¡êÊ");
+                    break;
+            }
         }
     }
 }
