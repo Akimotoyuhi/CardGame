@@ -230,7 +230,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             m_isAnim = true;
             m_defPos = m_rectTransform.anchoredPosition;
-            m_rectTransform.DOAnchorPosY(m_defPos.y + 50f, 0.05f).OnComplete(() => m_isAnim = false);
+            m_rectTransform.DOAnchorPosY(m_defPos.y + 30f, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
 

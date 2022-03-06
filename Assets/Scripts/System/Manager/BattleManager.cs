@@ -92,6 +92,9 @@ public class BattleManager : MonoBehaviour
         m_cardData = GameManager.Instance.CardData;
         m_cardPrefab = GameManager.Instance.CardPrefab;
         m_cardData.Setup();
+        Vector2 size = m_cardPrefab.gameObject.GetRectTransform().sizeDelta;
+        m_deck.GridLayoutGroupSetting(size);
+        m_discard.GridLayoutGroupSetting(size);
         SetCanvas();
         m_reward.RewardDisabled();
         m_reward.CanvasRectTransform = m_battleUICanvas.GetComponent<RectTransform>();

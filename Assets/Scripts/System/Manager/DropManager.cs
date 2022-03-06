@@ -47,7 +47,7 @@ public class DropManager : MonoBehaviour
                     break;
                 case UseType.System:
                     if ((CommandParam)card[0] == CommandParam.AddCard)
-                        BattleManager.Instance.AddCard((CardAddDestination)card[4], (CardID)2, card[3], card[5]);
+                        BattleManager.Instance.AddCard((CardAddDestination)card[4], (CardID)card[2], card[3], card[5]);
                         //Debug.Log($"{(CardID)card[2]}‚ð{card[3]}–‡{(CardAddDestination)card[4]}‚É’Ç‰Á‚·‚é");
                     break;
                 default:

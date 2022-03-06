@@ -7,6 +7,8 @@ public class CardManagement : MonoBehaviour
     [SerializeField] protected Transform m_cardParent;
     public Transform CardParent => m_cardParent;
     protected Canvas m_canvas = default;
+
+    public virtual void GridLayoutGroupSetting(Vector2 size) { }
     /// <summary>
     /// このクラスの子オブジェクトを全て破棄する
     /// </summary>
