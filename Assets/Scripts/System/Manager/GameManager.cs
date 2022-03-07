@@ -140,9 +140,9 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// プレイヤーデータの保存
     /// </summary>
-    public void PlayerDataSave(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife, int[] cardsID = null, int[] isCardUpgrade = null)
+    public void PlayerDataSave(string name, Sprite idleSprite, Sprite[] AttackedSprite, Sprite gameoverSprite, int maxLife, int currentLife, int[] cardsID = null, int[] isCardUpgrade = null)
     {
-        DataManager.Instance.SavePlayerState(name, idleSprite, gameoverSprite, maxLife, currentLife);
+        DataManager.Instance.SavePlayerState(name, idleSprite, AttackedSprite, gameoverSprite, maxLife, currentLife);
         if (cardsID == null) return;
         for (int i = 0; i < cardsID.Length; i++)
         {
@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
     {
         if (player)
         {
-            PlayerDataSave(player.Name, player.sprite, player.GameoverSprite, player.MaxLife, player.CurrentLife);
+            PlayerDataSave(player.Name, player.sprite, player.AttackedSprite, player.GameoverSprite, player.MaxLife, player.CurrentLife);
             Destroy(player.gameObject);
         }
         DataManager.Instance.Floor++;

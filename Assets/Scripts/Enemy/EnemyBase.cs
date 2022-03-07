@@ -51,26 +51,14 @@ public class EnemyBase : CharactorBase, IDrop
         switch (command)
         {
             case CommandParam.Attack:
-                Damage(cardParam[2], 0, null, false, () =>
-                {
-                    m_isDead = true;
-                    Dead();
-                });
+                Damage(cardParam[2], 0, null, false, () => Dead());
                 break;
             case CommandParam.Block:
-                Damage(0, cardParam[2], null, false, () =>
-                {
-                    m_isDead = true;
-                    Dead();
-                });
+                Damage(0, cardParam[2], null, false, () => Dead());
                 break;
             case CommandParam.Conditon:
                 ConditionSelection cs = new ConditionSelection();
-                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[2], cardParam[3]), false, () =>
-                {
-                    m_isDead = true;
-                    Dead();
-                });
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[2], cardParam[3]), false, () => Dead());
                 break;
             default:
                 Debug.LogError("—áŠO");
@@ -86,11 +74,7 @@ public class EnemyBase : CharactorBase, IDrop
     /// <param name="condition"></param>
     public void GetDamage(int damage, int block, Condition condition)
     {
-        Damage(damage, block, condition, false, () =>
-        {
-            m_isDead = true;
-            Dead();
-        });
+        Damage(damage, block, condition, false, () => Dead());
         m_enemyManager.EnemyDamaged();
     }
 
@@ -114,19 +98,10 @@ public class EnemyBase : CharactorBase, IDrop
             List<Condition> conditions = com.Conditions;
             if (com.Target == TargetType.ToEnemy)
             {
-                Damage(com.Power, com.Block, null, false, () =>
-                {
-                    //DOTween.KillAll();
-                    m_isDead = true;
-                    Dead();
-                });
+                Damage(com.Power, com.Block, null, false, () => Dead());
                 foreach (var condition in com.Conditions)
                 {
-                    Damage(0, 0, condition, false, () =>
-                    {
-                        m_isDead = true;
-                        Dead();
-                    });
+                    Damage(0, 0, condition, false, () => Dead());
                 }
             }
             else
@@ -161,8 +136,12 @@ public class EnemyBase : CharactorBase, IDrop
         }
     }
 
+    /// <summary>
+    /// ‚â‚ç‚ê‚½Žž
+    /// </summary>
     public void Dead()
     {
+        m_isDead = true;
         m_image.DOColor(Color.clear, 0.5f)
             .OnComplete(() =>
             {
@@ -170,7 +149,7 @@ public class EnemyBase : CharactorBase, IDrop
                 m_image.enabled = false;
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    Destroy(transform.GetChild(i).gameObject);
+                    transform.GetChild(i).gameObject.SetActive(false);
                 }
             });
     }

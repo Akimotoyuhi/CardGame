@@ -20,6 +20,8 @@ namespace Mastar
         public string Name { get; private set; }
         /// <summary>通常時の画像</summary>
         public Sprite IdleSprite { get; private set; }
+        /// <summary>攻撃時の画像</summary>
+        public Sprite[] AttackedSprite { get; private set; }
         /// <summary>ゲームオーバー時の画像</summary>
         public Sprite GameoverSprite { get; private set; }
         /// <summary>プレイヤーの現在体力</summary>
@@ -40,10 +42,11 @@ namespace Mastar
         /// <summary>プレイヤーデータがあるか</summary>
         public bool IsPlayerData { get; private set; } = false;
         /// <summary>プレイヤー情報の保存</summary>
-        public void SavePlayerState(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife)
+        public void SavePlayerState(string name, Sprite idleSprite, Sprite[] attackedSprite, Sprite gameoverSprite, int maxLife, int currentLife)
         {
             Name = name;
             IdleSprite = idleSprite;
+            AttackedSprite = attackedSprite;
             GameoverSprite = gameoverSprite;
             MaxLife = maxLife;
             CurrentLife = currentLife;

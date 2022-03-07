@@ -685,6 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d486970ba85b42c438b2adf4e6b929fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerAttackSpriteDuration: 1
 --- !u!1 &172243073
 GameObject:
   m_ObjectHideFlags: 0
@@ -9357,7 +9358,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -263.99997}
-  m_SizeDelta: {x: 1000, y: 100}
+  m_SizeDelta: {x: 1280, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1016621137
 MonoBehaviour:
@@ -11500,7 +11501,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99993527
+  m_Size: 0.84940827
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11782,7 +11783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000114218004}
+  m_AnchoredPosition: {x: 0, y: 0.2643707}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561
@@ -13026,7 +13027,7 @@ MonoBehaviour:
     type: 3}
   m_battleUI: {fileID: 570277563}
   m_particlePrefab:
-  - {fileID: 100004, guid: d205bba4d197a5f45a64abfcc6123c20, type: 3}
+  - {fileID: 100006, guid: 2fdab942587233e42ad5de42efdc56af, type: 3}
   m_particleDestroyDuration: 1
 --- !u!1 &2125065151
 GameObject:
@@ -13747,14 +13748,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf81dee2794e6fb4a8bcf95928508262, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -202,6 +202,7 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     protected void Damage(int damage, int block, Condition condition, bool isPlayer, Action dead)
     {
+        if (IsDead) return;
         AddEffect(condition);
         if (damage > 0)
         {

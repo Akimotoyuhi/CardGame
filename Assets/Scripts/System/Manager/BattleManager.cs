@@ -106,7 +106,7 @@ public class BattleManager : MonoBehaviour
             cards.Add(m_playerStatsData.GetCardData(i));
             isUpgrade.Add(m_playerStatsData.IsUpgrade(i));
         }
-        GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
+        GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.AttackedSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
     }
 
     /// <summary>
@@ -190,10 +190,10 @@ public class BattleManager : MonoBehaviour
                 cards.Add(m_playerStatsData.GetCardData(i));
                 isUpgrade.Add(m_playerStatsData.IsUpgrade(i));
             }
-            GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
+            GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.AttackedSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
         }
         m_player = Instantiate(m_playerPrefab, m_playerPos);
-        m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
+        m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.AttackedSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
         {
             int[] nms = DataManager.Instance.Cards[i];

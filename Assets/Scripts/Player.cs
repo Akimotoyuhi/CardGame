@@ -8,6 +8,7 @@ public class Player : CharactorBase, IDrop
 {
     /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
     private int m_maxCost = 3;
+    private Sprite[] m_attackedSprite;
     private Sprite m_gameoverSprite;
     [SerializeField] int m_cost = default;
     [SerializeField] int m_drowNum = 5;
@@ -17,6 +18,7 @@ public class Player : CharactorBase, IDrop
     public int CurrrentCost { get => m_cost; set => m_cost = value; }
     /// <summary>カードをドローする枚数</summary>
     public int DrowNum { get => m_drowNum; set => m_drowNum = value; }
+    public Sprite[] AttackedSprite => m_attackedSprite;
     public Sprite GameoverSprite => m_gameoverSprite;
     public Player Instance { get; private set; }
 
@@ -45,10 +47,11 @@ public class Player : CharactorBase, IDrop
         SetUI();
     }
 
-    public void SetParam(string name, Sprite idleSprite, Sprite gameoverSprite, int maxLife, int currentLife)
+    public void SetParam(string name, Sprite idleSprite, Sprite[] attackedSprite, Sprite gameoverSprite, int maxLife, int currentLife)
     {
         m_name = name;
         m_sprite = idleSprite;
+        m_attackedSprite = attackedSprite;
         m_gameoverSprite = gameoverSprite;
         m_maxLife = maxLife;
         m_life = currentLife;
@@ -119,8 +122,19 @@ public class Player : CharactorBase, IDrop
         }
     }
 
+    public void AttackSpriteChange(AttackSpriteID attackSpriteID,float duration)
+    {
+        m_image.sprite = m_attackedSprite[(int)attackSpriteID];
+        Observable.Timer(System.TimeSpan.FromSeconds(duration)).Subscribe(_ => m_image.sprite = m_sprite);
+    }
+
     public void PlayerAnim()
     {
         //AttackAnim(true);
     }
+}
+
+public enum AttackSpriteID
+{
+    Slash,
 }

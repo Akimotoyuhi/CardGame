@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class DropManager : MonoBehaviour
 {
+    [SerializeField, Tooltip("プレイヤーの攻撃画像を出す時間")] float m_playerAttackSpriteDuration;
     private EnemyManager m_enemyManager = default;
     private Player m_player = default;
 
@@ -55,5 +56,6 @@ public class DropManager : MonoBehaviour
                     break;
             }
         }
+        m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
     }
 }

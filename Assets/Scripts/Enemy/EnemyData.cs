@@ -50,8 +50,6 @@ public enum EnemyID
     Soldier,
     /// <summary>「見棄てし者」</summary>
     ForsakenOne,
-    /// <summary>クラウンスレイヤー</summary>
-    Crownslayer,
     /// <summary>火炎瓶暴徒</summary>
     CocktailThrower,
     /// <summary>重装兵</summary>

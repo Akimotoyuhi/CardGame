@@ -126,24 +126,6 @@ MonoBehaviour:
         m_condition: []
         m_target: 0
         m_plan: 00000000
-  - m_name: "\u30AF\u30E9\u30A6\u30F3\u30B9\u30EC\u30A4\u30E4\u30FC"
-    m_id: 3
-    m_life: 100
-    m_sprite: {fileID: 0}
-    m_spriteScaleMagnification: 1
-    m_enemyAppearanceEria: 2
-    m_enemyBaseState:
-    - m_conditionalCommand:
-      - m_type: 0
-        m_value: 0
-        m_probability: 0
-        m_isOnlyOnce: 0
-      m_actionCommnad:
-      - m_power: 10
-        m_block: 0
-        m_condition: []
-        m_target: 0
-        m_plan: 00000000
   - m_name: "\u706B\u708E\u74F6\u66B4\u5F92"
     m_id: 4
     m_life: 20
