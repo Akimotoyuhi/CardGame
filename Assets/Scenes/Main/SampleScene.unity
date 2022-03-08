@@ -1700,11 +1700,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: d9fc6c92a521a60409824434d56d7fbe, type: 3}
     m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 9
+    m_MinSize: 8
     m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2566,7 +2566,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: d9fc6c92a521a60409824434d56d7fbe, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -10073,7 +10073,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: d9fc6c92a521a60409824434d56d7fbe, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -10085,7 +10085,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5F37\u5316"
+  m_Text: "\u30AB\u30FC\u30C9\u5F37\u5316"
 --- !u!222 &1239158231
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11142,14 +11142,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 94a11ca23c79a59449e1981873284361, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11501,7 +11501,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99876225
+  m_Size: 0.97940123
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11783,7 +11783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000074150803}
+  m_AnchoredPosition: {x: 0, y: 0.000008209783}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561
@@ -13491,8 +13491,8 @@ MonoBehaviour:
     m_restMinIndex: 2
     m_restMaxIndex: 6
     m_restAbsolutelyIndex: 3
-    m_eliteMinIndex: 2
-    m_eliteMaxIndex: 6
+    m_eliteMinIndex: -1
+    m_eliteMaxIndex: -1
 --- !u!222 &8837727759021719348
 CanvasRenderer:
   m_ObjectHideFlags: 0
