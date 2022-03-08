@@ -198,8 +198,8 @@ MonoBehaviour:
   m_act1EnemyEncountData:
   - m_enemyID: 0000000000000000
   - m_enemyID: 01000000
-  - m_enemyID: 0100000004000000
+  - m_enemyID: 0100000003000000
   m_act1EliteEncountData:
-  - m_enemyID: 05000000
+  - m_enemyID: 04000000
   m_act1BossEncountData:
   - m_enemyID: 02000000

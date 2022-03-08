@@ -224,7 +224,7 @@ public class AddCardCommand : ICardCommand
     [SerializeField, Tooltip("追加するカードを強化済みにする")] bool m_isUpgrade;
     public int[] Execute()
     {
-        int i = m_isUpgrade ? 0 : 1;
+        int i = m_isUpgrade ? 1 : 0;
         return new int[] { (int)CommandParam.AddCard, (int)UseType.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
     }
 }
