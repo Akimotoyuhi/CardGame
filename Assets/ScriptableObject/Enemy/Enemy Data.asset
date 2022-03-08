@@ -127,7 +127,7 @@ MonoBehaviour:
         m_target: 0
         m_plan: 00000000
   - m_name: "\u706B\u708E\u74F6\u66B4\u5F92"
-    m_id: 4
+    m_id: 3
     m_life: 20
     m_sprite: {fileID: 0}
     m_spriteScaleMagnification: 1
@@ -158,7 +158,7 @@ MonoBehaviour:
         m_target: 0
         m_plan: 00000000
   - m_name: "\u91CD\u88C5\u5175"
-    m_id: 5
+    m_id: 4
     m_life: 50
     m_sprite: {fileID: 0}
     m_spriteScaleMagnification: 1.2
