@@ -79,6 +79,16 @@ public enum CardID
     GlassKnife,
     /// <summary>「破片」</summary>
     Shard,
+    /// <summary>鉄壁</summary>
+    IronWall,
+    /// <summary>俊足</summary>
+    SwiftHorse,
+    /// <summary>奇妙な刻印</summary>
+    StrangeEngraving,
+    /// <summary>解かれし力</summary>
+    ReleaseOfSealed,
+    /// <summary>「終末」</summary>
+    Apocalypse,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

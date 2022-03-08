@@ -131,7 +131,7 @@ MonoBehaviour:
       m_name: "\u7B4B\u529B\u5F37\u5316"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "\u81EA\u8EAB\u306B\u7B4B\u529B1\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
+      m_tooltip: "\u7B4B\u529B1\u3092\u5F97\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
       - id: 14
@@ -141,7 +141,7 @@ MonoBehaviour:
       m_name: "\u7B4B\u529B\u5F37\u5316+"
       m_cost: 1
       m_image: {fileID: 0}
-      m_tooltip: "\u81EA\u8EAB\u306B\u7B4B\u529B2\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
+      m_tooltip: "\u7B4B\u529B2\u3092\u5F97\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
       - id: 15
@@ -191,6 +191,113 @@ MonoBehaviour:
       - id: 21
       m_cardType: 1
       m_isDiscarding: 1
+  - m_rabel: "\u9244\u58C1"
+    m_cardInfo:
+      m_name: "\u9244\u58C1"
+      m_cost: 2
+      m_image: {fileID: 0}
+      m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_rarity: 1
+      m_commands:
+      - id: 22
+      m_cardType: 0
+      m_isDiscarding: 0
+    m_cardUpgrade:
+      m_name: "\u9244\u58C1+"
+      m_cost: 2
+      m_image: {fileID: 0}
+      m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_rarity: 1
+      m_commands:
+      - id: 23
+      m_cardType: 0
+      m_isDiscarding: 0
+  - m_rabel: "\u4FCA\u8DB3"
+    m_cardInfo:
+      m_name: "\u4FCA\u8DB3"
+      m_cost: 1
+      m_image: {fileID: 0}
+      m_tooltip: "\u654F\u63771\u3092\u5F97\u308B\n\u5EC3\u68C4"
+      m_rarity: 0
+      m_commands:
+      - id: 24
+      m_cardType: 0
+      m_isDiscarding: 1
+    m_cardUpgrade:
+      m_name: "\u4FCA\u8DB3+"
+      m_cost: 1
+      m_image: {fileID: 0}
+      m_tooltip: "\u654F\u63772\u3092\u5F97\u308B\n\u5EC3\u68C4"
+      m_rarity: 0
+      m_commands:
+      - id: 25
+      m_cardType: 0
+      m_isDiscarding: 1
+  - m_rabel: "\u5947\u5999\u306A\u523B\u5370"
+    m_cardInfo:
+      m_name: "\u5947\u5999\u306A\u523B\u5370"
+      m_cost: 3
+      m_image: {fileID: 0}
+      m_tooltip: "\u89E3\u304B\u308C\u3057\u529B\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
+      m_rarity: 2
+      m_commands:
+      - id: 26
+      m_cardType: 4
+      m_isDiscarding: 1
+    m_cardUpgrade:
+      m_name: "\u5947\u5999\u306A\u523B\u5370+"
+      m_cost: 2
+      m_image: {fileID: 0}
+      m_tooltip: "\u89E3\u304B\u308C\u3057\u529B\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
+      m_rarity: 2
+      m_commands:
+      - id: 27
+      m_cardType: 4
+      m_isDiscarding: 1
+  - m_rabel: "\u89E3\u304B\u308C\u3057\u529B"
+    m_cardInfo:
+      m_name: "\u89E3\u304B\u308C\u3057\u529B"
+      m_cost: 3
+      m_image: {fileID: 0}
+      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
+      m_rarity: 3
+      m_commands:
+      - id: 28
+      - id: 29
+      m_cardType: 4
+      m_isDiscarding: 1
+    m_cardUpgrade:
+      m_name: "\u89E3\u304B\u308C\u3057\u529B"
+      m_cost: 2
+      m_image: {fileID: 0}
+      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
+      m_rarity: 3
+      m_commands:
+      - id: 30
+      - id: 31
+      m_cardType: 4
+      m_isDiscarding: 1
+  - m_rabel: "\u300C\u7D42\u672B\u300D"
+    m_cardInfo:
+      m_name: "\u300C\u7D42\u672B\u300D"
+      m_cost: 3
+      m_image: {fileID: 0}
+      m_tooltip: "\u6575\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+      m_rarity: 3
+      m_commands:
+      - id: 32
+      m_cardType: 2
+      m_isDiscarding: 0
+    m_cardUpgrade:
+      m_name: "\u300C\u7D42\u672B\u300D"
+      m_cost: 3
+      m_image: {fileID: 0}
+      m_tooltip: "\u6575\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
+      m_rarity: 3
+      m_commands:
+      - id: 33
+      m_cardType: 2
+      m_isDiscarding: 0
   references:
     version: 1
     00000000:
@@ -315,3 +422,75 @@ MonoBehaviour:
       data:
         m_power: 3
         m_useType: 1
+    00000016:
+      type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
+      data:
+        m_block: 12
+        m_useType: 0
+    00000017:
+      type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
+      data:
+        m_block: 15
+        m_useType: 0
+    00000018:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 3
+          m_turn: 1
+        m_useType: 0
+    00000019:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 3
+          m_turn: 2
+        m_useType: 0
+    0000001A:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 11
+        m_cardAddDestination: 2
+        m_isUpgrade: 0
+    0000001B:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 11
+        m_cardAddDestination: 2
+        m_isUpgrade: 1
+    0000001C:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 5
+        m_useType: 0
+    0000001D:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 12
+        m_cardAddDestination: 2
+        m_isUpgrade: 0
+    0000001E:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 4
+        m_useType: 0
+    0000001F:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 12
+        m_cardAddDestination: 2
+        m_isUpgrade: 1
+    00000020:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 999999
+        m_useType: 2
+    00000021:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 9999999
+        m_useType: 2
