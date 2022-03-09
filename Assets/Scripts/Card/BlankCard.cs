@@ -134,12 +134,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewImage.sprite = carddata.Sprite;
         m_tooltip = carddata.Tooltip;
         m_carddata = carddata;
-        //Power = carddata.Attack;
-        //AttackNum = carddata.AttackNum;
-        //Block = carddata.Block;
-        //BlockNum = carddata.BlockNum;
         m_cost = carddata.Cost;
-        //Conditions = carddata.Conditions;
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
         m_useType = carddata.UseType;
@@ -212,10 +207,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void OnCast()
     {
         m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
-        m_player.PlayerAnim();
+        //m_player.PlayerAnim();
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         m_isDrag = false;
-        //BattleManager.Instance.SetHandUI();
         BattleManager.Instance.CardCast();
         m_cardState = CardState.None;
         m_cardCommand = m_carddata.Command;

@@ -93,13 +93,13 @@ public class EffectManager : MonoBehaviour
     /// <param name="color">テキストの色</param>
     /// <param name="position">生成位置(anchoredPosition)</param>
     /// <param name="parent">生成するテキストの親</param>
-    public void DamageText(string text, Color color, Vector2 position, Transform parent, bool isScaleChange = false)
+    public void DamageText(string text, Color color, Vector2 position, Transform parent)
     {
         Text txt = Instantiate(m_overfrowTextPrefab);
         Text viewText = txt.SetText(text, Color.clear);
         txt.transform.SetParent(parent, false);
         RectTransform rt = txt.gameObject.GetRectTransform();
-        rt.localScale = isScaleChange ? new Vector2(-1, 1) : Vector2.one;
+        //rt.localScale = isScaleChange ? new Vector2(-1, 1) : Vector2.one;
         rt.anchoredPosition = position;
         float endValueX = Random.Range(-100, 100);
         float endValueY = Random.Range(-100, 100);

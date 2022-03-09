@@ -37,9 +37,23 @@ public class Map : MonoBehaviour
         [SerializeField, Tooltip("絶対に休憩マスを生成する位置")] int m_restAbsolutelyIndex;
         [SerializeField, Tooltip("エリートマスを生成する最小位置")] int m_eliteMinIndex;
         [SerializeField, Tooltip("エリートマスを生成する最大位置")] int m_eliteMaxIndex;
-        public int RestIndex => Random.Range(m_restMinIndex, m_restMaxIndex);
-        public int RestAbsolutelyIndex => m_restAbsolutelyIndex;
-        public int EliteIndex => Random.Range(m_eliteMinIndex, m_eliteMaxIndex);
+        [SerializeField, Tooltip("絶対にエリートマスを生成する位置")] int m_eliteAbsolutelyIndex;
+        public bool RestIndex(int sector)
+        {
+            if (m_restAbsolutelyIndex == sector) return true;
+            if (m_restMinIndex <= sector && m_restMaxIndex >= sector)
+                if (Random.Range(0, 5) == 0)
+                    return true;
+            return false;
+        }
+        public bool EliteIndex(int sector)
+        {
+            if (m_eliteAbsolutelyIndex == sector) return true;
+            if (m_eliteMinIndex <= sector && m_eliteMaxIndex >= sector)
+                if (Random.Range(0, 5) == 0)
+                    return true;
+            return false;
+        }
     }
 
     /// <summary>
@@ -94,11 +108,11 @@ public class Map : MonoBehaviour
         //次のセクターから進むセルを一つ抽選する
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
         c.Step = sectorIndex;
-        if (sectorIndex == m_detailSettings.RestIndex || sectorIndex == m_detailSettings.RestAbsolutelyIndex)
+        if (m_detailSettings.RestIndex(sectorIndex))
         {
             c.SetCellState = CellState.Rest;
         }
-        else if (sectorIndex == m_detailSettings.EliteIndex)
+        else if (m_detailSettings.EliteIndex(sectorIndex))
         {
             c.SetCellState = CellState.Elite;
         }
@@ -192,69 +206,4 @@ public class Map : MonoBehaviour
             }
         }
     }
-
-    /*
-    // 対象となる Canvas
-    [SerializeField]
-    Canvas _targetCanvas;
-    // 始点となる Image
-    [SerializeField]
-    Image _startImage;
-    // 終点となる Image
-    [SerializeField]
-    Image _endImage;
-    // 描画するためのラインとなる Image
-    [SerializeField]
-    Image _lineImage;
-
-    RectTransform _line;
-    GameObject _lineObj;
-
-    Vector2 _startPos = Vector2.zero;
-    Vector2 _endPos = Vector2.zero;
-
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) SetStartPoint();
-        if (Input.GetMouseButton(0)) Drow();
-        if (Input.GetMouseButtonUp(0)) SetEndPoint();
-    }
-
-    void SetStartPoint()
-    {
-        _startPos = Input.mousePosition;
-        GameObject image = Instantiate(_startImage, _startPos, Quaternion.identity).gameObject;
-        image.transform.SetParent(_targetCanvas.transform);
-
-        _lineObj = Instantiate(_lineImage, _startPos, Quaternion.identity).gameObject;
-        _line = _lineObj.GetComponent<RectTransform>();
-        _lineObj.transform.SetParent(_targetCanvas.transform);
-    }
-
-    void Drow()
-    {
-        Vector2 mouse = Input.mousePosition;
-
-        float diffX = mouse.x - _startPos.x;
-        float diffY = mouse.y - _startPos.y;
-
-        // 終点となるImageの方向に向かせる
-        float angle = Mathf.Atan2(diffY, diffX) * Mathf.Rad2Deg;
-        _lineObj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        // 中点の計算
-        float mX = (_startPos.x + mouse.x) / 2;
-        float mY = (_startPos.y + mouse.y) / 2;
-        _lineObj.transform.position = new Vector2(mX, mY);
-        float distance = Vector2.Distance(_startPos, mouse);
-        _line.sizeDelta = new Vector2(distance, _line.rect.height);
-    }
-
-    void SetEndPoint()
-    {
-        _endPos = Input.mousePosition;
-        GameObject image = Instantiate(_endImage, _endPos, Quaternion.identity).gameObject;
-        image.transform.SetParent(_targetCanvas.transform);
-    }
-     */
 }

@@ -213,7 +213,7 @@ public class CharactorBase : MonoBehaviour
             else
             {
                 if (isPlayer) EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);
-                else EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform, true);
+                else EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);
             }
             dmg *= -1; //ブロック値計算の後ダメージの符号が反転してうざいので戻す
             if (dmg <= 0) { }
@@ -232,7 +232,7 @@ public class CharactorBase : MonoBehaviour
                 else
                 {
                     if (isPlayer) EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform);
-                    else EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform, true);
+                    else EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform);
                 }
             }
         }

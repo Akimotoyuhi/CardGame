@@ -18,7 +18,8 @@ public class Cell : MonoBehaviour
     [SerializeField] Image m_endPos;
     /// <summary>セルの状態</summary>
     [SerializeField] CellState m_cellState = default;
-    //[SerializeField] EnemyAppearanceEria m_enemyAppearanceEria = default;
+    /// <summary>テキスト</summary>
+    [SerializeField] Text m_viewText;
     [Header("セルの状態に応じて変わる色の設定")]
     [SerializeField] Color m_enemyColor = Color.red;
     [SerializeField] Color m_restColor = Color.blue;
@@ -96,12 +97,15 @@ public class Cell : MonoBehaviour
         {
             case CellState.Enemy:
                 m_image.color = m_enemyColor;
+                m_viewText.text = "戦闘"; //画像来るまでとりあえず
                 break;
             case CellState.Rest:
                 m_image.color = m_restColor;
+                m_viewText.text = "休憩";
                 break;
             case CellState.Boss:
                 m_image.color = m_bossColor;
+                m_viewText.text = "強敵";
                 break;
             case CellState.Elite:
                 m_image.color = m_eliteColor;
