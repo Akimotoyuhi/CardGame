@@ -30,7 +30,7 @@ public class EnemyBase : CharactorBase, IDrop
         m_sprite = data.Image;
         m_enemyDataBase = data;
         m_enemyManager = enemyManager;
-        transform.localScale = transform.localScale * data.ScaleMagnification;
+        //transform.localScale = transform.localScale * data.ScaleMagnification;
     }
 
     public bool CanDrop(UseType useType)
@@ -129,7 +129,6 @@ public class EnemyBase : CharactorBase, IDrop
             {
                 GameObject g = Instantiate(m_planImage);
                 g.transform.SetParent(m_planImageParent, false);
-                g.transform.localScale = new Vector2(-1, 1);
                 g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn)[i].Plan[n],
                     ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn)[i].Power));
             }

@@ -200,7 +200,6 @@ public class BattleManager : MonoBehaviour
             CreateCard(nms[0], nms[1]);
         }
         //“GƒOƒ‹[ƒv¶¬
-        //if (!m_enemyManager) m_enemyManager = m_enemies.GetComponent<EnemyManager>();
         m_enemyManager.CreateEnemies(eria);
         m_enemyManager.EnemyCount();
         m_dropManager.Setup(m_enemyManager, m_player);
@@ -293,7 +292,7 @@ public class BattleManager : MonoBehaviour
         CardInfomationData cardData;
         cardData = m_cardData.CardDatas(id, upgradeNum);
         card.SetInfo(cardData, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera, m_discard);
-        card.CardState = CardState.Play;
+        card.CardState = CardState.None;
         card.transform.SetParent(m_deck.CardParent, false);
         card.GetPlayerEffect();
     }

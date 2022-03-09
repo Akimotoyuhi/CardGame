@@ -26,10 +26,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewTooltip;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
     private List<Color> m_cardColor = default;
-    /// <summary>デフォルトカード効果　初期化用<br/>効果の種類(CommandParam), 発動対象(UseType), 効果(int)</summary>
-    private List<int[]> m_defCardCommand = new List<int[]>();
     /// <summary>カード効果<br/>効果の種類(CommandParam), 発動対象(UseType), 効果(int)</summary>
     private List<int[]> m_cardCommand = new List<int[]>();
+    /// <summary>このカードのデータ</summary>
+    private CardInfomationData m_carddata;
     /// <summary>ドラッグ中フラグ</summary>
     private bool m_isDrag = false;
     /// <summary>アニメーション中フラグ</summary>
@@ -133,8 +133,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewName.text = carddata.Name;
         m_viewImage.sprite = carddata.Sprite;
         m_tooltip = carddata.Tooltip;
-        m_cardCommand = carddata.Command;
-        m_defCardCommand = carddata.Command;
+        m_carddata = carddata;
         //Power = carddata.Attack;
         //AttackNum = carddata.AttackNum;
         //Block = carddata.Block;
@@ -157,7 +156,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void GetPlayerEffect()
     {
         string text = m_tooltip;
-        m_cardCommand = m_defCardCommand;
+        m_cardCommand = m_carddata.Command;
         if (m_cardState == CardState.Play)
         {
             foreach (var cc in m_cardCommand)
@@ -219,7 +218,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         //BattleManager.Instance.SetHandUI();
         BattleManager.Instance.CardCast();
         m_cardState = CardState.None;
-        m_cardCommand = m_defCardCommand;
+        m_cardCommand = m_carddata.Command;
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
     }
