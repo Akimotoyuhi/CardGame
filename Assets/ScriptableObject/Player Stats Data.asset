@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51801540d30e37f428fa4c629cff8cca, type: 3}
   m_Name: Player Stats Data
   m_EditorClassIdentifier: 
-  m_name: "\u3042\u307F\u3083"
-  m_idleSprite: {fileID: 21300000, guid: 494e93f398d869546b979d744682dc11, type: 3}
-  m_gameoverSprite: {fileID: 21300000, guid: 8c398018614bf30438cb2add334e59af, type: 3}
+  m_name: "\u4E3B\u4EBA\u516C"
+  m_sprite:
+    m_idleSprite: {fileID: 21300000, guid: e208fa10c22b8e147a93028cb2a3adba, type: 3}
+    m_attackedSprite:
+    - {fileID: 21300000, guid: e26d79636a7c9d7418bcd50a2d833652, type: 3}
+    m_gameoverSprite: {fileID: 21300000, guid: e208fa10c22b8e147a93028cb2a3adba, type: 3}
   m_maxHp: 70
   m_cardData:
   - m_cardID: 0
@@ -28,4 +31,6 @@ MonoBehaviour:
   - m_cardID: 1
     m_upgrade: 0
   - m_cardID: 1
+    m_upgrade: 0
+  - m_cardID: 2
     m_upgrade: 0

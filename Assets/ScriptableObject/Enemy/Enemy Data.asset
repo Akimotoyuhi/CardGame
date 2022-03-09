@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Enemy Data
   m_EditorClassIdentifier: 
   m_enemyDataBases:
-  - m_name: "\u30AA\u30EA\u30B8\u30E0\u30B7"
+  - m_name: "\u30AB\u30DE\u30AF\u30B8"
     m_id: 0
     m_life: 15
-    m_sprite: {fileID: 0}
+    m_sprite: {fileID: 21300000, guid: 6210c3ec19e788e46a1828367377826f, type: 3}
     m_spriteScaleMagnification: 1
     m_enemyAppearanceEria: 0
     m_enemyBaseState:
@@ -30,7 +30,7 @@ MonoBehaviour:
         m_block: 0
         m_condition:
         - m_conditionID: 0
-          m_turn: 2
+          m_turn: 1
         m_target: 0
         m_plan: 03000000
     - m_conditionalCommand:

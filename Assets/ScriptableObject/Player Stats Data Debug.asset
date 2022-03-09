@@ -17,7 +17,7 @@ MonoBehaviour:
     m_idleSprite: {fileID: 21300000, guid: e208fa10c22b8e147a93028cb2a3adba, type: 3}
     m_attackedSprite:
     - {fileID: 21300000, guid: e26d79636a7c9d7418bcd50a2d833652, type: 3}
-    m_gameoverSprite: {fileID: 0}
+    m_gameoverSprite: {fileID: 21300000, guid: e208fa10c22b8e147a93028cb2a3adba, type: 3}
   m_maxHp: 70
   m_cardData:
   - m_cardID: 1
