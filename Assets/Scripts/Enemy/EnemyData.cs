@@ -44,12 +44,12 @@ public class EnemyData : ScriptableObject
 /// <summary>敵ID</summary>
 public enum EnemyID
 {
-    /// <summary>オリジムシ</summary>
-    origimusi,
-    /// <summary>レユニオン兵</summary>
-    Soldier,
-    /// <summary>「見棄てし者」</summary>
-    ForsakenOne,
+    /// <summary>カマクジ</summary>
+    Kamakuji,
+    /// <summary>ガイコツ</summary>
+    Skelton,
+    /// <summary>塔の守護者</summary>
+    TowerGuardian,
     /// <summary>火炎瓶暴徒</summary>
     CocktailThrower,
     /// <summary>重装兵</summary>
