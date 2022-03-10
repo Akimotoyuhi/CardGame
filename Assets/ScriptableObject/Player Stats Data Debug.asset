@@ -32,3 +32,5 @@ MonoBehaviour:
     m_upgrade: 0
   - m_cardID: 10
     m_upgrade: 0
+  - m_cardID: 3
+    m_upgrade: 0

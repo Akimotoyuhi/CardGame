@@ -487,10 +487,10 @@ MonoBehaviour:
     00000020:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 999999
+        m_power: 50
         m_useType: 2
     00000021:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 9999999
+        m_power: 60
         m_useType: 2
