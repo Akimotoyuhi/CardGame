@@ -232,8 +232,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -324.41312, y: -186.80981}
-  m_SizeDelta: {x: 591.0262, y: 243.6196}
+  m_AnchoredPosition: {x: -327.48944, y: -186.80981}
+  m_SizeDelta: {x: 597.1789, y: 243.6196}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &426979039
 MonoBehaviour:
@@ -256,8 +256,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: d9fc6c92a521a60409824434d56d7fbe, type: 3}
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u6226\u95D8\u753B\u9762\u2192\n\u753B\u9762\u4E0B\u306B\u4E26\u3093\u3067\u308B\u306E\u304C\u541B\u306E\u30AB\u30FC\u30C9\u3060\n\u30AB\u30FC\u30C9\u3092\u6575\u304B\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u5834\u6240\u306B\u30C9\u30E9\u30C3\u30B0\uFF06\u30C9\u30ED\u30C3\u30D7\u3059\u308B\u3068\u4F7F\u3046\u4E8B\u304C\u51FA\u6765\u308B\u305E\n\u6575\u5168\u3066\u306EHP\u3092\uFF10\u306B\u3059\u308B\u3068\u52DD\u5229\n\n\n\u3042\u3068\u306F\u3084\u308C\u3070\u308F\u304B\u308B"
+  m_Text: "\u6226\u95D8\u753B\u9762\u2192\n\u753B\u9762\u4E0B\u306B\u4E26\u3093\u3067\u308B\u306E\u304C\u541B\u306E\u30AB\u30FC\u30C9\u3060\n\u30AB\u30FC\u30C9\u3092\u6575\u304B\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u5834\u6240\u306B\u30C9\u30E9\u30C3\u30B0\uFF06\u30C9\u30ED\u30C3\u30D7\u3059\u308B\u3068\u4F7F\u3046\u4E8B\u304C\u51FA\u6765\u308B\u305E\n\u6575\u5168\u3066\u306EHP\u3092\uFF10\u306B\u3059\u308B\u3068\u52DD\u5229\n\n\u4ED6\u306B\u5206\u304B\u3089\u306A\u3044\u3082\u306E\u304C\u3042\u3063\u305F\u3089\n\u30DE\u30A6\u30B9\u30AB\u30FC\u30BD\u30EB\u3092\u5F53\u3066\u308B\u3068\u8AAC\u660E\u3057\u3066\u304F\u308C\u308B\u305E"
 --- !u!222 &426979040
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -874,8 +874,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44, y: 61}
-  m_SizeDelta: {x: 266.7864, y: 146.3296}
+  m_AnchoredPosition: {x: 74, y: 61}
+  m_SizeDelta: {x: 225.0085, y: 146.3296}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1189469046
 MonoBehaviour:
