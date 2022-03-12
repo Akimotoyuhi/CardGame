@@ -284,10 +284,23 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         if (m_cardState == CardState.Play)
         {
+            //カードの座標をマウスの座標と合わせる
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
             localPoint.y += 230; //原因は分からないけど座標変換後ちょっとズレるのでそれの修正用
             m_rectTransform.localPosition = localPoint;
+
+            //ドラッグ中はドロップ対象を探し続けて、重なった相手をハイライトさせる
+            //List<RaycastResult> results = new List<RaycastResult>();
+            //EventSystem.current.RaycastAll(eventData, results);
+            //foreach (var hit in results)
+            //{
+            //    IDrop drop = hit.gameObject.GetComponent<IDrop>();
+            //    if (drop != null)
+            //    {
+            //        drop.OnCard(this);
+            //    }
+            //}
         }
     }
 

@@ -11,4 +11,5 @@ public interface IDrop
     void GetDrop(List<int[]> cardCommand);
     /// <summary>ドロップを受け付けるか否か</summary>
     bool CanDrop(UseType useType);
+    void OnCard(BlankCard card);
 }

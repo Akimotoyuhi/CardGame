@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EnemiesTarget : MonoBehaviour, IDrop, IPointerEnterHandler, IPointerExitHandler
+public class EnemiesTarget : MonoBehaviour, IDrop
 {
     [SerializeField] GameObject m_flame;
     public void Setup()
@@ -19,23 +19,20 @@ public class EnemiesTarget : MonoBehaviour, IDrop, IPointerEnterHandler, IPointe
     {
         BattleManager.Instance.DropManager.CardExecute(cardCommand);
     }
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnCard(BlankCard card)
     {
-        Debug.Log("PointerEnter");
-        List<RaycastResult> result = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, result);
-        foreach (var hit in result)
+        StartCoroutine(HighLight(card));
+    }
+    private IEnumerator HighLight(BlankCard card)
+    {
+        while (card)
         {
-            BlankCard card = hit.gameObject.GetComponent<BlankCard>();
-            if (card)
+            if (card.UseType == UseType.ToAllEnemies)
             {
-                Debug.Log("OnCard");
                 m_flame.SetActive(true);
+                yield return null;
             }
         }
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
         m_flame.SetActive(false);
     }
 }

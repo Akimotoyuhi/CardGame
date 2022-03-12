@@ -45,6 +45,14 @@ public class EnemyBase : CharactorBase, IDrop
         m_enemyManager.EnemyDamaged();
     }
 
+    public void OnCard(BlankCard card)
+    {
+        if (card.UseType == UseType.ToEnemy)
+        {
+            Debug.Log("Enemy");
+        }
+    }
+
     public override void GetDamage(int[] cardParam)
     {
         CommandParam command = (CommandParam)cardParam[0];

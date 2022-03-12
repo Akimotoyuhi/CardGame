@@ -89,6 +89,14 @@ public class Player : CharactorBase, IDrop
         BattleManager.Instance.DropManager.CardExecute(cardCommand);
     }
 
+    public void OnCard(BlankCard card)
+    {
+        if (card.UseType == UseType.ToPlayer)
+        {
+            Debug.Log("Player");
+        }
+    }
+
     public override void GetDamage(int[] cardParam)
     {
         CommandParam command = (CommandParam)cardParam[0];
