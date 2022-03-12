@@ -59,10 +59,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private Camera m_camera;
     /// <summary>CanvasのRectTransform</summary>
     private RectTransform m_canvasRect;
-    //public int Power { get; private set; }
-    //public int AttackNum { get; private set; }
-    //public int Block { get; private set; }
-    //public int BlockNum { get; private set; }
     public CardState CardState { set => m_cardState = value; }
     public int Cost
     {
@@ -80,8 +76,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             return ret;
         }
     }
-    //public List<Condition> Conditions { get; private set; }
-    public UseType GetCardType { get => m_useType; }
+    public UseType UseType { get => m_useType; }
     public string Name => m_viewName.text;
 
     private void Setup()
@@ -291,7 +286,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
-            localPoint.y += 230; //原因は分からないけど座標変換後ちょっとズレるので修正用の定数
+            localPoint.y += 230; //原因は分からないけど座標変換後ちょっとズレるのでそれの修正用
             m_rectTransform.localPosition = localPoint;
         }
     }

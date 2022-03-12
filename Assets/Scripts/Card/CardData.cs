@@ -105,7 +105,7 @@ public enum UseType
 {
     ToPlayer,
     ToEnemy,
-    ToAll,
+    ToAllEnemies,
     ToRandomEnemy,
     System,
 }

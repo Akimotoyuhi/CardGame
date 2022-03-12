@@ -36,5 +36,6 @@ HPバーの下にアイコンがあったらマウスカーソルをその位置
 有賀玲さん
 
 ６.お借りした画像
-https://illustimage.com/
-https://assetstore.unity.com/packages/2d/gui/icons/64-flat-game-icons-36440
+illustimage.com/
+assetstore.unity.com/packages/2d/gui/icons/64-flat-game-icons-36440
+azukichi.net

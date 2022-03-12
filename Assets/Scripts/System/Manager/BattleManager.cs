@@ -31,7 +31,8 @@ public class BattleManager : MonoBehaviour
     //[SerializeField] EnemyData m_enemyData;
     /// <summary>敵グループの管理クラス</summary>
     [SerializeField] EnemyManager m_enemyManager;
-    [Header("バトル中のパラメーター管理")]
+    /// <summary>敵グループのDrop対象</summary>
+    [SerializeField] EnemiesTarget m_enemiesTarget;
     /// <summary>経過ターン数</summary>
     private int m_currentTurn = 0;
     #endregion
@@ -61,6 +62,8 @@ public class BattleManager : MonoBehaviour
     private CardData m_cardData;
     /// <summary>カードのプレハブ</summary>
     private BlankCard m_cardPrefab;
+    /// <summary>ドロップ可能なオブジェクト達</summary>
+    private List<IDrop> m_dropObjs = new List<IDrop>();
     /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
@@ -180,7 +183,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="enemyid"></param>
     private void CreateField(EnemyAppearanceEria eria)
     {
-        //デッキとプレイヤー構築
+        //プレイヤー生成
         if (!DataManager.Instance.IsPlayerData)
         {
             List<int> cards = new List<int>();
@@ -194,15 +197,24 @@ public class BattleManager : MonoBehaviour
         }
         m_player = Instantiate(m_playerPrefab, m_playerPos);
         m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.AttackedSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
+        //敵グループ生成
+        m_enemyManager.Setup(m_enemiesTarget);
+        m_enemyManager.CreateEnemies(eria);
+        m_enemyManager.EnemyCount();
+        m_dropManager.Setup(m_enemyManager, m_player);
+        //カード生成
+        //if (m_dropObjs.Count == 0)
+        //{
+        //    foreach (GameObject obj in UnityEngine.Object.FindObjectOfType(typeof(IDrop)))
+        //    {
+
+        //    }
+        //}
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
         {
             int[] nms = DataManager.Instance.Cards[i];
             CreateCard(nms[0], nms[1]);
         }
-        //敵グループ生成
-        m_enemyManager.CreateEnemies(eria);
-        m_enemyManager.EnemyCount();
-        m_dropManager.Setup(m_enemyManager, m_player);
     }
 
     /// <summary>

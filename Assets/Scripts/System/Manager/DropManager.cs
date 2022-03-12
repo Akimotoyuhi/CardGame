@@ -40,7 +40,7 @@ public class DropManager : MonoBehaviour
                     }
                     enemy.GetDamage(card);
                     break;
-                case UseType.ToAll:
+                case UseType.ToAllEnemies:
                     m_enemyManager.AllEnemiesDamage(card);
                     break;
                 case UseType.ToRandomEnemy:

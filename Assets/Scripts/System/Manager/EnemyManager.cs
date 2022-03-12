@@ -15,8 +15,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject m_enemyPrefab;
     /// <summary>敵の親</summary>
     [SerializeField] Transform m_enemyParent;
-    /// <summary>ターゲット</summary>
-    [SerializeField] EnemiesTarget m_enemyTarget;
+    private EnemiesTarget m_enemiesDropTarget;
     /// <summary>現在出現中の全敵データ　戦闘中に使う</summary>
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
     /// <summary>敵の総数。終了判定用</summary>
@@ -26,7 +25,12 @@ public class EnemyManager : MonoBehaviour
     {
         BattleManager.Instance.TurnEnd2.Subscribe(turn => EnemyTrun(turn));
         BattleManager.Instance.TurnBegin.Subscribe(turn => ActionPlan(turn));
-        m_enemyTarget.Setup(this);
+    }
+
+    public void Setup(EnemiesTarget enemiesTarget)
+    {
+        m_enemiesDropTarget = enemiesTarget;
+        m_enemiesDropTarget.Setup();
     }
 
     public void CreateEnemies(EnemyAppearanceEria eria)
