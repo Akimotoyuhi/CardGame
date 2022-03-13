@@ -33,6 +33,10 @@ public class EnemyManager : MonoBehaviour
         m_enemiesDropTarget.Setup();
     }
 
+    /// <summary>
+    /// 敵の生成
+    /// </summary>
+    /// <param name="eria"></param>
     public void CreateEnemies(EnemyAppearanceEria eria)
     {
         List<EnemyDataBase> enemies = m_enemyData.Encount(eria);
@@ -120,6 +124,18 @@ public class EnemyManager : MonoBehaviour
                 Destroy(m_enemyParent.GetChild(i).gameObject);
             }
             Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(i => { BattleManager.Instance.BattleEnd(); }).AddTo(this);
+        }
+    }
+
+    /// <summary>
+    /// カードがドラッグされたことを受け取る
+    /// </summary>
+    /// <param name="useType"></param>
+    public void OnCardDrag(UseType? useType)
+    {
+        for (int i = 0; i < m_enemies.Count; i++)
+        {
+            m_enemies[i].OnCard(useType);
         }
     }
 }

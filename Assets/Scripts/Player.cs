@@ -89,9 +89,9 @@ public class Player : CharactorBase, IDrop
         BattleManager.Instance.DropManager.CardExecute(cardCommand);
     }
 
-    public void OnCard(BlankCard card)
+    public void OnCard(UseType? useType)
     {
-        if (card.UseType == UseType.ToPlayer)
+        if (useType == UseType.ToPlayer)
         {
             Debug.Log("Player");
         }

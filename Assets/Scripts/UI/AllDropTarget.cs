@@ -18,9 +18,9 @@ public class AllDropTarget : MonoBehaviour, IDrop
         BattleManager.Instance.DropManager.CardExecute(card);
     }
 
-    public void OnCard(BlankCard card)
+    public void OnCard(UseType? useType)
     {
-        if (card.UseType == UseType.System)
+        if (useType == UseType.System)
         {
             Debug.Log("System");
         }

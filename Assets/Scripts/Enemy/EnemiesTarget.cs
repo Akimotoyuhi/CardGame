@@ -19,9 +19,16 @@ public class EnemiesTarget : MonoBehaviour, IDrop
     {
         BattleManager.Instance.DropManager.CardExecute(cardCommand);
     }
-    public void OnCard(BlankCard card)
+    public void OnCard(UseType? useType)
     {
-        StartCoroutine(HighLight(card));
+        if (useType == UseType.ToAllEnemies)
+        {
+            m_flame.SetActive(true);
+        }
+        else
+        {
+            m_flame.SetActive(false);
+        }
     }
     private IEnumerator HighLight(BlankCard card)
     {

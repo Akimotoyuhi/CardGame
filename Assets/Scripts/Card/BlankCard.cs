@@ -277,6 +277,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (m_cardState == CardState.Play)
         {
             m_isDrag = true;
+            BattleManager.Instance.OnCardDrag(m_useType);
         }
     }
 
@@ -310,6 +311,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             m_rectTransform.DOAnchorPos(m_defPos, 0.1f)
                 .OnComplete(() => m_isDrag = false);
+            BattleManager.Instance.OnCardDrag(null);
         }
     }
 }

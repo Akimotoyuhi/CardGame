@@ -45,9 +45,9 @@ public class EnemyBase : CharactorBase, IDrop
         m_enemyManager.EnemyDamaged();
     }
 
-    public void OnCard(BlankCard card)
+    public void OnCard(UseType? useType)
     {
-        if (card.UseType == UseType.ToEnemy)
+        if (useType == UseType.ToEnemy)
         {
             Debug.Log("Enemy");
         }

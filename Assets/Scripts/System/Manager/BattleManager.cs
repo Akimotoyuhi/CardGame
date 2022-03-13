@@ -47,12 +47,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Discard m_discard;
     /// <summary>手札</summary>
     [SerializeField] Hand m_hand;
+    /// <summary>全てのドロップを受け取るクラス</summary>
+    [SerializeField] AllDropTarget m_allDropTarget;
     /// <summary>報酬画面</summary>
     [SerializeField] Reward m_reward;
     /// <summary>戦闘時のUI管理クラス</summary>
     [SerializeField] BattleUIController m_battleUIController;
-    /// <summary>ダメージ表示用のテキスト</summary>
-    //[SerializeField] GameObject m_damageTextPrefab;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
     [SerializeField] DropManager m_dropManager;
@@ -62,8 +62,8 @@ public class BattleManager : MonoBehaviour
     private CardData m_cardData;
     /// <summary>カードのプレハブ</summary>
     private BlankCard m_cardPrefab;
-    /// <summary>ドロップ可能なオブジェクト達</summary>
-    private List<IDrop> m_dropObjs = new List<IDrop>();
+    /// <summary>ドラッグ中のカードのUseType保存用</summary>
+    private UseType? m_dragCardUseType = null;
     /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
@@ -345,5 +345,13 @@ public class BattleManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void OnCardDrag(UseType? useType)
+    {
+        m_enemiesTarget.OnCard(useType);
+        m_player.OnCard(useType);
+        m_allDropTarget.OnCard(useType);
+        m_enemyManager.OnCardDrag(useType);
     }
 }
