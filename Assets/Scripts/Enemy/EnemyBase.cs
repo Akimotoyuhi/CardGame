@@ -47,10 +47,8 @@ public class EnemyBase : CharactorBase, IDrop
 
     public void OnCard(UseType? useType)
     {
-        if (useType == UseType.ToEnemy)
-        {
-            Debug.Log("Enemy");
-        }
+        if (useType == UseType.ToEnemy) m_flame.SetActive(true);
+        else m_flame.SetActive(false);
     }
 
     public override void GetDamage(int[] cardParam)

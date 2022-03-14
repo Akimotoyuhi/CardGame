@@ -40,11 +40,7 @@ public class Player : CharactorBase, IDrop
 
     protected override void SetUp()
     {
-        GetComponent<Image>().sprite = m_sprite;
-        m_hpSlider.maxValue = m_maxLife;
-        m_hpSlider.value = m_life;
-        m_blkSlider.value = m_block;
-        SetUI();
+        base.SetUp();
     }
 
     public void SetParam(string name, Sprite idleSprite, Sprite[] attackedSprite, Sprite gameoverSprite, int maxLife, int currentLife)
@@ -91,10 +87,8 @@ public class Player : CharactorBase, IDrop
 
     public void OnCard(UseType? useType)
     {
-        if (useType == UseType.ToPlayer)
-        {
-            Debug.Log("Player");
-        }
+        if (useType == UseType.ToPlayer) m_flame.SetActive(true);
+        else m_flame.SetActive(false);
     }
 
     public override void GetDamage(int[] cardParam)

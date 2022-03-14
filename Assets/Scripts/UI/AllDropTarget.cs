@@ -7,6 +7,14 @@ using UnityEngine;
 /// </summary>
 public class AllDropTarget : MonoBehaviour, IDrop
 {
+    /// <summary>ドロップ可能箇所を示すフレーム</summary>
+    [SerializeField] GameObject m_flame;
+
+    private void Start()
+    {
+        m_flame.SetActive(false);
+    }
+
     public bool CanDrop(UseType useType)
     {
         if (useType == UseType.System) return true;
@@ -20,9 +28,7 @@ public class AllDropTarget : MonoBehaviour, IDrop
 
     public void OnCard(UseType? useType)
     {
-        if (useType == UseType.System)
-        {
-            Debug.Log("System");
-        }
+        if (useType == UseType.System) m_flame.SetActive(true);
+        else m_flame.SetActive(false);
     }
 }

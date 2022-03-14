@@ -21,25 +21,7 @@ public class EnemiesTarget : MonoBehaviour, IDrop
     }
     public void OnCard(UseType? useType)
     {
-        if (useType == UseType.ToAllEnemies)
-        {
-            m_flame.SetActive(true);
-        }
-        else
-        {
-            m_flame.SetActive(false);
-        }
-    }
-    private IEnumerator HighLight(BlankCard card)
-    {
-        while (card)
-        {
-            if (card.UseType == UseType.ToAllEnemies)
-            {
-                m_flame.SetActive(true);
-                yield return null;
-            }
-        }
-        m_flame.SetActive(false);
+        if (useType == UseType.ToAllEnemies) m_flame.SetActive(true);
+        else m_flame.SetActive(false);
     }
 }

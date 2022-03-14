@@ -31,8 +31,9 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] GameObject m_conditionUIPrefab;
     /// <summary>バフデバフアイコンを表示するオブジェクトのプレハブの親</summary>
     [SerializeField] Transform m_conditionUIParent;
-    /// <summary>image</summary>
     [SerializeField] protected Image m_image;
+    /// <summary>キャラ画像のフレーム</summary>
+    [SerializeField] protected GameObject m_flame;
     /// <summary>死んでる判定</summary>
     protected bool m_isDead = false;
     /// <summary>敵かどうか</summary>
@@ -63,6 +64,7 @@ public class CharactorBase : MonoBehaviour
     protected enum GetCardType { Damage, Block }
     protected virtual void SetUp()
     {
+        m_flame.SetActive(false);
         GetComponent<Image>().sprite = m_sprite;
         m_life = m_maxLife;
         m_hpSlider.maxValue = m_maxLife;

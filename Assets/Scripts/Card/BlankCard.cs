@@ -202,7 +202,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void OnCast()
     {
         m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
-        //m_player.PlayerAnim();
+        BattleManager.Instance.OnCardDrag(null);
         BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         m_isDrag = false;
         BattleManager.Instance.CardCast();
