@@ -164,7 +164,7 @@ public class CardInfomationData
     [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{leg0}(数値の部分は配列番号)のように記述する事")]
     [SerializeField] string m_tooltip;
     [SerializeField] Rarity m_rarity;
-    [SerializeReference, SubclassSelector] List<ICardCommand> m_commands;
+    [SerializeReference, SubclassSelector] List<ICommand> m_commands;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
     /// <summary>カードの名前</summary>
@@ -198,35 +198,35 @@ public class CardInfomationData
     public bool IsDiscarding => m_isDiscarding;
 }
 
-public interface ICardCommand
+public interface ICommand
 {
     /// <summary>カードを使用した時の効果</summary>
     /// <returns>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</returns>
     int[] Execute();
 }
 [Serializable]
-public class CardAttackCommand : ICardCommand
+public class CardAttackCommand : ICommand
 {
     [SerializeField, Tooltip("何ダメージを与えるか")] int m_power;
     [SerializeField, Tooltip("付与対象")] UseType m_useType;
     public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_useType, m_power };
 }
 [Serializable]
-public class CardBlockCommnad : ICardCommand
+public class CardBlockCommnad : ICommand
 {
     [SerializeField, Tooltip("何ブロックを得るか")] int m_block;
     [SerializeField, Tooltip("付与対象")] UseType m_useType;
     public int[] Execute() => new int[] { (int)CommandParam.Block, (int)m_useType, m_block };
 }
 [Serializable]
-public class CardConditionCommand : ICardCommand
+public class CardConditionCommand : ICommand
 {
     [SerializeField, Tooltip("付与するバフデバフの設定")] ConditionSelection m_condition;
     [SerializeField, Tooltip("付与対象")] UseType m_useType;
     public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }
 [Serializable]
-public class AddCardCommand : ICardCommand
+public class AddCardCommand : ICommand
 {
     [SerializeField, Tooltip("カードの追加枚数")] int m_addNum;
     [SerializeField, Tooltip("追加するカードのID")] CardID m_cardID;

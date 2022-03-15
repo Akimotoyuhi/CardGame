@@ -20,6 +20,7 @@ public enum CardState
 /// </summary>
 public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
+    #region field
     [SerializeField] Text m_viewCost;
     [SerializeField] Text m_viewName;
     [SerializeField] Image m_viewImage;
@@ -59,6 +60,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private Camera m_camera;
     /// <summary>CanvasのRectTransform</summary>
     private RectTransform m_canvasRect;
+    #endregion
     public CardState CardState { set => m_cardState = value; }
     public int Cost
     {
@@ -173,24 +175,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                 continue;
             text = text.Replace(m.Value, m_cardCommand[index][2].ToString());
         }
-        #region 旧形式
-        //MatchCollection matches = Regex.Matches(m_tooltip, "{%atk([0-9]*)}");
-        //foreach (Match m in matches)
-        //{
-        //    int index = int.Parse(m.Groups[1].Value);
-        //    if (m_cardState == CardState.Play) { Power = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, int.Parse(m.Groups[1].Value)); }
-        //    else Power = int.Parse(m.Groups[1].Value);
-        //    text = text.Replace(m.Value, Power.ToString());
-        //}
-        //matches = Regex.Matches(m_tooltip, "{%def([0-9]*)}");
-        //foreach (Match m in matches)
-        //{
-        //    int index = int.Parse(m.Groups[1].Value);
-        //    if (m_cardState == CardState.Play) { Block = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, int.Parse(m.Groups[1].Value)); }
-        //    else Block = int.Parse(m.Groups[1].Value);
-        //    text = text.Replace(m.Value, Block.ToString());
-        //}
-        #endregion
         SetText(text);
     }
 
@@ -199,6 +183,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_viewTooltip.text = text;
     }
 
+    /// <summary>
+    /// 使用後の処理
+    /// </summary>
     public void OnCast()
     {
         m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
