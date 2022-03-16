@@ -8,9 +8,9 @@ public class RelicData : ScriptableObject
     [SerializeField] List<RelicDataBase> m_relicDataBases;
     public void Setup()
     {
-        foreach (var item in m_relicDataBases)
+        for (int i = 0; i < m_relicDataBases.Count; i++)
         {
-            item.Setup();
+            m_relicDataBases[i].Setup((RelicID)i);
         }
     }
 
@@ -52,9 +52,11 @@ public class RelicDataBase
     public Sprite Sprite => m_sprite;
     public RelicCommand Command => m_command;
     public RelicConditional Conditional => m_conditional;
-    public void Setup()
+    public RelicID RelicID { get; private set; }
+    public void Setup(RelicID relicID)
     {
         m_conditional.Setup();
+        RelicID = relicID;
     }
 }
 /// <summary>ƒŒƒŠƒbƒN‚Ì”­“®Žž‚ÌŒø‰Ê</summary>

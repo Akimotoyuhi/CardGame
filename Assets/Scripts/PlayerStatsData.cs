@@ -9,6 +9,7 @@ public class PlayerStatsData : ScriptableObject
     [SerializeField] PlayerSprite m_sprite;
     [SerializeField] int m_maxHp;
     [SerializeField] List<HaveCardData> m_cardData;
+    [SerializeField] List<HaveRelicData> m_relicData;
     [System.Serializable]
     public class PlayerSprite
     {
@@ -27,6 +28,12 @@ public class PlayerStatsData : ScriptableObject
         public CardID CardID => m_cardID;
         public int Upgrade => m_upgrade;
     }
+    [System.Serializable]
+    public class HaveRelicData
+    {
+        [SerializeField, Tooltip("開始時に所持しているレリックID")] RelicID m_relicID;
+        public RelicID RelicID => m_relicID;
+    }
     public string Name => m_name;
     public Sprite IdleSprite => m_sprite.IdleSprite;
     public Sprite[] AttackedSprite => m_sprite.AttackedSprite;
@@ -35,4 +42,5 @@ public class PlayerStatsData : ScriptableObject
     public int GetCardData(int index) => (int)m_cardData[index].CardID;
     public int IsUpgrade(int index) => m_cardData[index].Upgrade;
     public int GetCardLength => m_cardData.Count;
+    public int GetRelicData(int index) => (int)m_relicData[index].RelicID;
 }
