@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PlayerDataSave(string name, Sprite idleSprite, Sprite[] AttackedSprite, Sprite gameoverSprite, int maxLife, int currentLife, int[] cardsID = null, int[] isCardUpgrade = null)
     {
-        if (cardsID == null || DataManager.Instance.IsPlayerData) return; //既に保存されたデータが存在する場合は保存しない
+        if (cardsID == null) return;
         DataManager.Instance.SavePlayerState(name, idleSprite, AttackedSprite, gameoverSprite, maxLife, currentLife);
         for (int i = 0; i < cardsID.Length; i++)
         {
@@ -294,6 +294,7 @@ public class GameManager : MonoBehaviour
     public void GUIUpdate()
     {
         DG.Tweening.DOTween.KillAll();
+        DataManager.Instance.Init();
         DataManager.Instance.Floor = m_step;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

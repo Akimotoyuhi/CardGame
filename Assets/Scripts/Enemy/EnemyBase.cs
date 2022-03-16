@@ -47,6 +47,7 @@ public class EnemyBase : CharactorBase, IDrop
 
     public void OnCard(UseType? useType)
     {
+        if (m_isDead) return;
         if (useType == UseType.ToEnemy) m_flame.SetActive(true);
         else m_flame.SetActive(false);
     }
