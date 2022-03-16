@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] CardData m_cardData;
     /// <summary>カードのプレハブ</summary>
     [SerializeField] BlankCard m_cardPrefab;
+    /// <summary>レリックデータ</summary>
+    [SerializeField] RelicData m_relicData;
+    /// <summary>レリックのプレハブ</summary>
+    [SerializeField] Relic m_relicPrefab;
     /// <summary>Relicの画像の親</summary>
     [SerializeField] Transform m_relicParent;
     /// <summary>カードを表示させるためのCanvas</summary>
@@ -39,12 +43,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameoverScreen m_gameoverScreen;
     /// <summary>ゲームオーバー時のフェードアウトまでの時間</summary>
     [SerializeField] float m_gameoverFadeDuration = 3;
+    /// <summary>現在プレイヤーが所持しているレリック</summary>
+    private List<Relic> m_haveRelics = new List<Relic>();
     private Subject<int> m_onSceneReload = new Subject<int>();
 
     public static GameManager Instance { get; private set; }
     public int Step => DataManager.Instance.Floor;
     public CardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
+    public RelicData RelicData => m_relicData;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
     public IObservable<int> OnSceneReload => m_onSceneReload;
@@ -59,16 +66,6 @@ public class GameManager : MonoBehaviour
             UnityEngine.Random.InitState(seed);
             Debug.Log("シード値:" + seed);
         }
-
-        //int[] nums = new int[10];
-        //for (int i = 0; i < nums.Length; i++)
-        //{
-        //    nums[i] = UnityEngine.Random.Range(0, 100);
-        //}
-        //foreach (var item in nums)
-        //{
-        //    Debug.Log(item);
-        //}
     }
 
     void Start()
@@ -82,6 +79,7 @@ public class GameManager : MonoBehaviour
         m_step = DataManager.Instance.Floor;
         BattleManager.Instance.Setup();
         SetGameInfoPanel();
+        m_relicData.Setup();
     }
 
     /// <summary>
@@ -142,8 +140,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PlayerDataSave(string name, Sprite idleSprite, Sprite[] AttackedSprite, Sprite gameoverSprite, int maxLife, int currentLife, int[] cardsID = null, int[] isCardUpgrade = null)
     {
+        if (cardsID == null || DataManager.Instance.IsPlayerData) return; //既に保存されたデータが存在する場合は保存しない
         DataManager.Instance.SavePlayerState(name, idleSprite, AttackedSprite, gameoverSprite, maxLife, currentLife);
-        if (cardsID == null) return;
         for (int i = 0; i < cardsID.Length; i++)
         {
             DataManager.Instance.AddCards(cardsID[i], isCardUpgrade[i]);
@@ -235,7 +233,7 @@ public class GameManager : MonoBehaviour
             Destroy(player.gameObject);
         }
         DataManager.Instance.Floor++;
-        if (m_map.ClearCheck(DataManager.Instance.Floor)) Gameover();
+        if (m_map.ClearCheck(DataManager.Instance.Floor)) Gameover(true);
         SetGameInfoPanel();
         m_step = DataManager.Instance.Floor;
         m_map.AllColorChange();
@@ -254,14 +252,14 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// ゲームオーバー
     /// </summary>
-    public void Gameover()
+    public void Gameover(bool isCrear = false)
     {
         BattleManager.Instance.IsGame = false;
         Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ =>
         {
             EffectManager.Instance.Fade(Color.black, m_gameoverFadeDuration, () =>
             {
-                m_gameoverScreen.ShowPanel(DataManager.Instance.Cards.Count, Step);
+                m_gameoverScreen.ShowPanel(DataManager.Instance.Cards.Count, Step, isCrear);
                 EffectManager.Instance.Fade(Color.clear, 0);
             });
         });

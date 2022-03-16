@@ -15,6 +15,8 @@ public class GameoverScreen : MonoBehaviour
     [SerializeField] float m_textDuration;
     /// <summary>ゲームオーバー時に表示される文字列</summary>
     [SerializeField, TextArea] string m_gameoverText;
+    /// <summary>ゲームクリア時に表示される文字列</summary>
+    [SerializeField, TextArea] string m_gamecrearText;
     [SerializeField] GameObject m_retryButton;
     [SerializeField] GameObject m_titleButton;
 
@@ -29,11 +31,11 @@ public class GameoverScreen : MonoBehaviour
     /// </summary>
     /// <param name="haveCardNum">所持カード枚数</param>
     /// <param name="step">ゲーム進行度</param>
-    public void ShowPanel(int haveCardNum, int step)
+    public void ShowPanel(int haveCardNum, int step, bool isCrear)
     {
         m_panel.SetActive(true);
         m_text.text = default;
-        m_text.DOText(SetGameoverText(haveCardNum, step), m_textDuration).
+        m_text.DOText(SetGameoverText(haveCardNum, step, isCrear), m_textDuration).
             OnComplete(() =>
             {
                 m_retryButton.SetActive(true);
@@ -46,9 +48,11 @@ public class GameoverScreen : MonoBehaviour
     /// <param name="haveCardNum">所持カード枚数</param>
     /// <param name="step">ゲーム進行度</param>
     /// <returns>置き換え後のテキスト</returns>
-    private string SetGameoverText(int haveCardNum, int step)
+    private string SetGameoverText(int haveCardNum, int step, bool isCrear)
     {
-        string ret = m_gameoverText;
+        string ret = default;
+        if (isCrear) ret = m_gamecrearText;
+        else ret = m_gameoverText;
         MatchCollection matchs = Regex.Matches(ret, "{%haveCard}");
         foreach (Match m in matchs)
         {
