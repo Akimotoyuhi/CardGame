@@ -208,8 +208,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (!m_player) return;
         if (Cost <= m_player.CurrrentCost)
             m_viewCost.color = Color.black;
-        //else if (m_cardState != CardState.Play)
-        //    m_viewCost.color = Color.black;
+        else if (m_cardState != CardState.Play)
+            m_viewCost.color = Color.black;
         else
             m_viewCost.color = Color.red;
     }
