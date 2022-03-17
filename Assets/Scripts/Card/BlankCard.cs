@@ -176,6 +176,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             text = text.Replace(m.Value, m_cardCommand[index][2].ToString());
         }
         SetText(text);
+        UpdateCostText();
     }
 
     public void SetText(string text)
@@ -198,6 +199,22 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
     }
+
+    /// <summary>
+    /// プレイヤーのコストによってカード左上のコストの色を変化させる
+    /// </summary>
+    private void UpdateCostText()
+    {
+        if (!m_player) return;
+        if (Cost <= m_player.CurrrentCost)
+            m_viewCost.color = Color.black;
+        //else if (m_cardState != CardState.Play)
+        //    m_viewCost.color = Color.black;
+        else
+            m_viewCost.color = Color.red;
+    }
+
+    //以下インターフェース
 
     public void OnPointerEnter(PointerEventData eventData)
     {

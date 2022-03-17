@@ -17,11 +17,15 @@ public class Hand : CardManagement
             m_cardParent.GetChild(i).SetParent(m_discard.CardParent, false);
         }
     }
+    /// <summary>
+    /// カードのTooltipの更新
+    /// </summary>
     public void UpdateTooltip()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).GetComponent<BlankCard>().GetPlayerEffect();
+            BlankCard card = transform.GetChild(i).GetComponent<BlankCard>();
+            card.GetPlayerEffect();
         }
     }
 }
