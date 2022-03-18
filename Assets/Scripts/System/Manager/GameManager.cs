@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public CardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
     public RelicData RelicData => m_relicData;
+    public List<Relic> HaveRelics => m_haveRelics;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
     public IObservable<int> OnSceneReload => m_onSceneReload;

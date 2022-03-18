@@ -25,11 +25,13 @@ public class Cell : MonoBehaviour
     [SerializeField] Color m_restColor = Color.blue;
     [SerializeField] Color m_bossColor = Color.red;
     [SerializeField] Color m_eliteColor = Color.red;
+    private Map m_map;
     private List<int> m_nextCellList = new List<int>();
     /// <summary>このセルで出現するエンカウントID</summary>
     public int m_encountId = default;
     /// <summary>点滅アニメーション用</summary>
     private Sequence m_sequence;
+    public Map Map { set => m_map = value; }
     /// <summary>生成済みフラグ とりあえず</summary>
     public bool CreatedFlag { get; set; } = false;
     public CellState SetCellState
@@ -40,14 +42,6 @@ public class Cell : MonoBehaviour
             ColorChange();
         }
     }
-    //public EnemyAppearanceEria EnemyAppearanceEria
-    //{
-    //    set
-    //    {
-    //        m_enemyAppearanceEria = value;
-    //        ColorChange();
-    //    }
-    //}
     /// <summary>このセルが所属するセクター番号</summary>
     public int SectorIndex { get; set; }
     /// <summary>このセルが所属するステップ数</summary>
@@ -58,13 +52,14 @@ public class Cell : MonoBehaviour
 
     public void OnClick()
     {
+        if (m_map.IsClick) return;
+        m_map.IsClick = true;
         if (GameManager.Instance.Step != Step)
         {
             Debug.Log("選択不可");
             return;
         }
         DOTween.KillAll();
-        //とりあえず
         GameManager.Instance.OnClick(m_cellState);
     }
 

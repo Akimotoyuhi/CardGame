@@ -55,7 +55,8 @@ public class Map : MonoBehaviour
             return false;
         }
     }
-
+    /// <summary>セルのクリック可否フラグ</summary>
+    public bool IsClick { get; set; }
     /// <summary>
     /// セルの生成と配置
     /// </summary>
@@ -90,6 +91,7 @@ public class Map : MonoBehaviour
                     //cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
                 }
             }
+            cell.Map = this;
             m_sectorLocation[i] = sector;
             sector.transform.SetParent(m_parentSector, false);
         }
@@ -158,6 +160,7 @@ public class Map : MonoBehaviour
     /// </summary>
     public void AllColorChange()
     {
+        IsClick = false;
         for (int i = 0; i < m_sectorLocation.Length; i++)
         {
             for (int n = 0; n < m_sectorLocation[i].transform.childCount; n++)
