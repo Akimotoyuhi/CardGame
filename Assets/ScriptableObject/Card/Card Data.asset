@@ -298,6 +298,50 @@ MonoBehaviour:
       - id: 33
       m_cardType: 2
       m_isDiscarding: 0
+  - m_rabel: "\u30EA\u30D5\u30EC\u30AF\u30C8"
+    m_cardInfo:
+      m_name: "\u30EA\u30D5\u30EC\u30AF\u30C8"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: 4ac5fb8d933238b4c8574bf420ae3605, type: 3}
+      m_tooltip: "\u81EA\u8EAB\u304C\u30D7\u30EC\u30FC\u30C8\u30A2\u30FC\u30DE\u30FC3\u3092\u5F97\u308B\n\u5EC3\u68C4"
+      m_rarity: 0
+      m_commands:
+      - id: 34
+      m_cardType: 0
+      m_isDiscarding: 1
+    m_cardUpgrade:
+      m_name: "\u30EA\u30D5\u30EC\u30AF\u30C8+"
+      m_cost: 0
+      m_image: {fileID: 21300000, guid: 4ac5fb8d933238b4c8574bf420ae3605, type: 3}
+      m_tooltip: "\u81EA\u8EAB\u304C\u30D7\u30EC\u30FC\u30C8\u30A2\u30FC\u30DE\u30FC3\u3092\u5F97\u308B\n\u5EC3\u68C4"
+      m_rarity: 0
+      m_commands:
+      - id: 35
+      m_cardType: 0
+      m_isDiscarding: 1
+  - m_rabel: "\u7121\u9650\u306E\u5263"
+    m_cardInfo:
+      m_name: "\u7121\u9650\u306E\u5263"
+      m_cost: 0
+      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u6368\u3066\u672D\u306B\u7121\u9650\u306E\u5263\u3092\u4E00\u679A\u52A0\u3048\u308B"
+      m_rarity: 1
+      m_commands:
+      - id: 36
+      - id: 37
+      m_cardType: 1
+      m_isDiscarding: 0
+    m_cardUpgrade:
+      m_name: "\u7121\u9650\u306E\u5263+"
+      m_cost: 0
+      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u6368\u3066\u672D\u306B\u7121\u9650\u306E\u5263+\u3092\u4E00\u679A\u52A0\u3048\u308B"
+      m_rarity: 1
+      m_commands:
+      - id: 38
+      - id: 39
+      m_cardType: 1
+      m_isDiscarding: 0
   references:
     version: 1
     00000000:
@@ -323,22 +367,22 @@ MonoBehaviour:
     00000004:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 3
+        m_power: 1
         m_useType: 1
     00000005:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 4
+        m_power: 2
         m_useType: 1
     00000006:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 4
+        m_power: 2
         m_useType: 1
     00000007:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 4
+        m_power: 2
         m_useType: 1
     00000008:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
@@ -494,3 +538,41 @@ MonoBehaviour:
       data:
         m_power: 60
         m_useType: 2
+    00000022:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 4
+          m_turn: 3
+        m_useType: 0
+    00000023:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 4
+          m_turn: 3
+        m_useType: 0
+    00000024:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 2
+        m_useType: 1
+    00000025:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 14
+        m_cardAddDestination: 2
+        m_isUpgrade: 0
+    00000026:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 3
+        m_useType: 1
+    00000027:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 14
+        m_cardAddDestination: 2
+        m_isUpgrade: 1

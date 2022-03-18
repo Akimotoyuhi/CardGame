@@ -89,6 +89,10 @@ public enum CardID
     ReleaseOfSealed,
     /// <summary>「終末」</summary>
     Apocalypse,
+    /// <summary>リフレクト</summary>
+    Reflect,
+    /// <summary>無限の剣</summary>
+    UnlimitedSword,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

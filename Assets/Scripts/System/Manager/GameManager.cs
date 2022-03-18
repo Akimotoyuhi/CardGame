@@ -278,6 +278,10 @@ public class GameManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// タイトルボタンを押された時の処理<br/>
+    /// ボタンから呼ばれる事を想定している
+    /// </summary>
     public void TitleButton()
     {
         EffectManager.Instance.Fade(Color.black, 0.5f, () =>

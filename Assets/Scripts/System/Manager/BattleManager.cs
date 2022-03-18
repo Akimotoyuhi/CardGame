@@ -203,13 +203,6 @@ public class BattleManager : MonoBehaviour
         m_enemyManager.EnemyCount();
         m_dropManager.Setup(m_enemyManager, m_player);
         //ÉJÅ[Éhê∂ê¨
-        //if (m_dropObjs.Count == 0)
-        //{
-        //    foreach (GameObject obj in UnityEngine.Object.FindObjectOfType(typeof(IDrop)))
-        //    {
-
-        //    }
-        //}
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
         {
             int[] nms = DataManager.Instance.Cards[i];
