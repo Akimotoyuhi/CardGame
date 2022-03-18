@@ -216,6 +216,7 @@ public class BattleManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator OnBattle()
     {
+        m_isPress = true;
         if (m_currentTurn == 0)
         {
             m_battleUIController.Play(BattleUIType.BattleStart, () => m_battleFlag = true);
@@ -243,6 +244,7 @@ public class BattleManager : MonoBehaviour
         }
         TurnStart();
         m_battleFlag = false;
+        m_isPress = false;
     }
 
     /// <summary>
@@ -267,7 +269,6 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void TurnEnd()
     {
-        m_isPress = true;
         m_hand.AllCast();
         m_player.TurnEnd();
         m_turnEnd.OnNext(m_currentTurn);
@@ -280,7 +281,6 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void TurnStart()
     {
-        m_isPress = false;
         Debug.Log(m_currentTurn + "ƒ^[ƒ“–Ú");
         m_player.TurnStart();
         m_turnBegin.OnNext(m_currentTurn);
