@@ -22,9 +22,13 @@ MonoBehaviour:
   m_cardData:
   - m_cardID: 0
     m_upgrade: 0
-  - m_cardID: 13
+  - m_cardID: 0
     m_upgrade: 0
   - m_cardID: 1
+    m_upgrade: 0
+  - m_cardID: 1
+    m_upgrade: 0
+  - m_cardID: 13
     m_upgrade: 0
   - m_cardID: 14
     m_upgrade: 0
