@@ -165,6 +165,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                     default:
                         continue;
                 }
+                if (cc[2] <= 1) cc[2] = 1;
             }
         }
         MatchCollection match = Regex.Matches(text, "{leg([0-9]*)}");

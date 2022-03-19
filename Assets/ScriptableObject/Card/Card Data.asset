@@ -367,7 +367,7 @@ MonoBehaviour:
     00000004:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 1
+        m_power: 2
         m_useType: 1
     00000005:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
