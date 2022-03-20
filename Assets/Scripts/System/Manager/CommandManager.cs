@@ -54,9 +54,9 @@ public class CommandManager : MonoBehaviour
                     }
                     else if ((CommandParam)cmds[0] == CommandParam.DrawCard)
                     {
-                        if (cmds[2] == 0)
+                        if (cmds[2] == 0) //カード捨てる
                             BattleManager.Instance.CardDispose(cmds[3]);
-                        else
+                        else //カードを引く
                             BattleManager.Instance.CardDraw(cmds[3]);
                     }
                     break;

@@ -217,7 +217,7 @@ MonoBehaviour:
       m_name: "\u4FCA\u8DB3"
       m_cost: 1
       m_image: {fileID: 21300000, guid: 3be2c1261a3044642a7858147aac07fe, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B\u7B4B\u529B1\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
+      m_tooltip: "\u81EA\u8EAB\u306B\u654F\u63771\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
       - id: 24
@@ -227,7 +227,7 @@ MonoBehaviour:
       m_name: "\u4FCA\u8DB3+"
       m_cost: 1
       m_image: {fileID: 21300000, guid: 3be2c1261a3044642a7858147aac07fe, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B\u7B4B\u529B2\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
+      m_tooltip: "\u81EA\u8EAB\u306B\u654F\u63772\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
       - id: 25
