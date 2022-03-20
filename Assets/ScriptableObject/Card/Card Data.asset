@@ -342,6 +342,27 @@ MonoBehaviour:
       - id: 39
       m_cardType: 1
       m_isDiscarding: 0
+  - m_rabel: "\u6DF1\u547C\u5438"
+    m_cardInfo:
+      m_name: "\u6DF1\u547C\u5438"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: 3be2c1261a3044642a7858147aac07fe, type: 3}
+      m_tooltip: "\u30AB\u30FC\u30C9\u30922\u679A\u30C9\u30ED\u30FC\u3059\u308B"
+      m_rarity: 0
+      m_commands:
+      - id: 40
+      m_cardType: 4
+      m_isDiscarding: 0
+    m_cardUpgrade:
+      m_name: "\u6DF1\u547C\u5438+"
+      m_cost: 0
+      m_image: {fileID: 21300000, guid: 3be2c1261a3044642a7858147aac07fe, type: 3}
+      m_tooltip: "\u30AB\u30FC\u30C9\u30922\u679A\u30C9\u30ED\u30FC\u3059\u308B"
+      m_rarity: 0
+      m_commands:
+      - id: 41
+      m_cardType: 4
+      m_isDiscarding: 0
   references:
     version: 1
     00000000:
@@ -576,3 +597,13 @@ MonoBehaviour:
         m_cardID: 14
         m_cardAddDestination: 2
         m_isUpgrade: 1
+    00000028:
+      type: {class: DrawCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_drawNum: 2
+        m_isDraw: 1
+    00000029:
+      type: {class: DrawCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_drawNum: 2
+        m_isDraw: 1

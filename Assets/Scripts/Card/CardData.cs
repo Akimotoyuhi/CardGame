@@ -93,6 +93,8 @@ public enum CardID
     Reflect,
     /// <summary>無限の剣</summary>
     UnlimitedSword,
+    /// <summary>深呼吸</summary>
+    DeepBreath,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
@@ -102,7 +104,7 @@ public enum Rarity
     Elite,
     Special,
     Curse,
-    BadEffect
+    BadEffect,
 }
 /// <summary>カードの使用対象</summary>
 public enum UseType
@@ -120,6 +122,7 @@ public enum CommandParam
     Block,
     Conditon,
     AddCard,
+    DrawCard,
 }
 /// <summary>カード追加系カードを使用した際のカードの追加先</summary>
 public enum CardAddDestination
@@ -240,5 +243,16 @@ public class AddCardCommand : ICommand
     {
         int i = m_isUpgrade ? 1 : 0;
         return new int[] { (int)CommandParam.AddCard, (int)UseType.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
+    }
+}
+
+public class DrawCardCommand : ICommand
+{
+    [SerializeField, Tooltip("カードのドロー(or捨てる)枚数")] int m_drawNum;
+    [SerializeField, Tooltip("trueならドローする、falseなら捨てる")] bool m_isDraw;
+    public int[] Execute()
+    {
+        int i = m_isDraw ? 1 : 0;
+        return new int[] { (int)CommandParam.DrawCard, (int)UseType.System, i, m_drawNum };
     }
 }

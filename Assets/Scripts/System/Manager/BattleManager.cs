@@ -55,7 +55,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] BattleUIController m_battleUIController;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
-    [SerializeField] DropManager m_dropManager;
+    [SerializeField] CommandManager m_dropManager;
     /// <summary>カメラ</summary>
     [SerializeField] Camera m_camera;
     /// <summary>カードデータ</summary>
@@ -80,7 +80,7 @@ public class BattleManager : MonoBehaviour
     public IObservable<int> TurnBegin => m_turnBegin;
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
-    public DropManager DropManager => m_dropManager;
+    public CommandManager DropManager => m_dropManager;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
     public int CurrentTrun => m_currentTurn;
     #endregion
@@ -285,6 +285,17 @@ public class BattleManager : MonoBehaviour
         m_player.TurnStart();
         m_turnBegin.OnNext(m_currentTurn);
         SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
+    }
+
+    public void CardDraw(int drawNum)
+    {
+        m_deck.Draw(drawNum);
+    }
+
+    public void CardDispose(int disposeNum)
+    {
+        Debug.LogWarning("未実装");
+        return;
     }
 
     /// <summary>

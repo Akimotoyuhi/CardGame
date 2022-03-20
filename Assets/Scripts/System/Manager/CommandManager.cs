@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// カードのドロップ後の効果発動を管理するクラス
+/// カードの使用時の効果等の様々なクラスにダメージを与えたりするクラス
 /// </summary>
-public class DropManager : MonoBehaviour
+public class CommandManager : MonoBehaviour
 {
     [SerializeField, Tooltip("プレイヤーの攻撃画像を出す時間")] float m_playerAttackSpriteDuration;
     private EnemyManager m_enemyManager = default;
@@ -23,14 +23,14 @@ public class DropManager : MonoBehaviour
     /// <param name="cardParam"></param>
     public void CardExecute(List<int[]> cardParam, EnemyBase enemy = null)
     {
-        foreach (var card in cardParam)
+        foreach (var cmds in cardParam)
         {
             //CommandParam cp = (CommandParam)card[0];
-            UseType useType = (UseType)card[1];
+            UseType useType = (UseType)cmds[1];
             switch (useType)
             {
                 case UseType.ToPlayer:
-                    m_player.GetDamage(card);
+                    m_player.GetDamage(cmds);
                     break;
                 case UseType.ToEnemy:
                     if (!enemy)
@@ -38,18 +38,27 @@ public class DropManager : MonoBehaviour
                         Debug.LogError("敵データが存在しません カードの効果対象が正しいものなのかを確認してください");
                         break;
                     }
-                    enemy.GetDamage(card);
+                    enemy.GetDamage(cmds);
                     break;
                 case UseType.ToAllEnemies:
-                    m_enemyManager.AllEnemiesDamage(card);
+                    m_enemyManager.AllEnemiesDamage(cmds);
                     break;
                 case UseType.ToRandomEnemy:
                     Debug.Log("未作成");
                     break;
                 case UseType.System:
-                    if ((CommandParam)card[0] == CommandParam.AddCard)
-                        BattleManager.Instance.AddCard((CardAddDestination)card[4], (CardID)card[2], card[3], card[5]);
+                    if ((CommandParam)cmds[0] == CommandParam.AddCard)
+                    {
                         //Debug.Log($"{(CardID)card[2]}を{card[3]}枚{(CardAddDestination)card[4]}に追加する");
+                        BattleManager.Instance.AddCard((CardAddDestination)cmds[4], (CardID)cmds[2], cmds[3], cmds[5]);
+                    }
+                    else if ((CommandParam)cmds[0] == CommandParam.DrawCard)
+                    {
+                        if (cmds[2] == 0)
+                            BattleManager.Instance.CardDispose(cmds[3]);
+                        else
+                            BattleManager.Instance.CardDraw(cmds[3]);
+                    }
                     break;
                 default:
                     Debug.Log("例外");

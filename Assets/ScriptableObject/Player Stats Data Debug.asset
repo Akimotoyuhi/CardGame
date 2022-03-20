@@ -34,4 +34,6 @@ MonoBehaviour:
     m_upgrade: 0
   - m_cardID: 6
     m_upgrade: 0
+  - m_cardID: 15
+    m_upgrade: 0
   m_relicData: []

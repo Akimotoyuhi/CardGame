@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        //ランダムの初期化
         if (m_isSeed) UnityEngine.Random.InitState(m_seed);
         else
         {
