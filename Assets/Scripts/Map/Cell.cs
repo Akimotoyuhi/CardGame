@@ -52,6 +52,7 @@ public class Cell : MonoBehaviour
 
     public void OnClick()
     {
+        Debug.Log(m_map);
         if (m_map.IsClick) return;
         m_map.IsClick = true;
         if (GameManager.Instance.Step != Step)

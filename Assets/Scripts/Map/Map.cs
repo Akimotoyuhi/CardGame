@@ -78,7 +78,7 @@ public class Map : MonoBehaviour
                 cell.transform.SetParent(sector.transform, false);
                 cell.SectorIndex = i;
                 m_cells.Add(cell);
-                //cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
+                cell.Map = this;
             }
             else
             {
@@ -88,10 +88,9 @@ public class Map : MonoBehaviour
                     cell.transform.SetParent(sector.transform, false);
                     cell.SectorIndex = i;
                     m_cells.Add(cell);
-                    //cell.m_encountId = Random.Range(0, (int)EnemyID.endLength);
+                    cell.Map = this;
                 }
             }
-            cell.Map = this;
             m_sectorLocation[i] = sector;
             sector.transform.SetParent(m_parentSector, false);
         }

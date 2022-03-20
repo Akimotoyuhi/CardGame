@@ -184,7 +184,7 @@ public class BattleManager : MonoBehaviour
     private void CreateField(EnemyAppearanceEria eria)
     {
         //プレイヤー生成
-        if (!DataManager.Instance.IsPlayerData)
+        if (!DataManager.Instance.IsPlayerData) //データが無かったら今持ってるデッキを保存
         {
             List<int> cards = new List<int>();
             List<int> isUpgrade = new List<int>();
@@ -196,6 +196,7 @@ public class BattleManager : MonoBehaviour
             GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.AttackedSprite, m_playerStatsData.GameoverSprite, m_playerStatsData.HP, m_playerStatsData.HP, cards.ToArray(), isUpgrade.ToArray());
         }
         m_player = Instantiate(m_playerPrefab, m_playerPos);
+        m_player.Canvas = m_battleCanvas.transform;
         m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.AttackedSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
         //敵グループ生成
         m_enemyManager.Setup(m_enemiesTarget);

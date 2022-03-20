@@ -142,8 +142,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PlayerDataSave(string name, Sprite idleSprite, Sprite[] AttackedSprite, Sprite gameoverSprite, int maxLife, int currentLife, int[] cardsID = null, int[] isCardUpgrade = null)
     {
-        if (cardsID == null) return;
         DataManager.Instance.SavePlayerState(name, idleSprite, AttackedSprite, gameoverSprite, maxLife, currentLife);
+        if (cardsID == null) return;
         for (int i = 0; i < cardsID.Length; i++)
         {
             DataManager.Instance.AddCards(cardsID[i], isCardUpgrade[i]);
@@ -231,6 +231,7 @@ public class GameManager : MonoBehaviour
     {
         if (player)
         {
+            Debug.Log($"Save:PlayerCurrentLife{player.CurrentLife}");
             PlayerDataSave(player.Name, player.sprite, player.AttackedSprite, player.GameoverSprite, player.MaxLife, player.CurrentLife);
             Destroy(player.gameObject);
         }

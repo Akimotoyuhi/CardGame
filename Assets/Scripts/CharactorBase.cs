@@ -60,8 +60,12 @@ public class CharactorBase : MonoBehaviour
         }
     }
     public Sprite sprite => m_sprite;
+    /// <summary>死んでる判定</summary>
     public bool IsDead { get => m_isDead; }
+    /// <summary>このオブジェクトが配置されている親キャンバス</summary>
+    public Transform Canvas { get; set; }
     protected enum GetCardType { Damage, Block }
+    
     protected virtual void SetUp()
     {
         m_flame.SetActive(false);
