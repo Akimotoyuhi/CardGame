@@ -179,7 +179,7 @@ public class EnemyActionCommnad3
         }
     }
     public TargetType Target => m_target;
-    public List<Plan> ActionPlan => m_plan;
+    public List<Plan> ActionPlans => m_plan;
 }
 
 [Serializable]

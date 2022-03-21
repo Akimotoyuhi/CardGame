@@ -80,7 +80,7 @@ public class BattleManager : MonoBehaviour
     public IObservable<int> TurnBegin => m_turnBegin;
     public IObservable<int> TurnEnd2 => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
-    public CommandManager DropManager => m_dropManager;
+    public CommandManager CommandManager => m_dropManager;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
     public int CurrentTurn => m_currentTurn;
     #endregion

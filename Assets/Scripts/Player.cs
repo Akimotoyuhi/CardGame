@@ -82,7 +82,7 @@ public class Player : CharactorBase, IDrop
 
     public void GetDrop(List<int[]> cardCommand)
     {
-        BattleManager.Instance.DropManager.CardExecute(cardCommand);
+        BattleManager.Instance.CommandManager.CardExecute(cardCommand);
     }
 
     public void OnCard(UseType? useType)

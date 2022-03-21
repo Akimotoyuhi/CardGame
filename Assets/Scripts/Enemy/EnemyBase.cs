@@ -43,7 +43,7 @@ public class EnemyBase : CharactorBase, IDrop
 
     public void GetDrop(List<int[]> cardCommand)
     {
-        BattleManager.Instance.DropManager.CardExecute(cardCommand, this);
+        BattleManager.Instance.CommandManager.CardExecute(cardCommand, this);
         m_enemyManager.EnemyDamaged();
     }
 
@@ -99,6 +99,7 @@ public class EnemyBase : CharactorBase, IDrop
             Debug.Log("‰½‚à‚µ‚È‚¢");
             return;
         }
+        BattleManager.Instance.CommandManager.CardExecute(m_commands, this);
         //List<EnemyActionCommnad3> commands = m_enemyDataBase.CommandSelect(this, turn);
         //foreach (var com in commands)
         //{
@@ -162,10 +163,12 @@ public class EnemyBase : CharactorBase, IDrop
             Destroy(m_planImageParent.GetChild(i).gameObject);
         }
         if (m_actionCommnad == null) return;
-        for (int i = 0; i < m_actionCommnad.ActionPlan.Count; i++)
+        for (int i = 0; i < m_actionCommnad.ActionPlans.Count; i++)
         {
-            if (m_actionCommnad.ActionPlan[i].NumIndex < 0) continue;
-            //m_commands[m_actionCommnad.ActionPlan[i].NumIndex]
+            //if (m_actionCommnad.ActionPlan[i].NumIndex < 0) continue;
+            PlanController p = Instantiate(m_planImage);
+            p.transform.SetParent(m_planImageParent, false);
+            p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, 0/*m_commands[Å‰‚ÉCommandParam‚ªAttack‚Ìindex][2]*/);
         }
         //if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
         //for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Count; i++)
