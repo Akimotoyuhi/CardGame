@@ -115,7 +115,7 @@ public class EnemyDataBase
     public enum NodeType { Selector, Sequence }
     private NodeType m_NodeType = NodeType.Sequence;
     public List<EnemyBaseState> m_enemyBaseState;
-    public List<EnemyActionCommnad3> CommandSelect(EnemyBase enemy, int turn)
+    public EnemyActionCommnad3 CommandSelect(EnemyBase enemy, int turn)
     {
         switch (m_NodeType)
         {
@@ -150,39 +150,36 @@ public class EnemyDataBase
 public class EnemyBaseState
 {
     public List<EnemyConditionalCommand3> m_conditionalCommand;
-    public List<EnemyActionCommnad3> m_actionCommnad;
+    public EnemyActionCommnad3 m_actionCommnad;
 }
 
 [Serializable]
 public class EnemyActionCommnad3
 {
     [Header("行動データ")]
-    //[SerializeReference, SubclassSelector] ICommand m_command;
-    [SerializeField] int m_power = 0;
-    [SerializeField] int m_block = 0;
-    [SerializeField] List<ConditionSelection> m_condition;
+    [SerializeReference, SubclassSelector] List<ICommand> m_commands;
     [SerializeField] TargetType m_target;
-    [SerializeField] List<ActionPlan> m_plan;
-
-    public int Power { get => m_power; }
-    public int Block { get => m_block; }
-    public List<Condition> Conditions
+    [SerializeField] List<Plan> m_plan;
+    [Serializable]
+    public class Plan
+    {
+        [SerializeField, Tooltip("行動予定")] ActionPlan m_plan;
+        [SerializeField, Tooltip("行動予定に数値を入れる場合、コマンド配列のどのindexを参照するか")] int m_numIndex;
+        public ActionPlan ActionPlan => m_plan;
+        public int NumIndex => m_numIndex;
+    }
+    public List<int[]> Command
     {
         get
         {
-            List<Condition> ret = new List<Condition>();
-            for (int i = 0; i < m_condition.Count; i++)
-            {
-                if (m_condition[i].GetCondition != null)
-                {
-                    ret.Add(m_condition[i].GetCondition);
-                }
-            }
+            List<int[]> ret = new List<int[]>();
+            foreach (var c in m_commands)
+                ret.Add(c.Execute());
             return ret;
         }
     }
     public TargetType Target => m_target;
-    public List<ActionPlan> Plan => m_plan;
+    public List<Plan> ActionPlan => m_plan;
 }
 
 [Serializable]

@@ -5,11 +5,13 @@ using DG.Tweening;
 
 public class EnemyBase : CharactorBase, IDrop
 {
-    [SerializeField] GameObject m_planImage;
+    [SerializeField] PlanController m_planImage;
     [SerializeField] Transform m_planImageParent;
     private Player m_player;
     private EnemyManager m_enemyManager;
     private EnemyDataBase m_enemyDataBase;
+    private EnemyActionCommnad3 m_actionCommnad;
+    private List<int[]> m_commands = new List<int[]>();
 
     void Start()
     {
@@ -97,49 +99,85 @@ public class EnemyBase : CharactorBase, IDrop
             Debug.Log("何もしない");
             return;
         }
-        List<EnemyActionCommnad3> commands = m_enemyDataBase.CommandSelect(this, turn);
-        foreach (var com in commands)
+        //List<EnemyActionCommnad3> commands = m_enemyDataBase.CommandSelect(this, turn);
+        //foreach (var com in commands)
+        //{
+        //    int power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, com.Power);
+        //    int block = ConditionEffect(EventTiming.Attacked, ParametorType.Block, com.Block);
+        //    List<Condition> conditions = com.Conditions;
+        //    if (com.Target == TargetType.ToEnemy)
+        //    {
+        //        Damage(com.Power, com.Block, null, false, () => Dead());
+        //        foreach (var condition in com.Conditions)
+        //        {
+        //            Damage(0, 0, condition, false, () => Dead());
+        //        }
+        //    }
+        //    else
+        //    {
+        //        m_player.GetAcceptDamage(power, block, conditions);
+        //    }
+        //}
+    }
+
+    /// <summary>
+    /// 自身のバフデバフを評価して行動データの値を増減させる
+    /// </summary>
+    private void Effect()
+    {
+        m_commands = m_actionCommnad.Command;
+        foreach (var c in m_commands)
         {
-            int power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, com.Power);
-            int block = ConditionEffect(EventTiming.Attacked, ParametorType.Block, com.Block);
-            List<Condition> conditions = com.Conditions;
-            if (com.Target == TargetType.ToEnemy)
+            CommandParam cp = (CommandParam)c[0];
+            switch (cp)//自身のバフを評価して数値を増減させる
             {
-                Damage(com.Power, com.Block, null, false, () => Dead());
-                foreach (var condition in com.Conditions)
-                {
-                    Damage(0, 0, condition, false, () => Dead());
-                }
+                case CommandParam.Attack:
+                    c[2] = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, c[2]);
+                    break;
+                case CommandParam.Block:
+                    c[2] = ConditionEffect(EventTiming.Attacked, ParametorType.Block, c[2]);
+                    break;
+                default:
+                    continue;
             }
-            else
-            {
-                m_player.GetAcceptDamage(power, block, conditions);
-            }
+            if (c[2] <= 1) c[2] = 1;
         }
-        //AttackAnim(false);
+    }
+
+    /// <summary>
+    /// このターン行う行動を決める
+    /// </summary>
+    public void ActionCommand(int turn)
+    {
+        m_actionCommnad = m_enemyDataBase.CommandSelect(this, turn);
     }
 
     /// <summary>
     /// 行動予定の表示
     /// </summary>
-    /// <param name="turn"></param>
-    public void ActionPlan(int turn)
+    public void ActionPlan()
     {
         for (int i = 0; i < m_planImageParent.childCount; i++)
         {
             Destroy(m_planImageParent.GetChild(i).gameObject);
         }
-        if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
-        for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Count; i++)
+        if (m_actionCommnad == null) return;
+        for (int i = 0; i < m_actionCommnad.ActionPlan.Count; i++)
         {
-            for (int n = 0; n < m_enemyDataBase.CommandSelect(this, turn)[i].Plan.Count; n++)
-            {
-                GameObject g = Instantiate(m_planImage);
-                g.transform.SetParent(m_planImageParent, false);
-                g.GetComponent<PlanController>().SetImage(m_enemyDataBase.CommandSelect(this, turn)[i].Plan[n],
-                    ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn)[i].Power));
-            }
+            if (m_actionCommnad.ActionPlan[i].NumIndex < 0) continue;
+            //m_commands[m_actionCommnad.ActionPlan[i].NumIndex]
         }
+        //if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
+        //for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Count; i++)
+        //{
+        //    for (int n = 0; n < m_enemyDataBase.CommandSelect(this, turn)[i].ActionPlan.Count; n++)
+        //    {
+        //        PlanController p = Instantiate(m_planImage);
+        //        p.transform.SetParent(m_planImageParent, false);
+        //        p.SetImage(m_enemyDataBase.CommandSelect(this, turn)[i].ActionPlan[n].ActionPlan,
+        //            ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn)[i].Power));
+        //    }
+        //}
     }
 
     /// <summary>

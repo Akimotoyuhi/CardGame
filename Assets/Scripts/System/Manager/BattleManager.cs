@@ -82,7 +82,7 @@ public class BattleManager : MonoBehaviour
     public int GetDrowNum => m_player.DrowNum;
     public CommandManager DropManager => m_dropManager;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
-    public int CurrentTrun => m_currentTurn;
+    public int CurrentTurn => m_currentTurn;
     #endregion
 
     private void Awake()

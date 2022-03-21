@@ -28,7 +28,7 @@ public class PlanController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
     }
 
-    public void SetImage(ActionPlan actionPlan, int textValue = 0)
+    public void SetImage(ActionPlan actionPlan, int textValue)
     {
         m_viewText.text = "";
         m_planController[(int)actionPlan].SetImage(m_image);

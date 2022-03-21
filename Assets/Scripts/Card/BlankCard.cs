@@ -154,7 +154,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             foreach (var cc in m_cardCommand)
             {
                 CommandParam cp = (CommandParam)cc[0];
-                switch (cp)
+                switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
                         cc[2] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, cc[2]);
