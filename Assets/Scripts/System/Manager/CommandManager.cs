@@ -47,17 +47,20 @@ public class CommandManager : MonoBehaviour
                     Debug.Log("未作成");
                     break;
                 case UseType.System:
-                    if ((CommandParam)cmds[0] == CommandParam.AddCard)
+                    switch ((CommandParam)cmds[0])
                     {
-                        //Debug.Log($"{(CardID)card[2]}を{card[3]}枚{(CardAddDestination)card[4]}に追加する");
-                        BattleManager.Instance.AddCard((CardAddDestination)cmds[4], (CardID)cmds[2], cmds[3], cmds[5]);
-                    }
-                    else if ((CommandParam)cmds[0] == CommandParam.DrawCard)
-                    {
-                        if (cmds[2] == 0) //カード捨てる
-                            BattleManager.Instance.CardDispose(cmds[3]);
-                        else //カードを引く
-                            BattleManager.Instance.CardDraw(cmds[3]);
+                        case CommandParam.AddCard:
+                            //Debug.Log($"{(CardID)card[2]}を{card[3]}枚{(CardAddDestination)card[4]}に追加する");
+                            BattleManager.Instance.AddCard((CardAddDestination)cmds[4], (CardID)cmds[2], cmds[3], cmds[5]);
+                            break;
+                        case CommandParam.DrawCard:
+                            if (cmds[2] == 0) //カード捨てる
+                                BattleManager.Instance.CardDispose(cmds[3]);
+                            else //カードを引く
+                                BattleManager.Instance.CardDraw(cmds[3]);
+                            break;
+                        default:
+                            break;
                     }
                     break;
                 default:

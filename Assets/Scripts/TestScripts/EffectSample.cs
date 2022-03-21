@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 
 /// <summary>
-/// 何のテストクラスか忘れた
+/// コルーチンテスト用
 /// </summary>
 public class EffectSample : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class EffectSample : MonoBehaviour
 
     private IEnumerator SampleAsync()
     {
-        EffectManager.Instance.MoveText("Move", Color.red, Vector2.zero, transform, new Vector2(transform.position.x + 100, transform.position.y - 200), 1f, () => m_flag = true);
+        //EffectManager.Instance.MoveText("Move", Color.red, Vector2.zero, transform, new Vector2(transform.position.x + 100, transform.position.y - 200), 1f, () => m_flag = true);
         while (!m_flag)
         {
             yield return null;

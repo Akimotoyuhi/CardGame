@@ -9,7 +9,7 @@ public class EnemyBase : CharactorBase, IDrop
     [SerializeField] Transform m_planImageParent;
     private Player m_player;
     private EnemyManager m_enemyManager;
-    private EnemyDataBase m_enemyDataBase = new EnemyDataBase();
+    private EnemyDataBase m_enemyDataBase;
 
     void Start()
     {
@@ -92,7 +92,7 @@ public class EnemyBase : CharactorBase, IDrop
     public void Action(int turn)
     {
         if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        if (m_enemyDataBase.CommandSelect(this, turn) == null)
+        if (m_enemyDataBase.CommandSelect(this, turn) == null)//行動データが無かったら何もしない
         {
             Debug.Log("何もしない");
             return;
