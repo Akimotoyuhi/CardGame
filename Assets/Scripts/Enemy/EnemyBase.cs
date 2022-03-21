@@ -124,7 +124,7 @@ public class EnemyBase : CharactorBase, IDrop
     /// <summary>
     /// 自身のバフデバフを評価して行動データの値を増減させる
     /// </summary>
-    private void Effect()
+    public void Effect()
     {
         m_commands = m_actionCommnad.Command;
         foreach (var c in m_commands)
@@ -165,22 +165,19 @@ public class EnemyBase : CharactorBase, IDrop
         if (m_actionCommnad == null) return;
         for (int i = 0; i < m_actionCommnad.ActionPlans.Count; i++)
         {
-            //if (m_actionCommnad.ActionPlan[i].NumIndex < 0) continue;
+            int index = default;
+            for (int n = 0; n < m_commands.Count; n++)
+            {
+                if ((CommandParam)m_commands[n][0] == CommandParam.Attack)
+                {
+                    index = i;
+                    break;
+                }
+            }
             PlanController p = Instantiate(m_planImage);
             p.transform.SetParent(m_planImageParent, false);
-            p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, 0/*m_commands[最初にCommandParamがAttackのindex][2]*/);
+            p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, m_commands[index][2]);
         }
-        //if (m_enemyDataBase.CommandSelect(this, turn) == null) return;
-        //for (int i = 0; i < m_enemyDataBase.CommandSelect(this, turn).Count; i++)
-        //{
-        //    for (int n = 0; n < m_enemyDataBase.CommandSelect(this, turn)[i].ActionPlan.Count; n++)
-        //    {
-        //        PlanController p = Instantiate(m_planImage);
-        //        p.transform.SetParent(m_planImageParent, false);
-        //        p.SetImage(m_enemyDataBase.CommandSelect(this, turn)[i].ActionPlan[n].ActionPlan,
-        //            ConditionEffect(EventTiming.Attacked, ParametorType.Attack, m_enemyDataBase.CommandSelect(this, turn)[i].Power));
-        //    }
-        //}
     }
 
     /// <summary>
