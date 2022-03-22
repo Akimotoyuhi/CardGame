@@ -18,10 +18,10 @@ public class CommandManager : MonoBehaviour
     }
 
     /// <summary>
-    /// カードの効果を発動させる
+    /// コマンドの実行
     /// </summary>
     /// <param name="cardParam"></param>
-    public void CardExecute(List<int[]> cardParam, EnemyBase enemy = null)
+    public void CommandExecute(List<int[]> cardParam, bool isPlayerAnim, EnemyBase enemy = null)
     {
         foreach (var cmds in cardParam)
         {
@@ -68,6 +68,6 @@ public class CommandManager : MonoBehaviour
                     break;
             }
         }
-        m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
+        if (isPlayerAnim) m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
     }
 }

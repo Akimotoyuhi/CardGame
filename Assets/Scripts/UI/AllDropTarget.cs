@@ -23,7 +23,7 @@ public class AllDropTarget : MonoBehaviour, IDrop
 
     public void GetDrop(List<int[]> card)
     {
-        BattleManager.Instance.CommandManager.CardExecute(card);
+        BattleManager.Instance.CommandManager.CommandExecute(card, true);
     }
 
     public void OnCard(UseType? useType)

@@ -17,7 +17,7 @@ public class EnemiesTarget : MonoBehaviour, IDrop
     }
     public void GetDrop(List<int[]> cardCommand)
     {
-        BattleManager.Instance.CommandManager.CardExecute(cardCommand);
+        BattleManager.Instance.CommandManager.CommandExecute(cardCommand, true);
     }
     public void OnCard(UseType? useType)
     {

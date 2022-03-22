@@ -43,7 +43,7 @@ public class EnemyBase : CharactorBase, IDrop
 
     public void GetDrop(List<int[]> cardCommand)
     {
-        BattleManager.Instance.CommandManager.CardExecute(cardCommand, this);
+        BattleManager.Instance.CommandManager.CommandExecute(cardCommand, this);
         m_enemyManager.EnemyDamaged();
     }
 
@@ -99,26 +99,7 @@ public class EnemyBase : CharactorBase, IDrop
             Debug.Log("‰½‚à‚µ‚È‚¢");
             return;
         }
-        BattleManager.Instance.CommandManager.CardExecute(m_commands, this);
-        //List<EnemyActionCommnad3> commands = m_enemyDataBase.CommandSelect(this, turn);
-        //foreach (var com in commands)
-        //{
-        //    int power = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, com.Power);
-        //    int block = ConditionEffect(EventTiming.Attacked, ParametorType.Block, com.Block);
-        //    List<Condition> conditions = com.Conditions;
-        //    if (com.Target == TargetType.ToEnemy)
-        //    {
-        //        Damage(com.Power, com.Block, null, false, () => Dead());
-        //        foreach (var condition in com.Conditions)
-        //        {
-        //            Damage(0, 0, condition, false, () => Dead());
-        //        }
-        //    }
-        //    else
-        //    {
-        //        m_player.GetAcceptDamage(power, block, conditions);
-        //    }
-        //}
+        BattleManager.Instance.CommandManager.CommandExecute(m_commands, false, this);
     }
 
     /// <summary>

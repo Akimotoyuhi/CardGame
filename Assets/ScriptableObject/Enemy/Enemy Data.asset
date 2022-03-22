@@ -228,7 +228,7 @@ MonoBehaviour:
       data:
         m_condition:
           m_conditionID: 1
-          m_turn: 2
+          m_turn: 1
         m_useType: 0
     00000004:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
