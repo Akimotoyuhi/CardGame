@@ -50,10 +50,6 @@ public enum EnemyID
     Skelton,
     /// <summary>“ƒ‚ÌçŒìÒ</summary>
     TowerGuardian,
-    /// <summary>‰Î‰Š•r–\“k</summary>
-    CocktailThrower,
-    /// <summary>d‘••º</summary>
-    HeavyDefender,
 }
 /// <summary>“GoŒ»êŠ</summary>
 public enum EnemyAppearanceEria

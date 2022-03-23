@@ -43,7 +43,7 @@ public class EnemyBase : CharactorBase, IDrop
 
     public void GetDrop(List<int[]> cardCommand)
     {
-        BattleManager.Instance.CommandManager.CommandExecute(cardCommand, this);
+        BattleManager.Instance.CommandManager.CommandExecute(cardCommand, true, this);
         m_enemyManager.EnemyDamaged();
     }
 
