@@ -288,11 +288,19 @@ public class BattleManager : MonoBehaviour
         SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
     }
 
+    /// <summary>
+    /// カードを引く<br/>
+    /// 今後カードデータと一緒に改善予定
+    /// </summary>
     public void CardDraw(int drawNum)
     {
         m_deck.Draw(drawNum);
     }
 
+    /// <summary>
+    /// カードを捨てる<br/>
+    /// 今後カードデータと一緒に改善予定
+    /// </summary>
     public void CardDispose(int disposeNum)
     {
         Debug.LogWarning("未実装");

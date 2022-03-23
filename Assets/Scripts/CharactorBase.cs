@@ -70,7 +70,6 @@ public class CharactorBase : MonoBehaviour
     {
         m_flame.SetActive(false);
         GetComponent<Image>().sprite = m_sprite;
-        m_life = m_maxLife;
         m_hpSlider.maxValue = m_maxLife;
         m_hpSlider.value = m_life;
         m_blkSlider.value = m_block;

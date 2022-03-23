@@ -20,17 +20,6 @@ public class Player : CharactorBase, IDrop
     public int DrowNum { get => m_drowNum; set => m_drowNum = value; }
     public Sprite[] AttackedSprite => m_attackedSprite;
     public Sprite GameoverSprite => m_gameoverSprite;
-    public Player Instance { get; private set; }
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-    private void Start()
-    {
-        //Instance = this;
-        SetUp();
-    }
 
     public override void TurnStart()
     {
@@ -51,6 +40,7 @@ public class Player : CharactorBase, IDrop
         m_gameoverSprite = gameoverSprite;
         m_maxLife = maxLife;
         m_life = currentLife;
+        SetUp();
     }
 
     /// <summary>

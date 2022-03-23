@@ -29,6 +29,7 @@ public class EnemyBase : CharactorBase, IDrop
     {
         m_name = data.Name;
         m_maxLife = data.Life;
+        m_life = data.Life;
         m_sprite = data.Image;
         m_enemyDataBase = data;
         m_enemyManager = enemyManager;

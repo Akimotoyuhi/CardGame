@@ -31,7 +31,7 @@ namespace Mastar
             set
             {
                 m_currentLife = value;
-                if (m_currentLife > MaxLife)
+                if (m_currentLife > MaxLife)//現在体力が最大体力を超えないように
                 {
                     m_currentLife = MaxLife;
                 }
