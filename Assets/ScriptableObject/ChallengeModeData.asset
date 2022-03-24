@@ -9,12 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fe62206eb212cf499a06a7f257ee80d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5503392051d758d4e974dc4fb41d782d, type: 3}
   m_Name: ChallengeModeData
   m_EditorClassIdentifier: 
   m_databases:
   - m_name: "\u5897\u5E45\uFF1A\u706B\u529B\u2160"
     m_tooltip: "\u5168\u3066\u306E\u6575\u306E\u653B\u6483\u529B\u304C1.2\u500D"
+    m_iconSprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
+    m_iconColor: {r: 1, g: 0, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0, b: 0, a: 1}
     m_num: 1.2
     m_type: 0
     m_paramType: 1
@@ -22,6 +26,10 @@ MonoBehaviour:
     m_point: 1
   - m_name: "\u5897\u5E45\uFF1A\u706B\u529B\u2161"
     m_tooltip: "\u5168\u3066\u306E\u6575\u306E\u653B\u6483\u529B\u304C1.5\u500D"
+    m_iconSprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
+    m_iconColor: {r: 1, g: 0, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0, b: 0.501822, a: 1}
     m_num: 1.5
     m_type: 0
     m_paramType: 1
@@ -29,6 +37,10 @@ MonoBehaviour:
     m_point: 2
   - m_name: "\u5897\u5E45\uFF1A\u706B\u529B\u2162"
     m_tooltip: "\u5168\u3066\u306E\u6575\u306E\u653B\u6483\u529B\u304C2\u500D"
+    m_iconSprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
+    m_iconColor: {r: 1, g: 0, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0, b: 0.9307308, a: 1}
     m_num: 2
     m_type: 0
     m_paramType: 1

@@ -35,7 +35,7 @@ public class EffectManager : MonoBehaviour
     {
         if (m_battleUI) RemoveBattleUIText();
         else Debug.LogWarning("BattleUI‚ªƒAƒTƒCƒ“‚³‚ê‚Ä‚È‚¢‚æ");
-        //Fade(Color.clear, 0.1f);
+        m_fadePanel.raycastTarget = false;
     }
 
     public Text ViewText(string text, Vector2 position, Transform parent)
