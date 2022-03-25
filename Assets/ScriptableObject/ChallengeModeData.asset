@@ -46,14 +46,36 @@ MonoBehaviour:
     m_paramType: 1
     m_paramCoefficientType: 3
     m_point: 3
-  - m_name: "\u6E1B\u8870"
-    m_tooltip: "\u5168\u3066\u306E\u6575\u306E\u653B\u6483\u529B\u304C2\u500D"
-    m_iconSprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
-    m_iconColor: {r: 1, g: 0, b: 0, a: 1}
-    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
-    m_subIconColor: {r: 1, g: 0, b: 0.9307308, a: 1}
-    m_num: 2
-    m_type: 0
-    m_paramType: 1
-    m_paramCoefficientType: 3
+  - m_name: "\u6E1B\u8870\uFF1A\u4F53\u529B\u2160"
+    m_tooltip: "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6700\u5927\u4F53\u529B\u304C-10"
+    m_iconSprite: {fileID: 21300000, guid: 6b4d731bb49028047a4a8c4c1fa3bc4f, type: 3}
+    m_iconColor: {r: 0, g: 0.083200455, b: 1, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 59203ae641fe8e74c94e4c3beee5cfd4, type: 3}
+    m_subIconColor: {r: 0, g: 1, b: 0.085513115, a: 1}
+    m_num: 10
+    m_type: 1
+    m_paramType: 3
+    m_paramCoefficientType: 2
+    m_point: 1
+  - m_name: "\u6E1B\u8870\uFF1A\u4F53\u529B\u2161"
+    m_tooltip: "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6700\u5927\u4F53\u529B\u304C-30"
+    m_iconSprite: {fileID: 21300000, guid: 6b4d731bb49028047a4a8c4c1fa3bc4f, type: 3}
+    m_iconColor: {r: 0, g: 0.083200455, b: 1, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 59203ae641fe8e74c94e4c3beee5cfd4, type: 3}
+    m_subIconColor: {r: 0, g: 1, b: 0.90923214, a: 1}
+    m_num: 30
+    m_type: 1
+    m_paramType: 3
+    m_paramCoefficientType: 2
+    m_point: 2
+  - m_name: "\u6E1B\u8870\uFF1A\u4F53\u529B\u2162"
+    m_tooltip: "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6700\u5927\u4F53\u529B\u304C-50"
+    m_iconSprite: {fileID: 21300000, guid: 6b4d731bb49028047a4a8c4c1fa3bc4f, type: 3}
+    m_iconColor: {r: 0, g: 0.083200455, b: 1, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 59203ae641fe8e74c94e4c3beee5cfd4, type: 3}
+    m_subIconColor: {r: 0, g: 0.46197605, b: 1, a: 1}
+    m_num: 50
+    m_type: 1
+    m_paramType: 3
+    m_paramCoefficientType: 2
     m_point: 3

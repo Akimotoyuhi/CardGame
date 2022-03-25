@@ -31,6 +31,7 @@ public class CustomMode : MonoBehaviour
             CustomButton cb = Instantiate(m_customPrefab);
             cb.transform.SetParent(m_customParent);
             cb.Setup(m_customModeData.DataBases[i], this);
+            m_customButtons.Add(cb);
         }
     }
 
@@ -38,7 +39,7 @@ public class CustomMode : MonoBehaviour
     /// CustomButtonのクリックを受け取る
     /// </summary>
     /// <param name="database"></param>
-    public void OnClick(CustomModeDataBase database)
+    public void OnClick(CustomModeDataBase database, bool IsConflict)
     {
         for (int i = 0; i < m_selectCustomList.Count; i++)
         {
@@ -46,13 +47,36 @@ public class CustomMode : MonoBehaviour
             {
                 Debug.Log(database.Name + "を削除");
                 m_selectCustomList.RemoveAt(i);
-                SelectCustomListUpdate();
+                UpdateButtons(database, true);
                 return;
+            }
+        }
+        if (IsConflict)
+        {
+            for (int i = 0; i < m_selectCustomList.Count; i++)
+            {
+                if (database.CustomID == m_selectCustomList[i].CustomID)
+                {
+                    m_selectCustomList.RemoveAt(i);
+                    break;
+                }
             }
         }
         Debug.Log(database.Name + "を追加");
         m_selectCustomList.Add(database);
+        UpdateButtons(database, false);
+    }
+
+    /// <summary>
+    /// ボタンの情報の更新
+    /// </summary>
+    private void UpdateButtons(CustomModeDataBase database, bool isRemoved)
+    {
         SelectCustomListUpdate();
+        foreach (var cb in m_customButtons)
+        {
+            cb.SelectedIDCheck(database.CustomID, isRemoved);
+        }
     }
 
     /// <summary>

@@ -22,11 +22,11 @@ public class CustomModeDataBase
     [SerializeField] Sprite m_subIconSprite;
     [SerializeField] Color m_subIconColor = Color.black;
     [SerializeField] float m_num;
-    [SerializeField] CustomType m_type;
+    [SerializeField] CustomEntityType m_type;
     [SerializeField] CustomParamType m_paramType;
     [SerializeField] CustomParamCoefficientType m_paramCoefficientType;
     [SerializeField] int m_point;
-
+    [SerializeField] CustomID m_customID;
     public string Name => m_name;
     public string Tooltip => m_tooltip;
     public Sprite IconSprite => m_iconSprite;
@@ -34,13 +34,20 @@ public class CustomModeDataBase
     public Sprite SubIconSprite => m_subIconSprite;
     public Color SubIconColor => m_subIconColor;
     public float Num => m_num;
-    public CustomType Type => m_type;
+    public CustomEntityType Type => m_type;
     public CustomParamType ParamType => m_paramType;
     public CustomParamCoefficientType ParamUpDown => m_paramCoefficientType;
     public int Point => m_point;
+    public CustomID CustomID => m_customID;
+}
+/// <summary>カスタムID</summary>
+public enum CustomID
+{
+    EnemyPowerUp,
+    PlayerLifeDown,
 }
 /// <summary>カスタムモードの種類</summary>
-public enum CustomType
+public enum CustomEntityType
 {
     AllEnemiesBuff,
     PlayerNerf,
