@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 620567665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -1080,14 +1080,12 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 640, y: 40}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &624765172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,7 +2736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1586666054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3407,9 +3405,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_changeSceneName: SampleScene
   m_FadeTime:
-    m_sceneChange: 0.5
+    m_customSelect: 0.3
     m_gameExit: 0.5
-    m_credit: 0
+    m_sceneChange: 0.5
+  m_CustomMode: {fileID: 1797634947}
+  m_mainTitleScreen: {fileID: 1586666053}
+  m_customScreen: {fileID: 1620489752}
 --- !u!4 &1797634946
 Transform:
   m_ObjectHideFlags: 0
@@ -3438,8 +3439,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_customPrefab: {fileID: 59910065445088193, guid: 349acac0495ec9641a8da7891a08e967,
     type: 3}
+  m_customPrevText: {fileID: 5538589144206412655, guid: 6f4684334d71ed34a892041990882996,
+    type: 3}
   m_customModeData: {fileID: 11400000, guid: 0b3cf3b23b39e494db9b060281438b1c, type: 2}
   m_customParent: {fileID: 1417232845}
+  m_customTextParent: {fileID: 620567666}
 --- !u!1 &2130624784
 GameObject:
   m_ObjectHideFlags: 0

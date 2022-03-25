@@ -22,9 +22,9 @@ public class CustomModeDataBase
     [SerializeField] Sprite m_subIconSprite;
     [SerializeField] Color m_subIconColor = Color.black;
     [SerializeField] float m_num;
-    [SerializeField] ChallengeType m_type;
-    [SerializeField] ChallengeParamType m_paramType;
-    [SerializeField] ChallengeParamCoefficientType m_paramCoefficientType;
+    [SerializeField] CustomType m_type;
+    [SerializeField] CustomParamType m_paramType;
+    [SerializeField] CustomParamCoefficientType m_paramCoefficientType;
     [SerializeField] int m_point;
 
     public string Name => m_name;
@@ -34,42 +34,20 @@ public class CustomModeDataBase
     public Sprite SubIconSprite => m_subIconSprite;
     public Color SubIconColor => m_subIconColor;
     public float Num => m_num;
-    public ChallengeType Type => m_type;
-    public ChallengeParamType ParamType => m_paramType;
-    public ChallengeParamCoefficientType ParamUpDown => m_paramCoefficientType;
+    public CustomType Type => m_type;
+    public CustomParamType ParamType => m_paramType;
+    public CustomParamCoefficientType ParamUpDown => m_paramCoefficientType;
     public int Point => m_point;
 }
-//[System.Serializable]
-//public class ChallengeModeCommand
-//{
-//    [SerializeField] int num;
-//    [SerializeField] ChallengeParamType m_paramType;
-//    [SerializeField] ChallengeParamUpDown m_paramUpDown;
-//    public int[] Execute()
-//    {
-//        return new int[] {num};
-//    }
-//    public ChallengeType Type => ChallengeType.AllEnemiesBuff;
-//    public ChallengeParamType ParamType => m_paramType;
-//    public ChallengeParamUpDown ParamUpDown => m_paramUpDown;
-//}
-/// <summary>チャレンジモードの効果部分</summary>
-//public interface IChallengeCommand
-//{
-//    int[] Execute();
-//    ChallengeType Type { get; }
-//    ChallengeParamType ParamType { get; }
-//    ChallengeParamUpDown ParamUpDown { get; }
-//}
-/// <summary>チャレンジモードの種類</summary>
-public enum ChallengeType
+/// <summary>カスタムモードの種類</summary>
+public enum CustomType
 {
     AllEnemiesBuff,
     PlayerNerf,
     SpecificEnemyBuff,
 }
 /// <summary>チャレンジモードで増減させるパラメーター</summary>
-public enum ChallengeParamType
+public enum CustomParamType
 {
     None,
     Power,
@@ -77,7 +55,7 @@ public enum ChallengeParamType
     Life,
 }
 /// <summary>ChallengeParamTypeで指定した値に対する係数</summary>
-public enum ChallengeParamCoefficientType
+public enum CustomParamCoefficientType
 {
     None,
     Plus,

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum TitleState
 {
-    SceneChange,
+    ToCustomSelect,
     Exit,
-    Credit,
+    SceneChange,
 }
 public class OnDropTitleStateChange : MonoBehaviour
 {
@@ -14,6 +14,6 @@ public class OnDropTitleStateChange : MonoBehaviour
 
     public void OnDrop()
     {
-        TitleManager.Instance.SceneChange(m_state);
+        TitleManager.Instance.StateChange(m_state);
     }
 }
