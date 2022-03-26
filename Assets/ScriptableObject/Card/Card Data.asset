@@ -363,6 +363,52 @@ MonoBehaviour:
       - id: 41
       m_cardType: 4
       m_isDiscarding: 0
+  - m_rabel: "\u30D6\u30FC\u30E1\u30E9\u30F3"
+    m_cardInfo:
+      m_name: "\u30D6\u30FC\u30E1\u30E9\u30F3"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u5C71\u672D\u306B\u30D6\u30FC\u30E1\u30E9\u30F3\u3092\u4E00\u679A\u8FFD\u52A0\u3059\u308B\n\u5EC3\u68C4"
+      m_rarity: 0
+      m_commands:
+      - id: 42
+      - id: 43
+      m_cardType: 1
+      m_isDiscarding: 1
+    m_cardUpgrade:
+      m_name: "\u30D6\u30FC\u30E1\u30E9\u30F3+"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u5C71\u672D\u306B\u30D6\u30FC\u30E1\u30E9\u30F3+\u3092\u4E00\u679A\u8FFD\u52A0\u3059\u308B\n\u5EC3\u68C4"
+      m_rarity: 0
+      m_commands:
+      - id: 44
+      - id: 45
+      m_cardType: 1
+      m_isDiscarding: 1
+  - m_rabel: "\u30B7\u30FC\u30EB\u30C9\u30D0\u30C3\u30B7\u30E5"
+    m_cardInfo:
+      m_name: "\u30B7\u30FC\u30EB\u30C9\u30D0\u30C3\u30B7\u30E5"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u81EA\u8EAB\u306F{leg1}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_rarity: 0
+      m_commands:
+      - id: 46
+      - id: 47
+      m_cardType: 1
+      m_isDiscarding: 0
+    m_cardUpgrade:
+      m_name: "\u30B7\u30FC\u30EB\u30C9\u30D0\u30C3\u30B7\u30E5+"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u81EA\u8EAB\u306F{leg1}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+      m_rarity: 0
+      m_commands:
+      - id: 48
+      - id: 49
+      m_cardType: 1
+      m_isDiscarding: 0
   references:
     version: 1
     00000000:
@@ -607,3 +653,47 @@ MonoBehaviour:
       data:
         m_drawNum: 2
         m_isDraw: 1
+    0000002A:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 7
+        m_useType: 1
+    0000002B:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 16
+        m_cardAddDestination: 0
+        m_isUpgrade: 0
+    0000002C:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 9
+        m_useType: 0
+    0000002D:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 16
+        m_cardAddDestination: 0
+        m_isUpgrade: 1
+    0000002E:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 3
+        m_useType: 1
+    0000002F:
+      type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
+      data:
+        m_block: 3
+        m_useType: 0
+    00000030:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 5
+        m_useType: 1
+    00000031:
+      type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
+      data:
+        m_block: 5
+        m_useType: 0

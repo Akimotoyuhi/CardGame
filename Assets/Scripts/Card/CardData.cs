@@ -95,6 +95,10 @@ public enum CardID
     UnlimitedSword,
     /// <summary>深呼吸</summary>
     DeepBreath,
+    /// <summary>ブーメラン</summary>
+    Boomerang,
+    /// <summary>シールドバッシュ</summary>
+    ShieldBash,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

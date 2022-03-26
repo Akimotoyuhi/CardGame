@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public int CustomEvaluation(CustomEntityType entityType, CustomParamType paramType, int num)
     {
+        if (DataManager.Instance.CustomList == null) return num;
         int ret = num;
         foreach (var item in DataManager.Instance.CustomList)
         {
