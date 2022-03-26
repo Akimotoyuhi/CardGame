@@ -124,6 +124,7 @@ public class CustomMode : MonoBehaviour
     /// </summary>
     public void OnSelectEndButtonClick()
     {
+        m_titleManager.SaveCustomList(m_selectCustomList);
         m_titleManager.StateChange(TitleState.SceneChange);
     }
 }

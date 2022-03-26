@@ -20,7 +20,7 @@ MonoBehaviour:
     m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
     m_subIconColor: {r: 1, g: 0, b: 0, a: 1}
     m_num: 1.2
-    m_type: 0
+    m_entityType: 0
     m_paramType: 1
     m_paramCoefficientType: 3
     m_point: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
     m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
     m_subIconColor: {r: 1, g: 0, b: 0.501822, a: 1}
     m_num: 1.5
-    m_type: 0
+    m_entityType: 0
     m_paramType: 1
     m_paramCoefficientType: 3
     m_point: 2
@@ -44,7 +44,7 @@ MonoBehaviour:
     m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
     m_subIconColor: {r: 1, g: 0, b: 0.9307308, a: 1}
     m_num: 2
-    m_type: 0
+    m_entityType: 0
     m_paramType: 1
     m_paramCoefficientType: 3
     m_point: 3
@@ -56,7 +56,7 @@ MonoBehaviour:
     m_subIconSprite: {fileID: 21300000, guid: 59203ae641fe8e74c94e4c3beee5cfd4, type: 3}
     m_subIconColor: {r: 0, g: 1, b: 0.085513115, a: 1}
     m_num: 10
-    m_type: 1
+    m_entityType: 1
     m_paramType: 3
     m_paramCoefficientType: 2
     m_point: 1
@@ -68,7 +68,7 @@ MonoBehaviour:
     m_subIconSprite: {fileID: 21300000, guid: 59203ae641fe8e74c94e4c3beee5cfd4, type: 3}
     m_subIconColor: {r: 0, g: 1, b: 0.90923214, a: 1}
     m_num: 30
-    m_type: 1
+    m_entityType: 1
     m_paramType: 3
     m_paramCoefficientType: 2
     m_point: 2
@@ -80,7 +80,7 @@ MonoBehaviour:
     m_subIconSprite: {fileID: 21300000, guid: 59203ae641fe8e74c94e4c3beee5cfd4, type: 3}
     m_subIconColor: {r: 0, g: 0.46197605, b: 1, a: 1}
     m_num: 50
-    m_type: 1
+    m_entityType: 1
     m_paramType: 3
     m_paramCoefficientType: 2
     m_point: 3

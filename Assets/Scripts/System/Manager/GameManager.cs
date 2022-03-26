@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public BlankCard CardPrefab => m_cardPrefab;
     public RelicData RelicData => m_relicData;
     public List<Relic> HaveRelics => m_haveRelics;
+    public List<CustomModeDataBase> CustomLists => DataManager.Instance.CustomList;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
     public IObservable<int> OnSceneReload => m_onSceneReload;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         if (m_isSeed) UnityEngine.Random.InitState(m_seed);
         else
         {
+            //Seed値を適当に決める　RandomクラスにはSeed値を取得する関数が無いのでTickCountから取っている
             int seed = Environment.TickCount;
             UnityEngine.Random.InitState(seed);
             Debug.Log("シード値:" + seed);

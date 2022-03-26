@@ -13,7 +13,7 @@ namespace Mastar
         public int Floor { get; set; } = 0;
         public int Act { get; set; } = 1;
 
-        //プレイヤー情報関連
+        #region プレイヤー情報関連
         /// <summary>所持カード</summary>
         private List<int[]> m_cards = new List<int[]>();
         /// <summary>プレイヤーの名前</summary>
@@ -52,7 +52,6 @@ namespace Mastar
             CurrentLife = currentLife;
             IsPlayerData = true;
         }
-        //public List<CardID> Cards { get => m_cards; set => m_cards = value; }
         public List<int[]> Cards { get => m_cards; }
         /// <summary>カードの追加</summary>
         /// <param name="id"></param>
@@ -62,15 +61,15 @@ namespace Mastar
             int[] vs = new int[] { id, isUpgrade };
             m_cards.Add(vs);
         }
-        /// <summary>
-        /// カードアップグレード<br/>
-        /// 後に変える
-        /// </summary>
-        /// <param name="index"></param>
+        /// <summary>カードアップグレード</summary>
         public void CardUpgrade(int index)
         {
             m_cards[index][1] = 1;
         }
+        /// <summary>選択中のカスタム</summary>
+        public List<CustomModeDataBase> CustomList { get; set; }
+        #endregion
+
         /// <summary>データの初期化</summary>
         public void Init() => m_instance = new DataManager();
     }

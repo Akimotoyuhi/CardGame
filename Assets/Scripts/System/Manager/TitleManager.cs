@@ -75,4 +75,10 @@ public class TitleManager : MonoBehaviour
             EffectManager.Instance.Fade(Color.clear, m_FadeTime.GetFadeTime(titleState));
         });
     }
+
+    /// <summary>選択中のカスタムを保存する</summary>
+    public void SaveCustomList(List<CustomModeDataBase> customDataBases)
+    {
+        DataManager.Instance.CustomList = customDataBases;
+    }
 }
