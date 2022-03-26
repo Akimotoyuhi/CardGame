@@ -9079,7 +9079,7 @@ MonoBehaviour:
   m_text: {fileID: 75147835}
   m_textDuration: 2
   m_gameoverText: "\u3042\u306A\u305F\u306F\u65C5\u306E\u9014\u4E2D\u306B<color=#ff0000>{haveCard}</color>\u679A\u306E\u30AB\u30FC\u30C9\u3092\u624B\u306B\u5165\u308C\u305F\u304C\u3001<color=#ff0000>{step}</color>\u968E\u306B\u3066\u5012\u308C\u305F\u3002"
-  m_gamecrearText: "\u3042\u306A\u305F\u306F\u65C5\u306E\u9014\u4E2D\u306B<color=#ff0000>{haveCard}</color>\u679A\u306E\u30AB\u30FC\u30C9\u3092\u624B\u306B\u5165\u308C\u3001\u5E83\u3044\u7A7A\u9593\u306B\u51FA\u305F\u3002\n\u3053\u3053\u304C\u9802\u4E0A\u306A\u306E\u3060\u308D\u3046\u304B\uFF1F"
+  m_gamecrearText: "\u3042\u306A\u305F\u306F\u65C5\u306E\u9014\u4E2D\u306B<color=#ff0000>{haveCard}</color>\u679A\u306E\u30AB\u30FC\u30C9\u3092\u624B\u306B\u5165\u308C\u3001\u5E83\u3044\u7A7A\u9593\u306B\u51FA\u305F\u3002\n\u3053\u3053\u304C\u9802\u4E0A\u306A\u306E\u3060\u308D\u3046\u304B\uFF1F\n\n\u30AB\u30B9\u30BF\u30E0\u5371\u967A\u5EA6+{risk}"
   m_retryButton: {fileID: 136348132}
   m_titleButton: {fileID: 883051028}
 --- !u!1 &938612328
@@ -11791,7 +11791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561

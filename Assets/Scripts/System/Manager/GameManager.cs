@@ -46,9 +46,11 @@ public class GameManager : MonoBehaviour
     /// <summary>現在プレイヤーが所持しているレリック</summary>
     private List<Relic> m_haveRelics = new List<Relic>();
     private Subject<int> m_onSceneReload = new Subject<int>();
-
     public static GameManager Instance { get; private set; }
+    /// <summary>ゲーム進行度</summary>
     public int Step => DataManager.Instance.Floor;
+    /// <summary>カスタムの合計危険度</summary>
+    public int Risk => DataManager.Instance.TotalRisk;
     public CardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
     public RelicData RelicData => m_relicData;
@@ -152,7 +154,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// カスタムの評価
+    /// カスタム効果の評価
     /// </summary>
     public int CustomEvaluation(CustomEntityType entityType, CustomParamType paramType, int num)
     {

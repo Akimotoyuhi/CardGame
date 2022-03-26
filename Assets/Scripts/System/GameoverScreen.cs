@@ -14,9 +14,9 @@ public class GameoverScreen : MonoBehaviour
     /// <summary>テキスト表示までの時間</summary>
     [SerializeField] float m_textDuration;
     /// <summary>ゲームオーバー時に表示される文字列</summary>
-    [SerializeField, TextArea] string m_gameoverText;
+    [SerializeField, TextArea, Tooltip("所持カードは{haveCard}\n進行度は{step}\nって書いてね")] string m_gameoverText;
     /// <summary>ゲームクリア時に表示される文字列</summary>
-    [SerializeField, TextArea] string m_gamecrearText;
+    [SerializeField, TextArea, Tooltip("所持カードは{haveCard}\n進行度は{step}\n危険度は{risk}\nって書いてね")] string m_gamecrearText;
     [SerializeField] GameObject m_retryButton;
     [SerializeField] GameObject m_titleButton;
 
@@ -55,6 +55,7 @@ public class GameoverScreen : MonoBehaviour
         else ret = m_gameoverText;
         ret = ret.Replace("{haveCard}", haveCardNum.ToString());
         ret = ret.Replace("{step}", step.ToString());
+        ret = ret.Replace("{risk}", GameManager.Instance.Risk.ToString());
         return ret;
     }
 }
