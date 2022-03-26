@@ -28,8 +28,8 @@ public class EnemyBase : CharactorBase, IDrop
     public void SetParam(EnemyDataBase data, EnemyManager enemyManager)
     {
         m_name = data.Name;
-        m_maxLife = data.Life;
-        m_life = data.Life;
+        m_maxLife = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemiesBuff, CustomParamType.Life, data.Life);
+        m_life = m_maxLife;
         m_sprite = data.Image;
         m_enemyDataBase = data;
         m_enemyManager = enemyManager;
@@ -115,9 +115,11 @@ public class EnemyBase : CharactorBase, IDrop
             switch (cp)//自身のバフを評価して数値を増減させる
             {
                 case CommandParam.Attack:
+                    c[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemiesBuff, CustomParamType.Power, c[2]);
                     c[2] = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, c[2]);
                     break;
                 case CommandParam.Block:
+                    c[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemiesBuff, CustomParamType.Difence, c[2]);
                     c[2] = ConditionEffect(EventTiming.Attacked, ParametorType.Block, c[2]);
                     break;
                 default:

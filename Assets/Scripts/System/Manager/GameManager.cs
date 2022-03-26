@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
     public BlankCard CardPrefab => m_cardPrefab;
     public RelicData RelicData => m_relicData;
     public List<Relic> HaveRelics => m_haveRelics;
-    public List<CustomModeDataBase> CustomLists => DataManager.Instance.CustomList;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
     public IObservable<int> OnSceneReload => m_onSceneReload;
@@ -151,7 +150,20 @@ public class GameManager : MonoBehaviour
             DataManager.Instance.AddCards(cardsID[i], isCardUpgrade[i]);
         }
     }
-    
+
+    /// <summary>
+    /// カスタムの評価
+    /// </summary>
+    public int CustomEvaluation(CustomEntityType entityType, CustomParamType paramType, int num)
+    {
+        int ret = num;
+        foreach (var item in DataManager.Instance.CustomList)
+        {
+            ret = item.CustomEffect(entityType, paramType, ret);
+        }
+        return ret;
+    }
+
     /// <summary>
     /// カード表示<br/>
     /// 自分のデッキ表示や強化画面で使われる
@@ -188,6 +200,9 @@ public class GameManager : MonoBehaviour
         m_cardDisplayCanvas.enabled = true;
     }
 
+    /// <summary>
+    /// カードを表示する画面を初期化して消す
+    /// </summary>
     public void CrearCardDisplayPanel()
     {
         for (int i = 0; i < m_cardDisplayParent.childCount; i++)
