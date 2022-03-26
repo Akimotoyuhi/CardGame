@@ -27,6 +27,7 @@ public class CustomMode : MonoBehaviour
     private List<CustomModeDataBase> m_selectCustomList = new List<CustomModeDataBase>();
     private List<CustomButton> m_customButtons = new List<CustomButton>();
     private TitleManager m_titleManager;
+    private int m_totalRisk;
 
     public void Setup(TitleManager titleManager)
     {
@@ -102,6 +103,7 @@ public class CustomMode : MonoBehaviour
             t.transform.SetParent(m_customTextParent);
             totalRisk += m_selectCustomList[i].Point;
         }
+        m_totalRisk = totalRisk;
         TotalRiskTextUpdate(totalRisk);
     }
 
@@ -124,7 +126,7 @@ public class CustomMode : MonoBehaviour
     /// </summary>
     public void OnSelectEndButtonClick()
     {
-        m_titleManager.SaveCustomList(m_selectCustomList);
+        m_titleManager.SaveCustomList(m_selectCustomList, m_totalRisk);
         m_titleManager.StateChange(TitleState.SceneChange);
     }
 }

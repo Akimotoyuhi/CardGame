@@ -66,9 +66,12 @@ namespace Mastar
         {
             m_cards[index][1] = 1;
         }
+        #endregion
+
         /// <summary>選択中のカスタム</summary>
         public List<CustomModeDataBase> CustomList { get; set; }
-        #endregion
+        /// <summary>合計危険度</summary>
+        public int TotalRisk { get; set; }
 
         /// <summary>データの初期化</summary>
         public void Init() => m_instance = new DataManager();

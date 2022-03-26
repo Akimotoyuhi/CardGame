@@ -77,8 +77,9 @@ public class TitleManager : MonoBehaviour
     }
 
     /// <summary>選択中のカスタムを保存する</summary>
-    public void SaveCustomList(List<CustomModeDataBase> customDataBases)
+    public void SaveCustomList(List<CustomModeDataBase> customDataBases, int totalRisk)
     {
         DataManager.Instance.CustomList = customDataBases;
+        DataManager.Instance.TotalRisk = totalRisk;
     }
 }

@@ -161,6 +161,8 @@ public class GameManager : MonoBehaviour
         {
             ret = item.CustomEffect(entityType, paramType, ret);
         }
+        if (ret < 1)
+            ret = 1;
         return ret;
     }
 

@@ -43,26 +43,18 @@ public class GameoverScreen : MonoBehaviour
             });
     }
     /// <summary>
-    /// ゲームオーバー時のテキストの正規表現の置き換え
+    /// ゲームオーバー時のテキストの置き換え
     /// </summary>
     /// <param name="haveCardNum">所持カード枚数</param>
     /// <param name="step">ゲーム進行度</param>
     /// <returns>置き換え後のテキスト</returns>
     private string SetGameoverText(int haveCardNum, int step, bool isCrear)
     {
-        string ret = default;
+        string ret;
         if (isCrear) ret = m_gamecrearText;
         else ret = m_gameoverText;
-        MatchCollection matchs = Regex.Matches(ret, "{%haveCard}");
-        foreach (Match m in matchs)
-        {
-            ret = ret.Replace(m.Value, haveCardNum.ToString());
-        }
-        matchs = Regex.Matches(ret, "{%step}");
-        foreach (Match m in matchs)
-        {
-            ret = ret.Replace(m.Value, step.ToString());
-        }
+        ret = ret.Replace("{haveCard}", haveCardNum.ToString());
+        ret = ret.Replace("{step}", step.ToString());
         return ret;
     }
 }
