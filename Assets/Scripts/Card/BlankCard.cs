@@ -171,6 +171,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         MatchCollection match = Regex.Matches(text, "{leg([0-9]*)}");
         foreach (Match m in match)
         {
+            //{leg}と書かれた部分を対応した変数に置き換える
             int index = int.Parse(m.Groups[1].Value);
             if (m_cardCommand.Count < index || (CommandParam)m_cardCommand[index][0] == CommandParam.Conditon)
                 continue;

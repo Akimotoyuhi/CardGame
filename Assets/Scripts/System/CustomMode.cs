@@ -12,6 +12,11 @@ public class CustomMode : MonoBehaviour
     [SerializeField] CustomButton m_customPrefab;
     /// <summary>選択中のカスタムを表示するテキストプレハブ</summary>
     [SerializeField] Text m_customPrevText;
+    /// <summary>合計危険度を表示するテキスト</summary>
+    [SerializeField] Text m_totalRiskViewText;
+    /// <summary>合計危険度を表示するテキストに表示する文字列</summary>
+    [SerializeField, Tooltip("合計危険度を表示するテキストに表示する文字列\n変数の部分は{risk}と記述すること")]
+    string m_totalRiskText;
     /// <summary>カスタムデータ</summary>
     [SerializeField] CustomModeData m_customModeData;
     /// <summary>カスタムボタンの親</summary>
@@ -33,6 +38,7 @@ public class CustomMode : MonoBehaviour
             cb.Setup(m_customModeData.DataBases[i], this);
             m_customButtons.Add(cb);
         }
+        TotalRiskTextUpdate(0);
     }
 
     /// <summary>
@@ -88,14 +94,30 @@ public class CustomMode : MonoBehaviour
         {
             Destroy(m_customTextParent.GetChild(i).gameObject);
         }
+        int totalRisk = 0;
         for (int i = 0; i < m_selectCustomList.Count; i++)
         {
             Text t = Instantiate(m_customPrevText);
             t.text = $"{m_selectCustomList[i].Tooltip}(+{m_selectCustomList[i].Point})";
             t.transform.SetParent(m_customTextParent);
+            totalRisk += m_selectCustomList[i].Point;
         }
+        TotalRiskTextUpdate(totalRisk);
     }
 
+    /// <summary>
+    /// 合計危険度を受け取ってm_totalRiskViewTextを更新する
+    /// </summary>
+    /// <param name="risk"></param>
+    private void TotalRiskTextUpdate(int risk)
+    {
+        string s = m_totalRiskText.Replace("{risk}", risk.ToString());
+        m_totalRiskViewText.text = s;
+        if (risk > 0)
+            m_totalRiskViewText.color = Color.red;
+        else
+            m_totalRiskViewText.color = Color.black;
+    }
     /// <summary>
     /// カスタムの選択を終了して次の画面に進むボタンをクリックした時<br/>
     /// Unityのボタンから呼ばれる事を想定している
