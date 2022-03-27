@@ -99,9 +99,14 @@ public class CustomMode : MonoBehaviour
         for (int i = 0; i < m_selectCustomList.Count; i++)
         {
             Text t = Instantiate(m_customPrevText);
-            t.text = $"{m_selectCustomList[i].Tooltip}(+{m_selectCustomList[i].Point})";
+            string riskTxt;
+            if (m_selectCustomList[i].Risk < 0)
+                riskTxt = $"({m_selectCustomList[i].Risk})";
+            else
+                riskTxt= $"(+{m_selectCustomList[i].Risk})";
+            t.text = $"{m_selectCustomList[i].Tooltip + riskTxt}";
             t.transform.SetParent(m_customTextParent);
-            totalRisk += m_selectCustomList[i].Point;
+            totalRisk += m_selectCustomList[i].Risk;
         }
         m_totalRisk = totalRisk;
         TotalRiskTextUpdate(totalRisk);

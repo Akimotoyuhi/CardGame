@@ -85,3 +85,75 @@ MonoBehaviour:
     m_paramCoefficientType: 2
     m_point: 3
     m_customID: 1
+  - m_name: "\u652F\u63F4\uFF1A\u706B\u529B\u2160"
+    m_tooltip: "\u30AB\u30FC\u30C9\u306E\u653B\u6483\u529B1.2\u500D"
+    m_iconSprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
+    m_iconColor: {r: 1, g: 0.06700325, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0, b: 0, a: 1}
+    m_num: 1.2
+    m_entityType: 1
+    m_paramType: 1
+    m_paramCoefficientType: 3
+    m_point: -1
+    m_customID: 3
+  - m_name: "\u652F\u63F4\uFF1A\u706B\u529B\u2161"
+    m_tooltip: "\u30AB\u30FC\u30C9\u306E\u653B\u6483\u529B1.5\u500D"
+    m_iconSprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
+    m_iconColor: {r: 1, g: 0.010097885, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0.4621824, b: 0, a: 1}
+    m_num: 1.5
+    m_entityType: 1
+    m_paramType: 1
+    m_paramCoefficientType: 3
+    m_point: -2
+    m_customID: 3
+  - m_name: "\u652F\u63F4\uFF1A\u706B\u529B\u2162"
+    m_tooltip: "\u30AB\u30FC\u30C9\u306E\u653B\u6483\u529B2\u500D"
+    m_iconSprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
+    m_iconColor: {r: 1, g: 0.010097885, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0.87339544, b: 0, a: 1}
+    m_num: 2
+    m_entityType: 1
+    m_paramType: 1
+    m_paramCoefficientType: 3
+    m_point: -3
+    m_customID: 3
+  - m_name: "\u88DC\u52A9\uFF1A\u4F53\u529B\u2160"
+    m_tooltip: "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6700\u5927\u4F53\u529B\u304C+10"
+    m_iconSprite: {fileID: 21300000, guid: 6b4d731bb49028047a4a8c4c1fa3bc4f, type: 3}
+    m_iconColor: {r: 1, g: 0.94436395, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0.1598596, b: 0, a: 1}
+    m_num: 10
+    m_entityType: 1
+    m_paramType: 3
+    m_paramCoefficientType: 1
+    m_point: -1
+    m_customID: 2
+  - m_name: "\u88DC\u52A9\uFF1A\u4F53\u529B\u2161"
+    m_tooltip: "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6700\u5927\u4F53\u529B\u304C+30"
+    m_iconSprite: {fileID: 21300000, guid: 6b4d731bb49028047a4a8c4c1fa3bc4f, type: 3}
+    m_iconColor: {r: 1, g: 0.94436395, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0.6738253, b: 0, a: 1}
+    m_num: 30
+    m_entityType: 1
+    m_paramType: 3
+    m_paramCoefficientType: 1
+    m_point: -2
+    m_customID: 2
+  - m_name: "\u88DC\u52A9\uFF1A\u4F53\u529B\u2162"
+    m_tooltip: "\u30B2\u30FC\u30E0\u958B\u59CB\u6642\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6700\u5927\u4F53\u529B\u304C+50"
+    m_iconSprite: {fileID: 21300000, guid: 6b4d731bb49028047a4a8c4c1fa3bc4f, type: 3}
+    m_iconColor: {r: 1, g: 0.94436395, b: 0, a: 1}
+    m_subIconSprite: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
+    m_subIconColor: {r: 1, g: 0.9995191, b: 0, a: 1}
+    m_num: 50
+    m_entityType: 1
+    m_paramType: 3
+    m_paramCoefficientType: 1
+    m_point: -3
+    m_customID: 2

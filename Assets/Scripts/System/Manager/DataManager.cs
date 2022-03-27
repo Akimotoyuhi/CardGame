@@ -74,6 +74,11 @@ namespace Mastar
         public int TotalRisk { get; set; }
 
         /// <summary>データの初期化</summary>
-        public void Init() => m_instance = new DataManager();
+        public void Init()
+        {
+            DataManager d = new DataManager();
+            d.CustomList = m_instance.CustomList;
+            m_instance = d;
+        }
     }
 }

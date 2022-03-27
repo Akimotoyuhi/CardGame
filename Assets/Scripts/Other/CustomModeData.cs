@@ -37,7 +37,7 @@ public class CustomModeDataBase
     public CustomEntityType Type => m_entityType;
     public CustomParamType ParamType => m_paramType;
     //public CustomParamCoefficientType ParamCoefficientType => m_paramCoefficientType;
-    public int Point => m_point;
+    public int Risk => m_point;
     public CustomID CustomID => m_customID;
     /// <summary>与えられた数値を指定したパラメーターで増減させる</summary>
     public int CustomEffect(CustomEntityType entityType, CustomParamType paramType, int num)
@@ -74,12 +74,14 @@ public enum CustomID
 {
     EnemyPowerUp,
     PlayerLifeDown,
+    PlayerLifeUp,
+    PlayerAttackCardBuff,
 }
 /// <summary>カスタムモードの種類</summary>
 public enum CustomEntityType
 {
-    AllEnemiesBuff,
-    PlayerNerf,
+    AllEnemies,
+    PlayerAndCard,
     SpecificEnemyBuff,
 }
 /// <summary>チャレンジモードで増減させるパラメーター</summary>

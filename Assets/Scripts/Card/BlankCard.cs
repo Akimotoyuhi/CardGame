@@ -157,9 +157,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                 switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
+                        cc[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[2]);
                         cc[2] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, cc[2]);
                         break;
                     case CommandParam.Block:
+                        cc[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[2]);
                         cc[2] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, cc[2]);
                         break;
                     default:
@@ -234,7 +236,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             m_isAnim = true;
             m_rectTransform.DOAnchorPos3DY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
-            //transform.DOMoveY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
         }
     }
 

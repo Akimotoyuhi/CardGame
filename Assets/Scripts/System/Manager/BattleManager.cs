@@ -109,7 +109,7 @@ public class BattleManager : MonoBehaviour
             cards.Add(m_playerStatsData.GetCardData(i));
             isUpgrade.Add(m_playerStatsData.IsUpgrade(i));
         }
-        int playerMaxLife = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerNerf, CustomParamType.Life, m_playerStatsData.HP);
+        int playerMaxLife = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Life, m_playerStatsData.HP);
         GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.AttackedSprite, m_playerStatsData.GameoverSprite, playerMaxLife, playerMaxLife, cards.ToArray(), isUpgrade.ToArray());
     }
 
@@ -194,7 +194,7 @@ public class BattleManager : MonoBehaviour
                 cards.Add(m_playerStatsData.GetCardData(i));
                 isUpgrade.Add(m_playerStatsData.IsUpgrade(i));
             }
-            int playerMaxLife = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerNerf, CustomParamType.Life, m_playerStatsData.HP);
+            int playerMaxLife = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Life, m_playerStatsData.HP);
             GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.AttackedSprite, m_playerStatsData.GameoverSprite, playerMaxLife, playerMaxLife, cards.ToArray(), isUpgrade.ToArray());
         }
         m_player = Instantiate(m_playerPrefab, m_playerPos);
