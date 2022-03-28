@@ -9,12 +9,12 @@ public class Hand : CardManagement
     /// <summary>
     /// 手札にある全てのカードを捨て札に移動させる
     /// </summary>
-    public void AllCast(int n = 0)
+    public void AllCast()
     {
         if (m_cardParent.childCount == 0) { return; }
         for (int i = m_cardParent.childCount - 1; 0 <= i; i--)
         {
-            m_cardParent.GetChild(i).GetComponent<BlankCard>().OnCast(true);
+            m_cardParent.GetChild(i).GetComponent<BlankCard>().OnCast(false);
         }
     }
     /// <summary>

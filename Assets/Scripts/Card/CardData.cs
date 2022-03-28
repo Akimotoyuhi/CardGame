@@ -99,6 +99,8 @@ public enum CardID
     Boomerang,
     /// <summary>シールドバッシュ</summary>
     ShieldBash,
+    /// <summary>マジックシールド</summary>
+    MagicShield,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
@@ -178,6 +180,7 @@ public class CardInfomationData
     [SerializeReference, SubclassSelector] List<ICommand> m_commands;
     [SerializeField] UseType m_cardType = new UseType();
     [SerializeField] bool m_isDiscarding = false;
+    [SerializeField] bool m_ethereal = false;
     /// <summary>カードの名前</summary>
     public string Name => m_name;
     /// <summary>コスト</summary>
@@ -207,6 +210,7 @@ public class CardInfomationData
     public UseType UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
+    public bool Ethereal => m_ethereal;
 }
 
 public interface ICommand

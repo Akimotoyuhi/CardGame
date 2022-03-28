@@ -26,6 +26,7 @@ MonoBehaviour:
       - id: 0
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u65AC\u6483+"
       m_cost: 1
@@ -36,6 +37,7 @@ MonoBehaviour:
       - id: 1
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u9632\u5FA1"
     m_cardInfo:
       m_name: "\u9632\u5FA1"
@@ -47,6 +49,7 @@ MonoBehaviour:
       - id: 2
       m_cardType: 0
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u9632\u5FA1+"
       m_cost: 1
@@ -57,6 +60,7 @@ MonoBehaviour:
       - id: 3
       m_cardType: 0
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u9023\u6483"
     m_cardInfo:
       m_name: "\u9023\u6483"
@@ -70,6 +74,7 @@ MonoBehaviour:
       - id: 4
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u9023\u6483+"
       m_cost: 1
@@ -82,6 +87,7 @@ MonoBehaviour:
       - id: 7
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u865A\u8131\u306E\u5149"
     m_cardInfo:
       m_name: "\u865A\u8131\u306E\u5149"
@@ -93,6 +99,7 @@ MonoBehaviour:
       - id: 8
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u865A\u8131\u306E\u5149+"
       m_cost: 1
@@ -103,6 +110,7 @@ MonoBehaviour:
       - id: 9
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u3084\u305F\u3089\u3081\u3063\u305F\u3089"
     m_cardInfo:
       m_name: "\u3084\u305F\u3089\u3081\u3063\u305F\u3089"
@@ -115,6 +123,7 @@ MonoBehaviour:
       - id: 11
       m_cardType: 2
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u3084\u305F\u3089\u3081\u3063\u305F\u3089+"
       m_cost: 1
@@ -126,6 +135,7 @@ MonoBehaviour:
       - id: 13
       m_cardType: 2
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u7B4B\u529B\u5F37\u5316"
     m_cardInfo:
       m_name: "\u7B4B\u529B\u5F37\u5316"
@@ -137,6 +147,7 @@ MonoBehaviour:
       - id: 14
       m_cardType: 0
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u7B4B\u529B\u5F37\u5316+"
       m_cost: 1
@@ -147,6 +158,7 @@ MonoBehaviour:
       - id: 15
       m_cardType: 0
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u30AC\u30E9\u30B9\u306E\u30CA\u30A4\u30D5"
     m_cardInfo:
       m_name: "\u30AC\u30E9\u30B9\u306E\u30CA\u30A4\u30D5"
@@ -159,6 +171,7 @@ MonoBehaviour:
       - id: 17
       m_cardType: 1
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u30AC\u30E9\u30B9\u306E\u30CA\u30A4\u30D5+"
       m_cost: 1
@@ -170,6 +183,7 @@ MonoBehaviour:
       - id: 19
       m_cardType: 1
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u300C\u7834\u7247\u300D"
     m_cardInfo:
       m_name: "\u300C\u7834\u7247\u300D"
@@ -181,6 +195,7 @@ MonoBehaviour:
       - id: 20
       m_cardType: 1
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u300C\u92ED\u5229\u306A\u7834\u7247\u300D"
       m_cost: 0
@@ -191,6 +206,7 @@ MonoBehaviour:
       - id: 21
       m_cardType: 1
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u9244\u58C1"
     m_cardInfo:
       m_name: "\u9244\u58C1"
@@ -202,6 +218,7 @@ MonoBehaviour:
       - id: 22
       m_cardType: 0
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u9244\u58C1+"
       m_cost: 2
@@ -212,6 +229,7 @@ MonoBehaviour:
       - id: 23
       m_cardType: 0
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u4FCA\u8DB3"
     m_cardInfo:
       m_name: "\u4FCA\u8DB3"
@@ -223,6 +241,7 @@ MonoBehaviour:
       - id: 24
       m_cardType: 0
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u4FCA\u8DB3+"
       m_cost: 1
@@ -233,6 +252,7 @@ MonoBehaviour:
       - id: 25
       m_cardType: 0
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u5947\u5999\u306A\u523B\u5370"
     m_cardInfo:
       m_name: "\u5947\u5999\u306A\u523B\u5370"
@@ -244,6 +264,7 @@ MonoBehaviour:
       - id: 26
       m_cardType: 4
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u5947\u5999\u306A\u523B\u5370+"
       m_cost: 2
@@ -254,6 +275,7 @@ MonoBehaviour:
       - id: 27
       m_cardType: 4
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u89E3\u304B\u308C\u3057\u529B"
     m_cardInfo:
       m_name: "\u89E3\u304B\u308C\u3057\u529B"
@@ -266,6 +288,7 @@ MonoBehaviour:
       - id: 29
       m_cardType: 4
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u89E3\u304B\u308C\u3057\u529B"
       m_cost: 2
@@ -277,6 +300,7 @@ MonoBehaviour:
       - id: 31
       m_cardType: 4
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u300C\u7D42\u672B\u300D"
     m_cardInfo:
       m_name: "\u300C\u7D42\u672B\u300D"
@@ -288,6 +312,7 @@ MonoBehaviour:
       - id: 32
       m_cardType: 2
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u300C\u7D42\u672B\u300D"
       m_cost: 3
@@ -298,6 +323,7 @@ MonoBehaviour:
       - id: 33
       m_cardType: 2
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u30EA\u30D5\u30EC\u30AF\u30C8"
     m_cardInfo:
       m_name: "\u30EA\u30D5\u30EC\u30AF\u30C8"
@@ -309,6 +335,7 @@ MonoBehaviour:
       - id: 34
       m_cardType: 0
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u30EA\u30D5\u30EC\u30AF\u30C8+"
       m_cost: 0
@@ -319,6 +346,7 @@ MonoBehaviour:
       - id: 35
       m_cardType: 0
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u7121\u9650\u306E\u5263"
     m_cardInfo:
       m_name: "\u7121\u9650\u306E\u5263"
@@ -331,6 +359,7 @@ MonoBehaviour:
       - id: 37
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u7121\u9650\u306E\u5263+"
       m_cost: 0
@@ -342,6 +371,7 @@ MonoBehaviour:
       - id: 39
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u6DF1\u547C\u5438"
     m_cardInfo:
       m_name: "\u6DF1\u547C\u5438"
@@ -353,6 +383,7 @@ MonoBehaviour:
       - id: 40
       m_cardType: 4
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u6DF1\u547C\u5438+"
       m_cost: 0
@@ -363,6 +394,7 @@ MonoBehaviour:
       - id: 41
       m_cardType: 4
       m_isDiscarding: 0
+      m_ethereal: 0
   - m_rabel: "\u30D6\u30FC\u30E1\u30E9\u30F3"
     m_cardInfo:
       m_name: "\u30D6\u30FC\u30E1\u30E9\u30F3"
@@ -375,6 +407,7 @@ MonoBehaviour:
       - id: 43
       m_cardType: 1
       m_isDiscarding: 1
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u30D6\u30FC\u30E1\u30E9\u30F3+"
       m_cost: 1
@@ -386,6 +419,7 @@ MonoBehaviour:
       - id: 45
       m_cardType: 1
       m_isDiscarding: 1
+      m_ethereal: 0
   - m_rabel: "\u30B7\u30FC\u30EB\u30C9\u30D0\u30C3\u30B7\u30E5"
     m_cardInfo:
       m_name: "\u30B7\u30FC\u30EB\u30C9\u30D0\u30C3\u30B7\u30E5"
@@ -398,6 +432,7 @@ MonoBehaviour:
       - id: 47
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
     m_cardUpgrade:
       m_name: "\u30B7\u30FC\u30EB\u30C9\u30D0\u30C3\u30B7\u30E5+"
       m_cost: 1
@@ -409,6 +444,30 @@ MonoBehaviour:
       - id: 49
       m_cardType: 1
       m_isDiscarding: 0
+      m_ethereal: 0
+  - m_rabel: "\u30DE\u30B8\u30C3\u30AF\u30B7\u30FC\u30EB\u30C9"
+    m_cardInfo:
+      m_name: "\u30DE\u30B8\u30C3\u30AF\u30B7\u30FC\u30EB\u30C9"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: 4ac5fb8d933238b4c8574bf420ae3605, type: 3}
+      m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u5E0C\u8584"
+      m_rarity: 1
+      m_commands:
+      - id: 50
+      m_cardType: 0
+      m_isDiscarding: 0
+      m_ethereal: 1
+    m_cardUpgrade:
+      m_name: "\u30DE\u30B8\u30C3\u30AF\u30B7\u30FC\u30EB\u30C9+"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: 4ac5fb8d933238b4c8574bf420ae3605, type: 3}
+      m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u5E0C\u8584"
+      m_rarity: 1
+      m_commands:
+      - id: 51
+      m_cardType: 0
+      m_isDiscarding: 0
+      m_ethereal: 1
   references:
     version: 1
     00000000:
@@ -696,4 +755,14 @@ MonoBehaviour:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 5
+        m_useType: 0
+    00000032:
+      type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
+      data:
+        m_block: 10
+        m_useType: 0
+    00000033:
+      type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
+      data:
+        m_block: 13
         m_useType: 0

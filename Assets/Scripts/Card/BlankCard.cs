@@ -37,6 +37,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private bool m_isAnim = false;
     /// <summary>廃棄カードフラグ</summary>
     private bool m_isDiscarding = false;
+    /// <summary>エセリアル</summary>
+    private bool m_ethereal = false;
     /// <summary>カードの状態</summary>
     private CardState m_cardState = default;
     private string m_tooltip;
@@ -136,6 +138,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_cardID = carddata.CardId;
         m_useType = carddata.UseType;
         m_isDiscarding = carddata.IsDiscarding;
+        m_ethereal = carddata.Ethereal;
         GetPlayerEffect();
         Setup();
     }
@@ -191,12 +194,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// <summary>
     /// カードを捨て札に移動する
     /// </summary>
-    public void OnCast(bool isForcedCast = false)
+    public void OnCast(bool isUsed)
     {
-        if (!isForcedCast)
+        if (isUsed)
         {
             m_player.CurrrentCost -= Cost;
             BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
+        }
+        else
+        {
+            if (m_ethereal)
+                Destroy(gameObject);
         }
         BattleManager.Instance.OnCardDrag(null);
         m_isDrag = false;
@@ -279,7 +287,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             if (dropObj == null) continue;
             if (!dropObj.CanDrop(m_useType)) continue;
             dropObj.GetDrop(m_cardCommand);
-            OnCast();
+            OnCast(true);
         }
     }
 
