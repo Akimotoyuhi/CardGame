@@ -189,16 +189,20 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
 
     /// <summary>
-    /// 使用後の処理
+    /// カードを捨て札に移動する
     /// </summary>
-    public void OnCast()
+    public void OnCast(bool isForcedCast = false)
     {
-        m_player.CurrrentCost -= Cost; //プレイヤーのコストを減らす
+        if (!isForcedCast)
+        {
+            m_player.CurrrentCost -= Cost;
+            BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
+        }
         BattleManager.Instance.OnCardDrag(null);
-        BattleManager.Instance.SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
         m_isDrag = false;
         BattleManager.Instance.CardCast();
         m_cardState = CardState.None;
+        UpdateCostText();
         m_cardCommand = m_carddata.Command;
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動

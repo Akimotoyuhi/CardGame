@@ -217,8 +217,7 @@ public class CharactorBase : MonoBehaviour
             if (m_block < 0) m_block = 0;
             else
             {
-                if (isPlayer) EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);
-                else EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);
+                EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);
             }
             dmg *= -1; //ブロック値計算の後ダメージの符号が反転してうざいので戻す
             if (dmg <= 0) { }
@@ -229,15 +228,12 @@ public class CharactorBase : MonoBehaviour
                 if (isPlayer) GameManager.Instance.SetGameInfoPanel(this);
                 if (m_life <= 0)
                 {
-                    //DOTween.KillAll();
                     m_life = 0;
-                    //m_isDead = true;
                     dead();
                 }
                 else
                 {
-                    if (isPlayer) EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform);
-                    else EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform);
+                    EffectManager.Instance.DamageText(dmg.ToString(), Color.red, Vector2.zero, transform);
                 }
             }
         }
@@ -271,7 +267,7 @@ public class CharactorBase : MonoBehaviour
         SetUI();
     }
     /// <summary>
-    /// Conditionを動かす
+    /// バフデバフ効果の発動
     /// </summary>
     /// <param name="eventTiming"></param>
     /// <param name="parametorType"></param>

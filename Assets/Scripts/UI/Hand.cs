@@ -14,7 +14,7 @@ public class Hand : CardManagement
         if (m_cardParent.childCount == 0) { return; }
         for (int i = m_cardParent.childCount - 1; 0 <= i; i--)
         {
-            m_cardParent.GetChild(i).SetParent(m_discard.CardParent, false);
+            m_cardParent.GetChild(i).GetComponent<BlankCard>().OnCast(true);
         }
     }
     /// <summary>
