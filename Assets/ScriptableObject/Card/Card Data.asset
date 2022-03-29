@@ -24,6 +24,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 0
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -35,6 +41,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 1
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -47,6 +59,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 2
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -58,6 +76,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 3
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -72,6 +96,12 @@ MonoBehaviour:
       - id: 4
       - id: 4
       - id: 4
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -85,6 +115,12 @@ MonoBehaviour:
       - id: 5
       - id: 6
       - id: 7
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -97,6 +133,12 @@ MonoBehaviour:
       m_rarity: 1
       m_commands:
       - id: 8
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -108,6 +150,12 @@ MonoBehaviour:
       m_rarity: 1
       m_commands:
       - id: 9
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -121,6 +169,12 @@ MonoBehaviour:
       m_commands:
       - id: 10
       - id: 11
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 2
       m_isDiscarding: 0
       m_ethereal: 0
@@ -133,6 +187,12 @@ MonoBehaviour:
       m_commands:
       - id: 12
       - id: 13
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 2
       m_isDiscarding: 0
       m_ethereal: 0
@@ -145,6 +205,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 14
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 1
       m_ethereal: 0
@@ -156,6 +222,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 15
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 1
       m_ethereal: 0
@@ -169,6 +241,12 @@ MonoBehaviour:
       m_commands:
       - id: 16
       - id: 17
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 1
       m_ethereal: 0
@@ -181,6 +259,12 @@ MonoBehaviour:
       m_commands:
       - id: 18
       - id: 19
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 1
       m_ethereal: 0
@@ -193,6 +277,12 @@ MonoBehaviour:
       m_rarity: 3
       m_commands:
       - id: 20
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 1
       m_ethereal: 0
@@ -204,6 +294,12 @@ MonoBehaviour:
       m_rarity: 3
       m_commands:
       - id: 21
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 1
       m_ethereal: 0
@@ -216,6 +312,12 @@ MonoBehaviour:
       m_rarity: 1
       m_commands:
       - id: 22
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -227,6 +329,12 @@ MonoBehaviour:
       m_rarity: 1
       m_commands:
       - id: 23
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -239,6 +347,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 24
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 1
       m_ethereal: 0
@@ -250,6 +364,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 25
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 1
       m_ethereal: 0
@@ -262,6 +382,12 @@ MonoBehaviour:
       m_rarity: 2
       m_commands:
       - id: 26
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 4
       m_isDiscarding: 1
       m_ethereal: 0
@@ -273,6 +399,12 @@ MonoBehaviour:
       m_rarity: 2
       m_commands:
       - id: 27
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 4
       m_isDiscarding: 1
       m_ethereal: 0
@@ -286,6 +418,12 @@ MonoBehaviour:
       m_commands:
       - id: 28
       - id: 29
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 4
       m_isDiscarding: 1
       m_ethereal: 0
@@ -298,6 +436,12 @@ MonoBehaviour:
       m_commands:
       - id: 30
       - id: 31
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 4
       m_isDiscarding: 1
       m_ethereal: 0
@@ -310,6 +454,12 @@ MonoBehaviour:
       m_rarity: 3
       m_commands:
       - id: 32
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 2
       m_isDiscarding: 0
       m_ethereal: 0
@@ -321,6 +471,12 @@ MonoBehaviour:
       m_rarity: 3
       m_commands:
       - id: 33
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 2
       m_isDiscarding: 0
       m_ethereal: 0
@@ -333,6 +489,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 34
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 1
       m_ethereal: 0
@@ -344,6 +506,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 35
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 1
       m_ethereal: 0
@@ -357,6 +525,12 @@ MonoBehaviour:
       m_commands:
       - id: 36
       - id: 37
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -369,6 +543,12 @@ MonoBehaviour:
       m_commands:
       - id: 38
       - id: 39
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -381,6 +561,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 40
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 4
       m_isDiscarding: 0
       m_ethereal: 0
@@ -392,6 +578,12 @@ MonoBehaviour:
       m_rarity: 0
       m_commands:
       - id: 41
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 4
       m_isDiscarding: 0
       m_ethereal: 0
@@ -405,6 +597,12 @@ MonoBehaviour:
       m_commands:
       - id: 42
       - id: 43
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 1
       m_ethereal: 0
@@ -417,6 +615,12 @@ MonoBehaviour:
       m_commands:
       - id: 44
       - id: 45
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 1
       m_ethereal: 0
@@ -430,6 +634,12 @@ MonoBehaviour:
       m_commands:
       - id: 46
       - id: 47
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -442,6 +652,12 @@ MonoBehaviour:
       m_commands:
       - id: 48
       - id: 49
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -454,6 +670,12 @@ MonoBehaviour:
       m_rarity: 1
       m_commands:
       - id: 50
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 1
@@ -465,6 +687,12 @@ MonoBehaviour:
       m_rarity: 1
       m_commands:
       - id: 51
+      m_cardConditional:
+        m_doesNotAdapt: 0
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_num: 0
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 1
