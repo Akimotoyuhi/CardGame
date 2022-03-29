@@ -24,4 +24,8 @@ public class EnemiesTarget : MonoBehaviour, IDrop
         if (useType == UseType.ToAllEnemies) m_flame.SetActive(true);
         else m_flame.SetActive(false);
     }
+    public int CardUsedCheck(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType)
+    {
+        return BattleManager.Instance.CommandManager.CardUsedConditionalCheck(evaluationParam, evaluationType);
+    }
 }

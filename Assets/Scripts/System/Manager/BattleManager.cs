@@ -204,7 +204,7 @@ public class BattleManager : MonoBehaviour
         m_enemyManager.Setup(m_enemiesTarget);
         m_enemyManager.CreateEnemies(eria);
         m_enemyManager.EnemyCount();
-        m_dropManager.Setup(m_enemyManager, m_player);
+        m_dropManager.Setup(m_enemyManager, m_player, m_hand, m_discard, m_deck);
         //ƒJ[ƒh¶¬
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
         {

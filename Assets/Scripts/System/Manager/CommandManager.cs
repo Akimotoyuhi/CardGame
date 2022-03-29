@@ -8,13 +8,19 @@ using UnityEngine;
 public class CommandManager : MonoBehaviour
 {
     [SerializeField, Tooltip("プレイヤーの攻撃画像を出す時間")] float m_playerAttackSpriteDuration;
-    private EnemyManager m_enemyManager = default;
-    private Player m_player = default;
+    private EnemyManager m_enemyManager;
+    private Player m_player;
+    private Hand m_hand;
+    private Discard m_discard;
+    private Deck m_deck;
 
-    public void Setup(EnemyManager enemyManager, Player player)
+    public void Setup(EnemyManager enemyManager, Player player, Hand hand, Discard discard, Deck deck)
     {
         m_enemyManager = enemyManager;
         m_player = player;
+        m_hand = hand;
+        m_discard = discard;
+        m_deck = deck;
     }
 
     /// <summary>
@@ -44,7 +50,7 @@ public class CommandManager : MonoBehaviour
                     m_enemyManager.AllEnemiesDamage(cmds);
                     break;
                 case UseType.ToRandomEnemy:
-                    Debug.Log("未作成");
+                    //Debug.Log("未作成");
                     break;
                 case UseType.System:
                     switch ((CommandParam)cmds[0])
@@ -69,5 +75,55 @@ public class CommandManager : MonoBehaviour
             }
         }
         if (isPlayerAnim) m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
+    }
+    public int CardUsedConditionalCheck(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType, EnemyBase enemy = null)
+    {
+        int ret = 0;
+        CharactorBase cb = default;
+        switch (evaluationType)
+        {
+            case CardConditionalEvaluationType.Player:
+                cb = m_player;
+                break;
+            case CardConditionalEvaluationType.Enemy:
+                cb = enemy;
+                break;
+            case CardConditionalEvaluationType.Hand:
+                ret = m_hand.CardParent.childCount;
+                return ret;
+            case CardConditionalEvaluationType.Discard:
+                ret = m_discard.CardParent.childCount;
+                return ret;
+            case CardConditionalEvaluationType.Deck:
+                ret = m_deck.CardParent.childCount;
+                return ret;
+            default:
+                Debug.LogError("例外エラー");
+                ret = -1;
+                break;
+        }
+        switch (evaluationParam)
+        {
+            case CardConditionalEvaluationParam.Power:
+                //Debug.LogError("未実装");
+                ret = -1;
+                break;
+            case CardConditionalEvaluationParam.Block:
+                ret = cb.CurrentBlock;
+                break;
+            case CardConditionalEvaluationParam.Life:
+                ret = cb.CurrentLife;
+                break;
+            case CardConditionalEvaluationParam.BuffDebuff:
+                //ret = cb.ConditionIDCheck((ConditionID)num)
+                //Debug.LogError("未実装");
+                ret = -1;
+                break;
+            default:
+                Debug.LogError("例外エラー");
+                ret = -1;
+                break;
+        }
+        return ret;
     }
 }

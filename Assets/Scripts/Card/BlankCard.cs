@@ -49,6 +49,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private int m_index;
     private CardID m_cardID;
     private UseType m_useType;
+    private CardConditional m_conditional;
     private Reward m_reward;
     private Rest m_rest;
     private Player m_player;
@@ -137,6 +138,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
         m_useType = carddata.UseType;
+        m_conditional = carddata.CardConditional;
         m_isDiscarding = carddata.IsDiscarding;
         m_ethereal = carddata.Ethereal;
         GetPlayerEffect();
@@ -286,6 +288,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             IDrop dropObj = hit.gameObject.GetComponent<IDrop>();
             if (dropObj == null) continue;
             if (!dropObj.CanDrop(m_useType)) continue;
+            if (!m_conditional.Evaluation(dropObj.CardUsedCheck(m_conditional.EvaluationParam, m_conditional.EvaluationType)))
+            {
+                EffectManager.Instance.SetBattleUIText("使用条件を満たしていない！", Color.red, 1f);
+                continue;
+            }
             dropObj.GetDrop(m_cardCommand);
             OnCast(true);
         }
@@ -309,18 +316,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
             localPoint.y += 230; //原因は分からないけど座標変換後ちょっとズレるのでそれの修正用
             m_rectTransform.localPosition = localPoint;
-
-            //ドラッグ中はドロップ対象を探し続けて、重なった相手をハイライトさせる
-            //List<RaycastResult> results = new List<RaycastResult>();
-            //EventSystem.current.RaycastAll(eventData, results);
-            //foreach (var hit in results)
-            //{
-            //    IDrop drop = hit.gameObject.GetComponent<IDrop>();
-            //    if (drop != null)
-            //    {
-            //        drop.OnCard(this);
-            //    }
-            //}
         }
     }
 

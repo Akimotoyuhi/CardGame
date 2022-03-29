@@ -55,6 +55,11 @@ public class EnemyBase : CharactorBase, IDrop
         else m_flame.SetActive(false);
     }
 
+    public int CardUsedCheck(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType)
+    {
+        return BattleManager.Instance.CommandManager.CardUsedConditionalCheck(evaluationParam, evaluationType, this);
+    }
+
     public override void GetDamage(int[] cardParam)
     {
         CommandParam command = (CommandParam)cardParam[0];

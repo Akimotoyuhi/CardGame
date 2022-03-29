@@ -98,6 +98,8 @@ public class CardConditional
     [SerializeField] CardConditionalEvaluationType m_evaluationType;
     [SerializeField] CardUsedConditional m_cardConditional;
     [SerializeField] int m_num;
+    public CardConditionalEvaluationParam EvaluationParam => m_evaluationParam;
+    public CardConditionalEvaluationType EvaluationType => m_evaluationType;
     /// <summary>
     /// 条件の評価
     /// </summary>
@@ -110,6 +112,35 @@ public class CardConditional
         if (m_doesNotAdapt)
             return true;
         if (evaluationParam != m_evaluationParam || evaluationType != m_evaluationType) return false;
+        switch (m_cardConditional)
+        {
+            case CardUsedConditional.High:
+                if (m_num <= num)
+                    return true;
+                break;
+            case CardUsedConditional.Low:
+                if (m_num >= num)
+                    return true;
+                break;
+            case CardUsedConditional.Even:
+                if (num % 2 == 0)
+                    return true;
+                break;
+            case CardUsedConditional.Odd:
+                if (num % 2 != 0)
+                    return true;
+                break;
+            default:
+                break;
+        }
+        return false;
+    }
+    public bool Evaluation(int num)
+    {
+        if (m_doesNotAdapt)
+            return true;
+        if (num == -1)　　//現状返せないケースが与えられた場合はとりあえず-1を返すようになっているのでとりあえず
+            return false;
         switch (m_cardConditional)
         {
             case CardUsedConditional.High:
@@ -275,6 +306,8 @@ public enum CardID
     ShieldBash,
     /// <summary>マジックシールド</summary>
     MagicShield,
+    /// <summary>万全</summary>
+    Perfection,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

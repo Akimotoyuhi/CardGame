@@ -17,7 +17,7 @@ public class CharactorBase : MonoBehaviour
     [SerializeField] protected int m_maxLife = 1;
     /// <summary>現在HP</summary>
     [SerializeField] protected int m_life;
-    /// <summary>ブロック値</summary>
+    /// <summary>現在のブロック値</summary>
     protected int m_block;
     /// <summary>画像</summary>
     protected Sprite m_sprite;
@@ -59,6 +59,7 @@ public class CharactorBase : MonoBehaviour
             }
         }
     }
+    public int CurrentBlock => m_block;
     public Sprite sprite => m_sprite;
     /// <summary>死んでる判定</summary>
     public bool IsDead { get => m_isDead; }
@@ -240,7 +241,15 @@ public class CharactorBase : MonoBehaviour
         m_block += block;
         SetUI();
     }
-
+    public bool ConditionIDCheck(ConditionID id)
+    {
+        foreach (var c in m_conditions)
+        {
+            if (c.GetConditionID() == id)
+                return true;
+        }
+        return false;
+    }
     public void SetParam(string name, Sprite image, int hp)
     {
         m_name = name;
