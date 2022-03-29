@@ -76,6 +76,7 @@ public enum CustomID
     PlayerLifeDown,
     PlayerLifeUp,
     PlayerAttackCardBuff,
+    EnemyLifeUp,
 }
 /// <summary>カスタムモードの種類</summary>
 public enum CustomEntityType
