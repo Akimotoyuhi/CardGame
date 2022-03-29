@@ -308,6 +308,8 @@ public enum CardID
     MagicShield,
     /// <summary>万全</summary>
     Perfection,
+    /// <summary>決死の突撃</summary>
+    DeadlyAssault,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
