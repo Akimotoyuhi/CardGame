@@ -100,8 +100,8 @@ MonoBehaviour:
     m_color: {r: 0, g: 0.30706453, b: 1, a: 1}
   - m_sprite: {fileID: 21300000, guid: fb57a4db62aeb7644af37692289f8fd4, type: 3}
     m_text: "\u88DC\u52A9\n\u3053\u306E\u6575\u304C\u4E88\u5B9A\u3057\u3066\u3044\u308B\u306E\u306F\u81EA\u8EAB\u3089\u3092\u5F37\u5316\u3059\u308B\u4E8B"
-    m_color: {r: 0, g: 0.28125095, b: 1, a: 1}
-  - m_sprite: {fileID: 21300000, guid: fb57a4db62aeb7644af37692289f8fd4, type: 3}
+    m_color: {r: 1, g: 0.99265337, b: 0, a: 1}
+  - m_sprite: {fileID: 21300000, guid: 59203ae641fe8e74c94e4c3beee5cfd4, type: 3}
     m_text: "\u59A8\u5BB3\n\u3053\u306E\u6575\u304C\u4E88\u5B9A\u3057\u3066\u3044\u308B\u306E\u306F\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u59A8\u5BB3\u3092\u3059\u308B\u4E8B"
     m_color: {r: 0, g: 1, b: 0.14742756, a: 1}
   - m_sprite: {fileID: 21300000, guid: 8335557d6ddf54f4e8eb078d8c8a49b0, type: 3}
