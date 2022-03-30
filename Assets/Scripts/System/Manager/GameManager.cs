@@ -48,7 +48,8 @@ public class GameManager : MonoBehaviour
     private Subject<int> m_onSceneReload = new Subject<int>();
     public static GameManager Instance { get; private set; }
     /// <summary>ゲーム進行度</summary>
-    public int Step => DataManager.Instance.Floor;
+    public int Floor => DataManager.Instance.Floor;
+    public int Act { get => DataManager.Instance.Act; set => DataManager.Instance.Act = value; }
     /// <summary>カスタムの合計危険度</summary>
     public int Risk => DataManager.Instance.TotalRisk;
     public CardData CardData => m_cardData;
@@ -99,19 +100,22 @@ public class GameManager : MonoBehaviour
             switch (cellState)
             {
                 case CellState.Enemy:
-                    if (DataManager.Instance.Act == 1) BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy);
+                    if (DataManager.Instance.Act == 1)
+                        BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Enemy);
                     else Debug.LogError("まだ作ってない");
                     BattleManager.Instance.IsGame = true;
                     BattleManager.Instance.SetCanvas();
                     break;
                 case CellState.Elite:
-                    if (DataManager.Instance.Act == 1) BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Elite);
+                    if (DataManager.Instance.Act == 1)
+                        BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Elite);
                     else Debug.LogError("まだ作ってない");
                     BattleManager.Instance.IsGame = true;
                     BattleManager.Instance.SetCanvas();
                     break;
                 case CellState.Boss:
-                    if (DataManager.Instance.Act == 1) BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss);
+                    if (DataManager.Instance.Act == 1)
+                        BattleManager.Instance.BattleStart(EnemyAppearanceEria.Act1Boss);
                     else Debug.LogError("まだ作ってない");
                     BattleManager.Instance.IsGame = true;
                     BattleManager.Instance.SetCanvas();
@@ -258,7 +262,7 @@ public class GameManager : MonoBehaviour
             Destroy(player.gameObject);
         }
         DataManager.Instance.Floor++;
-        if (m_map.ClearCheck(DataManager.Instance.Floor)) Gameover(true);
+        m_map.ClearCheck(DataManager.Instance.Floor, DataManager.Instance.Act);
         SetGameInfoPanel();
         m_step = DataManager.Instance.Floor;
         m_map.AllColorChange();
@@ -284,7 +288,7 @@ public class GameManager : MonoBehaviour
         {
             EffectManager.Instance.Fade(Color.black, m_gameoverFadeDuration, () =>
             {
-                m_gameoverScreen.ShowPanel(DataManager.Instance.Cards.Count, Step, isCrear);
+                m_gameoverScreen.ShowPanel(DataManager.Instance.Cards.Count, Floor, isCrear);
                 EffectManager.Instance.Fade(Color.clear, 0);
             });
         });

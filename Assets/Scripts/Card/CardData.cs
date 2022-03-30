@@ -212,10 +212,10 @@ public class CardInfomationData
     public bool IsDiscarding => m_isDiscarding;
     public bool Ethereal => m_ethereal;
 }
-
+/// <summary>〇〇に対して何かしらをしたい時に使うインターフェース</summary>
 public interface ICommand
 {
-    /// <summary>カードを使用した時の効果</summary>
+    /// <summary>コマンドデータ</summary>
     /// <returns>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</returns>
     int[] Execute();
 }

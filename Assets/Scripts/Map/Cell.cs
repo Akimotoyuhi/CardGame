@@ -52,9 +52,9 @@ public class Cell : MonoBehaviour
 
     public void OnClick()
     {
-        if (m_map.IsClick) return;
-        m_map.IsClick = true;
-        if (GameManager.Instance.Step != Step)
+        if (m_map.CanClick) return;
+        m_map.CanClick = true;
+        if (GameManager.Instance.Floor != Step)
         {
             Debug.Log("選択不可");
             return;
@@ -106,7 +106,7 @@ public class Cell : MonoBehaviour
                 m_image.color = m_eliteColor;
                 break;
         }
-        if (GameManager.Instance.Step != Step)
+        if (GameManager.Instance.Floor != Step)
         {
             m_image.color -= new Color(0, 0, 0, 0.5f);
         }

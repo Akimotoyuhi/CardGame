@@ -15,6 +15,8 @@ public class Map : MonoBehaviour
     [SerializeField] int m_maxCell = 3;
     /// <summary>ここまで進んだらクリアとするAct数</summary>
     [SerializeField] int m_crearAct = 1;
+    /// <summary>Act毎の背景</summary>
+    [SerializeField] Sprite[] m_backGroundSprites;
     /// <summary>親セクター</summary>
     [SerializeField] Transform m_parentSector;
     /// <summary>セクタープレハブ</summary>
@@ -60,7 +62,7 @@ public class Map : MonoBehaviour
         }
     }
     /// <summary>セルのクリック可否フラグ</summary>
-    public bool IsClick { get; set; }
+    public bool CanClick { get; set; }
     /// <summary>
     /// セルの生成と配置
     /// </summary>
@@ -73,8 +75,7 @@ public class Map : MonoBehaviour
             GameObject sector = Instantiate(m_sectorPrefab);
             sector.transform.SetParent(transform, false);
             sector.name = $"Sector{i}";
-            Cell cell = default;
-            //ここ同じ処理が二度出てるので修正するように
+            Cell cell;
             if (i == 0 || i == m_sector - 1)
             {
                 //最初と最後はセル一つ
@@ -163,7 +164,7 @@ public class Map : MonoBehaviour
     /// </summary>
     public void AllColorChange()
     {
-        IsClick = false;
+        CanClick = false;
         for (int i = 0; i < m_sectorLocation.Length; i++)
         {
             for (int n = 0; n < m_sectorLocation[i].transform.childCount; n++)
@@ -177,13 +178,26 @@ public class Map : MonoBehaviour
     /// マップを踏破したかの判定<br/>
     /// 後に変える
     /// </summary>
-    /// <param name="floor"></param>
-    /// <returns></returns>
-    public bool ClearCheck(int floor)
+    public void ClearCheck(int floor, int act)
     {
-        if (floor == 0) return false;
-        if (floor % m_sector == 0) return true;
-        else return false;  
+        if (floor == 0) return;
+        if (floor % m_sector == 0)
+        {
+            if (m_crearAct == act)
+                GameManager.Instance.Gameover(true);
+            int i = 1;
+            while (true)
+            {
+                int n = floor - m_sector * i;
+                if (n < 0)
+                {
+                    break;
+                }
+                i++;
+            }
+            Debug.Log($"現在Act{i}");
+            GameManager.Instance.Act = i;
+        } 
     }
 
     /// <summary>
