@@ -13,6 +13,8 @@ public class Map : MonoBehaviour
     [SerializeField] int m_sector = 10;
     /// <summary>各セクターに生成するセルの最大数</summary>
     [SerializeField] int m_maxCell = 3;
+    /// <summary>ここまで進んだらクリアとするAct数</summary>
+    [SerializeField] int m_crearAct = 1;
     /// <summary>親セクター</summary>
     [SerializeField] Transform m_parentSector;
     /// <summary>セクタープレハブ</summary>
@@ -35,14 +37,16 @@ public class Map : MonoBehaviour
         [SerializeField, Tooltip("休憩マスを生成する最小位置")] int m_restMinIndex;
         [SerializeField, Tooltip("休憩マスを生成する最大位置")] int m_restMaxIndex;
         [SerializeField, Tooltip("絶対に休憩マスを生成する位置")] int m_restAbsolutelyIndex;
+        [SerializeField, Tooltip("休憩マスの生成確立はn分の１か")] int m_restProbability;
         [SerializeField, Tooltip("エリートマスを生成する最小位置")] int m_eliteMinIndex;
         [SerializeField, Tooltip("エリートマスを生成する最大位置")] int m_eliteMaxIndex;
         [SerializeField, Tooltip("絶対にエリートマスを生成する位置")] int m_eliteAbsolutelyIndex;
+        [SerializeField, Tooltip("エリートマスの生成確立はn分の１か")] int m_eliteProbability;
         public bool RestIndex(int sector)
         {
             if (m_restAbsolutelyIndex == sector) return true;
             if (m_restMinIndex <= sector && m_restMaxIndex >= sector)
-                if (Random.Range(0, 5) == 0)
+                if (Random.Range(0, m_restProbability) == 0)
                     return true;
             return false;
         }
@@ -50,7 +54,7 @@ public class Map : MonoBehaviour
         {
             if (m_eliteAbsolutelyIndex == sector) return true;
             if (m_eliteMinIndex <= sector && m_eliteMaxIndex >= sector)
-                if (Random.Range(0, 5) == 0)
+                if (Random.Range(0, 4) == 0)
                     return true;
             return false;
         }
@@ -177,7 +181,8 @@ public class Map : MonoBehaviour
     /// <returns></returns>
     public bool ClearCheck(int floor)
     {
-        if (floor >= m_sector) return true;
+        if (floor == 0) return false;
+        if (floor % m_sector == 0) return true;
         else return false;  
     }
 

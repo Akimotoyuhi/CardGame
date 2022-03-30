@@ -11791,7 +11791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000036867117}
+  m_AnchoredPosition: {x: 0, y: 0.0007543762}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561
@@ -13562,6 +13562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sector: 7
   m_maxCell: 3
+  m_crearAct: 1
   m_parentSector: {fileID: 8837727758879024943}
   m_sectorPrefab: {fileID: 4689219055565768202, guid: 6c611e1ee71f5e24282777e86147d07f,
     type: 3}
@@ -13574,9 +13575,11 @@ MonoBehaviour:
     m_restMinIndex: 2
     m_restMaxIndex: 5
     m_restAbsolutelyIndex: 3
+    m_restProbability: 4
     m_eliteMinIndex: -1
     m_eliteMaxIndex: -1
     m_eliteAbsolutelyIndex: -1
+    m_eliteProbability: 4
 --- !u!222 &8837727759021719348
 CanvasRenderer:
   m_ObjectHideFlags: 0
