@@ -15,13 +15,16 @@ public class MapData : ScriptableObject
     /// <param name="act"></param>
     public MapDataBase GetMapData(Act act)
     {
+        List<MapDataBase> data = new List<MapDataBase>();
         foreach (var m in m_dataBases)
         {
             if (m.Act == act)
-                return m;
+                data.Add(m);
         }
-        Debug.LogError($"指定されたマップデータが存在しません 渡された値=>{act}");
-        return null;
+        if (data.Count == 0)
+            Debug.LogError($"指定されたマップデータが存在しません 渡された値=>{act}({(int)act})");
+        int r = Random.Range(0, data.Count);
+        return data[r];
     }
 }
 /// <summary>マップデータベース</summary>

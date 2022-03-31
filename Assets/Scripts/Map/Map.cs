@@ -31,16 +31,20 @@ public class Map : MonoBehaviour
     [SerializeField] Image m_background;
     /// <summary>現在act保存用</summary>
     private int m_act = 1;
+    /// <summary>現在のMapID保存用</summary>
+    private MapID m_mapID;
     /// <summary>セクター保存用</summary>
     private GameObject[] m_sectorLocation;
     /// <summary>現在のマップデータ</summary>
     private MapDataBase m_nowMapData;
     private List<Cell> m_cells = new List<Cell>();
+    public int Sector => m_sector;
     /// <summary>セルのクリック可否フラグ</summary>
     public bool CanClick { get; set; }
     private void Setup()
     {
         m_nowMapData = m_mapData.GetMapData((Act)m_act);
+        m_mapID = m_nowMapData.MapID;
         m_background.sprite = m_nowMapData.Background;
     }
     /// <summary>
@@ -64,6 +68,7 @@ public class Map : MonoBehaviour
                 cell.SectorIndex = i;
                 m_cells.Add(cell);
                 cell.Map = this;
+                cell.MapID = m_mapID;
             }
             else
             {
@@ -74,6 +79,7 @@ public class Map : MonoBehaviour
                     cell.SectorIndex = i;
                     m_cells.Add(cell);
                     cell.Map = this;
+                    cell.MapID = m_mapID;
                 }
             }
             m_sectorLocation[i] = sector;
@@ -93,7 +99,7 @@ public class Map : MonoBehaviour
     {
         //次のセクターから進むセルを一つ抽選する
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
-        c.Step = sectorIndex;
+        c.Floor = sectorIndex;
         if (m_nowMapData.GetDetailSetting.RestIndex(sectorIndex))
         {
             c.SetCellState = CellState.Rest;
@@ -175,7 +181,11 @@ public class Map : MonoBehaviour
             }
             Debug.Log($"現在Act{i}");
             m_act = i;
-            Setup();
+            foreach (var s in m_sectorLocation)
+            {
+                Destroy(s);
+            }
+            CreateMap();
         } 
     }
 

@@ -151,6 +151,12 @@ MonoBehaviour:
     m_elites: []
     m_bosses:
     - m_enemyID: 02000000
+  - m_label: "\u5FAE\u7761\u306E\u6CBC\u5730"
+    m_enemies:
+    - m_enemyID: 00000000000000000000000000000000
+    m_elites: []
+    m_bosses:
+    - m_enemyID: 02000000
   references:
     version: 1
     00000000:

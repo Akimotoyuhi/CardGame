@@ -47,8 +47,7 @@ public class Cell : MonoBehaviour
     /// <summary>このセルが所属するセクター番号</summary>
     public int SectorIndex { get; set; }
     /// <summary>このセルが所属するステップ数</summary>
-    //public int Step { get; set; }
-    public int Step;
+    public int Floor { get; set; }
     public int GetNextCellIndex(int index) { return m_nextCellList[index]; }
     public void AddNextCell(int value) { m_nextCellList.Add(value); }
 
@@ -58,7 +57,7 @@ public class Cell : MonoBehaviour
     {
         if (m_map.CanClick) return;
         m_map.CanClick = true;
-        if (GameManager.Instance.Floor != Step)
+        if (AdjustmentFloorNum() != Floor)
         {
             Debug.Log("選択不可");
             return;
@@ -110,7 +109,8 @@ public class Cell : MonoBehaviour
                 m_image.color = m_eliteColor;
                 break;
         }
-        if (GameManager.Instance.Floor != Step)
+        int f = AdjustmentFloorNum();
+        if (f != Floor)
         {
             m_image.color -= new Color(0, 0, 0, 0.5f);
         }
@@ -122,5 +122,19 @@ public class Cell : MonoBehaviour
                 .Append(m_image.DOColor(color, m_highLightsDuration))
                 .SetLoops(-1);
         }
+    }
+
+    /// <summary>
+    /// 現在のFloor数をこのクラスで扱える大きさまで調節する
+    /// </summary>
+    /// <returns></returns>
+    private int AdjustmentFloorNum()
+    {
+        int f = GameManager.Instance.Floor;
+        while (m_map.Sector <= f)
+        {
+            f -= m_map.Sector;
+        }
+        return f;
     }
 }
