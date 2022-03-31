@@ -11,7 +11,6 @@ namespace Mastar
         private int m_currentLife = 0;
         /// <summary>現在の進行状況</summary>
         public int Floor { get; set; }
-        public int Act { get; set; } = 1;
 
         #region プレイヤー情報関連
         /// <summary>所持カード</summary>

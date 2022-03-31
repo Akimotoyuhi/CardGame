@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public enum CellState { Enemy, Rest, Boss, Elite }
+public enum CellState { Enemy, Elite, Boss, Rest }
 public enum CellChildType { Begin, End }
 
 public class Cell : MonoBehaviour
@@ -17,7 +17,8 @@ public class Cell : MonoBehaviour
     /// <summary>終了位置</summary>
     [SerializeField] Image m_endPos;
     /// <summary>セルの状態</summary>
-    [SerializeField] CellState m_cellState = default;
+    [SerializeField] CellState m_cellState;
+    [SerializeField] MapID m_mapID;
     /// <summary>テキスト</summary>
     [SerializeField] Text m_viewText;
     [Header("セルの状態に応じて変わる色の設定")]
@@ -42,6 +43,7 @@ public class Cell : MonoBehaviour
             ColorChange();
         }
     }
+    public MapID MapID { set => m_mapID = value; }
     /// <summary>このセルが所属するセクター番号</summary>
     public int SectorIndex { get; set; }
     /// <summary>このセルが所属するステップ数</summary>
@@ -50,6 +52,8 @@ public class Cell : MonoBehaviour
     public int GetNextCellIndex(int index) { return m_nextCellList[index]; }
     public void AddNextCell(int value) { m_nextCellList.Add(value); }
 
+    /// <summary>クリックされた時<br/>
+    /// UnityのButtonから呼ばれる事を想定している</summary>
     public void OnClick()
     {
         if (m_map.CanClick) return;
@@ -60,7 +64,7 @@ public class Cell : MonoBehaviour
             return;
         }
         DOTween.KillAll();
-        GameManager.Instance.OnClick(m_cellState);
+        GameManager.Instance.OnClick(m_cellState, m_mapID);
     }
 
     /// <summary>

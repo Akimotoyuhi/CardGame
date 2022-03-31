@@ -15,8 +15,8 @@ public class Map : MonoBehaviour
     [SerializeField] int m_maxCell = 3;
     /// <summary>ここまで進んだらクリアとするAct数</summary>
     [SerializeField] int m_crearAct = 1;
-    /// <summary>Act毎の背景</summary>
-    [SerializeField] Sprite[] m_backGroundSprites;
+    /// <summary>マップデータ</summary>
+    [SerializeField] MapData m_mapData;
     /// <summary>親セクター</summary>
     [SerializeField] Transform m_parentSector;
     /// <summary>セクタープレハブ</summary>
@@ -27,48 +27,28 @@ public class Map : MonoBehaviour
     [SerializeField] GameObject m_linePrefab;
     /// <summary>線となるオブジェクトの親</summary>
     [SerializeField] Transform m_lineParent;
-    /// <summary>詳細設定</summary>
-    [SerializeField] DetailSettings m_detailSettings;
+    /// <summary>背景</summary>
+    [SerializeField] Image m_background;
+    /// <summary>現在act保存用</summary>
+    private int m_act = 1;
     /// <summary>セクター保存用</summary>
     private GameObject[] m_sectorLocation;
+    /// <summary>現在のマップデータ</summary>
+    private MapDataBase m_nowMapData;
     private List<Cell> m_cells = new List<Cell>();
-    /// <summary>マップの詳細な設定</summary>
-    [System.Serializable]
-    public class DetailSettings
-    {
-        [SerializeField, Tooltip("休憩マスを生成する最小位置")] int m_restMinIndex;
-        [SerializeField, Tooltip("休憩マスを生成する最大位置")] int m_restMaxIndex;
-        [SerializeField, Tooltip("絶対に休憩マスを生成する位置")] int m_restAbsolutelyIndex;
-        [SerializeField, Tooltip("休憩マスの生成確立はn分の１か")] int m_restProbability;
-        [SerializeField, Tooltip("エリートマスを生成する最小位置")] int m_eliteMinIndex;
-        [SerializeField, Tooltip("エリートマスを生成する最大位置")] int m_eliteMaxIndex;
-        [SerializeField, Tooltip("絶対にエリートマスを生成する位置")] int m_eliteAbsolutelyIndex;
-        [SerializeField, Tooltip("エリートマスの生成確立はn分の１か")] int m_eliteProbability;
-        public bool RestIndex(int sector)
-        {
-            if (m_restAbsolutelyIndex == sector) return true;
-            if (m_restMinIndex <= sector && m_restMaxIndex >= sector)
-                if (Random.Range(0, m_restProbability) == 0)
-                    return true;
-            return false;
-        }
-        public bool EliteIndex(int sector)
-        {
-            if (m_eliteAbsolutelyIndex == sector) return true;
-            if (m_eliteMinIndex <= sector && m_eliteMaxIndex >= sector)
-                if (Random.Range(0, 4) == 0)
-                    return true;
-            return false;
-        }
-    }
     /// <summary>セルのクリック可否フラグ</summary>
     public bool CanClick { get; set; }
+    private void Setup()
+    {
+        m_nowMapData = m_mapData.GetMapData((Act)m_act);
+        m_background.sprite = m_nowMapData.Background;
+    }
     /// <summary>
     /// セルの生成と配置
     /// </summary>
     public void CreateMap()
     {
-        //DontDestroyOnLoad(gameObject);
+        Setup();
         m_sectorLocation = new GameObject[m_sector];
         for (int i = 0; i < m_sector; i++)
         {
@@ -114,23 +94,21 @@ public class Map : MonoBehaviour
         //次のセクターから進むセルを一つ抽選する
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
         c.Step = sectorIndex;
-        if (m_detailSettings.RestIndex(sectorIndex))
+        if (m_nowMapData.GetDetailSetting.RestIndex(sectorIndex))
         {
             c.SetCellState = CellState.Rest;
         }
-        else if (m_detailSettings.EliteIndex(sectorIndex))
+        else if (m_nowMapData.GetDetailSetting.EliteIndex(sectorIndex))
         {
             c.SetCellState = CellState.Elite;
         }
         else if (sectorIndex == m_sector - 1)
         {
             c.SetCellState = CellState.Boss;
-            //c.m_encountId = Random.Range(0, System.Enum.GetNames(typeof(EnemyID)));
         }
         else
         {
             c.SetCellState = CellState.Enemy;
-            //c.m_encountId = Random.Range(0, (int)EnemyID.endLength);
         }
         c.CreatedFlag = true;
         if (sectorIndex + 1 >= m_sector) return;
@@ -178,12 +156,12 @@ public class Map : MonoBehaviour
     /// マップを踏破したかの判定<br/>
     /// 後に変える
     /// </summary>
-    public void ClearCheck(int floor, int act)
+    public void ClearCheck(int floor)
     {
         if (floor == 0) return;
         if (floor % m_sector == 0)
         {
-            if (m_crearAct == act)
+            if (m_crearAct == m_act)
                 GameManager.Instance.Gameover(true);
             int i = 1;
             while (true)
@@ -196,7 +174,8 @@ public class Map : MonoBehaviour
                 i++;
             }
             Debug.Log($"現在Act{i}");
-            GameManager.Instance.Act = i;
+            m_act = i;
+            Setup();
         } 
     }
 

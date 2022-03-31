@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+/// <summary>
+/// マップでのイベントを制御することになるであろうクラス
+/// </summary>
 public class EventManager : MonoBehaviour
 {
     [SerializeField] EventData m_eventData;

@@ -37,9 +37,9 @@ public class EnemyManager : MonoBehaviour
     /// 敵の生成
     /// </summary>
     /// <param name="eria"></param>
-    public void CreateEnemies(EnemyAppearanceEria eria)
+    public void CreateEnemies(EnemyType eria, MapID mapID)
     {
-        List<EnemyDataBase> enemies = m_enemyData.Encount(eria);
+        List<EnemyDataBase> enemies = m_enemyData.Encount(eria, mapID);
         foreach (var item in enemies)
         {
             EnemyBase enemy = Instantiate(m_enemyPrefab, transform).GetComponent<EnemyBase>();

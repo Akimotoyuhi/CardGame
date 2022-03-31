@@ -8,34 +8,32 @@ using System;
 public class EnemyData : ScriptableObject
 {
     [SerializeField, Header("敵ステータスのデータ")]
-    List<EnemyDataBase> m_enemyDataBases = new List<EnemyDataBase>();
+    List<EnemyDataBase> m_enemyDataBases;
     [Header("エンカウントデータ")]
-    [SerializeField] List<EncountDataBase> m_act1EnemyEncountData = new List<EncountDataBase>();
-    [SerializeField] List<EncountDataBase> m_act1EliteEncountData = new List<EncountDataBase>();
-    [SerializeField] List<EncountDataBase> m_act1BossEncountData = new List<EncountDataBase>();
-    public List<EnemyDataBase> Encount(EnemyAppearanceEria eria)
+    [SerializeField] List<EncountDataBase> m_encountDatas; 
+    public List<EnemyDataBase> Encount(EnemyType enemyType, MapID mapID)
     {
         List<EnemyDataBase> ret = new List<EnemyDataBase>();
-        List<EncountDataBase> encountData;
-        switch (eria)
+        List<EncountIdData> encountData;
+        switch (enemyType)
         {
-            case EnemyAppearanceEria.Act1Enemy:
-                encountData = m_act1EnemyEncountData;
+            case EnemyType.Enemy:
+                encountData = m_encountDatas[(int)mapID].Enemies;
                 break;
-            case EnemyAppearanceEria.Act1Elite:
-                encountData = m_act1EliteEncountData;
+            case EnemyType.Elite:
+                encountData = m_encountDatas[(int)mapID].Elites;
                 break;
-            case EnemyAppearanceEria.Act1Boss:
-                encountData = m_act1BossEncountData;
+            case EnemyType.Boss:
+                encountData = m_encountDatas[(int)mapID].Bosses;
                 break;
             default:
                 Debug.Log("変な値入れんな");
                 return null;
         }
         int r = UnityEngine.Random.Range(0, encountData.Count);
-        for (int i = 0; i < encountData[r].GetLength; i++)
+        for (int i = 0; i < encountData[r].GetID.Length; i++)
         {
-            ret.Add(m_enemyDataBases[encountData[r].GetID(i)]);
+            ret.Add(m_enemyDataBases[encountData[r].GetID[i]]);
         }
         return ret;
     }
@@ -52,17 +50,11 @@ public enum EnemyID
     TowerGuardian,
 }
 /// <summary>敵出現場所</summary>
-public enum EnemyAppearanceEria
+public enum EnemyType
 {
-    Act1Enemy,
-    Act1Elite,
-    Act1Boss,
-    Act2Enemy,
-    Act2Elite,
-    Act2Boss,
-    Act3Enemy,
-    Act3Elite,
-    Act3Boss,
+    Enemy,
+    Elite,
+    Boss,
 }
 /// <summary>行動予定</summary>
 public enum ActionPlan
@@ -101,13 +93,13 @@ public class EnemyDataBase
     [SerializeField, Tooltip("最大体力")] int m_life;
     [SerializeField, Tooltip("画像")] Sprite m_sprite;
     [SerializeField, Tooltip("画像のデカさ倍率")] float m_spriteScaleMagnification = 1;
-    [SerializeField, Tooltip("出現場所")] EnemyAppearanceEria m_enemyAppearanceEria;
+    [SerializeField, Tooltip("敵の種類")] EnemyType m_enemyType;
     public string Name => m_name;
     public EnemyID ID => m_id;
     public int Life => m_life;
     public Sprite Image => m_sprite;
     public float ScaleMagnification => m_spriteScaleMagnification;
-    public EnemyAppearanceEria EnemyAppearanceEria => m_enemyAppearanceEria;
+    public EnemyType EnemyType => m_enemyType;
     public enum NodeType { Selector, Sequence }
     private NodeType m_NodeType = NodeType.Sequence;
     public List<EnemyBaseState> m_enemyBaseState;
@@ -262,12 +254,33 @@ public class EnemyConditionalCommand3
 [Serializable]
 public class EncountDataBase
 {
-    [SerializeField] EnemyID[] m_enemyID = new EnemyID[Enum.GetNames(typeof(EnemyID)).Length];
+    [SerializeField] string m_label;
+    [SerializeField, Header("Enemy")] List<EncountIdData> m_enemies;
+    [SerializeField, Header("Elite")] List<EncountIdData> m_elites;
+    [SerializeField, Header("Boss")] List<EncountIdData> m_bosses;
+    public List<EncountIdData> Enemies => m_enemies;
+    public List<EncountIdData> Elites => m_elites;
+    public List<EncountIdData> Bosses => m_bosses;
+}
+[Serializable]
+public class EncountIdData
+{
+    [SerializeField] EnemyID[] m_enemyID;
     /// <summary>
     /// 敵IDの取得
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public int GetID(int index) { return (int)m_enemyID[index]; }
-    public int GetLength { get => m_enemyID.Length; }
+    public int[] GetID
+    {
+        get
+        {
+            int[] ret = new int[m_enemyID.Length];
+            for (int i = 0; i < m_enemyID.Length; i++)
+            {
+                ret[i] = (int)m_enemyID[i];
+            }
+            return ret;
+        }
+    }
 }

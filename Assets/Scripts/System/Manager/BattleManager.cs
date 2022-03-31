@@ -142,12 +142,12 @@ public class BattleManager : MonoBehaviour
     /// 戦闘開始
     /// </summary>
     /// <param name="enemyid">エンカウントした敵のID</param>
-    public void BattleStart(EnemyAppearanceEria eria)
+    public void BattleStart(EnemyType eria, MapID mapID)
     {
         m_currentTurn = 0;
         m_isGame = true;
         SetCanvas();
-        CreateField(eria);
+        CreateField(eria, mapID);
         StartCoroutine(OnBattle());
         //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
         //FirstTurn();
@@ -182,7 +182,7 @@ public class BattleManager : MonoBehaviour
     /// プレイヤーや敵の生成を行う
     /// </summary>
     /// <param name="enemyid"></param>
-    private void CreateField(EnemyAppearanceEria eria)
+    private void CreateField(EnemyType eria, MapID mapID)
     {
         //プレイヤー生成
         if (!DataManager.Instance.IsPlayerData) //データが無かったら今持ってるデッキを保存
@@ -202,7 +202,7 @@ public class BattleManager : MonoBehaviour
         m_player.SetParam(DataManager.Instance.Name, DataManager.Instance.IdleSprite, DataManager.Instance.AttackedSprite, DataManager.Instance.GameoverSprite, DataManager.Instance.MaxLife, DataManager.Instance.CurrentLife);
         //敵グループ生成
         m_enemyManager.Setup(m_enemiesTarget);
-        m_enemyManager.CreateEnemies(eria);
+        m_enemyManager.CreateEnemies(eria, mapID);
         m_enemyManager.EnemyCount();
         m_dropManager.Setup(m_enemyManager, m_player, m_hand, m_discard, m_deck);
         //カード生成
