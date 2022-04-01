@@ -3,26 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-/// <summary>バフデバフ</summary>
-public enum ConditionID
-{
-    /// <summary>脱力<br/>与えるダメージが25%低下</summary>
-    Weakness,
-    /// <summary>脆弱化<br/>得るブロックが25%低下</summary>
-    Frail,
-    /// <summary>筋力<br/>与えるダメージが+X</summary>
-    Strength,
-    /// <summary>敏捷性<br/>得るブロックが+X</summary>
-    Agile,
-    /// <summary>プレートアーマー<br/>自分のターン終了時にXブロックを得る。攻撃されると効果-1</summary>
-    PlateArmor,
-    /// <summary>筋力低下<br/>ターン開始時に筋力Xを失う</summary>
-    StrengthDown,
-    /// <summary>遠距離攻撃</summary>
-    Ranger,
-    /// <summary>金属化</summary>
-    Metallicize,
-}
 /// <summary>バフデバフが効果を発動するタイミング</summary>
 public enum EventTiming
 {
@@ -43,7 +23,7 @@ public enum ParametorType
     Block,
     Life,
     Condition,
-    Any,
+    Other,
 }
 
 /// <summary>
@@ -82,45 +62,45 @@ public class ConditionSelection
         get
         {
             //if (m_turn <= 0) return null;
-            Condition ret = default;
+            Condition ret;
             switch (m_conditionID)
             {
                 case ConditionID.Weakness:
                     ret = new Weakness();
-                    ret.Turn = m_turn;
-                    return ret;
+                    break;
                 case ConditionID.Frail:
                     ret = new Frail();
-                    ret.Turn = m_turn;
-                    return ret;
+                    break;
                 case ConditionID.Strength:
                     ret = new Strength();
-                    ret.Turn = m_turn;
-                    return ret;
+                    break;
                 case ConditionID.Agile:
                     ret = new Agile();
-                    ret.Turn = m_turn;
-                    return ret;
+                    break;
                 case ConditionID.PlateArmor:
                     ret = new PlateArmor();
-                    ret.Turn = m_turn;
-                    return ret;
+                    break;
                 case ConditionID.StrengthDown:
                     ret = new StrengthDown();
-                    ret.Turn = m_turn;
-                    return ret;
-                case ConditionID.Ranger:
+                    break;
+                case ConditionID.Flying:
                     ret = new Ranger();
-                    ret.Turn = m_turn;
-                    return ret;
+                    break;
                 case ConditionID.Metallicize:
                     ret = new Metallicize();
-                    ret.Turn = m_turn;
-                    return ret;
+                    break;
+                case ConditionID.Activation:
+                    ret = new Activation();
+                    break;
+                case ConditionID.Sturdy:
+                    ret = new Sturdy();
+                    break;
                 default:
                     Debug.LogWarning("未設定のIDが渡されました");
                     return null;
             }
+            ret.Turn = m_turn;
+            return ret;
         }
     }
     public Condition SetCondition(ConditionID conditionID, int turn)

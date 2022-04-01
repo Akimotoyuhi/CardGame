@@ -97,10 +97,10 @@ MonoBehaviour:
     m_tooltip: "\u8131\u529B\n\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C25%\u4F4E\u4E0B"
   - m_sprite: {fileID: 21300000, guid: ed7a8320358fd2e4099e2f1ee1c9dc29, type: 3}
     m_color: {r: 0, g: 0.8794136, b: 1, a: 1}
-    m_tooltip: "\u8106\u5F31\u5316\n\u5F97\u308B\u30D6\u30ED\u30C3\u30AF\u304C25%\u4F4E\u4E0B"
+    m_tooltip: "\u8106\u5F31\u5316\n\u5F97\u308B\u30D6\u30ED\u30C3\u30AF\u304C25%\u4F4E\u4E0B\nX\u30BF\u30FC\u30F3\u6301\u7D9A"
   - m_sprite: {fileID: 21300000, guid: 5ac4a8d368fba3d4f9a9bb766c814658, type: 3}
     m_color: {r: 1, g: 0, b: 0, a: 1}
-    m_tooltip: "\u7B4B\u529B\n\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C+X"
+    m_tooltip: "\u7B4B\u529B\n\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C+X\nX\u30BF\u30FC\u30F3\u6301\u7D9A"
   - m_sprite: {fileID: 21300000, guid: 3a70f6f60a26f744d8fede14e4130d5a, type: 3}
     m_color: {r: 0, g: 1, b: 0.2274468, a: 1}
     m_tooltip: "\u654F\u6377\n\u5F97\u308B\u30D6\u30ED\u30C3\u30AF\u304C+X"
@@ -110,12 +110,18 @@ MonoBehaviour:
   - m_sprite: {fileID: 21300000, guid: 5ac4a8d368fba3d4f9a9bb766c814658, type: 3}
     m_color: {r: 0, g: 1, b: 1, a: 1}
     m_tooltip: "\u7B4B\u529B\u4F4E\u4E0B\n\u30BF\u30FC\u30F3\u958B\u59CB\u6642\u306B\u7B4B\u529BX\u3092\u5931\u3046"
-  - m_sprite: {fileID: 21300000, guid: 4ad737ead4a216b42a4c13015fdd4162, type: 3}
-    m_color: {r: 0.95214605, g: 1, b: 0, a: 1}
-    m_tooltip: "\u9060\u8DDD\u96E2\u653B\u6483\n\u3053\u306E\u30A8\u30CD\u30DF\u30FC\u304C\u53D7\u3051\u308B\u30C0\u30E1\u30FC\u30B8\u306F25%\u8EFD\u6E1B\u3055\u308C\u308B"
+  - m_sprite: {fileID: 21300000, guid: ad817611af9de6a42b6bd3ea5d173fae, type: 3}
+    m_color: {r: 0.71132076, g: 0.9969513, b: 1, a: 1}
+    m_tooltip: "\u98DB\u884C\n\u3053\u306E\u30A8\u30CD\u30DF\u30FC\u304C\u53D7\u3051\u308B\u30C0\u30E1\u30FC\u30B8\u306F25%\u8EFD\u6E1B\u3055\u308C\u308B"
   - m_sprite: {fileID: 21300000, guid: b788e695e23fe864794999e8c5524090, type: 3}
     m_color: {r: 0.9917425, g: 1, b: 0.82452834, a: 1}
     m_tooltip: "\u91D1\u5C5E\u5316\n\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+  - m_sprite: {fileID: 21300000, guid: 57fb11ebdbdec0d4da191bc96289da01, type: 3}
+    m_color: {r: 0.48490566, g: 0.7820628, b: 1, a: 1}
+    m_tooltip: "\u6D3B\u6027\u5316\n\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+  - m_sprite: {fileID: 21300000, guid: 6645b327088c4f6408d9561791c57b84, type: 3}
+    m_color: {r: 1, g: 0.56376946, b: 0, a: 1}
+    m_tooltip: "\u9811\u4E08\n\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
 --- !u!114 &2313634686770434370
 MonoBehaviour:
   m_ObjectHideFlags: 0
