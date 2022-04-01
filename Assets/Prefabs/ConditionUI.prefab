@@ -118,10 +118,10 @@ MonoBehaviour:
     m_tooltip: "\u91D1\u5C5E\u5316\n\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
   - m_sprite: {fileID: 21300000, guid: 57fb11ebdbdec0d4da191bc96289da01, type: 3}
     m_color: {r: 0.48490566, g: 0.7820628, b: 1, a: 1}
-    m_tooltip: "\u6D3B\u6027\u5316\n\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+    m_tooltip: "\u6D3B\u6027\u5316\n\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C50%\u5897\u52A0\nX\u30BF\u30FC\u30F3\u6301\u7D9A"
   - m_sprite: {fileID: 21300000, guid: 6645b327088c4f6408d9561791c57b84, type: 3}
     m_color: {r: 1, g: 0.56376946, b: 0, a: 1}
-    m_tooltip: "\u9811\u4E08\n\u81EA\u5206\u306E\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306BX\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
+    m_tooltip: "\u9811\u4E08\n\u5F97\u308B\u30D6\u30ED\u30C3\u30AF\u304C50%\u5897\u52A0\nX\u30BF\u30FC\u30F3\u6301\u7D9A"
 --- !u!114 &2313634686770434370
 MonoBehaviour:
   m_ObjectHideFlags: 0

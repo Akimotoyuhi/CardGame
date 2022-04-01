@@ -26,6 +26,16 @@ public class MapData : ScriptableObject
         int r = Random.Range(0, data.Count);
         return data[r];
     }
+    public MapDataBase GetMapData(MapID mapID)
+    {
+        foreach (var m in m_dataBases)
+        {
+            if (m.MapID == mapID)
+                return m;
+        }
+        Debug.LogError($"指定されたマップデータが存在しません 渡された値 => {mapID}");
+        return null;
+    }
 }
 /// <summary>マップデータベース</summary>
 [System.Serializable]

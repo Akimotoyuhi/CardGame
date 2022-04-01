@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int m_step;
     [SerializeField] bool m_isSeed;
     [SerializeField] int m_seed;
+    [SerializeField] bool m_isFixedMap;
+    [SerializeField] MapID m_mapID;
     /// <summary>カードデータ</summary>
     [Space]
     [SerializeField] CardData m_cardData;
@@ -77,6 +79,8 @@ public class GameManager : MonoBehaviour
     {
         EffectManager.Instance.Fade(Color.black, 0);
         EffectManager.Instance.Fade(Color.clear, 0.3f);
+        if (m_isFixedMap)
+            m_map.SetFixedMapDebug(m_mapID);
         m_map.CreateMap();
         m_eventCanvas.enabled = false;
         m_cardDisplayCanvas.enabled = false;

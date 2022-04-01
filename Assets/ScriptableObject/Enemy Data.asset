@@ -48,7 +48,7 @@ MonoBehaviour:
     m_id: 1
     m_life: 30
     m_sprite: {fileID: 21300000, guid: 9c694850066d84a4795427786b71ec6f, type: 3}
-    m_spriteScaleMagnification: 1.2
+    m_spriteScaleMagnification: 1
     m_enemyType: 0
     m_enemyBaseState:
     - m_conditionalCommand:

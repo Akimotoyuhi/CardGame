@@ -31,6 +31,8 @@ public class Map : MonoBehaviour
     [SerializeField] Image m_background;
     /// <summary>現在act保存用</summary>
     private int m_act = 1;
+    /// <summary>デバッグ用マップ固定フラグ</summary>
+    private bool m_isFixedMap;
     /// <summary>現在のMapID保存用</summary>
     private MapID m_mapID;
     /// <summary>セクター保存用</summary>
@@ -43,7 +45,10 @@ public class Map : MonoBehaviour
     public bool CanClick { get; set; }
     private void Setup()
     {
-        m_nowMapData = m_mapData.GetMapData((Act)m_act);
+        if (m_isFixedMap)
+            m_nowMapData = m_mapData.GetMapData(m_mapID);
+        else
+            m_nowMapData = m_mapData.GetMapData((Act)m_act);
         m_mapID = m_nowMapData.MapID;
         m_background.sprite = m_nowMapData.Background;
     }
@@ -215,5 +220,10 @@ public class Map : MonoBehaviour
                 }
             }
         }
+    }
+    public void SetFixedMapDebug(MapID mapID)
+    {
+        m_isFixedMap = true;
+        m_mapID = mapID;
     }
 }

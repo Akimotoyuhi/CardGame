@@ -245,10 +245,10 @@ public class Activation : Condition
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                ret = power * (1 + 0.25f);
+                ret = power * (1 + 0.5f);
                 return new int[] { (int)ret };
             case EventTiming.Drow:
-                ret = power * (1 + 0.25f);
+                ret = power * (1 + 0.5f);
                 return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
@@ -258,7 +258,8 @@ public class Activation : Condition
     }
     public override bool IsRemove()
     {
-        return true;
+        if (Turn <= 0) return true;
+        return false;
     }
     public override ConditionID GetConditionID() => ConditionID.Activation;
     public override int IsBuff() => 0;
@@ -276,10 +277,10 @@ public class Sturdy : Condition
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                ret = block * (1 + 0.25f);
+                ret = block * (1 + 0.5f);
                 return new int[] { (int)ret };
             case EventTiming.Drow:
-                ret = block * (1 + 0.25f);
+                ret = block * (1 + 0.5f);
                 return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
@@ -289,7 +290,8 @@ public class Sturdy : Condition
     }
     public override bool IsRemove()
     {
-        return true;
+        if (Turn <= 0) return true;
+        return false;
     }
     public override ConditionID GetConditionID() => ConditionID.Sturdy;
     public override int IsBuff() => 0;
