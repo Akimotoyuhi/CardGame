@@ -38,52 +38,6 @@ public class EnemyData : ScriptableObject
         return ret;
     }
 }
-#region Enums
-/// <summary>敵ID</summary>
-public enum EnemyID
-{
-    /// <summary>カマクジ</summary>
-    Kamakuji,
-    /// <summary>ガイコツ</summary>
-    Skelton,
-    /// <summary>塔の守護者</summary>
-    TowerGuardian,
-}
-/// <summary>敵出現場所</summary>
-public enum EnemyType
-{
-    Enemy,
-    Elite,
-    Boss,
-}
-/// <summary>行動予定</summary>
-public enum ActionPlan
-{
-    Attack,
-    Block,
-    Buff,
-    Debuff,
-    Unknown,
-}
-/// <summary>攻撃の標的</summary>
-public enum TargetType
-{
-    ToPlayer,
-    ToEnemy,
-}
-/// <summary>敵行動条件</summary>
-public enum WhereType
-{
-    Any,
-    Turn,
-    RowTurn,
-    HighTurn,
-    MultipleTurn,
-    RowLife,
-    HighLife,
-    BattleBegin,
-}
-#endregion
 #region 敵データ設定関係
 [Serializable]
 public class EnemyDataBase
@@ -284,3 +238,55 @@ public class EncountIdData
         }
     }
 }
+#region Enums
+/// <summary>敵ID</summary>
+public enum EnemyID
+{
+    /// <summary>カマクジ</summary>
+    Kamakuji,
+    /// <summary>ガイコツ</summary>
+    Skelton,
+    /// <summary>塔の守護者</summary>
+    TowerGuardian,
+    /// <summary>カマクジα</summary>
+    KamakujiAlpha,
+    /// <summary>ゾンビ犬</summary>
+    ZombieDog,
+    /// <summary>ペリュトン</summary>
+    Peryton,
+}
+/// <summary>敵出現場所</summary>
+public enum EnemyType
+{
+    Enemy,
+    Elite,
+    Boss,
+}
+/// <summary>行動予定</summary>
+public enum ActionPlan
+{
+    Attack,
+    Block,
+    Buff,
+    Debuff,
+    Unknown,
+}
+/// <summary>攻撃の標的</summary>
+public enum TargetType
+{
+    ToPlayer,
+    ToEnemy,
+}
+/// <summary>敵行動条件</summary>
+public enum WhereType
+{
+    Any,
+    Turn,
+    RowTurn,
+    HighTurn,
+    MultipleTurn,
+    RowLife,
+    HighLife,
+    BattleBegin,
+}
+#endregion

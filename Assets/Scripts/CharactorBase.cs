@@ -225,7 +225,7 @@ public class CharactorBase : MonoBehaviour
             else
             {
                 m_life -= dmg;
-                EffectChecker(EventTiming.Damaged, ParametorType.Any);
+                EffectChecker(EventTiming.Damaged, ParametorType.Other);
                 if (isPlayer) GameManager.Instance.SetGameInfoPanel(this);
                 if (m_life <= 0)
                 {
@@ -262,7 +262,7 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     public virtual void TurnEnd(int i = 0)
     {
-        EffectChecker(EventTiming.TurnEnd, ParametorType.Any);
+        EffectChecker(EventTiming.TurnEnd, ParametorType.Other);
         RemoveEffect();
     }
 
@@ -272,7 +272,7 @@ public class CharactorBase : MonoBehaviour
     public virtual void TurnStart()
     {
         m_block = 0;
-        EffectChecker(EventTiming.TurnBegin, ParametorType.Any);
+        EffectChecker(EventTiming.TurnBegin, ParametorType.Other);
         SetUI();
     }
     /// <summary>
