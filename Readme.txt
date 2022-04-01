@@ -1,5 +1,6 @@
 １.起動方法
 CardGame.exeをダブルクリック
+Webの場合は https://akimotoyuhi.github.io/CardGameRelease/ へ
 
 ２.操作方法
 このゲームはマウスの左クリックのみで操作可能です。
