@@ -45,7 +45,9 @@ public class EnemyBase : CharactorBase, IDrop
     public void GetDrop(List<int[]> cardCommand)
     {
         BattleManager.Instance.CommandManager.CommandExecute(cardCommand, true, this);
-        m_enemyManager.EnemyDamaged();
+        Effect();
+        ActionPlan();
+        //m_enemyManager.EnemyDamaged();
     }
 
     public void OnCard(UseType? useType)
@@ -79,18 +81,6 @@ public class EnemyBase : CharactorBase, IDrop
                 Debug.LogError("例外");
                 break;
         }
-    }
-
-    /// <summary>
-    /// プレイヤー以外からのダメージ受け付け用
-    /// </summary>
-    /// <param name="damagem"></param>
-    /// <param name="block"></param>
-    /// <param name="condition"></param>
-    public void GetDamage(int damage, int block, Condition condition)
-    {
-        Damage(damage, block, condition, false, () => Dead());
-        m_enemyManager.EnemyDamaged();
     }
 
     /// <summary>

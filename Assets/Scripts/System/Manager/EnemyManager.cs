@@ -108,10 +108,10 @@ public class EnemyManager : MonoBehaviour
     /// 敵がダメージを食らった時の呼ばれる<br/>
     /// 行動予定の更新用
     /// </summary>
-    public void EnemyDamaged()
-    {
-        ActionPlan(BattleManager.Instance.CurrentTurn);
-    }
+    //public void EnemyDamaged()
+    //{
+    //    ActionPlan(BattleManager.Instance.CurrentTurn);
+    //}
 
     /// <summary>
     /// 終了判定用<br/>
