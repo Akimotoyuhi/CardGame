@@ -260,6 +260,94 @@ MonoBehaviour:
         m_plan:
         - m_plan: 0
           m_numIndex: 0
+  - m_name: "\u6DF1\u304D\u8005\u3069\u3082"
+    m_id: 6
+    m_life: 50
+    m_sprite: {fileID: 21300000, guid: 6520f81174e259f46bd886e101700846, type: 3}
+    m_spriteScaleMagnification: 1
+    m_enemyType: 0
+    m_enemyBaseState:
+    - m_conditionalCommand:
+      - m_type: 5
+        m_value: 20
+        m_probability: 0
+        m_isOnlyOnce: 0
+      - m_type: 4
+        m_value: 4
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 19
+        - id: 20
+        - id: 21
+        m_target: 0
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 1
+        - m_plan: 0
+          m_numIndex: 2
+    - m_conditionalCommand:
+      - m_type: 5
+        m_value: 20
+        m_probability: 0
+        m_isOnlyOnce: 0
+      - m_type: 4
+        m_value: 3
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 22
+        - id: 23
+        m_target: 0
+        m_plan:
+        - m_plan: 3
+          m_numIndex: 0
+    - m_conditionalCommand:
+      - m_type: 4
+        m_value: 2
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 24
+        - id: 25
+        m_target: 1
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 1
+          m_numIndex: 1
+    - m_conditionalCommand:
+      - m_type: 4
+        m_value: 3
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 18
+        - id: 26
+        m_target: 0
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 2
+          m_numIndex: 1
+    - m_conditionalCommand:
+      - m_type: 0
+        m_value: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 18
+        m_target: 0
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
   m_encountDatas:
   - m_label: "\u5854\u306E\u59CB\u307E\u308A"
     m_enemies:
@@ -272,8 +360,9 @@ MonoBehaviour:
   - m_label: "\u5FAE\u7761\u306E\u6CBC\u5730"
     m_enemies:
     - m_enemyID: 0400000004000000
-    - m_enemyID: 030000000000000001000000
+    - m_enemyID: 0300000001000000
     - m_enemyID: 0300000005000000
+    - m_enemyID: 06000000
     m_elites: []
     m_bosses:
     - m_enemyID: 02000000
@@ -383,10 +472,56 @@ MonoBehaviour:
       data:
         m_condition:
           m_conditionID: 8
-          m_turn: 2
+          m_turn: 3
         m_useType: 2
     00000012:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
+        m_power: 9
+        m_useType: 0
+    00000013:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 5
+        m_useType: 0
+    00000014:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 5
+        m_useType: 0
+    00000015:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 5
+        m_useType: 0
+    00000016:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 0
+          m_turn: 1
+        m_useType: 0
+    00000017:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 1
+          m_turn: 1
+        m_useType: 0
+    00000018:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
         m_power: 7
         m_useType: 0
+    00000019:
+      type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
+      data:
+        m_block: 5
+        m_useType: 1
+    0000001A:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 8
+          m_turn: 2
+        m_useType: 1

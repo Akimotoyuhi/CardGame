@@ -254,6 +254,8 @@ public enum EnemyID
     ZombieDog,
     /// <summary>ƒyƒŠƒ…ƒgƒ“</summary>
     Peryton,
+    /// <summary>[‚«Ò‚Ç‚à</summary>
+    DeepOnes,
 }
 /// <summary>“GoŒ»êŠ</summary>
 public enum EnemyType
