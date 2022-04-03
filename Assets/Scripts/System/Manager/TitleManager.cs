@@ -57,6 +57,7 @@ public class TitleManager : MonoBehaviour
     {
         EffectManager.Instance.Fade(Color.black, m_FadeTime.GetFadeTime(titleState), () =>
         {
+            bool isFade = true;
             switch (titleState)
             {
                 case TitleState.ToCustomSelect:
@@ -67,12 +68,16 @@ public class TitleManager : MonoBehaviour
                     Application.Quit();
                     break;
                 case TitleState.SceneChange:
+                    isFade = false;
                     SceneManager.LoadScene(m_changeSceneName);
                     break;
                 default:
                     break;
             }
-            EffectManager.Instance.Fade(Color.clear, m_FadeTime.GetFadeTime(titleState));
+            if (isFade)
+            {
+                EffectManager.Instance.Fade(Color.clear, m_FadeTime.GetFadeTime(titleState));
+            }
         });
     }
 

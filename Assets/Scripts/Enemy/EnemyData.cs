@@ -256,6 +256,8 @@ public enum EnemyID
     Peryton,
     /// <summary>深き者ども</summary>
     DeepOnes,
+    /// <summary>リヴィアタン</summary>
+    Leviathan,
 }
 /// <summary>敵出現場所</summary>
 public enum EnemyType

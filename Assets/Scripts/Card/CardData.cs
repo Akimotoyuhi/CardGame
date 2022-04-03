@@ -93,7 +93,7 @@ public class CardDataBase
 public class CardConditional
 {
     /// <summary>条件を適応しない</summary>
-    [SerializeField] bool m_doesNotAdapt;
+    [SerializeField, Tooltip("条件を適応しない")] bool m_doesNotAdapt;
     [SerializeField] CardConditionalEvaluationParam m_evaluationParam;
     [SerializeField] CardConditionalEvaluationType m_evaluationType;
     [SerializeField] CardUsedConditional m_cardConditional;
