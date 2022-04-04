@@ -92,14 +92,9 @@ public class CardDataBase
 [Serializable]
 public class CardConditional
 {
-    /// <summary>条件を適応しない</summary>
-    [SerializeField, Tooltip("条件を適応しない")] bool m_doesNotAdapt;
-    [SerializeField] CardConditionalEvaluationParam m_evaluationParam;
-    [SerializeField] CardConditionalEvaluationType m_evaluationType;
-    [SerializeField] CardUsedConditional m_cardConditional;
-    [SerializeField] int m_num;
-    public CardConditionalEvaluationParam EvaluationParam => m_evaluationParam;
-    public CardConditionalEvaluationType EvaluationType => m_evaluationType;
+    [SerializeReference, SubclassSelector] List<IConditional> m_cardConditional = new List<IConditional>();
+    public CardConditionalEvaluationParam EvaluationParam => CardConditionalEvaluationParam.BuffDebuff;
+    public CardConditionalEvaluationType EvaluationType => CardConditionalEvaluationType.Player;
     /// <summary>
     /// 条件の評価
     /// </summary>
@@ -109,60 +104,57 @@ public class CardConditional
     /// <returns></returns>
     public bool Evaluation(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType, int num)
     {
-        if (m_doesNotAdapt)
-            return true;
-        if (evaluationParam != m_evaluationParam || evaluationType != m_evaluationType) return false;
-        switch (m_cardConditional)
-        {
-            case CardUsedConditional.High:
-                if (m_num <= num)
-                    return true;
-                break;
-            case CardUsedConditional.Low:
-                if (m_num >= num)
-                    return true;
-                break;
-            case CardUsedConditional.Even:
-                if (num % 2 == 0)
-                    return true;
-                break;
-            case CardUsedConditional.Odd:
-                if (num % 2 != 0)
-                    return true;
-                break;
-            default:
-                break;
-        }
-        return false;
+        if (/*evaluationParam != m_evaluationParam || evaluationType != m_evaluationType*/true) return false;
+        //switch (m_cardConditional)
+        //{
+        //    case CardUsedConditional.High:
+        //        if (m_num <= num)
+        //            return true;
+        //        break;
+        //    case CardUsedConditional.Low:
+        //        if (m_num >= num)
+        //            return true;
+        //        break;
+        //    case CardUsedConditional.Even:
+        //        if (num % 2 == 0)
+        //            return true;
+        //        break;
+        //    case CardUsedConditional.Odd:
+        //        if (num % 2 != 0)
+        //            return true;
+        //        break;
+        //    default:
+        //        break;
+        //}
+        //return false;
     }
     public bool Evaluation(int num)
     {
-        if (m_doesNotAdapt)
-            return true;
-        if (num == -1)　　//現状返せないケースが与えられた場合はとりあえず-1を返すようになっているのでとりあえず
-            return false;
-        switch (m_cardConditional)
-        {
-            case CardUsedConditional.High:
-                if (m_num <= num)
-                    return true;
-                break;
-            case CardUsedConditional.Low:
-                if (m_num >= num)
-                    return true;
-                break;
-            case CardUsedConditional.Even:
-                if (num % 2 == 0)
-                    return true;
-                break;
-            case CardUsedConditional.Odd:
-                if (num % 2 != 0)
-                    return true;
-                break;
-            default:
-                break;
-        }
-        return false;
+        return true;
+    //    if (num == -1)　　//現状返せないケースが与えられた場合はとりあえず-1を返すようになっているのでとりあえず
+    //        return false;
+    //    switch (m_cardConditional)
+    //    {
+    //        case CardUsedConditional.High:
+    //            if (m_num <= num)
+    //                return true;
+    //            break;
+    //        case CardUsedConditional.Low:
+    //            if (m_num >= num)
+    //                return true;
+    //            break;
+    //        case CardUsedConditional.Even:
+    //            if (num % 2 == 0)
+    //                return true;
+    //            break;
+    //        case CardUsedConditional.Odd:
+    //            if (num % 2 != 0)
+    //                return true;
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //    return false;
     }
 }
 /// <summary>カードデータの使用時の効果の部分</summary>
@@ -264,6 +256,49 @@ public class DrawCardCommand : ICommand
         return new int[] { (int)CommandParam.DrawCard, (int)UseType.System, i, m_drawNum };
     }
 }
+/*
+     * memo
+     * やりたい使用/発動条件
+     * 体力がn以下/以上
+     * 　欲しい変数:int life, enum 誰の体力か, enum 以上か以下か
+     * 敵行動予定
+     * 　enum 評価する攻撃予定
+     * ターン終了時に手札/山札/捨て札にあるか
+     * 　enum どこにあるか
+     * 
+     */
+public interface IConditional
+{
+    int[] Execute();
+}
+public class EvaluationLife : IConditional
+{
+    [SerializeField] CardConditionalEvaluationParam m_evaluationParam;
+    [SerializeField] CardConditionalEvaluationType m_evaluationType;
+    [SerializeField] CardUsedConditional m_cardConditional;
+    [SerializeField] int m_life;
+
+    public int[] Execute()
+    {
+        return new int[] { (int)CardConditionalType.EvaluationLife, m_life, (int)m_cardConditional, (int)m_evaluationType, (int)m_evaluationParam };
+    }
+}
+public class EnemyPlan : IConditional
+{
+
+
+    public int[] Execute()
+    {
+        return new int[] { (int)CardConditionalType.EnemyPlan };
+    }
+}
+public class TurnEndWhereCard : IConditional
+{
+    public int[] Execute()
+    {
+        return new int[] { (int)CardConditionalType.TurnEndWhereCard };
+    }
+}
 #region Enums
 /// <summary>カードのレア度</summary>
 public enum CardID
@@ -345,6 +380,12 @@ public enum CardAddDestination
     ToDeck,
     ToHand,
     ToDiscard,
+}
+public enum CardConditionalType
+{
+    EvaluationLife,
+    EnemyPlan,
+    TurnEndWhereCard,
 }
 /// <summary>カード使用条件にて評価したい対象</summary>
 public enum CardConditionalEvaluationType
