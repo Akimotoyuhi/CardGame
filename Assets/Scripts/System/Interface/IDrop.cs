@@ -13,5 +13,5 @@ public interface IDrop
     bool CanDrop(UseType useType);
     /// <summary>カードがドロップ可能であることを強調表示する時の判定</summary>
     void OnCard(UseType? useType);
-    int CardUsedCheck(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType);
+    EnemyBase IsEnemy();
 }

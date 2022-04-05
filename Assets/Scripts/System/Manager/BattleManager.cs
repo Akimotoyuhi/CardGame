@@ -83,6 +83,9 @@ public class BattleManager : MonoBehaviour
     public CommandManager CommandManager => m_dropManager;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
     public int CurrentTurn => m_currentTurn;
+    public int DeckChildCount => m_deck.CardParent.childCount;
+    public int HandChildCount => m_hand.CardParent.childCount;
+    public int DiscardChildCount => m_discard.CardParent.childCount;
     #endregion
 
     private void Awake()

@@ -80,9 +80,9 @@ public class Player : CharactorBase, IDrop
         if (useType == UseType.ToPlayer) m_flame.SetActive(true);
         else m_flame.SetActive(false);
     }
-    public int CardUsedCheck(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType)
+    public EnemyBase IsEnemy()
     {
-        return BattleManager.Instance.CommandManager.CardUsedConditionalCheck(evaluationParam, evaluationType);
+        return null;
     }
 
     public override void GetDamage(int[] cardParam)

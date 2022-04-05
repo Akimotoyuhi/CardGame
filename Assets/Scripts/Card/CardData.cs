@@ -93,68 +93,99 @@ public class CardDataBase
 public class CardConditional
 {
     [SerializeReference, SubclassSelector] List<IConditional> m_cardConditional = new List<IConditional>();
-    public CardConditionalEvaluationParam EvaluationParam => CardConditionalEvaluationParam.BuffDebuff;
-    public CardConditionalEvaluationType EvaluationType => CardConditionalEvaluationType.Player;
-    /// <summary>
-    /// 条件の評価
-    /// </summary>
+    /// <summary>条件の評価</summary>
     /// <param name="evaluationParam">評価したいパラメーターの種類</param>
-    /// <param name="evaluationType">評価したい対象</param>
-    /// <param name="num">評価したい値</param>
-    /// <returns></returns>
-    public bool Evaluation(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType, int num)
+    /// <returns>カード使用可否</returns>
+    public bool Evaluation(Player player, EnemyBase enemy, int deckChildCount, int handChildCount, int discardChildCount)
     {
-        if (/*evaluationParam != m_evaluationParam || evaluationType != m_evaluationType*/true) return false;
-        //switch (m_cardConditional)
-        //{
-        //    case CardUsedConditional.High:
-        //        if (m_num <= num)
-        //            return true;
-        //        break;
-        //    case CardUsedConditional.Low:
-        //        if (m_num >= num)
-        //            return true;
-        //        break;
-        //    case CardUsedConditional.Even:
-        //        if (num % 2 == 0)
-        //            return true;
-        //        break;
-        //    case CardUsedConditional.Odd:
-        //        if (num % 2 != 0)
-        //            return true;
-        //        break;
-        //    default:
-        //        break;
-        //}
-        //return false;
+        bool flag = true;
+        foreach (var c in m_cardConditional)
+        {
+            int[] nums = c.Execute();
+            switch ((CardConditionalType)nums[0])
+            {
+                case CardConditionalType.EvaluationParam:
+                    if (!EvaluationParam(nums[1], (CardUsedConditional)nums[2], (CardConditionalEvaluationType)nums[3], (CardConditionalEvaluationParam)nums[4], player, enemy))
+                    {
+                        return false;
+                    }
+                    break;
+                default:
+                    Debug.LogError("例外エラー");
+                    break;
+            }
+        }
+        return flag;
     }
-    public bool Evaluation(int num)
+    /// <summary>条件がEvaluationParamだった時用</summary>
+    private bool EvaluationParam(int evaNum, CardUsedConditional cardUsedConditional, CardConditionalEvaluationType evaluationType, CardConditionalEvaluationParam evaluationParam, Player player, EnemyBase enemy)
     {
-        return true;
-    //    if (num == -1)　　//現状返せないケースが与えられた場合はとりあえず-1を返すようになっているのでとりあえず
-    //        return false;
-    //    switch (m_cardConditional)
-    //    {
-    //        case CardUsedConditional.High:
-    //            if (m_num <= num)
-    //                return true;
-    //            break;
-    //        case CardUsedConditional.Low:
-    //            if (m_num >= num)
-    //                return true;
-    //            break;
-    //        case CardUsedConditional.Even:
-    //            if (num % 2 == 0)
-    //                return true;
-    //            break;
-    //        case CardUsedConditional.Odd:
-    //            if (num % 2 != 0)
-    //                return true;
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //    return false;
+        int num = default;
+        switch (evaluationType)
+        {
+            case CardConditionalEvaluationType.Player:
+                switch (evaluationParam)
+                {
+                    //case CardConditionalEvaluationParam.Power://攻撃力を取得するにはちょっと手順が多いので特別処理にすると思う
+                    //    break;
+                    case CardConditionalEvaluationParam.Block:
+                        num = player.CurrentBlock;
+                        break;
+                    case CardConditionalEvaluationParam.Life:
+                        num = player.CurrentLife;
+                        break;
+                    //case CardConditionalEvaluationParam.BuffDebuff://必要なパラメーターが違うので特別処理にすると思う
+                    //    break;
+                    default:
+                        Debug.LogError("例外エラー");
+                        return false;
+                }
+                break;
+            case CardConditionalEvaluationType.Enemy:
+                switch (evaluationParam)
+                {
+                    //case CardConditionalEvaluationParam.Power:
+                    //    break;
+                    case CardConditionalEvaluationParam.Block:
+                        num = enemy.CurrentBlock;
+                        break;
+                    case CardConditionalEvaluationParam.Life:
+                        num = enemy.CurrentLife;
+                        break;
+                    //case CardConditionalEvaluationParam.BuffDebuff:
+                    //    break;
+                    default:
+                        Debug.LogError("例外エラー");
+                        break;
+                }
+                break;
+            default:
+                Debug.LogError("例外エラー");
+                break;
+        }
+        switch (cardUsedConditional)
+        {
+            case CardUsedConditional.High:
+                if (evaNum <= num)
+                    return true;
+                break;
+            case CardUsedConditional.Low:
+                if (evaNum >= num)
+                    return true;
+                break;
+            case CardUsedConditional.Even:
+                if (num % 2 == 0)
+                    return true;
+                break;
+            case CardUsedConditional.Odd:
+                if (num % 2 != 0)
+                    return true;
+                break;
+            default:
+                Debug.LogError("例外エラー");
+                break;
+        }
+        return false;
     }
 }
 /// <summary>カードデータの使用時の効果の部分</summary>
@@ -269,6 +300,12 @@ public class DrawCardCommand : ICommand
      */
 public interface IConditional
 {
+    /// <summary>評価に必要な値をint配列にして渡す</summary>
+    /// <returns>
+    /// EvaluationLife   { CardConditionalType, life, CardUsedConditional, CardConditionalEvaluationType, CardConditionalEvaluationParam }<br/>
+    /// EnemyPlan        { CardConditionalType }<br/>
+    /// TurnEndWhereCard { CardConditionalType }
+    /// </returns>
     int[] Execute();
 }
 public class EvaluationLife : IConditional
@@ -280,7 +317,7 @@ public class EvaluationLife : IConditional
 
     public int[] Execute()
     {
-        return new int[] { (int)CardConditionalType.EvaluationLife, m_life, (int)m_cardConditional, (int)m_evaluationType, (int)m_evaluationParam };
+        return new int[] { (int)CardConditionalType.EvaluationParam, m_life, (int)m_cardConditional, (int)m_evaluationType, (int)m_evaluationParam };
     }
 }
 public class EnemyPlan : IConditional
@@ -383,7 +420,7 @@ public enum CardAddDestination
 }
 public enum CardConditionalType
 {
-    EvaluationLife,
+    EvaluationParam,
     EnemyPlan,
     TurnEndWhereCard,
 }
@@ -392,18 +429,14 @@ public enum CardConditionalEvaluationType
 {
     Player,
     Enemy,
-    Hand,
-    Discard,
-    Deck,
 }
 /// <summary>カード使用条件にて評価したいパラメーター</summary>
 public enum CardConditionalEvaluationParam
 {
-    Power,
+    //Power,
     Block,
     Life,
-    BuffDebuff,
-    Other,
+    //BuffDebuff,
 }
 /// <summary>カードの使用条件</summary>
 public enum CardUsedConditional

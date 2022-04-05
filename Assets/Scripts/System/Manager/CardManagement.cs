@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardManagement : MonoBehaviour
 {
     [SerializeField] protected Transform m_cardParent;
+    /// <summary>カードの親オブジェクト</summary>
     public Transform CardParent => m_cardParent;
     protected Canvas m_canvas = default;
 

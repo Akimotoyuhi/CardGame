@@ -286,9 +286,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             //ドロップされたオブジェクトがドロップを受け付けるインターフェースが実装されていれば自分の情報を渡す
             IDrop dropObj = hit.gameObject.GetComponent<IDrop>();
-            if (dropObj == null) continue;
-            if (!dropObj.CanDrop(m_useType)) continue;
-            if (!m_conditional.Evaluation(dropObj.CardUsedCheck(m_conditional.EvaluationParam, m_conditional.EvaluationType)))
+            if (dropObj == null || !dropObj.CanDrop(m_useType)) continue;
+            EnemyBase enemy = dropObj.IsEnemy();
+            if (!m_conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
             {
                 EffectManager.Instance.SetBattleUIText("使用条件を満たしていない！", Color.red, 1f);
                 continue;
