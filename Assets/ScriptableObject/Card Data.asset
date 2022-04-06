@@ -25,7 +25,8 @@ MonoBehaviour:
       m_commands:
       - id: 0
       m_cardConditional:
-        m_cardConditional: []
+        m_cardConditional:
+        - id: 1
       m_cardType: 1
       m_isDiscarding: 0
       m_ethereal: 0
@@ -36,7 +37,7 @@ MonoBehaviour:
       m_tooltip: "\u65751\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
-      - id: 1
+      - id: 2
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -50,7 +51,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_commands:
-      - id: 2
+      - id: 3
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -63,7 +64,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_commands:
-      - id: 3
+      - id: 4
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -77,9 +78,9 @@ MonoBehaviour:
       m_tooltip: "\u65751\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u30923\u56DE\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
-      - id: 4
-      - id: 4
-      - id: 4
+      - id: 5
+      - id: 5
+      - id: 5
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -92,9 +93,9 @@ MonoBehaviour:
       m_tooltip: "\u65751\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u30923\u56DE\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
-      - id: 5
       - id: 6
       - id: 7
+      - id: 8
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -108,7 +109,7 @@ MonoBehaviour:
       m_tooltip: "\u65751\u4F53\u306B\u8131\u529B3\u3092\u4E0E\u3048\u308B"
       m_rarity: 1
       m_commands:
-      - id: 8
+      - id: 9
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -121,7 +122,7 @@ MonoBehaviour:
       m_tooltip: "\u65751\u4F53\u306B\u8131\u529B4\u3092\u4E0E\u3048\u308B"
       m_rarity: 1
       m_commands:
-      - id: 9
+      - id: 10
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -135,8 +136,8 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 2
       m_commands:
-      - id: 10
       - id: 11
+      - id: 12
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 2
@@ -149,8 +150,8 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 2
       m_commands:
-      - id: 12
       - id: 13
+      - id: 14
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 2
@@ -164,7 +165,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u306B\u7B4B\u529B1\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 14
+      - id: 15
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -177,7 +178,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u306B\u7B4B\u529B2\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 15
+      - id: 16
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -191,8 +192,8 @@ MonoBehaviour:
       m_tooltip: "\u65751\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u624B\u672D\u306B\u300C\u7834\u7247\u300D\u30922\u679A\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 1
       m_commands:
-      - id: 16
       - id: 17
+      - id: 18
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -205,8 +206,8 @@ MonoBehaviour:
       m_tooltip: "\u65751\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u624B\u672D\u306B\u300C\u92ED\u5229\u306A\u7834\u7247\u300D\u30922\u679A\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 1
       m_commands:
-      - id: 18
       - id: 19
+      - id: 20
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -220,7 +221,7 @@ MonoBehaviour:
       m_tooltip: "\u6575\uFF11\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 3
       m_commands:
-      - id: 20
+      - id: 21
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -233,7 +234,7 @@ MonoBehaviour:
       m_tooltip: "\u6575\uFF11\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 3
       m_commands:
-      - id: 21
+      - id: 22
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -247,7 +248,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 1
       m_commands:
-      - id: 22
+      - id: 23
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -260,7 +261,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 1
       m_commands:
-      - id: 23
+      - id: 24
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -274,7 +275,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u306B\u654F\u63771\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 24
+      - id: 25
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -287,7 +288,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u306B\u654F\u63772\u3092\u4ED8\u4E0E\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 25
+      - id: 26
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -301,7 +302,7 @@ MonoBehaviour:
       m_tooltip: "\u89E3\u304B\u308C\u3057\u529B\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 2
       m_commands:
-      - id: 26
+      - id: 27
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 4
@@ -314,7 +315,7 @@ MonoBehaviour:
       m_tooltip: "\u89E3\u304B\u308C\u3057\u529B\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 2
       m_commands:
-      - id: 27
+      - id: 28
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 4
@@ -328,8 +329,8 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 3
       m_commands:
-      - id: 28
       - id: 29
+      - id: 30
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 4
@@ -342,8 +343,8 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 3
       m_commands:
-      - id: 30
       - id: 31
+      - id: 32
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 4
@@ -357,7 +358,7 @@ MonoBehaviour:
       m_tooltip: "\u6575\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 3
       m_commands:
-      - id: 32
+      - id: 33
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 2
@@ -370,7 +371,7 @@ MonoBehaviour:
       m_tooltip: "\u6575\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 3
       m_commands:
-      - id: 33
+      - id: 34
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 2
@@ -384,7 +385,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C\u30D7\u30EC\u30FC\u30C8\u30A2\u30FC\u30DE\u30FC3\u3092\u5F97\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 34
+      - id: 35
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -397,7 +398,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C\u30D7\u30EC\u30FC\u30C8\u30A2\u30FC\u30DE\u30FC3\u3092\u5F97\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 35
+      - id: 36
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -411,8 +412,8 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u6368\u3066\u672D\u306B\u7121\u9650\u306E\u5263\u3092\u4E00\u679A\u52A0\u3048\u308B"
       m_rarity: 1
       m_commands:
-      - id: 36
       - id: 37
+      - id: 38
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -425,8 +426,8 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u6368\u3066\u672D\u306B\u7121\u9650\u306E\u5263+\u3092\u4E00\u679A\u52A0\u3048\u308B"
       m_rarity: 1
       m_commands:
-      - id: 38
       - id: 39
+      - id: 40
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -440,7 +441,7 @@ MonoBehaviour:
       m_tooltip: "\u30AB\u30FC\u30C9\u30922\u679A\u30C9\u30ED\u30FC\u3059\u308B"
       m_rarity: 0
       m_commands:
-      - id: 40
+      - id: 41
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 4
@@ -453,7 +454,7 @@ MonoBehaviour:
       m_tooltip: "\u30AB\u30FC\u30C9\u30922\u679A\u30C9\u30ED\u30FC\u3059\u308B"
       m_rarity: 0
       m_commands:
-      - id: 41
+      - id: 42
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 4
@@ -467,8 +468,8 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u5C71\u672D\u306B\u30D6\u30FC\u30E1\u30E9\u30F3\u3092\u4E00\u679A\u8FFD\u52A0\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 42
       - id: 43
+      - id: 44
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -481,8 +482,8 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u5C71\u672D\u306B\u30D6\u30FC\u30E1\u30E9\u30F3+\u3092\u4E00\u679A\u8FFD\u52A0\u3059\u308B\n\u5EC3\u68C4"
       m_rarity: 0
       m_commands:
-      - id: 44
       - id: 45
+      - id: 46
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -496,8 +497,8 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u81EA\u8EAB\u306F{leg1}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_commands:
-      - id: 46
       - id: 47
+      - id: 48
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -510,8 +511,8 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3001\u81EA\u8EAB\u306F{leg1}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B"
       m_rarity: 0
       m_commands:
-      - id: 48
       - id: 49
+      - id: 50
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 1
@@ -525,7 +526,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u5E0C\u8584"
       m_rarity: 1
       m_commands:
-      - id: 50
+      - id: 51
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -538,7 +539,7 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u5E0C\u8584"
       m_rarity: 1
       m_commands:
-      - id: 51
+      - id: 52
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
@@ -552,10 +553,10 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u4F53\u529B\u304C50\u4EE5\u4E0A\u306E\u6642\u306E\u307F\u4F7F\u7528\u3067\u304D\u308B"
       m_rarity: 1
       m_commands:
-      - id: 50
+      - id: 51
       m_cardConditional:
         m_cardConditional:
-        - id: 52
+        - id: 53
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -566,9 +567,10 @@ MonoBehaviour:
       m_tooltip: "\u81EA\u8EAB\u304C{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u4F53\u529B\u304C40\u4EE5\u4E0A\u306E\u6642\u306E\u307F\u4F7F\u7528\u3067\u304D\u308B"
       m_rarity: 1
       m_commands:
-      - id: 51
+      - id: 52
       m_cardConditional:
-        m_cardConditional: []
+        m_cardConditional:
+        - id: 54
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -580,9 +582,10 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u4E0E\u3048\u308B\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u4F53\u529B\u304C10\u4EE5\u4E0B\u306E\u6642\u306E\u307F\u4F7F\u7528\u3067\u304D\u308B"
       m_rarity: 0
       m_commands:
-      - id: 53
+      - id: 55
       m_cardConditional:
-        m_cardConditional: []
+        m_cardConditional:
+        - id: 56
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -593,9 +596,10 @@ MonoBehaviour:
       m_tooltip: "\u6575\u4E00\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u4E0E\u3048\u308B\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u4F53\u529B\u304C10\u4EE5\u4E0B\u306E\u6642\u306E\u307F\u4F7F\u7528\u3067\u304D\u308B"
       m_rarity: 0
       m_commands:
-      - id: 54
+      - id: 57
       m_cardConditional:
-        m_cardConditional: []
+        m_cardConditional:
+        - id: 58
       m_cardType: 0
       m_isDiscarding: 0
       m_ethereal: 0
@@ -607,25 +611,27 @@ MonoBehaviour:
         m_power: 5
         m_useType: 1
     00000001:
+      type: {class: EvaluationParam, ns: , asm: Assembly-CSharp}
+      data:
+        m_evaluationParam: 0
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_life: 0
+    00000002:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 8
         m_useType: 1
-    00000002:
+    00000003:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 5
         m_useType: 0
-    00000003:
+    00000004:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 8
         m_useType: 0
-    00000004:
-      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
-      data:
-        m_power: 2
-        m_useType: 1
     00000005:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
@@ -642,166 +648,164 @@ MonoBehaviour:
         m_power: 2
         m_useType: 1
     00000008:
-      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_condition:
-          m_conditionID: 0
-          m_turn: 3
+        m_power: 2
         m_useType: 1
     00000009:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
           m_conditionID: 0
-          m_turn: 4
+          m_turn: 3
         m_useType: 1
     0000000A:
-      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 10
-        m_useType: 2
+        m_condition:
+          m_conditionID: 0
+          m_turn: 4
+        m_useType: 1
     0000000B:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 10
-        m_useType: 0
+        m_useType: 2
     0000000C:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 10
-        m_useType: 2
+        m_useType: 0
     0000000D:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 10
-        m_useType: 0
+        m_useType: 2
     0000000E:
-      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_condition:
-          m_conditionID: 2
-          m_turn: 1
+        m_power: 10
         m_useType: 0
     0000000F:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
           m_conditionID: 2
-          m_turn: 2
+          m_turn: 1
         m_useType: 0
     00000010:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 2
+          m_turn: 2
+        m_useType: 0
+    00000011:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 5
         m_useType: 1
-    00000011:
+    00000012:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 2
         m_cardID: 7
         m_cardAddDestination: 1
         m_isUpgrade: 0
-    00000012:
+    00000013:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 5
         m_useType: 1
-    00000013:
+    00000014:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 2
         m_cardID: 7
         m_cardAddDestination: 1
         m_isUpgrade: 1
-    00000014:
+    00000015:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 2
         m_useType: 1
-    00000015:
+    00000016:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 3
         m_useType: 1
-    00000016:
+    00000017:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 12
         m_useType: 0
-    00000017:
+    00000018:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 15
-        m_useType: 0
-    00000018:
-      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
-      data:
-        m_condition:
-          m_conditionID: 3
-          m_turn: 1
         m_useType: 0
     00000019:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
           m_conditionID: 3
-          m_turn: 2
+          m_turn: 1
         m_useType: 0
     0000001A:
-      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_addNum: 1
-        m_cardID: 11
-        m_cardAddDestination: 2
-        m_isUpgrade: 0
+        m_condition:
+          m_conditionID: 3
+          m_turn: 2
+        m_useType: 0
     0000001B:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 1
         m_cardID: 11
         m_cardAddDestination: 2
-        m_isUpgrade: 1
+        m_isUpgrade: 0
     0000001C:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 1
+        m_cardID: 11
+        m_cardAddDestination: 2
+        m_isUpgrade: 1
+    0000001D:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 5
         m_useType: 0
-    0000001D:
+    0000001E:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 1
         m_cardID: 12
         m_cardAddDestination: 2
         m_isUpgrade: 0
-    0000001E:
+    0000001F:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 4
         m_useType: 0
-    0000001F:
+    00000020:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 1
         m_cardID: 12
         m_cardAddDestination: 2
         m_isUpgrade: 1
-    00000020:
+    00000021:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 50
         m_useType: 2
-    00000021:
+    00000022:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 60
         m_useType: 2
-    00000022:
-      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
-      data:
-        m_condition:
-          m_conditionID: 4
-          m_turn: 3
-        m_useType: 0
     00000023:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
@@ -810,107 +814,135 @@ MonoBehaviour:
           m_turn: 3
         m_useType: 0
     00000024:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 4
+          m_turn: 3
+        m_useType: 0
+    00000025:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 2
         m_useType: 1
-    00000025:
+    00000026:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 1
         m_cardID: 14
         m_cardAddDestination: 2
         m_isUpgrade: 0
-    00000026:
+    00000027:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 3
         m_useType: 1
-    00000027:
+    00000028:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 1
         m_cardID: 14
         m_cardAddDestination: 2
         m_isUpgrade: 1
-    00000028:
-      type: {class: DrawCardCommand, ns: , asm: Assembly-CSharp}
-      data:
-        m_drawNum: 2
-        m_isDraw: 1
     00000029:
       type: {class: DrawCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_drawNum: 2
         m_isDraw: 1
     0000002A:
+      type: {class: DrawCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_drawNum: 2
+        m_isDraw: 1
+    0000002B:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 7
         m_useType: 1
-    0000002B:
+    0000002C:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 1
         m_cardID: 16
         m_cardAddDestination: 0
         m_isUpgrade: 0
-    0000002C:
+    0000002D:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 9
         m_useType: 0
-    0000002D:
+    0000002E:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
       data:
         m_addNum: 1
         m_cardID: 16
         m_cardAddDestination: 0
         m_isUpgrade: 1
-    0000002E:
+    0000002F:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 3
         m_useType: 1
-    0000002F:
+    00000030:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 3
         m_useType: 0
-    00000030:
+    00000031:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 5
         m_useType: 1
-    00000031:
+    00000032:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 5
         m_useType: 0
-    00000032:
+    00000033:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 8
         m_useType: 0
-    00000033:
+    00000034:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 10
         m_useType: 0
-    00000034:
-      type: {class: EvaluationLife, ns: , asm: Assembly-CSharp}
+    00000035:
+      type: {class: EvaluationParam, ns: , asm: Assembly-CSharp}
       data:
         m_evaluationParam: 1
         m_evaluationType: 0
         m_cardConditional: 0
         m_life: 50
-    00000035:
+    00000036:
+      type: {class: EvaluationParam, ns: , asm: Assembly-CSharp}
+      data:
+        m_evaluationParam: 1
+        m_evaluationType: 0
+        m_cardConditional: 0
+        m_life: 40
+    00000037:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 10
         m_useType: 1
-    00000036:
+    00000038:
+      type: {class: EvaluationParam, ns: , asm: Assembly-CSharp}
+      data:
+        m_evaluationParam: 1
+        m_evaluationType: 0
+        m_cardConditional: 1
+        m_life: 10
+    00000039:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 15
         m_useType: 1
+    0000003A:
+      type: {class: EvaluationParam, ns: , asm: Assembly-CSharp}
+      data:
+        m_evaluationParam: 1
+        m_evaluationType: 0
+        m_cardConditional: 1
+        m_life: 10

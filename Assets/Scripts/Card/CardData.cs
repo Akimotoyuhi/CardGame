@@ -198,6 +198,7 @@ public class CardInfomationData
     [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{leg0}(数値の部分は配列番号)のように記述する事")]
     [SerializeField] string m_tooltip;
     [SerializeField] Rarity m_rarity;
+    [SerializeField] ParticleID m_particleID;
     [SerializeReference, SubclassSelector] List<ICommand> m_commands;
     [SerializeField] CardConditional m_cardConditional;
     [SerializeField] UseType m_cardType;
@@ -215,9 +216,8 @@ public class CardInfomationData
     public CardID CardId { get; set; }
     /// <summary>レアリティ</summary>
     public Rarity Rarity => m_rarity;
-    /// <summary>
-    /// カード使用時の効果<br/>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }
-    /// </summary>
+    public ParticleID ParticleID { get; set; }
+    /// <summary>カード使用時の効果<br/>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</summary>
     public List<int[]> Command
     {
         get
@@ -287,28 +287,17 @@ public class DrawCardCommand : ICommand
         return new int[] { (int)CommandParam.DrawCard, (int)UseType.System, i, m_drawNum };
     }
 }
-/*
-     * memo
-     * やりたい使用/発動条件
-     * 体力がn以下/以上
-     * 　欲しい変数:int life, enum 誰の体力か, enum 以上か以下か
-     * 敵行動予定
-     * 　enum 評価する攻撃予定
-     * ターン終了時に手札/山札/捨て札にあるか
-     * 　enum どこにあるか
-     * 
-     */
 public interface IConditional
 {
     /// <summary>評価に必要な値をint配列にして渡す</summary>
     /// <returns>
-    /// EvaluationLife   { CardConditionalType, life, CardUsedConditional, CardConditionalEvaluationType, CardConditionalEvaluationParam }<br/>
+    /// EvaluationParam   { CardConditionalType, life, CardUsedConditional, CardConditionalEvaluationType, CardConditionalEvaluationParam }<br/>
     /// EnemyPlan        { CardConditionalType }<br/>
     /// TurnEndWhereCard { CardConditionalType }
     /// </returns>
     int[] Execute();
 }
-public class EvaluationLife : IConditional
+public class EvaluationParam : IConditional
 {
     [SerializeField] CardConditionalEvaluationParam m_evaluationParam;
     [SerializeField] CardConditionalEvaluationType m_evaluationType;
@@ -418,6 +407,7 @@ public enum CardAddDestination
     ToHand,
     ToDiscard,
 }
+/// <summary>カード使用条件の種類</summary>
 public enum CardConditionalType
 {
     EvaluationParam,
@@ -438,7 +428,7 @@ public enum CardConditionalEvaluationParam
     Life,
     //BuffDebuff,
 }
-/// <summary>カードの使用条件</summary>
+/// <summary>CardConditionalTypeがEvaluationParamだった場合の使用条件</summary>
 public enum CardUsedConditional
 {
     High,
