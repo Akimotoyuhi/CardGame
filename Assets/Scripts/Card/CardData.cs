@@ -199,7 +199,7 @@ public class CardInfomationData
     [SerializeField] string m_tooltip;
     [SerializeField] Rarity m_rarity;
     [SerializeField] ParticleID m_particleID;
-    [SerializeReference, SubclassSelector] List<ICommand> m_commands;
+    [SerializeField] List<CardExecuteCommand> m_commands;
     [SerializeField] CardConditional m_cardConditional;
     [SerializeField] UseType m_cardType;
     [SerializeField] bool m_isDiscarding = false;
@@ -216,24 +216,35 @@ public class CardInfomationData
     public CardID CardId { get; set; }
     /// <summary>レアリティ</summary>
     public Rarity Rarity => m_rarity;
-    public ParticleID ParticleID { get; set; }
-    /// <summary>カード使用時の効果<br/>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</summary>
-    public List<int[]> Command
-    {
-        get
-        {
-            List<int[]> ret = new List<int[]>();
-            foreach (var c in m_commands)
-                ret.Add(c.Execute());
-            return ret;
-        }
-    }
+    /// <summary>効果を発動させた際に出るパーティクルのID</summary>
+    public ParticleID ParticleID => m_particleID;
+    /// <summary>カードの効果とその条件</summary>
+    public List<CardExecuteCommand> Commands => m_commands;
     public CardConditional CardConditional => m_cardConditional;
     /// <summary>使用する標的</summary>
     public UseType UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
     public bool Ethereal => m_ethereal;
+}
+[Serializable]
+public class CardExecuteCommand
+{
+    [SerializeReference, SubclassSelector] ICommand m_command;
+    [SerializeField] CardConditional m_conditional;
+    /// <summary>カード使用時の効果<br/>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</summary>
+    //public List<int[]> Command
+    //{
+    //    get
+    //    {
+    //        List<int[]> ret = new List<int[]>();
+    //        foreach (var c in m_command)
+    //            ret.Add(c.Execute());
+    //        return ret;
+    //    }
+    //}
+    public int[] CardCommand => m_command.Execute();
+    public CardConditional Conditional => m_conditional;
 }
 /// <summary>〇〇に対して何かしらをしたい時に使うインターフェース</summary>
 public interface ICommand

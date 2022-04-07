@@ -153,7 +153,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void GetPlayerEffect()
     {
         string text = m_tooltip;
-        m_cardCommand = m_carddata.Command;
+        foreach (var c in m_carddata.Commands)
+            m_cardCommand.Add(c.CardCommand);
+        //m_cardCommand = m_carddata.Commands;
         if (m_cardState == CardState.Play)
         {
             foreach (var cc in m_cardCommand)
@@ -213,7 +215,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.CardCast();
         m_cardState = CardState.None;
         UpdateCostText();
-        m_cardCommand = m_carddata.Command;
+        foreach (var c in m_carddata.Commands)
+            m_cardCommand.Add(c.CardCommand);
+        //m_cardCommand = m_carddata.Command;
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
     }
