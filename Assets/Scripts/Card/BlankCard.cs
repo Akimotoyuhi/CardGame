@@ -153,8 +153,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void GetPlayerEffect()
     {
         string text = m_tooltip;
+        List<int[]> n = new List<int[]>();
         foreach (var c in m_carddata.Commands)
-            m_cardCommand.Add(c.CardCommand);
+            n.Add(c.CardCommand);
+        m_cardCommand = n;
         //m_cardCommand = m_carddata.Commands;
         if (m_cardState == CardState.Play)
         {
@@ -215,8 +217,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         BattleManager.Instance.CardCast();
         m_cardState = CardState.None;
         UpdateCostText();
+        List<int[]> n = new List<int[]>();
         foreach (var c in m_carddata.Commands)
-            m_cardCommand.Add(c.CardCommand);
+            n.Add(c.CardCommand);
+        m_cardCommand = n;
         //m_cardCommand = m_carddata.Command;
         if (m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
@@ -292,12 +296,22 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             IDrop dropObj = hit.gameObject.GetComponent<IDrop>();
             if (dropObj == null || !dropObj.CanDrop(m_useType)) continue;
             EnemyBase enemy = dropObj.IsEnemy();
+            //使用条件調べる
             if (!m_conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
             {
                 EffectManager.Instance.SetBattleUIText("使用条件を満たしていない！", Color.red, 1f);
                 continue;
             }
-            dropObj.GetDrop(m_cardCommand);
+            List<int[]> vs = new List<int[]>();
+            for (int i = 0; i < m_carddata.Commands.Count; i++)
+            {
+                if (m_carddata.Commands[i].Conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
+                {
+                    Debug.Log($"条件一致 {m_cardCommand[i][0]}");
+                    vs.Add(m_cardCommand[i]);
+                }
+            }
+            dropObj.GetDrop(vs);
             OnCast(true);
         }
     }
