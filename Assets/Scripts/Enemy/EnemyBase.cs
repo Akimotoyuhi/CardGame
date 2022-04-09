@@ -62,20 +62,20 @@ public class EnemyBase : CharactorBase, IDrop
         return this;
     }
 
-    public override void GetDamage(int[] cardParam)
+    public override void GetDamage(int[] cardParam, ParticleID particleID)
     {
         CommandParam command = (CommandParam)cardParam[0];
         switch (command)
         {
             case CommandParam.Attack:
-                Damage(cardParam[2], 0, null, false, () => Dead());
+                Damage(cardParam[3], 0, null, false, particleID, () => Dead());
                 break;
             case CommandParam.Block:
-                Damage(0, cardParam[2], null, false, () => Dead());
+                Damage(0, cardParam[3], null, false, particleID, () => Dead());
                 break;
             case CommandParam.Conditon:
                 ConditionSelection cs = new ConditionSelection();
-                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[2], cardParam[3]), false, () => Dead());
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), false, particleID, () => Dead());
                 break;
             default:
                 Debug.LogError("例外");
@@ -110,17 +110,17 @@ public class EnemyBase : CharactorBase, IDrop
             switch (cp)//自身のバフを評価して数値を増減させる
             {
                 case CommandParam.Attack:
-                    c[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Power, c[2]);
-                    c[2] = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, c[2]);
+                    c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Power, c[3]);
+                    c[3] = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, c[3]);
                     break;
                 case CommandParam.Block:
-                    c[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Difence, c[2]);
-                    c[2] = ConditionEffect(EventTiming.Attacked, ParametorType.Block, c[2]);
+                    c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Difence, c[3]);
+                    c[3] = ConditionEffect(EventTiming.Attacked, ParametorType.Block, c[3]);
                     break;
                 default:
                     continue;
             }
-            if (c[2] <= 1) c[2] = 1;
+            if (c[3] <= 1) c[3] = 1;
         }
     }
 
@@ -155,7 +155,7 @@ public class EnemyBase : CharactorBase, IDrop
             }
             PlanController p = Instantiate(m_planImage);
             p.transform.SetParent(m_planImageParent, false);
-            p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, m_commands[index][2]);
+            p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, m_commands[index][3]);
         }
     }
 

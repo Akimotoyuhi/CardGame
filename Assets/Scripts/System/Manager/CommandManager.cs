@@ -32,11 +32,11 @@ public class CommandManager : MonoBehaviour
         foreach (var cmds in cardParam)
         {
             //CommandParam cp = (CommandParam)card[0];
-            UseType useType = (UseType)cmds[1];
+            UseType useType = (UseType)cmds[2];
             switch (useType)
             {
                 case UseType.ToPlayer:
-                    m_player.GetDamage(cmds);
+                    m_player.GetDamage(cmds, (ParticleID)cmds[1]);
                     break;
                 case UseType.ToEnemy:
                     if (!enemy)
@@ -44,10 +44,10 @@ public class CommandManager : MonoBehaviour
                         Debug.LogError("敵データが存在しません カードの効果対象が正しいものなのかを確認してください");
                         break;
                     }
-                    enemy.GetDamage(cmds);
+                    enemy.GetDamage(cmds, (ParticleID)cmds[1]);
                     break;
                 case UseType.ToAllEnemies:
-                    m_enemyManager.AllEnemiesDamage(cmds);
+                    m_enemyManager.AllEnemiesDamage(cmds, (ParticleID)cmds[1]);
                     break;
                 case UseType.ToRandomEnemy:
                     //Debug.Log("未作成");
@@ -56,14 +56,13 @@ public class CommandManager : MonoBehaviour
                     switch ((CommandParam)cmds[0])
                     {
                         case CommandParam.AddCard:
-                            //Debug.Log($"{(CardID)card[2]}を{card[3]}枚{(CardAddDestination)card[4]}に追加する");
-                            BattleManager.Instance.AddCard((CardAddDestination)cmds[4], (CardID)cmds[2], cmds[3], cmds[5]);
+                            BattleManager.Instance.AddCard((CardAddDestination)cmds[5], (CardID)cmds[3], cmds[4], cmds[6]);
                             break;
                         case CommandParam.DrawCard:
-                            if (cmds[2] == 0) //カード捨てる
-                                BattleManager.Instance.CardDispose(cmds[3]);
+                            if (cmds[3] == 0) //カード捨てる
+                                BattleManager.Instance.CardDispose(cmds[4]);
                             else //カードを引く
-                                BattleManager.Instance.CardDraw(cmds[3]);
+                                BattleManager.Instance.CardDraw(cmds[4]);
                             break;
                         default:
                             break;

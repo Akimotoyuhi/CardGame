@@ -118,7 +118,7 @@ public class CharactorBase : MonoBehaviour
     /// <summary>
     /// 被ダメージ情報を受け取る
     /// </summary>
-    public virtual void GetDamage(int[] cardParam) { }
+    public virtual void GetDamage(int[] cardParam, ParticleID particleID) { }
 
     /// <summary>
     /// バフデバフを付与された時の加算
@@ -206,13 +206,13 @@ public class CharactorBase : MonoBehaviour
     /// <summary>
     /// 被ダメージ処理
     /// </summary>
-    protected void Damage(int damage, int block, Condition condition, bool isPlayer, Action dead)
+    protected void Damage(int damage, int block, Condition condition, bool isPlayer, ParticleID particleID, Action dead)
     {
         if (IsDead) return;
         AddEffect(condition);
         if (damage > 0)
         {
-            EffectManager.Instance.ShowParticle(ParticleID.a, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
+            EffectManager.Instance.ShowParticle(particleID, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
             int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
             dmg = m_block -= dmg;
             if (m_block < 0) m_block = 0;

@@ -198,7 +198,6 @@ public class CardInfomationData
     [TextArea(0, 5), Tooltip("変数に差し替えたい部分は{leg0}(数値の部分は配列番号)のように記述する事")]
     [SerializeField] string m_tooltip;
     [SerializeField] Rarity m_rarity;
-    [SerializeField] ParticleID m_particleID;
     [SerializeField] List<CardExecuteCommand> m_commands;
     [SerializeField] CardConditional m_cardConditional;
     [SerializeField] UseType m_cardType;
@@ -216,8 +215,6 @@ public class CardInfomationData
     public CardID CardId { get; set; }
     /// <summary>レアリティ</summary>
     public Rarity Rarity => m_rarity;
-    /// <summary>効果を発動させた際に出るパーティクルのID</summary>
-    public ParticleID ParticleID => m_particleID;
     /// <summary>カードの効果とその条件</summary>
     public List<CardExecuteCommand> Commands => m_commands;
     public CardConditional CardConditional => m_cardConditional;
@@ -232,17 +229,9 @@ public class CardExecuteCommand
 {
     [SerializeReference, SubclassSelector] ICommand m_command;
     [SerializeField] CardConditional m_conditional;
-    /// <summary>カード使用時の効果<br/>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</summary>
-    //public List<int[]> Command
-    //{
-    //    get
-    //    {
-    //        List<int[]> ret = new List<int[]>();
-    //        foreach (var c in m_command)
-    //            ret.Add(c.Execute());
-    //        return ret;
-    //    }
-    //}
+    /// <summary>
+    /// カード使用時の効果<br/>{ 効果の種類(CommandParam), 効果発動時のパーティクル(ParticleID), 発動対象(UseType), 効果(int) }
+    /// </summary>
     public int[] CardCommand => m_command.Execute();
     public CardConditional Conditional => m_conditional;
 }
@@ -250,7 +239,7 @@ public class CardExecuteCommand
 public interface ICommand
 {
     /// <summary>コマンドデータ</summary>
-    /// <returns>{ 効果の種類(CommandParam), 発動対象(UseType), 効果(int) }</returns>
+    /// <returns>{ 効果の種類(CommandParam), 効果発動時のパーティクル(ParticleID), 発動対象(UseType), 効果(int) }</returns>
     int[] Execute();
 }
 [Serializable]
@@ -258,21 +247,24 @@ public class CardAttackCommand : ICommand
 {
     [SerializeField, Tooltip("何ダメージを与えるか")] int m_power;
     [SerializeField, Tooltip("付与対象")] UseType m_useType;
-    public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_useType, m_power };
+    [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
+    public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_particleID, (int)m_useType, m_power };
 }
 [Serializable]
 public class CardBlockCommnad : ICommand
 {
     [SerializeField, Tooltip("何ブロックを得るか")] int m_block;
     [SerializeField, Tooltip("付与対象")] UseType m_useType;
-    public int[] Execute() => new int[] { (int)CommandParam.Block, (int)m_useType, m_block };
+    [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
+    public int[] Execute() => new int[] { (int)CommandParam.Block, (int)m_particleID, (int)m_useType, m_block };
 }
 [Serializable]
 public class CardConditionCommand : ICommand
 {
     [SerializeField, Tooltip("付与するバフデバフの設定")] ConditionSelection m_condition;
     [SerializeField, Tooltip("付与対象")] UseType m_useType;
-    public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
+    [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
+    public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_particleID, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }
 [Serializable]
 public class AddCardCommand : ICommand
@@ -281,10 +273,11 @@ public class AddCardCommand : ICommand
     [SerializeField, Tooltip("追加するカードのID")] CardID m_cardID;
     [SerializeField, Tooltip("カード追加先")] CardAddDestination m_cardAddDestination;
     [SerializeField, Tooltip("追加するカードを強化済みにする")] bool m_isUpgrade;
+    [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute()
     {
         int i = m_isUpgrade ? 1 : 0;
-        return new int[] { (int)CommandParam.AddCard, (int)UseType.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
+        return new int[] { (int)CommandParam.AddCard, (int)m_particleID, (int)UseType.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
     }
 }
 
@@ -292,10 +285,11 @@ public class DrawCardCommand : ICommand
 {
     [SerializeField, Tooltip("カードのドロー(or捨てる)枚数")] int m_drawNum;
     [SerializeField, Tooltip("trueならドローする、falseなら捨てる")] bool m_isDraw;
+    [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute()
     {
         int i = m_isDraw ? 1 : 0;
-        return new int[] { (int)CommandParam.DrawCard, (int)UseType.System, i, m_drawNum };
+        return new int[] { (int)CommandParam.DrawCard, (int)m_particleID, (int)UseType.System, i, m_drawNum };
     }
 }
 public interface IConditional

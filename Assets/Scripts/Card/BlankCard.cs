@@ -166,17 +166,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                 switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
-                        cc[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[2]);
-                        cc[2] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, cc[2]);
+                        cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[3]);
+                        cc[3] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, cc[3]);
                         break;
                     case CommandParam.Block:
-                        cc[2] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[2]);
-                        cc[2] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, cc[2]);
+                        cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[3]);
+                        cc[3] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, cc[3]);
                         break;
                     default:
                         continue;
                 }
-                if (cc[2] <= 1) cc[2] = 1;
+                if (cc[3] <= 1) cc[3] = 1;
             }
         }
         MatchCollection match = Regex.Matches(text, "{leg([0-9]*)}");
@@ -186,7 +186,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             int index = int.Parse(m.Groups[1].Value);
             if (m_cardCommand.Count < index || (CommandParam)m_cardCommand[index][0] == CommandParam.Conditon)
                 continue;
-            text = text.Replace(m.Value, m_cardCommand[index][2].ToString());
+            text = text.Replace(m.Value, m_cardCommand[index][3].ToString());
         }
         SetText(text);
         UpdateCostText();

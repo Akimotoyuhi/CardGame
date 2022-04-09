@@ -6,7 +6,9 @@ using DG.Tweening;
 
 public enum ParticleID
 {
-    a,
+    None = -1,
+    BlueSparking,
+    Flame,
 }
 
 /// <summary>
@@ -133,6 +135,7 @@ public class EffectManager : MonoBehaviour
     /// <param name="stopDuration">Ž~‚ß‚é‚Ü‚Å‚ÌŽžŠÔ</param>
     public void ShowParticle(ParticleID particleID, float stopDuration, Vector3 position)
     {
+        if (particleID == ParticleID.None) return;
         GameObject obj = Instantiate(m_particlePrefab[(int)particleID], position, Quaternion.identity);
         List<ParticleSystem> pss = new List<ParticleSystem>();
         for (int i = 0; i < obj.transform.childCount; i++)
