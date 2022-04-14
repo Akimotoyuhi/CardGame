@@ -31,3 +31,4 @@ MonoBehaviour:
           m_conditionID: 0
           m_turn: 2
         m_useType: 2
+        m_particleID: -1

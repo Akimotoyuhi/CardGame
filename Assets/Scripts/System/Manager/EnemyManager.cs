@@ -15,6 +15,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject m_enemyPrefab;
     /// <summary>敵の親</summary>
     [SerializeField] Transform m_enemyParent;
+    /// <summary>敵の攻撃にかける時間</summary>
+    [SerializeField] float m_enemyTurnDuration;
     private EnemiesTarget m_enemiesDropTarget;
     /// <summary>現在出現中の全敵データ　戦闘中に使う</summary>
     private List<EnemyBase> m_enemies = new List<EnemyBase>();
@@ -23,8 +25,8 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        BattleManager.Instance.TurnEnd2.Subscribe(turn => EnemyTrun(turn));
-        BattleManager.Instance.TurnBegin.Subscribe(turn => ActionPlan(turn));
+        //BattleManager.Instance.TurnEndNotice.Subscribe(turn => EnemyTrun(turn));
+        BattleManager.Instance.TurnBeginNotice.Subscribe(turn => ActionPlan(turn));
     }
 
     public void Setup(EnemiesTarget enemiesTarget)
@@ -64,7 +66,12 @@ public class EnemyManager : MonoBehaviour
     /// 敵のターン
     /// </summary>
     /// <param name="turn">現在ターン数</param>
-    public void EnemyTrun(int turn)
+    public void EnemyTrun(int turn, Action onComplete)
+    {
+        StartCoroutine(EnemyActionAsync(turn, onComplete));
+    }
+
+    private IEnumerator EnemyActionAsync(int turn, Action onComplete)
     {
         for (int i = 0; i < m_enemies.Count; i++)
         {
@@ -72,7 +79,9 @@ public class EnemyManager : MonoBehaviour
             m_enemies[i].TurnStart();
             m_enemies[i].Action(turn);
             m_enemies[i].TurnEnd();
+            yield return new WaitForSeconds(m_enemyTurnDuration);
         }
+        onComplete();
     }
 
     /// <summary>

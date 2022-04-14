@@ -77,8 +77,8 @@ public class BattleManager : MonoBehaviour
     #endregion
     #region プロパティ
     public static BattleManager Instance { get; private set; }
-    public IObservable<int> TurnBegin => m_turnBegin;
-    public IObservable<int> TurnEnd2 => m_turnEnd;
+    public IObservable<int> TurnBeginNotice => m_turnBegin;
+    public IObservable<int> TurnEndNotice => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
     public CommandManager CommandManager => m_dropManager;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
@@ -144,7 +144,6 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 戦闘開始
     /// </summary>
-    /// <param name="enemyid">エンカウントした敵のID</param>
     public void BattleStart(EnemyType eria, MapID mapID)
     {
         m_currentTurn = 0;
@@ -173,7 +172,6 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 報酬画面終了
     /// </summary>
-    /// <param name="getCardId"></param>
     public void RewardEnd(int getCardId, int isUpgrade)
     {
         DataManager.Instance.AddCards(getCardId, isUpgrade);
@@ -227,29 +225,33 @@ public class BattleManager : MonoBehaviour
         {
             m_battleUIController.Play(BattleUIType.BattleStart, () => m_battleFlag = true);
             while (!m_battleFlag)
-            {
                 yield return null;
-            }
-            FirstTurn();
             m_battleFlag = false;
+
+            m_enemyManager.EnemyTrun(m_currentTurn, () => m_battleFlag = true);
+            while (!m_battleFlag)
+                yield return null;
+            m_battleFlag = false;
+            FirstTurn();
         }
         else
         {
             m_battleUIController.Play(BattleUIType.EnemyTurn, () => m_battleFlag = true);
             while (!m_battleFlag)
-            {
                 yield return null;
-            }
-            TurnEnd();
             m_battleFlag = false;
+            TurnEnd();
         }
+        m_enemyManager.EnemyTrun(m_currentTurn, () => m_battleFlag = true);
+        while (!m_battleFlag)
+            yield return null;
+        m_battleFlag = false;
+
         m_battleUIController.Play(BattleUIType.PlayerTurn, () => m_battleFlag = true);
         while (!m_battleFlag)
-        {
             yield return null;
-        }
-        TurnStart();
         m_battleFlag = false;
+        TurnStart();
         m_isPress = false;
     }
 
@@ -260,7 +262,7 @@ public class BattleManager : MonoBehaviour
     private void FirstTurn()
     {
         Debug.Log(m_currentTurn + "ターン目");
-        m_enemyManager.EnemyTrun(m_currentTurn);
+        //m_enemyManager.EnemyTrun(m_currentTurn);
         m_currentTurn++;
     }
 
@@ -277,9 +279,9 @@ public class BattleManager : MonoBehaviour
     {
         m_hand.AllCast();
         m_player.TurnEnd();
-        m_turnEnd.OnNext(m_currentTurn);
+        //m_turnEnd.OnNext(m_currentTurn);
+        //m_enemyManager.EnemyTrun(m_currentTurn);
         m_currentTurn++;
-        //m_battleUIController.Play(BattleUIType.PlayerTurn, TurnStart);
     }
 
     /// <summary>
