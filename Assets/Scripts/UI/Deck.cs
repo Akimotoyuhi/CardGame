@@ -50,11 +50,11 @@ public class Deck : CardManagement
     {
         if (flag)
         {
-            EffectManager.Instance.SetBattleUIText("山札を表示する", Color.black);
+            EffectManager.Instance.SetUIText(PanelType.Battle, "山札を表示する", Color.black);
         }
         else
         {
-            EffectManager.Instance.RemoveBattleUIText();
+            EffectManager.Instance.RemoveUIText(PanelType.Battle);
         }
     }
 }

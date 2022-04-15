@@ -10,6 +10,12 @@ public enum ParticleID
     BlueSparking,
     Flame,
 }
+/// <summary>テキスト表示用パネル</summary>
+public enum PanelType
+{
+    Battle,
+    Info,
+}
 
 /// <summary>
 /// エフェクトやってくれるクラス<br/>
@@ -21,6 +27,7 @@ public class EffectManager : MonoBehaviour
     [SerializeField] Text m_overfrowTextPrefab;
     [SerializeField] Text m_textPrefab;
     [SerializeField] GameObject m_battleUI;
+    [SerializeField] GameObject m_infoUI;
     [SerializeField] GameObject[] m_particlePrefab;
     /// <summary>パーティクルを止めてから削除するまでの時間</summary>
     [SerializeField] float m_particleDestroyDuration;
@@ -35,8 +42,10 @@ public class EffectManager : MonoBehaviour
     }
     private void Start()
     {
-        if (m_battleUI) RemoveBattleUIText();
-        else Debug.LogWarning("BattleUIがアサインされてないよ");
+        if (m_battleUI) RemoveUIText(PanelType.Battle);
+        else Debug.LogWarning("BattleUIがアサインされてない");
+        if (m_infoUI) RemoveUIText(PanelType.Info);
+        else Debug.LogWarning("InfoUIがアサインされてない");
         m_fadePanel.raycastTarget = false;
     }
 
@@ -53,29 +62,50 @@ public class EffectManager : MonoBehaviour
     /// </summary>
     /// <param name="text">表示する文字列</param>
     /// <param name="color">テキストの色</param>
-    public void SetBattleUIText(string text, Color color)
+    public void SetUIText(PanelType panelType, string text, Color color)
     {
-        m_battleUI.transform.GetChild(0).gameObject.GetText().SetText(text, color);
-        m_battleUI.SetActive(true);
-    }
+        switch (panelType)
+        {
+            case PanelType.Battle:
+                m_battleUI.transform.GetChild(0).gameObject.GetText().SetText(text, color);
+                m_battleUI.SetActive(true);
+                break;
+            case PanelType.Info:
+                m_infoUI.transform.GetChild(0).gameObject.GetText().SetText(text, color);
+                m_infoUI.SetActive(true);
+                break;
+            default:
+                break;
+        }    }
     /// <summary>
     /// 戦闘時の説明用のテキストを表示し、n秒後に消す
     /// </summary>
     /// <param name="text">表示する文字列</param>
     /// <param name="color">テキストの色</param>
     /// <param name="removeTime">消すまでの時間</param>
-    public void SetBattleUIText(string text, Color color, float removeTime)
+    public void SetUIText(PanelType panelType, string text, Color color, float removeTime)
     {
-        SetBattleUIText(text, color);
-        DOVirtual.DelayedCall(removeTime, () => RemoveBattleUIText());
+        SetUIText(panelType, text, color);
+        DOVirtual.DelayedCall(removeTime, () => RemoveUIText(PanelType.Battle));
     }
     /// <summary>
     /// 現在表示中の説明用のテキストを非表示にする
     /// </summary>
-    public void RemoveBattleUIText()
+    public void RemoveUIText(PanelType panelType)
     {
-        m_battleUI.transform.GetChild(0).gameObject.GetText("");
-        m_battleUI.SetActive(false);
+        switch (panelType)
+        {
+            case PanelType.Battle:
+                m_battleUI.transform.GetChild(0).gameObject.GetText("");
+                m_battleUI.SetActive(false);
+                break;
+            case PanelType.Info:
+                m_infoUI.transform.GetChild(0).gameObject.GetText("");
+                m_infoUI.SetActive(false);
+                break;
+            default:
+                break;
+        }
     }
     public void MoveText(string text, Color color, Vector2 position, Transform parent, Vector2 endValue, float duration, System.Action action)
     {

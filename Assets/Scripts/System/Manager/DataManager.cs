@@ -11,7 +11,6 @@ namespace Mastar
         private int m_currentLife = 0;
         /// <summary>現在の進行状況</summary>
         public int Floor { get; set; }
-
         #region プレイヤー情報関連
         /// <summary>所持カード</summary>
         private List<int[]> m_cards = new List<int[]>();
@@ -65,12 +64,16 @@ namespace Mastar
         {
             m_cards[index][1] = 1;
         }
+        /// <summary>現在所持中のレリック</summary>
+        public List<RelicDataBase> HaveRelic { get; set; }
         #endregion
 
+        #region カスタム関連
         /// <summary>選択中のカスタム</summary>
         public List<CustomModeDataBase> CustomList { get; set; }
         /// <summary>合計危険度</summary>
         public int TotalRisk { get; set; }
+        #endregion
 
         /// <summary>データの初期化</summary>
         public void Init()

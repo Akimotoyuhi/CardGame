@@ -40,11 +40,11 @@ public class ConditionUI : MonoBehaviour
     {
         if (flag)
         {
-            EffectManager.Instance.SetBattleUIText(m_text, Color.black);
+            EffectManager.Instance.SetUIText(PanelType.Battle, m_text, Color.black);
         }
         else
         {
-            EffectManager.Instance.RemoveBattleUIText();
+            EffectManager.Instance.RemoveUIText(PanelType.Battle);
         }
     }
 }

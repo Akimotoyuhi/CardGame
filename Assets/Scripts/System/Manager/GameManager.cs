@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameoverScreen m_gameoverScreen;
     /// <summary>ゲームオーバー時のフェードアウトまでの時間</summary>
     [SerializeField] float m_gameoverFadeDuration = 3;
-    /// <summary>現在プレイヤーが所持しているレリック</summary>
-    private List<Relic> m_haveRelics = new List<Relic>();
     private Subject<int> m_onSceneReload = new Subject<int>();
     public static GameManager Instance { get; private set; }
     /// <summary>ゲーム進行度</summary>
@@ -56,7 +54,7 @@ public class GameManager : MonoBehaviour
     public CardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
     public RelicData RelicData => m_relicData;
-    public List<Relic> HaveRelics => m_haveRelics;
+    public List<RelicDataBase> HaveRelics => DataManager.Instance.HaveRelic;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
     public IObservable<int> OnSceneReload => m_onSceneReload;

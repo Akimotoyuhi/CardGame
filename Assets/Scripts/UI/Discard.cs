@@ -31,11 +31,11 @@ public class Discard : CardManagement
     {
         if (flag)
         {
-            EffectManager.Instance.SetBattleUIText("捨て札を表示する", Color.black);
+            EffectManager.Instance.SetUIText(PanelType.Battle, "捨て札を表示する", Color.black);
         }
         else
         {
-            EffectManager.Instance.RemoveBattleUIText();
+            EffectManager.Instance.RemoveUIText(PanelType.Battle);
         }
     }
 }

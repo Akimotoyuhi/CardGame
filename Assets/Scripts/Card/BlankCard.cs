@@ -284,7 +284,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (m_cardState != CardState.Play) return;
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
         {
-            EffectManager.Instance.SetBattleUIText("コストが足りない！", Color.red, 1f);
+            EffectManager.Instance.SetUIText(PanelType.Battle, "コストが足りない！", Color.red, 1f);
             return;
         }
         //ドロップ時に自分の座標にRayを飛ばす
@@ -299,7 +299,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             //使用条件調べる
             if (!m_conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
             {
-                EffectManager.Instance.SetBattleUIText("使用条件を満たしていない！", Color.red, 1f);
+                EffectManager.Instance.SetUIText(PanelType.Battle, "使用条件を満たしていない！", Color.red, 1f);
                 continue;
             }
             List<int[]> vs = new List<int[]>();

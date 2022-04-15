@@ -9,11 +9,11 @@ public class CostView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        EffectManager.Instance.SetBattleUIText(m_text, Color.black);
+        EffectManager.Instance.SetUIText(PanelType.Battle, m_text, Color.black);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        EffectManager.Instance.RemoveBattleUIText();
+        EffectManager.Instance.RemoveUIText(PanelType.Battle);
     }
 }
