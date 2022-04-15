@@ -1,16 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+/// <summary>
+/// ƒŒƒŠƒbƒN‚ÌŽÀ‘Ì
+/// </summary>
 public class Relic : MonoBehaviour
 {
+    [SerializeField] Image m_image;
+    [SerializeField] Text m_tooltipText;
     private string m_name;
-    private List<int[]> m_relicCommnad = new List<int[]>();
-    private RelicDataBase m_database;
+    private string m_tooltip;
+    private List<int[]> m_commands;
+    private List<RelicConditional> m_conditional;
 
-    public void Setup()
+    public void Setup(RelicDataBase dataBase)
     {
-
+        m_name = dataBase.Name;
+        m_tooltip = dataBase.Tooltip;
+        m_image.sprite = dataBase.Sprite;
+        m_commands = dataBase.Commands.Command;
+        m_conditional = dataBase.Commands.Conditional;
     }
 
     /// <summary>
@@ -20,5 +31,6 @@ public class Relic : MonoBehaviour
     private void SetData(RelicDataBase relicDataBase)
     {
         m_name = relicDataBase.Name;
+        m_tooltip = relicDataBase.Tooltip;
     }
 }

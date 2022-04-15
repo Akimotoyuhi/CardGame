@@ -13,15 +13,7 @@ public class RelicData : ScriptableObject
             m_relicDataBases[i].Setup((RelicID)i);
         }
     }
-
-    public List<int[]> RelicExecute(int index, RelicTriggerTiming triggerTiming, ParametorType parametorType)
-    {
-        if (m_relicDataBases[index].Conditional.Conditional(triggerTiming, parametorType))
-        {
-            return m_relicDataBases[index].Command.Execute;
-        }
-        else return null;
-    }
+    public List<RelicDataBase> DataBases => m_relicDataBases;
 }
 #region Enums
 /// <summary>レリックの効果発動タイミング</summary>
@@ -45,17 +37,17 @@ public enum RelicID
 public class RelicDataBase
 {
     [SerializeField] string m_name;
+    [SerializeField, TextArea] string m_tooltip;
     [SerializeField] Sprite m_sprite;
     [SerializeField] RelicCommand m_command;
-    [SerializeField] RelicConditional m_conditional;
+    
     public string Name => m_name;
+    public string Tooltip => m_tooltip;
     public Sprite Sprite => m_sprite;
-    public RelicCommand Command => m_command;
-    public RelicConditional Conditional => m_conditional;
+    public RelicCommand Commands => m_command;
     public RelicID RelicID { get; private set; }
     public void Setup(RelicID relicID)
     {
-        m_conditional.Setup();
         RelicID = relicID;
     }
 }
@@ -64,7 +56,8 @@ public class RelicDataBase
 public class RelicCommand
 {
     [SerializeReference, SubclassSelector] List<ICommand> m_relicCommand;
-    public List<int[]> Execute
+    [SerializeField] List<RelicConditional> m_conditional;
+    public List<int[]> Command
     {
         get
         {
@@ -76,6 +69,7 @@ public class RelicCommand
             return ret;
         }
     }
+    public List<RelicConditional> Conditional => m_conditional;
 }
 /// <summary>レリックの発動条件</summary>
 [System.Serializable]
@@ -87,23 +81,16 @@ public class RelicConditional
     [SerializeField] ParametorType m_parametorType;
     /// <summary>効果が最大何回発動するか</summary>
     [SerializeField, Tooltip("最大何回発動するか\n-1なら制限なし")] int m_maxTriggerNum;
-    /// <summary>現在何回発動したかの保存用</summary>
-    private int m_currentTriggerNum;
-    public void Setup()
-    {
-        m_currentTriggerNum = 0;
-    }
-    public bool Conditional(RelicTriggerTiming triggerTiming, ParametorType parametorType)
+    public bool Conditional(int currentTriggerNum, RelicTriggerTiming triggerTiming, ParametorType parametorType)
     {
         if (triggerTiming == m_timing && parametorType == m_parametorType)
         {
-            if (m_maxTriggerNum < 0) return true;
-            if (m_maxTriggerNum <= m_currentTriggerNum)
-            {
-                m_currentTriggerNum++;
+            if (m_maxTriggerNum < 0)
                 return true;
-            }
-            else return false;
+            if (m_maxTriggerNum <= currentTriggerNum)
+                return true;
+            else
+                return false;
         }
         else return false;
     }
