@@ -42,5 +42,16 @@ public class PlayerStatsData : ScriptableObject
     public int GetCardData(int index) => (int)m_cardData[index].CardID;
     public int IsUpgrade(int index) => m_cardData[index].Upgrade;
     public int GetCardLength => m_cardData.Count;
-    public int GetRelicData(int index) => (int)m_relicData[index].RelicID;
+    public List<RelicID> GetRelicData
+    {
+        get
+        {
+            List<RelicID> ret = new List<RelicID>();
+            foreach (var r in m_relicData)
+            {
+                ret.Add(r.RelicID);
+            }
+            return ret;
+        }
+    }
 }

@@ -15,24 +15,6 @@ public class RelicData : ScriptableObject
     }
     public List<RelicDataBase> DataBases => m_relicDataBases;
 }
-#region Enums
-/// <summary>レリックの効果発動タイミング</summary>
-public enum RelicTriggerTiming
-{
-    BattleBegin,
-    BattleEnd,
-    TurnBegin,
-    TurnEnd,
-    Attacked,
-    Damaged,
-    Obtained,
-}
-/// <summary>レリックID</summary>
-public enum RelicID
-{
-    StrangeMask,
-}
-#endregion
 [System.Serializable]
 public class RelicDataBase
 {
@@ -95,3 +77,21 @@ public class RelicConditional
         else return false;
     }
 }
+#region Enums
+/// <summary>レリックの効果発動タイミング</summary>
+public enum RelicTriggerTiming
+{
+    BattleBegin,
+    BattleEnd,
+    TurnBegin,
+    TurnEnd,
+    Attacked,
+    Damaged,
+    Obtained,
+}
+/// <summary>レリックID</summary>
+public enum RelicID
+{
+    StoneOfCourage,
+}
+#endregion

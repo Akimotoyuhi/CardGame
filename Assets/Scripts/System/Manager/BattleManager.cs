@@ -114,6 +114,8 @@ public class BattleManager : MonoBehaviour
         }
         int playerMaxLife = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Life, m_playerStatsData.HP);
         GameManager.Instance.PlayerDataSave(m_playerStatsData.Name, m_playerStatsData.IdleSprite, m_playerStatsData.AttackedSprite, m_playerStatsData.GameoverSprite, playerMaxLife, playerMaxLife, cards.ToArray(), isUpgrade.ToArray());
+        foreach (var p in m_playerStatsData.GetRelicData)
+            GameManager.Instance.SaveRelicData(p);
     }
 
     /// <summary>
