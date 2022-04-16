@@ -87,7 +87,7 @@ public class RelicConditional
         {
             if (m_maxTriggerNum < 0)
                 return true;
-            if (m_maxTriggerNum <= currentTriggerNum)
+            if (m_maxTriggerNum > currentTriggerNum)
                 return true;
             else
                 return false;

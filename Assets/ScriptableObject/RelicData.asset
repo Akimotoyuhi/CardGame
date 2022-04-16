@@ -19,7 +19,10 @@ MonoBehaviour:
     m_command:
       m_relicCommand:
       - id: 0
-      m_conditional: []
+      m_conditional:
+      - m_timing: 0
+        m_parametorType: 3
+        m_maxTriggerNum: 1
   references:
     version: 1
     00000000:

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// レリックの実体
 /// </summary>
-public class Relic : MonoBehaviour
+public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image m_image;
-    [SerializeField] Text m_tooltipText;
     private string m_name;
     private string m_tooltip;
+    private int m_triggerCount;
     private List<int[]> m_commands;
     private List<RelicConditional> m_conditional;
 
@@ -22,15 +23,29 @@ public class Relic : MonoBehaviour
         m_image.sprite = dataBase.Sprite;
         m_commands = dataBase.Commands.Command;
         m_conditional = dataBase.Commands.Conditional;
+        m_triggerCount = 0;
     }
 
-    /// <summary>
-    /// データを受け取る
-    /// </summary>
-    /// <param name="relicDataBase"></param>
-    private void SetData(RelicDataBase relicDataBase)
+    public void Execute(RelicTriggerTiming triggerTiming, ParametorType parametorType)
     {
-        m_name = relicDataBase.Name;
-        m_tooltip = relicDataBase.Tooltip;
+        foreach (var cond in m_conditional)
+        {
+            if (!cond.Conditional(m_triggerCount, triggerTiming, parametorType))
+                return;
+        }
+        m_triggerCount++;
+        BattleManager.Instance.CommandManager.CommandExecute(m_commands, false);
     }
+
+    #region インターフェースの実装
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        EffectManager.Instance.SetUIText(PanelType.Info, $"{m_name}\n{m_tooltip}", Color.black);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        EffectManager.Instance.RemoveUIText(PanelType.Info);
+    }
+    #endregion
 }
