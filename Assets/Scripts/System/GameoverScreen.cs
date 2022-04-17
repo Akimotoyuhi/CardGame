@@ -55,7 +55,7 @@ public class GameoverScreen : MonoBehaviour
         else ret = m_gameoverText;
         ret = ret.Replace("{haveCard}", haveCardNum.ToString());
         ret = ret.Replace("{step}", step.ToString());
-        ret = ret.Replace("{risk}", GameManager.Instance.Risk.ToString());
+        ret = ret.Replace("{risk}", GameManager.Instance.TotalRisk.ToString());
         return ret;
     }
 }

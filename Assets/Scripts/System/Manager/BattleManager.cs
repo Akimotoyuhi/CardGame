@@ -55,7 +55,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] BattleUIController m_battleUIController;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
-    [SerializeField] CommandManager m_dropManager;
+    [SerializeField] CommandManager m_commandManager;
     /// <summary>カメラ</summary>
     [SerializeField] Camera m_camera;
     /// <summary>カードデータ</summary>
@@ -80,7 +80,7 @@ public class BattleManager : MonoBehaviour
     public IObservable<int> TurnBeginNotice => m_turnBegin;
     public IObservable<int> TurnEndNotice => m_turnEnd;
     public int GetDrowNum => m_player.DrowNum;
-    public CommandManager CommandManager => m_dropManager;
+    public CommandManager CommandManager => m_commandManager;
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
     public int CurrentTurn => m_currentTurn;
     public int DeckChildCount => m_deck.CardParent.childCount;
@@ -151,6 +151,7 @@ public class BattleManager : MonoBehaviour
         m_currentTurn = 0;
         m_isGame = true;
         SetCanvas();
+        GameManager.Instance.RelicSetup();
         CreateField(eria, mapID);
         StartCoroutine(OnBattle());
         //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
@@ -207,7 +208,7 @@ public class BattleManager : MonoBehaviour
         m_enemyManager.Setup(m_enemiesTarget);
         m_enemyManager.CreateEnemies(eria, mapID);
         m_enemyManager.EnemyCount();
-        m_dropManager.Setup(m_enemyManager, m_player, m_hand, m_discard, m_deck);
+        m_commandManager.Setup(m_enemyManager, m_player, m_hand, m_discard, m_deck);
         //カード生成
         for (int i = 0; i < DataManager.Instance.Cards.Count; i++)
         {
@@ -265,6 +266,8 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log(m_currentTurn + "ターン目");
         //m_enemyManager.EnemyTrun(m_currentTurn);
+        foreach (var r in GameManager.Instance.HaveRelics)
+            r.Execute(RelicTriggerTiming.BattleBegin, ParametorType.Other);
         m_currentTurn++;
     }
 

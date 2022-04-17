@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     /// <summary>ゲーム進行度</summary>
     public int Floor => DataManager.Instance.Floor;
     /// <summary>カスタムの合計危険度</summary>
-    public int Risk => DataManager.Instance.TotalRisk;
+    public int TotalRisk => DataManager.Instance.TotalRisk;
     public CardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
     public List<Relic> HaveRelics => m_haveRelics;
@@ -149,9 +149,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>所持レリックの保存</summary>
+    /// <param name="relicID"></param>
     public void SaveRelicData(RelicID relicID)
     {
-        DataManager.Instance.HaveRelic.Add(m_relicData.DataBases[(int)relicID]);
+        DataManager.Instance.HaveRelic.Add(relicID);
+        SetViewRelic(m_relicData.DataBases[(int)relicID]);
+    }
+
+    /// <summary>レリック生成</summary>
+    private void SetViewRelic(RelicDataBase relicData)
+    {
+        Relic rel = Instantiate(m_relicPrefab);
+        rel.transform.SetParent(m_relicParent);
+        rel.Setup(relicData);
+        HaveRelics.Add(rel);
+    }
+
+    public void RelicSetup()
+    {
+        foreach (var r in HaveRelics)
+        {
+            r.Setup();
+        }
     }
 
     /// <summary>

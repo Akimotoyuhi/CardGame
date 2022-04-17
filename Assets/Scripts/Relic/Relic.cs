@@ -16,13 +16,16 @@ public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private List<int[]> m_commands;
     private List<RelicConditional> m_conditional;
 
-    public void Setup(RelicDataBase dataBase)
+    public void Setup(RelicDataBase dataBase = null)
     {
-        m_name = dataBase.Name;
-        m_tooltip = dataBase.Tooltip;
-        m_image.sprite = dataBase.Sprite;
-        m_commands = dataBase.Commands.Command;
-        m_conditional = dataBase.Commands.Conditional;
+        if (dataBase != null)
+        {
+            m_name = dataBase.Name;
+            m_tooltip = dataBase.Tooltip;
+            m_image.sprite = dataBase.Sprite;
+            m_commands = dataBase.Commands.Command;
+            m_conditional = dataBase.Commands.Conditional;
+        }
         m_triggerCount = 0;
     }
 
@@ -31,8 +34,12 @@ public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         foreach (var cond in m_conditional)
         {
             if (!cond.Conditional(m_triggerCount, triggerTiming, parametorType))
+            {
+                Debug.Log("false");
                 return;
+            }
         }
+        Debug.Log("true");
         m_triggerCount++;
         BattleManager.Instance.CommandManager.CommandExecute(m_commands, false);
     }

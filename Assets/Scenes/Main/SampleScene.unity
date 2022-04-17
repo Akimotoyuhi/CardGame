@@ -657,7 +657,7 @@ MonoBehaviour:
   m_reward: {fileID: 1644228800}
   m_battleUIController: {fileID: 40818538}
   m_rewardNum: 3
-  m_dropManager: {fileID: 164370313}
+  m_commandManager: {fileID: 164370313}
   m_camera: {fileID: 706788427}
 --- !u!4 &164370312
 Transform:
@@ -1796,7 +1796,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 1000, y: 600}
+  m_SizeDelta: {x: 700, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &374703471
 MonoBehaviour:
@@ -1811,7 +1811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2844,7 +2844,7 @@ RectTransform:
   m_GameObject: {fileID: 570277563}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1495121719}
   m_Father: {fileID: 194272877}
@@ -2852,8 +2852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 300}
+  m_AnchoredPosition: {x: 0, y: -40}
+  m_SizeDelta: {x: 700, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &570277565
 MonoBehaviour:
@@ -9129,7 +9129,7 @@ MonoBehaviour:
   m_cardPrefab: {fileID: -9154361223724921267, guid: ad5ff9493237f6f44a07a22bff2b1928,
     type: 3}
   m_relicData: {fileID: 11400000, guid: 4b18e53ceb7abc443a76b37dca954f35, type: 2}
-  m_relicPrefab: {fileID: 5286310441891632509, guid: a5d590b209085894193167bf721ecebc,
+  m_relicPrefab: {fileID: 8430995766483893287, guid: 47c48b49b599abd449d8574823b780bc,
     type: 3}
   m_relicParent: {fileID: 591558336}
   m_cardDisplayCanvas: {fileID: 1851085565}
@@ -10552,10 +10552,10 @@ RectTransform:
   m_Father: {fileID: 570277564}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 470, y: 280}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1495121720
 MonoBehaviour:
@@ -10579,11 +10579,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d9fc6c92a521a60409824434d56d7fbe, type: 3}
-    m_FontSize: 30
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 47
+    m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -11668,7 +11668,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.84140295
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11950,7 +11950,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030706586}
+  m_AnchoredPosition: {x: 0, y: 4.365834}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561

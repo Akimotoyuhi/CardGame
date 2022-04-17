@@ -14,6 +14,7 @@ namespace Mastar
         #region プレイヤー情報関連
         /// <summary>所持カード</summary>
         private List<int[]> m_cards = new List<int[]>();
+        private List<RelicID> m_relics = new List<RelicID>();
         /// <summary>プレイヤーの名前</summary>
         public string Name { get; private set; }
         /// <summary>通常時の画像</summary>
@@ -65,7 +66,7 @@ namespace Mastar
             m_cards[index][1] = 1;
         }
         /// <summary>現在所持中のレリック</summary>
-        public List<RelicDataBase> HaveRelic { get; set; }
+        public List<RelicID> HaveRelic { get => m_relics; set => m_relics = value; }
         #endregion
 
         #region カスタム関連
