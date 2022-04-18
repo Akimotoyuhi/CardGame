@@ -29,7 +29,7 @@ public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         m_triggerCount = 0;
     }
 
-    public void Execute(RelicTriggerTiming triggerTiming, ParametorType parametorType)
+    public void Execute(RelicTriggerTiming triggerTiming, ParametorType parametorType, int num)
     {
         foreach (var cond in m_conditional)
         {

@@ -7,8 +7,13 @@ using DG.Tweening;
 public enum ParticleID
 {
     None = -1,
-    BlueSparking,
+    BlueSpark,
     Flame,
+    PurpleMowamowa,
+    YellowKirakira,
+    BlueKirakira,
+    GreenSpark,
+    IceSpark,
 }
 /// <summary>テキスト表示用パネル</summary>
 public enum PanelType

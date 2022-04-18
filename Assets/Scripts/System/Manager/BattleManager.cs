@@ -266,8 +266,7 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log(m_currentTurn + "ƒ^[ƒ“–Ú");
         //m_enemyManager.EnemyTrun(m_currentTurn);
-        foreach (var r in GameManager.Instance.HaveRelics)
-            r.Execute(RelicTriggerTiming.BattleBegin, ParametorType.Other);
+        GameManager.Instance.RelicExecute(RelicTriggerTiming.BattleBegin, ParametorType.Other, 0);
         m_currentTurn++;
     }
 

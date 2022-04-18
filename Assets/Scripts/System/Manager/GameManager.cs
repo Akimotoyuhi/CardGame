@@ -174,6 +174,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>レリック効果の発動</summary>
+    public void RelicExecute(RelicTriggerTiming relicTriggerTiming, ParametorType parametorType, int num)
+    {
+        foreach (var r in m_haveRelics)
+        {
+            r.Execute(relicTriggerTiming, parametorType, num);
+        }
+    }
+
     /// <summary>
     /// カスタム効果の評価
     /// </summary>

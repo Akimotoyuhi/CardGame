@@ -376,6 +376,8 @@ public enum CardID
     Perfection,
     /// <summary>決死の突撃</summary>
     DeadlyAssault,
+    /// <summary>アローレイン</summary>
+    ArrowRain,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
