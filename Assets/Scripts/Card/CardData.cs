@@ -242,7 +242,6 @@ public interface ICommand
     /// <returns>{ 効果の種類(CommandParam), 効果発動時のパーティクル(ParticleID), 発動対象(UseType), 効果(int) }</returns>
     int[] Execute();
 }
-[Serializable]
 public class CardAttackCommand : ICommand
 {
     [SerializeField, Tooltip("何ダメージを与えるか")] int m_power;
@@ -250,7 +249,6 @@ public class CardAttackCommand : ICommand
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_particleID, (int)m_useType, m_power };
 }
-[Serializable]
 public class CardBlockCommnad : ICommand
 {
     [SerializeField, Tooltip("何ブロックを得るか")] int m_block;
@@ -258,7 +256,6 @@ public class CardBlockCommnad : ICommand
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute() => new int[] { (int)CommandParam.Block, (int)m_particleID, (int)m_useType, m_block };
 }
-[Serializable]
 public class CardConditionCommand : ICommand
 {
     [SerializeField, Tooltip("付与するバフデバフの設定")] ConditionSelection m_condition;
@@ -266,7 +263,6 @@ public class CardConditionCommand : ICommand
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_particleID, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }
-[Serializable]
 public class AddCardCommand : ICommand
 {
     [SerializeField, Tooltip("カードの追加枚数")] int m_addNum;

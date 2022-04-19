@@ -28,7 +28,8 @@ public class CharactorBase : MonoBehaviour
     /// <summary>HPバー前にあるテキスト</summary>
     [SerializeField] protected Text m_text;
     /// <summary>バフデバフアイコンを表示するオブジェクトのプレハブ</summary>
-    [SerializeField] GameObject m_conditionUIPrefab;
+    [SerializeField] ConditionUI m_conditionUIPrefab;
+    [SerializeField] Image m_viewConditionImage;
     /// <summary>バフデバフアイコンを表示するオブジェクトのプレハブの親</summary>
     [SerializeField] Transform m_conditionUIParent;
     [SerializeField] protected Image m_image;
@@ -40,6 +41,9 @@ public class CharactorBase : MonoBehaviour
     protected bool m_isEnemy = false;
     /// <summary>アニメーション中判定</summary>
     private bool m_isAnim = false;
+    /// <summary>バフデバフを付与された/解除した事をハイライトする用のimageを動かすためのSequenceリスト</summary>
+    private List<Sequence> m_conditionSequence = new List<Sequence>();
+    /// <summary>所持中のバフデバフ</summary>
     protected List<Condition> m_conditions = new List<Condition>();
     /// <summary>位置保存用　アニメーション用に作ったが今は使ってない</summary>
     protected RectTransform m_rectTransform;
@@ -66,7 +70,8 @@ public class CharactorBase : MonoBehaviour
     /// <summary>このオブジェクトが配置されている親キャンバス</summary>
     public Transform Canvas { get; set; }
     protected enum GetCardType { Damage, Block }
-    
+    #endregion
+
     protected virtual void SetUp()
     {
         m_flame.SetActive(false);
@@ -75,14 +80,14 @@ public class CharactorBase : MonoBehaviour
         m_hpSlider.value = m_life;
         m_blkSlider.value = m_block;
         m_rectTransform = GetComponent<RectTransform>();
-        SetUI();
+        SetSlider();
+        m_viewConditionImage.gameObject.SetActive(false);
     }
-    #endregion
 
     /// <summary>
     /// キャラクター下のスライダーとテキストの処理
     /// </summary>
-    protected void SetUI()
+    protected void SetSlider()
     {
         if (m_block > 0) //ブロック値がある時
         {
@@ -141,8 +146,31 @@ public class CharactorBase : MonoBehaviour
         {
             //同じエフェクトが一つも見つからなかったら新たに追加
             m_conditions.Add(c);
+            HighLightConditionUI(c.GetConditionID());
         }
         ViewConditionUI();
+    }
+
+    /// <summary>
+    /// デバフにかかった/解除した事を表示する
+    /// </summary>
+    private void HighLightConditionUI(ConditionID conditionID)
+    {
+        m_viewConditionImage.gameObject.SetActive(true);
+        m_viewConditionImage.sprite = m_conditionUIPrefab.GetSprite(conditionID);
+        m_viewConditionImage.color = m_conditionUIPrefab.GetColor(conditionID);
+        RectTransform rt = m_viewConditionImage.gameObject.GetRectTransform();
+        Vector2 v = rt.anchoredPosition;
+        Sequence s = DOTween.Sequence();
+        m_conditionSequence.Add(s);
+        s.Append(rt.DOAnchorPosY(rt.anchoredPosition.y + 50, 0.5f));
+        s.Append(m_viewConditionImage.DOColor(Color.clear, 0.5f));
+        s.OnComplete(() =>
+        {
+            rt.anchoredPosition = v;
+            m_conditionSequence.Remove(s);
+            m_viewConditionImage.gameObject.SetActive(false);
+        });
     }
 
     /// <summary>
@@ -171,13 +199,11 @@ public class CharactorBase : MonoBehaviour
         {
             Destroy(m_conditionUIParent.GetChild(i).gameObject);
         }
-        foreach (var item in m_conditions)
+        foreach (var con in m_conditions)
         {
-            GameObject obj = Instantiate(m_conditionUIPrefab);
-            obj.transform.SetParent(m_conditionUIParent, false);
-            //if (m_isEnemy) obj.transform.localScale = new Vector2(-1, 1);
-            //else obj.transform.localScale = Vector2.one;
-            obj.GetComponent<ConditionUI>().SetUI(item.GetConditionID(), item.Turn);
+            ConditionUI c = Instantiate(m_conditionUIPrefab);
+            c.transform.SetParent(m_conditionUIParent, false);
+            c.SetUI(con.GetConditionID(), con.Turn);
         }
     }
 
@@ -196,7 +222,7 @@ public class CharactorBase : MonoBehaviour
                 for (int i = 0; i < num; i++)
                 {
                     m_life -= value;
-                    SetUI();
+                    SetSlider();
                     yield return new WaitForSeconds(0.1f);
                 }
                 break;
@@ -239,7 +265,7 @@ public class CharactorBase : MonoBehaviour
             }
         }
         m_block += block;
-        SetUI();
+        SetSlider();
     }
     public bool ConditionIDCheck(ConditionID id)
     {
@@ -273,7 +299,7 @@ public class CharactorBase : MonoBehaviour
     {
         m_block = 0;
         EffectChecker(EventTiming.TurnBegin, ParametorType.Other);
-        SetUI();
+        SetSlider();
     }
     /// <summary>
     /// バフデバフ効果の発動

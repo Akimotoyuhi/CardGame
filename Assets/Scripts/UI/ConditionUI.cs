@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 public class ConditionUI : MonoBehaviour
 {
     [SerializeField] Text m_viewText;
+    [SerializeField] Image m_image;
     [SerializeField] ConditionSpriteData[] m_conditionSpriteData;
     private string m_text = "";
     [System.Serializable]
@@ -22,16 +23,18 @@ public class ConditionUI : MonoBehaviour
         public Color Color => m_color;
         public string Tooltip => m_tooltip;
     }
+    public Sprite GetSprite(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Sprite;
+    public Color GetColor(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Color;
 
     public void SetUI(ConditionID conditionID, int turn)
     {
-        Image image = GetComponent<Image>();
         m_viewText.text = "";
-        image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
+        m_image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
         string s = m_conditionSpriteData[(int)conditionID].Tooltip;
         m_text = s;
         m_viewText.text = turn.ToString();
     }
+
     /// <summary>
     /// ゲーム画面にテキストを表示<br/>EventTriggerから呼ばれる事を想定している
     /// </summary>

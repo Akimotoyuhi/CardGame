@@ -282,9 +282,8 @@ public class BattleManager : MonoBehaviour
     private void TurnEnd()
     {
         m_hand.AllCast();
+        GameManager.Instance.RelicExecute(RelicTriggerTiming.TurnEnd, ParametorType.Other, 0);
         m_player.TurnEnd();
-        //m_turnEnd.OnNext(m_currentTurn);
-        //m_enemyManager.EnemyTrun(m_currentTurn);
         m_currentTurn++;
     }
 
@@ -294,6 +293,7 @@ public class BattleManager : MonoBehaviour
     private void TurnStart()
     {
         Debug.Log(m_currentTurn + "É^Å[Éìñ⁄");
+        GameManager.Instance.RelicExecute(RelicTriggerTiming.TurnBegin, ParametorType.Other, 0);
         m_player.TurnStart();
         m_turnBegin.OnNext(m_currentTurn);
         SetCostText(m_player.MaxCost.ToString(), m_player.CurrrentCost.ToString());
