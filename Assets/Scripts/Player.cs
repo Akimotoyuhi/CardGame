@@ -64,9 +64,9 @@ public class Player : CharactorBase, IDrop
         }
     }
 
-    public bool CanDrop(UseType useType)
+    public bool CanDrop(UseTiming useType)
     {
-        if (useType == UseType.ToPlayer) return true;
+        if (useType == UseTiming.ToPlayer) return true;
         return false;
     }
 
@@ -75,9 +75,9 @@ public class Player : CharactorBase, IDrop
         BattleManager.Instance.CommandManager.CommandExecute(cardCommand, true);
     }
 
-    public void OnCard(UseType? useType)
+    public void OnCard(UseTiming? useType)
     {
-        if (useType == UseType.ToPlayer) m_flame.SetActive(true);
+        if (useType == UseTiming.ToPlayer) m_flame.SetActive(true);
         else m_flame.SetActive(false);
     }
     public EnemyBase IsEnemy()

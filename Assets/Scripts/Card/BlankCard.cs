@@ -48,7 +48,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// <summary>DataManagerが管理しているこのカードのindex</summary>
     private int m_index;
     private CardID m_cardID;
-    private UseType m_useType;
+    private UseTiming m_useType;
     private CardConditional m_conditional;
     private Reward m_reward;
     private Rest m_rest;
@@ -81,7 +81,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             return ret;
         }
     }
-    public UseType UseType { get => m_useType; }
+    public UseTiming UseType { get => m_useType; }
     public string Name => m_viewName.text;
 
     private void Setup()
@@ -209,6 +209,18 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
         else
         {
+            List<int[]> vs = new List<int[]>();
+            for (int i = 0; i < m_carddata.Commands.Count; i++)
+            {
+                //if (m_carddata.Commands[i].Conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
+                //{
+                //    Debug.Log($"条件一致 {m_cardCommand[i][0]}");
+                //    vs.Add(m_cardCommand[i]);
+                //}
+                if (m_useType == UseTiming.TurnEnd)
+                    vs.Add(m_cardCommand[i]); //今は条件評価に必要な敵クラスが無いので一旦これで
+            }
+            BattleManager.Instance.CommandManager.CommandExecute(vs, true);
             if (m_ethereal)
                 Destroy(gameObject);
         }
@@ -281,7 +293,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (m_cardState != CardState.Play) return;
+        if (m_cardState != CardState.Play)
+            return;
         if (m_player.CurrrentCost < Cost) //コスト足りなかったら使えない
         {
             EffectManager.Instance.SetUIText(PanelType.Battle, "コストが足りない！", Color.red, 1f);

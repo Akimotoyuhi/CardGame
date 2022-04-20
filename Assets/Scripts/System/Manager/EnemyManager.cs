@@ -143,7 +143,7 @@ public class EnemyManager : MonoBehaviour
     /// カードがドラッグされたことを受け取る
     /// </summary>
     /// <param name="useType"></param>
-    public void OnCardDrag(UseType? useType)
+    public void OnCardDrag(UseTiming? useType)
     {
         for (int i = 0; i < m_enemies.Count; i++)
         {

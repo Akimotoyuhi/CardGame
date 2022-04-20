@@ -36,9 +36,9 @@ public class EnemyBase : CharactorBase, IDrop
         transform.localScale = transform.localScale * data.ScaleMagnification;
     }
 
-    public bool CanDrop(UseType useType)
+    public bool CanDrop(UseTiming useType)
     {
-        if (useType == UseType.ToEnemy) return true;
+        if (useType == UseTiming.ToEnemy) return true;
         else return false;
     }
 
@@ -50,10 +50,10 @@ public class EnemyBase : CharactorBase, IDrop
         //m_enemyManager.EnemyDamaged();
     }
 
-    public void OnCard(UseType? useType)
+    public void OnCard(UseTiming? useType)
     {
         if (m_isDead) return;
-        if (useType == UseType.ToEnemy) m_flame.SetActive(true);
+        if (useType == UseTiming.ToEnemy) m_flame.SetActive(true);
         else m_flame.SetActive(false);
     }
 

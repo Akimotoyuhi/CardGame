@@ -26,19 +26,20 @@ public class CommandManager : MonoBehaviour
     /// <summary>
     /// コマンドの実行
     /// </summary>
-    /// <param name="cardParam"></param>
-    public void CommandExecute(List<int[]> cardParam, bool isPlayerAnim, EnemyBase enemy = null)
+    public void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
     {
-        foreach (var cmds in cardParam)
+        if (commands.Count == 0)
+            return;
+        foreach (var cmds in commands)
         {
             //CommandParam cp = (CommandParam)card[0];
-            UseType useType = (UseType)cmds[2];
+            UseTiming useType = (UseTiming)cmds[2];
             switch (useType)
             {
-                case UseType.ToPlayer:
+                case UseTiming.ToPlayer:
                     m_player.GetDamage(cmds, (ParticleID)cmds[1]);
                     break;
-                case UseType.ToEnemy:
+                case UseTiming.ToEnemy:
                     if (!enemy)
                     {
                         Debug.LogError("敵データが存在しません カードの効果対象が正しいものなのかを確認してください");
@@ -46,13 +47,13 @@ public class CommandManager : MonoBehaviour
                     }
                     enemy.GetDamage(cmds, (ParticleID)cmds[1]);
                     break;
-                case UseType.ToAllEnemies:
+                case UseTiming.ToAllEnemies:
                     m_enemyManager.AllEnemiesDamage(cmds, (ParticleID)cmds[1]);
                     break;
-                case UseType.ToRandomEnemy:
+                case UseTiming.ToRandomEnemy:
                     //Debug.Log("未作成");
                     break;
-                case UseType.System:
+                case UseTiming.System:
                     switch ((CommandParam)cmds[0])
                     {
                         case CommandParam.AddCard:
@@ -69,7 +70,6 @@ public class CommandManager : MonoBehaviour
                     }
                     break;
                 default:
-                    Debug.Log("例外");
                     break;
             }
         }

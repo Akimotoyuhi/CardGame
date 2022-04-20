@@ -10,18 +10,18 @@ public class EnemiesTarget : MonoBehaviour, IDrop
     {
         m_flame.SetActive(false);
     }
-    public bool CanDrop(UseType useType)
+    public bool CanDrop(UseTiming useType)
     {
-        if (useType == UseType.ToAllEnemies) return true;
+        if (useType == UseTiming.ToAllEnemies) return true;
         else return false;
     }
     public void GetDrop(List<int[]> cardCommand)
     {
         BattleManager.Instance.CommandManager.CommandExecute(cardCommand, true);
     }
-    public void OnCard(UseType? useType)
+    public void OnCard(UseTiming? useType)
     {
-        if (useType == UseType.ToAllEnemies) m_flame.SetActive(true);
+        if (useType == UseTiming.ToAllEnemies) m_flame.SetActive(true);
         else m_flame.SetActive(false);
     }
     public EnemyBase IsEnemy()

@@ -15,9 +15,9 @@ public class AllDropTarget : MonoBehaviour, IDrop
         m_flame.SetActive(false);
     }
 
-    public bool CanDrop(UseType useType)
+    public bool CanDrop(UseTiming useType)
     {
-        if (useType == UseType.System) return true;
+        if (useType == UseTiming.System) return true;
         return false;
     }
 
@@ -26,9 +26,9 @@ public class AllDropTarget : MonoBehaviour, IDrop
         BattleManager.Instance.CommandManager.CommandExecute(card, true);
     }
 
-    public void OnCard(UseType? useType)
+    public void OnCard(UseTiming? useType)
     {
-        if (useType == UseType.System) m_flame.SetActive(true);
+        if (useType == UseTiming.System) m_flame.SetActive(true);
         else m_flame.SetActive(false);
     }
     public EnemyBase IsEnemy()

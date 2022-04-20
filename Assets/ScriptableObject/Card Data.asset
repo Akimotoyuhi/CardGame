@@ -809,6 +809,64 @@ MonoBehaviour:
       m_cardType: 2
       m_isDiscarding: 0
       m_ethereal: 0
+  - m_rabel: "\u706B\u50B7"
+    m_cardInfo:
+      m_name: "\u706B\u50B7"
+      m_cost: '-'
+      m_image: {fileID: 21300000, guid: dd3885098198d104888439be4c590aba, type: 3}
+      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u4F7F\u7528\u4E0D\u53EF"
+      m_rarity: 5
+      m_commands:
+      - m_command:
+          id: 62
+        m_conditional:
+          m_cardConditional: []
+      m_cardConditional:
+        m_cardConditional: []
+      m_cardType: 5
+      m_isDiscarding: 0
+      m_ethereal: 0
+    m_cardUpgrade:
+      m_name: "\u706B\u50B7+"
+      m_cost: '-'
+      m_image: {fileID: 21300000, guid: dd3885098198d104888439be4c590aba, type: 3}
+      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u4F7F\u7528\u4E0D\u53EF"
+      m_rarity: 5
+      m_commands:
+      - m_command:
+          id: 63
+        m_conditional:
+          m_cardConditional: []
+      m_cardConditional:
+        m_cardConditional: []
+      m_cardType: 5
+      m_isDiscarding: 0
+      m_ethereal: 0
+  - m_rabel: "\u74E6\u792B"
+    m_cardInfo:
+      m_name: "\u74E6\u792B"
+      m_cost: 1
+      m_image: {fileID: 21300000, guid: d6f46844ea7558f4bbe365a20987de04, type: 3}
+      m_tooltip: "\u5EC3\u68C4"
+      m_rarity: 5
+      m_commands: []
+      m_cardConditional:
+        m_cardConditional: []
+      m_cardType: 4
+      m_isDiscarding: 1
+      m_ethereal: 0
+    m_cardUpgrade:
+      m_name: "\u8D85\u74E6\u792B"
+      m_cost: 2
+      m_image: {fileID: 21300000, guid: d6f46844ea7558f4bbe365a20987de04, type: 3}
+      m_tooltip: "\u5EC3\u68C4"
+      m_rarity: 5
+      m_commands: []
+      m_cardConditional:
+        m_cardConditional: []
+      m_cardType: 4
+      m_isDiscarding: 1
+      m_ethereal: 0
   references:
     version: 1
     00000000:
@@ -1224,12 +1282,12 @@ MonoBehaviour:
     0000003E:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
-        m_useType: 2
-        m_particleID: 0
+        m_power: 2
+        m_useType: 0
+        m_particleID: 1
     0000003F:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 7
-        m_useType: 2
-        m_particleID: 0
+        m_power: 4
+        m_useType: 0
+        m_particleID: 1

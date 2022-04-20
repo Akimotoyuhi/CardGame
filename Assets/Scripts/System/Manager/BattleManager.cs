@@ -63,7 +63,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>カードのプレハブ</summary>
     private BlankCard m_cardPrefab;
     /// <summary>ドラッグ中のカードのUseType保存用</summary>
-    private UseType? m_dragCardUseType = null;
+    private UseTiming? m_dragCardUseType = null;
     /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
@@ -371,7 +371,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void OnCardDrag(UseType? useType)
+    public void OnCardDrag(UseTiming? useType)
     {
         m_enemiesTarget.OnCard(useType);
         m_player.OnCard(useType);

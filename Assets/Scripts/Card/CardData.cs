@@ -200,7 +200,7 @@ public class CardInfomationData
     [SerializeField] Rarity m_rarity;
     [SerializeField] List<CardExecuteCommand> m_commands;
     [SerializeField] CardConditional m_cardConditional;
-    [SerializeField] UseType m_cardType;
+    [SerializeField] UseTiming m_cardType;
     [SerializeField] bool m_isDiscarding = false;
     [SerializeField] bool m_ethereal = false;
     /// <summary>カードの名前</summary>
@@ -219,7 +219,7 @@ public class CardInfomationData
     public List<CardExecuteCommand> Commands => m_commands;
     public CardConditional CardConditional => m_cardConditional;
     /// <summary>使用する標的</summary>
-    public UseType UseType => m_cardType;
+    public UseTiming UseType => m_cardType;
     /// <summary>廃棄カード</summary>
     public bool IsDiscarding => m_isDiscarding;
     public bool Ethereal => m_ethereal;
@@ -245,21 +245,21 @@ public interface ICommand
 public class CardAttackCommand : ICommand
 {
     [SerializeField, Tooltip("何ダメージを与えるか")] int m_power;
-    [SerializeField, Tooltip("付与対象")] UseType m_useType;
+    [SerializeField, Tooltip("付与対象")] UseTiming m_useType;
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_particleID, (int)m_useType, m_power };
 }
 public class CardBlockCommnad : ICommand
 {
     [SerializeField, Tooltip("何ブロックを得るか")] int m_block;
-    [SerializeField, Tooltip("付与対象")] UseType m_useType;
+    [SerializeField, Tooltip("付与対象")] UseTiming m_useType;
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute() => new int[] { (int)CommandParam.Block, (int)m_particleID, (int)m_useType, m_block };
 }
 public class CardConditionCommand : ICommand
 {
     [SerializeField, Tooltip("付与するバフデバフの設定")] ConditionSelection m_condition;
-    [SerializeField, Tooltip("付与対象")] UseType m_useType;
+    [SerializeField, Tooltip("付与対象")] UseTiming m_useType;
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_particleID, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }
@@ -273,7 +273,7 @@ public class AddCardCommand : ICommand
     public int[] Execute()
     {
         int i = m_isUpgrade ? 1 : 0;
-        return new int[] { (int)CommandParam.AddCard, (int)m_particleID, (int)UseType.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
+        return new int[] { (int)CommandParam.AddCard, (int)m_particleID, (int)UseTiming.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
     }
 }
 
@@ -285,7 +285,7 @@ public class DrawCardCommand : ICommand
     public int[] Execute()
     {
         int i = m_isDraw ? 1 : 0;
-        return new int[] { (int)CommandParam.DrawCard, (int)m_particleID, (int)UseType.System, i, m_drawNum };
+        return new int[] { (int)CommandParam.DrawCard, (int)m_particleID, (int)UseTiming.System, i, m_drawNum };
     }
 }
 public interface IConditional
@@ -374,6 +374,10 @@ public enum CardID
     DeadlyAssault,
     /// <summary>アローレイン</summary>
     ArrowRain,
+    /// <summary>火傷</summary>
+    Burn,
+    /// <summary>瓦礫</summary>
+    Rubble,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
@@ -385,14 +389,16 @@ public enum Rarity
     Curse,
     BadEffect,
 }
-/// <summary>カードの使用対象</summary>
-public enum UseType
+/// <summary>カードの効果発動タイミングと標的</summary>
+public enum UseTiming
 {
+    None = -1,
     ToPlayer,
     ToEnemy,
     ToAllEnemies,
     ToRandomEnemy,
     System,
+    TurnEnd,
 }
 /// <summary>カードの使用時の効果が何なのか</summary>
 public enum CommandParam
