@@ -236,9 +236,9 @@ public class CharactorBase : MonoBehaviour
     {
         if (IsDead) return;
         AddEffect(condition);
+        EffectManager.Instance.ShowParticle(particleID, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
         if (damage > 0)
         {
-            EffectManager.Instance.ShowParticle(particleID, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
             int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
             dmg = m_block -= dmg;
             if (m_block < 0) m_block = 0;
