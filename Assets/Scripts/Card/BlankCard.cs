@@ -25,6 +25,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewName;
     [SerializeField] Image m_viewImage;
     [SerializeField] Text m_viewTooltip;
+    [SerializeField] CardEffectHelp m_cardEffectHelp;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
     private List<Color> m_cardColor = default;
     /// <summary>カード効果<br/>効果の種類(CommandParam), 発動対象(UseType), 効果(int)</summary>
@@ -89,6 +90,8 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         //m_viewTooltip.text = m_tooltip;
         m_viewCost.text = m_cost;
         m_rectTransform = gameObject.GetComponent<RectTransform>();
+        m_cardEffectHelp.SetText(m_isDiscarding, m_ethereal);
+        m_cardEffectHelp.SetActive(false);
     }
     private void Init()
     {
@@ -262,6 +265,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             m_defPos = m_rectTransform.anchoredPosition;
             m_rectTransform.DOAnchorPosY(m_defPos.y + 30f, 0.05f).OnComplete(() => m_isAnim = false);
         }
+        m_cardEffectHelp.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -271,6 +275,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             m_isAnim = true;
             m_rectTransform.DOAnchorPos3DY(m_defPos.y, 0.05f).OnComplete(() => m_isAnim = false);
         }
+        m_cardEffectHelp.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -336,6 +341,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             m_isDrag = true;
             BattleManager.Instance.OnCardDrag(m_useType);
         }
+        m_cardEffectHelp.SetActive(false);
     }
 
     public void OnDrag(PointerEventData eventData)

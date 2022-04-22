@@ -23,6 +23,7 @@ public class ConditionUI : MonoBehaviour
         public Color Color => m_color;
         public string Tooltip => m_tooltip;
     }
+    public string GetTooltip(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Tooltip;
     public Sprite GetSprite(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Sprite;
     public Color GetColor(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Color;
 
