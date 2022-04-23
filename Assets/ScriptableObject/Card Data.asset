@@ -818,7 +818,7 @@ MonoBehaviour:
       m_rarity: 5
       m_commands:
       - m_command:
-          id: 62
+          id: 64
         m_conditional:
           m_cardConditional: []
       m_cardConditional:
@@ -1282,12 +1282,18 @@ MonoBehaviour:
     0000003E:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 2
-        m_useType: 0
+        m_power: 4
+        m_useType: 2
         m_particleID: 1
     0000003F:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 4
+        m_useType: 0
+        m_particleID: 1
+    00000040:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 3
         m_useType: 0
         m_particleID: 1
