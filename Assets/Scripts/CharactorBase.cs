@@ -146,15 +146,15 @@ public class CharactorBase : MonoBehaviour
         {
             //同じエフェクトが一つも見つからなかったら新たに追加
             m_conditions.Add(c);
-            HighLightConditionUI(c.GetConditionID());
+            HighLightConditionUI(c.GetConditionID(), true);
         }
         ViewConditionUI();
     }
 
     /// <summary>
-    /// デバフにかかった/解除した事を表示する
+    /// デバフにかかった/解除した事を表示する<br/>
     /// </summary>
-    private void HighLightConditionUI(ConditionID conditionID)
+    private void HighLightConditionUI(ConditionID conditionID, bool isAddEffect)
     {
         m_viewConditionImage.gameObject.SetActive(true);
         m_viewConditionImage.sprite = m_conditionUIPrefab.GetSprite(conditionID);
@@ -163,7 +163,10 @@ public class CharactorBase : MonoBehaviour
         Vector2 v = rt.anchoredPosition;
         Sequence s = DOTween.Sequence();
         m_conditionSequence.Add(s);
-        s.Append(rt.DOAnchorPosY(rt.anchoredPosition.y + 50, 0.5f));
+        if (isAddEffect)
+            s.Append(rt.DOAnchorPosY(rt.anchoredPosition.y + 20, 0.5f));
+        else
+            s.Append(rt.DOAnchorPosY(rt.anchoredPosition.y - 20, 0.5f));
         s.Append(m_viewConditionImage.DOColor(Color.clear, 0.5f));
         s.OnComplete(() =>
         {
