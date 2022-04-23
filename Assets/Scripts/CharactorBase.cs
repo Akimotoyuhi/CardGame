@@ -185,7 +185,7 @@ public class CharactorBase : MonoBehaviour
         {
             if (m_conditions[i].IsRemove())
             {
-                Debug.Log($"{m_conditions[i].GetConditionID()}デバフを除去");
+                HighLightConditionUI(m_conditions[i].GetConditionID(), false);
                 m_conditions.RemoveAt(i);
             }
         }
