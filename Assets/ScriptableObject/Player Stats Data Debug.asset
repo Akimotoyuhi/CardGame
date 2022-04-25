@@ -21,21 +21,21 @@ MonoBehaviour:
   m_maxHp: 70
   m_cardData:
   - m_cardID: 0
-    m_upgrade: 1
+    m_upgrade: 0
   - m_cardID: 0
-    m_upgrade: 1
+    m_upgrade: 0
   - m_cardID: 0
-    m_upgrade: 1
+    m_upgrade: 0
   - m_cardID: 1
-    m_upgrade: 1
+    m_upgrade: 0
   - m_cardID: 1
-    m_upgrade: 1
+    m_upgrade: 0
   - m_cardID: 1
-    m_upgrade: 1
+    m_upgrade: 0
   - m_cardID: 2
     m_upgrade: 0
   - m_cardID: 3
     m_upgrade: 0
-  - m_cardID: 21
+  - m_cardID: 10
     m_upgrade: 1
   m_relicData: []

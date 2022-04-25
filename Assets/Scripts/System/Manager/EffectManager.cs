@@ -54,14 +54,6 @@ public class EffectManager : MonoBehaviour
         m_fadePanel.raycastTarget = false;
     }
 
-    public Text ViewText(string text, Vector2 position, Transform parent)
-    {
-        Text txt = Instantiate(m_textPrefab);
-        txt.transform.SetParent(parent, false);
-        //txt.GetText(text);
-        txt.gameObject.GetRectTransform().anchoredPosition = position;
-        return txt;
-    }
     /// <summary>
     /// 戦闘時の説明用のテキストに表示する
     /// </summary>
@@ -111,17 +103,6 @@ public class EffectManager : MonoBehaviour
             default:
                 break;
         }
-    }
-    public void MoveText(string text, Color color, Vector2 position, Transform parent, Vector2 endValue, float duration, System.Action action)
-    {
-        m_text.text = text;
-        m_text.color = color;
-        GameObject obj = Instantiate(m_overfrowTextPrefab).gameObject;
-        obj.transform.SetParent(parent, false);
-        RectTransform rt = obj.GetRectTransform();
-        rt.anchoredPosition = position;
-        DOTween.Sequence().Append(rt.DOAnchorPos(endValue, duration))
-            .OnComplete(() => action());
     }
     /// <summary>
     /// ダメージ表示用のテキストを表示して動かす

@@ -929,13 +929,13 @@ MonoBehaviour:
       data:
         m_block: 5
         m_useType: 0
-        m_particleID: 0
+        m_particleID: 4
     00000003:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 8
         m_useType: 0
-        m_particleID: 0
+        m_particleID: 4
     00000004:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:

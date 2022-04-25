@@ -5,6 +5,7 @@ using Mastar;
 using System;
 using UniRx;
 using UnityEngine.UI;
+using DG.Tweening;
 
 enum Timing { Start, End }
 
@@ -55,6 +56,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] BattleUIController m_battleUIController;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
+    [SerializeField] float m_cardAddedShowDuration = 0.5f;
     [SerializeField] CommandManager m_commandManager;
     /// <summary>カメラ</summary>
     [SerializeField] Camera m_camera;
@@ -349,6 +351,7 @@ public class BattleManager : MonoBehaviour
     {
         for (int i = 0; i < num; i++)
         {
+            Vector2 v = default;
             CardInfomationData c = m_cardData.CardDatas((int)cardID, isUpgrade);
             BlankCard b = Instantiate(m_cardPrefab);
             b.SetInfo(c, m_battleUICanvas.GetComponent<RectTransform>(), m_player, m_camera, m_discard);
@@ -356,26 +359,51 @@ public class BattleManager : MonoBehaviour
             {
                 case CardAddDestination.ToDeck:
                     b.transform.SetParent(m_deck.CardParent, false);
+                    v = m_deck.gameObject.GetRectTransform().anchoredPosition;
                     break;
                 case CardAddDestination.ToHand:
                     b.transform.SetParent(m_hand.CardParent, false);
                     b.CardState = CardState.Play;
+                    v = m_hand.gameObject.GetRectTransform().anchoredPosition;
                     break;
                 case CardAddDestination.ToDiscard:
                     b.transform.SetParent(m_discard.CardParent, false);
+                    v = m_discard.gameObject.GetRectTransform().anchoredPosition;
                     break;
                 default:
                     Debug.LogError("存在しないの追加先");
                     break;
             }
+            MoveingCard(v, cardID, isUpgrade);
         }
     }
 
+    /// <summary>カードのドラッグ中に各ドロップ対象に枠を表示させる</summary>
+    /// <param name="useType">使用対象</param>
     public void OnCardDrag(UseTiming? useType)
     {
         m_enemiesTarget.OnCard(useType);
         m_player.OnCard(useType);
         m_allDropTarget.OnCard(useType);
         m_enemyManager.OnCardDrag(useType);
+    }
+
+    /// <summary>カードが追加されたときに追加されたカードを表示させる</summary>
+    public void MoveingCard(Vector2 moveingTo, CardID cardId, int upgrade)
+    {
+        bool flag = false;
+        BlankCard card = Instantiate(m_cardPrefab);
+        card.SetInfo(m_cardData.CardDatas((int)cardId, upgrade));
+        card.CardState = CardState.None;
+        card.transform.SetParent(m_battleUICanvas.gameObject.GetRectTransform(), false);
+        RectTransform rt = card.gameObject.GetRectTransform();
+        Sequence s = DOTween.Sequence();
+        s.AppendInterval(m_cardAddedShowDuration)
+            .Append(rt.DOAnchorPos(moveingTo, 0.1f))
+            .OnComplete(() => flag = true);
+        Debug.Log("wait");
+        //while (!flag) { }
+        Debug.Log("complete");
+        Destroy(card);
     }
 }
