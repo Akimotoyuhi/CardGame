@@ -5,9 +5,12 @@ using UnityEngine;
 public class CardManagement : MonoBehaviour
 {
     [SerializeField] protected Transform m_cardParent;
+    [SerializeField] RectTransform m_addCardMoveingAtPos;
+    protected Canvas m_canvas = default;
     /// <summary>カードの親オブジェクト</summary>
     public Transform CardParent => m_cardParent;
-    protected Canvas m_canvas = default;
+    /// <summary>カードが追加された際に飛ばされるアニメーションの終着点</summary>
+    public Vector2 AddCardMoveingAtPos => m_addCardMoveingAtPos.anchoredPosition;
 
     public virtual void GridLayoutGroupSetting(Vector2 size) { }
     /// <summary>

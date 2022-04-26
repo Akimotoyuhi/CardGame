@@ -6,6 +6,7 @@ using System;
 using UniRx;
 using UnityEngine.UI;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 enum Timing { Start, End }
 
@@ -56,6 +57,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] BattleUIController m_battleUIController;
     /// <summary>報酬枚数</summary>
     [SerializeField] int m_rewardNum = 3;
+    /// <summary>カード追加コマンドが実行されたときに画面中央で止める秒数</summary>
     [SerializeField] float m_cardAddedShowDuration = 0.5f;
     [SerializeField] CommandManager m_commandManager;
     /// <summary>カメラ</summary>
@@ -359,16 +361,16 @@ public class BattleManager : MonoBehaviour
             {
                 case CardAddDestination.ToDeck:
                     b.transform.SetParent(m_deck.CardParent, false);
-                    v = m_deck.gameObject.GetRectTransform().anchoredPosition;
+                    v = m_deck.AddCardMoveingAtPos;
                     break;
                 case CardAddDestination.ToHand:
                     b.transform.SetParent(m_hand.CardParent, false);
                     b.CardState = CardState.Play;
-                    v = m_hand.gameObject.GetRectTransform().anchoredPosition;
+                    v = m_hand.AddCardMoveingAtPos;
                     break;
                 case CardAddDestination.ToDiscard:
                     b.transform.SetParent(m_discard.CardParent, false);
-                    v = m_discard.gameObject.GetRectTransform().anchoredPosition;
+                    v = m_discard.AddCardMoveingAtPos;
                     break;
                 default:
                     Debug.LogError("存在しないの追加先");
@@ -391,7 +393,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>カードが追加されたときに追加されたカードを表示させる</summary>
     public void MoveingCard(Vector2 moveingTo, CardID cardId, int upgrade)
     {
-        bool flag = false;
+        //bool flag = false;
         BlankCard card = Instantiate(m_cardPrefab);
         card.SetInfo(m_cardData.CardDatas((int)cardId, upgrade));
         card.CardState = CardState.None;
@@ -399,11 +401,16 @@ public class BattleManager : MonoBehaviour
         RectTransform rt = card.gameObject.GetRectTransform();
         Sequence s = DOTween.Sequence();
         s.AppendInterval(m_cardAddedShowDuration)
-            .Append(rt.DOAnchorPos(moveingTo, 0.1f))
-            .OnComplete(() => flag = true);
-        Debug.Log("wait");
-        //while (!flag) { }
-        Debug.Log("complete");
-        Destroy(card);
+            .Append(rt.DOAnchorPos(moveingTo, 0.1f, true))
+            .OnComplete(() =>
+            {
+                Destroy(card.gameObject);
+                //flag = true;
+            });
     }
+
+    //private async UniTask StartTween()
+    //{
+    //    await transform.DOMove(Vector2.zero, 1f);
+    //}
 }
