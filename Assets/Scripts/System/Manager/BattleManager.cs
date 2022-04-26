@@ -349,7 +349,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 場にカードを追加する
     /// </summary>
-    public void AddCard(CardAddDestination addDestination, CardID cardID, int num, int isUpgrade)
+    public async void AddCard(CardAddDestination addDestination, CardID cardID, int num, int isUpgrade)
     {
         for (int i = 0; i < num; i++)
         {
@@ -376,8 +376,22 @@ public class BattleManager : MonoBehaviour
                     Debug.LogError("存在しないの追加先");
                     break;
             }
-            MoveingCard(v, cardID, isUpgrade);
+            await MoveingCard(v, cardID, isUpgrade);
         }
+    }
+
+    /// <summary>カードが追加されたときに追加されたカードを表示させる</summary>
+    public async UniTask MoveingCard(Vector2 moveingTo, CardID cardId, int upgrade)
+    {
+        BlankCard card = Instantiate(m_cardPrefab);
+        card.SetInfo(m_cardData.CardDatas((int)cardId, upgrade));
+        card.CardState = CardState.None;
+        card.transform.SetParent(m_battleUICanvas.gameObject.GetRectTransform(), false);
+        RectTransform rt = card.gameObject.GetRectTransform();
+        Sequence s = DOTween.Sequence();
+        await s.AppendInterval(m_cardAddedShowDuration)
+            .Append(rt.DOAnchorPos(moveingTo, 0.1f))
+            .OnComplete(() => Destroy(card.gameObject));
     }
 
     /// <summary>カードのドラッグ中に各ドロップ対象に枠を表示させる</summary>
@@ -389,28 +403,4 @@ public class BattleManager : MonoBehaviour
         m_allDropTarget.OnCard(useType);
         m_enemyManager.OnCardDrag(useType);
     }
-
-    /// <summary>カードが追加されたときに追加されたカードを表示させる</summary>
-    public void MoveingCard(Vector2 moveingTo, CardID cardId, int upgrade)
-    {
-        //bool flag = false;
-        BlankCard card = Instantiate(m_cardPrefab);
-        card.SetInfo(m_cardData.CardDatas((int)cardId, upgrade));
-        card.CardState = CardState.None;
-        card.transform.SetParent(m_battleUICanvas.gameObject.GetRectTransform(), false);
-        RectTransform rt = card.gameObject.GetRectTransform();
-        Sequence s = DOTween.Sequence();
-        s.AppendInterval(m_cardAddedShowDuration)
-            .Append(rt.DOAnchorPos(moveingTo, 0.1f, true))
-            .OnComplete(() =>
-            {
-                Destroy(card.gameObject);
-                //flag = true;
-            });
-    }
-
-    //private async UniTask StartTween()
-    //{
-    //    await transform.DOMove(Vector2.zero, 1f);
-    //}
 }

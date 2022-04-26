@@ -325,7 +325,6 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             {
                 if (m_carddata.Commands[i].Conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
                 {
-                    Debug.Log($"条件一致 {m_cardCommand[i][0]}");
                     vs.Add(m_cardCommand[i]);
                 }
             }
