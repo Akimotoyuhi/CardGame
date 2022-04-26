@@ -25,6 +25,8 @@ public enum ConditionID
     Activation,
     /// <summary>頑丈<br/>得るブロックが25%増加。Xターン持続</summary>
     Sturdy,
+    /// <summary>腐敗<br/>ターン終了時に筋力Xを失う</summary>
+    Corruption,
 }
 public class Weakness : Condition
 {
@@ -169,7 +171,6 @@ public class StrengthDown : Condition
 {
     public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int value = 0)
     {
-        Debug.Log($"渡された値 {eventTiming}:{parametorType}:{value}({(ConditionID)value})");
         if (parametorType != ParametorType.Other)
         {
             if (Turn <= 0 || parametorType != ParametorType.Condition) return new int[] { value };
@@ -296,4 +297,29 @@ public class Sturdy : Condition
     public override ConditionID GetConditionID() => ConditionID.Sturdy;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Block;
+}
+public class Corruption : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0)
+    {
+        if (parametorType != ParametorType.Other)
+            return new int[] { num };
+        if (eventTiming == EventTiming.TurnEnd)
+        {
+            return new int[] { (int)ConditionID.Strength, -Turn };
+        }
+        return new int[] { 0 };
+    }
+
+    public override ConditionID GetConditionID() => ConditionID.Corruption;
+
+    public override ParametorType GetParametorType() => ParametorType.Other;
+
+    public override int IsBuff() => 1;
+
+    public override bool IsRemove()
+    {
+        if (Turn < 0) return true;
+        return false;
+    }
 }

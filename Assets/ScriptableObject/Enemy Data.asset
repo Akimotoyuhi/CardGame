@@ -187,20 +187,29 @@ MonoBehaviour:
     m_enemyType: 0
     m_enemyBaseState:
     - m_conditionalCommand:
-      - m_type: 0
+      - m_type: 7
         m_value: 0
         m_probability: 0
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
         - id: 14
+        m_target: 1
+        m_plan:
+        - m_plan: 4
+          m_numIndex: 0
+    - m_conditionalCommand:
+      - m_type: 0
+        m_value: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
         - id: 15
         m_target: 0
         m_plan:
         - m_plan: 0
           m_numIndex: 0
-        - m_plan: 4
-          m_numIndex: 1
   - m_name: "\u30DA\u30EA\u30E5\u30C8\u30F3"
     m_id: 5
     m_life: 80
@@ -231,7 +240,7 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
-        - id: 14
+        - id: 15
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -505,7 +514,7 @@ MonoBehaviour:
   - m_label: "\u5FAE\u7761\u306E\u6CBC\u5730"
     m_enemies:
     - m_enemyID: 0400000004000000
-    - m_enemyID: 0300000001000000
+    - m_enemyID: 0300000004000000
     - m_enemyID: 0300000005000000
     - m_enemyID: 06000000
     m_elites: []
@@ -608,18 +617,18 @@ MonoBehaviour:
         m_useType: 0
         m_particleID: 0
     0000000E:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 10
+          m_turn: 1
+        m_useType: 1
+        m_particleID: -1
+    0000000F:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 10
         m_useType: 0
-        m_particleID: 0
-    0000000F:
-      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
-      data:
-        m_condition:
-          m_conditionID: 2
-          m_turn: -1
-        m_useType: 1
         m_particleID: 0
     00000010:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}

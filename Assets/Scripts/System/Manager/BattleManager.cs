@@ -230,15 +230,12 @@ public class BattleManager : MonoBehaviour
         m_isPress = true;
         if (m_currentTurn == 0)
         {
+            m_enemyManager.ActionPlan(m_currentTurn);
             m_battleUIController.Play(BattleUIType.BattleStart, () => m_battleFlag = true);
             while (!m_battleFlag)
                 yield return null;
             m_battleFlag = false;
 
-            m_enemyManager.EnemyTrun(m_currentTurn, () => m_battleFlag = true);
-            while (!m_battleFlag)
-                yield return null;
-            m_battleFlag = false;
             FirstTurn();
         }
         else
@@ -287,6 +284,7 @@ public class BattleManager : MonoBehaviour
     {
         m_hand.AllCast();
         GameManager.Instance.RelicExecute(RelicTriggerTiming.TurnEnd, ParametorType.Other, 0);
+        //m_enemyManager.
         m_player.TurnEnd();
         m_currentTurn++;
     }

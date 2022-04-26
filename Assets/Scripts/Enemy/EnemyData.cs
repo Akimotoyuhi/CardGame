@@ -76,7 +76,6 @@ public class EnemyDataBase
                     }
                     if (flag)
                     {
-                        //m_enemyBaseState[i].m_conditionalCommand
                         return m_enemyBaseState[i].m_actionCommnad;
                     }
                 }

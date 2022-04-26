@@ -101,16 +101,22 @@ public class EnemyManager : MonoBehaviour
     /// 敵の行動予定を表示させる
     /// </summary>
     /// <param name="turn"></param>
-    private void ActionPlan(int turn)
+    public void ActionPlan(int turn)
     {
         for (int i = 0; i < m_enemies.Count; i++)
         {
             if (m_enemies[i].IsDead)
                 continue;
+            //m_enemies[i].TurnEnd(turn);
             m_enemies[i].ActionCommand(turn);
             m_enemies[i].Effect();
             m_enemies[i].ActionPlan();
         }
+    }
+
+    public void TurnEnd()
+    {
+
     }
 
     /// <summary>

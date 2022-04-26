@@ -103,6 +103,8 @@ public class EnemyBase : CharactorBase, IDrop
     /// </summary>
     public void Effect()
     {
+        if (m_actionCommnad == null)
+            return;
         m_commands = m_actionCommnad.Command;
         foreach (var c in m_commands)
         {

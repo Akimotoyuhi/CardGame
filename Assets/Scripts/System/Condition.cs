@@ -95,6 +95,9 @@ public class ConditionSelection
                 case ConditionID.Sturdy:
                     ret = new Sturdy();
                     break;
+                case ConditionID.Corruption:
+                    ret = new Corruption();
+                    break;
                 default:
                     Debug.LogWarning("未設定のIDが渡されました");
                     return null;

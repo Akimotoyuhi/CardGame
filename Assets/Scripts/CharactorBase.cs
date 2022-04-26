@@ -311,23 +311,37 @@ public class CharactorBase : MonoBehaviour
     /// <param name="parametorType"></param>
     protected void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
     {
+        List<Condition> addCondition = new List<Condition>();
         foreach (var c in m_conditions)
         {
+            int[] i = new int[0];
             switch (c.GetParametorType())
             {
                 case ParametorType.Condition:
                     for (int evaluation = 0; evaluation < m_conditions.Count; evaluation++)
                     {
-                        int[] i = c.Effect(eventTiming, parametorType, (int)m_conditions[evaluation].GetConditionID());
+                        i = c.Effect(eventTiming, parametorType, (int)m_conditions[evaluation].GetConditionID());
                         if (i.Length >= 2)
                         {
                             Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
                             ConditionSelection cs = new ConditionSelection();
-                            AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
+                            //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
+                            addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
                         }
                     }
                     break;
+                case ParametorType.Other:
+                    i = c.Effect(eventTiming, parametorType, 0);
+                    if (i.Length >= 2)
+                    {
+                        Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
+                        ConditionSelection cs = new ConditionSelection();
+                        //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
+                        addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+                    }
+                    break;
                 default:
+
                     break;
             }
             switch (c.GetConditionID())
@@ -342,6 +356,10 @@ public class CharactorBase : MonoBehaviour
                     c.Effect(eventTiming, parametorType);
                     break;
             }
+        }
+        foreach (var item in addCondition)
+        {
+            AddEffect(item);
         }
         RemoveEffect();
     }
