@@ -34,6 +34,7 @@ public abstract class Condition
     public int Turn { get; set; }
     /// <summary>Conditionの効果</summary>
     /// <param name="eventTiming">評価されるタイミング</param>
+    /// <param name="parametorType">numで渡すパラメーターが何なのか</param>
     /// <param name="num">影響を受ける数値</param>
     /// <returns>Condition評価後の数値</returns>
     public abstract int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0);

@@ -514,7 +514,7 @@ MonoBehaviour:
   - m_label: "\u5FAE\u7761\u306E\u6CBC\u5730"
     m_enemies:
     - m_enemyID: 0400000004000000
-    - m_enemyID: 0300000004000000
+    - m_enemyID: 0300000001000000
     - m_enemyID: 0300000005000000
     - m_enemyID: 06000000
     m_elites: []
