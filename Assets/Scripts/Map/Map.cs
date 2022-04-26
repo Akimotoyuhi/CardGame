@@ -29,6 +29,8 @@ public class Map : MonoBehaviour
     [SerializeField] Transform m_lineParent;
     /// <summary>背景</summary>
     [SerializeField] Image m_background;
+    /// <summary>マップのContent</summary>
+    [SerializeField] RectTransform m_scrollViewContentTra;
     /// <summary>現在act保存用</summary>
     private int m_act = 1;
     /// <summary>デバッグ用マップ固定フラグ</summary>
@@ -190,6 +192,7 @@ public class Map : MonoBehaviour
             {
                 Destroy(s);
             }
+            m_scrollViewContentTra.anchoredPosition = new Vector2(0, m_scrollViewContentTra.anchoredPosition.y);
             CreateMap();
         } 
     }
@@ -206,21 +209,12 @@ public class Map : MonoBehaviour
                 if (!m_sectorLocation[i].transform.GetChild(n).gameObject.GetComponent<Cell>().CreatedFlag)
                 {
                     Destroy(m_sectorLocation[i].transform.GetChild(n).gameObject);
-                    //int r = Random.Range(0, 2);
-                    //if (r == 0)
-                    //{
-                    //    Destroy(m_sectorLocation[i].transform.GetChild(n).gameObject);
-                    //}
-                    //else
-                    //{
-                    //    m_sectorLocation[i].transform.GetChild(n).GetComponent<
-                    //    >().interactable = false;
-                    //    m_sectorLocation[i].transform.GetChild(n).GetComponent<Image>().color = new Color(0, 0, 0, 1);
-                    //}
                 }
             }
         }
     }
+
+    /// <summary>デバッグ用のマップ固定処理</summary>
     public void SetFixedMapDebug(MapID mapID)
     {
         m_isFixedMap = true;
