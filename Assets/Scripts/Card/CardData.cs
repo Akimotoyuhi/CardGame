@@ -378,6 +378,8 @@ public enum CardID
     Burn,
     /// <summary>瓦礫</summary>
     Rubble,
+    /// <summary>緊急防御</summary>
+    EmergencyBlock
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity
