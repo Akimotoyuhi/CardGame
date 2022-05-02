@@ -257,6 +257,10 @@ public enum EnemyID
     DeepOnes,
     /// <summary>リヴィアタン</summary>
     Leviathan,
+    /// <summary>サーベルタイガー</summary>
+    SavelTiger,
+    /// <summary>タツノオトシゴ</summary>
+    Seahorse,
 }
 /// <summary>敵出現場所</summary>
 public enum EnemyType

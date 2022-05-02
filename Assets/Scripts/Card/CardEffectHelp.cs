@@ -24,7 +24,7 @@ public class CardEffectHelp : MonoBehaviour
             s += m_etherealTooltip + "\n";
         //foreach (var c in conditions)
         //    m_text.text += m_conditionUI.GetTooltip(c.GetConditionID()) + "\n";
-        if (s.Length > 0)
+        if (s.Length > 0)//テキストの長さが0なら表示しない
         {
             m_text.text = s;
             m_isActive = true;
@@ -41,7 +41,7 @@ public class CardEffectHelp : MonoBehaviour
     /// <param name="value"></param>
     public void SetActive(bool value)
     {
-        if (value)//テキストの長さが0なら表示しない
+        if (value)
             m_background.SetActive(m_isActive);
         else
             m_background.SetActive(value);

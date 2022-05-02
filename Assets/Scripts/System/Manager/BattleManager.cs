@@ -158,8 +158,6 @@ public class BattleManager : MonoBehaviour
         GameManager.Instance.RelicSetup();
         CreateField(eria, mapID);
         StartCoroutine(OnBattle());
-        //m_battleUIController.Play(BattleUIType.BattleStart, FirstTurn);
-        //FirstTurn();
     }
 
     /// <summary>
