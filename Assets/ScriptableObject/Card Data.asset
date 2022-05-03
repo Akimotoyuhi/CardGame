@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a779fc0370f44e44ba74e39af86795c, type: 3}
   m_Name: Card Data
   m_EditorClassIdentifier: 
-  m_eliteProbability: 5
-  m_rareProbability: 30
+  m_rewardCardProbability:
+  - m_rabel: "\u96D1\u9B5A\u6575"
+    m_rareProbability: 30
+    m_superRareProbability: 3
+  - m_rabel: "\u30A8\u30EA\u30FC\u30C8"
+    m_rareProbability: 50
+    m_superRareProbability: 10
+  - m_rabel: "\u30DC\u30B9"
+    m_rareProbability: 0
+    m_superRareProbability: 100
   m_cardData:
   - m_rabel: "\u65AC\u6483"
     m_cardInfo:

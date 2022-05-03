@@ -68,6 +68,7 @@ public class BattleManager : MonoBehaviour
     private BlankCard m_cardPrefab;
     /// <summary>ドラッグ中のカードのUseType保存用</summary>
     private UseTiming? m_dragCardUseType = null;
+    private EnemyType m_encountEnemyType;
     /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
     /// <summary>バトル中かどうかのフラグ</summary>
@@ -154,6 +155,7 @@ public class BattleManager : MonoBehaviour
     {
         m_currentTurn = 0;
         m_isGame = true;
+        m_encountEnemyType = eria;
         SetCanvas();
         GameManager.Instance.RelicSetup();
         CreateField(eria, mapID);
@@ -170,7 +172,7 @@ public class BattleManager : MonoBehaviour
         m_hand.CardDelete();
         for (int i = 0; i < m_rewardNum; i++)
         {
-            m_reward.RewardView(m_cardData.GetCardRarityRandom(0));
+            m_reward.RewardView(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
         }
     }
 

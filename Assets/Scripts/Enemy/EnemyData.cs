@@ -262,7 +262,7 @@ public enum EnemyID
     /// <summary>ƒ^ƒcƒmƒIƒgƒVƒS</summary>
     Seahorse,
 }
-/// <summary>“GoŒ»êŠ</summary>
+/// <summary>“G‚Ìí—Ş</summary>
 public enum EnemyType
 {
     Enemy,

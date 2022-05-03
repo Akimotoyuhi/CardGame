@@ -7,13 +7,21 @@ using System.Linq;
 
 /// <summary>
 /// カードデータ<br/>
-/// 報酬画面に出現する確率比重を管理している。
+/// 報酬画面に出現する確率比重も管理している。
 /// </summary>
 [CreateAssetMenu(fileName = "Card Data")]
 public class CardData : ScriptableObject
 {
-    [SerializeField, Range(0, 100)] int m_eliteProbability = 5;
-    [SerializeField, Range(0, 100)] int m_rareProbability = 30;
+    [Serializable]
+    public class RewardCardProbability
+    {
+        public string m_rabel;
+        [SerializeField, Range(0, 100)] int m_rareProbability;
+        [SerializeField, Range(0, 100)] int m_superRareProbability;
+        public int RareProbability => m_rareProbability;
+        public int SuperRareProbability => m_superRareProbability;
+    }
+    [SerializeField] List<RewardCardProbability> m_rewardCardProbability;
     [SerializeField] List<CardDataBase> m_cardData = new List<CardDataBase>();
     public CardInfomationData CardDatas(int id, int upgrade) => m_cardData[id].GetCardInfo(upgrade);
     public void Setup()
@@ -28,15 +36,15 @@ public class CardData : ScriptableObject
     /// </summary>
     /// <param name="upgradeNum">強化回数</param>
     /// <returns>カードデータ</returns>
-    public CardInfomationData GetCardRarityRandom(int upgradeNum)
+    public CardInfomationData GetCardRarityRandom(int upgradeNum, EnemyType enemyType)
     {
         Rarity rarity;
         int r = UnityEngine.Random.Range(0, 100);
-        if (r < m_eliteProbability)
+        if (r < m_rewardCardProbability[(int)enemyType].SuperRareProbability)
         {
-            rarity = Rarity.Elite;
+            rarity = Rarity.SuperRare;
         }
-        else if (r < m_rareProbability)
+        else if (r < m_rewardCardProbability[(int)enemyType].RareProbability)
         {
             rarity = Rarity.Rare;
         }
@@ -44,6 +52,7 @@ public class CardData : ScriptableObject
         {
             rarity = Rarity.Common;
         }
+        Debug.Log($"報酬レアリティ{rarity}");
         return GetCardRarityRandom(rarity, upgradeNum);
     }
     /// <summary>
@@ -386,7 +395,7 @@ public enum Rarity
 {
     Common,
     Rare,
-    Elite,
+    SuperRare,
     Special,
     Curse,
     BadEffect,
