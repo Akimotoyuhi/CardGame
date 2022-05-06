@@ -48,6 +48,7 @@ public class Weakness : Condition
                 if (Turn > 0) Turn--;
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -79,6 +80,7 @@ public class Frail : Condition
                 if (Turn > 0) Turn--;
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -102,6 +104,7 @@ public class Strength : Condition
             default:
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -125,6 +128,7 @@ public class Agile : Condition
             default:
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -151,6 +155,7 @@ public class PlateArmor : Condition
             default:
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -176,7 +181,8 @@ public class StrengthDown : Condition
             default:
                 break;
         }
-        return new Command();
+        command.Conditions = null;
+        return command;
     }
     public override bool IsRemove()
     {
@@ -200,6 +206,7 @@ public class Flying : Condition
             default:
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override int IsBuff() => 0;
@@ -223,6 +230,7 @@ public class Metallicize : Condition
             default:
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -254,6 +262,7 @@ public class Activation : Condition
                 if (Turn > 0) Turn--;
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -285,6 +294,7 @@ public class Sturdy : Condition
                 if (Turn > 0) Turn--;
                 break;
         }
+        command.Conditions = null;
         return command;
     }
     public override bool IsRemove()
@@ -310,7 +320,8 @@ public class Corruption : Condition
             default:
                 break;
         }
-        return new Command();
+        command.Conditions = null;
+        return command;
     }
 
     public override ConditionID GetConditionID() => ConditionID.Corruption;
