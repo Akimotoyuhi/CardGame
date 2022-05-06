@@ -166,15 +166,18 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             foreach (var cc in m_cardCommand)
             {
                 CommandParam cp = (CommandParam)cc[0];
+                Command command = new Command();
                 switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
                         cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[3]);
-                        cc[3] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, cc[3]);
+                        command.Power = cc[3];
+                        cc[3] = m_player.ConditionEffect(EventTiming.Attacked, command).Power;
                         break;
                     case CommandParam.Block:
                         cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[3]);
-                        cc[3] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, cc[3]);
+                        command.Block = cc[3];
+                        cc[3] = m_player.ConditionEffect(EventTiming.Attacked, command).Block;
                         break;
                     default:
                         continue;

@@ -110,12 +110,12 @@ public class CharactorBase : MonoBehaviour
     /// <param name="parametorType">評価するパラメーター名</param>
     /// <param name="value">評価する数値</param>
     /// <returns>評価された後のパラメーター</returns>
-    public int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
+    public Command ConditionEffect(EventTiming eventTiming, Command command)
     {
-        int ret = value;
+        Command ret = command;
         foreach (var item in m_conditions)
         {
-            ret = item.Effect(eventTiming, parametorType, ret)[0];
+            ret = item.Effect(eventTiming, ret);
         }
         return ret;
     }
@@ -242,7 +242,9 @@ public class CharactorBase : MonoBehaviour
         EffectManager.Instance.ShowParticle(particleID, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
         if (damage > 0)
         {
-            int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
+            Command c = new Command();
+            c.Power = damage;
+            int dmg = ConditionEffect(EventTiming.Damaged, c).Power;
             dmg = m_block -= dmg;
             if (m_block < 0) m_block = 0;
             else
@@ -254,7 +256,7 @@ public class CharactorBase : MonoBehaviour
             else
             {
                 m_life -= dmg;
-                EffectChecker(EventTiming.Damaged, ParametorType.Other);
+                EffectChecker(EventTiming.Damaged);
                 if (isPlayer) GameManager.Instance.SetGameInfoPanel(this);
                 if (m_life <= 0)
                 {
@@ -291,7 +293,7 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     public virtual void TurnEnd(int i = 0)
     {
-        EffectChecker(EventTiming.TurnEnd, ParametorType.Other);
+        EffectChecker(EventTiming.TurnEnd);
         RemoveEffect();
     }
 
@@ -301,7 +303,7 @@ public class CharactorBase : MonoBehaviour
     public virtual void TurnStart()
     {
         m_block = 0;
-        EffectChecker(EventTiming.TurnBegin, ParametorType.Other);
+        EffectChecker(EventTiming.TurnBegin);
         SetSlider();
     }
     /// <summary>
@@ -309,57 +311,69 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     /// <param name="eventTiming"></param>
     /// <param name="parametorType"></param>
-    protected void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
+    protected void EffectChecker(EventTiming eventTiming)
     {
         List<Condition> addCondition = new List<Condition>();
-        foreach (var c in m_conditions)
+        Command command = new Command();
+        command.Conditions = m_conditions;
+        command.Life = CurrentLife;
+        command.Block = CurrentBlock;
+        Command receive = new Command();
+        foreach (var item in m_conditions)
         {
-            int[] i = new int[0];
-            switch (c.GetParametorType())
-            {
-                case ParametorType.Condition:
-                    for (int evaluation = 0; evaluation < m_conditions.Count; evaluation++)
-                    {
-                        i = c.Effect(eventTiming, parametorType, (int)m_conditions[evaluation].GetConditionID());
-                        if (i.Length >= 2)
-                        {
-                            Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
-                            ConditionSelection cs = new ConditionSelection();
-                            //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
-                            addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
-                        }
-                    }
-                    break;
-                case ParametorType.Other:
-                    i = c.Effect(eventTiming, parametorType, 0);
-                    if (i.Length >= 2)
-                    {
-                        Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
-                        ConditionSelection cs = new ConditionSelection();
-                        //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
-                        addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
-                    }
-                    break;
-                default:
-
-                    break;
-            }
-            switch (c.GetConditionID())
-            {
-                case ConditionID.PlateArmor:
-                    m_block += c.Effect(eventTiming, parametorType)[0];
-                    break;
-                case ConditionID.Metallicize:
-                    m_block += c.Effect(eventTiming, parametorType)[0];
-                    break;
-                default:
-                    c.Effect(eventTiming, parametorType);
-                    break;
-            }
+            receive = item.Effect(eventTiming, command);
         }
-        foreach (var item in addCondition)
+        //foreach (var c in m_conditions)
+        //{
+        //    int[] i = new int[0];
+        //    switch (c.GetParametorType())
+        //    {
+        //        case ParametorType.Condition:
+        //            for (int evaluation = 0; evaluation < m_conditions.Count; evaluation++)
+        //            {
+        //                i = c.Effect(eventTiming, parametorType, (int)m_conditions[evaluation].GetConditionID());
+        //                if (i.Length >= 2)
+        //                {
+        //                    Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
+        //                    ConditionSelection cs = new ConditionSelection();
+        //                    //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
+        //                    addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+        //                }
+        //            }
+        //            break;
+        //        case ParametorType.Other:
+        //            i = c.Effect(eventTiming, parametorType, 0);
+        //            if (i.Length >= 2)
+        //            {
+        //                Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
+        //                ConditionSelection cs = new ConditionSelection();
+        //                //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
+        //                addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+        //            }
+        //            break;
+        //        default:
+
+        //            break;
+        //    }
+        //    switch (c.GetConditionID())
+        //    {
+        //        case ConditionID.PlateArmor:
+        //            m_block += c.Effect(eventTiming, parametorType)[0];
+        //            break;
+        //        case ConditionID.Metallicize:
+        //            m_block += c.Effect(eventTiming, parametorType)[0];
+        //            break;
+        //        default:
+        //            c.Effect(eventTiming, parametorType);
+        //            break;
+        //    }
+        //}
+        if (receive.Conditions != null)
         {
-            AddEffect(item);
+            foreach (var item in receive.Conditions)
+            {
+                AddEffect(item);
+            }
         }
         RemoveEffect();
     }

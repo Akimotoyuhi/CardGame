@@ -8,7 +8,7 @@ using DG.Tweening;
 /// </summary>
 public class StructSample : MonoBehaviour
 {
-    Parametor p;
+    Command p;
     
     void Start()
     {
