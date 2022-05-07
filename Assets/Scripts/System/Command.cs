@@ -20,3 +20,14 @@ public struct Command
         Conditions = condition;
     }
 }
+public struct CardRemoval
+{
+
+}
+/// <summary>
+/// ÉJÅ[Éhí«â¡
+/// </summary>
+public struct CardAdd
+{
+
+}

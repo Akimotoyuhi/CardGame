@@ -110,12 +110,12 @@ public class CharactorBase : MonoBehaviour
     /// <param name="parametorType">評価するパラメーター名</param>
     /// <param name="value">評価する数値</param>
     /// <returns>評価された後のパラメーター</returns>
-    public Command ConditionEffect(EventTiming eventTiming, Command command)
+    public int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
     {
-        Command ret = command;
+        int ret = value;
         foreach (var item in m_conditions)
         {
-            ret = item.Effect(eventTiming, ret);
+            ret = item.Effect(eventTiming, parametorType, ret)[0];
         }
         return ret;
     }
@@ -211,28 +211,6 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 連続で攻撃食らったorブロック張った時の処理
-    /// </summary>
-    /// <param name="getCardType">攻撃かブロックか</param>
-    /// <param name="value">値</param>
-    /// <param name="num">回数</param>
-    /// <returns></returns>
-    protected IEnumerator ContinuousReaction(GetCardType getCardType, int value, int num)
-    {
-        switch (getCardType)
-        {
-            case GetCardType.Damage:
-                for (int i = 0; i < num; i++)
-                {
-                    m_life -= value;
-                    SetSlider();
-                    yield return new WaitForSeconds(0.1f);
-                }
-                break;
-        }
-    }
-
-    /// <summary>
     /// 被ダメージ処理
     /// </summary>
     protected void Damage(int damage, int block, Condition condition, bool isPlayer, ParticleID particleID, Action dead)
@@ -242,9 +220,7 @@ public class CharactorBase : MonoBehaviour
         EffectManager.Instance.ShowParticle(particleID, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
         if (damage > 0)
         {
-            Command c = new Command();
-            c.Power = damage;
-            int dmg = ConditionEffect(EventTiming.Damaged, c).Power;
+            int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
             dmg = m_block -= dmg;
             if (m_block < 0) m_block = 0;
             else
@@ -256,7 +232,7 @@ public class CharactorBase : MonoBehaviour
             else
             {
                 m_life -= dmg;
-                EffectChecker(EventTiming.Damaged);
+                EffectChecker(EventTiming.Damaged, ParametorType.Other);
                 if (isPlayer) GameManager.Instance.SetGameInfoPanel(this);
                 if (m_life <= 0)
                 {
@@ -293,7 +269,7 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     public virtual void TurnEnd(int i = 0)
     {
-        EffectChecker(EventTiming.TurnEnd);
+        EffectChecker(EventTiming.TurnEnd, ParametorType.Other);
         RemoveEffect();
     }
 
@@ -303,7 +279,7 @@ public class CharactorBase : MonoBehaviour
     public virtual void TurnStart()
     {
         m_block = 0;
-        EffectChecker(EventTiming.TurnBegin);
+        EffectChecker(EventTiming.TurnBegin, ParametorType.Other);
         SetSlider();
     }
     /// <summary>
@@ -311,28 +287,57 @@ public class CharactorBase : MonoBehaviour
     /// </summary>
     /// <param name="eventTiming"></param>
     /// <param name="parametorType"></param>
-    protected void EffectChecker(EventTiming eventTiming)
+    protected void EffectChecker(EventTiming eventTiming, ParametorType parametorType)
     {
-        Command command = new Command();
-        command.Conditions = m_conditions;
-        command.Life = m_life;
-        command.Block = m_block;
-        Command receive = new Command();
-        if (m_conditions.Count != 0)
+        List<Condition> addCondition = new List<Condition>();
+        foreach (var c in m_conditions)
         {
-            foreach (var item in m_conditions)
+            int[] i = new int[0];
+            switch (c.GetParametorType())
             {
-                receive = item.Effect(eventTiming, command);
+                case ParametorType.Condition:
+                    for (int evaluation = 0; evaluation < m_conditions.Count; evaluation++)
+                    {
+                        i = c.Effect(eventTiming, parametorType, (int)m_conditions[evaluation].GetConditionID());
+                        if (i.Length >= 2)
+                        {
+                            Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
+                            ConditionSelection cs = new ConditionSelection();
+                            //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
+                            addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+                        }
+                    }
+                    break;
+                case ParametorType.Other:
+                    i = c.Effect(eventTiming, parametorType, 0);
+                    if (i.Length >= 2)
+                    {
+                        Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
+                        ConditionSelection cs = new ConditionSelection();
+                        //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
+                        addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+                    }
+                    break;
+                default:
+
+                    break;
             }
-            m_life = receive.Life;
-            m_block = receive.Block;
+            switch (c.GetConditionID())
+            {
+                case ConditionID.PlateArmor:
+                    m_block += c.Effect(eventTiming, parametorType)[0];
+                    break;
+                case ConditionID.Metallicize:
+                    m_block += c.Effect(eventTiming, parametorType)[0];
+                    break;
+                default:
+                    c.Effect(eventTiming, parametorType);
+                    break;
+            }
         }
-        if (receive.Conditions != null)
+        foreach (var item in addCondition)
         {
-            foreach (var item in receive.Conditions)
-            {
-                AddEffect(item);
-            }
+            AddEffect(item);
         }
         RemoveEffect();
     }

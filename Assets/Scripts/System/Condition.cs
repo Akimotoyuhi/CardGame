@@ -37,7 +37,7 @@ public abstract class Condition
     /// <param name="parametorType">numで渡すパラメーターが何なのか</param>
     /// <param name="num">影響を受ける数値</param>
     /// <returns>Condition評価後の数値</returns>
-    public abstract Command Effect(EventTiming eventTiming, Command command);
+    public abstract int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0);
     /// <summary>バフかデバフかの判定</summary>
     /// <returns>0ならバフ、1ならデバフ、2ならそれ以外</returns>
     public abstract int IsBuff();

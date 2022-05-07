@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// カードの使用時の効果等の様々なクラスにダメージを与えたりするクラス
@@ -8,6 +10,7 @@ using UnityEngine;
 public class CommandManager : MonoBehaviour
 {
     [SerializeField, Tooltip("プレイヤーの攻撃画像を出す時間")] float m_playerAttackSpriteDuration;
+    [SerializeField, Tooltip("コマンド実行間隔")] float m_delayDuration;
     private EnemyManager m_enemyManager;
     private Player m_player;
     private Hand m_hand;
@@ -23,10 +26,15 @@ public class CommandManager : MonoBehaviour
         m_deck = deck;
     }
 
+    //public async void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
+    //{
+    //    await CommandExecuteAsync(commands, isPlayerAnim, enemy);
+    //}
+
     /// <summary>
     /// コマンドの実行
     /// </summary>
-    public void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
+    public /*async UniTask*/ void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
     {
         if (commands.Count == 0)
             return;
@@ -73,63 +81,8 @@ public class CommandManager : MonoBehaviour
                     break;
             }
         }
-        if (isPlayerAnim) m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
+        if (isPlayerAnim)
+            m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
+        //await DOVirtual.DelayedCall(m_delayDuration, () => { });
     }
-    /// <summary>
-    /// カードの使用条件を評価するためのパラメーターを返す
-    /// </summary>
-    /// <param name="evaluationParam"></param>
-    /// <param name="evaluationType"></param>
-    /// <param name="enemy"></param>
-    /// <returns></returns>
-    //public int CardUsedConditionalCheck(CardConditionalEvaluationParam evaluationParam, CardConditionalEvaluationType evaluationType, EnemyBase enemy = null)
-    //{
-    //    int ret;
-    //    CharactorBase cb = default;
-    //    switch (evaluationType)
-    //    {
-    //        case CardConditionalEvaluationType.Player:
-    //            cb = m_player;
-    //            break;
-    //        case CardConditionalEvaluationType.Enemy:
-    //            cb = enemy;
-    //            break;
-    //        case CardConditionalEvaluationType.Hand:
-    //            ret = m_hand.CardParent.childCount;
-    //            return ret;
-    //        case CardConditionalEvaluationType.Discard:
-    //            ret = m_discard.CardParent.childCount;
-    //            return ret;
-    //        case CardConditionalEvaluationType.Deck:
-    //            ret = m_deck.CardParent.childCount;
-    //            return ret;
-    //        default:
-    //            Debug.LogError("例外エラー");
-    //            ret = -1;
-    //            break;
-    //    }
-    //    switch (evaluationParam)
-    //    {
-    //        case CardConditionalEvaluationParam.Power:
-    //            //Debug.LogError("未実装");
-    //            ret = -1;
-    //            break;
-    //        case CardConditionalEvaluationParam.Block:
-    //            ret = cb.CurrentBlock;
-    //            break;
-    //        case CardConditionalEvaluationParam.Life:
-    //            ret = cb.CurrentLife;
-    //            break;
-    //        case CardConditionalEvaluationParam.BuffDebuff:
-    //            //ret = cb.ConditionIDCheck((ConditionID)num)
-    //            //Debug.LogError("未実装");
-    //            ret = -1;
-    //            break;
-    //        default:
-    //            Debug.LogError("例外エラー");
-    //            ret = -1;
-    //            break;
-    //    }
-    //    return ret;
-    //}
 }

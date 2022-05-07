@@ -30,26 +30,26 @@ public enum ConditionID
 }
 public class Weakness : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
-        Command ret = new Command();
-        float f;
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { power };
+        }
+        float ret = default;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                f = command.Power * (1 - 0.25f);
-                ret.Power = (int)f;
-                return ret;
+                ret = power * (1 - 0.25f);
+                return new int[] { (int)ret };
             case EventTiming.Drow:
-                f = command.Power * (1 - 0.25f);
-                ret.Power = (int)f;
-                return ret;
+                ret = power * (1 - 0.25f);
+                return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
                 break;
         }
-        command.Conditions = null;
-        return command;
+        return new int[] { power };
     }
     public override bool IsRemove()
     {
@@ -62,26 +62,26 @@ public class Weakness : Condition
 }
 public class Frail : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        Command ret = new Command();
-        float f;
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { block };
+        }
+        float ret = default;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                f = command.Block * (1 - 0.25f);
-                ret.Block = (int)f;
-                return ret;
+                ret = block * (1 - 0.25f);
+                return new int[] { (int)ret };
             case EventTiming.Drow:
-                f = command.Block * (1 - 0.25f);
-                ret.Block = (int)f;
-                return ret;
+                ret = block * (1 - 0.25f);
+                return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
                 break;
         }
-        command.Conditions = null;
-        return command;
+        return new int[] { block };
     }
     public override bool IsRemove()
     {
@@ -94,18 +94,19 @@ public class Frail : Condition
 }
 public class Strength : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn == 0 || parametorType != ParametorType.Attack) return new int[] { power };
+        }
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                command.Power += Turn;
-                break;
+                return new int[] { power + Turn };
             default:
-                break;
+                return new int[] { power };
         }
-        command.Conditions = null;
-        return command;
     }
     public override bool IsRemove()
     {
@@ -118,18 +119,19 @@ public class Strength : Condition
 }
 public class Agile : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn == 0 || parametorType != ParametorType.Block) return new int[] { block };
+        }
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                command.Block += Turn;
-                break;
+                return new int[] { block + Turn };
             default:
-                break;
+                return new int[] { block };
         }
-        command.Conditions = null;
-        return command;
     }
     public override bool IsRemove()
     {
@@ -142,21 +144,19 @@ public class Agile : Condition
 }
 public class PlateArmor : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
+        if (Turn <= 0 || parametorType != ParametorType.Other) return new int[] { block };
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
-                command.Block += Turn;
-                return command;
+                return new int[] { Turn };
             case EventTiming.Damaged:
                 Turn--;
-                break;
+                return new int[] { 0 };
             default:
-                break;
+                return new int[] { block };
         }
-        command.Conditions = null;
-        return command;
     }
     public override bool IsRemove()
     {
@@ -169,20 +169,19 @@ public class PlateArmor : Condition
 }
 public class StrengthDown : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int value = 0)
     {
-        switch (eventTiming)
+        if (parametorType != ParametorType.Other)
         {
-            case EventTiming.TurnBegin:
-                Command ret = new Command();
-                ConditionSelection cs = new ConditionSelection();
-                ret.Conditions.Add(cs.SetCondition(ConditionID.Strength, Turn));
-                return ret;
-            default:
-                break;
+            if (Turn <= 0 || parametorType != ParametorType.Condition) return new int[] { value };
         }
-        command.Conditions = null;
-        return command;
+        if (eventTiming == EventTiming.TurnBegin && (ConditionID)value == ConditionID.Strength)
+        {
+            int[] ret = new int[] { (int)ConditionID.Strength, -Turn };
+            Turn = 0;
+            return ret;
+        }
+        return new int[] { 0 };
     }
     public override bool IsRemove()
     {
@@ -195,19 +194,14 @@ public class StrengthDown : Condition
 }
 public class Flying : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
-        switch (eventTiming)
+        if (eventTiming == EventTiming.Damaged && parametorType == ParametorType.Attack)
         {
-            case EventTiming.Damaged:
-                float f = command.Power * (1 - 0.5f);
-                command.Power = (int)f;
-                return command;
-            default:
-                break;
+            float ret = power * (1 - 0.25f);
+            return new int[] { (int)ret };
         }
-        command.Conditions = null;
-        return command;
+        else return new int[] { power };
     }
     public override int IsBuff() => 0;
     public override bool IsRemove()
@@ -220,18 +214,16 @@ public class Flying : Condition
 }
 public class Metallicize : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
+        if (Turn <= 0 || parametorType != ParametorType.Other) return new int[] { block };
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
-                command.Block += Turn;
-                return command;
+                return new int[] { Turn };
             default:
-                break;
+                return new int[] { block };
         }
-        command.Conditions = null;
-        return command;
     }
     public override bool IsRemove()
     {
@@ -244,26 +236,26 @@ public class Metallicize : Condition
 }
 public class Activation : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
     {
-        Command ret = new Command();
-        float f;
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { power };
+        }
+        float ret;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                f = command.Power * (1 + 0.25f);
-                ret.Power = (int)f;
-                return ret;
+                ret = power * (1 + 0.5f);
+                return new int[] { (int)ret };
             case EventTiming.Drow:
-                f = command.Power * (1 + 0.25f);
-                ret.Power = (int)f;
-                return ret;
+                ret = power * (1 + 0.5f);
+                return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
                 break;
         }
-        command.Conditions = null;
-        return command;
+        return new int[] { power };
     }
     public override bool IsRemove()
     {
@@ -276,26 +268,26 @@ public class Activation : Condition
 }
 public class Sturdy : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        Command ret = new Command();
-        float f;
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { block };
+        }
+        float ret;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                f = command.Block * (1 + 0.25f);
-                ret.Power = (int)f;
-                return ret;
+                ret = block * (1 + 0.5f);
+                return new int[] { (int)ret };
             case EventTiming.Drow:
-                f = command.Block * (1 + 0.25f);
-                ret.Power = (int)f;
-                return ret;
+                ret = block * (1 + 0.5f);
+                return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
                 break;
         }
-        command.Conditions = null;
-        return command;
+        return new int[] { block };
     }
     public override bool IsRemove()
     {
@@ -308,20 +300,15 @@ public class Sturdy : Condition
 }
 public class Corruption : Condition
 {
-    public override Command Effect(EventTiming eventTiming, Command command)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0)
     {
-        switch (eventTiming)
+        if (parametorType != ParametorType.Other)
+            return new int[] { num };
+        if (eventTiming == EventTiming.TurnEnd)
         {
-            case EventTiming.TurnBegin:
-                Command ret = new Command();
-                ConditionSelection cs = new ConditionSelection();
-                ret.Conditions.Add(cs.SetCondition(ConditionID.Strength, Turn));
-                return ret;
-            default:
-                break;
+            return new int[] { (int)ConditionID.Strength, -Turn };
         }
-        command.Conditions = null;
-        return command;
+        return new int[] { 0 };
     }
 
     public override ConditionID GetConditionID() => ConditionID.Corruption;

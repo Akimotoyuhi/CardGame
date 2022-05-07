@@ -109,18 +109,15 @@ public class EnemyBase : CharactorBase, IDrop
         foreach (var c in m_commands)
         {
             CommandParam cp = (CommandParam)c[0];
-            Command command = new Command();
             switch (cp)//自身のバフを評価して数値を増減させる
             {
                 case CommandParam.Attack:
                     c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Power, c[3]);
-                    command.Power = c[3];
-                    c[3] = m_player.ConditionEffect(EventTiming.Attacked, command).Power;
+                    c[3] = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, c[3]);
                     break;
                 case CommandParam.Block:
                     c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Difence, c[3]);
-                    command.Block = c[3];
-                    c[3] = m_player.ConditionEffect(EventTiming.Attacked, command).Block;
+                    c[3] = ConditionEffect(EventTiming.Attacked, ParametorType.Block, c[3]);
                     break;
                 default:
                     continue;
@@ -132,7 +129,7 @@ public class EnemyBase : CharactorBase, IDrop
     /// <summary>
     /// このターン行う行動を決める
     /// </summary>
-    public void ActionCommand(int turn)
+    public void SelectActionCommand(int turn)
     {
         m_actionCommnad = m_enemyDataBase.CommandSelect(this, turn);
     }
