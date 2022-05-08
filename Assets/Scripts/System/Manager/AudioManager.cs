@@ -6,7 +6,7 @@ using DG.Tweening;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField, Range(0, 1)] float m_volume;
+    [SerializeField] float m_fadeDuration;
     [SerializeField] AudioClip[] m_bgm;
     [SerializeField] AudioSource m_aSource;
     public static AudioManager Instance { get; private set; }
@@ -18,14 +18,24 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        m_aSource.volume = m_volume;
     }
 
     /// <summary>BGMの再生</summary>
     public void Play(BGM bgm)
     {
-        m_aSource.clip = m_bgm[(int)bgm];
-        m_aSource.Play();
+        if (m_aSource.clip)//既にclipが入ってたらフェードする
+        {
+            m_aSource.DOFade(0f, m_fadeDuration).OnComplete(() =>
+            {
+                m_aSource.clip = m_bgm[(int)bgm];
+                m_aSource.DOFade(1f, m_fadeDuration).OnComplete(() => m_aSource.Play());
+            });
+        }
+        else
+        {
+            m_aSource.clip = m_bgm[(int)bgm];
+            m_aSource.Play();
+        }
     }
 
     /// <summary>SEの再生</summary>
