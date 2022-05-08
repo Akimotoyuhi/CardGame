@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
         BattleManager.Instance.Setup();
         SetGameInfoPanel();
         m_relicData.Setup();
+        AudioManager.Instance.Play(BGM.Battle1);
     }
 
     /// <summary>

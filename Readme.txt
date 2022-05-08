@@ -36,8 +36,12 @@ HPバーの下にアイコンがあったらマウスカーソルをその位置
 プレイヤー、敵、背景
 有賀玲さん
 
-６.お借りした画像
+６.お借りした素材
+画像
 illustimage.com/
 assetstore.unity.com/packages/2d/gui/icons/64-flat-game-icons-36440
 azukichi.net
 https://www.irasutoya.com/
+
+音楽
+https://maou.audio

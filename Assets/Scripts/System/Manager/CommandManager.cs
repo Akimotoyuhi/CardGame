@@ -34,7 +34,7 @@ public class CommandManager : MonoBehaviour
     /// <summary>
     /// コマンドの実行
     /// </summary>
-    public /*async UniTask*/ void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
+    public async UniTask CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
     {
         if (commands.Count == 0)
             return;
@@ -83,6 +83,6 @@ public class CommandManager : MonoBehaviour
         }
         if (isPlayerAnim)
             m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
-        //await DOVirtual.DelayedCall(m_delayDuration, () => { });
+        await DOVirtual.DelayedCall(m_delayDuration, () => { }).AsyncWaitForCompletion();
     }
 }
