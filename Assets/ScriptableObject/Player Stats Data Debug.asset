@@ -18,20 +18,20 @@ MonoBehaviour:
     m_attackedSprite:
     - {fileID: 21300000, guid: e26d79636a7c9d7418bcd50a2d833652, type: 3}
     m_gameoverSprite: {fileID: 21300000, guid: e208fa10c22b8e147a93028cb2a3adba, type: 3}
-  m_maxHp: 70
+  m_maxHp: 1
   m_cardData:
   - m_cardID: 0
     m_upgrade: 0
-  - m_cardID: 3
+  - m_cardID: 0
     m_upgrade: 0
-  - m_cardID: 5
+  - m_cardID: 0
     m_upgrade: 0
   - m_cardID: 1
     m_upgrade: 0
-  - m_cardID: 9
+  - m_cardID: 1
     m_upgrade: 0
-  - m_cardID: 13
+  - m_cardID: 1
     m_upgrade: 0
-  - m_cardID: 18
+  - m_cardID: 12
     m_upgrade: 0
   m_relicData: []

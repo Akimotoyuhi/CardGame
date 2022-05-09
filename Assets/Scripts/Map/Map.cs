@@ -53,6 +53,7 @@ public class Map : MonoBehaviour
             m_nowMapData = m_mapData.GetMapData((Act)m_act);
         m_mapID = m_nowMapData.MapID;
         m_background.sprite = m_nowMapData.Background;
+        AudioManager.Instance.Play(m_nowMapData.MapBgm);
     }
     /// <summary>
     /// セルの生成と配置
@@ -166,15 +167,14 @@ public class Map : MonoBehaviour
     }
 
     /// <summary>
-    /// マップを踏破したかの判定<br/>
-    /// 後に変える
+    /// マップを踏破したかの判定
     /// </summary>
     public void ClearCheck(int floor)
     {
         if (floor == 0) return;
         if (floor % m_sector == 0)
         {
-            if (m_crearAct == m_act)
+            if (m_crearAct == m_act)//最後まで到達したらクリア
                 GameManager.Instance.Gameover(true);
             int i = 1;
             while (true)

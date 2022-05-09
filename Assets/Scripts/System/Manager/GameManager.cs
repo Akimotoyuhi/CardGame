@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour
         BattleManager.Instance.Setup();
         SetGameInfoPanel();
         m_relicData.Setup();
-        AudioManager.Instance.Play(BGM.Battle1);
     }
 
     /// <summary>
@@ -110,6 +109,7 @@ public class GameManager : MonoBehaviour
                     BattleManager.Instance.SetCanvas();
                     break;
                 case CellState.Boss:
+                    AudioManager.Instance.Play(BGM.Boss1);
                     BattleManager.Instance.BattleStart(EnemyType.Boss, mapID);
                     BattleManager.Instance.SetCanvas();
                     break;
@@ -311,6 +311,7 @@ public class GameManager : MonoBehaviour
     public void Gameover(bool isCrear = false)
     {
         BattleManager.Instance.IsGame = false;
+        AudioManager.Instance.Play(BGM.None);
         Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ =>
         {
             EffectManager.Instance.Fade(Color.black, m_gameoverFadeDuration, () =>

@@ -45,10 +45,14 @@ public class MapDataBase
     [SerializeField, Tooltip("“K‰žAct")] Act m_act;
     [SerializeField] MapID m_mapID;
     [SerializeField] Sprite m_background;
+    [SerializeField] BGM m_mapBgm;
+    [SerializeField] BGM m_bossBgm;
     [SerializeField] DetailSettings m_detailSetting;
     public Act Act => m_act;
     public MapID MapID => m_mapID;
     public Sprite Background => m_background;
+    public BGM MapBgm => m_mapBgm;
+    public BGM BossBgm => m_bossBgm;
     public DetailSettings GetDetailSetting => m_detailSetting;
     [System.Serializable]
     public class DetailSettings

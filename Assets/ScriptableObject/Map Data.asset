@@ -17,6 +17,8 @@ MonoBehaviour:
     m_act: 1
     m_mapID: 0
     m_background: {fileID: 0}
+    m_mapBgm: 0
+    m_bossBgm: 2
     m_detailSetting:
       m_restMinIndex: 1
       m_restMaxIndex: 5
@@ -30,6 +32,8 @@ MonoBehaviour:
     m_act: 2
     m_mapID: 1
     m_background: {fileID: 0}
+    m_mapBgm: 1
+    m_bossBgm: 2
     m_detailSetting:
       m_restMinIndex: 1
       m_restMaxIndex: 5

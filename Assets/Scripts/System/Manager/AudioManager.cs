@@ -9,11 +9,14 @@ using DG.Tweening;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField] AudioSource m_source;
     [SerializeField] float m_fadeDuration;
     [SerializeField] AudioClip[] m_bgm;
     [SerializeField] SEAudio m_seAudioPrefab;
-    [SerializeField] AudioSource m_source;
     private List<SEAudio> m_seSources;
+    private BGM m_nowPlaying;
+    /// <summary>現在再生中のBGM</summary>
+    public BGM NowPlaying => m_nowPlaying;
     public static AudioManager Instance { get; private set; }
 
     private void Awake()
@@ -28,12 +31,21 @@ public class AudioManager : MonoBehaviour
     /// <summary>BGMの再生</summary>
     public void Play(BGM bgm)
     {
+        m_nowPlaying = bgm;
         if (m_source.clip)//既にclipが入ってたらフェードする
         {
             m_source.DOFade(0f, m_fadeDuration).OnComplete(() =>
             {
-                m_source.clip = m_bgm[(int)bgm];
-                m_source.DOFade(1f, m_fadeDuration).OnComplete(() => m_source.Play());
+                if (bgm == BGM.None)
+                {
+                    m_source.Stop();
+                    m_source.clip = null;
+                }
+                else
+                {
+                    m_source.clip = m_bgm[(int)bgm];
+                    m_source.DOFade(1f, m_fadeDuration).OnComplete(() => m_source.Play());
+                }
             });
         }
         else
@@ -51,6 +63,7 @@ public class AudioManager : MonoBehaviour
 
 public enum BGM
 {
+    None = -1,
     Battle1,
     Battle2,
     Boss1,
