@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "RelicData")]
 public class RelicData : ScriptableObject
 {
     [SerializeField] List<RelicDataBase> m_relicDataBases;
+    [SerializeField, Range(0, 100)] int m_rareProbability;
+    [SerializeField, Range(0, 100)] int m_superRareProbability;
+    public List<RelicDataBase> DataBases => m_relicDataBases;
     public void Setup()
     {
         for (int i = 0; i < m_relicDataBases.Count; i++)
@@ -13,7 +17,39 @@ public class RelicData : ScriptableObject
             m_relicDataBases[i].Setup((RelicID)i);
         }
     }
-    public List<RelicDataBase> DataBases => m_relicDataBases;
+    /// <summary>
+    /// レリックデータの取得
+    /// </summary>
+    public RelicDataBase GetRelic(EnemyType enemy)
+    {
+        switch (enemy)
+        {
+            case EnemyType.Elite:
+                int r = Random.Range(0, 100);
+                RelicRarity rarity;
+                if (r < m_superRareProbability)
+                    rarity = RelicRarity.SuperRare;
+                else if (r < m_rareProbability)
+                    rarity = RelicRarity.Rare;
+                else
+                    rarity = RelicRarity.Common;
+                return GetRelic(rarity);
+            case EnemyType.Boss:
+                return GetRelic(RelicRarity.Boss);
+            default:
+                return null;
+        }
+    }
+    /// <summary>
+    /// レリックデータのレアリティを指定して取得
+    /// </summary>
+    public RelicDataBase GetRelic(RelicRarity rarity)
+    {
+        var list = m_relicDataBases.Where((relic) => relic.Rarity == rarity).ToList();
+        int r = Random.Range(0, m_relicDataBases.Count);
+        return m_relicDataBases[r];
+    }
+    
 }
 [System.Serializable]
 public class RelicDataBase
@@ -21,11 +57,13 @@ public class RelicDataBase
     [SerializeField] string m_name;
     [SerializeField, TextArea] string m_tooltip;
     [SerializeField] Sprite m_sprite;
+    [SerializeField] RelicRarity m_rarity;
     [SerializeField] RelicCommand m_command;
-    
+
     public string Name => m_name;
     public string Tooltip => m_tooltip;
     public Sprite Sprite => m_sprite;
+    public RelicRarity Rarity => m_rarity;
     public RelicCommand Commands => m_command;
     public RelicID RelicID { get; private set; }
     public void Setup(RelicID relicID)
@@ -93,5 +131,14 @@ public enum RelicTriggerTiming
 public enum RelicID
 {
     StoneOfCourage,
+}
+/// <summary>レリックのレアリティ</summary>
+public enum RelicRarity
+{
+    Common,
+    Rare,
+    SuperRare,
+    Boss,
+    Event,
 }
 #endregion
