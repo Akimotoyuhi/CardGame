@@ -52,7 +52,6 @@ public class CardData : ScriptableObject
         {
             rarity = Rarity.Common;
         }
-        Debug.Log($"報酬レアリティ{rarity}");
         return GetCardRarityRandom(rarity, upgradeNum);
     }
     /// <summary>

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// ƒŒƒŠƒbƒN‚ÌŽÀ‘Ì
 /// </summary>
-public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
+public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField] Image m_image;
     private string m_name;
@@ -43,6 +43,7 @@ public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         m_image.sprite = dataBase.Sprite;
         m_commands = dataBase.Commands.Command;
         m_conditional = dataBase.Commands.Conditional;
+        m_id = dataBase.RelicID;
     }
 
     public void Execute(RelicTriggerTiming triggerTiming, ParametorType parametorType, int num)
@@ -70,9 +71,19 @@ public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         EffectManager.Instance.RemoveUIText(PanelType.Info);
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        //‚±‚ê‚ª–³‚¢‚ÆOnPointerUp‚ªŒÄ‚Î‚ê‚È‚¢‚Ì‚Å
+    }
+
     public void OnPointerUp(PointerEventData eventData)
     {
-        m_reward.OnClickRelic(m_id);
+        if (m_reward)
+        {
+            m_reward.OnClickRelic(m_id);
+            m_reward = null;
+            EffectManager.Instance.RemoveUIText(PanelType.Info);
+        }
     }
     #endregion
 }

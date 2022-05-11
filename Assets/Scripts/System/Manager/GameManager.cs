@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
         SetViewRelic(m_relicData.DataBases[(int)relicID]);
     }
 
-    /// <summary>レリック生成</summary>
+    /// <summary>レリックを画面上に生成</summary>
     private void SetViewRelic(RelicDataBase relicData)
     {
         Relic rel = Instantiate(m_relicPrefab);

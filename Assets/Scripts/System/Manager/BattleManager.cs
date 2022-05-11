@@ -184,13 +184,16 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 報酬画面終了
+    /// 新規カードの保存
     /// </summary>
     public void GetCard(CardID cardId, int isUpgrade)
     {
         DataManager.Instance.AddCards(cardId, isUpgrade);
     }
 
+    /// <summary>
+    /// 新規レリックの保存
+    /// </summary>
     public void GetRelic(RelicID relic)
     {
         GameManager.Instance.SaveRelicData(relic);
@@ -294,7 +297,6 @@ public class BattleManager : MonoBehaviour
     {
         m_hand.AllCast();
         GameManager.Instance.RelicExecute(RelicTriggerTiming.TurnEnd, ParametorType.Other, 0);
-        //m_enemyManager.
         m_player.TurnEnd();
         m_currentTurn++;
     }
@@ -347,7 +349,6 @@ public class BattleManager : MonoBehaviour
 
     /// <summary>
     /// 手札の全カードのテキストを更新させる
-    /// <br/>カード使用時に呼ばれる
     /// </summary>
     public void CardCast()
     {

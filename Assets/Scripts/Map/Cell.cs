@@ -107,6 +107,7 @@ public class Cell : MonoBehaviour
                 break;
             case CellState.Elite:
                 m_image.color = m_eliteColor;
+                m_viewText.text = "エリート";
                 break;
         }
         int f = AdjustmentFloorNum();

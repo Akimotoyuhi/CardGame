@@ -26,7 +26,7 @@ MonoBehaviour:
       m_restProbability: 4
       m_eliteMinIndex: -1
       m_eliteMaxIndex: -1
-      m_eliteAbsolutelyIndex: -1
+      m_eliteAbsolutelyIndex: 1
       m_eliteProbability: 4
   - m_name: "\u5FAE\u7761\u306E\u6CBC\u5730"
     m_act: 2

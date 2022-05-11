@@ -32,7 +32,7 @@ public class Reward : MonoBehaviour
     /// </summary>
     private void SetCardRewardView()
     {
-        if (m_cardDatas != null)
+        if (m_cardDatas != null && m_cardDatas[0] != null)
         {
             m_panel.SetActive(true);
             foreach (var data in m_cardDatas)
@@ -48,6 +48,7 @@ public class Reward : MonoBehaviour
         {
             SetRelicRewardView();
         }
+        m_cardDatas.Clear();
     }
 
     /// <summary>
@@ -55,7 +56,7 @@ public class Reward : MonoBehaviour
     /// </summary>
     private void SetRelicRewardView()
     {
-        if (m_relicDatas != null)
+        if (m_relicDatas != null && m_relicDatas[0] != null)
         {
             m_panel.SetActive(true);
             foreach (var data in m_relicDatas)
@@ -71,6 +72,7 @@ public class Reward : MonoBehaviour
         {
             m_nextMethod();
         }
+        m_relicDatas.Clear();
     }
 
     /// <summary>
