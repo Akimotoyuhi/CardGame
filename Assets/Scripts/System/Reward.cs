@@ -20,6 +20,10 @@ public class Reward : MonoBehaviour
     public List<CardInfomationData> CardData => m_cardDatas;
     public List<RelicDataBase> RelicData => m_relicDatas;
 
+    /// <summary>
+    /// •ñV‰æ–Ê•\¦
+    /// </summary>
+    /// <param name="nextMethod"></param>
     public void ShowRewardPanel(System.Action nextMethod)
     {
         RewardDisabled();

@@ -26,15 +26,15 @@ public class CommandManager : MonoBehaviour
         m_deck = deck;
     }
 
-    public async void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
+    public void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
     {
-        await CommandExecuteAsync(commands, isPlayerAnim, enemy);
+        CommandExecuteAsync(commands, isPlayerAnim, enemy);
     }
 
     /// <summary>
     /// コマンドの実行
     /// </summary>
-    public async UniTask CommandExecuteAsync(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
+    private void CommandExecuteAsync(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
     {
         if (commands.Count == 0)
             return;
@@ -83,6 +83,8 @@ public class CommandManager : MonoBehaviour
         }
         if (isPlayerAnim)
             m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
-        await DOVirtual.DelayedCall(m_delayDuration, () => { }).AsyncWaitForCompletion();
+        //Debug.Log("待機");
+        //await UniTask.Delay(System.TimeSpan.FromSeconds(m_delayDuration));
+        //Debug.Log("再開");
     }
 }

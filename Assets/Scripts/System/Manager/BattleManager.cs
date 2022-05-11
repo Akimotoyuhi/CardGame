@@ -400,7 +400,8 @@ public class BattleManager : MonoBehaviour
         Sequence s = DOTween.Sequence();
         await s.AppendInterval(m_cardAddedShowDuration)
             .Append(rt.DOAnchorPos(moveingTo, 0.1f))
-            .OnComplete(() => Destroy(card.gameObject));
+            .OnComplete(() => Destroy(card.gameObject))
+            .AsyncWaitForCompletion();
     }
 
     /// <summary>カードのドラッグ中に各ドロップ対象に枠を表示させる</summary>
