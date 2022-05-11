@@ -46,7 +46,7 @@ MonoBehaviour:
       - id: 2
       m_conditional:
       - m_timing: 0
-        m_parametorType: 0
+        m_parametorType: 4
         m_maxTriggerNum: 1
   references:
     version: 1

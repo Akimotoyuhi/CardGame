@@ -880,7 +880,7 @@ MonoBehaviour:
       m_name: "\u7DCA\u6025\u9632\u5FA1"
       m_cost: 1
       m_image: {fileID: 21300000, guid: 4ac5fb8d933238b4c8574bf420ae3605, type: 3}
-      m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306EHP\u304C40\u4EE5\u4E0B\u306E\u5834\u5408\u306F\u66F4\u306B{leg3}\u30D6\u30ED\u30C3\u30AF"
+      m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306EHP\u304C40\u4EE5\u4E0B\u306E\u5834\u5408\u306F\u66F4\u306B{leg1}\u30D6\u30ED\u30C3\u30AF"
       m_rarity: 0
       m_commands:
       - m_command:
