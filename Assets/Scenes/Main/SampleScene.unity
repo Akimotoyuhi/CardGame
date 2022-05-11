@@ -656,7 +656,8 @@ MonoBehaviour:
   m_allDropTarget: {fileID: 199230250}
   m_reward: {fileID: 1644228800}
   m_battleUIController: {fileID: 40818538}
-  m_rewardNum: 3
+  m_cardRewardNum: 3
+  m_relicRewardNum: 1
   m_cardAddedShowDuration: 1
   m_commandManager: {fileID: 164370313}
   m_camera: {fileID: 706788427}
@@ -11406,9 +11407,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panel: {fileID: 221237994}
-  m_uiCard: {fileID: -9154361223724921267, guid: ad5ff9493237f6f44a07a22bff2b1928,
+  m_cardPrefab: {fileID: -9154361223724921267, guid: ad5ff9493237f6f44a07a22bff2b1928,
     type: 3}
-  m_cardsParent: {fileID: 26662148}
+  m_parent: {fileID: 26662148}
+  m_relicPrefab: {fileID: 8430995766483893287, guid: 47c48b49b599abd449d8574823b780bc,
+    type: 3}
 --- !u!1 &1722569901
 GameObject:
   m_ObjectHideFlags: 0
@@ -11819,7 +11822,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.6667091
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12101,7 +12104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000023702876}
+  m_AnchoredPosition: {x: 0, y: 0.0000076293945}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561

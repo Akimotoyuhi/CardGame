@@ -6,9 +6,10 @@ using System.Linq;
 [CreateAssetMenu(fileName = "RelicData")]
 public class RelicData : ScriptableObject
 {
-    [SerializeField] List<RelicDataBase> m_relicDataBases;
     [SerializeField, Range(0, 100)] int m_rareProbability;
     [SerializeField, Range(0, 100)] int m_superRareProbability;
+    [SerializeField] List<RelicDataBase> m_relicDataBases;
+    
     public List<RelicDataBase> DataBases => m_relicDataBases;
     public void Setup()
     {

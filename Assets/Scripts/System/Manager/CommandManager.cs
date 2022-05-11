@@ -26,15 +26,15 @@ public class CommandManager : MonoBehaviour
         m_deck = deck;
     }
 
-    //public async void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
-    //{
-    //    await CommandExecuteAsync(commands, isPlayerAnim, enemy);
-    //}
+    public async void CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
+    {
+        await CommandExecuteAsync(commands, isPlayerAnim, enemy);
+    }
 
     /// <summary>
     /// コマンドの実行
     /// </summary>
-    public async UniTask CommandExecute(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
+    public async UniTask CommandExecuteAsync(List<int[]> commands, bool isPlayerAnim, EnemyBase enemy = null)
     {
         if (commands.Count == 0)
             return;

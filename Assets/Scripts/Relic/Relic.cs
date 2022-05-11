@@ -7,39 +7,54 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// ƒŒƒŠƒbƒN‚ÌŽÀ‘Ì
 /// </summary>
-public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
     [SerializeField] Image m_image;
     private string m_name;
     private string m_tooltip;
     private int m_triggerCount;
+    private RelicID m_id;
+    private Reward m_reward;
     private List<int[]> m_commands;
     private List<RelicConditional> m_conditional;
 
-    public void Setup(RelicDataBase dataBase = null)
+    public void Setup(RelicDataBase dataBase)
     {
         if (dataBase != null)
         {
-            m_name = dataBase.Name;
-            m_tooltip = dataBase.Tooltip;
-            m_image.sprite = dataBase.Sprite;
-            m_commands = dataBase.Commands.Command;
-            m_conditional = dataBase.Commands.Conditional;
+            SetParam(dataBase);
         }
         m_triggerCount = 0;
+    }
+
+    public void Setup(RelicDataBase dataBase, Reward reward)
+    {
+        if (dataBase != null)
+        {
+            SetParam(dataBase);
+        }
+        m_reward = reward;
+    }
+
+    private void SetParam(RelicDataBase dataBase)
+    {
+        m_name = dataBase.Name;
+        m_tooltip = dataBase.Tooltip;
+        m_image.sprite = dataBase.Sprite;
+        m_commands = dataBase.Commands.Command;
+        m_conditional = dataBase.Commands.Conditional;
     }
 
     public void Execute(RelicTriggerTiming triggerTiming, ParametorType parametorType, int num)
     {
         foreach (var cond in m_conditional)
         {
+            //if (cond.Evaluation())
             if (!cond.Conditional(m_triggerCount, triggerTiming, parametorType))
             {
-                Debug.Log("false");
                 return;
             }
         }
-        Debug.Log("true");
         m_triggerCount++;
         BattleManager.Instance.CommandManager.CommandExecute(m_commands, false);
     }
@@ -53,6 +68,11 @@ public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         EffectManager.Instance.RemoveUIText(PanelType.Info);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        m_reward.OnClickRelic(m_id);
     }
     #endregion
 }

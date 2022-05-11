@@ -55,8 +55,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Reward m_reward;
     /// <summary>戦闘時のUI管理クラス</summary>
     [SerializeField] BattleUIController m_battleUIController;
-    /// <summary>報酬枚数</summary>
-    [SerializeField] int m_rewardNum = 3;
+    /// <summary>カードの報酬枚数</summary>
+    [SerializeField] int m_cardRewardNum = 3;
+    /// <summary>レリックの報酬個数</summary>
+    [SerializeField] int m_relicRewardNum = 3;
     /// <summary>カード追加コマンドが実行されたときに画面中央で止める秒数</summary>
     [SerializeField] float m_cardAddedShowDuration = 0.5f;
     [SerializeField] CommandManager m_commandManager;
@@ -64,6 +66,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Camera m_camera;
     /// <summary>カードデータ</summary>
     private CardData m_cardData;
+    /// <summary>レリックデータ</summary>
+    private RelicData m_relicData;
     /// <summary>カードのプレハブ</summary>
     private BlankCard m_cardPrefab;
     /// <summary>ドラッグ中のカードのUseType保存用</summary>
@@ -91,6 +95,7 @@ public class BattleManager : MonoBehaviour
     public int DeckChildCount => m_deck.CardParent.childCount;
     public int HandChildCount => m_hand.CardParent.childCount;
     public int DiscardChildCount => m_discard.CardParent.childCount;
+    public Player Player => m_player;
     #endregion
 
     private void Awake()
@@ -103,6 +108,7 @@ public class BattleManager : MonoBehaviour
         m_cardData = GameManager.Instance.CardData;
         m_cardPrefab = GameManager.Instance.CardPrefab;
         m_cardData.Setup();
+        m_relicData = GameManager.Instance.RelicData;
         Vector2 size = m_cardPrefab.gameObject.GetRectTransform().sizeDelta;
         m_deck.GridLayoutGroupSetting(size);
         m_discard.GridLayoutGroupSetting(size);
@@ -170,20 +176,24 @@ public class BattleManager : MonoBehaviour
         m_discard.CardDelete();
         m_deck.CardDelete();
         m_hand.CardDelete();
-        for (int i = 0; i < m_rewardNum; i++)
-        {
-            m_reward.RewardView(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
-        }
+        for (int i = 0; i < m_cardRewardNum; i++)
+            m_reward.CardData.Add(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
+        for (int i = 0; i < m_relicRewardNum; i++)
+            m_reward.RelicData.Add(m_relicData.GetRelic(m_encountEnemyType));
+        m_reward.ShowRewardPanel(() => GameManager.Instance.FloorFinished(m_player));
     }
 
     /// <summary>
     /// 報酬画面終了
     /// </summary>
-    public void RewardEnd(int getCardId, int isUpgrade)
+    public void GetCard(CardID cardId, int isUpgrade)
     {
-        DataManager.Instance.AddCards(getCardId, isUpgrade);
-        m_reward.RewardDisabled();
-        GameManager.Instance.FloorFinished(m_player);
+        DataManager.Instance.AddCards(cardId, isUpgrade);
+    }
+
+    public void GetRelic(RelicID relic)
+    {
+        GameManager.Instance.SaveRelicData(relic);
     }
 
     /// <summary>

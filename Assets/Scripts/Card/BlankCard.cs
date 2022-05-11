@@ -287,7 +287,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (m_cardState == CardState.Reward)
         {
             if (!m_reward) return;
-            m_reward.OnClick(m_cardID, m_upgrade);
+            m_reward.OnClickCard(m_cardID, m_upgrade);
         }
         else if (m_cardState == CardState.Upgrade)
         {

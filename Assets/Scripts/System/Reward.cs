@@ -8,36 +8,99 @@ public class Reward : MonoBehaviour
     /// <summary>報酬画面パネル</summary>
     [SerializeField] GameObject m_panel;
     /// <summary>表示するカードのプレハブ</summary>
-    [SerializeField] BlankCard m_uiCard;
-    /// <summary>カードの親オブジェクト(レイアウトグループ用)</summary>
-    [SerializeField] Transform m_cardsParent;
+    [SerializeField] BlankCard m_cardPrefab;
+    /// <summary>親オブジェクト</summary>
+    [SerializeField] Transform m_parent;
+    /// <summary>表示するレリックのプレハブ</summary>
+    [SerializeField] Relic m_relicPrefab;
+    private List<CardInfomationData> m_cardDatas = new List<CardInfomationData>();
+    private List<RelicDataBase> m_relicDatas = new List<RelicDataBase>();
+    private System.Action m_nextMethod;
     public RectTransform CanvasRectTransform { private get; set; }
+    public List<CardInfomationData> CardData => m_cardDatas;
+    public List<RelicDataBase> RelicData => m_relicDatas;
+
+    public void ShowRewardPanel(System.Action nextMethod)
+    {
+        RewardDisabled();
+        m_nextMethod = nextMethod;
+        SetCardRewardView();
+    }
 
     /// <summary>
-    /// 報酬画面表示
+    /// カード用報酬画面表示
     /// </summary>
-    public void RewardView(CardInfomationData cardDataBase)
+    private void SetCardRewardView()
     {
-        m_panel.SetActive(true);
-        BlankCard card = Instantiate(m_uiCard);
-        card.transform.SetParent(m_cardsParent, false);
-        card.transform.localScale = Vector2.one;
-        //obj.GetRectTransform().anchoredPosition = Vector3.zero;
-        card.SetInfo(cardDataBase, 0, this);
-        card.CardState = CardState.Reward;
+        if (m_cardDatas != null)
+        {
+            m_panel.SetActive(true);
+            foreach (var data in m_cardDatas)
+            {
+                BlankCard card = Instantiate(m_cardPrefab);
+                card.transform.SetParent(m_parent, false);
+                card.transform.localScale = Vector2.one;
+                card.SetInfo(data, 0, this);
+                card.CardState = CardState.Reward;
+            }
+        }
+        else
+        {
+            SetRelicRewardView();
+        }
     }
 
-    public void OnClick(CardID id, int upgrade)
+    /// <summary>
+    /// レリック用報酬画面
+    /// </summary>
+    private void SetRelicRewardView()
     {
-        BattleManager.Instance.RewardEnd((int)id, upgrade);
-        m_panel.SetActive(false);
+        if (m_relicDatas != null)
+        {
+            m_panel.SetActive(true);
+            foreach (var data in m_relicDatas)
+            {
+                Relic relic = Instantiate(m_relicPrefab);
+                relic.transform.SetParent(m_parent, false);
+                //relic.transform.localScale = relic.transform.localScale * 2;
+                relic.gameObject.GetRectTransform().sizeDelta = relic.gameObject.GetRectTransform().sizeDelta * 2;
+                relic.Setup(data, this);
+            }
+        }
+        else
+        {
+            m_nextMethod();
+        }
     }
 
+    /// <summary>
+    /// 報酬カードをクリックした時
+    /// </summary>
+    public void OnClickCard(CardID id, int upgrade)
+    {
+        BattleManager.Instance.GetCard(id, upgrade);
+        RewardDisabled();
+        SetRelicRewardView();
+    }
+
+    /// <summary>
+    /// 報酬レリックをクリックした時
+    /// </summary>
+    public void OnClickRelic(RelicID relicId)
+    {
+        BattleManager.Instance.GetRelic(relicId);
+        RewardDisabled();
+        m_nextMethod();
+    }
+
+    /// <summary>
+    /// 報酬画面を閉じる
+    /// </summary>
     public void RewardDisabled()
     {
-        for (int i = 0; i < m_cardsParent.childCount; i++)
+        for (int i = 0; i < m_parent.childCount; i++)
         {
-            Destroy(m_cardsParent.GetChild(i).gameObject);
+            Destroy(m_parent.GetChild(i).gameObject);
         }
         m_panel.SetActive(false);
     }

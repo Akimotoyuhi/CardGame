@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public int TotalRisk => DataManager.Instance.TotalRisk;
     public CardData CardData => m_cardData;
     public BlankCard CardPrefab => m_cardPrefab;
+    public RelicData RelicData => m_relicData;
     public List<Relic> HaveRelics => m_haveRelics;
     public int Heal { set => DataManager.Instance.CurrentLife += value; }
     public void CardUpgrade(int index) => DataManager.Instance.CardUpgrade(index);
@@ -146,7 +147,7 @@ public class GameManager : MonoBehaviour
         if (cardsID == null) return;
         for (int i = 0; i < cardsID.Length; i++)
         {
-            DataManager.Instance.AddCards(cardsID[i], isCardUpgrade[i]);
+            DataManager.Instance.AddCards((CardID)cardsID[i], isCardUpgrade[i]);
         }
     }
 
@@ -171,7 +172,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var r in HaveRelics)
         {
-            r.Setup();
+            r.Setup(null);
         }
     }
 

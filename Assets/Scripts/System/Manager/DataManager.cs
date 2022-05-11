@@ -55,9 +55,9 @@ namespace Mastar
         /// <summary>カードの追加</summary>
         /// <param name="id"></param>
         /// <param name="isUpgrade"></param>
-        public void AddCards(int id, int isUpgrade)
+        public void AddCards(CardID id, int isUpgrade)
         {
-            int[] vs = new int[] { id, isUpgrade };
+            int[] vs = new int[] { (int)id, isUpgrade };
             m_cards.Add(vs);
         }
         /// <summary>カードアップグレード</summary>
