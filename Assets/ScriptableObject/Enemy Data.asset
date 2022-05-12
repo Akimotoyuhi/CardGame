@@ -715,7 +715,7 @@ MonoBehaviour:
     0000000F:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 10
+        m_power: 7
         m_useType: 0
         m_particleID: 0
     00000010:

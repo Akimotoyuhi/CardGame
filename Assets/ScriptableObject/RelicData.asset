@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RelicData
   m_EditorClassIdentifier: 
   m_rareProbability: 30
-  m_superRareProbability: 3
+  m_superRareProbability: 5
   m_relicDataBases:
   - m_name: "\u52C7\u6C17\u306E\u77F3"
     m_tooltip: "\u6301\u3063\u3066\u3044\u308B\u3060\u3051\u3067\u52C7\u6C17\u304C\u6E67\u3044\u3066\u304F\u308B\u6C17\u304C\u3059\u308B\u4E0D\u601D\u8B70\u306A\u8D64\u3044\u77F3\n\u6226\u95D8\u958B\u59CB\u6642\u81EA\u8EAB\u306B\u6D3B\u6027\u5316\u30922\u4ED8\u4E0E\u3059\u308B"

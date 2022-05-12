@@ -47,8 +47,8 @@ public class RelicData : ScriptableObject
     public RelicDataBase GetRelic(RelicRarity rarity)
     {
         var list = m_relicDataBases.Where((relic) => relic.Rarity == rarity).ToList();
-        int r = Random.Range(0, m_relicDataBases.Count);
-        return m_relicDataBases[r];
+        int r = Random.Range(0, list.Count);
+        return list[r];
     }
     
 }
