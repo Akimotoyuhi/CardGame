@@ -12,17 +12,12 @@ public class SEAudio : MonoBehaviour
     /// <summary>Audio‚ÌI—¹”»’è</summary>
     public bool IsFinishd { get => m_isFinishd; }
 
+    /// <summary>Ä¶</summary>
     public void PlayAudio(AudioClip clip)
     {
         m_isFinishd = false;
         float time = clip.length;
-        Debug.Log($"Ä¶ŠÔ{time}, AudioName{clip.name}");
         m_source.PlayOneShot(clip);
-        Debug.Log("Ä¶");
-        DOVirtual.DelayedCall(time, () =>
-        {
-            Debug.Log("’â~");
-            m_isFinishd = true;
-        });
+        DOVirtual.DelayedCall(time, () => m_isFinishd = true);
     }
 }

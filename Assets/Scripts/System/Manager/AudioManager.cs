@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip[] m_bgmClips;
     [SerializeField] AudioClip[] m_seClips;
     [SerializeField] SEAudio m_seAudioPrefab;
-    private List<SEAudio> m_seSources = new List<SEAudio>();
+    private List<SEAudio> m_sePools = new List<SEAudio>();
     private BGM m_nowPlaying;
     /// <summary>åªç›çƒê∂íÜÇÃBGM</summary>
     public BGM NowPlaying => m_nowPlaying;
@@ -58,16 +58,16 @@ public class AudioManager : MonoBehaviour
     {
         if (se == SE.None)
             return;
-        foreach (var item in m_seSources)
+        foreach (var item in m_sePools)
         {
-            if (item.IsFinishd)
+            if (item.IsFinishd)//çƒê∂çœÇ›SEÇ™Ç†ÇÈÇ»ÇÁÇªÇÍÇégÇ§
             {
                 item.PlayAudio(m_seClips[(int)se]);
                 return;
             }
         }
         SEAudio audio = Instantiate(m_seAudioPrefab);
-        m_seSources.Add(audio);
+        m_sePools.Add(audio);
         audio.PlayAudio(m_seClips[(int)se]);
     }
 }

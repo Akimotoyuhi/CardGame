@@ -57,6 +57,7 @@ public class CustomButton : MonoBehaviour
         {
             m_mask.SetActive(true);
             m_text.text = m_conflictText;
+            m_text.color = Color.red;
             m_isSelected = false;
             return;
         }
@@ -64,6 +65,7 @@ public class CustomButton : MonoBehaviour
         {
             m_mask.SetActive(true);
             m_text.text = m_selectedText;
+            m_text.color = Color.white;
             m_isConflict = false;
             return;
         }

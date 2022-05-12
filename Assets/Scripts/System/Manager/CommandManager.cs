@@ -80,7 +80,7 @@ public class CommandManager : MonoBehaviour
                 default:
                     break;
             }
-            AudioManager.Instance.Play(SE.System);
+            //AudioManager.Instance.Play(SE.System);
         }
         if (isPlayerAnim)
             m_player.AttackSpriteChange(AttackSpriteID.Slash, m_playerAttackSpriteDuration);
