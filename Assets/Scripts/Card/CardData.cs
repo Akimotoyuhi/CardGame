@@ -387,7 +387,9 @@ public enum CardID
     /// <summary>瓦礫</summary>
     Rubble,
     /// <summary>緊急防御</summary>
-    EmergencyBlock
+    EmergencyBlock,
+    /// <summary>タックル</summary>
+    Tackle,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

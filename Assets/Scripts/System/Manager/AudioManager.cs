@@ -22,7 +22,6 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake");
         Instance = this;
     }
 
