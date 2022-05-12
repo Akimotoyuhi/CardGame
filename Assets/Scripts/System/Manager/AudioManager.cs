@@ -11,9 +11,10 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioSource m_source;
     [SerializeField] float m_fadeDuration;
-    [SerializeField] AudioClip[] m_bgm;
+    [SerializeField] AudioClip[] m_bgmClips;
+    [SerializeField] AudioClip[] m_seClips;
     [SerializeField] SEAudio m_seAudioPrefab;
-    private List<SEAudio> m_seSources;
+    private List<SEAudio> m_seSources = new List<SEAudio>();
     private BGM m_nowPlaying;
     /// <summary>åªç›çƒê∂íÜÇÃBGM</summary>
     public BGM NowPlaying => m_nowPlaying;
@@ -21,11 +22,8 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Awake");
         Instance = this;
-    }
-
-    private void Start()
-    {
     }
 
     /// <summary>BGMÇÃçƒê∂</summary>
@@ -43,14 +41,14 @@ public class AudioManager : MonoBehaviour
                 }
                 else
                 {
-                    m_source.clip = m_bgm[(int)bgm];
+                    m_source.clip = m_bgmClips[(int)bgm];
                     m_source.DOFade(1f, m_fadeDuration).OnComplete(() => m_source.Play());
                 }
             });
         }
         else
         {
-            m_source.clip = m_bgm[(int)bgm];
+            m_source.clip = m_bgmClips[(int)bgm];
             m_source.Play();
         }
     }
@@ -58,6 +56,19 @@ public class AudioManager : MonoBehaviour
     /// <summary>SEÇÃçƒê∂</summary>
     public void Play(SE se)
     {
+        if (se == SE.None)
+            return;
+        foreach (var item in m_seSources)
+        {
+            if (item.IsFinishd)
+            {
+                item.PlayAudio(m_seClips[(int)se]);
+                return;
+            }
+        }
+        SEAudio audio = Instantiate(m_seAudioPrefab);
+        m_seSources.Add(audio);
+        audio.PlayAudio(m_seClips[(int)se]);
     }
 }
 
@@ -70,5 +81,6 @@ public enum BGM
 }
 public enum SE
 {
-
+    None = -1,
+    System,
 }
