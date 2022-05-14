@@ -131,7 +131,16 @@ public enum RelicTriggerTiming
 /// <summary>レリックID</summary>
 public enum RelicID
 {
+    /// <summary>勇気の石</summary>
     StoneOfCourage,
+    /// <summary>呪いの本</summary>
+    CurseBook,
+    /// <summary>究極破壊兵器</summary>
+    Dynamite,
+    /// <summary>ひも付き硬化おにぎり</summary>
+    Bomb,
+    /// <summary>狂気のルーン</summary>
+    MadnessRune,
 }
 /// <summary>レリックのレアリティ</summary>
 public enum RelicRarity
