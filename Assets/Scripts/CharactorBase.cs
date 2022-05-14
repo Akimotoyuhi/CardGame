@@ -213,14 +213,21 @@ public class CharactorBase : MonoBehaviour
     /// <summary>
     /// 被ダメージ処理
     /// </summary>
-    protected void Damage(int damage, int block, Condition condition, bool isPlayer, ParticleID particleID, Action dead)
+    protected void Damage(int damage, int block, Condition condition, bool isPlayer, ParticleID particleID, bool isntEffect, Action dead)
     {
         if (IsDead) return;
         AddEffect(condition);
         EffectManager.Instance.ShowParticle(particleID, 0.5f, new Vector3(transform.position.x, transform.position.y, 100));
         if (damage > 0)
         {
-            int dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
+            int dmg;
+            if (isntEffect)
+            {
+                dmg = damage;
+                Debug.Log($"TrueDamage {dmg}");
+            }
+            else
+                dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
             dmg = m_block -= dmg;
             if (m_block < 0) m_block = 0;
             else

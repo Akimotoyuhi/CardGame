@@ -253,9 +253,14 @@ public interface ICommand
 public class CardAttackCommand : ICommand
 {
     [SerializeField, Tooltip("何ダメージを与えるか")] int m_power;
+    [SerializeField, Tooltip("確定ダメージ(バフデバフを考慮しない)を与えるか")] bool m_isTrueDmg;
     [SerializeField, Tooltip("付与対象")] UseTiming m_useType;
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
-    public int[] Execute() => new int[] { (int)CommandParam.Attack, (int)m_particleID, (int)m_useType, m_power };
+    public int[] Execute()
+    {
+        int b = m_isTrueDmg ? 1 : 0;
+        return new int[] { (int)CommandParam.Attack, (int)m_particleID, (int)m_useType, m_power, b };
+    }
 }
 public class CardBlockCommnad : ICommand
 {

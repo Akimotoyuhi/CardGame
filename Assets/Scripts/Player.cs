@@ -49,14 +49,14 @@ public class Player : CharactorBase, IDrop
     /// <param name="damage">被ダメージ</param>
     public void GetAcceptDamage(int power, int block, List<Condition> condition, ParticleID particleID)
     {
-        Damage(power, block, null, true, particleID, () =>
+        Damage(power, block, null, true, particleID, false, () =>
         {
             m_image.sprite = m_gameoverSprite;
             GameManager.Instance.Gameover();
         });
         foreach (var item in condition)
         {
-            Damage(0, 0, item, true, particleID, () =>
+            Damage(0, 0, item, true, particleID, false, () =>
             {
                 m_image.sprite = m_gameoverSprite;
                 GameManager.Instance.Gameover();
@@ -88,17 +88,19 @@ public class Player : CharactorBase, IDrop
     public override void GetDamage(int[] cardParam, ParticleID particleID)
     {
         CommandParam command = (CommandParam)cardParam[0];
+        bool b;
         switch (command)
         {
             case CommandParam.Attack:
-                Damage(cardParam[3], 0, null, true, particleID, () =>
+                b = cardParam[4] == 1 ? true : false;
+                Damage(cardParam[3], 0, null, true, particleID, b, () =>
                 {
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();
                 });
                 break;
             case CommandParam.Block:
-                Damage(0, cardParam[3], null, true, particleID, () =>
+                Damage(0, cardParam[3], null, true, particleID, false, () =>
                 {
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();
@@ -106,7 +108,7 @@ public class Player : CharactorBase, IDrop
                 break;
             case CommandParam.Conditon:
                 ConditionSelection cs = new ConditionSelection();
-                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), true, particleID, () =>
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), true, particleID, false, () =>
                 {
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();

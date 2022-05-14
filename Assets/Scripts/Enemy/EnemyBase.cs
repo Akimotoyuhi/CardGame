@@ -65,17 +65,19 @@ public class EnemyBase : CharactorBase, IDrop
     public override void GetDamage(int[] cardParam, ParticleID particleID)
     {
         CommandParam command = (CommandParam)cardParam[0];
+        bool b;
         switch (command)
         {
             case CommandParam.Attack:
-                Damage(cardParam[3], 0, null, false, particleID, () => Dead());
+                b = cardParam[4] == 1 ? true : false;
+                Damage(cardParam[3], 0, null, false, particleID, b, () => Dead());
                 break;
             case CommandParam.Block:
-                Damage(0, cardParam[3], null, false, particleID, () => Dead());
+                Damage(0, cardParam[3], null, false, particleID, false, () => Dead());
                 break;
             case CommandParam.Conditon:
                 ConditionSelection cs = new ConditionSelection();
-                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), false, particleID, () => Dead());
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), false, particleID, false, () => Dead());
                 break;
             default:
                 Debug.LogError("—áŠO");
