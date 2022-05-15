@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 休憩マスの処理<br/>
@@ -10,12 +11,17 @@ public class Rest : MonoBehaviour
 {
     /// <summary>回復量</summary>
     [SerializeField] int m_healValue;
+    [SerializeField] string m_cardUpgradeText;
+    [SerializeField, Tooltip("回復量の部分は{heal}と記入")] string m_restText;
+    [SerializeField] Text m_text;
+    [SerializeField] Canvas m_canvas;
     /// <summary>アップグレードさせるカードのインデックス保存用</summary>
     private int m_upgradeCardIndex;
 
     public void StartEvent()
     {
-        GetComponent<Canvas>().enabled = true;
+        m_canvas.enabled = true;
+        TextReset();
     }
 
     /// <summary>
@@ -27,6 +33,13 @@ public class Rest : MonoBehaviour
         Debug.Log($"Playerの体力が{m_healValue}回復した");
         GameManager.Instance.Heal = m_healValue;
         GameManager.Instance.FloorFinished();
+        TextReset();
+    }
+
+    /// <summary>テキスト更新</summary>
+    private void TextUpdate(string text)
+    {
+        m_text.text = text;
     }
 
     /// <summary>
@@ -37,6 +50,7 @@ public class Rest : MonoBehaviour
     {
         Debug.Log("カード強化");
         GameManager.Instance.DisplayCard(this);
+        TextReset();
     }
 
     /// <summary>
@@ -66,5 +80,24 @@ public class Rest : MonoBehaviour
     public void UpgradeBackButton()
     {
         GameManager.Instance.UpgradeConfirmationPanelDisabled();
+    }
+
+    /// <summary>休憩ボタンにポインタが当たった時<br/>EventSystemから呼ばれる</summary>
+    public void RestButtonOnPointer()
+    {
+        string s = m_restText.Replace("{heal}", m_healValue.ToString());
+        TextUpdate(s);
+    }
+
+    /// <summary>カード強化ボタンにポインタが当たった時<br/>EventSystemから呼ばれる</summary>
+    public void CardUpgradeButtonOnPointer()
+    {
+        TextUpdate(m_cardUpgradeText);
+    }
+
+    /// <summary>テキスト非表示</summary>
+    public void TextReset()
+    {
+        m_text.text = "";
     }
 }
