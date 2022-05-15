@@ -27,7 +27,7 @@ MonoBehaviour:
     m_cardInfo:
       m_name: "\u65AC\u6483"
       m_cost: 1
-      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_image: {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
       m_tooltip: "\u65751\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 3
       m_commands:
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_cardUpgrade:
       m_name: "\u65AC\u6483+"
       m_cost: 1
-      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_image: {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
       m_tooltip: "\u65751\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 3
       m_commands:
@@ -175,9 +175,9 @@ MonoBehaviour:
     m_cardInfo:
       m_name: "\u3084\u305F\u3089\u3081\u3063\u305F\u3089"
       m_cost: 2
-      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_image: {fileID: 21300000, guid: 3925691c2a021aa429c1dc89712a1253, type: 3}
       m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
-      m_rarity: 2
+      m_rarity: 1
       m_commands:
       - m_command:
           id: 12
@@ -195,9 +195,9 @@ MonoBehaviour:
     m_cardUpgrade:
       m_name: "\u3084\u305F\u3089\u3081\u3063\u305F\u3089+"
       m_cost: 1
-      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_image: {fileID: 21300000, guid: 3925691c2a021aa429c1dc89712a1253, type: 3}
       m_tooltip: "\u81EA\u8EAB\u3092\u542B\u3081\u305F\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
-      m_rarity: 2
+      m_rarity: 1
       m_commands:
       - m_command:
           id: 14
@@ -788,7 +788,7 @@ MonoBehaviour:
     m_cardInfo:
       m_name: "\u30A2\u30ED\u30FC\u30EC\u30A4\u30F3"
       m_cost: 1
-      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_image: {fileID: 21300000, guid: 125bb49b217257347be09ede099b888d, type: 3}
       m_tooltip: "\u6575\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
@@ -804,7 +804,7 @@ MonoBehaviour:
     m_cardUpgrade:
       m_name: "\u30A2\u30ED\u30FC\u30EC\u30A4\u30F3"
       m_cost: 1
-      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_image: {fileID: 21300000, guid: 125bb49b217257347be09ede099b888d, type: 3}
       m_tooltip: "\u6575\u5168\u4F53\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
       m_rarity: 0
       m_commands:
