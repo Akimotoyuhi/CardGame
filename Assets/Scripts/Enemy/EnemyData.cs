@@ -261,6 +261,10 @@ public enum EnemyID
     SavelTiger,
     /// <summary>タツノオトシゴ</summary>
     Seahorse,
+    /// <summary>なそべま</summary>
+    Nasobema,
+    /// <summary>デスネズミ</summary>
+    DeathRat,
 }
 /// <summary>敵の種類</summary>
 public enum EnemyType

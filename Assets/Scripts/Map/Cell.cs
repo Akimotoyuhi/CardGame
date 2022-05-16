@@ -56,18 +56,19 @@ public class Cell : MonoBehaviour
     public void OnClick()
     {
         if (m_map.CanClick) return;
-        m_map.CanClick = true;
         if (AdjustmentFloorNum() != Floor)
         {
             Debug.Log("選択不可");
             return;
         }
+        m_map.CanClick = true;
+        //m_sequence.Kill();
         DOTween.KillAll();
         GameManager.Instance.OnClick(m_cellState, m_mapID);
     }
 
     /// <summary>
-    /// セルの子(線の始点or終点となる位置)を知れる
+    /// セルの子(線の始点or終点となる位置)
     /// </summary>
     /// <param name="isBeginPos">始点かどうか</param>
     /// <returns>BeginPosition or EndPosition</returns>
@@ -88,9 +89,6 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void ColorChange()
     {
-        //bool flag = GetComponent<Button>().interactable;
-        //if (!flag) return; //使用されていないセルの場合は設定しない
-        //Image image = GetComponent<Image>();
         switch (m_cellState)
         {
             case CellState.Enemy:
