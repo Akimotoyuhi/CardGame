@@ -42,10 +42,13 @@ HPバーの下にアイコンがあったらマウスカーソルをその位置
 ６.お借りした素材
 画像
 illustimage.com/
-assetstore.unity.com/packages/2d/gui/icons/64-flat-game-icons-36440
+64 Flat Game Icons assetstore.unity.com/packages/2d/gui/icons/64-flat-game-icons-36440
+Tiny Fantasy Icons https://assetstore.unity.com/packages/2d/gui/icons/tiny-fantasy-icons-99722#description
+FREE - RPG Fantasy Spell Icons https://assetstore.unity.com/packages/2d/gui/icons/free-rpg-fantasy-spell-icons-200511#description
+2D SKILLS ICON SET - HANDPAINTED https://assetstore.unity.com/packages/2d/gui/icons/2d-skills-icon-set-handpainted-210622
 azukichi.net
-https://www.irasutoya.com/
-https://nanamiyuki.com/
+いらすとや https://www.irasutoya.com/
+星乃だーつ　グーテンベルグの娘 http://darts.kirara.st/
 
 音楽
 https://maou.audio
