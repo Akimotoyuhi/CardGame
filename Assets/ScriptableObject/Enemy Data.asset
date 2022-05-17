@@ -278,7 +278,7 @@ MonoBehaviour:
     m_enemyBaseState:
     - m_conditionalCommand:
       - m_type: 5
-        m_value: 20
+        m_value: 8
         m_probability: 0
         m_isOnlyOnce: 0
       - m_type: 4
@@ -803,21 +803,21 @@ MonoBehaviour:
     00000013:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 3
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
     00000014:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 3
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
     00000015:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 3
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0

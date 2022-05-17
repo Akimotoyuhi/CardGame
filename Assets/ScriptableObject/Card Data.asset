@@ -1188,7 +1188,7 @@ MonoBehaviour:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 3
-        m_isTrueDmg: 0
+        m_isTrueDmg: 1
         m_useType: 0
         m_particleID: 1
     0000001F:
@@ -1425,7 +1425,7 @@ MonoBehaviour:
     00000040:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 3
+        m_power: 2
         m_isTrueDmg: 1
         m_useType: 0
         m_particleID: 1
