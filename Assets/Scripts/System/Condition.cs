@@ -24,6 +24,8 @@ public enum ParametorType
     Life,
     Condition,
     Other,
+    Cost,
+    DrowNum,
 }
 
 /// <summary>
@@ -98,6 +100,18 @@ public class ConditionSelection
                     break;
                 case ConditionID.Corruption:
                     ret = new Corruption();
+                    break;
+                case ConditionID.Burning:
+                    ret = new Burning();
+                    break;
+                case ConditionID.Frozen:
+                    ret = new Frozen();
+                    break;
+                case ConditionID.ElectricShock:
+                    ret = new ElectricShock();
+                    break;
+                case ConditionID.Silence:
+                    ret = new Silence();
                     break;
                 default:
                     Debug.LogWarning("未設定のIDが渡されました");

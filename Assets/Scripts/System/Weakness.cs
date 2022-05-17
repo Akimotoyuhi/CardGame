@@ -25,8 +25,16 @@ public enum ConditionID
     Activation,
     /// <summary>頑丈<br/>得るブロックが25%増加。Xターン持続</summary>
     Sturdy,
-    /// <summary>腐敗<br/>ターン終了時に筋力Xを失う</summary>
+    /// <summary>腐敗<br/>ターン開始時に筋力Xを失う</summary>
     Corruption,
+    /// <summary>灼熱<br/>受けるダメージが50%増加。Xターン持続</summary>
+    Burning,
+    /// <summary>凍結<br/>与えるダメージが50%減少。Xターン持続</summary>
+    Frozen,
+    /// <summary>感電<br/>ターン開始時コストがX減少</summary>
+    ElectricShock,
+    /// <summary>沈黙<br/>ターン開始時のドロー枚数がX枚減少</summary>
+    Silence,
 }
 public class Weakness : Condition
 {
@@ -34,7 +42,8 @@ public class Weakness : Condition
     {
         if (parametorType != ParametorType.Other)
         {
-            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { power };
+            if (Turn <= 0 || parametorType != GetParametorType())
+                return new int[] { power };
         }
         float ret = default;
         switch (eventTiming)
@@ -304,7 +313,7 @@ public class Corruption : Condition
     {
         if (parametorType != ParametorType.Other)
             return new int[] { num };
-        if (eventTiming == EventTiming.TurnEnd)
+        if (eventTiming == EventTiming.TurnBegin)
         {
             return new int[] { (int)ConditionID.Strength, -Turn };
         }
@@ -321,5 +330,126 @@ public class Corruption : Condition
     {
         if (Turn < 0) return true;
         return false;
+    }
+}
+public class Burning : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int dmg = 0)
+    {
+        switch (eventTiming)
+        {
+            case EventTiming.TurnEnd:
+                Turn--;
+                break;
+            case EventTiming.Damaged:
+                if (parametorType == ParametorType.Attack)
+                {
+                    float ret = dmg * (1 + 0.5f);
+                    return new int[] { (int)ret };
+                }
+                break;
+            default:
+                break;
+        }
+        return new int[] { dmg };
+    }
+
+    public override ConditionID GetConditionID() => ConditionID.Burning;
+
+    public override ParametorType GetParametorType() => ParametorType.Attack;
+
+    public override int IsBuff() => 1;
+
+    public override bool IsRemove()
+    {
+        if (Turn <= 0)
+            return true;
+        else
+            return false;
+    }
+}
+public class Frozen : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int power = 0)
+    {
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn == 0 || parametorType != ParametorType.Attack) return new int[] { power };
+        }
+        switch (eventTiming)
+        {
+            case EventTiming.Attacked:
+                return new int[] { power + Turn };
+            default:
+                return new int[] { power };
+        }
+    }
+
+    public override ConditionID GetConditionID() => ConditionID.Frozen;
+
+    public override ParametorType GetParametorType() => ParametorType.Attack;
+
+    public override int IsBuff() => 1;
+
+    public override bool IsRemove()
+    {
+        if (Turn <= 0)
+            return true;
+        else
+            return false;
+    }
+}
+public class ElectricShock : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override ConditionID GetConditionID()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override ParametorType GetParametorType()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override int IsBuff()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override bool IsRemove()
+    {
+        throw new System.NotImplementedException();
+    }
+}
+public class Silence : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override ConditionID GetConditionID()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override ParametorType GetParametorType()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override int IsBuff()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override bool IsRemove()
+    {
+        throw new System.NotImplementedException();
     }
 }
