@@ -23,8 +23,8 @@ public class Player : CharactorBase, IDrop
 
     public override void TurnStart()
     {
-        m_cost = ConditionEffect(EventTiming.TurnBegin, ParametorType.Cost, m_maxCost);
-        m_drowNum = ConditionEffect(EventTiming.TurnBegin, ParametorType.DrowNum, m_drowNum);
+        m_cost = OnBattleEffect(EventTiming.TurnBegin, ParametorType.Cost, m_maxCost);
+        m_drowNum = OnBattleEffect(EventTiming.TurnBegin, ParametorType.DrowNum, m_drowNum);
         base.TurnStart();
     }
 
@@ -101,7 +101,8 @@ public class Player : CharactorBase, IDrop
                 });
                 break;
             case CommandParam.Block:
-                Damage(0, cardParam[3], null, true, particleID, false, () =>
+                b = cardParam[4] == 1 ? true : false;
+                Damage(0, cardParam[3], null, true, particleID, b, () =>
                 {
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();

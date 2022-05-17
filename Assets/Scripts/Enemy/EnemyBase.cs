@@ -115,11 +115,11 @@ public class EnemyBase : CharactorBase, IDrop
             {
                 case CommandParam.Attack:
                     c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Power, c[3]);
-                    c[3] = ConditionEffect(EventTiming.Attacked, ParametorType.Attack, c[3]);
+                    c[3] = OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, c[3]);
                     break;
                 case CommandParam.Block:
                     c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Difence, c[3]);
-                    c[3] = ConditionEffect(EventTiming.Attacked, ParametorType.Block, c[3]);
+                    c[3] = OnBattleEffect(EventTiming.Attacked, ParametorType.Block, c[3]);
                     break;
                 default:
                     continue;

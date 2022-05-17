@@ -166,19 +166,19 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             foreach (var cc in m_cardCommand)
             {
                 CommandParam cp = (CommandParam)cc[0];
-                bool b;
+                bool b = cc[4] == 1 ? true : false;
                 switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
-                        b = cc[4] == 1 ? true : false;
+                        
                         cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[3]);
                         if (!b)
-                            cc[3] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Attack, cc[3]);
+                            cc[3] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, cc[3]);
                         break;
                     case CommandParam.Block:
                         cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[3]);
-                        if (true)
-                            cc[3] = m_player.ConditionEffect(EventTiming.Attacked, ParametorType.Block, cc[3]);
+                        if (!b)
+                            cc[3] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Block, cc[3]);
                         break;
                     default:
                         continue;

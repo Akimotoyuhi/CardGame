@@ -972,7 +972,7 @@ MonoBehaviour:
       m_name: "\u30C6\u30B9\u30C8"
       m_cost: 0
       m_image: {fileID: 21300000, guid: feb8709f10385a94095b55fe8d0f625c, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B\u6C88\u9ED91\u3092\u4ED8\u4E0E"
+      m_tooltip: "\u81EA\u8EAB\u306B\u707C\u71B11\u3092\u4ED8\u4E0E"
       m_rarity: 3
       m_commands:
       - m_command:
@@ -988,7 +988,7 @@ MonoBehaviour:
       m_name: "\u30C6\u30B9\u30C8+"
       m_cost: 0
       m_image: {fileID: 21300000, guid: feb8709f10385a94095b55fe8d0f625c, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B\u611F\u96FB1\u3092\u4ED8\u4E0E"
+      m_tooltip: "\u81EA\u8EAB\u306B\u51CD\u7D501\u3092\u4ED8\u4E0E"
       m_rarity: 3
       m_commands:
       - m_command:
@@ -1549,15 +1549,15 @@ MonoBehaviour:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
-          m_conditionID: 14
-          m_turn: 1
+          m_conditionID: 11
+          m_turn: 2
         m_useType: 0
         m_particleID: 3
     0000004E:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
-          m_conditionID: 13
+          m_conditionID: 12
           m_turn: 1
         m_useType: 0
         m_particleID: 3

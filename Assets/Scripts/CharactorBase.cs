@@ -110,7 +110,7 @@ public class CharactorBase : MonoBehaviour
     /// <param name="parametorType">評価するパラメーター名</param>
     /// <param name="value">評価する数値</param>
     /// <returns>評価された後のパラメーター</returns>
-    public int ConditionEffect(EventTiming eventTiming, ParametorType parametorType, int value)
+    public int OnBattleEffect(EventTiming eventTiming, ParametorType parametorType, int value)
     {
         int ret = value;
         foreach (var item in m_conditions)
@@ -224,10 +224,9 @@ public class CharactorBase : MonoBehaviour
             if (isntEffect)
             {
                 dmg = damage;
-                Debug.Log($"TrueDamage {dmg}");
             }
             else
-                dmg = ConditionEffect(EventTiming.Damaged, ParametorType.Attack, damage);
+                dmg = OnBattleEffect(EventTiming.Damaged, ParametorType.Attack, damage);
             dmg = m_block -= dmg;
             if (m_block < 0) m_block = 0;
             else
