@@ -23,7 +23,8 @@ public class Player : CharactorBase, IDrop
 
     public override void TurnStart()
     {
-        m_cost = m_maxCost;
+        m_cost = ConditionEffect(EventTiming.TurnBegin, ParametorType.Cost, m_maxCost);
+        m_drowNum = ConditionEffect(EventTiming.TurnBegin, ParametorType.DrowNum, m_drowNum);
         base.TurnStart();
     }
 

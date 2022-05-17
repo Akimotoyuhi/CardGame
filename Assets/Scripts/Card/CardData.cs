@@ -395,6 +395,8 @@ public enum CardID
     EmergencyBlock,
     /// <summary>タックル</summary>
     Tackle,
+    /// <summary>テスト</summary>
+    Test,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

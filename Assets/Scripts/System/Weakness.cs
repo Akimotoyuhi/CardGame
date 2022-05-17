@@ -401,55 +401,69 @@ public class Frozen : Condition
 }
 public class ElectricShock : Condition
 {
-    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int cost = 0)
     {
-        throw new System.NotImplementedException();
+        switch (eventTiming)
+        {
+            case EventTiming.TurnBegin:
+                if (parametorType == GetParametorType())
+                {
+                    int ret = cost - Turn;
+                    Turn = 0;
+                    return new int[] { ret };
+                }
+                break;
+            default:
+                break;
+        }
+        return new int[] { cost };
     }
 
-    public override ConditionID GetConditionID()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override ConditionID GetConditionID() => ConditionID.ElectricShock;
 
-    public override ParametorType GetParametorType()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override ParametorType GetParametorType() => ParametorType.Cost;
 
-    public override int IsBuff()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override int IsBuff() => 1;
 
     public override bool IsRemove()
     {
-        throw new System.NotImplementedException();
+        if (Turn <= 0)
+            return true;
+        else
+            return false;
     }
 }
 public class Silence : Condition
 {
-    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int drowNum = 0)
     {
-        throw new System.NotImplementedException();
+        switch (eventTiming)
+        {
+            case EventTiming.TurnBegin:
+                if (parametorType == GetParametorType())
+                {
+                    int ret = drowNum - Turn;
+                    Turn = 0;
+                    return new int[] { ret };
+                }
+                break;
+            default:
+                break;
+        }
+        return new int[] { drowNum };
     }
 
-    public override ConditionID GetConditionID()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override ConditionID GetConditionID() => ConditionID.Silence;
 
-    public override ParametorType GetParametorType()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override ParametorType GetParametorType() => ParametorType.DrowNum;
 
-    public override int IsBuff()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override int IsBuff() => 1;
 
     public override bool IsRemove()
     {
-        throw new System.NotImplementedException();
+        if (Turn <= 0)
+            return true;
+        else
+            return false;
     }
 }
