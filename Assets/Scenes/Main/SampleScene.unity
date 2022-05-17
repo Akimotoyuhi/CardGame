@@ -9446,7 +9446,7 @@ MonoBehaviour:
   m_text: {fileID: 75147835}
   m_textDuration: 2
   m_gameoverText: "\u3042\u306A\u305F\u306F\u65C5\u306E\u9014\u4E2D\u306B<color=#ff0000>{haveCard}</color>\u679A\u306E\u30AB\u30FC\u30C9\u3092\u624B\u306B\u5165\u308C\u305F\u304C\u3001<color=#ff0000>{step}</color>\u968E\u306B\u3066\u5012\u308C\u305F\u3002"
-  m_gamecrearText: "\u3042\u306A\u305F\u306F\u65C5\u306E\u9014\u4E2D\u306B<color=#ff0000>{haveCard}</color>\u679A\u306E\u30AB\u30FC\u30C9\u3092\u624B\u306B\u5165\u308C\u3001\u5E83\u3044\u7A7A\u9593\u306B\u51FA\u305F\u3002\n\u3053\u3053\u304C\u9802\u4E0A\u306A\u306E\u3060\u308D\u3046\u304B\uFF1F\n\n\u30AB\u30B9\u30BF\u30E0\u5371\u967A\u5EA6+{risk}"
+  m_gamecrearText: "\u3042\u306A\u305F\u306F\u65C5\u306E\u9014\u4E2D\u306B<color=#ff0000>{haveCard}</color>\u679A\u306E\u30AB\u30FC\u30C9\u3092\u624B\u306B\u5165\u308C\u3001\u5E83\u3044\u7A7A\u9593\u306B\u51FA\u305F\u3002\n\u3053\u3053\u304C\u9802\u4E0A\u306A\u306E\u3060\u308D\u3046\u304B\uFF1F\n\n\u30AB\u30B9\u30BF\u30E0\u5371\u967A\u5EA6{risk}"
   m_retryButton: {fileID: 136348132}
   m_titleButton: {fileID: 883051028}
 --- !u!1 &938612328
@@ -12009,7 +12009,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8022858
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12291,7 +12291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.4350437}
+  m_AnchoredPosition: {x: 0, y: -0.000015258789}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561
@@ -14075,7 +14075,7 @@ MonoBehaviour:
   m_parentSector: {fileID: 8837727758879024943}
   m_sectorPrefab: {fileID: 4689219055565768202, guid: 6c611e1ee71f5e24282777e86147d07f,
     type: 3}
-  m_cellPrefab: {fileID: 971258997563312600, guid: e6524bca606119c4994e372a1e84ffb3,
+  m_cellPrefab: {fileID: 8329438101312130439, guid: e6524bca606119c4994e372a1e84ffb3,
     type: 3}
   m_linePrefab: {fileID: 538390810350223235, guid: ffc7a88d40db5ff49b83891c08204752,
     type: 3}
@@ -14337,7 +14337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

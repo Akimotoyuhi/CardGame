@@ -88,7 +88,7 @@ public enum Act
 {
     One = 1,
     Two,
-    //Three,
+    Three,
 }
 public enum MapID
 {
@@ -96,5 +96,7 @@ public enum MapID
     TheBeginningOfTheTower,
     /// <summary>”÷‡‚ÌÀ’n</summary>
     SwampOfFallIntoADoze,
+    /// <summary>s—ä‚’n</summary>
+    SteepRidgeHighlands,
 }
 #endregion

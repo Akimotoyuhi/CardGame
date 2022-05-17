@@ -27,7 +27,7 @@ MonoBehaviour:
       m_eliteMinIndex: 3
       m_eliteMaxIndex: 5
       m_eliteAbsolutelyIndex: -1
-      m_eliteProbability: 4
+      m_eliteProbability: 3
   - m_name: "\u5FAE\u7761\u306E\u6CBC\u5730"
     m_act: 2
     m_mapID: 1
@@ -42,4 +42,19 @@ MonoBehaviour:
       m_eliteMinIndex: 2
       m_eliteMaxIndex: 5
       m_eliteAbsolutelyIndex: -1
-      m_eliteProbability: 4
+      m_eliteProbability: 3
+  - m_name: "\u5CFB\u5DBA\u9AD8\u5730"
+    m_act: 3
+    m_mapID: 2
+    m_background: {fileID: 0}
+    m_mapBgm: 1
+    m_bossBgm: 2
+    m_detailSetting:
+      m_restMinIndex: 1
+      m_restMaxIndex: 5
+      m_restAbsolutelyIndex: 3
+      m_restProbability: 4
+      m_eliteMinIndex: 2
+      m_eliteMaxIndex: 5
+      m_eliteAbsolutelyIndex: -1
+      m_eliteProbability: 3

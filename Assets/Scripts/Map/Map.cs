@@ -22,7 +22,7 @@ public class Map : MonoBehaviour
     /// <summary>セクタープレハブ</summary>
     [SerializeField] GameObject m_sectorPrefab;
     /// <summary>セルプレハブ</summary>
-    [SerializeField] GameObject m_cellPrefab;
+    [SerializeField] Cell m_cellPrefab;
     /// <summary>線描画用</summary>
     [SerializeField] GameObject m_linePrefab;
     /// <summary>線となるオブジェクトの親</summary>
@@ -71,7 +71,7 @@ public class Map : MonoBehaviour
             if (i == 0 || i == m_sector - 1)
             {
                 //最初と最後はセル一つ
-                cell = Instantiate(m_cellPrefab).GetComponent<Cell>();
+                cell = Instantiate(m_cellPrefab);
                 cell.transform.SetParent(sector.transform, false);
                 cell.SectorIndex = i;
                 m_cells.Add(cell);
@@ -82,7 +82,7 @@ public class Map : MonoBehaviour
             {
                 for (int n = 0; n < m_maxCell; n++)
                 {
-                    cell = Instantiate(m_cellPrefab).GetComponent<Cell>();
+                    cell = Instantiate(m_cellPrefab);
                     cell.transform.SetParent(sector.transform, false);
                     cell.SectorIndex = i;
                     m_cells.Add(cell);

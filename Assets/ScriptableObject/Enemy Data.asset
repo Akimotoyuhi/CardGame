@@ -673,6 +673,10 @@ MonoBehaviour:
     - m_enemyID: 09000000
     m_bosses:
     - m_enemyID: 07000000
+  - m_label: "\u5CFB\u5DBA\u9AD8\u5730"
+    m_enemies: []
+    m_elites: []
+    m_bosses: []
   references:
     version: 1
     00000000:
