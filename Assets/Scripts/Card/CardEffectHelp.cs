@@ -12,18 +12,23 @@ public class CardEffectHelp : MonoBehaviour
     [SerializeField, TextArea] string m_discardingTooltip;
     /// <summary>エセリアルの説明</summary>
     [SerializeField, TextArea] string m_etherealTooltip;
-    [SerializeField] ConditionUI m_conditionUI;
     private bool m_isActive;
 
-    public void SetText(bool discarding, bool ethereal)
+    /// <summary>
+    /// 表示テキストの設定
+    /// </summary>
+    /// <param name="discarding"></param>
+    /// <param name="ethereal"></param>
+    /// <param name="conditions"></param>
+    public void SetText(bool discarding, bool ethereal, List<Condition> conditions)
     {
         string s = string.Empty;
         if (discarding)
             s += m_discardingTooltip + "\n";
         if (ethereal)
             s += m_etherealTooltip + "\n";
-        //foreach (var c in conditions)
-        //    m_text.text += m_conditionUI.GetTooltip(c.GetConditionID()) + "\n";
+        foreach (var c in conditions)
+            s += c.Tooltip + "\n";
         if (s.Length > 0)//テキストの長さが0なら表示しない
         {
             m_text.text = s;

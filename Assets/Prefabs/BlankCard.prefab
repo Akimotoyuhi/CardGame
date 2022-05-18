@@ -510,8 +510,6 @@ MonoBehaviour:
   m_background: {fileID: 4271764064245072743}
   m_discardingTooltip: "\u5EC3\u68C4\n\u4F7F\u7528\u5F8C\u3001\u6226\u95D8\u7D42\u4E86\u307E\u3067\u30C7\u30C3\u30AD\u304B\u3089\u524A\u9664\u3055\u308C\u308B"
   m_etherealTooltip: "\u5E0C\u8584\n\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u3001\u6226\u95D8\u7D42\u4E86\u307E\u3067\u30C7\u30C3\u30AD\u304B\u3089\u524A\u9664\u3055\u308C\u308B"
-  m_conditionUI: {fileID: -6394686715113199277, guid: fc016acdd04f9124398e42789d21ab1e,
-    type: 3}
 --- !u!1 &8468497527062062413
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,10 +577,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d9fc6c92a521a60409824434d56d7fbe, type: 3}
-    m_FontSize: 20
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 43
     m_Alignment: 1
     m_AlignByGeometry: 0

@@ -31,10 +31,12 @@ public enum ConditionID
     Burning,
     /// <summary>凍結<br/>与えるダメージが50%減少。Xターン持続</summary>
     Frozen,
-    /// <summary>感電<br/>ターン開始時コストがX減少</summary>
+    /// <summary>感電<br/>ターン開始時所持コストがX減少</summary>
     ElectricShock,
     /// <summary>沈黙<br/>ターン開始時のドロー枚数がX枚減少</summary>
     Silence,
+    /// <summary>祈祷<br/>ターン開始時所持コストがX増加</summary>
+    Prayer,
 }
 public class Weakness : Condition
 {
@@ -68,6 +70,7 @@ public class Weakness : Condition
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Weakness;
     public override ParametorType GetParametorType() => ParametorType.Attack;
+    public override string Tooltip => $"脱力\n与えるダメージが25%低下。{Turn}ターン持続";
 }
 public class Frail : Condition
 {
@@ -100,6 +103,7 @@ public class Frail : Condition
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Frail;
     public override ParametorType GetParametorType() => ParametorType.Block;
+    public override string Tooltip => $"脆弱化\n得るブロックが25%低下。{Turn}ターン持続";
 }
 public class Strength : Condition
 {
@@ -125,6 +129,16 @@ public class Strength : Condition
     public override ConditionID GetConditionID() => ConditionID.Strength;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Attack;
+    public override string Tooltip
+    {
+        get
+        {
+            if (Turn >= 0)
+                return $"筋力\n与えるダメージが<color=#0000ff>+{Turn}</color>";
+            else
+                return $"筋力\n与えるダメージが<color=#ff0000>{Turn}</color>";
+        }
+    }
 }
 public class Agile : Condition
 {
@@ -150,6 +164,16 @@ public class Agile : Condition
     public override ConditionID GetConditionID() => ConditionID.Agile;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Block;
+    public override string Tooltip
+    {
+        get
+        {
+            if (Turn >= 0)
+                return $"敏捷\n得るブロックが<color=#0000ff>+{Turn}</color>";
+            else
+                return $"敏捷\n得るブロックが<color=#ff0000>{Turn}</color>";
+        }
+    }
 }
 public class PlateArmor : Condition
 {
@@ -169,12 +193,13 @@ public class PlateArmor : Condition
     }
     public override bool IsRemove()
     {
-        if (Turn < 0) return true;
+        if (Turn <= 0) return true;
         return false;
     }
     public override ConditionID GetConditionID() => ConditionID.PlateArmor;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Other;
+    public override string Tooltip => $"プレートアーマー\n自分のターン終了時に<color=#0000ff>{Turn}</color>ブロックを得る。攻撃されると効果-1";
 }
 public class StrengthDown : Condition
 {
@@ -200,6 +225,7 @@ public class StrengthDown : Condition
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.StrengthDown;
     public override ParametorType GetParametorType() => ParametorType.Condition;
+    public override string Tooltip => $"筋力低下\nターン開始時に筋力<color=#0000ff>{Turn}</color>を失う";
 }
 public class Flying : Condition
 {
@@ -207,7 +233,7 @@ public class Flying : Condition
     {
         if (eventTiming == EventTiming.Damaged && parametorType == ParametorType.Attack)
         {
-            float ret = power * (1 - 0.25f);
+            float ret = power * (1 - 0.5f);
             return new int[] { (int)ret };
         }
         else return new int[] { power };
@@ -220,6 +246,7 @@ public class Flying : Condition
     }
     public override ParametorType GetParametorType() => ParametorType.Attack;
     public override ConditionID GetConditionID() => ConditionID.Flying;
+    public override string Tooltip => $"飛行\n受けるダメージが50%減少";
 }
 public class Metallicize : Condition
 {
@@ -242,6 +269,7 @@ public class Metallicize : Condition
     public override ConditionID GetConditionID() => ConditionID.Metallicize;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Other;
+    public override string Tooltip =>$"金属化\n自分のターン終了時に<color=#0000ff>{Turn}</color>ブロックを得る";
 }
 public class Activation : Condition
 {
@@ -255,10 +283,10 @@ public class Activation : Condition
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                ret = power * (1 + 0.5f);
+                ret = power * (1 + 0.25f);
                 return new int[] { (int)ret };
             case EventTiming.Drow:
-                ret = power * (1 + 0.5f);
+                ret = power * (1 + 0.25f);
                 return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
@@ -274,6 +302,7 @@ public class Activation : Condition
     public override ConditionID GetConditionID() => ConditionID.Activation;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Attack;
+    public override string Tooltip => $"活性化\n与えるダメージが25%増加。<color=#0000ff>{Turn}</color>ターン持続";
 }
 public class Sturdy : Condition
 {
@@ -287,10 +316,10 @@ public class Sturdy : Condition
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                ret = block * (1 + 0.5f);
+                ret = block * (1 + 0.25f);
                 return new int[] { (int)ret };
             case EventTiming.Drow:
-                ret = block * (1 + 0.5f);
+                ret = block * (1 + 0.25f);
                 return new int[] { (int)ret };
             case EventTiming.TurnEnd:
                 if (Turn > 0) Turn--;
@@ -306,6 +335,7 @@ public class Sturdy : Condition
     public override ConditionID GetConditionID() => ConditionID.Sturdy;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Block;
+    public override string Tooltip => $"頑丈\n得るブロックが25%増加。<color=#0000ff>{Turn}</color>ターン持続";
 }
 public class Corruption : Condition
 {
@@ -331,6 +361,7 @@ public class Corruption : Condition
         if (Turn < 0) return true;
         return false;
     }
+    public override string Tooltip => $"腐敗\nターン開始時に筋力<color=#ff0000>{Turn}</color>を失う";
 }
 public class Burning : Condition
 {
@@ -367,6 +398,7 @@ public class Burning : Condition
         else
             return false;
     }
+    public override string Tooltip => $"灼熱\n受けるダメージが50%増加。<color=#0000ff>{Turn}</color>ターン持続";
 }
 public class Frozen : Condition
 {
@@ -398,6 +430,7 @@ public class Frozen : Condition
         else
             return false;
     }
+    public override string Tooltip => $"凍結\n与えるダメージが50%減少。<color=#0000ff>{Turn}</color>ターン持続";
 }
 public class ElectricShock : Condition
 {
@@ -432,6 +465,7 @@ public class ElectricShock : Condition
         else
             return false;
     }
+    public override string Tooltip => $"感電\nターン開始時所持コストが<color=#ff0000>{Turn}</color>減少";
 }
 public class Silence : Condition
 {
@@ -466,4 +500,40 @@ public class Silence : Condition
         else
             return false;
     }
+    public override string Tooltip => $"沈黙\nターン開始時のドロー枚数が<color=#ff0000>{Turn}</color>枚減少";
+}
+public class Prayer : Condition
+{
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int cost = 0)
+    {
+        switch (eventTiming)
+        {
+            case EventTiming.TurnBegin:
+                if (parametorType == GetParametorType())
+                {
+                    int ret = cost + Turn;
+                    Turn = 0;
+                    return new int[] { ret };
+                }
+                break;
+            default:
+                break;
+        }
+        return new int[] { cost };
+    }
+
+    public override ConditionID GetConditionID() => ConditionID.Prayer;
+
+    public override ParametorType GetParametorType() => ParametorType.Cost;
+
+    public override int IsBuff() => 0;
+
+    public override bool IsRemove()
+    {
+        if (Turn <= 0)
+            return true;
+        else
+            return false;
+    }
+    public override string Tooltip => $"祈祷\nターン開始時所持コストが<color=#0000ff>{Turn}</color>増加";
 }

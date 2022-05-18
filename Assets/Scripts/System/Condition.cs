@@ -52,6 +52,7 @@ public abstract class Condition
     /// <summary>Conditionが消去される条件</summary>
     /// <returns></returns>
     public abstract bool IsRemove();
+    public abstract string Tooltip { get; }
     public Condition Copy() => (Condition)MemberwiseClone();
 }
 
@@ -112,6 +113,9 @@ public class ConditionSelection
                     break;
                 case ConditionID.Silence:
                     ret = new Silence();
+                    break;
+                case ConditionID.Prayer:
+                    ret = new Prayer();
                     break;
                 default:
                     Debug.LogWarning("未設定のIDが渡されました");

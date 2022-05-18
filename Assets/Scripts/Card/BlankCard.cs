@@ -90,7 +90,17 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         //m_viewTooltip.text = m_tooltip;
         m_viewCost.text = m_cost;
         m_rectTransform = gameObject.GetComponent<RectTransform>();
-        m_cardEffectHelp.SetText(m_isDiscarding, m_ethereal);
+        List<Condition> c = new List<Condition>();
+        ConditionSelection cs = new ConditionSelection();
+        foreach (var com in m_cardCommand)
+        {
+            CommandParam cp = (CommandParam)com[0];
+            if (cp == CommandParam.Conditon)
+            {
+                c.Add(cs.SetCondition((ConditionID)com[3], com[4]));
+            }
+        }
+        m_cardEffectHelp.SetText(m_isDiscarding, m_ethereal, c);
         m_cardEffectHelp.SetActive(false);
     }
     private void Init()

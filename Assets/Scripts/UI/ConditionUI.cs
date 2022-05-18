@@ -16,24 +16,26 @@ public class ConditionUI : MonoBehaviour
     [System.Serializable]
     public class ConditionSpriteData
     {
+        public string m_name;
         [SerializeField] Sprite m_sprite;
         [SerializeField] Color m_color;
-        [SerializeField, TextArea] string m_tooltip;
+        //[SerializeField, TextArea] string m_tooltip;
         public Sprite Sprite => m_sprite;
         public Color Color => m_color;
-        public string Tooltip => m_tooltip;
+        //public string Tooltip => m_tooltip;
     }
-    public string GetTooltip(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Tooltip;
+    //public string GetTooltip(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Tooltip;
     public Sprite GetSprite(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Sprite;
     public Color GetColor(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Color;
 
-    public void SetUI(ConditionID conditionID, int turn)
+    public void SetUI(string text, ConditionID conditionID)
     {
         m_viewText.text = "";
         m_image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
-        string s = m_conditionSpriteData[(int)conditionID].Tooltip;
-        m_text = s;
-        m_viewText.text = turn.ToString();
+        m_viewText.text = text;
+        //string s = m_conditionSpriteData[(int)conditionID].Tooltip;
+        //m_text = text;
+        //m_viewText.text = turn.ToString();
     }
 
     /// <summary>

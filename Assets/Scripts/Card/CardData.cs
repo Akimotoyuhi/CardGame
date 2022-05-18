@@ -402,6 +402,8 @@ public enum CardID
     Tackle,
     /// <summary>テスト</summary>
     Test,
+    /// <summary>聖域</summary>
+    Sanctuary
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

@@ -206,7 +206,8 @@ public class CharactorBase : MonoBehaviour
         {
             ConditionUI c = Instantiate(m_conditionUIPrefab);
             c.transform.SetParent(m_conditionUIParent, false);
-            c.SetUI(con.GetConditionID(), con.Turn);
+            //c.SetUI(con.GetConditionID(), con.Turn);
+            c.SetUI(con.Tooltip, con.GetConditionID());
         }
     }
 
