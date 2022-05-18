@@ -28,11 +28,12 @@ public class ConditionUI : MonoBehaviour
     public Sprite GetSprite(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Sprite;
     public Color GetColor(ConditionID conditionID) => m_conditionSpriteData[(int)conditionID].Color;
 
-    public void SetUI(string text, ConditionID conditionID)
+    public void SetUI(Condition condition)
     {
         m_viewText.text = "";
-        m_image.SetImage(m_conditionSpriteData[(int)conditionID].Color, m_conditionSpriteData[(int)conditionID].Sprite);
-        m_viewText.text = text;
+        m_image.SetImage(m_conditionSpriteData[(int)condition.GetConditionID()].Color, m_conditionSpriteData[(int)condition.GetConditionID()].Sprite);
+        m_viewText.text = condition.Turn.ToString();
+        m_text = condition.Tooltip;
         //string s = m_conditionSpriteData[(int)conditionID].Tooltip;
         //m_text = text;
         //m_viewText.text = turn.ToString();

@@ -57,8 +57,8 @@ public class GameoverScreen : MonoBehaviour
         ret = ret.Replace("{step}", step.ToString());
         int i = GameManager.Instance.TotalRisk;
         string s = i.ToString();
-        if (i <= 0)
-            s = i.ToString() + "+";
+        if (i >= 0)
+            s = "+" + i.ToString();
         ret = ret.Replace("{risk}", s);
         return ret;
     }
