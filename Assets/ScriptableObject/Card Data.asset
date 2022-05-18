@@ -423,7 +423,7 @@ MonoBehaviour:
       m_name: "\u89E3\u304B\u308C\u3057\u529B"
       m_cost: 3
       m_image: {fileID: 21300000, guid: cdec13907ffc75749ab2ed436bec6b14, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
+      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u306E\u78BA\u5B9A\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 3
       m_commands:
       - m_command:
@@ -443,7 +443,7 @@ MonoBehaviour:
       m_name: "\u89E3\u304B\u308C\u3057\u529B"
       m_cost: 2
       m_image: {fileID: 21300000, guid: cdec13907ffc75749ab2ed436bec6b14, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
+      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u306E\u78BA\u5B9A\u30C0\u30E1\u30FC\u30B8\n\u300C\u7D42\u672B\u300D\u30921\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 3
       m_commands:
       - m_command:
@@ -822,7 +822,7 @@ MonoBehaviour:
       m_name: "\u706B\u50B7"
       m_cost: '-'
       m_image: {fileID: 21300000, guid: dd3885098198d104888439be4c590aba, type: 3}
-      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u4F7F\u7528\u4E0D\u53EF"
+      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u81EA\u8EAB\u306B{leg0}\u306E\u78BA\u5B9A\u30C0\u30E1\u30FC\u30B8\n\u4F7F\u7528\u4E0D\u53EF"
       m_rarity: 5
       m_commands:
       - m_command:
@@ -838,7 +838,7 @@ MonoBehaviour:
       m_name: "\u706B\u50B7+"
       m_cost: '-'
       m_image: {fileID: 21300000, guid: dd3885098198d104888439be4c590aba, type: 3}
-      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u81EA\u8EAB\u306B{leg0}\u30C0\u30E1\u30FC\u30B8\n\u4F7F\u7528\u4E0D\u53EF"
+      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u81EA\u8EAB\u306B{leg0}\u306E\u78BA\u5B9A\u30C0\u30E1\u30FC\u30B8\n\u4F7F\u7528\u4E0D\u53EF"
       m_rarity: 5
       m_commands:
       - m_command:
@@ -923,7 +923,7 @@ MonoBehaviour:
       m_name: "\u30BF\u30C3\u30AF\u30EB"
       m_cost: 2
       m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B{leg0} \u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\n\u7B4B\u529B1\u3092\u5F97\u3066\u3001\u6575\u4E00\u4F53\u306B{leg2}\u30C0\u30E1\u30FC\u30B8"
+      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u306E\u78BA\u5B9A\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\n\u7B4B\u529B1\u3092\u5F97\u3066\u3001\u6575\u4E00\u4F53\u306B{leg2}\u30C0\u30E1\u30FC\u30B8"
       m_rarity: 2
       m_commands:
       - m_command:
@@ -947,7 +947,7 @@ MonoBehaviour:
       m_name: "\u30BF\u30C3\u30AF\u30EB+"
       m_cost: 2
       m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
-      m_tooltip: "\u81EA\u8EAB\u306B{leg0} \u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\n\u7B4B\u529B2\u3092\u5F97\u3066\u3001\u6575\u4E00\u4F53\u306B{leg2}\u30C0\u30E1\u30FC\u30B8"
+      m_tooltip: "\u81EA\u8EAB\u306B{leg0}\u306E\u78BA\u5B9A\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\n\u7B4B\u529B2\u3092\u5F97\u3066\u3001\u6575\u4E00\u4F53\u306B{leg2}\u30C0\u30E1\u30FC\u30B8"
       m_rarity: 2
       m_commands:
       - m_command:
@@ -1298,7 +1298,7 @@ MonoBehaviour:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 3
-        m_isTrueDmg: 0
+        m_isTrueDmg: 1
         m_useType: 0
         m_particleID: 1
     00000021:
@@ -1533,10 +1533,10 @@ MonoBehaviour:
     00000041:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 6
+        m_power: 4
         m_isTrueDmg: 0
         m_useType: 0
-        m_particleID: 0
+        m_particleID: 1
     00000042:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:

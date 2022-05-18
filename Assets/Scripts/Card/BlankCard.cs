@@ -92,6 +92,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_rectTransform = gameObject.GetComponent<RectTransform>();
         List<Condition> c = new List<Condition>();
         ConditionSelection cs = new ConditionSelection();
+        bool trueDmg = false;
         foreach (var com in m_cardCommand)
         {
             CommandParam cp = (CommandParam)com[0];
@@ -99,8 +100,12 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             {
                 c.Add(cs.SetCondition((ConditionID)com[3], com[4]));
             }
+            if (cp == CommandParam.Attack && !trueDmg)
+            {
+                trueDmg = com[4] == 1 ? true : false;
+            }
         }
-        m_cardEffectHelp.SetText(m_isDiscarding, m_ethereal, c);
+        m_cardEffectHelp.SetText(m_isDiscarding, m_ethereal, trueDmg, c);
         m_cardEffectHelp.SetActive(false);
     }
     private void Init()
@@ -180,15 +185,18 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                 switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
-                        
-                        cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[3]);
                         if (!b)
+                        {
+                            cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[3]);
                             cc[3] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, cc[3]);
+                        }
                         break;
                     case CommandParam.Block:
-                        cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[3]);
                         if (!b)
+                        {
+                            cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[3]);
                             cc[3] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Block, cc[3]);
+                        }
                         break;
                     default:
                         continue;
