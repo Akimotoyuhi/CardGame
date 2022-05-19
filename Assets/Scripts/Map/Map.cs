@@ -167,15 +167,19 @@ public class Map : MonoBehaviour
     }
 
     /// <summary>
-    /// マップを踏破したかの判定
+    /// マップを踏破したかの判定<br/>
+    /// クリアしたらtrue
     /// </summary>
-    public void ClearCheck(int floor)
+    public bool ClearCheck(int floor)
     {
-        if (floor == 0) return;
+        if (floor == 0) return false;
         if (floor % m_sector == 0)
         {
             if (m_crearAct == m_act)//最後まで到達したらクリア
+            {
                 GameManager.Instance.Gameover(true);
+                return true;
+            }
             int i = 1;
             while (true)
             {
@@ -194,7 +198,8 @@ public class Map : MonoBehaviour
             }
             m_scrollViewContentTra.anchoredPosition = new Vector2(0, m_scrollViewContentTra.anchoredPosition.y);
             CreateMap();
-        } 
+        }
+        return false;
     }
 
     /// <summary>

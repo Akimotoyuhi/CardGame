@@ -290,7 +290,12 @@ public class GameManager : MonoBehaviour
             Destroy(player.gameObject);
         }
         DataManager.Instance.Floor++;
-        m_map.ClearCheck(DataManager.Instance.Floor);
+        if (m_map.ClearCheck(DataManager.Instance.Floor))
+        {
+            Debug.Log("a");
+            Gameover(true);
+            return;
+        }
         SetGameInfoPanel();
         m_step = DataManager.Instance.Floor;
         m_map.AllColorChange();

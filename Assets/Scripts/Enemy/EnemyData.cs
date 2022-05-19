@@ -265,6 +265,8 @@ public enum EnemyID
     Nasobema,
     /// <summary>デスネズミ</summary>
     DeathRat,
+    /// <summary>ワイバーン</summary>
+    Ybarn
 }
 /// <summary>敵の種類</summary>
 public enum EnemyType

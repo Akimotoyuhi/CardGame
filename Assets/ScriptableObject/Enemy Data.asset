@@ -212,7 +212,7 @@ MonoBehaviour:
           m_numIndex: 0
   - m_name: "\u30DA\u30EA\u30E5\u30C8\u30F3"
     m_id: 5
-    m_life: 80
+    m_life: 90
     m_sprite: {fileID: 21300000, guid: 894fddbf3693d504d8ebf752456ee9de, type: 3}
     m_spriteScaleMagnification: 1.3
     m_enemyType: 0
@@ -286,7 +286,7 @@ MonoBehaviour:
           m_numIndex: 0
   - m_name: "\u6DF1\u304D\u8005\u3069\u3082"
     m_id: 6
-    m_life: 50
+    m_life: 70
     m_sprite: {fileID: 21300000, guid: 6520f81174e259f46bd886e101700846, type: 3}
     m_spriteScaleMagnification: 1
     m_enemyType: 0
@@ -498,11 +498,8 @@ MonoBehaviour:
         m_commands:
         - id: 39
         - id: 40
-        - id: 41
         m_target: 0
         m_plan:
-        - m_plan: 0
-          m_numIndex: 0
         - m_plan: 3
           m_numIndex: 1
     - m_conditionalCommand:
@@ -512,7 +509,7 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
-        - id: 42
+        - id: 41
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -531,7 +528,7 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
-        - id: 43
+        - id: 42
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -543,8 +540,8 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
+        - id: 43
         - id: 44
-        - id: 45
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -558,9 +555,9 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
+        - id: 45
         - id: 46
         - id: 47
-        - id: 48
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -583,7 +580,7 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
-        - id: 49
+        - id: 48
         m_target: 0
         m_plan:
         - m_plan: 3
@@ -595,8 +592,8 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
+        - id: 49
         - id: 50
-        - id: 51
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -617,7 +614,7 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
-        - id: 52
+        - id: 51
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -636,7 +633,7 @@ MonoBehaviour:
         m_isOnlyOnce: 0
       m_actionCommnad:
         m_commands:
-        - id: 53
+        - id: 52
         m_target: 0
         m_plan:
         - m_plan: 0
@@ -652,63 +649,52 @@ MonoBehaviour:
         m_plan:
         - m_plan: 4
           m_numIndex: 0
-  - m_name: 
+  - m_name: "\u30EF\u30A4\u30D0\u30FC\u30F3"
     m_id: 11
-    m_life: 80
-    m_sprite: {fileID: 21300000, guid: b1444316459a81847be1825658132f88, type: 3}
+    m_life: 120
+    m_sprite: {fileID: 21300000, guid: 8e3ffe18492b4eb4cb853a660fc3aad7, type: 3}
     m_spriteScaleMagnification: 1.1
-    m_enemyType: 1
+    m_enemyType: 0
     m_enemyBaseState:
-    - m_conditionalCommand: []
+    - m_conditionalCommand:
+      - m_type: 0
+        m_value: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
       m_actionCommnad:
-        m_commands: []
+        m_commands:
+        - id: 53
+        - id: 54
+        - id: 55
+        - id: 56
+        - id: 57
+        - id: 58
+        - id: 59
+        - id: 60
+        - id: 61
+        - id: 62
         m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
-    - m_conditionalCommand: []
-      m_actionCommnad:
-        m_commands: []
-        m_target: 0
-        m_plan: []
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 0
+          m_numIndex: 0
   m_encountDatas:
   - m_label: "\u5854\u306E\u59CB\u307E\u308A"
     m_enemies:
@@ -731,7 +717,8 @@ MonoBehaviour:
     m_bosses:
     - m_enemyID: 07000000
   - m_label: "\u5CFB\u5DBA\u9AD8\u5730"
-    m_enemies: []
+    m_enemies:
+    - m_enemyID: 0c000000
     m_elites: []
     m_bosses: []
   references:
@@ -769,14 +756,14 @@ MonoBehaviour:
     00000004:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 2
+        m_power: 3
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
     00000005:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 2
+        m_power: 3
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
@@ -850,7 +837,7 @@ MonoBehaviour:
     0000000F:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 10
+        m_power: 9
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
@@ -873,7 +860,7 @@ MonoBehaviour:
     00000012:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 7
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
@@ -887,7 +874,7 @@ MonoBehaviour:
     00000014:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 5
+        m_power: 6
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
@@ -982,7 +969,7 @@ MonoBehaviour:
     00000021:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 9
+        m_power: 7
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 2
@@ -1005,7 +992,7 @@ MonoBehaviour:
     00000024:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
-        m_power: 12
+        m_power: 9
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 2
@@ -1014,7 +1001,7 @@ MonoBehaviour:
       data:
         m_condition:
           m_conditionID: 0
-          m_turn: 0
+          m_turn: 2
         m_useType: 0
         m_particleID: 0
     00000026:
@@ -1026,13 +1013,6 @@ MonoBehaviour:
         m_isUpgrade: 0
         m_particleID: -1
     00000027:
-      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
-      data:
-        m_power: 11
-        m_isTrueDmg: 0
-        m_useType: 0
-        m_particleID: 2
-    00000028:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
@@ -1040,7 +1020,7 @@ MonoBehaviour:
           m_turn: 2
         m_useType: 0
         m_particleID: -1
-    00000029:
+    00000028:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
@@ -1048,28 +1028,28 @@ MonoBehaviour:
           m_turn: 2
         m_useType: 0
         m_particleID: -1
-    0000002A:
+    00000029:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 16
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
-    0000002B:
+    0000002A:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 6
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
-    0000002C:
+    0000002B:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 8
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
-    0000002D:
+    0000002C:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
@@ -1077,21 +1057,21 @@ MonoBehaviour:
           m_turn: 1
         m_useType: 0
         m_particleID: -1
-    0000002E:
+    0000002D:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 10
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
-    0000002F:
+    0000002E:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 5
         m_isTrueBlk: 0
         m_useType: 0
         m_particleID: -1
-    00000030:
+    0000002F:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
@@ -1099,7 +1079,7 @@ MonoBehaviour:
           m_turn: 1
         m_useType: 0
         m_particleID: -1
-    00000031:
+    00000030:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
@@ -1107,31 +1087,101 @@ MonoBehaviour:
           m_turn: -1
         m_useType: 0
         m_particleID: 5
-    00000032:
+    00000031:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 8
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 6
-    00000033:
+    00000032:
       type: {class: CardBlockCommnad, ns: , asm: Assembly-CSharp}
       data:
         m_block: 8
         m_isTrueBlk: 0
         m_useType: 1
         m_particleID: 6
-    00000034:
+    00000033:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 2
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
-    00000035:
+    00000034:
       type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
       data:
         m_power: 15
         m_isTrueDmg: 0
         m_useType: 0
         m_particleID: 0
+    00000035:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: 1
+    00000036:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    00000037:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    00000038:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    00000039:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    0000003A:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    0000003B:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    0000003C:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    0000003D:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1
+    0000003E:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 1
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: -1

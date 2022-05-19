@@ -403,7 +403,11 @@ public enum CardID
     /// <summary>テスト</summary>
     Test,
     /// <summary>聖域</summary>
-    Sanctuary
+    Sanctuary,
+    /// <summary>タクティカルソード</summary>
+    TacticalSword,
+    /// <summary>タクティカルアーマー</summary>
+    TacticalArmor,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

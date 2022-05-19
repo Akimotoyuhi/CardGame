@@ -17,6 +17,7 @@ public enum EventTiming
     /// <summary>カードを引いた時</summary>
     Drow,
 }
+/// <summary>Conditionが評価したい値</summary>
 public enum ParametorType
 {
     Attack,

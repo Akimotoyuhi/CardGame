@@ -10,18 +10,17 @@ using DG.Tweening;
 /// </summary>
 public class Sample : MonoBehaviour
 {
-    public int m_seed;
+    CommandParam m_cp = CommandParam.AddCard;
 
     private void Start()
     {
-        int[] nums = new int[10];
-        for (int i = 0; i < nums.Length; i++)
-        {
-            nums[i] = UnityEngine.Random.Range(0, 100);
-        }
-        foreach (var item in nums)
-        {
-            Debug.Log(item);
-        }
+        Debug.Log(m_cp);
+        AAAA(ref m_cp);
+        Debug.Log(m_cp);
+    }
+
+    private void AAAA(ref CommandParam cp)
+    {
+        cp = CommandParam.Attack;
     }
 }
