@@ -257,7 +257,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             n.Add(c.CardCommand);
         m_cardCommand = n;
         //m_cardCommand = m_carddata.Command;
-        if (m_isDiscarding) Destroy(gameObject);
+        if (isUsed && m_isDiscarding) Destroy(gameObject);
         else transform.SetParent(m_discard.CardParent, false); //捨て札に移動
     }
 

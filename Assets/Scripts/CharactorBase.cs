@@ -239,16 +239,18 @@ public class CharactorBase : MonoBehaviour
                 dmg = damage;
             }
             else
+            {
                 dmg = OnBattleEffect(EventTiming.Damaged, ParametorType.Attack, damage);
+            }
             dmg = m_block -= dmg;
             if (m_block < 0) m_block = 0;
             else
             {
+                EffectChecker(EventTiming.Blocked, ParametorType.Other);
                 EffectManager.Instance.DamageText(damage.ToString(), Color.blue, Vector2.zero, transform);
             }
             dmg *= -1; //ブロック値計算の後ダメージの符号が反転してうざいので戻す
-            if (dmg <= 0) { }
-            else
+            if (dmg > 0)
             {
                 m_life -= dmg;
                 EffectChecker(EventTiming.Damaged, ParametorType.Other);
@@ -341,18 +343,19 @@ public class CharactorBase : MonoBehaviour
 
                     break;
             }
-            switch (c.GetConditionID())
-            {
-                case ConditionID.PlateArmor:
-                    m_block += c.Effect(eventTiming, parametorType)[0];
-                    break;
-                case ConditionID.Metallicize:
-                    m_block += c.Effect(eventTiming, parametorType)[0];
-                    break;
-                default:
-                    c.Effect(eventTiming, parametorType);
-                    break;
-            }
+            m_block += c.Effect(eventTiming, parametorType)[0];
+            //switch (c.GetConditionID())
+            //{
+            //    case ConditionID.PlateArmor:
+            //        m_block += c.Effect(eventTiming, parametorType)[0];
+            //        break;
+            //    case ConditionID.Metallicize:
+            //        m_block += c.Effect(eventTiming, parametorType)[0];
+            //        break;
+            //    default:
+            //        c.Effect(eventTiming, parametorType);
+            //        break;
+            //}
         }
         foreach (var item in addCondition)
         {

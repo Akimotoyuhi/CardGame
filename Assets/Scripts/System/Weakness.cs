@@ -179,16 +179,18 @@ public class PlateArmor : Condition
 {
     public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Other) return new int[] { block };
+        if (Turn <= 0 || parametorType != ParametorType.Other)
+            return new int[] { block };
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
                 return new int[] { Turn };
             case EventTiming.Damaged:
+                Debug.Log("ブロック成功");
                 Turn--;
                 return new int[] { 0 };
             default:
-                return new int[] { block };
+                return new int[] { 0 };
         }
     }
     public override bool IsRemove()
@@ -199,7 +201,7 @@ public class PlateArmor : Condition
     public override ConditionID GetConditionID() => ConditionID.PlateArmor;
     public override int IsBuff() => 0;
     public override ParametorType GetParametorType() => ParametorType.Other;
-    public override string Tooltip => $"プレートアーマー\n自分のターン終了時に<color=#0000ff>{Turn}</color>ブロックを得る。攻撃されると効果-1";
+    public override string Tooltip => $"プレートアーマー\n自分のターン終了時に<color=#0000ff>{Turn}</color>ブロックを得る。ダメージを受けると効果-1";
 }
 public class StrengthDown : Condition
 {
@@ -256,7 +258,7 @@ public class Metallicize : Condition
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
-                return new int[] { Turn };
+                return new int[] { block + Turn };
             default:
                 return new int[] { block };
         }

@@ -650,10 +650,10 @@ MonoBehaviour:
         - m_plan: 4
           m_numIndex: 0
   - m_name: "\u30EF\u30A4\u30D0\u30FC\u30F3"
-    m_id: 11
-    m_life: 120
+    m_id: 12
+    m_life: 100
     m_sprite: {fileID: 21300000, guid: 8e3ffe18492b4eb4cb853a660fc3aad7, type: 3}
-    m_spriteScaleMagnification: 1.1
+    m_spriteScaleMagnification: 1.2
     m_enemyType: 0
     m_enemyBaseState:
     - m_conditionalCommand:
@@ -694,6 +694,81 @@ MonoBehaviour:
         - m_plan: 0
           m_numIndex: 0
         - m_plan: 0
+          m_numIndex: 0
+    - m_conditionalCommand:
+      - m_type: 4
+        m_value: 4
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 63
+        - id: 64
+        - id: 65
+        m_target: 0
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 3
+          m_numIndex: 1
+    - m_conditionalCommand:
+      - m_type: 4
+        m_value: 2
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 66
+        - id: 67
+        - id: 68
+        m_target: 0
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
+        - m_plan: 3
+          m_numIndex: 1
+  - m_name: "\u708E\u306E\u9B54\u8853\u5E2B"
+    m_id: 12
+    m_life: 60
+    m_sprite: {fileID: 21300000, guid: 384d3eb3d1aae4e42b48f9b53e82b6f0, type: 3}
+    m_spriteScaleMagnification: 1
+    m_enemyType: 0
+    m_enemyBaseState:
+    - m_conditionalCommand:
+      - m_type: 1
+        m_value: 1
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 69
+        m_target: 0
+        m_plan:
+        - m_plan: 3
+          m_numIndex: 0
+    - m_conditionalCommand:
+      - m_type: 1
+        m_value: 2
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 70
+        m_target: 1
+        m_plan:
+        - m_plan: 2
+          m_numIndex: 0
+    - m_conditionalCommand:
+      - m_type: 1
+        m_value: 3
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 71
+        m_target: 0
+        m_plan:
+        - m_plan: 3
           m_numIndex: 0
   m_encountDatas:
   - m_label: "\u5854\u306E\u59CB\u307E\u308A"
@@ -1185,4 +1260,74 @@ MonoBehaviour:
         m_power: 1
         m_isTrueDmg: 0
         m_useType: 0
+        m_particleID: -1
+    0000003F:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 10
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: 1
+    00000040:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 0
+          m_turn: 2
+        m_useType: 0
+        m_particleID: -1
+    00000041:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 2
+        m_cardID: 23
+        m_cardAddDestination: 0
+        m_isUpgrade: 0
+        m_particleID: -1
+    00000042:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 7
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: 1
+    00000043:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 1
+          m_turn: 2
+        m_useType: 0
+        m_particleID: -1
+    00000044:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 2
+        m_cardID: 23
+        m_cardAddDestination: 0
+        m_isUpgrade: 0
+        m_particleID: -1
+    00000045:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 2
+        m_cardID: 22
+        m_cardAddDestination: 2
+        m_isUpgrade: 0
+        m_particleID: -1
+    00000046:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 2
+          m_turn: 2
+        m_useType: 2
+        m_particleID: 1
+    00000047:
+      type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_addNum: 2
+        m_cardID: 22
+        m_cardAddDestination: 2
+        m_isUpgrade: 1
         m_particleID: -1
