@@ -471,4 +471,37 @@ public enum CardUsedConditional
     Even,//偶数
     Odd,//奇数
 }
+public enum CommonCmdEnum
+{
+    CommandParam,
+    ParticleID,
+    UseType,
+}
+public enum AttackCmdEnum
+{
+    Power = 3,
+    TrueDmg = 4,
+}
+public enum BlockCmdEnum
+{
+    Block = 3,
+    TrueBlk = 4,
+}
+public enum ConditionCmdEnum
+{
+    ConditionID = 3,
+    Turn = 4,
+}
+public enum CardAddCmdEnum
+{
+    CardID = 3,
+    Num = 4,
+    AddDestination = 5,
+    IsUpGrade = 6,
+}
+public enum DrowCardCmdEnum
+{
+    IsDrow = 3,
+    Num = 4,
+}
 #endregion

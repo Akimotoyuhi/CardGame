@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
         m_nowPlaying = bgm;
         if (m_source.clip)//既にclipが入ってたらフェードする
         {
+            float v = m_source.volume;
             m_source.DOFade(0f, m_fadeDuration).OnComplete(() =>
             {
                 if (bgm == BGM.None)
@@ -41,7 +42,7 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     m_source.clip = m_bgmClips[(int)bgm];
-                    m_source.DOFade(1f, m_fadeDuration).OnComplete(() => m_source.Play());
+                    m_source.DOFade(v, m_fadeDuration).OnComplete(() => m_source.Play());
                 }
             });
         }

@@ -97,13 +97,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             CommandParam cp = (CommandParam)com[0];
             if (cp == CommandParam.Conditon)
-            {
                 c.Add(cs.SetCondition((ConditionID)com[3], com[4]));
-            }
             if (cp == CommandParam.Attack && !trueDmg)
-            {
                 trueDmg = com[4] == 1 ? true : false;
-            }
         }
         m_cardEffectHelp.SetText(m_isDiscarding, m_ethereal, trueDmg, c);
         m_cardEffectHelp.SetActive(false);
@@ -180,28 +176,28 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             foreach (var cc in m_cardCommand)
             {
-                CommandParam cp = (CommandParam)cc[0];
-                bool b = cc[4] == 1 ? true : false;
+                CommandParam cp = (CommandParam)cc[(int)CommonCmdEnum.CommandParam];
+                bool b = cc[(int)AttackCmdEnum.TrueDmg] == 1 ? true : false;
                 switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
                         if (!b)
                         {
-                            cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[3]);
-                            cc[3] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, cc[3]);
+                            cc[(int)AttackCmdEnum.Power] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[(int)AttackCmdEnum.Power]);
+                            cc[(int)AttackCmdEnum.Power] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, cc[(int)AttackCmdEnum.Power]);
                         }
                         break;
                     case CommandParam.Block:
                         if (!b)
                         {
-                            cc[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[3]);
-                            cc[3] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Block, cc[3]);
+                            cc[(int)BlockCmdEnum.Block] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[(int)BlockCmdEnum.Block]);
+                            cc[(int)BlockCmdEnum.Block] = m_player.OnBattleEffect(EventTiming.Attacked, ParametorType.Block, cc[(int)BlockCmdEnum.Block]);
                         }
                         break;
                     default:
                         continue;
                 }
-                if (cc[3] <= 1) cc[3] = 1;
+                if (cc[(int)AttackCmdEnum.Power] <= 1) cc[(int)AttackCmdEnum.Power] = 1;
             }
         }
         MatchCollection match = Regex.Matches(text, "{leg([0-9]*)}");
