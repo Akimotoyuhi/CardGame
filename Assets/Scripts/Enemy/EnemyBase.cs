@@ -151,7 +151,7 @@ public class EnemyBase : CharactorBase, IDrop
             int index = default;
             for (int n = 0; n < m_commands.Count; n++)
             {
-                if ((CommandParam)m_commands[n][0] == CommandParam.Attack)
+                if (m_commands[n] != null && (CommandParam)m_commands[n][0] == CommandParam.Attack)
                 {
                     index = i;
                     break;
@@ -159,7 +159,10 @@ public class EnemyBase : CharactorBase, IDrop
             }
             PlanController p = Instantiate(m_planImage);
             p.transform.SetParent(m_planImageParent, false);
-            p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, m_commands[index][3]);
+            if (m_commands.Count == 0)
+                p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, 0);
+            else
+                p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, m_commands[index][3]);
         }
     }
 

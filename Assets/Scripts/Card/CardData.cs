@@ -404,7 +404,7 @@ public enum CardID
     Test,
     /// <summary>聖域</summary>
     Sanctuary,
-    /// <summary>タクティカルソード</summary>
+    /// <summary>タクティカルブレード</summary>
     TacticalSword,
     /// <summary>タクティカルアーマー</summary>
     TacticalArmor,

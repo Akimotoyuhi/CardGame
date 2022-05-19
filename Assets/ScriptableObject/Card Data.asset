@@ -1122,7 +1122,7 @@ MonoBehaviour:
     m_cardUpgrade:
       m_name: "\u30BF\u30AF\u30C6\u30A3\u30AB\u30EB\u30A2\u30FC\u30DE\u30FC+"
       m_cost: 1
-      m_image: {fileID: 21300000, guid: ed96a51652807624eb144afea016f677, type: 3}
+      m_image: {fileID: 21300000, guid: 4ac5fb8d933238b4c8574bf420ae3605, type: 3}
       m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30BF\u30AF\u30C6\u30A3\u30AB\u30EB\u30BD\u30FC\u30C9+\u30921\u679A\u5C71\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
       m_rarity: 1
       m_commands:
@@ -1787,7 +1787,7 @@ MonoBehaviour:
       data:
         m_power: 8
         m_isTrueDmg: 0
-        m_useType: 0
+        m_useType: 1
         m_particleID: 5
     00000059:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
@@ -1802,7 +1802,7 @@ MonoBehaviour:
       data:
         m_power: 11
         m_isTrueDmg: 0
-        m_useType: 0
+        m_useType: 1
         m_particleID: 5
     0000005B:
       type: {class: AddCardCommand, ns: , asm: Assembly-CSharp}
