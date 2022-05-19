@@ -177,10 +177,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             foreach (var cc in m_cardCommand)
             {
                 CommandParam cp = (CommandParam)cc[(int)CommonCmdEnum.CommandParam];
-                bool b = cc[(int)AttackCmdEnum.TrueDmg] == 1 ? true : false;
+                bool b;
                 switch (cp)//自身のバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
+                        b = cc[(int)AttackCmdEnum.TrueDmg] == 1 ? true : false;
                         if (!b)
                         {
                             cc[(int)AttackCmdEnum.Power] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Power, cc[(int)AttackCmdEnum.Power]);
@@ -188,6 +189,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                         }
                         break;
                     case CommandParam.Block:
+                        b = cc[(int)BlockCmdEnum.TrueBlk] == 1 ? true : false;
                         if (!b)
                         {
                             cc[(int)BlockCmdEnum.Block] = GameManager.Instance.CustomEvaluation(CustomEntityType.PlayerAndCard, CustomParamType.Difence, cc[(int)BlockCmdEnum.Block]);

@@ -79,6 +79,9 @@ public class EnemyBase : CharactorBase, IDrop
                 ConditionSelection cs = new ConditionSelection();
                 Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), false, particleID, false, () => Dead());
                 break;
+            case CommandParam.Heal:
+                Heal(cardParam[(int)HeadCmdEnum.Value], false);
+                break;
             default:
                 Debug.LogError("—áŠO");
                 break;

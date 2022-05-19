@@ -88,21 +88,21 @@ public class Player : CharactorBase, IDrop
 
     public override void GetDamage(int[] cardParam, ParticleID particleID)
     {
-        CommandParam command = (CommandParam)cardParam[0];
+        CommandParam command = (CommandParam)cardParam[(int)CommonCmdEnum.CommandParam];
         bool b;
         switch (command)
         {
             case CommandParam.Attack:
-                b = cardParam[4] == 1 ? true : false;
-                Damage(cardParam[3], 0, null, true, particleID, b, () =>
+                b = cardParam[(int)AttackCmdEnum.TrueDmg] == 1 ? true : false;
+                Damage(cardParam[(int)AttackCmdEnum.Power], 0, null, true, particleID, b, () =>
                 {
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();
                 });
                 break;
             case CommandParam.Block:
-                b = cardParam[4] == 1 ? true : false;
-                Damage(0, cardParam[3], null, true, particleID, b, () =>
+                b = cardParam[(int)BlockCmdEnum.TrueBlk] == 1 ? true : false;
+                Damage(0, cardParam[(int)BlockCmdEnum.Block], null, true, particleID, b, () =>
                 {
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();
@@ -110,11 +110,14 @@ public class Player : CharactorBase, IDrop
                 break;
             case CommandParam.Conditon:
                 ConditionSelection cs = new ConditionSelection();
-                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), true, particleID, false, () =>
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[(int)ConditionCmdEnum.ConditionID], cardParam[(int)ConditionCmdEnum.Turn]), true, particleID, false, () =>
                 {
                     m_image.sprite = m_gameoverSprite;
                     GameManager.Instance.Gameover();
                 });
+                break;
+            case CommandParam.Heal:
+                Heal(cardParam[(int)HeadCmdEnum.Value], true);
                 break;
             default:
                 Debug.LogError("例外");

@@ -121,6 +121,19 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
+    /// 回復
+    /// </summary>
+    /// <param name="healValue"></param>
+    protected void Heal(int healValue, bool isPlayer)
+    {
+        CurrentLife += healValue;
+        EffectManager.Instance.DamageText(healValue.ToString(), Color.green, Vector2.zero, transform);
+        SetSlider();
+        if (isPlayer)
+            GameManager.Instance.SetGameInfoPanel(this);
+    }
+
+    /// <summary>
     /// 被ダメージ情報を受け取る
     /// </summary>
     public virtual void GetDamage(int[] cardParam, ParticleID particleID) { }

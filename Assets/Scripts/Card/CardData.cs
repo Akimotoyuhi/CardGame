@@ -306,6 +306,16 @@ public class DrawCardCommand : ICommand
         return new int[] { (int)CommandParam.DrawCard, (int)m_particleID, (int)UseTiming.System, i, m_drawNum };
     }
 }
+public class HeadCommand : ICommand
+{
+    [SerializeField, Tooltip("回復量")] int m_healValue;
+    [SerializeField, Tooltip("回復対象")] UseTiming m_useType;
+    [SerializeField, Tooltip("パーティクルID")] ParticleID m_particleID;
+    public int[] Execute()
+    {
+        return new int[] { (int)CommandParam.Heal, (int)m_particleID, (int)m_useType, m_healValue };
+    }
+}
 public interface IConditional
 {
     /// <summary>評価に必要な値をint配列にして渡す</summary>
@@ -438,6 +448,7 @@ public enum CommandParam
     Conditon,
     AddCard,
     DrawCard,
+    Heal,
 }
 /// <summary>カード追加系カードを使用した際のカードの追加先</summary>
 public enum CardAddDestination
@@ -507,5 +518,9 @@ public enum DrowCardCmdEnum
 {
     IsDrow = 3,
     Num = 4,
+}
+public enum HeadCmdEnum
+{
+    Value = 3,
 }
 #endregion
