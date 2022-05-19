@@ -316,6 +316,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Gameover(bool isCrear = false)
     {
+        if (!BattleManager.Instance.IsGame)
+            return;
         BattleManager.Instance.IsGame = false;
         AudioManager.Instance.Play(BGM.None);
         Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ =>
