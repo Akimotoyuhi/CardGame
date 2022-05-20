@@ -338,12 +338,15 @@ public class CharactorBase : MonoBehaviour
                         //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
                         addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
                     }
+                    else
+                    {
+                        m_block += i[0];
+                    }
                     break;
                 default:
 
                     break;
             }
-            m_block += c.Effect(eventTiming, parametorType)[0];
             //switch (c.GetConditionID())
             //{
             //    case ConditionID.PlateArmor:

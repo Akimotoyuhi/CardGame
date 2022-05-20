@@ -186,7 +186,6 @@ public class PlateArmor : Condition
             case EventTiming.TurnEnd:
                 return new int[] { Turn };
             case EventTiming.Damaged:
-                Debug.Log("ƒuƒƒbƒN¬Œ÷");
                 Turn--;
                 return new int[] { 0 };
             default:
