@@ -344,7 +344,7 @@ public class CharactorBase : MonoBehaviour
                     }
                     break;
                 default:
-
+                    c.Effect(eventTiming, parametorType, 0);
                     break;
             }
             //switch (c.GetConditionID())

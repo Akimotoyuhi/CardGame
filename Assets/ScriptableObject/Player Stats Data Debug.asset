@@ -20,18 +20,33 @@ MonoBehaviour:
     m_gameoverSprite: {fileID: 21300000, guid: e208fa10c22b8e147a93028cb2a3adba, type: 3}
   m_maxHp: 70
   m_cardData:
-  - m_cardID: 0
-    m_upgrade: 0
-  - m_cardID: 0
-    m_upgrade: 0
-  - m_cardID: 13
-    m_upgrade: 0
-  - m_cardID: 1
-    m_upgrade: 0
-  - m_cardID: 1
-    m_upgrade: 0
-  - m_cardID: 13
-    m_upgrade: 0
-  - m_cardID: 13
-    m_upgrade: 0
-  m_relicData: []
+  - m_cardID: 27
+    m_upgrade: 1
+  - m_cardID: 27
+    m_upgrade: 1
+  - m_cardID: 28
+    m_upgrade: 1
+  - m_cardID: 28
+    m_upgrade: 1
+  - m_cardID: 29
+    m_upgrade: 1
+  - m_cardID: 29
+    m_upgrade: 1
+  - m_cardID: 12
+    m_upgrade: 1
+  m_relicData:
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2
+  - m_relicID: 2

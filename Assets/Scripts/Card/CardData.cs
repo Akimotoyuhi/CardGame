@@ -306,7 +306,7 @@ public class DrawCardCommand : ICommand
         return new int[] { (int)CommandParam.DrawCard, (int)m_particleID, (int)UseTiming.System, i, m_drawNum };
     }
 }
-public class HeadCommand : ICommand
+public class HealCommand : ICommand
 {
     [SerializeField, Tooltip("回復量")] int m_healValue;
     [SerializeField, Tooltip("回復対象")] UseTiming m_useType;

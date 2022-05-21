@@ -728,7 +728,7 @@ MonoBehaviour:
         - m_plan: 3
           m_numIndex: 1
   - m_name: "\u708E\u306E\u9B54\u8853\u5E2B"
-    m_id: 12
+    m_id: 13
     m_life: 60
     m_sprite: {fileID: 21300000, guid: 384d3eb3d1aae4e42b48f9b53e82b6f0, type: 3}
     m_spriteScaleMagnification: 1
@@ -766,6 +766,30 @@ MonoBehaviour:
       m_actionCommnad:
         m_commands:
         - id: 71
+        m_target: 0
+        m_plan:
+        - m_plan: 3
+          m_numIndex: 0
+    - m_conditionalCommand:
+      - m_type: 4
+        m_value: 2
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 72
+        m_target: 0
+        m_plan:
+        - m_plan: 0
+          m_numIndex: 0
+    - m_conditionalCommand:
+      - m_type: 0
+        m_value: 0
+        m_probability: 0
+        m_isOnlyOnce: 0
+      m_actionCommnad:
+        m_commands:
+        - id: 73
         m_target: 0
         m_plan:
         - m_plan: 3
@@ -1331,3 +1355,18 @@ MonoBehaviour:
         m_cardAddDestination: 2
         m_isUpgrade: 1
         m_particleID: -1
+    00000048:
+      type: {class: CardAttackCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_power: 10
+        m_isTrueDmg: 0
+        m_useType: 0
+        m_particleID: 1
+    00000049:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 11
+          m_turn: 1
+        m_useType: 0
+        m_particleID: 1

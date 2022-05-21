@@ -266,7 +266,15 @@ public enum EnemyID
     /// <summary>ƒfƒXƒlƒYƒ~</summary>
     DeathRat,
     /// <summary>ƒƒCƒo[ƒ“</summary>
-    Ybarn
+    Ybarn,
+    /// <summary>‰Š‚Ì–‚pt</summary>
+    FlameWizard,
+    /// <summary>…‚Ì–‚pt</summary>
+    WaterWizard,
+    /// <summary>•—‚Ì–‚pt</summary>
+    WindWizard,
+    /// <summary>—‹‚Ì–‚pt</summary>
+    LightningWizard,
 }
 /// <summary>“G‚Ìí—Ş</summary>
 public enum EnemyType
