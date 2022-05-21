@@ -54,7 +54,7 @@ MonoBehaviour:
       m_restMaxIndex: 5
       m_restAbsolutelyIndex: 3
       m_restProbability: 4
-      m_eliteMinIndex: 2
+      m_eliteMinIndex: 1
       m_eliteMaxIndex: 5
       m_eliteAbsolutelyIndex: -1
       m_eliteProbability: 3

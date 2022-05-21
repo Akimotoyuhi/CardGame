@@ -184,7 +184,7 @@ public class PlateArmor : Condition
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
-                return new int[] { Turn };
+                return new int[] { (int)ParametorType.Block, Turn };
             case EventTiming.Damaged:
                 Turn--;
                 return new int[] { 0 };
@@ -212,7 +212,7 @@ public class StrengthDown : Condition
         }
         if (eventTiming == EventTiming.TurnBegin && (ConditionID)value == ConditionID.Strength)
         {
-            int[] ret = new int[] { (int)ConditionID.Strength, -Turn };
+            int[] ret = new int[] { (int)ParametorType.Condition, (int)ConditionID.Strength, -Turn };
             Turn = 0;
             return ret;
         }
@@ -366,24 +366,26 @@ public class Corruption : Condition
 }
 public class Burning : Condition
 {
-    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int dmg = 0)
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
+        if (parametorType != ParametorType.Other)
+        {
+            if (Turn <= 0 || parametorType != GetParametorType()) return new int[] { block };
+        }
+        float ret = default;
         switch (eventTiming)
         {
+            case EventTiming.Attacked:
+                ret = block * (1 - 0.5f);
+                return new int[] { (int)ret };
+            case EventTiming.Drow:
+                ret = block * (1 - 0.5f);
+                return new int[] { (int)ret };
             case EventTiming.TurnEnd:
-                Turn--;
-                break;
-            case EventTiming.Damaged:
-                if (parametorType == ParametorType.Attack)
-                {
-                    float ret = dmg * (1 + 0.5f);
-                    return new int[] { (int)ret };
-                }
-                break;
-            default:
+                if (Turn > 0) Turn--;
                 break;
         }
-        return new int[] { dmg };
+        return new int[] { block };
     }
 
     public override ConditionID GetConditionID() => ConditionID.Burning;
@@ -399,7 +401,7 @@ public class Burning : Condition
         else
             return false;
     }
-    public override string Tooltip => $"灼熱\n受けるダメージが50%増加。<color=#0000ff>{Turn}</color>ターン持続";
+    public override string Tooltip => $"灼熱\n得るブロックが50%低下。<color=#0000ff>{Turn}</color>ターン持続";
 }
 public class Frozen : Condition
 {
@@ -407,15 +409,23 @@ public class Frozen : Condition
     {
         if (parametorType != ParametorType.Other)
         {
-            if (Turn == 0 || parametorType != ParametorType.Attack) return new int[] { power };
+            if (Turn <= 0 || parametorType != GetParametorType())
+                return new int[] { power };
         }
+        float ret = default;
         switch (eventTiming)
         {
             case EventTiming.Attacked:
-                return new int[] { power + Turn };
-            default:
-                return new int[] { power };
+                ret = power * (1 - 0.5f);
+                return new int[] { (int)ret };
+            case EventTiming.Drow:
+                ret = power * (1 - 0.5f);
+                return new int[] { (int)ret };
+            case EventTiming.TurnEnd:
+                if (Turn > 0) Turn--;
+                break;
         }
+        return new int[] { power };
     }
 
     public override ConditionID GetConditionID() => ConditionID.Frozen;

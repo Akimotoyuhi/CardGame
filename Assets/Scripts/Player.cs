@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class Player : CharactorBase, IDrop
 {
     /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
-    private int m_maxCost = 3;
+    private int m_defCost = 3;
+    private int m_defDrowNum = 5;
     private Sprite[] m_attackedSprite;
     private Sprite m_gameoverSprite;
     [SerializeField] int m_cost = default;
-    [SerializeField] int m_drowNum = 5;
+    [SerializeField] int m_drowNum = default;
     /// <summary>最大コスト</summary>
-    public int MaxCost => m_maxCost;
+    public int MaxCost => m_defCost;
     /// <summary>現在コスト</summary>
     public int CurrrentCost { get => m_cost; set => m_cost = value; }
     /// <summary>カードをドローする枚数</summary>
@@ -23,8 +24,8 @@ public class Player : CharactorBase, IDrop
 
     public override void TurnStart()
     {
-        m_cost = OnBattleEffect(EventTiming.TurnBegin, ParametorType.Cost, m_maxCost);
-        m_drowNum = OnBattleEffect(EventTiming.TurnBegin, ParametorType.DrowNum, m_drowNum);
+        m_cost = OnBattleEffect(EventTiming.TurnBegin, ParametorType.Cost, m_defCost);
+        m_drowNum = OnBattleEffect(EventTiming.TurnBegin, ParametorType.DrowNum, m_defDrowNum);
         base.TurnStart();
     }
 

@@ -324,41 +324,30 @@ public class CharactorBase : MonoBehaviour
                         {
                             Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
                             ConditionSelection cs = new ConditionSelection();
-                            //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
                             addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
                         }
                     }
                     break;
                 case ParametorType.Other:
                     i = c.Effect(eventTiming, parametorType, 0);
-                    if (i.Length >= 2)
+                    switch ((ParametorType)i[0])
                     {
-                        Debug.Log($"{(ConditionID)i[0]}を{i[1]}ターン付与");
-                        ConditionSelection cs = new ConditionSelection();
-                        //AddEffect(cs.SetCondition((ConditionID)i[0], i[1]));
-                        addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
-                    }
-                    else
-                    {
-                        m_block += i[0];
+                        case ParametorType.Block:
+                            m_block += i[1];
+                            break;
+                        case ParametorType.Condition:
+                            Debug.Log($"{(ConditionID)i[1]}を{i[2]}ターン付与");
+                            ConditionSelection cs = new ConditionSelection();
+                            addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+                            break;
+                        default:
+                            break;
                     }
                     break;
                 default:
                     c.Effect(eventTiming, parametorType, 0);
                     break;
             }
-            //switch (c.GetConditionID())
-            //{
-            //    case ConditionID.PlateArmor:
-            //        m_block += c.Effect(eventTiming, parametorType)[0];
-            //        break;
-            //    case ConditionID.Metallicize:
-            //        m_block += c.Effect(eventTiming, parametorType)[0];
-            //        break;
-            //    default:
-            //        c.Effect(eventTiming, parametorType);
-            //        break;
-            //}
         }
         foreach (var item in addCondition)
         {

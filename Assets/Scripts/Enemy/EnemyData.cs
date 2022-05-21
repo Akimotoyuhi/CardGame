@@ -275,6 +275,8 @@ public enum EnemyID
     WindWizard,
     /// <summary>—‹‚Ì–‚pt</summary>
     LightningWizard,
+    /// <summary>ƒGƒ^[ƒiƒ‹ƒhƒ‰ƒSƒ“</summary>
+    EternalDragon,
 }
 /// <summary>“G‚Ìí—Ş</summary>
 public enum EnemyType
