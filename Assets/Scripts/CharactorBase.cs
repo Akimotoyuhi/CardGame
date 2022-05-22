@@ -292,6 +292,7 @@ public class CharactorBase : MonoBehaviour
     {
         EffectChecker(EventTiming.TurnEnd, ParametorType.Other);
         RemoveEffect();
+        SetSlider();
     }
 
     /// <summary>

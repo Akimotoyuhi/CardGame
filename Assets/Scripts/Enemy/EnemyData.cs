@@ -277,6 +277,8 @@ public enum EnemyID
     LightningWizard,
     /// <summary>エターナルドラゴン</summary>
     EternalDragon,
+    /// <summary>アザトース</summary>
+    Azathoth,
 }
 /// <summary>敵の種類</summary>
 public enum EnemyType
