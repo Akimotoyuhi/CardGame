@@ -178,7 +178,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             {
                 CommandParam cp = (CommandParam)cc[(int)CommonCmdEnum.CommandParam];
                 bool b;
-                switch (cp)//自身のバフを評価して数値を増減させる
+                switch (cp)//プレイヤーのバフを評価して数値を増減させる
                 {
                     case CommandParam.Attack:
                         b = cc[(int)AttackCmdEnum.TrueDmg] == 1 ? true : false;
@@ -235,15 +235,16 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             List<int[]> vs = new List<int[]>();
             for (int i = 0; i < m_carddata.Commands.Count; i++)
             {
-                //if (m_carddata.Commands[i].Conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
-                //{
-                //    Debug.Log($"条件一致 {m_cardCommand[i][0]}");
-                //    vs.Add(m_cardCommand[i]);
-                //}
-                if (m_useType == UseTiming.TurnEnd)
-                    vs.Add(m_cardCommand[i]); //今は条件評価に必要な敵クラスが取れないので一旦これで
+                if (m_carddata.Commands[i].Conditional.Count > 0)
+                {
+                    if (m_carddata.Commands[i].Conditional.Evaluation(m_player, null, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, isUsed))
+                    {
+                        vs.Add(m_cardCommand[i]);
+                    }
+                }
             }
-            BattleManager.Instance.CommandManager.CommandExecute(vs, true);
+            if (vs.Count > 0)
+                BattleManager.Instance.CommandManager.CommandExecute(vs, true);
             if (m_ethereal)
                 Destroy(gameObject);
         }
@@ -335,7 +336,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             if (dropObj == null || !dropObj.CanDrop(m_useType)) continue;
             EnemyBase enemy = dropObj.IsEnemy();
             //使用条件調べる
-            if (!m_conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
+            if (!m_conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, true))
             {
                 EffectManager.Instance.SetUIText(PanelType.Battle, "使用条件を満たしていない！", Color.red, 1f);
                 continue;
@@ -343,7 +344,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             List<int[]> vs = new List<int[]>();
             for (int i = 0; i < m_carddata.Commands.Count; i++)
             {
-                if (m_carddata.Commands[i].Conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount))
+                if (m_carddata.Commands[i].Conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, true))
                 {
                     vs.Add(m_cardCommand[i]);
                 }

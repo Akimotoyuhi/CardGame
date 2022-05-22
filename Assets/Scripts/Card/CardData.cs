@@ -101,10 +101,11 @@ public class CardDataBase
 public class CardConditional
 {
     [SerializeReference, SubclassSelector] List<IConditional> m_cardConditional = new List<IConditional>();
+    public int Count => m_cardConditional.Count;
     /// <summary>条件の評価</summary>
     /// <param name="evaluationParam">評価したいパラメーターの種類</param>
     /// <returns>カード使用可否</returns>
-    public bool Evaluation(Player player, EnemyBase enemy, int deckChildCount, int handChildCount, int discardChildCount)
+    public bool Evaluation(Player player, EnemyBase enemy, int deckChildCount, int handChildCount, int discardChildCount, bool isUsed)
     {
         bool flag = true;
         foreach (var c in m_cardConditional)
@@ -118,6 +119,11 @@ public class CardConditional
                         return false;
                     }
                     break;
+                case CardConditionalType.TurnEndWhereCard:
+                    if (!isUsed)
+                        return true;
+                    else
+                        return false;
                 default:
                     Debug.LogError("例外エラー");
                     break;
@@ -418,6 +424,8 @@ public enum CardID
     TacticalSword,
     /// <summary>タクティカルアーマー</summary>
     TacticalArmor,
+    /// <summary>旧き竜の呪い</summary>
+    CurseOfTheOldDragon,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

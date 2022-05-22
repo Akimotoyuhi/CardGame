@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class Player : CharactorBase, IDrop
 {
-    /// <summary>デフォルトコスト。何らかの効果で下げられた後元の値に戻す時に使う</summary>
+    /// <summary>デフォルトコスト</summary>
     private int m_defCost = 3;
+    /// <summary>デフォルトドロー枚数</summary>
     private int m_defDrowNum = 5;
     private Sprite[] m_attackedSprite;
     private Sprite m_gameoverSprite;
