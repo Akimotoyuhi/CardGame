@@ -72,6 +72,7 @@ public class BattleManager : MonoBehaviour
     private BlankCard m_cardPrefab;
     /// <summary>ドラッグ中のカードのUseType保存用</summary>
     private UseTiming? m_dragCardUseType = null;
+    /// <summary>エンカウント中の敵タイプ</summary>
     private EnemyType m_encountEnemyType;
     /// <summary>ボタンの受付</summary>
     private bool m_isPress = true;
@@ -176,6 +177,8 @@ public class BattleManager : MonoBehaviour
         m_discard.CardDelete();
         m_deck.CardDelete();
         m_hand.CardDelete();
+        if (m_encountEnemyType == EnemyType.Boss)
+            AudioManager.Instance.Play(BGM.None);
         for (int i = 0; i < m_cardRewardNum; i++)
             m_reward.CardData.Add(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
         for (int i = 0; i < m_relicRewardNum; i++)
