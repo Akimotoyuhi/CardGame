@@ -94,6 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_icon: {fileID: 7202970104006059189}
   m_subIcon: {fileID: 4522819078645461015}
+  m_background: {fileID: 4866230928532690365}
+  m_riskUpColor: {r: 1, g: 0.67358494, b: 0.67358494, a: 0.3137255}
+  m_riskDownColor: {r: 0.53207546, g: 0.8534213, b: 1, a: 0.3137255}
   m_mask: {fileID: 4541433089301544290}
   m_text: {fileID: 5942984572109989490}
   m_conflictText: "\u7AF6\u5408\u4E2D"

@@ -8,6 +8,11 @@ public class CustomButton : MonoBehaviour
 {
     [SerializeField] Image m_icon;
     [SerializeField] Image m_subIcon;
+    [SerializeField] Image m_background;
+    /// <summary>リスク上昇ボタンの背景色</summary>
+    [SerializeField] Color m_riskUpColor;
+    /// <summary>リスク低下ボタンの背景色</summary>
+    [SerializeField] Color m_riskDownColor;
     [SerializeField] GameObject m_mask;
     [SerializeField] Text m_text;
     /// <summary>カスタム競合時のテキスト</summary>
@@ -31,6 +36,10 @@ public class CustomButton : MonoBehaviour
         m_manager = manager;
         m_text.text = "";
         m_mask.SetActive(false);
+        if (database.Risk > 0)
+            m_background.color = m_riskUpColor;
+        else
+            m_background.color = m_riskDownColor;
     }
 
     /// <summary>

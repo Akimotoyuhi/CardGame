@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// チャレンジモードの管理
+/// カスタムモードの管理
 /// </summary>
 public class CustomMode : MonoBehaviour
 {
