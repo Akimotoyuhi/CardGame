@@ -51,7 +51,7 @@ public class Relic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         foreach (var cond in m_conditional)
         {
             //if (cond.Evaluation())
-            if (!cond.Conditional(m_triggerCount, triggerTiming, parametorType))
+            if (!cond.Conditional(m_triggerCount, triggerTiming, parametorType, num))
             {
                 return;
             }

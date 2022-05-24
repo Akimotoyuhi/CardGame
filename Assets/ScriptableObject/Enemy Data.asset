@@ -2081,7 +2081,7 @@ MonoBehaviour:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
-          m_conditionID: 4
+          m_conditionID: 7
           m_turn: 30
         m_useType: 1
         m_particleID: 0

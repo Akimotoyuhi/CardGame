@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System;
-using DG.Tweening;
+using UnityEngine.UI;
 
 /// <summary>
 /// オブジェクトに付けるテスト用のクラス<br/>
@@ -10,17 +9,9 @@ using DG.Tweening;
 /// </summary>
 public class Sample : MonoBehaviour
 {
-    CommandParam m_cp = CommandParam.AddCard;
+    private GridLayoutGroup s;
 
     private void Start()
     {
-        Debug.Log(m_cp);
-        AAAA(ref m_cp);
-        Debug.Log(m_cp);
-    }
-
-    private void AAAA(ref CommandParam cp)
-    {
-        cp = CommandParam.Attack;
     }
 }

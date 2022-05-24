@@ -187,9 +187,9 @@ public class PlateArmor : Condition
                 return new int[] { (int)ParametorType.Block, Turn };
             case EventTiming.Damaged:
                 Turn--;
-                return new int[] { 0 };
+                return new int[] { (int)ParametorType.None };
             default:
-                return new int[] { 0 };
+                return new int[] { (int)ParametorType.None };
         }
     }
     public override bool IsRemove()
@@ -216,7 +216,7 @@ public class StrengthDown : Condition
             Turn = 0;
             return ret;
         }
-        return new int[] { 0 };
+        return new int[] { (int)ParametorType.None };
     }
     public override bool IsRemove()
     {
@@ -253,13 +253,14 @@ public class Metallicize : Condition
 {
     public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int block = 0)
     {
-        if (Turn <= 0 || parametorType != ParametorType.Other) return new int[] { block };
+        if (Turn <= 0 || parametorType != ParametorType.Other)
+            return new int[] { block };
         switch (eventTiming)
         {
             case EventTiming.TurnEnd:
-                return new int[] { block + Turn };
+                return new int[] { (int)ParametorType.Block, block + Turn };
             default:
-                return new int[] { block };
+                return new int[] { (int)ParametorType.None };
         }
     }
     public override bool IsRemove()
@@ -346,9 +347,9 @@ public class Corruption : Condition
             return new int[] { num };
         if (eventTiming == EventTiming.TurnBegin)
         {
-            return new int[] { (int)ConditionID.Strength, -Turn };
+            return new int[] { (int)ParametorType.Condition, (int)ConditionID.Strength, -Turn };
         }
-        return new int[] { 0 };
+        return new int[] { (int)ParametorType.None };
     }
 
     public override ConditionID GetConditionID() => ConditionID.Corruption;
@@ -390,7 +391,7 @@ public class Burning : Condition
 
     public override ConditionID GetConditionID() => ConditionID.Burning;
 
-    public override ParametorType GetParametorType() => ParametorType.Attack;
+    public override ParametorType GetParametorType() => ParametorType.Block;
 
     public override int IsBuff() => 1;
 

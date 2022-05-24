@@ -59,6 +59,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] int m_cardRewardNum = 3;
     /// <summary>レリックの報酬個数</summary>
     [SerializeField] int m_relicRewardNum = 3;
+    /// <summary>Actクリア時の回復量</summary>
+    [SerializeField] int m_actClearHeal = 30;
     /// <summary>カード追加コマンドが実行されたときに画面中央で止める秒数</summary>
     [SerializeField] float m_cardAddedShowDuration = 0.5f;
     [SerializeField] CommandManager m_commandManager;
@@ -178,7 +180,10 @@ public class BattleManager : MonoBehaviour
         m_deck.CardDelete();
         m_hand.CardDelete();
         if (m_encountEnemyType == EnemyType.Boss)
+        {
+            m_player.CurrentLife += m_actClearHeal;
             AudioManager.Instance.Play(BGM.None);
+        }
         for (int i = 0; i < m_cardRewardNum; i++)
             m_reward.CardData.Add(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
         for (int i = 0; i < m_relicRewardNum; i++)

@@ -64,20 +64,20 @@ public class EnemyBase : CharactorBase, IDrop
 
     public override void GetDamage(int[] cardParam, ParticleID particleID)
     {
-        CommandParam command = (CommandParam)cardParam[0];
+        CommandParam command = (CommandParam)cardParam[(int)CommonCmdEnum.CommandParam];
         bool b;
         switch (command)
         {
             case CommandParam.Attack:
-                b = cardParam[4] == 1 ? true : false;
-                Damage(cardParam[3], 0, null, false, particleID, b, () => Dead());
+                b = cardParam[(int)AttackCmdEnum.TrueDmg] == 1 ? true : false;
+                Damage(cardParam[(int)AttackCmdEnum.Power], 0, null, false, particleID, b, () => Dead());
                 break;
             case CommandParam.Block:
-                Damage(0, cardParam[3], null, false, particleID, false, () => Dead());
+                Damage(0, cardParam[(int)BlockCmdEnum.Block], null, false, particleID, false, () => Dead());
                 break;
             case CommandParam.Conditon:
                 ConditionSelection cs = new ConditionSelection();
-                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[3], cardParam[4]), false, particleID, false, () => Dead());
+                Damage(0, 0, cs.SetCondition((ConditionID)cardParam[(int)ConditionCmdEnum.ConditionID], cardParam[(int)ConditionCmdEnum.Turn]), false, particleID, false, () => Dead());
                 break;
             case CommandParam.Heal:
                 Heal(cardParam[(int)HeadCmdEnum.Value], false);
@@ -113,21 +113,25 @@ public class EnemyBase : CharactorBase, IDrop
         m_commands = m_actionCommnad.Command;
         foreach (var c in m_commands)
         {
-            CommandParam cp = (CommandParam)c[0];
+            CommandParam cp = (CommandParam)c[(int)CommonCmdEnum.CommandParam];
             switch (cp)//自身のバフを評価して数値を増減させる
             {
                 case CommandParam.Attack:
-                    c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Power, c[3]);
-                    c[3] = OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, c[3]);
+                    c[(int)AttackCmdEnum.Power] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Power, c[(int)AttackCmdEnum.Power]);
+                    c[(int)AttackCmdEnum.Power] = OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, c[(int)AttackCmdEnum.Power]);
+                    if (c[(int)AttackCmdEnum.Power] <= 1)
+                        c[(int)AttackCmdEnum.Power] = 1;
                     break;
                 case CommandParam.Block:
-                    c[3] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Difence, c[3]);
-                    c[3] = OnBattleEffect(EventTiming.Attacked, ParametorType.Block, c[3]);
+                    c[(int)BlockCmdEnum.Block] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Difence, c[(int)BlockCmdEnum.Block]);
+                    c[(int)BlockCmdEnum.Block] = OnBattleEffect(EventTiming.Attacked, ParametorType.Block, c[(int)BlockCmdEnum.Block]);
+                    if (c[(int)BlockCmdEnum.Block] <= 1)
+                        c[(int)BlockCmdEnum.Block] = 1;
                     break;
                 default:
                     continue;
             }
-            if (c[3] <= 1) c[3] = 1;
+            
         }
     }
 
@@ -154,7 +158,7 @@ public class EnemyBase : CharactorBase, IDrop
             int index = default;
             for (int n = 0; n < m_commands.Count; n++)
             {
-                if (m_commands[n] != null && (CommandParam)m_commands[n][0] == CommandParam.Attack)
+                if (m_commands[n] != null && (CommandParam)m_commands[n][(int)CommonCmdEnum.CommandParam] == CommandParam.Attack)
                 {
                     index = i;
                     break;
@@ -165,7 +169,7 @@ public class EnemyBase : CharactorBase, IDrop
             if (m_commands.Count == 0)
                 p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, 0);
             else
-                p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, m_commands[index][3]);
+                p.SetImage(m_actionCommnad.ActionPlans[i].ActionPlan, m_commands[index][(int)AttackCmdEnum.Power]);
         }
     }
 

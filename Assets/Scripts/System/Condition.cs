@@ -22,6 +22,7 @@ public enum EventTiming
 /// <summary>Conditionが評価したい値</summary>
 public enum ParametorType
 {
+    None = -1,
     Attack,
     Block,
     Life,
@@ -29,6 +30,7 @@ public enum ParametorType
     Other,
     Cost,
     DrowNum,
+    Turn,
 }
 
 /// <summary>

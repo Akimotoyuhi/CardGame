@@ -140,7 +140,7 @@ public class CardConditional
             case CardConditionalEvaluationType.Player:
                 switch (evaluationParam)
                 {
-                    //case CardConditionalEvaluationParam.Power://攻撃力を取得するにはちょっと手順が多いので特別処理にすると思う
+                    //case CardConditionalEvaluationParam.Power://攻撃力を取得するにはちょっと手順が違いすぎるので特別処理にすると思う
                     //    break;
                     case CardConditionalEvaluationParam.Block:
                         num = player.CurrentBlock;

@@ -1150,7 +1150,7 @@ MonoBehaviour:
       m_name: "\u65E7\u304D\u7ADC\u306E\u546A\u3044"
       m_cost: 1
       m_image: {fileID: 21300000, guid: e8a68fd17ce42174e9b24babd0ae6629, type: 3}
-      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u707C\u71B12\u3001\u51CD\u7D502\u3001\u611F\u96FB1\u3001\u6C88\u9ED91\u3092\u5F97\u308B\n\u5E0C\u8584"
+      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u8131\u529B2\u3001\u8106\u5F312\u3001\u611F\u96FB1\u3001\u6C88\u9ED91\u3092\u5F97\u308B\n\u5E0C\u8584"
       m_rarity: 5
       m_commands:
       - m_command:
@@ -1179,25 +1179,33 @@ MonoBehaviour:
       m_isDiscarding: 0
       m_ethereal: 1
     m_cardUpgrade:
-      m_name: "\u30BF\u30AF\u30C6\u30A3\u30AB\u30EB\u30A2\u30FC\u30DE\u30FC+"
+      m_name: "\u65E7\u304D\u7ADC\u306E\u546A\u7E1B"
       m_cost: 1
       m_image: {fileID: 21300000, guid: 4ac5fb8d933238b4c8574bf420ae3605, type: 3}
-      m_tooltip: "{leg0}\u30D6\u30ED\u30C3\u30AF\u3092\u5F97\u308B\n\u30BF\u30AF\u30C6\u30A3\u30AB\u30EB\u30D6\u30EC\u30FC\u30C9+\u30921\u679A\u5C71\u672D\u306B\u52A0\u3048\u308B\n\u5EC3\u68C4"
-      m_rarity: 1
+      m_tooltip: "\u30BF\u30FC\u30F3\u7D42\u4E86\u6642\u306B\u624B\u672D\u306B\u3042\u308B\u5834\u5408\u707C\u71B12\u3001\u51CD\u7D502\u3001\u611F\u96FB1\u3001\u6C88\u9ED91\u3092\u5F97\u308B\n\u5E0C\u8584"
+      m_rarity: 5
       m_commands:
       - m_command:
-          id: 97
+          id: 107
         m_conditional:
           m_cardConditional: []
       - m_command:
-          id: 98
+          id: 108
+        m_conditional:
+          m_cardConditional: []
+      - m_command:
+          id: 109
+        m_conditional:
+          m_cardConditional: []
+      - m_command:
+          id: 110
         m_conditional:
           m_cardConditional: []
       m_cardConditional:
         m_cardConditional: []
       m_cardType: 0
-      m_isDiscarding: 1
-      m_ethereal: 0
+      m_isDiscarding: 0
+      m_ethereal: 1
   references:
     version: 1
     00000000:
@@ -1913,7 +1921,7 @@ MonoBehaviour:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
-          m_conditionID: 11
+          m_conditionID: 0
           m_turn: 2
         m_useType: 0
         m_particleID: 1
@@ -1923,7 +1931,7 @@ MonoBehaviour:
       type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
       data:
         m_condition:
-          m_conditionID: 12
+          m_conditionID: 1
           m_turn: 2
         m_useType: 0
         m_particleID: 6
@@ -1949,3 +1957,35 @@ MonoBehaviour:
         m_particleID: 2
     0000006A:
       type: {class: TurnEndWhereCard, ns: , asm: Assembly-CSharp}
+    0000006B:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 11
+          m_turn: 2
+        m_useType: 0
+        m_particleID: 1
+    0000006C:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 12
+          m_turn: 2
+        m_useType: 0
+        m_particleID: 6
+    0000006D:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 13
+          m_turn: 1
+        m_useType: 0
+        m_particleID: 3
+    0000006E:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 14
+          m_turn: 1
+        m_useType: 0
+        m_particleID: 2

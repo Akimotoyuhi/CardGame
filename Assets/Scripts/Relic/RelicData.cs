@@ -101,14 +101,12 @@ public class RelicConditional
     /// <summary>•]‰¿‚·‚é’l</summary>
     [SerializeField] ParametorType m_parametorType;
     /// <summary>Œø‰Ê‚ªÅ‘å‰½‰ñ”­“®‚·‚é‚©</summary>
-    [SerializeField, Tooltip("Å‘å‰½‰ñ”­“®‚·‚é‚©\n-1‚È‚ç§ŒÀ‚È‚µ")] int m_maxTriggerNum;
-    public bool Conditional(int currentTriggerNum, RelicTriggerTiming triggerTiming, ParametorType parametorType)
+    [SerializeField, Tooltip("Å‘å‰½‰ñ”­“®‚·‚é‚©\n-1ˆÈ‰º‚È‚ç§ŒÀ‚È‚µ")] int m_maxTriggerNum;
+    public bool Conditional(int currentTriggerNum, RelicTriggerTiming triggerTiming, ParametorType parametorType, int num)
     {
         if (triggerTiming == m_timing && parametorType == m_parametorType)
         {
-            if (m_maxTriggerNum < 0)
-                return true;
-            if (m_maxTriggerNum > currentTriggerNum)
+            if (m_maxTriggerNum < 0 || m_maxTriggerNum > currentTriggerNum)
                 return true;
             else
                 return false;
