@@ -219,6 +219,13 @@ public class Map : MonoBehaviour
         }
     }
 
+    public void OnClick(CellState cellState, MapID mapID)
+    {
+        if (cellState == CellState.Boss)
+            AudioManager.Instance.Play(m_nowMapData.BossBgm);
+        GameManager.Instance.Encount(cellState, mapID);
+    }
+
     /// <summary>デバッグ用のマップ固定処理</summary>
     public void SetFixedMapDebug(MapID mapID)
     {

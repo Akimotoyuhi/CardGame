@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     /// マップのボタンのクリック後のデータを受け取る
     /// </summary>
     /// <param name="cellState"></param>
-    public void OnClick(CellState cellState, MapID mapID)
+    public void Encount(CellState cellState, MapID mapID)
     {
         EffectManager.Instance.Fade(Color.black, 0.3f, () =>
         {
@@ -110,7 +110,6 @@ public class GameManager : MonoBehaviour
                     BattleManager.Instance.SetCanvas();
                     break;
                 case CellState.Boss:
-                    AudioManager.Instance.Play(BGM.Boss1);
                     BattleManager.Instance.BattleStart(EnemyType.Boss, mapID);
                     BattleManager.Instance.SetCanvas();
                     break;
@@ -292,7 +291,6 @@ public class GameManager : MonoBehaviour
         DataManager.Instance.Floor++;
         if (m_map.ClearCheck(DataManager.Instance.Floor))
         {
-            Debug.Log("a");
             Gameover(true);
             return;
         }

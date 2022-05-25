@@ -1219,7 +1219,6 @@ MonoBehaviour:
     - m_enemyID: 0600000010000000
     - m_enemyID: 020000000d000000
     m_elites:
-    - m_enemyID: 0d0000000e0000000f00000010000000
     - m_enemyID: 12000000
     m_bosses:
     - m_enemyID: 11000000

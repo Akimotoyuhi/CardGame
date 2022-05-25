@@ -64,7 +64,7 @@ public class Cell : MonoBehaviour
         m_map.CanClick = true;
         //m_sequence.Kill();
         DOTween.KillAll();
-        GameManager.Instance.OnClick(m_cellState, m_mapID);
+        m_map.OnClick(m_cellState, m_mapID);
     }
 
     /// <summary>

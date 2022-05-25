@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip[] m_bgmClips;
     [SerializeField] AudioClip[] m_seClips;
     [SerializeField] SEAudio m_seAudioPrefab;
+    private float m_volume;
     private List<SEAudio> m_sePools = new List<SEAudio>();
     private BGM m_nowPlaying;
     /// <summary>現在再生中のBGM</summary>
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        m_volume = m_source.volume;
     }
 
     /// <summary>BGMの再生</summary>
@@ -31,7 +33,7 @@ public class AudioManager : MonoBehaviour
         m_nowPlaying = bgm;
         if (m_source.clip)//既にclipが入ってたらフェードする
         {
-            float v = m_source.volume;
+            float v = m_volume;
             m_source.DOFade(0f, m_fadeDuration).OnComplete(() =>
             {
                 if (bgm == BGM.None)
@@ -48,6 +50,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
+            m_source.volume = m_volume;
             m_source.clip = m_bgmClips[(int)bgm];
             m_source.Play();
         }
