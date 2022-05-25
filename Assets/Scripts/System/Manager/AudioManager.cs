@@ -77,7 +77,10 @@ public enum BGM
     None = -1,
     Battle1,
     Battle2,
+    Battle3,
     Boss1,
+    Boss2,
+    Boss3,
 }
 public enum SE
 {

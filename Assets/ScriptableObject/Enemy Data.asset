@@ -1214,9 +1214,9 @@ MonoBehaviour:
   - m_label: "\u5CFB\u5DBA\u9AD8\u5730"
     m_enemies:
     - m_enemyID: 0c0000000e000000
-    - m_enemyID: 08000000030000000d000000
+    - m_enemyID: 080000000d000000
     - m_enemyID: 0b0000000f000000
-    - m_enemyID: 050000000600000010000000
+    - m_enemyID: 0600000010000000
     - m_enemyID: 020000000d000000
     m_elites:
     - m_enemyID: 0d0000000e0000000f00000010000000
