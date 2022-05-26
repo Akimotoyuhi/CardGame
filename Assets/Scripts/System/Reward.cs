@@ -17,7 +17,8 @@ public class Reward : MonoBehaviour
     private List<RelicDataBase> m_relicDatas = new List<RelicDataBase>();
     private System.Action m_nextMethod;
     public RectTransform CanvasRectTransform { private get; set; }
-    public List<CardInfomationData> CardData => m_cardDatas;
+    //public List<CardInfomationData> CardData => m_cardDatas;
+    public List<CardInfomationData> CardData { set => m_cardDatas = value; }
     public List<RelicDataBase> RelicData => m_relicDatas;
 
     /// <summary>

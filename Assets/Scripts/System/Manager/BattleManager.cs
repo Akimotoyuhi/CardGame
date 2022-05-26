@@ -184,8 +184,9 @@ public class BattleManager : MonoBehaviour
             m_player.CurrentLife += m_actClearHeal;
             AudioManager.Instance.Play(BGM.None);
         }
-        for (int i = 0; i < m_cardRewardNum; i++)
-            m_reward.CardData.Add(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
+        //for (int i = 0; i < m_cardRewardNum; i++)
+        //    m_reward.CardData.Add(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
+        m_reward.CardData = m_cardData.GetCardRarityRandoms(0, m_encountEnemyType, m_cardRewardNum);
         for (int i = 0; i < m_relicRewardNum; i++)
             m_reward.RelicData.Add(m_relicData.GetRelic(m_encountEnemyType));
         m_reward.ShowRewardPanel(() => GameManager.Instance.FloorFinished(m_player));

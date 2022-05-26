@@ -32,27 +32,50 @@ public class CardData : ScriptableObject
         }
     }
     /// <summary>
-    /// ランダムで抽選したレア度の中からランダムで１つカードを抽選する
+    /// ランダムなレアリティからカードをかぶりなしで何枚か抽選する
     /// </summary>
-    /// <param name="upgradeNum">強化回数</param>
-    /// <returns>カードデータ</returns>
-    public CardInfomationData GetCardRarityRandom(int upgradeNum, EnemyType enemyType)
+    /// <param name="isUpgarde">強化の有無</param>
+    /// <param name="enemyType">倒した敵タイプ</param>
+    /// <param name="elements">欲しい枚数</param>
+    /// <returns>抽選されたカードのリスト</returns>
+    public List<CardInfomationData> GetCardRarityRandoms(int isUpgarde, EnemyType enemyType, int elements)
     {
-        Rarity rarity;
-        int r = UnityEngine.Random.Range(0, 100);
-        if (r < m_rewardCardProbability[(int)enemyType].SuperRareProbability)
+        List<CardInfomationData> ret = new List<CardInfomationData>();
+        for (int i = 0; i < elements; i++)
         {
-            rarity = Rarity.SuperRare;
+            Rarity rarity;
+            int r = UnityEngine.Random.Range(0, 100);
+            if (r < m_rewardCardProbability[(int)enemyType].SuperRareProbability)
+            {
+                rarity = Rarity.SuperRare;
+            }
+            else if (r < m_rewardCardProbability[(int)enemyType].RareProbability)
+            {
+                rarity = Rarity.Rare;
+            }
+            else
+            {
+                rarity = Rarity.Common;
+            }
+            while (true)
+            {
+                bool b = true;
+                CardInfomationData c = GetCardRarityRandom(rarity, isUpgarde);
+                foreach (var item in ret)
+                {
+                    if (item.CardId == c.CardId)
+                    {
+                        b = false;
+                    }
+                }
+                if (b)
+                {
+                    ret.Add(c);
+                    break;
+                }
+            }
         }
-        else if (r < m_rewardCardProbability[(int)enemyType].RareProbability)
-        {
-            rarity = Rarity.Rare;
-        }
-        else
-        {
-            rarity = Rarity.Common;
-        }
-        return GetCardRarityRandom(rarity, upgradeNum);
+        return ret;
     }
     /// <summary>
     /// 指定したレア度のカードを１つ抽選する
@@ -66,6 +89,8 @@ public class CardData : ScriptableObject
         int r = UnityEngine.Random.Range(0, list.Count);
         return list[r].GetCardInfo(upgradeNum);
     }
+
+    
 }
 /// <summary>カードのデータベース<br/>カードの効果の部分</summary>
 [Serializable]
