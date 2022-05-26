@@ -28,7 +28,7 @@ MonoBehaviour:
       m_eliteMaxIndex: 5
       m_eliteAbsolutelyIndex: -1
       m_eliteProbability: 3
-  - m_name: "\u5FAE\u7761\u306E\u6CBC\u5730"
+  - m_name: "\u3059\u3053\u3084\u304B\u5DDD"
     m_act: 2
     m_mapID: 1
     m_background: {fileID: 0}

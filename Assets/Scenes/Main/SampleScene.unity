@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a5fa7122dfb664da6650fd599c30e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerStatsData: {fileID: 11400000, guid: 90b25845594935e4082613813d12c510, type: 2}
+  m_playerStatsData: {fileID: 11400000, guid: 68d4e47a4d8b47d4fb59b3010a10eced, type: 2}
   m_playerPrefab: {fileID: 4774533046676721406, guid: bbac139c1fcfaca40b3839a4f9101ec4,
     type: 3}
   m_playerPos: {fileID: 636189127}
@@ -4260,7 +4260,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ea238b82a017ac141be7db1165a4c51a, type: 3}
   - {fileID: 8300000, guid: d9b022701b53d5648b5f1046f8fc906a, type: 3}
   m_seClips:
-  - {fileID: 8300000, guid: 98725cec45568494e9d4161f7bd45dd9, type: 3}
+  - {fileID: 8300000, guid: b167ad54b7c4eae4fa56939f73b8ca2c, type: 3}
+  - {fileID: 8300000, guid: 92eb37456f5a27d44a00c9a97022772c, type: 3}
+  - {fileID: 8300000, guid: 8ce828861f537f44bb688908e57c05d3, type: 3}
   m_seAudioPrefab: {fileID: 1116685517852499120, guid: c5d7ff8a9728bbb4fb799fde42a73d77,
     type: 3}
 --- !u!1 &853589710
@@ -9413,8 +9415,8 @@ MonoBehaviour:
   m_step: 0
   m_isSeed: 0
   m_seed: 10
-  m_isFixedMap: 1
-  m_mapID: 2
+  m_isFixedMap: 0
+  m_mapID: 0
   m_cardData: {fileID: 11400000, guid: e4c95d31497a019459b2f60bbc7d10a3, type: 2}
   m_cardPrefab: {fileID: -9154361223724921267, guid: ad5ff9493237f6f44a07a22bff2b1928,
     type: 3}
@@ -12012,7 +12014,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9781818
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12294,7 +12296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0103746215}
+  m_AnchoredPosition: {x: 0, y: 0.000065044725}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1819838561

@@ -88,5 +88,7 @@ public enum BGM
 public enum SE
 {
     None = -1,
-    System,
+    Blocked,
+    Knife,
+    Punch,
 }

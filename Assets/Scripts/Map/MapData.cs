@@ -95,7 +95,7 @@ public enum MapID
     /// <summary>“ƒ‚Ìn‚Ü‚è</summary>
     TheBeginningOfTheTower,
     /// <summary>”÷‡‚ÌÀ’n</summary>
-    SwampOfFallIntoADoze,
+    HealthyRiver,
     /// <summary>s—ä‚’n</summary>
     SteepRidgeHighlands,
 }

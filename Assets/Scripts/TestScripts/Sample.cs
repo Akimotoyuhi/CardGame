@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// </summary>
 public class Sample : MonoBehaviour
 {
-    private GridLayoutGroup s;
+
 
     private void Start()
     {

@@ -339,7 +339,7 @@ public class CharactorBase : MonoBehaviour
                         case ParametorType.Condition:
                             Debug.Log($"{(ConditionID)i[1]}を{i[2]}ターン付与");
                             ConditionSelection cs = new ConditionSelection();
-                            addCondition.Add(cs.SetCondition((ConditionID)i[0], i[1]));
+                            addCondition.Add(cs.SetCondition((ConditionID)i[1], i[2]));
                             break;
                         default:
                             break;
