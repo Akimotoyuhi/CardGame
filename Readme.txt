@@ -51,4 +51,5 @@ azukichi.net
 星乃だーつ　グーテンベルグの娘 http://darts.kirara.st/
 
 音楽
-https://maou.audio
+魔王魂 https://maou.audio
+効果音ラボ　https://soundeffect-lab.info/
