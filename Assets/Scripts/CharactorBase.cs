@@ -92,7 +92,7 @@ public class CharactorBase : MonoBehaviour
         if (m_block > 0) //ブロック値がある時
         {
             m_blkSlider.value = m_block;
-            m_text.text = $"{m_block}";
+            m_text.text = $"{m_life} / {m_maxLife}(+{m_block})";
         }
         else
         {
@@ -304,6 +304,7 @@ public class CharactorBase : MonoBehaviour
         EffectChecker(EventTiming.TurnBegin, ParametorType.Other);
         SetSlider();
     }
+
     /// <summary>
     /// バフデバフ効果の発動
     /// </summary>

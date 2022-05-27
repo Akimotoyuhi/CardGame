@@ -95,11 +95,11 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         bool trueDmg = false;
         foreach (var com in m_cardCommand)
         {
-            CommandParam cp = (CommandParam)com[0];
+            CommandParam cp = (CommandParam)com[(int)CommonCmdEnum.CommandParam];
             if (cp == CommandParam.Conditon)
-                c.Add(cs.SetCondition((ConditionID)com[3], com[4]));
+                c.Add(cs.SetCondition((ConditionID)com[(int)ConditionCmdEnum.ConditionID], com[(int)ConditionCmdEnum.Turn]));
             if (cp == CommandParam.Attack && !trueDmg)
-                trueDmg = com[4] == 1 ? true : false;
+                trueDmg = com[(int)AttackCmdEnum.TrueDmg] == 1 ? true : false;
         }
         m_cardEffectHelp.SetText(m_isDiscarding, m_ethereal, trueDmg, c);
         m_cardEffectHelp.SetActive(false);

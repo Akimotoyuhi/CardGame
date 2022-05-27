@@ -9416,7 +9416,7 @@ MonoBehaviour:
   m_isSeed: 0
   m_seed: 10
   m_isFixedMap: 0
-  m_mapID: 0
+  m_mapID: 2
   m_cardData: {fileID: 11400000, guid: e4c95d31497a019459b2f60bbc7d10a3, type: 2}
   m_cardPrefab: {fileID: -9154361223724921267, guid: ad5ff9493237f6f44a07a22bff2b1928,
     type: 3}
@@ -12014,7 +12014,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1960022933}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9989351
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
