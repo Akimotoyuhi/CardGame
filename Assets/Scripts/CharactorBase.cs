@@ -92,7 +92,7 @@ public class CharactorBase : MonoBehaviour
         if (m_block > 0) //ブロック値がある時
         {
             m_blkSlider.value = m_block;
-            m_text.text = $"{m_life} / {m_maxLife}(+{m_block})";
+            m_text.text = $"{m_life}+{m_block} / {m_maxLife}";
         }
         else
         {
