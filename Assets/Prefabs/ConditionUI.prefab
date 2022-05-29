@@ -141,6 +141,9 @@ MonoBehaviour:
   - m_name: "\u7948\u7977"
     m_sprite: {fileID: 21300000, guid: 89f3171d2ad4b8c468c652be9f406f5b, type: 3}
     m_color: {r: 0.9530008, g: 1, b: 0.3622641, a: 1}
+  - m_name: "\u6BD2"
+    m_sprite: {fileID: 21300000, guid: 81ea0aec7b2a3304aa19221f59e6214f, type: 3}
+    m_color: {r: 0, g: 1, b: 0.025688648, a: 1}
 --- !u!114 &2313634686770434370
 MonoBehaviour:
   m_ObjectHideFlags: 0

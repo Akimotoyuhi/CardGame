@@ -199,7 +199,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
                     default:
                         continue;
                 }
-                if (cc[(int)AttackCmdEnum.Power] <= 1) cc[(int)AttackCmdEnum.Power] = 1;
+                if (cc[(int)AttackCmdEnum.Power] <= 0) cc[(int)AttackCmdEnum.Power] = 0;
             }
         }
         MatchCollection match = Regex.Matches(text, "{leg([0-9]*)}");

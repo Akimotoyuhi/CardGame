@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a5fa7122dfb664da6650fd599c30e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerStatsData: {fileID: 11400000, guid: 68d4e47a4d8b47d4fb59b3010a10eced, type: 2}
+  m_playerStatsData: {fileID: 11400000, guid: 90b25845594935e4082613813d12c510, type: 2}
   m_playerPrefab: {fileID: 4774533046676721406, guid: bbac139c1fcfaca40b3839a4f9101ec4,
     type: 3}
   m_playerPos: {fileID: 636189127}
@@ -13624,6 +13624,9 @@ MonoBehaviour:
   - {fileID: 100004, guid: 4f1e87ee37fd9904b8aa23d71ab1b9a1, type: 3}
   - {fileID: 100006, guid: 50f1c35dedf5eb940a3ee61713626364, type: 3}
   - {fileID: 100006, guid: b26161bd088b9ef4992538643ba979ba, type: 3}
+  - {fileID: 100010, guid: 176790904455b214b92ac1cfd30fddc9, type: 3}
+  - {fileID: 100000, guid: 41caabb81e9bb9f468feae7e763002e2, type: 3}
+  - {fileID: 100006, guid: 2ffc588afbc8e364dad6109fe9ad7a54, type: 3}
   m_particleDestroyDuration: 1
 --- !u!1 &2125065151
 GameObject:

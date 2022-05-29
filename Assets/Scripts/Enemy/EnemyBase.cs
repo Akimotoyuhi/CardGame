@@ -62,6 +62,13 @@ public class EnemyBase : CharactorBase, IDrop
         return this;
     }
 
+    protected override void LifeFluctuation(int value, bool isPlayer)
+    {
+        base.LifeFluctuation(value, isPlayer);
+        if (m_life <= 0)
+            Dead();
+    }
+
     public override void GetDamage(int[] cardParam, ParticleID particleID)
     {
         CommandParam command = (CommandParam)cardParam[(int)CommonCmdEnum.CommandParam];
@@ -80,7 +87,7 @@ public class EnemyBase : CharactorBase, IDrop
                 Damage(0, 0, cs.SetCondition((ConditionID)cardParam[(int)ConditionCmdEnum.ConditionID], cardParam[(int)ConditionCmdEnum.Turn]), false, particleID, false, () => Dead());
                 break;
             case CommandParam.Heal:
-                Heal(cardParam[(int)HeadCmdEnum.Value], false);
+                LifeFluctuation(cardParam[(int)HeadCmdEnum.Value], false);
                 break;
             default:
                 Debug.LogError("例外");
@@ -94,6 +101,8 @@ public class EnemyBase : CharactorBase, IDrop
     /// <param name="turn">現在ターン数</param>
     public void Action(int turn)
     {
+        if (IsDead)
+            return;
         if (!m_player) m_player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (m_enemyDataBase.CommandSelect(this, turn) == null)//行動データが無かったら何もしない
         {
@@ -119,19 +128,19 @@ public class EnemyBase : CharactorBase, IDrop
                 case CommandParam.Attack:
                     c[(int)AttackCmdEnum.Power] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Power, c[(int)AttackCmdEnum.Power]);
                     c[(int)AttackCmdEnum.Power] = OnBattleEffect(EventTiming.Attacked, ParametorType.Attack, c[(int)AttackCmdEnum.Power]);
-                    if (c[(int)AttackCmdEnum.Power] <= 1)
-                        c[(int)AttackCmdEnum.Power] = 1;
+                    if (c[(int)AttackCmdEnum.Power] <= 0)
+                        c[(int)AttackCmdEnum.Power] = 0;
                     break;
                 case CommandParam.Block:
                     c[(int)BlockCmdEnum.Block] = GameManager.Instance.CustomEvaluation(CustomEntityType.AllEnemies, CustomParamType.Difence, c[(int)BlockCmdEnum.Block]);
                     c[(int)BlockCmdEnum.Block] = OnBattleEffect(EventTiming.Attacked, ParametorType.Block, c[(int)BlockCmdEnum.Block]);
-                    if (c[(int)BlockCmdEnum.Block] <= 1)
-                        c[(int)BlockCmdEnum.Block] = 1;
+                    if (c[(int)BlockCmdEnum.Block] <= 0)
+                        c[(int)BlockCmdEnum.Block] = 0;
                     break;
                 default:
                     continue;
             }
-            
+
         }
     }
 

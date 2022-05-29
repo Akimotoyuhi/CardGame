@@ -122,6 +122,9 @@ public class ConditionSelection
                 case ConditionID.Prayer:
                     ret = new Prayer();
                     break;
+                case ConditionID.Poison:
+                    ret = new Poison();
+                    break;
                 default:
                     Debug.LogWarning("未設定のIDが渡されました");
                     return null;

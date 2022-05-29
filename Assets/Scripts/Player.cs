@@ -67,6 +67,16 @@ public class Player : CharactorBase, IDrop
         }
     }
 
+    protected override void LifeFluctuation(int value, bool isPlayer)
+    {
+        base.LifeFluctuation(value, isPlayer);
+        if (m_life <= 0)
+        {
+            m_image.sprite = m_gameoverSprite;
+            GameManager.Instance.Gameover();
+        }
+    }
+
     public bool CanDrop(UseTiming useType)
     {
         if (useType == UseTiming.ToPlayer) return true;
@@ -119,7 +129,7 @@ public class Player : CharactorBase, IDrop
                 });
                 break;
             case CommandParam.Heal:
-                Heal(cardParam[(int)HeadCmdEnum.Value], true);
+                LifeFluctuation(cardParam[(int)HeadCmdEnum.Value], true);
                 break;
             default:
                 Debug.LogError("例外");

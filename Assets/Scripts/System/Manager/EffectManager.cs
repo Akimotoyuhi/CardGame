@@ -14,6 +14,9 @@ public enum ParticleID
     BlueKirakira,
     GreenSpark,
     IceSpark,
+    DarkBall,
+    Laser,
+    Poison,
 }
 /// <summary>テキスト表示用パネル</summary>
 public enum PanelType

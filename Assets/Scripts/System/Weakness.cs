@@ -37,6 +37,8 @@ public enum ConditionID
     Silence,
     /// <summary>祈祷<br/>ターン開始時所持コストがX増加</summary>
     Prayer,
+    /// <summary>毒<br/>ターン終了時に体力Xを失い、効果-1(ブロックを無視)</summary>
+    Poison,
 }
 public class Weakness : Condition
 {
@@ -70,7 +72,7 @@ public class Weakness : Condition
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Weakness;
     public override ParametorType GetParametorType() => ParametorType.Attack;
-    public override string Tooltip => $"脱力\n与えるダメージが25%低下。{Turn}ターン持続";
+    public override string Tooltip => $"脱力\n与えるダメージが<color=#ff0000>25%</color>低下。<color=#0000ff>{Turn}</color>ターン持続";
 }
 public class Frail : Condition
 {
@@ -103,7 +105,7 @@ public class Frail : Condition
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.Frail;
     public override ParametorType GetParametorType() => ParametorType.Block;
-    public override string Tooltip => $"脆弱化\n得るブロックが25%低下。{Turn}ターン持続";
+    public override string Tooltip => $"脆弱化\n得るブロックが<color=#ff0000>25%</color>低下。<color=#0000ff>{Turn}</color>ターン持続";
 }
 public class Strength : Condition
 {
@@ -548,4 +550,35 @@ public class Prayer : Condition
             return false;
     }
     public override string Tooltip => $"祈祷\nターン開始時所持コストが<color=#0000ff>{Turn}</color>増加";
+}
+public class Poison : Condition
+{
+    public override string Tooltip => $"毒\nターン終了時に体力<color=#ff0000>{Turn}</color>を失い(ブロックを無視)、効果を-1する";
+
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int num = 0)
+    {
+        if (parametorType != ParametorType.Other)
+            return new int[] { num };
+        if (eventTiming == EventTiming.TurnEnd)
+        {
+            int ret = Turn;
+            Turn--;
+            return new int[] { (int)ParametorType.Life, -ret };
+        }
+        return new int[] { (int)ParametorType.None };
+    }
+
+    public override ConditionID GetConditionID() => ConditionID.Poison;
+
+    public override ParametorType GetParametorType() => ParametorType.Other;
+
+    public override int IsBuff() => 1;
+
+    public override bool IsRemove()
+    {
+        if (Turn <= 0)
+            return true;
+        else
+            return false;
+    }
 }

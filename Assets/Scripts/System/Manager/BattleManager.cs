@@ -181,7 +181,7 @@ public class BattleManager : MonoBehaviour
         m_hand.CardDelete();
         if (m_encountEnemyType == EnemyType.Boss)
         {
-            m_player.CurrentLife += m_actClearHeal;
+            m_player.CurrentLife = m_actClearHeal;
             AudioManager.Instance.Play(BGM.None);
         }
         //for (int i = 0; i < m_cardRewardNum; i++)

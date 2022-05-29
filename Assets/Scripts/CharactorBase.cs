@@ -97,10 +97,10 @@ public class CharactorBase : MonoBehaviour
         else
         {
             m_block = 0;
-            m_blkSlider.value = m_block;
-            m_hpSlider.value = m_life;
             m_text.text = $"{m_life} / {m_maxLife}";
         }
+        m_blkSlider.value = m_block;
+        m_hpSlider.value = m_life;
     }
 
     /// <summary>
@@ -121,13 +121,15 @@ public class CharactorBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 回復
+    /// ブロックに左右されない体力の増減
     /// </summary>
-    /// <param name="healValue"></param>
-    protected void Heal(int healValue, bool isPlayer)
+    protected virtual void LifeFluctuation(int value, bool isPlayer)
     {
-        CurrentLife += healValue;
-        EffectManager.Instance.DamageText(healValue.ToString(), Color.green, Vector2.zero, transform);
+        CurrentLife = value;
+        if (value >= 0)
+            EffectManager.Instance.DamageText(value.ToString(), Color.green, Vector2.zero, transform);
+        else
+            EffectManager.Instance.DamageText(value.ToString(), Color.red, Vector2.zero, transform);
         SetSlider();
         if (isPlayer)
             GameManager.Instance.SetGameInfoPanel(this);
@@ -334,6 +336,9 @@ public class CharactorBase : MonoBehaviour
                     i = c.Effect(eventTiming, parametorType, 0);
                     switch ((ParametorType)i[0])
                     {
+                        case ParametorType.Life:
+                            LifeFluctuation(i[1], !m_isEnemy);
+                            break;
                         case ParametorType.Block:
                             m_block += i[1];
                             break;

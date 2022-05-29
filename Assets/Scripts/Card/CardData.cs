@@ -516,6 +516,20 @@ public enum CardID
     TacticalArmor,
     /// <summary>旧き竜の呪い</summary>
     CurseOfTheOldDragon,
+    /// <summary>神経毒</summary>
+    Neurotoxin,
+    /// <summary>暗殺者の短剣</summary>
+    AssassinsDagger,
+    /// <summary>全力の一振り</summary>
+    ASwingOfAllOurMight,
+    /// <summary>温存</summary>
+    Preserve,
+    /// <summary>毒液装填</summary>
+    ToxicantLoading,
+    /// <summary>緑の小瓶</summary>
+    SmallGreenBottle,
+    /// <summary>勝敗分かつ連撃</summary>
+    StrikesOfVictory,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

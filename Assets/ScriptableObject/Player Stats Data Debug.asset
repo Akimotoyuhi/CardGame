@@ -24,10 +24,14 @@ MonoBehaviour:
     m_upgrade: 0
   - m_cardID: 1
     m_upgrade: 0
-  - m_cardID: 22
+  - m_cardID: 31
     m_upgrade: 0
-  - m_cardID: 20
+  - m_cardID: 34
     m_upgrade: 0
-  - m_cardID: 24
+  - m_cardID: 37
+    m_upgrade: 1
+  - m_cardID: 35
+    m_upgrade: 0
+  - m_cardID: 33
     m_upgrade: 0
   m_relicData: []
