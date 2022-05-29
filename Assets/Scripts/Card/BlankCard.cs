@@ -24,6 +24,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     [SerializeField] Text m_viewCost;
     [SerializeField] Text m_viewName;
     [SerializeField] Image m_viewImage;
+    [SerializeField] Image m_background;
     [SerializeField] Text m_viewTooltip;
     [SerializeField] CardEffectHelp m_cardEffectHelp;
     [SerializeField, Tooltip("レア度に応じたカードの色。\nそれぞれ\nCommon\nRare\nElite\nSpecial\nCurse\nBadEffect\nの順")]
@@ -48,6 +49,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private int m_upgrade;
     /// <summary>DataManagerが管理しているこのカードのindex</summary>
     private int m_index;
+    private Color m_subAlpha = new Color(0, 0, 0, 0.5f);
     private CardID m_cardID;
     private UseTiming m_useType;
     private List<CardConditional> m_conditionals;
@@ -149,7 +151,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_tooltip = carddata.Tooltip;
         m_carddata = carddata;
         m_cost = carddata.Cost;
-        GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
+        m_background.color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
         m_useType = carddata.UseType;
         m_conditionals = carddata.Conditionals;
@@ -215,6 +217,26 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         UpdateCostText();
     }
 
+    private void SetUIColor(bool isDrag)
+    {
+        if (isDrag)
+        {
+            m_background.color -= m_subAlpha;
+            m_viewCost.color -= m_subAlpha;
+            m_viewName.color -= m_subAlpha;
+            m_viewTooltip.color -= m_subAlpha;
+            m_viewImage.color -= m_subAlpha;
+        }
+        else
+        {
+            m_background.color = m_cardColor[(int)m_carddata.Rarity];
+            UpdateCostText();
+            m_viewName.color = Color.black;
+            m_viewTooltip.color = Color.black;
+            m_viewImage.color = Color.white;
+        }
+    }
+
     public void SetText(string text)
     {
         m_viewTooltip.text = text;
@@ -246,6 +268,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             if (m_ethereal)
                 Destroy(gameObject);
         }
+        SetUIColor(false);
         BattleManager.Instance.OnCardDrag(null);
         m_isDrag = false;
         BattleManager.Instance.CardCast();
@@ -369,6 +392,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         if (m_cardState == CardState.Play)
         {
+            SetUIColor(true);
             m_isDrag = true;
             BattleManager.Instance.OnCardDrag(m_useType);
         }
@@ -391,6 +415,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         if (m_cardState == CardState.Play)
         {
+            SetUIColor(false);
             m_rectTransform.DOAnchorPos(m_defPos, 0.1f)
                 .OnComplete(() => m_isDrag = false);
             BattleManager.Instance.OnCardDrag(null);

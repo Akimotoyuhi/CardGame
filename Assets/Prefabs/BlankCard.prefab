@@ -485,6 +485,7 @@ MonoBehaviour:
   m_viewCost: {fileID: 4756192354467185732}
   m_viewName: {fileID: 4756192354113062012}
   m_viewImage: {fileID: 4756192353576663584}
+  m_background: {fileID: 4756192355611260292}
   m_viewTooltip: {fileID: 4756192353884880473}
   m_cardEffectHelp: {fileID: 8991249582694802881}
   m_cardColor:
