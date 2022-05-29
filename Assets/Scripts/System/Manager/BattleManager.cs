@@ -179,6 +179,7 @@ public class BattleManager : MonoBehaviour
         m_discard.CardDelete();
         m_deck.CardDelete();
         m_hand.CardDelete();
+        EffectManager.Instance.RemoveUIText(PanelType.Battle);
         if (m_encountEnemyType == EnemyType.Boss)
         {
             m_player.CurrentLife = m_actClearHeal;
