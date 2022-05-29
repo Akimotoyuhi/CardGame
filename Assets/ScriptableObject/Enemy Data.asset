@@ -1198,7 +1198,7 @@ MonoBehaviour:
     - m_enemyID: 08000000
     m_bosses:
     - m_enemyID: 02000000
-  - m_label: "\u5FAE\u7761\u306E\u6CBC\u5730"
+  - m_label: "\u3055\u308F\u3084\u304B\u5DDD"
     m_enemies:
     - m_enemyID: 0400000004000000
     - m_enemyID: 0300000001000000

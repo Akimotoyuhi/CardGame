@@ -21,38 +21,13 @@ MonoBehaviour:
   m_maxHp: 70
   m_cardData:
   - m_cardID: 0
-    m_upgrade: 1
-  - m_cardID: 0
-    m_upgrade: 1
-  - m_cardID: 0
-    m_upgrade: 1
+    m_upgrade: 0
   - m_cardID: 1
-    m_upgrade: 1
-  - m_cardID: 1
-    m_upgrade: 1
-  - m_cardID: 1
-    m_upgrade: 1
-  - m_cardID: 9
-    m_upgrade: 1
-  - m_cardID: 5
-    m_upgrade: 1
-  - m_cardID: 15
-    m_upgrade: 1
-  - m_cardID: 28
-    m_upgrade: 1
-  - m_cardID: 8
-    m_upgrade: 1
-  - m_cardID: 27
-    m_upgrade: 1
-  - m_cardID: 25
-    m_upgrade: 1
-  - m_cardID: 8
-    m_upgrade: 1
-  - m_cardID: 18
-    m_upgrade: 1
-  - m_cardID: 17
-    m_upgrade: 1
-  m_relicData:
-  - m_relicID: 0
-  - m_relicID: 1
-  - m_relicID: 2
+    m_upgrade: 0
+  - m_cardID: 22
+    m_upgrade: 0
+  - m_cardID: 20
+    m_upgrade: 0
+  - m_cardID: 24
+    m_upgrade: 0
+  m_relicData: []

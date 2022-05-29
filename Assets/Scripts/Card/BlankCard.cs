@@ -50,7 +50,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private int m_index;
     private CardID m_cardID;
     private UseTiming m_useType;
-    private CardConditional m_conditional;
+    private List<CardConditional> m_conditionals;
     private Reward m_reward;
     private Rest m_rest;
     private Player m_player;
@@ -152,7 +152,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         GetComponent<Image>().color = m_cardColor[(int)carddata.Rarity];
         m_cardID = carddata.CardId;
         m_useType = carddata.UseType;
-        m_conditional = carddata.CardConditional;
+        m_conditionals = carddata.Conditionals;
         m_isDiscarding = carddata.IsDiscarding;
         m_ethereal = carddata.Ethereal;
         GetPlayerEffect();
@@ -235,12 +235,10 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             List<int[]> vs = new List<int[]>();
             for (int i = 0; i < m_carddata.Commands.Count; i++)
             {
-                if (m_carddata.Commands[i].Conditional.Count > 0)
+                foreach (var item in m_carddata.Commands[i].Conditionals)
                 {
-                    if (m_carddata.Commands[i].Conditional.Evaluation(m_player, null, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, isUsed))
-                    {
+                    if (item.Evaluation(m_player, null, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, isUsed))
                         vs.Add(m_cardCommand[i]);
-                    }
                 }
             }
             if (vs.Count > 0)
@@ -336,15 +334,28 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             if (dropObj == null || !dropObj.CanDrop(m_useType)) continue;
             EnemyBase enemy = dropObj.IsEnemy();
             //使用条件調べる
-            if (!m_conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, true))
+            foreach (var c in m_conditionals)
             {
-                EffectManager.Instance.SetUIText(PanelType.Battle, "使用条件を満たしていない！", Color.red, 1f);
-                continue;
+                if (!c.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, true))
+                {
+                    EffectManager.Instance.SetUIText(PanelType.Battle, "使用条件を満たしていない！", Color.red, 1f);
+                    return;
+                }
             }
             List<int[]> vs = new List<int[]>();
             for (int i = 0; i < m_carddata.Commands.Count; i++)
             {
-                if (m_carddata.Commands[i].Conditional.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, true))
+                if (m_carddata.Commands[i].Conditionals.Count > 0)
+                {
+                    foreach (var item in m_carddata.Commands[i].Conditionals)
+                    {
+                        if (item.Evaluation(m_player, enemy, BattleManager.Instance.DeckChildCount, BattleManager.Instance.HandChildCount, BattleManager.Instance.DiscardChildCount, true))
+                        {
+                            vs.Add(m_cardCommand[i]);
+                        }
+                    }
+                }
+                else
                 {
                     vs.Add(m_cardCommand[i]);
                 }
@@ -371,7 +382,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             //カードの座標をマウスの座標と合わせる
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRect, eventData.position, m_camera, out localPoint);
-            localPoint.y += 230; //原因は分からないけど座標変換後ちょっとズレるのでそれの修正用
+            localPoint.y += 230; //原因は分からないけど座標変換後ちょっとズレるので修正
             m_rectTransform.localPosition = localPoint;
         }
     }
