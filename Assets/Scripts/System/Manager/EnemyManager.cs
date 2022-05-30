@@ -94,6 +94,8 @@ public class EnemyManager : MonoBehaviour
         {
             if (m_enemies[i].IsDead) continue;
             m_enemies[i].GetDamage(cardCommand, particleID);
+            m_enemies[i].Effect();
+            m_enemies[i].ActionPlan();
         }
     }
 

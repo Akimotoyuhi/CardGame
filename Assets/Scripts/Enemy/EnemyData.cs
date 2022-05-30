@@ -279,6 +279,8 @@ public enum EnemyID
     EternalDragon,
     /// <summary>アザトース</summary>
     Azathoth,
+    /// <summary>ハーピー</summary>
+    Harpy,
 }
 /// <summary>敵の種類</summary>
 public enum EnemyType

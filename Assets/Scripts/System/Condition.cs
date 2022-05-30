@@ -125,6 +125,9 @@ public class ConditionSelection
                 case ConditionID.Poison:
                     ret = new Poison();
                     break;
+                case ConditionID.StrengthUp:
+                    ret = new StrengthUp();
+                    break;
                 default:
                     Debug.LogWarning("未設定のIDが渡されました");
                     return null;

@@ -1223,7 +1223,7 @@ MonoBehaviour:
     m_cardInfo:
       m_name: "\u6BD2\u6DB2\u88C5\u586B"
       m_cost: 2
-      m_image: {fileID: 21300000, guid: 3be2c1261a3044642a7858147aac07fe, type: 3}
+      m_image: {fileID: 21300000, guid: d6f46844ea7558f4bbe365a20987de04, type: 3}
       m_tooltip: "\u7DD1\u306E\u5C0F\u74F6\u30923\u679A\u6368\u3066\u672D\u306B\u52A0\u3048\u308B"
       m_rarity: 1
       m_commands:
@@ -1237,7 +1237,7 @@ MonoBehaviour:
     m_cardUpgrade:
       m_name: "\u6BD2\u6DB2\u88C5\u586B+"
       m_cost: 2
-      m_image: {fileID: 21300000, guid: 3be2c1261a3044642a7858147aac07fe, type: 3}
+      m_image: {fileID: 21300000, guid: d6f46844ea7558f4bbe365a20987de04, type: 3}
       m_tooltip: "\u7DD1\u306E\u5C0F\u74F6+\u30923\u679A\u5C71\u672D\u306B\u52A0\u3048\u308B"
       m_rarity: 1
       m_commands:
@@ -1310,6 +1310,47 @@ MonoBehaviour:
         m_conditionals: []
       m_conditionals: []
       m_cardType: 1
+      m_isDiscarding: 0
+      m_ethereal: 0
+  - m_rabel: "\u795E\u7D4C\u731B\u6BD2"
+    m_cardInfo:
+      m_name: "\u795E\u7D4C\u731B\u6BD2"
+      m_cost: 2
+      m_image: {fileID: 21300000, guid: 3b94a08871830c84d909ded59afce0f4, type: 3}
+      m_tooltip: "\u6575\u5168\u4F53\u306B\u6BD24\u3092\u4E0E\u3048\u3001\u3053\u306E\u30BF\u30FC\u30F3\u4E2D\u7B4B\u529B\u30922\u6E1B\u5C11\u3055\u305B\u308B"
+      m_rarity: 2
+      m_commands:
+      - m_command:
+          id: 117
+        m_conditionals: []
+      - m_command:
+          id: 118
+        m_conditionals: []
+      - m_command:
+          id: 119
+        m_conditionals: []
+      m_conditionals: []
+      m_cardType: 2
+      m_isDiscarding: 0
+      m_ethereal: 0
+    m_cardUpgrade:
+      m_name: "\u795E\u7D4C\u5287\u6BD2"
+      m_cost: 2
+      m_image: {fileID: 21300000, guid: 3b94a08871830c84d909ded59afce0f4, type: 3}
+      m_tooltip: "\u6575\u5168\u4F53\u306B\u6BD28\u3092\u4E0E\u3048\u3001\u3053\u306E\u30BF\u30FC\u30F3\u4E2D\u7B4B\u529B\u30924\u6E1B\u5C11\u3055\u305B\u308B"
+      m_rarity: 2
+      m_commands:
+      - m_command:
+          id: 120
+        m_conditionals: []
+      - m_command:
+          id: 121
+        m_conditionals: []
+      - m_command:
+          id: 122
+        m_conditionals: []
+      m_conditionals: []
+      m_cardType: 2
       m_isDiscarding: 0
       m_ethereal: 0
   references:
@@ -2177,3 +2218,51 @@ MonoBehaviour:
         m_isTrueDmg: 0
         m_useType: 1
         m_particleID: 0
+    00000075:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 16
+          m_turn: 4
+        m_useType: 2
+        m_particleID: 9
+    00000076:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 2
+          m_turn: -2
+        m_useType: 2
+        m_particleID: -1
+    00000077:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 17
+          m_turn: 2
+        m_useType: 2
+        m_particleID: -1
+    00000078:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 16
+          m_turn: 8
+        m_useType: 2
+        m_particleID: 9
+    00000079:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 2
+          m_turn: -4
+        m_useType: 2
+        m_particleID: -1
+    0000007A:
+      type: {class: CardConditionCommand, ns: , asm: Assembly-CSharp}
+      data:
+        m_condition:
+          m_conditionID: 17
+          m_turn: 4
+        m_useType: 2
+        m_particleID: -1

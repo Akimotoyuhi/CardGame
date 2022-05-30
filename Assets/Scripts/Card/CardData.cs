@@ -530,6 +530,8 @@ public enum CardID
     SmallGreenBottle,
     /// <summary>勝敗分かつ連撃</summary>
     StrikesOfVictory,
+    /// <summary>神経猛毒</summary>
+    DeadlyPoisonOfNerves,
 }
 /// <summary>カードのレア度</summary>
 public enum Rarity

@@ -39,6 +39,8 @@ public enum ConditionID
     Prayer,
     /// <summary>毒<br/>ターン終了時に体力Xを失い、効果-1(ブロックを無視)</summary>
     Poison,
+    /// <summary>筋力増加<br/>ターン開始時に筋力Xを得る</summary>
+    StrengthUp,
 }
 public class Weakness : Condition
 {
@@ -209,10 +211,8 @@ public class StrengthDown : Condition
     public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int value = 0)
     {
         if (parametorType != ParametorType.Other)
-        {
-            if (Turn <= 0 || parametorType != ParametorType.Condition) return new int[] { value };
-        }
-        if (eventTiming == EventTiming.TurnBegin && (ConditionID)value == ConditionID.Strength)
+            return new int[] { value };
+        if (eventTiming == EventTiming.TurnBegin)
         {
             int[] ret = new int[] { (int)ParametorType.Condition, (int)ConditionID.Strength, -Turn };
             Turn = 0;
@@ -227,8 +227,8 @@ public class StrengthDown : Condition
     }
     public override int IsBuff() => 1;
     public override ConditionID GetConditionID() => ConditionID.StrengthDown;
-    public override ParametorType GetParametorType() => ParametorType.Condition;
-    public override string Tooltip => $"筋力低下\nターン開始時に筋力<color=#0000ff>{Turn}</color>を失う";
+    public override ParametorType GetParametorType() => ParametorType.Other;
+    public override string Tooltip => $"筋力低下\nターン開始時に筋力<color=#ff0000>{Turn}</color>を失い、効果を終了する";
 }
 public class Flying : Condition
 {
@@ -479,7 +479,7 @@ public class ElectricShock : Condition
         else
             return false;
     }
-    public override string Tooltip => $"感電\nターン開始時所持コストが<color=#ff0000>{Turn}</color>減少";
+    public override string Tooltip => $"感電\nターン開始時に所持コストを<color=#ff0000>{Turn}</color>減少させ、効果を終了する";
 }
 public class Silence : Condition
 {
@@ -514,7 +514,7 @@ public class Silence : Condition
         else
             return false;
     }
-    public override string Tooltip => $"沈黙\nターン開始時のドロー枚数が<color=#ff0000>{Turn}</color>枚減少";
+    public override string Tooltip => $"沈黙\nターン開始時のドロー枚数が<color=#ff0000>{Turn}</color>枚減少し、効果を終了する";
 }
 public class Prayer : Condition
 {
@@ -573,6 +573,37 @@ public class Poison : Condition
     public override ParametorType GetParametorType() => ParametorType.Other;
 
     public override int IsBuff() => 1;
+
+    public override bool IsRemove()
+    {
+        if (Turn <= 0)
+            return true;
+        else
+            return false;
+    }
+}
+public class StrengthUp : Condition
+{
+    public override string Tooltip => $"筋力増加\nターン開始時に筋力<color=#0000ff>{Turn}</color>を得て、効果を終了する";
+
+    public override int[] Effect(EventTiming eventTiming, ParametorType parametorType, int value = 0)
+    {
+        if (parametorType != ParametorType.Other)
+            return new int[] { value };
+        if (eventTiming == EventTiming.TurnBegin)
+        {
+            int[] ret = new int[] { (int)ParametorType.Condition, (int)ConditionID.Strength, Turn };
+            Turn = 0;
+            return ret;
+        }
+        return new int[] { (int)ParametorType.None };
+    }
+
+    public override ConditionID GetConditionID() => ConditionID.StrengthUp;
+
+    public override ParametorType GetParametorType() => ParametorType.Other;
+
+    public override int IsBuff() => 2;
 
     public override bool IsRemove()
     {
