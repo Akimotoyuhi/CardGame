@@ -57,28 +57,42 @@ public class MapDataBase
     [System.Serializable]
     public class DetailSettings
     {
+        [SerializeField, Tooltip("休憩マスの最大数")] int m_restMaxGeneratingNum;
         [SerializeField, Tooltip("休憩マスを生成する最小位置")] int m_restMinIndex;
         [SerializeField, Tooltip("休憩マスを生成する最大位置")] int m_restMaxIndex;
         [SerializeField, Tooltip("絶対に休憩マスを生成する位置")] int m_restAbsolutelyIndex;
         [SerializeField, Tooltip("休憩マスの生成確立はn分の１か")] int m_restProbability;
+        [SerializeField, Tooltip("エリートマスの最大数")] int m_eliteMaxGeneratingNum;
         [SerializeField, Tooltip("エリートマスを生成する最小位置")] int m_eliteMinIndex;
         [SerializeField, Tooltip("エリートマスを生成する最大位置")] int m_eliteMaxIndex;
         [SerializeField, Tooltip("絶対にエリートマスを生成する位置")] int m_eliteAbsolutelyIndex;
         [SerializeField, Tooltip("エリートマスの生成確立はn分の１か")] int m_eliteProbability;
-        public bool RestIndex(int sector)
+        public bool RestIndex(int sector, ref int nowGeneratingNum)
         {
-            if (m_restAbsolutelyIndex == sector) return true;
+            if (nowGeneratingNum >= m_restMaxGeneratingNum)
+                return false;
+            if (m_restAbsolutelyIndex == sector)
+                return true;
             if (m_restMinIndex <= sector && m_restMaxIndex >= sector)
                 if (Random.Range(0, m_restProbability) == 0)
+                {
+                    nowGeneratingNum++;
                     return true;
+                }
             return false;
         }
-        public bool EliteIndex(int sector)
+        public bool EliteIndex(int sector, ref int nowGeneratingNum)
         {
-            if (m_eliteAbsolutelyIndex == sector) return true;
+            if (nowGeneratingNum >= m_eliteMaxGeneratingNum)
+                return false;
+            if (m_eliteAbsolutelyIndex == sector)
+                return true;
             if (m_eliteMinIndex <= sector && m_eliteMaxIndex >= sector)
-                if (Random.Range(0, 4) == 0)
+                if (Random.Range(0, m_eliteProbability) == 0)
+                {
+                    nowGeneratingNum++;
                     return true;
+                }
             return false;
         }
     }
@@ -94,7 +108,7 @@ public enum MapID
 {
     /// <summary>塔の始まり</summary>
     TheBeginningOfTheTower,
-    /// <summary>微睡の沼地</summary>
+    /// <summary>さわやか川</summary>
     HealthyRiver,
     /// <summary>峻嶺高地</summary>
     SteepRidgeHighlands,

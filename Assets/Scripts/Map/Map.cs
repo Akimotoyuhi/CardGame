@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    //最初にセルを各セクター内にm_maxCell個作ってスタートからゴールまで一本ずつ道を作る
-    //これをm_maxCell回繰り返す
-
     /// <summary>セクター数</summary>
     [SerializeField] int m_sector = 10;
     /// <summary>各セクターに生成するセルの最大数</summary>
@@ -33,6 +30,10 @@ public class Map : MonoBehaviour
     [SerializeField] RectTransform m_scrollViewContentTra;
     /// <summary>現在act保存用</summary>
     private int m_act = 1;
+    /// <summary>現在の休憩マスの生成数</summary>
+    private int m_restGenerateNum = 0;
+    /// <summary>現在のエリートマスの生成数</summary>
+    private int m_eliteGenerateNum = 0;
     /// <summary>デバッグ用マップ固定フラグ</summary>
     private bool m_isFixedMap;
     /// <summary>現在のMapID保存用</summary>
@@ -54,6 +55,8 @@ public class Map : MonoBehaviour
         m_mapID = m_nowMapData.MapID;
         m_background.sprite = m_nowMapData.Background;
         AudioManager.Instance.Play(m_nowMapData.MapBgm);
+        m_restGenerateNum = 0;
+        m_eliteGenerateNum = 0;
     }
     /// <summary>
     /// セルの生成と配置
@@ -108,11 +111,11 @@ public class Map : MonoBehaviour
         //次のセクターから進むセルを一つ抽選する
         Cell c = m_sectorLocation[sectorIndex].transform.GetChild(cellIndex).GetComponent<Cell>();
         c.Floor = sectorIndex;
-        if (m_nowMapData.GetDetailSetting.RestIndex(sectorIndex))
+        if (m_nowMapData.GetDetailSetting.RestIndex(sectorIndex, ref m_restGenerateNum))
         {
             c.SetCellState = CellState.Rest;
         }
-        else if (m_nowMapData.GetDetailSetting.EliteIndex(sectorIndex))
+        else if (m_nowMapData.GetDetailSetting.EliteIndex(sectorIndex, ref m_eliteGenerateNum))
         {
             c.SetCellState = CellState.Elite;
         }

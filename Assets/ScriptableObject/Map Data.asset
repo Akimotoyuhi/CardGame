@@ -20,10 +20,12 @@ MonoBehaviour:
     m_mapBgm: 0
     m_bossBgm: 3
     m_detailSetting:
+      m_restMaxGeneratingNum: 5
       m_restMinIndex: 1
       m_restMaxIndex: 5
       m_restAbsolutelyIndex: 3
       m_restProbability: 4
+      m_eliteMaxGeneratingNum: 3
       m_eliteMinIndex: 3
       m_eliteMaxIndex: 5
       m_eliteAbsolutelyIndex: -1
@@ -35,10 +37,12 @@ MonoBehaviour:
     m_mapBgm: 1
     m_bossBgm: 4
     m_detailSetting:
+      m_restMaxGeneratingNum: 5
       m_restMinIndex: 1
       m_restMaxIndex: 5
       m_restAbsolutelyIndex: 3
       m_restProbability: 4
+      m_eliteMaxGeneratingNum: 3
       m_eliteMinIndex: 2
       m_eliteMaxIndex: 5
       m_eliteAbsolutelyIndex: -1
@@ -50,10 +54,12 @@ MonoBehaviour:
     m_mapBgm: 2
     m_bossBgm: 5
     m_detailSetting:
+      m_restMaxGeneratingNum: 5
       m_restMinIndex: 1
       m_restMaxIndex: 5
       m_restAbsolutelyIndex: 3
       m_restProbability: 4
+      m_eliteMaxGeneratingNum: 3
       m_eliteMinIndex: 2
       m_eliteMaxIndex: 5
       m_eliteAbsolutelyIndex: -1
