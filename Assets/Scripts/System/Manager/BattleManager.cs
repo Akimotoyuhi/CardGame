@@ -89,14 +89,23 @@ public class BattleManager : MonoBehaviour
     #endregion
     #region プロパティ
     public static BattleManager Instance { get; private set; }
+    /// <summary>ターン開始を通知する</summary>
     public IObservable<int> TurnBeginNotice => m_turnBegin;
+    /// <summary>ターン終了を通知する</summary>
     public IObservable<int> TurnEndNotice => m_turnEnd;
+    /// <summary>ターン開始時に引くカードの枚数</summary>
     public int GetDrowNum => m_player.DrowNum;
+    /// <summary>コマンド評価クラス</summary>
     public CommandManager CommandManager => m_commandManager;
+    /// <summary>ゲーム中フラグ</summary>
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
+    /// <summary>現在ターン</summary>
     public int CurrentTurn => m_currentTurn;
+    /// <summary>山札の枚数</summary>
     public int DeckChildCount => m_deck.CardParent.childCount;
+    /// <summary>手札の枚数</summary>
     public int HandChildCount => m_hand.CardParent.childCount;
+    /// <summary>捨て札の枚数</summary>
     public int DiscardChildCount => m_discard.CardParent.childCount;
     public Player Player => m_player;
     #endregion
@@ -185,8 +194,6 @@ public class BattleManager : MonoBehaviour
             m_player.CurrentLife = m_actClearHeal;
             AudioManager.Instance.Play(BGM.None);
         }
-        //for (int i = 0; i < m_cardRewardNum; i++)
-        //    m_reward.CardData.Add(m_cardData.GetCardRarityRandom(0, m_encountEnemyType));
         m_reward.CardData = m_cardData.GetCardRarityRandoms(0, m_encountEnemyType, m_cardRewardNum);
         for (int i = 0; i < m_relicRewardNum; i++)
             m_reward.RelicData.Add(m_relicData.GetRelic(m_encountEnemyType));

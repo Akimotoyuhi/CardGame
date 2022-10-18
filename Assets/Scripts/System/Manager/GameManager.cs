@@ -64,7 +64,10 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         //ランダムの初期化
-        if (m_isSeed) UnityEngine.Random.InitState(m_seed);
+        if (m_isSeed)
+        {
+            UnityEngine.Random.InitState(m_seed);
+        }
         else
         {
             //Seed値を適当に決める　RandomクラスにはSeed値を取得する関数が無いのでTickCountから取っている
@@ -208,6 +211,7 @@ public class GameManager : MonoBehaviour
     {
         if (m_cardDisplayParent.childCount > 0) return;
         List<int[]> data = DataManager.Instance.Cards;
+        //休憩マス(カードの強化)の場合は、既に強化済みのカードを除外して表示する
         if (rest)
         {
             for (int i = 0; i < data.Count; i++)
@@ -221,14 +225,13 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        //それ以外なら全て表示
         else
         {
             for (int i = 0; i < data.Count; i++)
             {
                 BlankCard card = Instantiate(CardPrefab);
                 card.transform.SetParent(m_cardDisplayParent, false);
-                //if (data[i][1] == 0) card.SetInfo(m_cardData.CardDatas(data[i][0], 0), i, rest);
-                //else card.SetInfo(m_cardData.CardDatas[data[i][0]].UpgradeData, i, rest);
                 card.SetInfo(m_cardData.CardDatas(data[i][0], data[i][1]), i, rest);
                 card.CardState = CardState.Upgrade;
             }
@@ -272,8 +275,6 @@ public class GameManager : MonoBehaviour
     {
         Destroy(m_upgradeBeforeCardParent.GetChild(0).gameObject);
         Destroy(m_upgradeAfterCardParent.GetChild(0).gameObject);
-        //CrearCardDisplayPanel();
-        //m_cardDisplayCanvas.enabled = false;
         m_upgradeConfirmationPanel.gameObject.SetActive(false);
     }
 
@@ -307,7 +308,6 @@ public class GameManager : MonoBehaviour
             m_upgradeConfirmationPanel.gameObject.SetActive(false);
             EffectManager.Instance.Fade(Color.clear, 0.2f);
         });
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     /// <summary>
     /// ゲームオーバー画面を呼ぶ
