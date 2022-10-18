@@ -49,6 +49,7 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private int m_upgrade;
     /// <summary>DataManagerが管理しているこのカードのindex</summary>
     private int m_index;
+    /// <summary>カードドラック時に減算する色</summary>
     private Color m_subAlpha = new Color(0, 0, 0, 0.5f);
     private CardID m_cardID;
     private UseTiming m_useType;
@@ -67,7 +68,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// <summary>CanvasのRectTransform</summary>
     private RectTransform m_canvasRect;
     #endregion
+    /// <summary>カードの状態</summary>
     public CardState CardState { set => m_cardState = value; }
+    /// <summary>カードの消費コスト</summary>
     public int Cost
     {
         get
@@ -84,7 +87,9 @@ public class BlankCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             return ret;
         }
     }
+    /// <summary>使用対象</summary>
     public UseTiming UseType { get => m_useType; }
+    /// <summary>名前</summary>
     public string Name => m_viewName.text;
 
     private void Setup()

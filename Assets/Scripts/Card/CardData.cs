@@ -338,13 +338,18 @@ public class CardExecuteCommand
     public int[] CardCommand => m_command.Execute();
     public List<CardConditional> Conditionals => m_conditionals;
 }
-/// <summary>〇〇に対して何かしらをしたい時に使うインターフェース</summary>
+/// <summary>
+/// 戦闘で使用する行動（コマンド）を設定可能にするインターフェース
+/// </summary>
 public interface ICommand
 {
     /// <summary>コマンドデータ</summary>
     /// <returns>{ 効果の種類(CommandParam), 効果発動時のパーティクル(ParticleID), 発動対象(UseType), 効果(int) }</returns>
     int[] Execute();
 }
+/// <summary>
+/// 特定の対象に攻撃をする
+/// </summary>
 public class CardAttackCommand : ICommand
 {
     [SerializeField, Tooltip("何ダメージを与えるか")] int m_power;
@@ -357,6 +362,9 @@ public class CardAttackCommand : ICommand
         return new int[] { (int)CommandParam.Attack, (int)m_particleID, (int)m_useType, m_power, b };
     }
 }
+/// <summary>
+/// 特定の対象にブロックを付与する
+/// </summary>
 public class CardBlockCommnad : ICommand
 {
     [SerializeField, Tooltip("何ブロックを得るか")] int m_block;
@@ -369,6 +377,9 @@ public class CardBlockCommnad : ICommand
         return new int[] { (int)CommandParam.Block, (int)m_particleID, (int)m_useType, m_block, b };
     }
 }
+/// <summary>
+/// 特定の対象にバフやデバフを付与する
+/// </summary>
 public class CardConditionCommand : ICommand
 {
     [SerializeField, Tooltip("付与するバフデバフの設定")] ConditionSelection m_condition;
@@ -376,6 +387,9 @@ public class CardConditionCommand : ICommand
     [SerializeField, Tooltip("使用時に表示するパーティクルのID")] ParticleID m_particleID;
     public int[] Execute() => new int[] { (int)CommandParam.Conditon, (int)m_particleID, (int)m_useType, (int)m_condition.GetCondition.GetConditionID(), m_condition.GetCondition.Turn };
 }
+/// <summary>
+/// 任意の位置にカードを追加する
+/// </summary>
 public class AddCardCommand : ICommand
 {
     [SerializeField, Tooltip("カードの追加枚数")] int m_addNum;
@@ -389,7 +403,9 @@ public class AddCardCommand : ICommand
         return new int[] { (int)CommandParam.AddCard, (int)m_particleID, (int)UseTiming.System, (int)m_cardID, m_addNum, (int)m_cardAddDestination, i };
     }
 }
-
+/// <summary>
+/// カードを引いたり捨てたりする
+/// </summary>
 public class DrawCardCommand : ICommand
 {
     [SerializeField, Tooltip("カードのドロー(or捨てる)枚数")] int m_drawNum;
@@ -401,6 +417,9 @@ public class DrawCardCommand : ICommand
         return new int[] { (int)CommandParam.DrawCard, (int)m_particleID, (int)UseTiming.System, i, m_drawNum };
     }
 }
+/// <summary>
+/// 特定の対象を回復させる
+/// </summary>
 public class HealCommand : ICommand
 {
     [SerializeField, Tooltip("回復量")] int m_healValue;
@@ -411,6 +430,9 @@ public class HealCommand : ICommand
         return new int[] { (int)CommandParam.Heal, (int)m_particleID, (int)m_useType, m_healValue };
     }
 }
+/// <summary>
+/// 条件評価を行う機能を提供するインターフェース
+/// </summary>
 public interface IConditional
 {
     /// <summary>評価に必要な値をint配列にして渡す</summary>
@@ -421,7 +443,9 @@ public interface IConditional
     /// </returns>
     int[] Execute();
 }
-
+/// <summary>
+/// 任意の対象のパラメーターを参照し、条件評価を行う
+/// </summary>
 public class EvaluationParam : IConditional
 {
     [SerializeField] CardConditionalEvaluationParam m_evaluationParam;
@@ -434,6 +458,9 @@ public class EvaluationParam : IConditional
         return new int[] { (int)CardConditionalType.EvaluationParam, m_life, (int)m_cardConditional, (int)m_evaluationType, (int)m_evaluationParam };
     }
 }
+/// <summary>
+/// 敵の行動予定を参照して条件評価を行う<br/>未実装
+/// </summary>
 public class EnemyPlan : IConditional
 {
 
@@ -443,6 +470,9 @@ public class EnemyPlan : IConditional
         return new int[] { (int)CardConditionalType.EnemyPlan };
     }
 }
+/// <summary>
+/// 特定のカードが山札、手札、捨て札のどこにあるかで条件評価を行うクラス<br/>未実装
+/// </summary>
 public class TurnEndWhereCard : IConditional
 {
     public int[] Execute()
@@ -451,7 +481,7 @@ public class TurnEndWhereCard : IConditional
     }
 }
 #region Enums
-/// <summary>カードのレア度</summary>
+/// <summary>各カードのID</summary>
 public enum CardID
 {
     /// <summary>斬撃</summary>
